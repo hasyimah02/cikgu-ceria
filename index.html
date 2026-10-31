@@ -111,7 +111,29 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.12) rotate(-2deg)}60%{transform:scale(.97) rotate(2deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
 /* Tulis Huruf */
-#app:has(#s-tulis.on),#app:has(#s-warna.on),#app:has(#s-bm.on){max-width:1060px}
+#app:has(#s-tulis.on),#app:has(#s-warna.on),#app:has(#s-bm.on),#app:has(#s-cerita.on){max-width:1060px}
+/* Buku cerita */
+#s-cerita{position:relative;z-index:0}
+.crbuku{background:var(--card);border-radius:28px;box-shadow:0 8px 22px var(--sh);overflow:hidden;border:6px solid var(--oren)}
+.crbuku.selak{animation:cr-selak .5s ease}
+@keyframes cr-selak{0%{transform:perspective(900px) rotateY(-12deg);opacity:.4}100%{transform:none;opacity:1}}
+.crlatar .crsvg{display:block;width:100%;height:auto;max-height:46vh}
+.crteks{padding:14px 16px 18px}
+.crayat,.crkunci{display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center}
+.crk{background:none;padding:4px 8px;border-radius:14px;font-size:clamp(30px,5vw,50px);font-weight:700;transition:transform .2s,background .2s}
+.crk .su.s0{color:#e8434f}.crk .su.s1{color:#2f7fe0}.crk .sutanda{color:var(--text)}
+.crk .su{display:inline-block;transition:transform .2s}.crk .su.on{transform:scale(1.35) translateY(-4px);text-shadow:0 0 10px #ffd23f}
+.crk.sorot{background:var(--kuning-p);transform:scale(1.08)}.crk.giliran{background:var(--hijau-p)}
+.crcara{text-align:center}.crcara b{display:block;font-size:24px}.crcara ol{text-align:left;display:inline-block;margin:6px 0 10px;font-size:clamp(17px,2.4vw,21px);font-weight:700}
+.crcara li{padding:3px 8px;border-radius:10px;transition:background .3s}.crcara li.on{background:var(--kuning-p)}
+.crkunci .crk{background:var(--ungu-p);font-size:clamp(28px,4.5vw,42px)}
+.crtamat{text-align:center;font-size:clamp(40px,8vw,72px);font-weight:700;color:var(--oren);animation:pop .6s}
+.crbtns{justify-content:center;margin-top:14px}
+.art .watak{transform-box:fill-box;transform-origin:50% 100%}
+.art .watak.w-masuk{animation:w-masuk 1s ease-out}.art .watak.w-lompat{animation:w-lompat .8s ease 2}.art .watak.w-goyang{animation:xa-goyang 1.2s ease-in-out 2}.art .watak.w-dekat{animation:w-dekat 1s ease}
+@keyframes w-masuk{0%{transform:translateX(-120px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes w-lompat{40%{transform:translateY(-22px)}70%{transform:translateY(0) scale(1.05,.95)}}
+@keyframes w-dekat{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
 /* BM Tahap 1 */
 #s-bm{position:relative;z-index:0}
 .bmatas{display:flex;gap:16px;align-items:center;justify-content:center}
@@ -472,6 +494,12 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
     <div id="bmKawasan" class="bmkawasan"></div>
     <div class="bmpapan hide" id="bmPapan"><canvas id="bmPanduan"></canvas><canvas id="bmInk"></canvas></div>
     <div class="tbtns bmbtns" id="bmBtns"></div>
+  </section>
+  <section id="s-cerita" class="screen">
+    <div class="tbg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="top"><button class="pill ikon" id="crBack" aria-label="Keluar"></button><h2 id="crTajuk" style="flex:1;margin:0"></h2><div class="pill" id="crMuka">1/3</div></div>
+    <div class="crbuku" id="crBuku"><div class="crlatar" id="crLatar"></div><div class="crteks" id="crTeks"></div></div>
+    <div class="tbtns crbtns" id="crBtns"></div>
   </section>
   <section id="s-result" class="screen">
     <h2 id="resTitle"></h2>
@@ -2557,16 +2585,43 @@ function warnaJaya() {
 function warnaNext() { wI = (wI + 1) % WARNA.length; warnaItem(); }
 
 /* ===== BM Tahap 1: membaca, mengeja, bina ayat & menulis ayat ===== */
-const BM_KATA = "buku kucing nasi susu kereta epal ayam ikan bunga rumah meja kerusi pensel kasut topi pisang roti payung lembu kambing itik pokok bulan gajah arnab burung telur tangan mata cawan sudu katil pintu durian kelapa lori teksi guru gunting".split(" ");
-/* [ayat, nama foto dalam Perpustakaan] */
-const BM_AYAT = [
-  ["Ini buku saya.", "Buku"], ["Kucing itu comel.", "Kucing"], ["Adik makan nasi.", "Nasi"], ["Saya minum susu.", "Susu"],
-  ["Ayah memandu kereta.", "Kereta"], ["Ayam itu berkokok.", "Ayam"], ["Ikan itu berenang.", "Ikan"], ["Bunga itu cantik.", "Bunga"],
-  ["Matahari bersinar terang.", "Matahari"], ["Saya pergi ke sekolah.", "Sekolah"], ["Rumah saya besar.", "Rumah"], ["Kakak makan pisang.", "Pisang"],
-  ["Arnab itu putih.", "Arnab"], ["Gajah itu besar.", "Gajah"], ["Burung terbang tinggi.", "Burung"], ["Bulan itu bulat.", "Bulan"],
-  ["Saya naik bas.", "Bas"], ["Cikgu mengajar kami.", "Guru"], ["Doktor merawat pesakit.", "Doktor"], ["Lembu makan rumput.", "Lembu"],
-  ["Ibu beli roti.", "Roti"], ["Saya tidur di katil.", "Katil"], ["Adik pakai topi.", "Topi"], ["Itik berenang di kolam.", "Itik"]
-];
+/* Latihan ikut tahap: 1 mudah, 2 sederhana, 3 susah (50 ayat setiap tahap) */
+const BM_AYAT_T = {
+  1: "Ini buku saya.|Kucing itu comel.|Adik makan nasi.|Saya minum susu.|Bunga itu cantik.|Rumah saya besar.|Arnab itu putih.|Gajah itu besar.|Bulan itu bulat.|Saya naik bas.|Ibu beli roti.|Adik pakai topi.|Itu meja cikgu.|Ayam itu gemuk.|Kuda itu laju.|Epal itu merah.|Pisang itu kuning.|Ikan itu kecil.|Lembu makan rumput.|Kambing itu comel.|Itik itu berenang.|Kereta ayah baru.|Kasut saya hitam.|Payung saya biru.|Cawan itu kosong.|Saya suka durian.|Kakak suka rambutan.|Ayah minum teh.|Burung itu terbang.|Matahari sangat panas.|Pokok itu tinggi.|Katak itu melompat.|Semut itu kecil.|Harimau itu garang.|Monyet suka pisang.|Saya ada pensel.|Pintu itu tertutup.|Tingkap itu terbuka.|Kelapa itu bulat.|Lori itu besar.|Basikal saya baru.|Teksi itu laju.|Doktor itu baik.|Cikgu itu baik.|Telur itu bulat.|Sudu itu kecil.|Bantal saya lembut.|Kapal itu besar.|Madu itu manis.|Keju itu kuning.".split("|"),
+  2: "Saya pergi ke sekolah.|Ayah memandu kereta baru.|Ibu memasak nasi goreng.|Kakak membaca buku cerita.|Adik minum susu panas.|Kucing itu tidur nyenyak.|Burung terbang di langit.|Ikan berenang di kolam.|Lembu makan rumput hijau.|Gajah mempunyai belalai panjang.|Arnab suka makan lobak.|Monyet memanjat pokok kelapa.|Itik itu berjalan perlahan.|Saya gosok gigi setiap pagi.|Matahari terbit pada waktu pagi.|Bulan bersinar pada waktu malam.|Cikgu mengajar kami membaca.|Doktor merawat orang sakit.|Ahli bomba memadam api.|Polis menjaga keselamatan kita.|Petani menanam padi di sawah.|Nelayan menangkap ikan di laut.|Adik memakai kasut sekolah.|Saya membawa payung kerana hujan.|Ayah membaca surat khabar.|Ibu membeli sayur di pasar.|Kakak menyapu lantai rumah.|Abang menunggang basikal laju.|Kami makan durian bersama.|Bas sekolah berwarna kuning.|Kapal terbang itu sangat besar.|Kereta api bergerak laju.|Pokok bunga itu sangat cantik.|Ayam jantan berkokok setiap pagi.|Katak melompat ke dalam kolam.|Semut membawa makanan ke sarang.|Rama-rama hinggap di atas bunga.|Harimau tinggal di dalam hutan.|Penyu bertelur di tepi pantai.|Ikan paus hidup di laut.|Saya suka makan buah epal.|Adik minum jus oren.|Nenek membuat kuih di dapur.|Atuk duduk di atas kerusi.|Saya menulis dengan pensel.|Cawan itu berisi air.|Bantal saya sangat lembut.|Kami bermain di taman.|Hari ini cuaca cerah.|Zirafah mempunyai leher panjang.".split("|"),
+  3: "Saya dan adik pergi ke sekolah bersama.|Ibu memasak nasi lemak untuk sarapan pagi.|Ayah mencuci kereta di hadapan rumah.|Kakak menyiram pokok bunga setiap petang.|Abang bermain bola sepak di padang.|Kucing itu sedang tidur di atas sofa.|Burung-burung berkicau riang di atas pokok.|Nelayan pergi ke laut untuk menangkap ikan.|Petani menanam padi di sawah yang luas.|Cikgu memuji murid yang rajin belajar.|Doktor memeriksa pesakit di hospital.|Gajah menggunakan belalainya untuk minum air.|Monyet itu melompat dari dahan ke dahan.|Rama-rama yang cantik hinggap pada bunga.|Penyu menyimpan telurnya di dalam pasir.|Lembu dan kambing makan rumput di padang.|Matahari terbenam pada waktu senja.|Langit menjadi gelap apabila hujan turun.|Kami membawa payung kerana hari hujan.|Adik menggosok gigi sebelum tidur malam.|Saya membantu ibu mengemas rumah.|Ayah membaca surat khabar di ruang tamu.|Nenek menjahit baju baharu untuk saya.|Atuk menanam pokok rambutan di kebun.|Kami sekeluarga makan malam bersama-sama.|Bas sekolah berhenti di hadapan pagar sekolah.|Kereta api itu bergerak dengan sangat laju.|Kapal besar belayar di tengah lautan.|Kapal terbang mendarat di lapangan terbang.|Murid-murid beratur sebelum masuk ke kelas.|Saya menyimpan duit syiling di dalam tabung.|Kakak membeli buku cerita di kedai buku.|Abang menunggang basikal ke rumah kawan.|Ibu membeli ikan dan sayur di pasar.|Kami mengutip sampah untuk menjaga kebersihan.|Pokok kelapa tumbuh di tepi pantai.|Harimau ialah haiwan yang sangat garang.|Arnab suka makan lobak merah dan sayur.|Itik dan angsa berenang di dalam kolam.|Semut bekerjasama mengangkat makanan ke sarang.|Pada hari raya kami memakai baju baharu.|Saya berasa gembira apabila mendapat hadiah.|Adik menangis kerana jatuh dari basikal.|Kami mesti membasuh tangan sebelum makan.|Bomba datang dengan segera untuk memadam api.|Polis membantu murid melintas jalan raya.|Durian ialah raja segala buah.|Bunga raya ialah bunga kebangsaan Malaysia.|Malaysia mempunyai banyak pantai yang cantik.|Saya sayang ibu dan ayah saya.".split("|")
+};
+const BM_TAHAP = { 1: L("Mudah", "Easy", "简单"), 2: L("Sederhana", "Medium", "中等"), 3: L("Susah", "Hard", "困难") };
+/* Perkataan ejaan diambil dari Perpustakaan (ada foto) dan dibahagi ikut kesukaran suku kata */
+const bmKataTahap = (() => {
+  let c = null;
+  return lv => {
+    if (!c) {
+      c = { 1: [], 2: [], 3: [] };
+      [...new Set(Object.keys(FOTO).map(k => k.split("|")[1]))].filter(n => /^[A-Za-z]+$/.test(n)).forEach(n => {
+        const w = n.toLowerCase(), s = sukuKata(w);
+        const t = s.length === 2 && s.every(x => /^[^aeiou][aeiou]$/.test(x)) ? 1 : (s.length === 2 && w.length <= 6) || (s.length === 3 && s.every(x => /^[^aeiou]?[aeiou]$/.test(x))) ? 2 : s.length >= 3 ? 3 : 0;
+        if (t && c[t].length < 50) c[t].push(w);
+      });
+    }
+    return c[lv];
+  };
+})();
+/* Foto ayat: nama benda pertama (paling panjang dahulu) yang ada dalam Perpustakaan */
+const BM_ALIAS = { cikgu: "Guru", murid: "Sekolah", nelayan: "Ikan", petani: "Padi" };
+const fotoAyat = (() => {
+  let nama = null;
+  return ayat => {
+    if (!nama) nama = [...new Set(Object.keys(FOTO).map(k => k.split("|")[1]))].sort((a, b) => b.length - a.length);
+    const t = " " + ayat.toLowerCase().replace(/[^a-z -]/g, " ") + " ";
+    const n = nama.find(x => t.indexOf(" " + x.toLowerCase() + " ") >= 0);
+    if (n) return fotoNama(n);
+    const al = Object.keys(BM_ALIAS).find(k => t.indexOf(" " + k + " ") >= 0);
+    return al ? fotoNama(BM_ALIAS[al]) : "";
+  };
+})();
+const BM_KEMAJUAN = "appPendidikan.bm1.v1";
+function bmKemajuan() { try { return JSON.parse(localStorage.getItem(BM_KEMAJUAN)) || {}; } catch (e) { return {}; } }
 const BM_MOD = {
   baca: { nama: L("Membaca", "Reading", "阅读"), ds: L("Dengar & baca ayat bersama", "Listen & read sentences together", "一起听和读句子"), ikon: "baca" },
   eja: { nama: L("Mengeja", "Spelling", "拼写"), ds: L("Susun huruf ikut suku kata", "Spell words by syllables", "按音节拼单词"), ikon: "eja" },
@@ -2582,6 +2637,7 @@ const kataBersih = w => w.toLowerCase().replace(/[^a-z-]/g, "");
 const fotoNama = n => { const k = Object.keys(FOTO).find(x => x.split("|")[1] === n); return k ? FOTO[k] : ""; };
 /* Pecah suku kata BM: ng/ny/sy/kh/gh satu bunyi; VKV -> V.KV; VKKV -> VK.KV; diftong ai/au/oi di hujung kata */
 function sukuKata(w) {
+  if (w.indexOf("-") >= 0) return [].concat(...w.split("-").filter(Boolean).map(sukuKata));
   const u = [];
   for (let i = 0; i < w.length;) { const d = w.substr(i, 2); if (/^(ng|ny|sy|kh|gh)$/.test(d)) { u.push(d); i += 2; } else { u.push(w[i]); i++; } }
   const vi = u.map((x, i) => /^[aeiou]$/.test(x) ? i : -1).filter(i => i >= 0), s = [];
@@ -2599,7 +2655,7 @@ function sukuKata(w) {
   return s;
 }
 
-let bmMod = "baca", bmList = [], bmI = 0, bmId = 0, bmPos = 0, bmSkor = 0, bmInk = [], bmNow = null, bmMask = null, bmDone = false;
+let bmMod = "baca", bmLv = 1, bmList = [], bmI = 0, bmId = 0, bmPos = 0, bmSkor = 0, bmInk = [], bmNow = null, bmMask = null, bmDone = false;
 const bmOn = () => $("s-bm").classList.contains("on");
 const tunggu = ms => new Promise(r => setTimeout(r, ms));
 function bmBual(t) { const b = $("bmBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
@@ -2609,14 +2665,26 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), starText(st["bm1-" + m] || 0), () => startBM(m)]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita]]), () => renderKuiz(curTahap, renderHome));
 }
-function startBM(m) {
-  bmMod = m; bmI = 0; bmSkor = 0;
+/* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
+function renderBMTahap(m) {
+  backMenu = () => renderBMTahap(m);
+  const st = loadStars(), kj = bmKemajuan();
+  renderMenu(tr(BM_MOD[m].nama), [1, 2, 3].map(lv => {
+    const jum = m === "eja" ? bmKataTahap(lv).length : BM_AYAT_T[lv].length, siap = (kj[m + "-" + lv] || []).length;
+    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
+  }), renderBM1);
+}
+function startBM(m, lv) {
+  bmMod = m; bmLv = lv; bmI = 0; bmSkor = 0;
   $("s-bm").className = "screen m" + m;
-  curSubj = "bm1-" + m; replay = () => startBM(m);
-  bmList = shuffle(m === "eja" ? BM_KATA : BM_AYAT).slice(0, 10);
-  $("bmTitle").textContent = tr(BM_MOD[m].nama);
+  curSubj = "bm1-" + m + "-" + lv; replay = () => startBM(m, lv);
+  /* Utamakan latihan yang belum dibuat */
+  const siap = bmKemajuan()[m + "-" + lv] || [], semua = m === "eja" ? bmKataTahap(lv) : BM_AYAT_T[lv].map(a => [a, fotoAyat(a)]);
+  const kunci = it => typeof it === "string" ? it : it[0];
+  bmList = shuffle(semua.filter(it => siap.indexOf(kunci(it)) < 0)).concat(shuffle(semua.filter(it => siap.indexOf(kunci(it)) >= 0))).slice(0, 10);
+  $("bmTitle").textContent = tr(BM_MOD[m].nama) + " · " + tr(BM_TAHAP[lv]);
   show("s-bm");
   bmSoalan();
 }
@@ -2625,7 +2693,7 @@ function bmSoalan() {
   bmPos = 0; bmDone = false;
   $("bmCount").textContent = (bmI + 1) + "/" + bmList.length;
   $("bmProg").style.width = (bmI / bmList.length * 100) + "%";
-  const foto = bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : fotoNama(it[1]);
+  const foto = bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : it[1];
   $("bmFoto").src = foto; $("bmFoto").classList.toggle("hide", !foto);
   $("bmFoto").classList.remove("lompat");
   $("bmKawasan").innerHTML = "";
@@ -2644,6 +2712,10 @@ function bmButang(ik, label, kelas, fn) {
 function bmJaya(sebut) {
   const id = bmId;
   bmDone = true; bmSkor++;
+  const kj = bmKemajuan(), k = bmMod + "-" + bmLv, it = bmList[bmI], kunci = typeof it === "string" ? it : it[0];
+  kj[k] = kj[k] || [];
+  if (kj[k].indexOf(kunci) < 0) kj[k].push(kunci);
+  try { localStorage.setItem(BM_KEMAJUAN, JSON.stringify(kj)); } catch (e) { /* abaikan */ }
   sndWin();
   const r = $("bmKawasan").getBoundingClientRect();
   tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
@@ -2778,15 +2850,14 @@ const BM_FON = '"Chalkboard SE","Comic Sans MS","Trebuchet MS",sans-serif';
 function bmSaiz() {
   if (bmMod !== "tulis" || !bmOn()) return;
   const pp = $("bmPapan"), dpr = window.devicePixelRatio || 1, ayat = bmAyat(), kata = ayat.split(" ");
-  let baris = [ayat];
-  if (kata.length >= 3) {
-    let terbaik = 1;
-    for (let i = 1; i < kata.length; i++) if (Math.abs(kata.slice(0, i).join(" ").length - kata.slice(i).join(" ").length) < Math.abs(kata.slice(0, terbaik).join(" ").length - kata.slice(terbaik).join(" ").length)) terbaik = i;
-    baris = [kata.slice(0, terbaik).join(" "), kata.slice(terbaik).join(" ")];
-  }
-  const nisbah = baris.length > 1 ? 2.2 : 3.6;
+  /* Pecah ayat kepada 1-3 baris yang hampir sama panjang */
+  const n = kata.length > 6 ? 3 : kata.length >= 3 ? 2 : 1, sasaran = ayat.length / n, baris = [];
+  let cur = [];
+  kata.forEach((w, i) => { cur.push(w); if (baris.length < n - 1 && cur.join(" ").length >= sasaran - 2 && kata.length - i - 1 >= n - 1 - baris.length) { baris.push(cur.join(" ")); cur = []; } });
+  if (cur.length) baris.push(cur.join(" "));
+  const nisbah = [3.6, 2.2, 1.6][baris.length - 1];
   pp.style.aspectRatio = nisbah + "/1";
-  pp.style.width = ""; pp.style.width = Math.min(pp.getBoundingClientRect().width, window.innerHeight * .37 * nisbah) + "px";
+  pp.style.width = ""; pp.style.width = Math.min(pp.getBoundingClientRect().width, window.innerHeight * (baris.length > 2 ? .46 : .37) * nisbah) + "px";
   const r = pp.getBoundingClientRect();
   if (!r.width) return;
   [$("bmPanduan"), $("bmInk")].forEach(c => { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); });
@@ -2859,6 +2930,255 @@ function bmUp(e) {
     if (px[i] > 60) { ink++; if (bmMask.B[i] > 60) inkB++; }
   }
   if (a && ak / a >= .55 && inkB / Math.max(1, ink) >= .6) { const id = bmId; bmJaya(() => id === bmId && speak(bmAyat(), "ms")); }
+}
+
+/* ===== 100 Buku Cerita BM: "Tajuk|watak (ART)|latar|muka1/muka2/..." ===== */
+const CERITA_T = {
+  1: `Kucing Comel|Kucing|rumah|Ini kucing saya./Kucing itu comel./Kucing suka tidur.
+Ayam Lapar|Ayam|kebun|Ini ayam./Ayam itu lapar./Ayam makan cacing.
+Bola Adik|Bola|padang|Ini bola adik./Bola itu bulat./Adik tendang bola.
+Itik Kecil|Itik|sungai|Itik itu kecil./Itik suka air./Itik berenang laju.
+Lebah Rajin|Lebah|kebun|Ini lebah./Lebah itu rajin./Lebah buat madu.
+Gajah Besar|Gajah|hutan|Gajah itu besar./Gajah ada belalai./Gajah minum air.
+Monyet Nakal|Monyet|hutan|Ini monyet./Monyet itu nakal./Monyet makan pisang.
+Arnab Putih|Rabbit|padang|Ini arnab./Arnab itu putih./Arnab suka lobak.
+Ikan Emas|Fish|laut|Ini ikan./Ikan itu emas./Ikan suka berenang.
+Hari Pagi|Sun|langit|Hari sudah pagi./Matahari naik./Langit jadi terang.
+Layang-layang|Kite|langit|Ini layang-layang./Ia terbang tinggi./Adik suka main.
+Topi Baru|Hat|rumah|Ini topi baru./Topi itu cantik./Adik pakai topi.
+Payung Merah|Umbrella|jalan|Hari hujan./Ini payung merah./Saya pakai payung.
+Van Ayah|Van|jalan|Ini van ayah./Van itu biru./Van jalan laju.
+Feri Besar|Feri|laut|Ini feri./Feri itu besar./Feri di laut.
+Tikus Kecil|Tikus|rumah|Ini tikus./Tikus itu kecil./Tikus suka keju.
+Singa Garang|Singa|hutan|Ini singa./Singa itu garang./Singa raja hutan.
+Zirafah Tinggi|Zirafah|hutan|Ini zirafah./Leher zirafah panjang./Zirafah makan daun.
+Ular Panjang|Ular|hutan|Ini ular./Ular itu panjang./Ular itu licin.
+Cicak di Dinding|Cicak|rumah|Ini cicak./Cicak di dinding./Cicak makan nyamuk.
+Anjing Setia|Dog|rumah|Ini anjing./Anjing itu setia./Anjing jaga rumah.
+Kambing Comel|Goat|padang|Ini kambing./Kambing itu comel./Kambing makan rumput.
+Zebra Belang|Zebra|padang|Ini zebra./Zebra itu belang./Zebra lari laju.
+Harimau Belang|Harimau|hutan|Ini harimau./Harimau itu belang./Harimau tinggal di hutan.
+Telur Ayam|Egg|kebun|Ini telur./Telur itu bulat./Telur ayam putih.
+Epal Merah|Epal|kebun|Ini epal./Epal itu merah./Saya makan epal.
+Pisang Kuning|Pisang|kebun|Ini pisang./Pisang itu kuning./Monyet suka pisang.
+Oren Manis|Oren|rumah|Ini oren./Oren itu manis./Adik minum jus oren.
+Nanas Manis|Nanas|kebun|Ini nanas./Kulit nanas tajam./Nanas rasa manis.
+Aiskrim Sejuk|Ice cream|rumah|Ini aiskrim./Aiskrim itu sejuk./Adik suka aiskrim.
+Jam Dinding|Jam|rumah|Ini jam./Jam itu bulat./Jam berbunyi kring.
+Pensel Saya|Pencil|sekolah|Ini pensel./Pensel itu kuning./Saya tulis nama.
+Ikan Yu|Yu|laut|Ini ikan yu./Yu itu besar./Yu tinggal di laut.
+Benang Nenek|Yarn|rumah|Ini benang./Benang itu merah jambu./Nenek suka mengait.`,
+  2: `Kucing dan Tikus|Kucing|rumah|Kucing itu bernama Comel./Comel nampak seekor tikus./Tikus lari ke dalam lubang./Comel tidur semula di sofa.
+Ayam Jantan|Ayam|kebun|Ayam jantan bangun awal pagi./Ayam itu berkokok dengan kuat./Semua orang di kampung bangun./Ayah pergi bekerja di kebun.
+Itik Mencari Ibu|Itik|sungai|Anak itik berenang di sungai./Anak itik mencari ibunya./Ibu itik memanggil dengan kuat./Mereka berenang pulang bersama.
+Lebah dan Bunga|Lebah|kebun|Lebah terbang ke taman bunga./Lebah menghisap madu bunga./Lebah membawa madu ke sarang./Lebah sangat rajin bekerja.
+Gajah Mandi|Gajah|sungai|Gajah pergi ke tepi sungai./Gajah menyedut air dengan belalai./Gajah menyembur air ke badannya./Gajah berasa sejuk dan gembira.
+Monyet dan Pisang|Monyet|hutan|Monyet memanjat pokok yang tinggi./Monyet nampak sesikat pisang./Monyet memetik pisang itu./Monyet makan pisang dengan gembira.
+Arnab Lapar|Rabbit|kebun|Arnab berasa sangat lapar./Arnab melompat ke dalam kebun./Arnab jumpa lobak merah./Arnab makan sampai kenyang.
+Ikan Emas Kecil|Fish|laut|Ikan emas tinggal di kolam./Ikan emas suka bermain gelembung./Adik memberi ikan itu makanan./Ikan emas berenang dengan gembira.
+Hari yang Cerah|Sun|padang|Matahari bersinar dengan terang./Burung berkicau di atas pokok./Adik bermain di padang./Adik pulang apabila petang.
+Layang-layang Adik|Kite|langit|Adik membawa layang-layang ke padang./Angin bertiup dengan kencang./Layang-layang terbang sangat tinggi./Adik berasa sangat gembira.
+Hujan Turun|Umbrella|jalan|Langit menjadi gelap tiba-tiba./Hujan turun dengan lebat./Adik membuka payung merahnya./Adik tidak basah lagi.
+Pulang ke Kampung|Van|jalan|Ayah memandu van ke kampung./Kami duduk di dalam van./Kami nampak sawah padi./Nenek menunggu di rumah.
+Naik Feri|Feri|laut|Kami menaiki feri ke pulau./Feri bergerak di atas laut./Kami nampak ikan melompat./Kami tiba di pulau.
+Tikus dan Keju|Tikus|rumah|Tikus kecil berasa lapar./Tikus nampak keju di atas meja./Tikus memanjat meja perlahan-lahan./Tikus makan keju itu.
+Singa yang Baik|Singa|hutan|Singa tidur di bawah pokok./Seekor tikus terjatuh atas singa./Singa tidak marah pada tikus./Singa melepaskan tikus itu.
+Zirafah Makan Daun|Zirafah|hutan|Zirafah mempunyai leher yang panjang./Zirafah boleh makan daun tinggi./Haiwan lain tidak boleh capai./Zirafah berkongsi daun dengan kawan.
+Ular di Taman|Ular|kebun|Seekor ular masuk ke taman./Adik berasa sangat takut./Ayah memanggil pegawai bomba./Ular itu dibawa ke hutan.
+Cicak dan Nyamuk|Cicak|rumah|Cicak merayap di dinding rumah./Cicak nampak seekor nyamuk./Cicak menangkap nyamuk itu./Rumah kami bebas nyamuk.
+Anjing Penjaga|Dog|rumah|Anjing itu menjaga rumah./Anjing menyalak apabila ada orang./Tuannya pulang dari kerja./Anjing menyambut tuannya dengan gembira.
+Kambing Lapar|Goat|padang|Kambing itu berasa lapar./Kambing pergi ke padang rumput./Kambing makan rumput hijau./Kambing pulang ke kandang.
+Zebra Berlari|Zebra|padang|Zebra tinggal di padang luas./Zebra suka berlari bersama kawan./Badan zebra berbelang hitam putih./Zebra minum air di sungai.
+Harimau Lapar|Harimau|hutan|Harimau berjalan di dalam hutan./Harimau mencari makanan./Harimau minum air di sungai./Harimau tidur di dalam gua.
+Telur Menetas|Egg|kebun|Ibu ayam duduk atas telur./Telur itu mula retak./Seekor anak ayam keluar./Anak ayam berbunyi ciap-ciap.
+Pokok Epal|Epal|kebun|Atuk ada pokok epal./Buah epal masak dan merah./Atuk memetik epal itu./Kami makan epal bersama.
+Nanas dari Kebun|Nanas|kebun|Nenek menanam nanas di kebun./Nanas itu sudah masak./Nenek memotong nanas itu./Nanas itu manis sekali.
+Aiskrim Cair|Ice cream|padang|Adik membeli aiskrim coklat./Hari itu sangat panas./Aiskrim adik mula cair./Adik cepat-cepat makan aiskrim.
+Jam Loceng|Jam|rumah|Jam loceng berbunyi pagi./Adik bangun dari tidur./Adik mandi dan bersarapan./Adik pergi ke sekolah.
+Pensel Hilang|Pencil|sekolah|Pensel adik sudah hilang./Adik mencari pensel di kelas./Kawan adik menjumpai pensel itu./Adik mengucapkan terima kasih.
+Ikan Yu Lapar|Yu|laut|Ikan yu berenang di laut./Ikan yu sedang lapar./Ikan kecil bersembunyi di batu./Ikan yu pergi jauh.
+Bola Sepak|Bola|padang|Abang bermain bola sepak./Abang menendang bola dengan kuat./Bola masuk ke dalam gol./Semua kawan bersorak gembira.
+Benang Kusut|Yarn|rumah|Nenek suka mengait baju./Kucing bermain dengan benang./Benang itu menjadi kusut./Nenek tersenyum melihat kucing.
+Jus Oren|Oren|rumah|Ibu membeli oren di pasar./Ibu memerah oren menjadi jus./Adik minum jus oren./Jus itu segar dan manis.
+Topi Atuk|Hat|kebun|Atuk memakai topi ke kebun./Angin bertiup topi atuk./Topi atuk jatuh ke tanah./Adik mengambil topi untuk atuk.`,
+  3: `Kucing yang Hilang|Kucing|rumah|Comel ialah kucing kesayangan keluarga kami./Pada suatu petang, Comel tidak pulang ke rumah./Kami mencari Comel di sekeliling kampung./Akhirnya kami menjumpai Comel di dalam stor./Kami berasa sangat gembira dan lega.
+Ibu Ayam yang Rajin|Ayam|kebun|Seekor ibu ayam tinggal di reban bersama anaknya./Setiap pagi, ibu ayam mencari makanan di kebun./Ibu ayam mengajar anaknya mencari cacing./Anak-anak ayam belajar dengan bersungguh-sungguh./Mereka membesar menjadi ayam yang sihat.
+Itik yang Berani|Itik|sungai|Anak itik itu takut untuk berenang./Ibu itik memujuknya dengan lembut./Anak itik mencuba berenang perlahan-lahan./Akhirnya anak itik boleh berenang dengan pandai./Ibu itik berasa bangga dengan anaknya.
+Lebah Bekerjasama|Lebah|kebun|Lebah-lebah tinggal di dalam sarang yang besar./Setiap lebah mempunyai tugas masing-masing./Ada lebah yang mencari madu di taman./Ada lebah yang menjaga sarang daripada musuh./Mereka bekerjasama untuk hidup dengan selamat.
+Gajah Membantu Kawan|Gajah|sungai|Seekor monyet terjatuh ke dalam sungai yang deras./Monyet itu menjerit meminta tolong./Gajah datang dan menghulurkan belalainya./Monyet memegang belalai gajah dengan erat./Monyet berterima kasih kepada gajah yang baik hati.
+Monyet yang Tamak|Monyet|hutan|Seekor monyet menjumpai banyak pisang di pokok./Monyet itu tidak mahu berkongsi dengan kawannya./Dia makan terlalu banyak pisang sekali gus./Akhirnya perut monyet itu berasa sangat sakit./Monyet belajar bahawa sikap tamak tidak baik.
+Arnab dan Kura-kura|Rabbit|padang|Arnab mengajak kura-kura berlumba lari./Arnab berlari dengan sangat laju./Arnab berehat di bawah pokok lalu tertidur./Kura-kura terus berjalan tanpa berhenti./Akhirnya kura-kura memenangi perlumbaan itu.
+Ikan Kecil yang Bijak|Fish|laut|Seekor ikan kecil berenang jauh dari kawannya./Tiba-tiba seekor ikan besar datang menghampirinya./Ikan kecil itu cepat bersembunyi di celah batu./Ikan besar tidak dapat menangkapnya./Ikan kecil berenang pulang dengan selamat.
+Matahari dan Angin|Sun|langit|Matahari dan angin bertanding siapa yang lebih kuat./Angin bertiup kencang tetapi lelaki itu memegang bajunya./Matahari pula bersinar dengan lembut dan panas./Lelaki itu berasa panas lalu membuka bajunya./Matahari menang kerana bersikap lembut.
+Pesta Layang-layang|Kite|langit|Pesta layang-layang diadakan di tepi pantai./Ramai kanak-kanak datang bersama keluarga./Layang-layang pelbagai warna terbang di udara./Layang-layang adik terbang paling tinggi./Adik mendapat hadiah kerana layang-layangnya cantik.
+Hari Hujan|Umbrella|jalan|Pagi itu, langit kelihatan sangat mendung./Ibu mengingatkan adik supaya membawa payung./Dalam perjalanan ke sekolah, hujan turun dengan lebat./Adik membuka payung dan berjalan dengan berhati-hati./Adik tiba di sekolah tanpa basah.
+Percutian ke Kampung|Van|jalan|Pada cuti sekolah, kami pulang ke kampung nenek./Ayah memandu van dengan berhati-hati./Di sepanjang jalan, kami nampak sawah padi menghijau./Nenek menyambut kami dengan pelukan mesra./Kami makan bersama-sama dengan gembira.
+Pulau yang Indah|Feri|laut|Kami menaiki feri untuk ke sebuah pulau./Air laut di sekeliling pulau sangat jernih./Kami nampak ikan berwarna-warni di dalam air./Ayah membawa kami bermain pasir di pantai./Percutian itu sangat menyeronokkan.
+Tikus Kota dan Tikus Desa|Tikus|rumah|Tikus desa melawat sepupunya di kota./Rumah tikus kota penuh dengan makanan sedap./Tetapi ada kucing besar yang selalu mengejar mereka./Tikus desa berasa takut dan mahu pulang./Dia lebih suka hidup aman di desa.
+Singa dan Tikus|Singa|hutan|Seekor singa terperangkap di dalam jaring pemburu./Singa mengaum meminta pertolongan./Seekor tikus kecil datang lalu menggigit jaring itu./Akhirnya singa dapat keluar dengan selamat./Singa berterima kasih kepada tikus yang kecil itu.
+Zirafah yang Baik|Zirafah|hutan|Zirafah ialah haiwan yang paling tinggi di hutan./Seekor burung kecil terjatuh dari sarangnya./Zirafah mengangkat burung itu dengan lembut./Zirafah meletakkan burung itu semula ke sarang./Ibu burung mengucapkan terima kasih kepada zirafah.
+Ular dan Katak|Ular|sungai|Seekor ular sedang mencari makanan di tepi sungai./Ular itu ternampak seekor katak di atas daun./Katak itu cepat melompat ke dalam air./Ular tidak dapat menangkap katak itu./Katak berenang jauh dengan selamat.
+Cicak yang Membantu|Cicak|rumah|Seekor cicak tinggal di dinding dapur./Pada waktu malam, cicak keluar mencari serangga./Cicak menangkap nyamuk yang mengganggu adik tidur./Ibu berkata cicak membantu menghalau nyamuk./Adik tidak lagi takut kepada cicak.
+Anjing yang Setia|Dog|rumah|Ali mempunyai seekor anjing bernama Bobi./Bobi selalu menunggu Ali pulang dari sekolah./Pada suatu hari, Ali terjatuh di tepi jalan./Bobi menyalak untuk memanggil ayah Ali./Ayah datang membantu Ali dengan segera.
+Kambing dan Serigala|Goat|padang|Seekor anak kambing bermain jauh dari kandang./Ibu kambing berpesan supaya dia tidak keluar./Seekor serigala cuba menipu anak kambing itu./Anak kambing tidak membuka pintu kandang./Dia selamat kerana mendengar nasihat ibunya.
+Zebra Mencari Air|Zebra|padang|Musim kemarau telah tiba di padang rumput./Sungai-sungai kecil mula menjadi kering./Kumpulan zebra berjalan jauh untuk mencari air./Akhirnya mereka menjumpai sebuah tasik yang besar./Semua zebra minum air dengan puas.
+Harimau dan Arnab|Harimau|hutan|Seekor harimau mahu menangkap seekor arnab./Arnab yang bijak mendapat satu idea./Arnab membawa harimau ke sebuah perigi./Harimau nampak bayangnya lalu menyangka harimau lain./Harimau melompat ke dalam perigi dan arnab selamat.
+Telur yang Istimewa|Egg|kebun|Adik menjumpai sebiji telur di bawah semak./Adik membawa telur itu kepada ayah./Ayah meletakkan telur itu di tempat yang hangat./Beberapa hari kemudian, telur itu menetas./Seekor anak itik yang comel keluar dari telur.
+Kebun Atuk|Epal|kebun|Atuk mempunyai sebuah kebun buah-buahan yang luas./Di kebun itu ada pokok epal, pisang dan nanas./Setiap petang, kami membantu atuk menyiram pokok./Apabila buah masak, kami memetiknya bersama-sama./Atuk menjual sebahagian buah itu di pasar.
+Pisang Goreng Ibu|Pisang|jalan|Ibu membuat pisang goreng untuk dijual./Kakak membantu ibu menggoreng pisang./Ramai orang datang membeli pisang goreng ibu./Pisang goreng itu habis dijual sebelum petang./Ibu berasa bersyukur dengan rezeki hari itu.
+Berkelah di Taman|Ice cream|padang|Pada hari Sabtu, kami berkelah di taman./Ayah membeli aiskrim untuk semua orang./Adik memilih aiskrim berperisa strawberi./Kami makan aiskrim sambil melihat burung./Hari itu sangat menyeronokkan bagi kami.
+Bangun Awal|Jam|rumah|Adik selalu lewat bangun pada waktu pagi./Ibu memberikan adik sebuah jam loceng baharu./Adik mengunci jam loceng pada pukul enam./Keesokan harinya, adik bangun awal dan bersiap./Adik tidak lagi lewat ke sekolah.
+Pensel Kuning Siti|Pencil|sekolah|Siti mempunyai sebatang pensel berwarna kuning./Siti suka melukis gambar dengan pensel itu./Dia melukis rumah, pokok dan matahari./Cikgu memuji lukisan Siti yang cantik./Lukisan itu ditampal di papan kenyataan kelas.
+Ikan Yu yang Kesepian|Yu|laut|Seekor ikan yu tidak mempunyai kawan di laut./Ikan-ikan lain takut kepada ikan yu itu./Ikan yu membantu seekor penyu yang tersangkut jaring./Sejak hari itu, semua ikan mahu berkawan dengannya./Ikan yu tidak lagi berasa kesepian.
+Pertandingan Bola|Bola|padang|Sekolah kami mengadakan pertandingan bola sepak./Pasukan kelas kami berlatih setiap petang./Pada hari pertandingan, kami bermain bersungguh-sungguh./Abang menjaringkan gol pada saat akhir./Pasukan kami menjadi juara dan semua orang gembira.
+Baju Kait Nenek|Yarn|rumah|Nenek mengait sehelai baju sejuk untuk adik./Nenek menggunakan benang berwarna merah jambu./Setiap malam, nenek mengait dengan tekun./Selepas seminggu, baju sejuk itu siap./Adik memakai baju itu dan memeluk nenek.
+Petani Nanas|Nanas|kebun|Pak Ali ialah seorang petani nanas yang rajin./Dia menanam nanas di kebun yang luas./Pak Ali menjaga tanamannya dengan baik./Apabila tiba musim menuai, nanasnya besar dan manis./Ramai orang membeli nanas daripada Pak Ali.
+Mahkota yang Hilang|Queen|rumah|Seorang permaisuri tinggal di sebuah istana./Mahkota permaisuri hilang pada suatu pagi./Semua pengawal mencari mahkota di seluruh istana./Seorang budak menjumpai mahkota itu di taman./Permaisuri menghadiahkan budak itu sebuah buku.`
+};
+const CERITA = (() => {
+  const o = {};
+  Object.keys(CERITA_T).forEach(lv => { o[lv] = CERITA_T[lv].split("\n").map((b, i) => { const p = b.split("|"); return { id: lv + "-" + i, tajuk: p[0], watak: p[1], latar: p[2], muka: p[3].split("/") }; }); });
+  return o;
+})();
+
+/* ===== Pembaca Buku Cerita: cara membaca, suku kata berwarna, latar beranimasi ===== */
+const CR_CARA = ["Lihat gambar dahulu.", "Baca suku kata berwarna, merah kemudian biru.", "Gabungkan suku kata menjadi perkataan.", "Tekan perkataan jika mahu dengar."];
+const CR_SEBUT = { cara: "Cara membaca buku ini.", kunci: "Mari belajar kata kunci.", mula: "Jom kita baca!", kamu: "Sekarang kamu baca!", tamat: "Tamat. Syabas, kamu sudah habis membaca!" };
+const CERITA_KEY = "appPendidikan.cerita.v1";
+function crDibaca() { try { return JSON.parse(localStorage.getItem(CERITA_KEY)) || {}; } catch (e) { return {}; } }
+/* Latar 240 x 140 dengan unsur bergerak */
+const LATAR = (() => {
+  const G = (c, s, o, d) => `<g class="${c}" style="transform-origin:${o || "50% 50%"}${d ? ";animation-delay:" + d : ""}">${s}</g>`;
+  const awan = (x, y, s, d) => G("x-awan", `<path d="M${x} ${y} q0 -${8 * s} ${9 * s} -${8 * s} q${3 * s} -${8 * s} ${11 * s} -${6 * s} q${7 * s} -${3 * s} ${11 * s} ${4 * s} q${7 * s} 0 ${7 * s} ${6 * s} q0 ${4 * s} -${5 * s} ${4 * s} h-${28 * s} q-${5 * s} 0 -${5 * s} 0z" fill="#fff" stroke="none" opacity=".95"/>`, "50% 50%", d);
+  const langit = (c1) => `<rect width="240" height="140" fill="${c1 || "#bfe6ff"}"/>` + awan(20, 30, 1.2, "0s") + awan(150, 22, 1, "-3s");
+  const matahari = (x, y) => G("x-putar", `<path d="M${x} ${y - 22} v-6 M${x} ${y + 22} v6 M${x - 22} ${y} h-6 M${x + 22} ${y} h6 M${x - 16} ${y - 16} l-4 -4 M${x + 16} ${y + 16} l4 4 M${x + 16} ${y - 16} l4 -4 M${x - 16} ${y + 16} l-4 4" stroke="#ffb627" stroke-width="3" stroke-linecap="round"/>`) + `<circle cx="${x}" cy="${y}" r="15" fill="#ffd23f"/>`;
+  const rumput = y => `<path d="M0 ${y} q60 -10 120 0 t120 0 V140 H0z" fill="#8bd17c"/>` + G("x-goyang", [16, 44, 200, 226].map(x => `<path d="M${x} ${y + 6} q2 -10 4 0 M${x + 6} ${y + 6} q2 -12 4 0" fill="none" stroke="#5cb85c" stroke-width="2"/>`).join(""), "50% 100%");
+  const bunga = (x, y, c) => G("x-goyang", `<path d="M${x} ${y} v14" stroke="#4caf50" stroke-width="2"/>` + [0, 1, 2, 3, 4].map(k => { const a = k * 1.2566; return `<circle cx="${(x + Math.cos(a) * 4).toFixed(1)}" cy="${(y + Math.sin(a) * 4).toFixed(1)}" r="3.4" fill="${c}"/>`; }).join("") + `<circle cx="${x}" cy="${y}" r="2.4" fill="#ffd23f"/>`, "50% 100%");
+  const pokok = (x, y, s, d) => G("x-goyang", `<rect x="${x - 3 * s}" y="${y}" width="${6 * s}" height="${30 * s}" fill="#8a5a2b"/><circle cx="${x}" cy="${y - 4 * s}" r="${16 * s}" fill="#4caf50"/><circle cx="${x - 10 * s}" cy="${y + 4 * s}" r="${11 * s}" fill="#5cc26a"/><circle cx="${x + 10 * s}" cy="${y + 4 * s}" r="${11 * s}" fill="#43a047"/>`, "50% 100%", d);
+  const ombak = (y, c, d) => G("x-ombak", `<path d="M-40 ${y} q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 V140 H-40z" fill="${c}"/>`, "50% 50%", d);
+  const burung = (x, y) => G("x-terbang", `<path d="M${x} ${y} q4 -4 7 0 q3 -4 7 0" fill="none" stroke="#4a3428" stroke-width="1.6"/>`);
+  return {
+    padang: langit() + matahari(205, 30) + burung(120, 26) + rumput(104) + bunga(30, 112, "#ff8fd8") + bunga(212, 116, "#ff5a5f"),
+    kebun: langit() + matahari(28, 28) + rumput(100) + `<path d="M0 96 h240 M0 84 h240" stroke="#c98d4a" stroke-width="3"/>` + [10, 40, 70, 170, 200, 230].map(x => `<rect x="${x}" y="76" width="6" height="26" rx="2" fill="#e0a868"/>`).join("") + bunga(24, 114, "#ff5a5f") + bunga(48, 118, "#ffd23f") + bunga(196, 116, "#9b8afb") + bunga(222, 112, "#ff8fd8"),
+    hutan: langit("#cdeee0") + pokok(26, 62, 1.4, "0s") + pokok(214, 58, 1.5, "-1s") + pokok(120, 44, .9, "-.5s") + rumput(108) + burung(80, 22) + burung(170, 30),
+    rumah: `<rect width="240" height="140" fill="#ffe9c7"/><rect y="104" width="240" height="36" fill="#e0b98a"/><path d="M0 104 h240" stroke="#c98d4a" stroke-width="2"/><rect x="160" y="18" width="56" height="44" rx="4" fill="#bfe6ff" stroke="#c98d4a" stroke-width="4"/><path d="M188 18 v44 M160 40 h56" stroke="#c98d4a" stroke-width="3"/>` + awan(170, 40, .5, "0s") + `<rect x="24" y="22" width="34" height="26" rx="3" fill="#fff" stroke="#c98d4a" stroke-width="3"/><path d="M28 44 l8 -10 l6 6 l5 -6 l7 10z" fill="#8bd17c"/><circle cx="50" cy="30" r="3" fill="#ffd23f"/><ellipse cx="120" cy="126" rx="70" ry="9" fill="#ff8fa3" opacity=".6"/>`,
+    sungai: langit() + matahari(210, 26) + `<rect y="78" width="240" height="62" fill="#8bd17c"/>` + ombak(100, "#7cc6fe", "0s") + ombak(112, "#5fb4f5", "-1s") + G("x-goyang", `<path d="M14 100 v-22 M20 100 v-28 M226 100 v-24 M232 100 v-18" stroke="#5a8f3a" stroke-width="2.5"/><ellipse cx="20" cy="70" rx="2.5" ry="6" fill="#8a5a2b"/><ellipse cx="226" cy="74" rx="2.5" ry="6" fill="#8a5a2b"/>`, "50% 100%"),
+    laut: langit() + matahari(40, 28) + burung(150, 24) + ombak(92, "#7cc6fe", "0s") + ombak(106, "#4aa8f0", "-1s") + ombak(122, "#2f8fd8", "-.5s"),
+    langit: `<rect width="240" height="140" fill="#9fd6ff"/>` + awan(10, 40, 1.4, "0s") + awan(160, 30, 1.2, "-2s") + awan(90, 110, 1, "-4s") + burung(60, 70) + burung(190, 90),
+    jalan: langit() + [[10, "#ff8a8e"], [70, "#ffd166"], [180, "#9fd6a5"]].map(([x, c]) => `<rect x="${x}" y="54" width="44" height="40" fill="${c}" stroke="#4a3428" stroke-width="2"/><path d="M${x - 4} 56 l26 -18 l26 18z" fill="#c0573f" stroke="#4a3428" stroke-width="2"/><rect x="${x + 16}" y="72" width="12" height="22" fill="#a0673a"/>`).join("") + `<rect y="94" width="240" height="46" fill="#7d8796"/>` + G("x-ombak", `<path d="M-40 118 h20 M0 118 h20 M40 118 h20 M80 118 h20 M120 118 h20 M160 118 h20 M200 118 h20 M240 118 h20" stroke="#fff" stroke-width="4"/>`),
+    sekolah: `<rect width="240" height="140" fill="#fff2d6"/><rect y="106" width="240" height="34" fill="#d9a066"/><rect x="40" y="16" width="160" height="66" rx="4" fill="#2f6b4f" stroke="#a0673a" stroke-width="5"/><path d="M60 40 q10 -10 20 0 t20 0 M60 58 h50 M130 36 l10 10 l14 -18" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/><rect x="60" y="84" width="120" height="6" fill="#a0673a"/>`
+  };
+})();
+function crAdegan(c, kelas) {
+  return `<svg class="art crsvg" viewBox="0 0 240 140" aria-hidden="true">${LATAR[c.latar] || LATAR.padang}<svg x="66" y="40" width="108" height="90" viewBox="0 0 120 100" overflow="visible"><g class="watak ${kelas || ""}"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${ART[c.watak] || ""}</g></g></svg></svg>`;
+}
+/* Perkataan dengan suku kata berwarna (merah, biru bergilir) */
+function crKata(w) {
+  const m = w.match(/^([A-Za-z-]+)(.*)$/);
+  if (!m) return `<span class="sutanda">${w}</span>`;
+  let j = 0;
+  const h = m[1].split("-").map(bah => { let i = 0; return sukuKata(bah.toLowerCase()).map(s => { const t = bah.substr(i, s.length); i += s.length; return `<span class="su s${(j++) % 2}">${t}</span>`; }).join(""); }).join(`<span class="sutanda">-</span>`);
+  return h + (m[2] ? `<span class="sutanda">${m[2]}</span>` : "");
+}
+let crC = null, crM = -1, crId = 0;
+const crOn = () => $("s-cerita").classList.contains("on");
+function renderCerita() {
+  backMenu = renderCerita;
+  const d = crDibaca();
+  renderMenu(tr(L("Buku Cerita", "Story Books", "故事书")), [1, 2, 3].map(lv => [["t-pra", "t-t1", "t-t2"][lv - 1], IKON.baca, tr(BM_TAHAP[lv]),
+    CERITA[lv].filter(c => d[c.id]).length + " / " + CERITA[lv].length + tr(L(" buku dibaca", " books read", " 本已读")), "", () => renderCeritaTahap(lv)]), renderBM1);
+}
+function renderCeritaTahap(lv) {
+  backMenu = () => renderCeritaTahap(lv);
+  const d = crDibaca();
+  renderMenu(tr(L("Buku Cerita", "Story Books", "故事书")) + " · " + tr(BM_TAHAP[lv]), CERITA[lv].map((c, i) => ["c" + (i % 5), artSvg(c.watak), (i + 1) + ". " + c.tajuk, c.muka.length + tr(L(" muka surat", " pages", " 页")), d[c.id] ? "★" : "", () => startCerita(c)]), renderCerita);
+}
+function startCerita(c) { crC = c; crM = -1; show("s-cerita"); crMuka(); }
+/* Kata kunci: sehingga 3 perkataan paling banyak suku kata */
+function crKunci(c) {
+  const k = [];
+  c.muka.join(" ").split(" ").map(kataBersih).filter(w => w && sukuKata(w).length >= 2).sort((a, b) => sukuKata(b).length - sukuKata(a).length || b.length - a.length).forEach(w => { if (k.length < 3 && !k.some(x => x.indexOf(w) >= 0 || w.indexOf(x) >= 0)) k.push(w); });
+  return k;
+}
+function crButang(ik, label, kelas, fn) {
+  const b = document.createElement("button");
+  b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
+  $("crBtns").appendChild(b);
+}
+function crSebutSuku(w, el, id) {
+  const s = sukuKata(w), bah = el ? [...el.querySelectorAll(".su")] : [];
+  let p = Promise.resolve();
+  s.forEach((x, j) => { p = p.then(() => { if (id !== crId) return; bah.forEach((b, k) => b.classList.toggle("on", k === j)); return speak("~" + x, "ms").then(() => tunggu(150)); }); });
+  return p.then(() => { bah.forEach(b => b.classList.remove("on")); return id === crId ? speak(w, "ms") : null; });
+}
+function crMuka() {
+  const c = crC, id = ++crId, n = c.muka.length;
+  $("crTajuk").textContent = c.tajuk;
+  $("crBtns").innerHTML = "";
+  $("crBuku").classList.remove("selak"); void $("crBuku").offsetWidth; $("crBuku").classList.add("selak");
+  if (crM < 0) {
+    /* Muka depan + cara membaca + kata kunci */
+    $("crMuka").textContent = tr(L("Cara Baca", "How to Read", "怎么读"));
+    $("crLatar").innerHTML = crAdegan(c, "w-masuk");
+    const kunci = crKunci(c);
+    $("crTeks").innerHTML = `<div class="crcara"><b>${tr(L("Cara Membaca", "How to Read", "怎么读"))}</b><ol>${CR_CARA.map(t => `<li>${t}</li>`).join("")}</ol><div class="crkunci"></div></div>`;
+    kunci.forEach(w => {
+      const b = document.createElement("button");
+      b.className = "crk"; b.innerHTML = crKata(w);
+      b.onclick = () => { ++crId; crSebutSuku(w, b, crId); };
+      $("crTeks").querySelector(".crkunci").appendChild(b);
+    });
+    crButang("play", tr(L("Mula Baca", "Start Reading", "开始阅读")), "hijau", () => { crM = 0; crMuka(); });
+    const li = [...$("crTeks").querySelectorAll("li")], kb = [...$("crTeks").querySelectorAll(".crk")];
+    let p = speak(c.tajuk, "ms").then(() => tunggu(300)).then(() => id === crId && speak(CR_SEBUT.cara, "ms"));
+    CR_CARA.forEach((t, j) => { p = p.then(() => { if (id !== crId) return; li.forEach((x, k) => x.classList.toggle("on", k === j)); return speak(t, "ms"); }); });
+    p = p.then(() => { li.forEach(x => x.classList.remove("on")); return id === crId && speak(CR_SEBUT.kunci, "ms"); });
+    kunci.forEach((w, j) => { p = p.then(() => id === crId && crSebutSuku(w, kb[j], id)).then(() => tunggu(250)); });
+    p.then(() => id === crId && speak(CR_SEBUT.mula, "ms"));
+    return;
+  }
+  if (crM >= n) {
+    /* Tamat */
+    const d = crDibaca(); d[c.id] = 1; try { localStorage.setItem(CERITA_KEY, JSON.stringify(d)); } catch (e) { /* abaikan */ }
+    $("crMuka").textContent = n + "/" + n;
+    $("crLatar").innerHTML = crAdegan(c, "w-lompat");
+    $("crTeks").innerHTML = `<div class="crtamat">${tr(L("Tamat", "The End", "完"))}</div>`;
+    sndWin();
+    const r = $("crBuku").getBoundingClientRect();
+    tKonfeti(r.left + r.width / 2, r.top + r.height / 3);
+    speak(CR_SEBUT.tamat, "ms");
+    crButang("back", tr(L("Baca Lagi", "Read Again", "再读一次")), "ungu", () => { crM = -1; crMuka(); });
+    crButang("next", tr(L("Buku Lain", "Other Books", "其他书")), "hijau", () => { crId++; stopSpeech(); goBack(); });
+    return;
+  }
+  $("crMuka").textContent = (crM + 1) + "/" + n;
+  $("crLatar").innerHTML = crAdegan(c, ["w-masuk", "w-lompat", "w-goyang", "w-dekat"][crM % 4]);
+  const ayat = c.muka[crM];
+  $("crTeks").innerHTML = `<div class="crayat"></div>`;
+  ayat.split(" ").forEach(w => {
+    const b = document.createElement("button");
+    b.className = "crk"; b.innerHTML = crKata(w);
+    b.onclick = () => { ++crId; crSebutSuku(kataBersih(w), b, crId); };
+    $("crTeks").querySelector(".crayat").appendChild(b);
+  });
+  const kata = [...$("crTeks").querySelectorAll(".crk")];
+  const dengar = i2 => {
+    let p = Promise.resolve();
+    kata.forEach(b => { p = p.then(() => { if (i2 !== crId) return; kata.forEach(z => z.classList.remove("sorot")); b.classList.add("sorot"); return speak(kataBersih(b.textContent), "ms").then(() => tunggu(100)); }); });
+    return p.then(() => { kata.forEach(z => z.classList.remove("sorot")); return i2 === crId && speak(ayat, "ms"); });
+  };
+  crButang("back", tr(UI.sebelum).replace(EMOJI_RE, "").trim(), "ungu", () => { crId++; crM--; crMuka(); });
+  crButang("speak", tr(UI.dengar), "biru", () => { ++crId; dengar(crId); });
+  crButang("baca", tr(L("Saya Baca", "I Read", "我来读")), "koral", () => {
+    const i2 = ++crId;
+    speak(CR_SEBUT.kamu, "ms").then(() => {
+      let p = Promise.resolve();
+      kata.forEach(b => { p = p.then(() => { if (i2 !== crId) return; kata.forEach(z => z.classList.remove("sorot")); b.classList.add("sorot", "giliran"); tone(500, 0, .05); return tunggu(600 + sukuKata(kataBersih(b.textContent)).length * 450); }); });
+      return p;
+    }).then(() => kata.forEach(z => z.classList.remove("sorot", "giliran")));
+  });
+  crButang("next", tr(UI.lagi), "hijau", () => { crId++; crM++; crMuka(); });
+  tunggu(500).then(() => id === crId && dengar(id));
 }
 
 /* ===== UI ===== */
@@ -3218,7 +3538,7 @@ try { window.speechSynthesis && window.speechSynthesis.getVoices(); } catch (e) 
 /* Tulis Huruf: butang & Apple Pencil */
 function tulisLabel() {
   const lb = (id, ik, t) => { $(id).innerHTML = IKON[ik] + "<span></span>"; $(id).querySelector("span").textContent = tr(t); };
-  $("tBack").innerHTML = IKON.back; $("bmBack").innerHTML = IKON.back;
+  $("tBack").innerHTML = IKON.back; $("bmBack").innerHTML = IKON.back; $("crBack").innerHTML = IKON.back;
   lb("wSay", "speak", UI.dengar); lb("wErase", "padam", UI.padam); lb("wNext", "next", UI.lagi); $("wBack").innerHTML = IKON.back;
   lb("tShow", "play", UI.tunjuk); lb("tErase", "padam", UI.padam); lb("tSay", "speak", UI.dengar); lb("tNext", "next", UI.lagi);
 }
@@ -3257,6 +3577,7 @@ $("bmMas").insertAdjacentHTML("beforeend", MASKOT);
 ["pointerdown", "pointermove", "pointerup", "pointercancel"].forEach((ev, i) => $("bmInk").addEventListener(ev, [bmDown, bmMove, bmUp, bmUp][i]));
 $("bmInk").addEventListener("touchstart", e => e.preventDefault(), { passive: false });
 $("bmBack").onclick = () => { bmId++; stopSpeech(); goBack(); };
+$("crBack").onclick = () => { crId++; stopSpeech(); goBack(); };
 window.addEventListener("resize", () => { if (bmOn()) bmSaiz(); });
 applyLang();
 renderHome();
