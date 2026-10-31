@@ -665,7 +665,7 @@ function nombor() {
 /* Kamus istilah [BM, English, 中文] untuk Warna, Bentuk & Sains */
 const K = {
   merah:L("Merah","Red","红色"), kuning:L("Kuning","Yellow","黄色"), hijau:L("Hijau","Green","绿色"), biru:L("Biru","Blue","蓝色"),
-  oren:L("Oren","Orange","橙色"), ungu:L("Ungu","Purple","紫色"), perang:L("Perang","Brown","褐色"), hitam:L("Hitam","Black","黑色"),
+  oren:L("Oren","Orange","橙色"), ungu:L("Ungu","Purple","紫色"), perang:L("Coklat","Brown","褐色"), hitam:L("Hitam","Black","黑色"),
   putih:L("Putih","White","白色"),
   bulatan:L("Bulatan","Circle","圆形"), segitiga:L("Segi tiga","Triangle","三角形"), segiempatsama:L("Segi empat sama","Square","正方形"),
   segiempattepat:L("Segi empat tepat","Rectangle","长方形"),
@@ -2309,7 +2309,7 @@ const WARNA = (() => {
     { k: "ungu", c: "#9b59d6", t: "#fff", s: { ms: ["u", "ngu"], en: ["pur", "ple"] }, b: L("anggur", "bunch of grapes", "葡萄"), en: "a bunch of grapes", f: "gambar/buah-05.jpg",
       r: kumpul(garisAnggur, 9),
       d: garisAnggur.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="9" fill="none" stroke-width="1.5"/>` + kilat(p[0] - 5, p[1] - 2)).join("") + `<path d="M62 25 Q61 14 67 6" fill="none" stroke="#8a5a2b" stroke-width="4"/><path d="M65 12 Q76 0 92 4 Q102 8 104 18 Q94 22 84 20 Q72 18 65 12 Z" fill="#6cd17a"/><path d="M68 12 Q84 11 102 17" fill="none" stroke-width="1.4"/><path d="M38 20 Q30 14 34 6 Q40 10 40 18" fill="none" stroke="#6cd17a" stroke-width="2.5"/>` + MC(57, 46, 3.4) + MC(69, 46, 3.4) + SENYUM(63, 51, 3) + PIPI(52, 51, .8) + PIPI(74, 51, .8) },
-    { k: "perang", c: "#8b5a2b", t: "#fff", s: { ms: ["pe", "rang"], en: ["brown"] }, b: L("burung hantu", "owl", "猫头鹰"), en: "an owl", f: "gambar/burung-03.jpg",
+    { k: "perang", c: "#8b5a2b", t: "#fff", s: { ms: ["co", "klat"], en: ["brown"] }, b: L("burung hantu", "owl", "猫头鹰"), en: "an owl", f: "gambar/burung-03.jpg",
       r: "M60 88 Q26 88 26 56 Q26 30 36 18 L32 6 L48 14 Q60 10 72 14 L88 6 L84 18 Q94 30 94 56 Q94 88 60 88 Z M28 50 Q16 60 20 76 Q28 72 32 64 Z M92 50 Q104 60 100 76 Q92 72 88 64 Z",
       d: `<path d="M8 92 H112" stroke="#7a4b26" stroke-width="7"/><path d="M60 82 Q42 82 42 66 Q44 56 60 56 Q76 56 78 66 Q78 82 60 82 Z" fill="#f3d8b5"/><path d="M52 64 L55 67 L58 64 M62 64 L65 67 L68 64 M57 72 L60 75 L63 72" fill="none" stroke-width="1.5"/><circle cx="46" cy="38" r="13" fill="#fff"/><circle cx="74" cy="38" r="13" fill="#fff"/>` + MC(47, 39, 7) + MC(73, 39, 7) + `<path d="M56 48 L60 55 L64 48 Z" fill="#ffb627"/>` + PIPI(36, 52) + PIPI(84, 52) + `<path d="M50 88 L48 94 M54 88 L54 94 M66 88 L66 94 M70 88 L72 94" stroke="#ffb627" stroke-width="3"/>` },
     { k: "hitam", c: "#222222", t: "#fff", s: { ms: ["hi", "tam"], en: ["black"] }, b: L("penguin", "penguin", "企鹅"), en: "a penguin", f: "gambar/burung-06.jpg", bg: "#e8f6ff",
