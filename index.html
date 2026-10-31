@@ -111,7 +111,23 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.12) rotate(-2deg)}60%{transform:scale(.97) rotate(2deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
 /* Tulis Huruf */
-#app:has(#s-tulis.on),#app:has(#s-warna.on),#app:has(#s-bm.on),#app:has(#s-cerita.on){max-width:1060px}
+#app:has(#s-tulis.on),#app:has(#s-warna.on),#app:has(#s-bm.on),#app:has(#s-cerita.on),#app:has(#s-tb.on){max-width:1060px}
+/* Tatabahasa */
+#s-tb{position:relative;z-index:0}
+.tbatas{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}.tbatas h2{margin:0}.tbatas .masc{width:clamp(50px,7vw,72px)}.tbatas .tmas{flex-direction:row-reverse;align-items:center;gap:8px}.tbatas .tbub{margin:0}.tbatas .tbub::after{display:none}
+#tbKawasan{margin:14px 0}
+.tbnota{background:var(--card);border-radius:26px;padding:20px;box-shadow:0 6px 16px var(--sh);border-top:10px solid var(--ungu);text-align:center;animation:pop .4s}
+.tbtajuk{font-size:clamp(26px,4.5vw,40px);font-weight:700;color:var(--ungu)}
+.tbterang{font-size:clamp(19px,2.8vw,24px);font-weight:700;margin:10px 0 16px}
+.tbcontoh{display:flex;flex-direction:column;gap:10px;align-items:center}
+.tbc{font-size:clamp(22px,3.6vw,32px);font-weight:700;padding:8px 18px;border-radius:16px;background:var(--biru-p);opacity:.25;transform:scale(.92);transition:opacity .4s,transform .4s,background .3s;cursor:pointer}
+.tbc.muncul{opacity:1;transform:none}.tbc.on{background:var(--kuning-p);transform:scale(1.06)}
+.tbc mark,.tbsoalan mark{background:#ffd23f;color:#2f3a4a;border-radius:8px;padding:0 6px;animation:pop .5s}
+.tbsoalan{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 6px 16px var(--sh);font-size:clamp(24px,4vw,36px);font-weight:700;text-align:center;margin-bottom:14px;line-height:1.5}
+.tbkosong{display:inline-block;min-width:110px;border-bottom:4px dashed var(--muted);margin:0 6px}
+.tbkosong.isi{border-bottom:4px solid var(--hijau);color:var(--hijau);animation:pop .4s}
+.tbayat{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:var(--card);border-radius:24px;padding:16px;box-shadow:0 6px 16px var(--sh)}
+.tbw{border:3px solid var(--track)}.tbw.betul{background:var(--hijau);color:#fff;border-color:var(--hijau);animation:pop .4s}.tbw.no{animation:shake .5s}
 /* Buku cerita */
 #s-cerita{position:relative;z-index:0}
 .crbuku{background:var(--card);border-radius:28px;box-shadow:0 8px 22px var(--sh);overflow:hidden;border:6px solid var(--oren)}
@@ -500,6 +516,13 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
     <div class="top"><button class="pill ikon" id="crBack" aria-label="Keluar"></button><h2 id="crTajuk" style="flex:1;margin:0"></h2><div class="pill" id="crMuka">1/3</div></div>
     <div class="crbuku" id="crBuku"><div class="crlatar" id="crLatar"></div><div class="crteks" id="crTeks"></div></div>
     <div class="tbtns crbtns" id="crBtns"></div>
+  </section>
+  <section id="s-tb" class="screen">
+    <div class="tbg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="top"><button class="pill ikon" id="tbBack" aria-label="Keluar"></button><div class="bar"><i id="tbProg"></i></div><div class="pill" id="tbCount"></div></div>
+    <div class="tbatas"><h2 id="tbTajuk"></h2><div class="tmas" id="tbMas"><div class="tbub" id="tbBub"></div></div></div>
+    <div id="tbKawasan"></div>
+    <div class="tbtns crbtns" id="tbBtns"></div>
   </section>
   <section id="s-result" class="screen">
     <h2 id="resTitle"></h2>
@@ -2665,7 +2688,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", renderTB]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3181,6 +3204,281 @@ function crMuka() {
   tunggu(500).then(() => id === crId && dengar(id));
 }
 
+/* ===== Tatabahasa: nota bersuara + latihan (P = pilih jawapan, T = tekan perkataan) =====
+   Nota: "Tajuk|Penerangan.|contoh 1;contoh 2" (*kata* = disorot). Soalan: "P|soalan ___|jawapan|salah|salah" atau "T|arahan|ayat|sasaran1,sasaran2" */
+const TB = [
+  { lv: 1, nama: "Kata Nama Am dan Khas", nota: [
+    "Kata Nama Am|Kata nama am ialah nama umum bagi orang, haiwan, benda dan tempat. Ia ditulis dengan huruf kecil.|*kucing*;*buku*;*sekolah*;*guru*",
+    "Kata Nama Khas|Kata nama khas ialah nama khusus. Huruf pertamanya ditulis dengan huruf besar.|*Ali*;*Siti*;*Kuala Lumpur*;*Sungai Pahang*"], soal: [
+    "T|Tekan kata nama khas.|Ali tinggal di Ipoh.|Ali,Ipoh", "T|Tekan kata nama am.|Siti membeli buku.|buku", "T|Tekan kata nama khas.|Kami melawat Zoo Negara.|Zoo,Negara",
+    "P|Yang manakah kata nama khas?|Melaka|bandar|negeri", "P|Yang manakah kata nama am?|pokok|Ahmad|Langkawi", "P|Pilih ejaan yang betul.|Kuala Lumpur|kuala lumpur|Kuala lumpur",
+    "T|Tekan kata nama am.|Adik bermain bola di padang.|Adik,bola,padang", "P|Nama hari ditulis dengan huruf besar. Pilih yang betul.|Isnin|isnin|iSnin", "P|Kucing saya bernama ___.|Comel|comel|kucing",
+    "T|Tekan kata nama khas.|Abu menjual ikan di Pasar Besar.|Abu,Pasar,Besar", "P|Gunung Kinabalu ialah kata nama ___.|khas|am|kerja", "P|Pilih kata nama am.|meja|Johor|Aminah"] },
+  { lv: 1, nama: "Kata Ganti Nama", nota: [
+    "Kata Ganti Nama Diri|Kata ganti nama diri menggantikan nama orang.|*saya*, *aku* untuk diri sendiri;*kamu*, *awak* untuk orang yang kita bercakap dengannya;*dia*, *beliau*, *mereka* untuk orang yang kita cerita",
+    "Kata Ganti Nama Tunjuk|Ini untuk benda yang dekat. Itu untuk benda yang jauh.|*Ini* buku saya.;*Itu* rumah Ali.",
+    "Kami dan Kita|Kami tidak termasuk orang yang kita bercakap dengannya. Kita termasuk semua orang.|*Kami* pergi dahulu, cikgu.;Mari *kita* bermain bersama."], soal: [
+    "P|Ali tidak datang kerana ___ demam.|dia|saya|kamu", "P|___ buku saya yang ada di tangan saya.|Ini|Itu|Mereka", "P|Rumah ___ jauh di seberang sungai.|itu|ini|beliau",
+    "P|Siti dan Aminah pergi ke kedai. ___ membeli roti.|Mereka|Dia|Kami", "P|Mari ___ makan bersama-sama!|kita|kami|mereka", "P|Cikgu, ___ sudah siap membuat kerja.|saya|dia|mereka",
+    "P|Encik Ahmad ialah guru besar. ___ sangat baik.|Beliau|Mereka|Kamu", "T|Tekan kata ganti nama diri.|Saya dan dia pergi ke sekolah.|Saya,dia", "T|Tekan kata ganti nama tunjuk.|Itu kereta ayah saya.|Itu",
+    "P|Adik bertanya, ini pensel ___?|kamu|dia|mereka", "P|Ayah dan ibu ke pasar. ___ pergi naik kereta.|Mereka|Dia|Kita", "T|Tekan kata ganti nama.|Mereka bermain di padang.|Mereka"] },
+  { lv: 1, nama: "Penjodoh Bilangan", nota: [
+    "Penjodoh Bilangan|Penjodoh bilangan digunakan untuk membilang benda.|*seorang* guru;*seekor* ayam;*sebuah* kereta",
+    "Ikut Bentuk Benda|Pilih penjodoh bilangan ikut bentuk benda.|*sebiji* bola yang bulat;*sehelai* kain yang nipis;*sebatang* pensel yang panjang",
+    "Lagi Contoh|Ada banyak penjodoh bilangan lain.|*sekuntum* bunga;*sekeping* roti;*sepasang* kasut;*sebutir* bintang"], soal: [
+    "P|Ayah membeli ___ kereta baharu.|sebuah|seekor|sebiji", "P|Di kebun ada ___ lembu.|seekor|seorang|sebatang", "P|Ibu memetik ___ bunga.|sekuntum|sehelai|sebuah",
+    "P|Adik makan ___ epal.|sebiji|sekeping|seekor", "P|Kakak memakai ___ baju baharu.|sehelai|sebatang|sebiji", "P|Saya ada ___ pensel.|sebatang|sebuah|seekor",
+    "P|Cikgu itu ___ yang baik.|seorang|seekor|sebuah", "P|Ali membeli ___ kasut sukan.|sepasang|sehelai|sebuah", "P|Adik makan ___ roti.|sekeping|sekuntum|seorang",
+    "P|Di langit ada ___ bintang.|sebutir|sebatang|seekor", "P|Atuk menanam ___ pokok rambutan.|sepohon|seekor|sehelai", "P|Di dalam bilik ada ___ katil.|sebuah|sebiji|seekor"] },
+  { lv: 1, nama: "Kata Kerja dan Kata Perintah", nota: [
+    "Kata Kerja|Kata kerja ialah perkataan yang menunjukkan perbuatan.|Adik *makan* nasi.;Ali *berlari* laju.;Ibu *memasak* di dapur.",
+    "Ayat Aktif dan Pasif|Dalam ayat aktif, pelaku di depan. Dalam ayat pasif, benda yang dikenakan perbuatan di depan.|Ali *menendang* bola.;Bola *ditendang* oleh Ali.",
+    "Kata Perintah|Kata perintah digunakan untuk menyuruh, mengajak atau melarang.|*Sila* duduk.;*Jangan* bising.;*Mari* bermain.;*Tolong* tutup pintu."], soal: [
+    "T|Tekan kata kerja.|Kucing tidur di atas sofa.|tidur", "T|Tekan kata kerja.|Ayah membaca surat khabar.|membaca", "T|Tekan kata kerja.|Burung terbang tinggi.|terbang",
+    "P|Bola ___ oleh Ali.|ditendang|menendang|tendangan", "P|Ibu ___ nasi di dapur.|memasak|dimasak|masakan", "P|Kek itu ___ oleh kakak.|dibuat|membuat|buatan",
+    "P|___ buang sampah merata-rata.|Jangan|Sila|Mari", "P|___ duduk, murid-murid.|Sila|Jangan|Aduh", "P|___ kita pergi ke taman.|Mari|Jangan|Tolong",
+    "P|Ayat manakah ayat pasif?|Surat itu ditulis oleh Siti.|Siti menulis surat.|Siti suka menulis.", "T|Tekan kata perintah.|Tolong tutup pintu itu.|Tolong", "P|Pilih kata kerja.|melompat|cantik|meja"] },
+  { lv: 1, nama: "Kata Sendi Nama", nota: [
+    "Kata Sendi Nama|Kata sendi nama digunakan di hadapan kata nama.|Saya tinggal *di* Melaka.;Adik pergi *ke* kedai.;Ayah pulang *dari* pejabat.",
+    "Kepada dan Pada|Kepada digunakan untuk orang atau haiwan. Pada digunakan untuk masa.|Ali memberi hadiah *kepada* ibu.;Kami bertolak *pada* pukul lapan.",
+    "Daripada dan Dengan|Daripada digunakan untuk orang, asal benda atau perbandingan. Dengan bermaksud bersama.|Saya dapat surat *daripada* nenek.;Adik bermain *dengan* kucing."], soal: [
+    "P|Adik pergi ___ sekolah.|ke|di|pada", "P|Kami tinggal ___ Johor Bahru.|di|ke|kepada", "P|Ayah baru pulang ___ Kuching.|dari|daripada|kepada",
+    "P|Siti memberi bunga ___ guru.|kepada|ke|di", "P|Kelas bermula ___ pukul tujuh.|pada|kepada|di", "P|Baju itu diperbuat ___ kain sutera.|daripada|dari|ke",
+    "P|Abang pergi ke sekolah ___ basikal.|dengan|kepada|di", "P|Hadiah ini ___ ibu saya.|untuk|ke|di", "P|Ali lebih tinggi ___ Ahmad.|daripada|dari|kepada",
+    "P|Saya menerima kad ___ kawan.|daripada|dari|di", "T|Tekan kata sendi nama.|Kucing tidur di bawah meja.|di", "T|Tekan kata sendi nama.|Ibu membeli ikan untuk makan malam.|untuk"] },
+  { lv: 1, nama: "Kata Arah", nota: [
+    "Kata Arah|Kata arah menunjukkan kedudukan sesuatu benda.|di *atas* meja;di *bawah* kerusi;di *dalam* kotak;di *luar* rumah",
+    "Lagi Kata Arah|Kata arah selalu digunakan selepas di, ke atau dari.|di *depan* sekolah;di *belakang* rumah;di *tepi* jalan;di *antara* dua pokok"], soal: [
+    "P|Kucing bersembunyi di ___ katil kerana takut.|bawah|atas|luar", "P|Ikan berenang di ___ air.|dalam|atas|luar", "P|Kapal terbang terbang di ___ awan.|atas|bawah|dalam",
+    "P|Murid-murid beratur di ___ kelas sebelum masuk.|luar|dalam|bawah", "P|Pemandu duduk di ___ bas.|depan|bawah|luar", "P|Ekor kucing ada di ___ badannya.|belakang|depan|atas",
+    "P|Kereta berhenti di ___ jalan.|tepi|dalam|atas", "P|Rumah saya terletak di ___ kedai dan masjid.|antara|atas|dalam", "P|Kasut diletakkan di ___ rumah.|luar|atas|dalam",
+    "T|Tekan kata arah.|Bola itu ada di bawah meja.|bawah", "T|Tekan kata arah.|Adik berdiri di depan pintu.|depan", "P|Lawan kata atas ialah ___.|bawah|dalam|tepi"] },
+  { lv: 1, nama: "Kata Tanya", nota: [
+    "Kata Tanya|Kata tanya digunakan untuk bertanya. Ayat tanya diakhiri dengan tanda soal.|*Apa* nama kamu?;*Siapa* guru kelas kamu?;*Di mana* rumah kamu?",
+    "Lagi Kata Tanya|Setiap kata tanya ada tugasnya sendiri.|*Bila* kamu datang?;*Berapa* umur kamu?;*Mengapa* kamu menangis?;*Bagaimana* cara membuat kek?"], soal: [
+    "P|___ nama kucing kamu?|Apa|Siapa|Bila", "P|___ guru kelas kamu?|Siapa|Apa|Berapa", "P|___ umur adik kamu?|Berapa|Siapa|Di mana",
+    "P|___ kamu pergi ke Pulau Pinang?|Bila|Apa|Siapa", "P|___ kamu lewat datang ke sekolah?|Mengapa|Berapa|Siapa", "P|___ rumah nenek kamu?|Di mana|Bila|Berapa",
+    "P|___ cara membuat layang-layang?|Bagaimana|Siapa|Berapa", "P|Pilih tanda baca untuk ayat tanya.|?|.|!", "T|Tekan kata tanya.|Siapakah nama ayah kamu?|Siapakah",
+    "P|Berapa harga buku ini? Jawapan yang sesuai ialah ___.|Lima ringgit.|Di kedai.|Semalam.", "P|Di mana kamu tinggal? Jawapan yang sesuai ialah ___.|Di Kuantan.|Pada pagi tadi.|Dua orang.", "P|Bila kamu bangun? Jawapan yang sesuai ialah ___.|Pukul enam pagi.|Di bilik.|Ayah saya."] },
+  { lv: 1, nama: "Imbuhan Awalan dan Akhiran", nota: [
+    "Imbuhan Awalan|Imbuhan awalan ditambah di depan kata dasar.|ber + main = *bermain*;me + lukis = *melukis*;di + baca = *dibaca*",
+    "Imbuhan Akhiran|Imbuhan akhiran ditambah di belakang kata dasar.|makan + an = *makanan*;minum + an = *minuman*;main + an = *mainan*"], soal: [
+    "P|ber + lari = ___|berlari|melari|dilari", "P|me + lukis = ___|melukis|bermelukis|dilukis", "P|di + tulis = ___|ditulis|menulis|bertulis",
+    "P|makan + an = ___|makanan|memakan|dimakan", "P|Adik suka ___ di taman.|bermain|mainan|dimain", "P|Kek ialah sejenis ___.|makanan|memakan|dimakan",
+    "P|Kakak sedang ___ gambar bunga.|melukis|dilukis|lukisan", "P|Surat itu ___ oleh Ali.|ditulis|menulis|tulisan", "P|Kata dasar bagi berjalan ialah ___.|jalan|berjal|alan",
+    "P|Kata dasar bagi minuman ialah ___.|minum|inum|mina", "T|Tekan perkataan yang ada imbuhan.|Adik bermain bola.|bermain", "T|Tekan perkataan yang ada imbuhan.|Ibu memasak nasi.|memasak"] },
+  { lv: 1, nama: "Kata Majmuk", nota: [
+    "Kata Majmuk|Kata majmuk ialah dua perkataan yang bergabung dan membawa satu maksud. Ia dieja terpisah.|*kapal terbang*;*rumah sakit*;*air mata*;*jalan raya*",
+    "Dieja Rapat|Ada kata majmuk yang sudah mantap dan dieja rapat.|*kerjasama*;*tandatangan*;*bumiputera*;*matahari*"], soal: [
+    "P|Kenderaan yang terbang di langit ialah ___.|kapal terbang|kapal laut|kereta api", "P|Air yang keluar dari mata ketika menangis ialah ___.|air mata|air laut|mata air", "P|Kenderaan yang bergerak di atas landasan ialah ___.|kereta api|kapal terbang|kereta lembu",
+    "P|Pilih ejaan kata majmuk yang betul.|jalan raya|jalanraya|jalan-raya", "P|Pilih ejaan kata majmuk yang betul.|kapal terbang|kapalterbang|kapal-terbang", "P|Pilih ejaan yang betul.|matahari|mata hari|mata-hari",
+    "P|Pilih ejaan yang betul.|kerjasama|kerja-sama|ker jasama", "P|Tempat orang sakit dirawat ialah ___.|rumah sakit|rumah api|rumah kedai", "P|Duit yang diberi semasa hari raya ialah ___.|duit raya|duit syiling|duit kertas",
+    "T|Tekan kata majmuk.|Ayah menunggu di stesen kereta api.|kereta,api", "T|Tekan kata majmuk.|Kami melintas jalan raya dengan berhati-hati.|jalan,raya", "P|Pilih kata majmuk.|bilik air|bermain|cantik"] },
+  { lv: 1, nama: "Jenis Ayat", nota: [
+    "Ayat Penyata|Ayat penyata menerangkan sesuatu. Ia diakhiri dengan noktah.|Saya suka membaca.;Kucing itu comel.",
+    "Ayat Tanya dan Perintah|Ayat tanya diakhiri tanda soal. Ayat perintah menyuruh atau melarang.|Siapa nama kamu?;*Sila* duduk.",
+    "Ayat Seruan|Ayat seruan menunjukkan perasaan dan diakhiri tanda seru.|*Wah*, cantiknya bunga itu!;*Aduh*, sakitnya kaki saya!",
+    "Ayat Tunggal dan Majmuk|Ayat tunggal ada satu idea. Ayat majmuk menggabungkan dua ayat dengan kata hubung.|Ali makan nasi.;Ali makan nasi *dan* minum air."], soal: [
+    "P|Wah, besarnya rumah itu! Ini ialah ayat ___.|seruan|tanya|penyata", "P|Siapakah nama kamu? Ini ialah ayat ___.|tanya|seruan|perintah", "P|Tolong ambil buku itu. Ini ialah ayat ___.|perintah|tanya|seruan",
+    "P|Adik sedang tidur. Ini ialah ayat ___.|penyata|perintah|tanya", "P|Pilih tanda baca: Aduh, sakitnya kaki saya ___|!|?|,", "P|Pilih tanda baca: Bila kamu pulang ___|?|!|.",
+    "P|Pilih tanda baca: Saya suka makan durian ___|.|?|!", "P|Yang manakah ayat majmuk?|Ali membaca buku dan menulis surat.|Ali membaca buku.|Ali suka membaca.", "P|Yang manakah ayat tunggal?|Siti pergi ke pasar.|Siti pergi ke pasar dan membeli ikan.|Siti menyanyi sambil menari.",
+    "P|Jangan bermain di jalan raya. Ini ialah ayat ___.|perintah|seruan|tanya", "P|Gabungkan: Saya makan. Saya minum.|Saya makan dan minum.|Saya makan tetapi minum.|Saya makan kerana minum.", "P|Amboi, cantiknya baju kamu! Ini ialah ayat ___.|seruan|penyata|tanya"] },
+  { lv: 2, nama: "Kata Adjektif", nota: [
+    "Kata Adjektif|Kata adjektif menerangkan sifat kata nama.|kucing yang *comel*;rumah yang *besar*;bunga *merah*",
+    "Jenis Kata Adjektif|Ada adjektif sifat, warna, ukuran, bentuk dan waktu.|sifat: *rajin*;warna: *hijau*;ukuran: *tinggi*;bentuk: *bulat*;waktu: *lama*"], soal: [
+    "T|Tekan kata adjektif.|Gajah itu sangat besar.|besar", "T|Tekan kata adjektif warna.|Adik memakai baju merah.|merah", "T|Tekan kata adjektif.|Siti murid yang rajin.|rajin",
+    "P|Bola itu berbentuk ___.|bulat|rajin|merah", "P|Pilih kata adjektif warna.|kuning|tinggi|bulat", "P|Pilih kata adjektif ukuran.|pendek|biru|baharu",
+    "P|Pilih kata adjektif waktu.|lama|kecil|hijau", "P|Pilih kata adjektif bentuk.|bujur|cerdik|merah", "P|Lawan bagi tinggi ialah ___.|rendah|panjang|besar",
+    "P|Lawan bagi rajin ialah ___.|malas|pandai|cepat", "P|Kura-kura berjalan dengan ___.|perlahan|laju|tinggi", "P|Ais itu terasa ___.|sejuk|panas|merah"] },
+  { lv: 2, nama: "Kata Hubung", nota: [
+    "Kata Hubung|Kata hubung menyambung dua perkataan atau dua ayat.|Ali *dan* Abu;nasi *atau* roti;kecil *tetapi* kuat",
+    "Lagi Kata Hubung|Setiap kata hubung ada maksudnya.|Dia tidak datang *kerana* demam.;Adik makan *sambil* menonton televisyen.;Ayah mandi *lalu* bersarapan."], soal: [
+    "P|Saya suka makan epal ___ oren.|dan|tetapi|kerana", "P|Kamu mahu air teh ___ air kopi?|atau|dan|kerana", "P|Rumah itu kecil ___ sangat bersih.|tetapi|dan|atau",
+    "P|Ali tidak hadir ___ dia demam.|kerana|tetapi|atau", "P|Adik menyanyi ___ menari.|sambil|kerana|tetapi", "P|Kakak bangun ___ terus mandi.|lalu|atau|kerana",
+    "P|Ibu membeli sayur ___ ikan di pasar.|dan|atau|tetapi", "P|Kami bermain di dalam rumah ___ hari hujan.|kerana|tetapi|atau", "P|Saya rajin belajar ___ lulus peperiksaan.|supaya|tetapi|atau",
+    "T|Tekan kata hubung.|Ayah dan ibu pergi ke pasar.|dan", "T|Tekan kata hubung.|Abu kecil tetapi sangat kuat.|tetapi", "P|Gabungkan: Siti pandai. Siti rajin.|Siti pandai dan rajin.|Siti pandai tetapi rajin.|Siti pandai atau rajin."] },
+  { lv: 2, nama: "Kata Seru", nota: [
+    "Kata Seru|Kata seru menunjukkan perasaan. Ayat seruan diakhiri tanda seru.|*Wah*, cantiknya!;*Aduh*, sakitnya!;*Amboi*, bergayanya!;*Syabas*, kamu berjaya!",
+    "Lagi Kata Seru|Pilih kata seru ikut perasaan.|*Cis*, jahatnya!;*Oh*, begitu rupanya.;*Alamak*, saya terlupa!;*Hore*, kita menang!"], soal: [
+    "P|___, sakitnya kaki saya!|Aduh|Wah|Syabas", "P|___, cantiknya pemandangan di sini!|Wah|Aduh|Cis", "P|___, kamu sudah berjaya!|Syabas|Aduh|Cis",
+    "P|___, kita menang!|Hore|Aduh|Cis", "P|___, jahatnya perbuatan kamu!|Cis|Hore|Syabas", "P|___, saya terlupa membawa buku!|Alamak|Hore|Syabas",
+    "P|___, bergayanya baju baharu kamu!|Amboi|Aduh|Cis", "P|___, begitu rupanya cara membuatnya.|Oh|Hore|Aduh", "T|Tekan kata seru.|Wah, besarnya ikan itu!|Wah",
+    "T|Tekan kata seru.|Aduh, panasnya hari ini!|Aduh", "P|Kata seru aduh menunjukkan perasaan ___.|sakit|gembira|marah", "P|Kata seru syabas digunakan untuk ___.|memuji|marah|bertanya"] },
+  { lv: 2, nama: "Kata Dasar dan Kata Ganda", nota: [
+    "Kata Dasar|Kata dasar ialah perkataan tanpa imbuhan.|*makan*;*rumah*;*besar*;*lari*",
+    "Kata Ganda|Kata ganda ialah perkataan yang diulang. Ia ditulis dengan tanda sempang.|*rumah-rumah*;*kanak-kanak*;*murid-murid*;*buah-buahan*"], soal: [
+    "P|Bentuk jamak bagi buku ialah ___.|buku-buku|bukubuku|buku buku", "P|Pilih ejaan yang betul.|kanak-kanak|kanakkanak|kanak kanak", "P|Banyak pokok disebut ___.|pokok-pokok|pokokan|berpokok",
+    "P|Kata dasar bagi bermain ialah ___.|main|ber|bermai", "P|Kata dasar bagi pemandu ialah ___.|pandu|pemand|mandu", "P|Yang manakah kata dasar?|tulis|menulis|tulisan",
+    "P|Yang manakah kata ganda?|rumah-rumah|rumah|perumahan", "T|Tekan kata ganda.|Murid-murid sedang belajar.|Murid-murid", "T|Tekan kata ganda.|Ibu membeli sayur-sayuran di pasar.|sayur-sayuran",
+    "P|Buah-buahan bermaksud ___.|pelbagai jenis buah|sebiji buah|buah yang besar", "P|Pilih kata dasar.|baca|membaca|bacaan", "P|Bentuk jamak bagi murid ialah ___.|murid-murid|murid murid|muridan"] },
+  { lv: 2, nama: "Pola Ayat Dasar", nota: [
+    "Subjek dan Predikat|Ayat dasar ada dua bahagian, iaitu subjek dan predikat.|*Ali* ialah murid.;*Adik* sedang tidur.",
+    "Empat Pola Ayat|Predikat boleh jadi frasa nama, frasa kerja, frasa adjektif atau frasa sendi nama.|Ayah *doktor*. FN + FN;Adik *tidur*. FN + FK;Bunga itu *cantik*. FN + FA;Ibu *ke pasar*. FN + FS"], soal: [
+    "P|Subjek dalam ayat Kucing itu tidur ialah ___.|Kucing itu|tidur|itu tidur", "P|Predikat dalam ayat Adik menangis ialah ___.|menangis|Adik|Adik menangis", "P|Ayah seorang doktor. Ini ialah pola ___.|FN + FN|FN + FK|FN + FS",
+    "P|Burung itu terbang. Ini ialah pola ___.|FN + FK|FN + FA|FN + FN", "P|Bunga itu harum. Ini ialah pola ___.|FN + FA|FN + FK|FN + FS", "P|Ibu ke pasar. Ini ialah pola ___.|FN + FS|FN + FN|FN + FA",
+    "T|Tekan subjek ayat.|Kakak membaca buku.|Kakak", "T|Tekan kata kerja dalam predikat.|Abang berenang di kolam.|berenang", "P|Lengkapkan: ___ sedang memasak.|Ibu|Cantik|Di dapur",
+    "P|Lengkapkan: Gajah itu ___.|besar|di|dan", "P|Susunan ayat yang betul ialah ___.|Saya suka membaca.|Membaca saya suka.|Suka saya membaca.", "P|Susunan ayat yang betul ialah ___.|Kucing itu tidur di sofa.|Tidur kucing itu sofa di.|Sofa di tidur kucing itu."] },
+  { lv: 3, nama: "Kata Kerja Transitif dan Tak Transitif", nota: [
+    "Kata Kerja Transitif|Kata kerja transitif memerlukan objek selepasnya.|Ali *menendang* bola.;Ibu *membeli* sayur.",
+    "Kata Kerja Tak Transitif|Kata kerja tak transitif tidak memerlukan objek.|Adik *tidur*.;Burung *terbang*.;Bayi itu *menangis*."], soal: [
+    "P|Yang manakah kata kerja transitif?|membaca|tidur|menangis", "P|Yang manakah kata kerja tak transitif?|berlari|menulis|memotong", "P|Kakak menjahit baju. Objek ayat ini ialah ___.|baju|Kakak|menjahit",
+    "P|Bayi itu ketawa. Kata kerja ini ialah kata kerja ___.|tak transitif|transitif|adjektif", "P|Ayah mencuci kereta. Kata kerja ini ialah kata kerja ___.|transitif|tak transitif|adjektif", "P|Lengkapkan: Ali memukul ___.|bola|tidur|cantik",
+    "T|Tekan kata kerja transitif.|Siti menyapu lantai.|menyapu", "T|Tekan objek.|Abang memancing ikan.|ikan", "P|Ayat manakah menggunakan kata kerja tak transitif?|Adik sedang tidur.|Adik makan roti.|Adik membaca buku.",
+    "P|Ayat manakah menggunakan kata kerja transitif?|Ibu memasak nasi.|Ibu berehat.|Ibu tersenyum.", "P|Pokok itu tumbang. Kata kerja ini ialah kata kerja ___.|tak transitif|transitif|seru", "T|Tekan kata kerja tak transitif.|Murid-murid berbaris di padang.|berbaris"] },
+  { lv: 3, nama: "Adjektif Jarak, Perasaan dan Pancaindera", nota: [
+    "Jarak dan Perasaan|Adjektif jarak menunjukkan jauh atau dekat. Adjektif perasaan menunjukkan rasa hati.|jarak: *jauh*, *dekat*;perasaan: *gembira*, *sedih*, *takut*",
+    "Pancaindera|Adjektif pancaindera berkaitan dengan lima deria.|rasa: *manis*, *masam*;bau: *harum*, *busuk*;dengar: *merdu*, *bising*;sentuh: *lembut*, *kasar*"], soal: [
+    "P|Gula rasanya ___.|manis|harum|merdu", "P|Bunga mawar baunya ___.|harum|masam|kasar", "P|Suara penyanyi itu sangat ___.|merdu|busuk|manis",
+    "P|Kulit bayi sangat ___.|lembut|bising|masam", "P|Rumah saya ___ dari sekolah, jadi saya naik bas.|jauh|dekat|merdu", "P|Adik berasa ___ kerana mendapat hadiah.|gembira|sedih|marah",
+    "P|Siti berasa ___ kerana kucingnya hilang.|sedih|gembira|harum", "P|Asam jawa rasanya ___.|masam|manis|merdu", "P|Bunyi kenderaan di bandar sangat ___.|bising|merdu|lembut",
+    "P|Pilih adjektif perasaan.|takut|jauh|masin", "P|Pilih adjektif jarak.|dekat|marah|wangi", "T|Tekan adjektif pancaindera.|Kuih itu sangat manis.|manis"] },
+  { lv: 3, nama: "Kata Tugas", nota: [
+    "Kata Pemeri dan Penguat|Kata pemeri ialah ialah dan adalah. Kata penguat menguatkan maksud adjektif.|Kuala Lumpur *ialah* ibu negara.;Bunga itu *sangat* cantik.;Dia *paling* tinggi.",
+    "Kata Nafi dan Kata Bantu|Kata nafi menafikan, iaitu tidak dan bukan. Kata bantu menunjukkan masa, iaitu sudah, sedang dan akan.|Saya *tidak* lapar.;Itu *bukan* buku saya.;Adik *sedang* tidur.;Ayah *akan* pulang.",
+    "Kata Bilangan|Kata bilangan menunjukkan jumlah.|*semua* murid;*beberapa* biji epal;*setiap* hari"], soal: [
+    "P|Kuching ___ ibu negeri Sarawak.|ialah|sangat|bukan", "P|Gunung Kinabalu ___ tinggi.|sangat|ialah|bukan", "P|Saya ___ suka makan sayur pahit.|tidak|bukan|ialah",
+    "P|Itu ___ kucing saya. Kucing saya berwarna putih.|bukan|tidak|sudah", "P|Adik ___ tidur. Jangan bising.|sedang|akan|bukan", "P|Esok kami ___ pergi ke zoo.|akan|sudah|sedang",
+    "P|Saya ___ siap membuat kerja rumah.|sudah|akan|sedang", "P|Ali ialah murid yang ___ pandai dalam kelas.|paling|ialah|bukan", "P|___ murid mesti memakai kasut sekolah.|Semua|Sedang|Bukan",
+    "P|Ibu membeli ___ biji tembikai.|beberapa|sangat|ialah", "P|Pilih kata nafi.|tidak|sangat|sudah", "T|Tekan kata penguat.|Pemandangan di pantai sangat indah.|sangat"] },
+  { lv: 3, nama: "Kata Ganda Penuh, Separa dan Berentak", nota: [
+    "Kata Ganda Penuh|Seluruh perkataan diulang.|*buku-buku*;*rumah-rumah*;*kanak-kanak*",
+    "Kata Ganda Separa|Hanya suku kata awal diulang.|*lelaki*;*pepohon*;*dedaun*;*jejari*",
+    "Kata Ganda Berentak|Perkataan diulang dengan bunyi yang berubah.|*sayur-mayur*;*kuih-muih*;*bukit-bukau*;*lauk-pauk*"], soal: [
+    "P|Rumah-rumah ialah kata ganda ___.|penuh|separa|berentak", "P|Sayur-mayur ialah kata ganda ___.|berentak|penuh|separa", "P|Pepohon ialah kata ganda ___.|separa|penuh|berentak",
+    "P|Pilih kata ganda berentak.|kuih-muih|buku-buku|lelaki", "P|Pilih kata ganda separa.|dedaun|lauk-pauk|kereta-kereta", "P|Pilih kata ganda penuh.|pokok-pokok|bukit-bukau|jejari",
+    "P|Ibu memasak pelbagai ___ untuk kenduri.|lauk-pauk|lauk lauk|laukpauk", "P|Di kampung ada banyak ___ yang hijau.|bukit-bukau|bukit bukau|bukitbukau", "P|Kata ganda separa bagi pohon ialah ___.|pepohon|pohon-pohon|pohon-mohon",
+    "P|Kata ganda separa bagi daun ialah ___.|dedaun|daun-daun|daun-maun", "T|Tekan kata ganda berentak.|Nenek membuat kuih-muih untuk hari raya.|kuih-muih", "T|Tekan kata ganda.|Pepohon di hutan itu sangat tinggi.|Pepohon"] },
+  { lv: 3, nama: "Ayat Tanya tanpa Kata Tanya", nota: [
+    "Tanpa Kata Tanya|Kita boleh bertanya tanpa kata tanya. Nada suara dinaikkan di hujung ayat dan ayat diakhiri tanda soal.|Kamu sudah makan?;Esok kita ke sekolah?;Adik suka aiskrim?",
+    "Partikel Kah|Partikel kah boleh ditambah untuk bertanya.|*Sudahkah* kamu makan?;*Benarkah* dia datang?;*Siapakah* nama kamu?"], soal: [
+    "P|Pilih ayat tanya tanpa kata tanya.|Kamu sudah makan?|Apa yang kamu makan?|Bila kamu makan?", "P|Pilih ayat tanya tanpa kata tanya.|Ayah sudah pulang?|Siapa yang pulang?|Mengapa ayah pulang?", "P|Pilih tanda baca: Kamu mahu ikut kami ___|?|.|!",
+    "P|Benarkah dia sakit? Partikel dalam ayat ini ialah ___.|kah|lah|tah", "P|Tukar kepada ayat tanya: Adik sudah tidur.|Adik sudah tidur?|Adik sudah tidur!|Adik, sudah tidur.", "P|Tukar kepada ayat tanya: Dia sudah datang.|Sudahkah dia datang?|Sudahlah dia datang.|Dia sudah datanglah.",
+    "P|Jawapan bagi Kamu suka membaca? ialah ___.|Ya, saya suka membaca.|Di perpustakaan.|Pada waktu petang.", "P|Jawapan bagi Esok cuti sekolah? ialah ___.|Ya, esok cuti.|Pukul lapan.|Di sekolah.", "T|Tekan perkataan yang ada partikel kah.|Bolehkah saya pinjam pensel kamu?|Bolehkah",
+    "T|Tekan perkataan yang ada partikel kah.|Adakah kamu sudah siap?|Adakah", "P|Ayat manakah betul?|Kamu sudah mandi?|Kamu sudah mandi.?|Kamu? sudah mandi", "P|Bolehkah saya duduk di sini? Ini ialah ayat ___.|tanya|perintah|seruan"] }
+];
+TB.forEach((t, i) => { t.id = "tb" + i; });
+/* Teks untuk disebut (buang tanda sorotan) */
+const tbBersih = t => t.replace(/\*/g, "");
+const tbNota = s => { const p = s.split("|"); return { tajuk: p[0], terang: p[1], contoh: p[2].split(";") }; };
+const tbSoal = s => { const p = s.split("|"); return p[0] === "T" ? { j: "T", q: p[1], ayat: p[2], sasar: p[3].split(",") } : { j: "P", q: p[1], a: p[2], salah: p.slice(3) }; };
+/* Ayat lengkap selepas dijawab: ganti ___ dengan jawapan */
+const tbPenuh = s => s.q.indexOf("___") >= 0 ? s.q.replace(/\s*___\s*/, m => (m.charAt(0) === " " ? " " : "") + s.a + (m.slice(-1) === " " ? " " : "")).replace(/\s+([?!.,])$/, "$1") : s.a;
+let tbT = null, tbMod = "nota", tbI = 0, tbId = 0, tbList = [], tbSkor = 0, tbSalah = false;
+const tbOn = () => $("s-tb").classList.contains("on");
+function renderTB() {
+  backMenu = renderTB;
+  const st = loadStars();
+  renderMenu(tr(L("Tatabahasa", "Grammar", "语法")), [1, 2, 3].map(lv => {
+    const t = TB.filter(x => x.lv === lv), siap = t.filter(x => st[x.id]).length;
+    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON.bina, tr(BM_TAHAP[lv]), siap + " / " + t.length + tr(L(" topik selesai", " topics done", " 个主题已完成")), "", () => renderTBTahap(lv)];
+  }), renderBM1);
+}
+function renderTBTahap(lv) {
+  backMenu = () => renderTBTahap(lv);
+  const st = loadStars();
+  renderMenu(tr(L("Tatabahasa", "Grammar", "语法")) + " · " + tr(BM_TAHAP[lv]), TB.filter(x => x.lv === lv).map((t, i) =>
+    ["c" + (i % 5), IKON.bina, (i + 1) + ". " + t.nama, t.nota.length + tr(L(" nota · ", " notes · ", " 笔记 · ")) + t.soal.length + tr(L(" soalan", " questions", " 题")), starText(st[t.id] || 0), () => startTB(t)]), renderTB);
+}
+function startTB(t) {
+  tbT = t; tbMod = "nota"; tbI = 0; tbSkor = 0;
+  curSubj = t.id; replay = () => startTB(t);
+  tbList = shuffle(t.soal.map(tbSoal)).slice(0, 10);
+  $("tbTajuk").textContent = t.nama;
+  show("s-tb");
+  tbPapar();
+}
+function tbBual(t) { const b = $("tbBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
+function tbButang(ik, label, kelas, fn) {
+  const b = document.createElement("button");
+  b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
+  $("tbBtns").appendChild(b);
+}
+const tbSorot = t => t.replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
+function tbPapar() {
+  const id = ++tbId, k = $("tbKawasan");
+  $("tbBtns").innerHTML = ""; k.innerHTML = "";
+  const m = document.querySelector("#s-tb .masc"); if (m) m.classList.remove("yay");
+  if (tbMod === "nota") {
+    const n = tbNota(tbT.nota[tbI]);
+    $("tbCount").textContent = tr(L("Nota ", "Note ", "笔记 ")) + (tbI + 1) + "/" + tbT.nota.length;
+    $("tbProg").style.width = ((tbI + 1) / tbT.nota.length * 100) + "%";
+    k.innerHTML = `<div class="tbnota"><div class="tbtajuk"></div><p class="tbterang"></p><div class="tbcontoh">${n.contoh.map(c => `<div class="tbc">${tbSorot(c)}</div>`).join("")}</div></div>`;
+    k.querySelector(".tbtajuk").textContent = n.tajuk; k.querySelector(".tbterang").textContent = n.terang;
+    const c = [...k.querySelectorAll(".tbc")];
+    const main = i2 => {
+      c.forEach(x => x.classList.remove("muncul", "on"));
+      let p = speak(n.tajuk, "ms").then(() => i2 === tbId && speak(n.terang, "ms"));
+      n.contoh.forEach((t, j) => { p = p.then(() => { if (i2 !== tbId) return; c.forEach(x => x.classList.remove("on")); c[j].classList.add("muncul", "on"); tone(600 + j * 80, 0, .08); return speak(tbBersih(t), "ms").then(() => tunggu(250)); }); });
+      return p.then(() => c.forEach(x => x.classList.remove("on")));
+    };
+    c.forEach((x, j) => { x.onclick = () => { ++tbId; speak(tbBersih(n.contoh[j]), "ms"); }; });
+    tbBual(tr(L("Dengar dan fahami ya!", "Listen and understand!", "听一听，理解它！")));
+    tbButang("speak", tr(UI.dengar), "ungu", () => { ++tbId; main(tbId); });
+    const akhir = tbI === tbT.nota.length - 1;
+    tbButang(akhir ? "play" : "next", akhir ? tr(L("Mula Latihan", "Start Practice", "开始练习")) : tr(UI.lagi), "hijau", () => { if (akhir) { tbMod = "latihan"; tbI = 0; } else tbI++; tbPapar(); });
+    main(id);
+    return;
+  }
+  const s = tbList[tbI];
+  tbSalah = false;
+  $("tbCount").textContent = (tbI + 1) + "/" + tbList.length;
+  $("tbProg").style.width = (tbI / tbList.length * 100) + "%";
+  k.innerHTML = `<div class="tbsoalan"></div>`;
+  const q = k.querySelector(".tbsoalan");
+  q.innerHTML = s.q.split("___").map(x => x.replace(/[&<>]/g, "")).join(`<span class="tbkosong">&nbsp;</span>`);
+  tbBual(tr(L("Pilih jawapan yang betul!", "Choose the right answer!", "选出正确答案！")));
+  if (s.j === "P") {
+    const o = document.createElement("div"); o.className = "opts"; k.appendChild(o);
+    shuffle([s.a].concat(s.salah)).forEach(x => {
+      const b = document.createElement("button");
+      b.className = "opt"; b.textContent = x;
+      b.onclick = () => tbJawab(b, x === s.a, s);
+      o.appendChild(b);
+    });
+    speak(s.q, "ms");
+  } else {
+    tbBual(s.q);
+    const a = document.createElement("div"); a.className = "tbayat"; k.appendChild(a);
+    let tinggal = s.sasar.slice();
+    s.ayat.split(" ").forEach(w => {
+      const b = document.createElement("button");
+      b.className = "crk tbw"; b.textContent = w;
+      b.onclick = () => {
+        const teras = w.replace(/[.,!?]/g, "");
+        if (tinggal.indexOf(teras) >= 0) {
+          tinggal.splice(tinggal.indexOf(teras), 1); b.classList.add("betul"); b.disabled = true; tone(700, 0, .1);
+          if (!tinggal.length) tbBetul(s, () => speak(s.ayat, "ms"));
+        } else if (!b.classList.contains("betul")) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); sndBad(); }
+      };
+      a.appendChild(b);
+    });
+    speak(s.q, "ms").then(() => id === tbId && speak(s.ayat, "ms"));
+  }
+  tbButang("speak", tr(UI.dengar), "ungu", () => speak(s.q, "ms"));
+}
+function tbJawab(b, betul, s) {
+  if (b.disabled) return;
+  if (!betul) { tbSalah = true; b.classList.add("wrong"); b.disabled = true; sndBad(); speak(b.textContent, "ms"); return; }
+  document.querySelectorAll("#tbKawasan .opt").forEach(x => { x.disabled = true; });
+  b.classList.add("right");
+  const kosong = document.querySelector(".tbkosong");
+  if (kosong) { kosong.textContent = s.a; kosong.classList.add("isi"); }
+  tbBetul(s, () => speak(tbPenuh(s), "ms"));
+}
+function tbBetul(s, sebut) {
+  const id = tbId;
+  if (!tbSalah) tbSkor++;
+  sndOk();
+  const m = document.querySelector("#s-tb .masc"); if (m) { m.classList.remove("yay"); void m.getBoundingClientRect(); m.classList.add("yay"); }
+  const pj = pick(BM_SEBUT.hebat);
+  tbBual(pj);
+  speak(pj, "ms").then(() => id === tbId && sebut()).then(() => tunggu(700)).then(() => {
+    if (id !== tbId || !tbOn()) return;
+    if (tbI < tbList.length - 1) { tbI++; tbPapar(); }
+    else showResult(tbSkor >= 9 ? 3 : tbSkor >= 6 ? 2 : 1, tr(UI.markah) + tbSkor + " / " + tbList.length);
+  });
+}
+
 /* ===== UI ===== */
 const $ = id => document.getElementById(id);
 function show(id) {
@@ -3538,7 +3836,7 @@ try { window.speechSynthesis && window.speechSynthesis.getVoices(); } catch (e) 
 /* Tulis Huruf: butang & Apple Pencil */
 function tulisLabel() {
   const lb = (id, ik, t) => { $(id).innerHTML = IKON[ik] + "<span></span>"; $(id).querySelector("span").textContent = tr(t); };
-  $("tBack").innerHTML = IKON.back; $("bmBack").innerHTML = IKON.back; $("crBack").innerHTML = IKON.back;
+  $("tBack").innerHTML = IKON.back; $("bmBack").innerHTML = IKON.back; $("crBack").innerHTML = IKON.back; $("tbBack").innerHTML = IKON.back;
   lb("wSay", "speak", UI.dengar); lb("wErase", "padam", UI.padam); lb("wNext", "next", UI.lagi); $("wBack").innerHTML = IKON.back;
   lb("tShow", "play", UI.tunjuk); lb("tErase", "padam", UI.padam); lb("tSay", "speak", UI.dengar); lb("tNext", "next", UI.lagi);
 }
@@ -3578,6 +3876,8 @@ $("bmMas").insertAdjacentHTML("beforeend", MASKOT);
 $("bmInk").addEventListener("touchstart", e => e.preventDefault(), { passive: false });
 $("bmBack").onclick = () => { bmId++; stopSpeech(); goBack(); };
 $("crBack").onclick = () => { crId++; stopSpeech(); goBack(); };
+$("tbBack").onclick = () => { tbId++; stopSpeech(); goBack(); };
+$("tbMas").insertAdjacentHTML("beforeend", MASKOT);
 window.addEventListener("resize", () => { if (bmOn()) bmSaiz(); });
 applyLang();
 renderHome();
