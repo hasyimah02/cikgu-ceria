@@ -317,6 +317,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <script src="gambar/senarai.js"></script>
+<script src="gambar/suara.js"></script>
 <script>
 "use strict";
 /* ===== Tema ===== */
@@ -1666,8 +1667,36 @@ const sndWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.14,
 
 /* ===== Suara ===== */
 const EMOJI_RE = /[\p{Extended_Pictographic}️‍]/gu;
-const VOICE = { ms: ["ms-MY", "ms", "id-ID", "id"], en: ["en-GB", "en-US", "en"], zh: ["zh-CN", "zh"] };
+const VOICE = { ms: ["ms-MY", "ms"], en: ["en-GB", "en-US", "en"], zh: ["zh-CN", "zh"] };
+/* Rakaman suara Amira (BM Malaysia) dari gambar/suara.js; tiada rakaman = suara sistem */
+const SUARA = (typeof window !== "undefined" && window.SUARA) || {};
+const KLIP = {};
+let klipMain = null, klipNo = 0;
+function mainKlip(f) {
+  const no = ++klipNo;
+  if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+  if (actx.state === "suspended") actx.resume();
+  KLIP[f] = KLIP[f] || fetch(f).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => actx.decodeAudioData(b, ok, no)));
+  return KLIP[f].then(buf => {
+    if (no !== klipNo) return;
+    const src = actx.createBufferSource();
+    src.buffer = buf; src.connect(actx.destination); src.start();
+    klipMain = src;
+  });
+}
+function henti() {
+  klipNo++;
+  try { if (klipMain) klipMain.stop(); } catch (e) { /* abaikan */ }
+  klipMain = null;
+}
 function speak(text, lang) {
+  henti();
+  const f = SUARA[(VOICE[lang] ? lang : "ms") + "|" + text];
+  if (f) {
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ }
+    mainKlip(f).catch(() => { delete KLIP[f]; delete SUARA[(VOICE[lang] ? lang : "ms") + "|" + text]; speak(text, lang); });
+    return;
+  }
   try {
     const ss = window.speechSynthesis;
     if (!ss) return;
@@ -1822,7 +1851,7 @@ function tulisHuruf() {
   $("tNext").classList.remove("goyang");
   tBual(tr(UI.ikut));
   tSaiz();
-  speak(ch + ". " + untuk(h, x), x.sl);
+  speak(h[0] + ". " + untuk(h, x), x.sl);
   const id = tDemo;
   setTimeout(() => { if (id === tDemo) tunjuk(); }, 1400);
 }
@@ -1957,7 +1986,9 @@ function tulisJaya() {
   $("tPic").classList.remove("lompat"); void $("tPic").offsetWidth; $("tPic").classList.add("lompat");
   $("tNext").classList.add("goyang");
   speak(pj, LANG);
-  setTimeout(() => { if (tDone && tChar() === ch) speak(untuk(h, x), x.sl); }, 1500);
+  setTimeout(() => { if (tDone && tChar() === ch) speak(untuk(h, x), x.sl); }, 1700);
+  /* Terus ke huruf seterusnya: A -> a -> B -> b ... */
+  setTimeout(() => { if (tDone && tChar() === ch && $("s-tulis").classList.contains("on")) tulisNext(); }, 3600);
   tulisStrip();
 }
 function tulisNext() {
@@ -2011,7 +2042,7 @@ function show(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
   window.scrollTo(0, 0);
 }
-function stopSpeech() { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } }
+function stopSpeech() { henti(); try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } }
 
 function cardBtn(emoji, nama, desc, extra) {
   const b = document.createElement("button");
@@ -2379,7 +2410,10 @@ KRAYON.forEach((k, i) => {
 $("tInk").addEventListener("touchstart", e => e.preventDefault(), { passive: false });
 $("tShow").onclick = tunjuk;
 $("tErase").onclick = () => { tDone = false; tPadam(); tMaskot(""); tBual(tr(UI.ikut)); };
-$("tSay").onclick = () => { const h = HURUF[tL], x = hw(h); speak(tChar() + ". " + untuk(h, x), x.sl); };
+$("tSay").onclick = () => { const h = HURUF[tL], x = hw(h); speak(h[0] + ". " + untuk(h, x), x.sl); };
+try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) { /* abaikan */ }
+/* iPad: hidupkan audio pada sentuhan pertama supaya suara boleh main sendiri selepas itu */
+document.addEventListener("pointerdown", () => { if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === "suspended") actx.resume(); }, true);
 $("tNext").onclick = tulisNext;
 $("tBack").onclick = () => { tDemo++; stopSpeech(); tBalik ? tBalik() : goBack(); };
 document.querySelectorAll("#tCase button").forEach(b => { b.onclick = () => { tCs = b.dataset.c; tulisHuruf(); }; });
