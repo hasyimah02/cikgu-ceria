@@ -152,10 +152,10 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 #tGuide .mk.now .mki{transform-origin:0 0;animation:denyut 1s ease-in-out infinite}
 #tGuide .mk{transition:opacity .3s}#tGuide .mk.siap{opacity:0}
 .tside{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
-.tpic{width:100%;max-width:240px;background:var(--card);border-radius:24px;padding:10px;box-shadow:0 6px 16px var(--sh);animation:apung 3s ease-in-out infinite}
+.tpic{width:100%;max-width:300px;background:var(--card);border-radius:24px;padding:10px;box-shadow:0 6px 16px var(--sh);animation:apung 3s ease-in-out infinite}
 .tpic .art{width:100%;height:auto}
 .tpic.lompat{animation:lompat .7s ease 2}
-.tword{font-size:clamp(26px,5vw,38px);font-weight:700;text-align:center}
+.tword{font-size:clamp(24px,4.4vw,36px);font-weight:700;text-align:center}
 .tword b{color:#ff5a5f;font-size:1.25em}
 .tmas{display:flex;flex-direction:column;align-items:center;margin-top:4px}
 .masc{width:clamp(70px,11vw,104px);height:auto;overflow:visible;animation:apung 2.4s ease-in-out infinite}
@@ -241,12 +241,13 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .art .x-titis{animation:xa-titis 2.4s ease-in infinite}
 .art .x-kepakx{animation:xa-kepakx .35s ease-in-out infinite alternate}
 @keyframes xa-kepakx{to{transform:scaleX(.35)}}
-.tpic:has(.kira){max-width:330px}
+.tpic:has(.kira){max-width:440px}
 .kira{display:grid;gap:4px;width:100%;align-items:center;justify-items:center}
 .kb{position:relative;width:100%;max-width:90px;animation:pop .45s both}
 .kb .art{width:100%;height:auto}
 .kb span{position:absolute;top:-4px;right:-2px;background:var(--ungu);color:#fff;border-radius:50%;width:24px;height:24px;font-size:15px;font-weight:700;display:grid;place-items:center;transform:scale(0);transition:transform .25s}
 .kb.dikira{animation:kb-lompat .5s ease}
+.kb{transition:transform .25s,filter .25s}.kb.tunjuk{transform:scale(1.25);filter:drop-shadow(0 0 8px #ffd23f) drop-shadow(0 0 3px #ffb627);z-index:1}
 .kb.dikira span{transform:scale(1)}
 @keyframes kb-lompat{40%{transform:translateY(-12px) scale(1.18)}}
 @keyframes xa-kedip{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
@@ -1756,6 +1757,7 @@ const sndWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.14,
 /* ===== Suara ===== */
 const EMOJI_RE = /[\p{Extended_Pictographic}️‍]/gu;
 const VOICE = { ms: ["ms-MY", "ms"], en: ["en-GB", "en-US", "en"], zh: ["zh-CN", "zh"] };
+/* speak() pulangkan Promise yang selesai bila suara habis (atau dihentikan) */
 /* Rakaman suara Amira (BM Malaysia) dari gambar/suara.js; tiada rakaman = suara sistem */
 const SUARA = (typeof window !== "undefined" && window.SUARA) || {};
 const KLIP = {};
@@ -1765,12 +1767,14 @@ function mainKlip(f) {
   if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
   if (actx.state === "suspended") actx.resume();
   KLIP[f] = KLIP[f] || fetch(f).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => actx.decodeAudioData(b, ok, no)));
-  return KLIP[f].then(buf => {
-    if (no !== klipNo) return;
+  return KLIP[f].then(buf => new Promise(selesai => {
+    if (no !== klipNo) return selesai();
     const src = actx.createBufferSource();
-    src.buffer = buf; src.connect(actx.destination); src.start();
+    src.buffer = buf; src.connect(actx.destination);
+    src.onended = () => selesai();
+    src.start();
     klipMain = src;
-  });
+  }));
 }
 function henti() {
   klipNo++;
@@ -1782,12 +1786,13 @@ function speak(text, lang) {
   const f = SUARA[(VOICE[lang] ? lang : "ms") + "|" + text];
   if (f) {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ }
-    mainKlip(f).catch(() => { delete KLIP[f]; delete SUARA[(VOICE[lang] ? lang : "ms") + "|" + text]; speak(text, lang); });
-    return;
+    return mainKlip(f).catch(() => { delete KLIP[f]; delete SUARA[(VOICE[lang] ? lang : "ms") + "|" + text]; return speak(text, lang); });
   }
+  return new Promise(selesai => {
+  setTimeout(selesai, 1500 + text.length * 150);
   try {
     const ss = window.speechSynthesis;
-    if (!ss) return;
+    if (!ss) return selesai();
     ss.cancel();
     lang = VOICE[lang] ? lang : "ms";
     let clean = text.replace(EMOJI_RE, "");
@@ -1804,8 +1809,10 @@ function speak(text, lang) {
     u.lang = v ? v.lang : VOICE[lang][0];
     if (v) u.voice = v;
     u.rate = 0.85;
+    u.onend = u.onerror = () => selesai();
     ss.speak(u);
-  } catch (e) { /* tiada suara */ }
+  } catch (e) { selesai(); }
+  });
 }
 
 /* ===== Objek kira untuk Nombor 1-10 (SVG beranimasi, ganti emoji) ===== */
@@ -1816,23 +1823,31 @@ const KIRA = (() => {
   const bintang = (() => { let d = ""; for (let k = 0; k < 10; k++) { const r = k % 2 ? 11 : 26, a = -Math.PI / 2 + k * Math.PI / 5; d += (k ? "L" : "M") + (30 + Math.cos(a) * r).toFixed(1) + " " + (32 + Math.sin(a) * r).toFixed(1) + " "; } return d + "z"; })();
   const roda = x => `<circle cx="${x}" cy="44" r="6" fill="#3b3b3b"/>` + G("x-putar-cepat", `<circle cx="${x}" cy="44" r="2.6" fill="#ccc"/><path d="M${x - 2.6} 44 h5.2 M${x} 41.4 v5.2" stroke="#888" stroke-width="1.2"/>`);
   return [
-    { n: L("epal", "apple", "苹果"), s: G("x-goyang", `<path d="M30 16 q-6-4 -13 0 q-7 5 -4 16 q3 12 12 13 q3 0 5-1.5 q2 1.5 5 1.5 q9-1 12-13 q3-11 -4-16 q-7-4 -13 0z" fill="#ff4d5a"/><path d="M30 16 q0-5 3-9" fill="none" stroke-width="3"/>` + G("x-ekor", `<path d="M32 11 q6-6 12-2 q-5 6 -12 2z" fill="#6cc070"/>`, "0% 100%") + M(30, 29, 5), "50% 100%") },
-    { n: L("bintang", "stars", "星星"), s: G("x-goyang", `<path d="${bintang}" fill="#ffd23f"/>` + M(30, 31, 5)) },
-    { n: L("ikan", "fish", "鱼"), s: G("x-apung", G("x-ekor", `<path d="M14 30 l-10-10 v20z" fill="#3fa7f5"/>`, "100% 50%") + `<ellipse cx="32" cy="30" rx="20" ry="13" fill="#5ec4ff"/><path d="M28 18 q6-8 14-2 l-4 4z" fill="#3fa7f5"/>` + E(42, 27) + `<path d="M44 34 q3 2 6 -1" fill="none" stroke-width="2"/>`) },
-    { n: L("belon", "balloons", "气球"), s: G("x-apung", `<path d="M30 42 q-4 6 0 10 q4 4 0 8" fill="none" stroke-width="1.5"/><ellipse cx="30" cy="22" rx="15" ry="18" fill="#ff5a5f"/><path d="M27 41 l3-4 l3 4z" fill="#ff5a5f"/><path d="M21 13 q3-5 8-6" stroke="#fff" stroke-width="3" fill="none"/>` + M(30, 22, 5)) },
-    { n: L("kereta", "cars", "汽车"), s: G("x-gegil", `<path d="M4 44 v-9 q0-5 5-5 h7 l7-10 h15 l8 10 h5 q5 0 5 5 v9z" fill="#ff9f1c"/><path d="M20 30 l5-7 h5 v7z M34 30 v-7 h4 l6 7z" fill="#d6f0ff"/><circle cx="54" cy="36" r="2" fill="#ffd23f"/>`) + roda(16) + roda(44) },
-    { n: L("anak ayam", "chicks", "小鸡"), s: G("x-lompat", `<path d="M24 54 v4 m-3 0 h6 M36 54 v4 m-3 0 h6" stroke="#ff9f1c" stroke-width="2.5" fill="none"/><path d="M28 10 q2-6 4 0 q3-5 4 1" fill="none" stroke-width="2"/><circle cx="30" cy="34" r="21" fill="#ffd23f"/>` + G("x-ekor", `<path d="M14 36 q-8 0 -6 8 q6 2 10 -2z" fill="#ffbf00"/>`, "100% 0%") + `<path d="M27 34 l3 4 l3-4z" fill="#ff9f1c"/>` + M(30, 28, 6)) },
-    { n: L("bunga", "flowers", "花"), s: G("x-goyang", `<path d="M30 40 v20" stroke="#4caf50" stroke-width="4"/><path d="M30 52 q-10-8 -16-2 q8 6 16 2z" fill="#6cc070"/>` + G("x-putar", [0, 1, 2, 3, 4, 5].map(k => { const a = k * Math.PI / 3; return `<circle cx="${(30 + Math.cos(a) * 13).toFixed(1)}" cy="${(24 + Math.sin(a) * 13).toFixed(1)}" r="8" fill="#ff8fd8"/>`; }).join("")) + `<circle cx="30" cy="24" r="10" fill="#ffd23f"/>` + M(30, 22, 4), "50% 100%") },
-    { n: L("biskut", "cookies", "饼干"), s: G("x-golek", `<circle cx="30" cy="30" r="24" fill="#e6a85c"/>` + [[18, 20], [40, 18], [44, 36], [18, 40], [30, 46]].map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#6b3f1f" stroke="none"/>`).join("") + M(30, 28, 6), "50% 100%") },
-    { n: L("bola", "balls", "球"), s: G("x-lompat", `<circle cx="30" cy="30" r="24" fill="#ffd23f"/><path d="M7 24 a24 24 0 0 1 46 0 q-23 -5 -46 0z" fill="#ff5a5f"/><path d="M7 37 q23 5 46 0 a24 24 0 0 1 -46 0z" fill="#3fa7f5"/><circle cx="30" cy="30" r="24" fill="none"/><path d="M15 15 q5-5 10-6" stroke="#fff" stroke-width="3" fill="none"/>`) },
-    { n: L("rama-rama", "butterflies", "蝴蝶"), s: G("x-terbang", G("x-kepakx", `<ellipse cx="18" cy="22" rx="13" ry="15" fill="#9b8afb"/><ellipse cx="20" cy="44" rx="10" ry="10" fill="#ff8fd8"/><circle cx="16" cy="22" r="4" fill="#fff" stroke="none" opacity=".7"/>`, "100% 50%") + G("x-kepakx", `<ellipse cx="42" cy="22" rx="13" ry="15" fill="#9b8afb"/><ellipse cx="40" cy="44" rx="10" ry="10" fill="#ff8fd8"/><circle cx="44" cy="22" r="4" fill="#fff" stroke="none" opacity=".7"/>`, "0% 50%") + `<path d="M28 12 q-4-8 -8-8 M32 12 q4-8 8-8" fill="none" stroke-width="2"/><ellipse cx="30" cy="34" rx="5" ry="20" fill="#5b3a29"/>` + E(28, 20) + E(33, 20)) }
+    { n: L("biji tembikai", "watermelon", "个西瓜"), s: G("x-goyang", `<path d="M6 22 a24 24 0 0 0 48 0z" fill="#4caf50"/><path d="M10 22 a20 20 0 0 0 40 0z" fill="#ff5a6e"/><path d="M6 22 h48" stroke-width="2.2"/>` + [[18, 30], [26, 36], [34, 36], [42, 30], [30, 42]].map(p => `<ellipse cx="${p[0]}" cy="${p[1]}" rx="1.4" ry="2.4" fill="#3b2a20" stroke="none"/>`).join("") + M(30, 27, 6), "50% 100%") },
+    { n: L("butir bintang", "star", "颗星星"), s: G("x-goyang", `<path d="${bintang}" fill="#ffd23f"/>` + M(30, 31, 5)) },
+    { n: L("ekor penyu", "turtle", "只海龟"), s: G("x-apung", G("x-ekor", `<ellipse cx="16" cy="46" rx="8" ry="4" fill="#8bd17c" transform="rotate(30 16 46)"/>`, "100% 0%") + G("x-ekor", `<ellipse cx="40" cy="47" rx="8" ry="4" fill="#8bd17c" transform="rotate(-30 40 47)"/>`, "0% 0%", ".25s") + `<circle cx="50" cy="30" r="8" fill="#8bd17c"/>` + E(52, 28) + `<path d="M6 38 q0-24 24-24 q20 0 22 24z" fill="#2e9e5b"/><path d="M18 38 l4-12 h14 l4 12 M22 26 l8-8 l8 8" fill="none" stroke="#1f7a43" stroke-width="2"/><path d="M4 38 h50" stroke-width="2.5"/>`) },
+    { n: L("biji belon", "balloon", "个气球"), s: G("x-apung", `<path d="M30 42 q-4 6 0 10 q4 4 0 8" fill="none" stroke-width="1.5"/><ellipse cx="30" cy="22" rx="15" ry="18" fill="#ff5a5f"/><path d="M27 41 l3-4 l3 4z" fill="#ff5a5f"/><path d="M21 13 q3-5 8-6" stroke="#fff" stroke-width="3" fill="none"/>` + M(30, 22, 5)) },
+    { n: L("buah kereta", "car", "辆汽车"), s: G("x-gegil", `<path d="M4 44 v-9 q0-5 5-5 h7 l7-10 h15 l8 10 h5 q5 0 5 5 v9z" fill="#ff9f1c"/><path d="M20 30 l5-7 h5 v7z M34 30 v-7 h4 l6 7z" fill="#d6f0ff"/><circle cx="54" cy="36" r="2" fill="#ffd23f"/>`) + roda(16) + roda(44) },
+    { n: L("ekor katak", "frog", "只青蛙"), s: G("x-lompat", `<path d="M10 54 q-6 2 -6 6 h12 M50 54 q6 2 6 6 h-12" fill="#5cc26a"/><ellipse cx="30" cy="40" rx="22" ry="16" fill="#6cd17a"/><ellipse cx="30" cy="46" rx="12" ry="8" fill="#c8f5c8" stroke="none"/><circle cx="19" cy="22" r="8" fill="#6cd17a"/><circle cx="41" cy="22" r="8" fill="#6cd17a"/>` + E(19, 22) + E(41, 22) + `<path d="M20 36 q10 8 20 0" fill="none" stroke-width="2.2"/><ellipse cx="14" cy="38" rx="3" ry="1.8" fill="#ff8fa3" stroke="none"/><ellipse cx="46" cy="38" rx="3" ry="1.8" fill="#ff8fa3" stroke="none"/>`) },
+    { n: L("kuntum bunga", "flower", "朵花"), s: G("x-goyang", `<path d="M30 40 v20" stroke="#4caf50" stroke-width="4"/><path d="M30 52 q-10-8 -16-2 q8 6 16 2z" fill="#6cc070"/>` + G("x-putar", [0, 1, 2, 3, 4, 5].map(k => { const a = k * Math.PI / 3; return `<circle cx="${(30 + Math.cos(a) * 13).toFixed(1)}" cy="${(24 + Math.sin(a) * 13).toFixed(1)}" r="8" fill="#ff8fd8"/>`; }).join("")) + `<circle cx="30" cy="24" r="10" fill="#ffd23f"/>` + M(30, 22, 4), "50% 100%") },
+    { n: L("keping biskut", "cookie", "块饼干"), s: G("x-golek", `<circle cx="30" cy="30" r="24" fill="#e6a85c"/>` + [[18, 20], [40, 18], [44, 36], [18, 40], [30, 46]].map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#6b3f1f" stroke="none"/>`).join("") + M(30, 28, 6), "50% 100%") },
+    { n: L("biji strawberi", "strawberry", "颗草莓"), s: G("x-goyang", `<path d="M30 56 q-22 -10 -22 -28 q0 -10 10 -10 q6 0 12 4 q6 -4 12 -4 q10 0 10 10 q0 18 -22 28z" fill="#ff4d5a"/>` + [[18, 30], [42, 30], [24, 42], [36, 42], [30, 50], [14, 22], [46, 22]].map(p => `<ellipse cx="${p[0]}" cy="${p[1]}" rx="1.3" ry="2" fill="#ffe14d" stroke="none"/>`).join("") + `<path d="M30 18 l-12 -6 l8 -2 l4 -8 l4 8 l8 2z" fill="#4caf50"/>` + M(30, 30, 6), "50% 100%") },
+    { n: L("ekor rama-rama", "butterfly", "只蝴蝶"), s: G("x-terbang", G("x-kepakx", `<ellipse cx="18" cy="22" rx="13" ry="15" fill="#9b8afb"/><ellipse cx="20" cy="44" rx="10" ry="10" fill="#ff8fd8"/><circle cx="16" cy="22" r="4" fill="#fff" stroke="none" opacity=".7"/>`, "100% 50%") + G("x-kepakx", `<ellipse cx="42" cy="22" rx="13" ry="15" fill="#9b8afb"/><ellipse cx="40" cy="44" rx="10" ry="10" fill="#ff8fd8"/><circle cx="44" cy="22" r="4" fill="#fff" stroke="none" opacity=".7"/>`, "0% 50%") + `<path d="M28 12 q-4-8 -8-8 M32 12 q4-8 8-8" fill="none" stroke-width="2"/><ellipse cx="30" cy="34" rx="5" ry="20" fill="#5b3a29"/>` + E(28, 20) + E(33, 20)) }
   ];
 })();
 const NOMS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+/* "tiga ekor penyu" / "three turtles" / "三只海龟"; k = bilangan semasa mengira */
+const kiraAyat = i => kiraFrasa(i, i);
+function kiraFrasa(i, k) {
+  const o = KIRA[i], nm = tr(NAMA_NOMBOR)[k];
+  const en = o.n.en, jamak = !k ? en : /y$/.test(en) ? en.slice(0, -1) + "ies" : en + "s";
+  return LANG === "en" ? nm + " " + jamak : LANG === "zh" ? nm + o.n.zh : nm + " " + o.n.ms;
+}
 function kiraHtml(i) {
   const o = KIRA[i], n = i + 1, c = n <= 3 ? n : n === 4 ? 2 : n <= 6 ? 3 : n <= 8 ? 4 : 5;
   let h = `<div class="kira" style="grid-template-columns:repeat(${c},1fr)">`;
-  for (let k = 0; k < n; k++) h += `<div class="kb" style="animation-delay:${(k * .12).toFixed(2)}s"><svg class="art" viewBox="0 0 60 62" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">${o.s}</g></svg><span>${k + 1}</span></div>`;
+  const w = n <= 2 ? 190 : n <= 4 ? 150 : n <= 6 ? 130 : 110;
+  for (let k = 0; k < n; k++) h += `<div class="kb" style="max-width:${w}px;animation-delay:${(k * .12).toFixed(2)}s"><svg class="art" viewBox="0 0 60 62" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">${o.s}</g></svg><span>${k + 1}</span></div>`;
   return h + "</div>";
 }
 
@@ -1928,7 +1943,7 @@ const tChar = () => tMod === "nombor" ? NOMS[tL] : tCs === "B" ? ABC[tL] : ABC[t
 const tKunci = ch => tMod === "nombor" ? "#" + ch : ch;
 /* Sebutan & gambar ikut mod: huruf (A untuk Ayam) atau nombor (3. tiga + objek dikira) */
 function tSebut() {
-  if (tMod === "nombor") return speak((tL + 1) + ". " + tr(NAMA_NOMBOR)[tL], LANG);
+  if (tMod === "nombor") return speak((tL + 1) + ". " + kiraAyat(tL), LANG);
   const h = HURUF[tL], x = hw(h);
   speak(h[0] + ". " + untuk(h, x), x.sl);
 }
@@ -1983,7 +1998,7 @@ function tulisHuruf() {
   if (tMod === "nombor") {
     $("tPic").innerHTML = kiraHtml(tL);
     w.textContent = ch + " "; $("tWord").appendChild(w);
-    $("tWord").appendChild(document.createTextNode(tr(NAMA_NOMBOR)[tL]));
+    $("tWord").appendChild(document.createTextNode(kiraAyat(tL)));
   } else {
     const x = hw(HURUF[tL]);
     $("tPic").innerHTML = artSvg(x.w, "art");
@@ -2131,20 +2146,23 @@ function tulisJaya() {
   const lagi = () => tDone && tChar() === ch && $("s-tulis").classList.contains("on");
   let tunggu = 3600;
   if (tMod === "nombor") {
-    /* Kira objek satu demi satu sambil disebut: satu, dua, tiga ... */
-    const n = tL + 1;
-    setTimeout(() => {
+    /* Kira bersama: tunjuk objek ke-k sambil sebut "satu ekor katak", "dua ekor katak" ... */
+    const kb = [...document.querySelectorAll("#tPic .kb")], i = tL;
+    const kira = k => {
       if (!lagi()) return;
-      speak(tr(NAMA_NOMBOR).slice(0, n).join(", "), LANG);
-      document.querySelectorAll("#tPic .kb").forEach((b, k) => setTimeout(() => { if (lagi()) { b.classList.add("dikira"); tone(520 + k * 60, 0, .1); } }, 250 + k * 620));
-    }, 1700);
-    tunggu = 1700 + 250 + n * 620 + 1400;
+      if (k >= kb.length) { setTimeout(() => { if (lagi()) tulisNext(); }, 1200); return; }
+      kb[k].classList.add("dikira", "tunjuk");
+      tone(520 + k * 60, 0, .1);
+      speak(kiraFrasa(i, k), LANG).then(() => { kb[k].classList.remove("tunjuk"); setTimeout(() => kira(k + 1), 300); });
+    };
+    setTimeout(() => kira(0), 1700);
+    tunggu = 0;
   } else {
     const h = HURUF[tL], x = hw(h);
     setTimeout(() => { if (lagi()) speak(untuk(h, x), x.sl); }, 1700);
   }
   /* Terus ke seterusnya: A -> a -> B -> b ... atau 1 -> 2 -> 3 ... */
-  setTimeout(() => { if (lagi()) tulisNext(); }, tunggu);
+  if (tunggu) setTimeout(() => { if (lagi()) tulisNext(); }, tunggu);
   tulisStrip();
 }
 function tulisNext() {
