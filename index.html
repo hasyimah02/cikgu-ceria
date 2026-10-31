@@ -111,7 +111,45 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.12) rotate(-2deg)}60%{transform:scale(.97) rotate(2deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
 /* Tulis Huruf */
-#app:has(#s-tulis.on),#app:has(#s-warna.on){max-width:1060px}
+#app:has(#s-tulis.on),#app:has(#s-warna.on),#app:has(#s-bm.on){max-width:1060px}
+/* BM Tahap 1 */
+#s-bm{position:relative;z-index:0}
+.bmatas{display:flex;gap:16px;align-items:center;justify-content:center}
+.bmfoto{width:min(46%,320px);aspect-ratio:4/3;object-fit:cover;border-radius:24px;border:6px solid var(--card);box-shadow:0 6px 16px var(--sh);animation:pop .5s}
+#s-bm.mtulis .bmfoto{width:min(30%,190px)}#s-bm.mtulis .masc{width:clamp(50px,6vw,70px)}#s-bm.mtulis h2{margin:4px 0 8px}#s-bm.mtulis .bmkawasan{margin:8px 0}
+.bmfoto.lompat{animation:lompat .7s ease 2}
+.bmatas .masc{width:clamp(60px,9vw,90px)}
+.bmkawasan{margin:16px 0}
+.ejaslot{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.ejaslot .bsk{display:flex;gap:6px;padding:8px;border-radius:20px;background:var(--card);box-shadow:0 4px 12px var(--sh);border:4px solid var(--track);transition:transform .3s,background .3s,border-color .3s}
+.ejaslot .bsk.siap{border-color:var(--hijau);background:var(--hijau-p)}
+.ejaslot .bsk.on{transform:scale(1.15);border-color:var(--kuning);background:var(--kuning-p)}
+.ejaslot i{font-style:normal;width:clamp(44px,7vw,64px);height:clamp(54px,8.5vw,76px);border-radius:14px;border:3px dashed var(--muted);display:grid;place-items:center;font-size:clamp(32px,5.5vw,50px);font-weight:700}
+.ejaslot i.isi{border:3px solid var(--biru);background:var(--card);animation:pop .3s}
+.ejaslot.penuh .bsk{background:var(--kuning);border-color:var(--oren)}.ejaslot.penuh i{color:var(--on)}
+.ejahuruf,.binakad{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.hbtn,.kbtn{min-width:clamp(56px,8vw,74px);height:clamp(56px,8vw,74px);border-radius:18px;background:var(--ungu);color:#fff;font-size:clamp(30px,5vw,44px);font-weight:700;box-shadow:0 5px 0 rgba(0,0,0,.15),0 6px 14px var(--sh);transition:transform .15s,opacity .3s}
+.kbtn{padding:0 18px;background:var(--biru);font-size:clamp(24px,4vw,36px)}
+.hbtn:nth-child(3n+2),.kbtn:nth-child(3n+2){background:var(--oren)}.hbtn:nth-child(3n),.kbtn:nth-child(3n){background:var(--hijau)}
+.hbtn:active,.kbtn:active{transform:translateY(4px)}
+.hbtn.guna,.kbtn.guna{opacity:0;transform:scale(.5);pointer-events:none}
+.hbtn.no,.kbtn.no{animation:shake .5s}
+.binaslot{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.bslot{min-width:clamp(80px,12vw,120px);height:clamp(56px,8vw,70px);border-radius:16px;border:3px dashed var(--muted);display:grid;place-items:center;font-size:clamp(24px,4vw,36px);font-weight:700;padding:0 14px;transition:transform .2s,background .2s}
+.bslot.isi{border:3px solid var(--hijau);background:var(--hijau-p);animation:pop .3s}
+.bslot.sorot{background:var(--kuning);color:var(--on);transform:scale(1.1)}
+.bacaayat{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:18px;background:var(--card);border-radius:26px;box-shadow:0 6px 16px var(--sh)}
+.bkata{display:flex;flex-direction:column;align-items:center;background:none;padding:6px 10px;border-radius:18px;transition:transform .2s,background .2s}
+.bkata .bk{font-size:clamp(34px,6vw,58px);font-weight:700}
+.bkata .bsukuw{font-size:clamp(18px,2.8vw,24px);font-weight:700;color:var(--muted);display:none}
+.bkata.eja .bsukuw{display:block}
+.bkata .bsk.on{color:#ff5a5f;font-size:1.35em}
+.bkata.sorot{background:var(--kuning);color:var(--on);transform:scale(1.12)}
+.bkata.giliran{background:var(--hijau);color:#fff}
+.tulisayat{text-align:center;font-size:clamp(26px,4.5vw,40px);font-weight:700}
+.bmpapan{position:relative;width:100%;margin:0 auto;aspect-ratio:3.2/1;background:var(--card);border-radius:24px;border:5px solid var(--kuning);box-shadow:0 8px 20px var(--sh);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#bmPanduan,#bmInk{position:absolute;inset:0;width:100%;height:100%}#bmInk{touch-action:none;cursor:crosshair}
+.bmbtns{justify-content:center;margin-top:16px}
 #s-warna{position:relative;z-index:0}
 .tboard.wboard{aspect-ratio:120/100;width:min(60%,calc(62vh * 1.2));border-color:var(--wc)}
 .tboard.wboard.ajak{animation:goyang .6s ease-in-out 3}.wboard.jaya{animation:lompat .6s ease 2}
@@ -425,6 +463,15 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
       <div class="krayon" id="wKrayon"></div>
       <div class="tbtns"><button class="tb ungu" id="wSay"></button><button class="tb koral" id="wErase"></button><button class="tb hijau" id="wNext"></button></div>
     </div>
+  </section>
+  <section id="s-bm" class="screen">
+    <div class="tbg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="top"><button class="pill ikon" id="bmBack" aria-label="Keluar"></button><div class="bar"><i id="bmProg"></i></div><div class="pill" id="bmCount">1/10</div></div>
+    <h2 id="bmTitle"></h2>
+    <div class="bmatas"><img id="bmFoto" class="bmfoto" alt=""><div class="tmas" id="bmMas"><div class="tbub" id="bmBub"></div></div></div>
+    <div id="bmKawasan" class="bmkawasan"></div>
+    <div class="bmpapan hide" id="bmPapan"><canvas id="bmPanduan"></canvas><canvas id="bmInk"></canvas></div>
+    <div class="tbtns bmbtns" id="bmBtns"></div>
   </section>
   <section id="s-result" class="screen">
     <h2 id="resTitle"></h2>
@@ -1972,6 +2019,9 @@ const IKON = {
   speak: SVGI('<path d="M4 9 h4 l5-4 v14 l-5-4 h-4z" fill="currentColor"/><path d="M16.5 8.5 q2 3.5 0 7 M19 6 q4 6 0 12"/>'),
   play: SVGI('<path d="M7 4.5 L19 12 L7 19.5z" fill="currentColor"/>'),
   padam: SVGI('<path d="M4 15 L13 6 L19 12 L12 19 H7z" fill="currentColor" fill-opacity=".25"/><path d="M8.5 10.5 L14.5 16.5 M12 19 H20"/>'),
+  baca: SVGI('<path d="M3 6 q4.5-2.5 9 0.5 q4.5-3 9-0.5 v13 q-4.5-2 -9 0.5 q-4.5-2.5 -9-0.5z" fill="currentColor" fill-opacity=".25"/><path d="M12 6.5 v13"/>'),
+  eja: SVGI('<path d="M2.5 18 l3.5-11 l3.5 11 M3.8 14.5 h4.4 M12 7 v11 M12 12.5 q1.5-2 3.5-2 q3 0 3 3.7 q0 3.8-3 3.8 q-2 0-3.5-2"/>'),
+  bina: SVGI('<rect x="2.5" y="12.5" width="8.5" height="8" rx="1.6" fill="currentColor" fill-opacity=".25"/><rect x="13" y="12.5" width="8.5" height="8" rx="1.6"/><rect x="7.7" y="3.5" width="8.5" height="8" rx="1.6" fill="currentColor" fill-opacity=".25"/>'),
   pensel: SVGI('<path d="M4 20 l1.5-5 L16 4.5 l3.5 3.5 L9 18.5z" fill="currentColor" fill-opacity=".25"/><path d="M14 6.5 l3.5 3.5"/>')
 };
 const MASKOT = `<svg class="masc" viewBox="0 0 80 132" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
@@ -2506,6 +2556,311 @@ function warnaJaya() {
 }
 function warnaNext() { wI = (wI + 1) % WARNA.length; warnaItem(); }
 
+/* ===== BM Tahap 1: membaca, mengeja, bina ayat & menulis ayat ===== */
+const BM_KATA = "buku kucing nasi susu kereta epal ayam ikan bunga rumah meja kerusi pensel kasut topi pisang roti payung lembu kambing itik pokok bulan gajah arnab burung telur tangan mata cawan sudu katil pintu durian kelapa lori teksi guru gunting".split(" ");
+/* [ayat, nama foto dalam Perpustakaan] */
+const BM_AYAT = [
+  ["Ini buku saya.", "Buku"], ["Kucing itu comel.", "Kucing"], ["Adik makan nasi.", "Nasi"], ["Saya minum susu.", "Susu"],
+  ["Ayah memandu kereta.", "Kereta"], ["Ayam itu berkokok.", "Ayam"], ["Ikan itu berenang.", "Ikan"], ["Bunga itu cantik.", "Bunga"],
+  ["Matahari bersinar terang.", "Matahari"], ["Saya pergi ke sekolah.", "Sekolah"], ["Rumah saya besar.", "Rumah"], ["Kakak makan pisang.", "Pisang"],
+  ["Arnab itu putih.", "Arnab"], ["Gajah itu besar.", "Gajah"], ["Burung terbang tinggi.", "Burung"], ["Bulan itu bulat.", "Bulan"],
+  ["Saya naik bas.", "Bas"], ["Cikgu mengajar kami.", "Guru"], ["Doktor merawat pesakit.", "Doktor"], ["Lembu makan rumput.", "Lembu"],
+  ["Ibu beli roti.", "Roti"], ["Saya tidur di katil.", "Katil"], ["Adik pakai topi.", "Topi"], ["Itik berenang di kolam.", "Itik"]
+];
+const BM_MOD = {
+  baca: { nama: L("Membaca", "Reading", "阅读"), ds: L("Dengar & baca ayat bersama", "Listen & read sentences together", "一起听和读句子"), ikon: "baca" },
+  eja: { nama: L("Mengeja", "Spelling", "拼写"), ds: L("Susun huruf ikut suku kata", "Spell words by syllables", "按音节拼单词"), ikon: "eja" },
+  bina: { nama: L("Bina Ayat", "Build Sentences", "造句"), ds: L("Susun perkataan jadi ayat", "Arrange words into a sentence", "把词语排成句子"), ikon: "bina" },
+  tulis: { nama: L("Menulis Ayat", "Writing Sentences", "写句子"), ds: L("Surih ayat dengan pensel", "Trace sentences with a pencil", "用笔描写句子"), ikon: "pensel" }
+};
+const BM_SEBUT = {
+  eja: "Dengar dan eja perkataan ini!", bina: "Susun perkataan menjadi ayat!", baca: "Dengar dan baca bersama!",
+  kamuBaca: "Sekarang kamu baca!", tulis: "Surih ayat ini dengan pensel!", hebat: ["Hebat!", "Pandai!", "Bagus sekali!", "Betul!"],
+  bacaBagus: "Bagus! Kamu pandai membaca!"
+};
+const kataBersih = w => w.toLowerCase().replace(/[^a-z-]/g, "");
+const fotoNama = n => { const k = Object.keys(FOTO).find(x => x.split("|")[1] === n); return k ? FOTO[k] : ""; };
+/* Pecah suku kata BM: ng/ny/sy/kh/gh satu bunyi; VKV -> V.KV; VKKV -> VK.KV; diftong ai/au/oi di hujung kata */
+function sukuKata(w) {
+  const u = [];
+  for (let i = 0; i < w.length;) { const d = w.substr(i, 2); if (/^(ng|ny|sy|kh|gh)$/.test(d)) { u.push(d); i += 2; } else { u.push(w[i]); i++; } }
+  const vi = u.map((x, i) => /^[aeiou]$/.test(x) ? i : -1).filter(i => i >= 0), s = [];
+  if (vi.length <= 1) return [w];
+  let mula = 0;
+  for (let k = 0; k < vi.length - 1; k++) {
+    const a = vi[k], b = vi[k + 1], jarak = b - a - 1;
+    let potong;
+    if (jarak === 0) { if (/^(ai|au|oi)$/.test(u[a] + u[b]) && b === u.length - 1) continue; potong = b; }
+    else if (jarak === 1) potong = b - 1;
+    else potong = a + 2;
+    s.push(u.slice(mula, potong).join("")); mula = potong;
+  }
+  s.push(u.slice(mula).join(""));
+  return s;
+}
+
+let bmMod = "baca", bmList = [], bmI = 0, bmId = 0, bmPos = 0, bmSkor = 0, bmInk = [], bmNow = null, bmMask = null, bmDone = false;
+const bmOn = () => $("s-bm").classList.contains("on");
+const tunggu = ms => new Promise(r => setTimeout(r, ms));
+function bmBual(t) { const b = $("bmBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
+function bmMaskot(c) { const m = document.querySelector("#s-bm .masc"); if (!m) return; m.classList.remove("yay", "fikir"); void m.getBoundingClientRect(); if (c) m.classList.add(c); }
+
+function renderBM1() {
+  backMenu = renderBM1;
+  const st = loadStars();
+  renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), starText(st["bm1-" + m] || 0), () => startBM(m)]), () => renderKuiz(curTahap, renderHome));
+}
+function startBM(m) {
+  bmMod = m; bmI = 0; bmSkor = 0;
+  $("s-bm").className = "screen m" + m;
+  curSubj = "bm1-" + m; replay = () => startBM(m);
+  bmList = shuffle(m === "eja" ? BM_KATA : BM_AYAT).slice(0, 10);
+  $("bmTitle").textContent = tr(BM_MOD[m].nama);
+  show("s-bm");
+  bmSoalan();
+}
+function bmSoalan() {
+  const id = ++bmId, it = bmList[bmI];
+  bmPos = 0; bmDone = false;
+  $("bmCount").textContent = (bmI + 1) + "/" + bmList.length;
+  $("bmProg").style.width = (bmI / bmList.length * 100) + "%";
+  const foto = bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : fotoNama(it[1]);
+  $("bmFoto").src = foto; $("bmFoto").classList.toggle("hide", !foto);
+  $("bmFoto").classList.remove("lompat");
+  $("bmKawasan").innerHTML = "";
+  $("bmPapan").classList.toggle("hide", bmMod !== "tulis");
+  $("bmBtns").innerHTML = "";
+  bmMaskot("");
+  ({ eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula })[bmMod](it, id);
+}
+const bmAyat = () => bmList[bmI][0];
+function bmButang(ik, label, kelas, fn) {
+  const b = document.createElement("button");
+  b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
+  $("bmBtns").appendChild(b);
+  return b;
+}
+function bmJaya(sebut) {
+  const id = bmId;
+  bmDone = true; bmSkor++;
+  sndWin();
+  const r = $("bmKawasan").getBoundingClientRect();
+  tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
+  bmMaskot("yay");
+  const pj = pick(BM_SEBUT.hebat);
+  bmBual(pj);
+  $("bmFoto").classList.add("lompat");
+  return speak(pj, "ms").then(() => sebut && id === bmId && bmOn() ? sebut() : null).then(() => tunggu(900)).then(() => { if (id === bmId && bmOn()) bmSeterusnya(); });
+}
+function bmSeterusnya() {
+  if (bmI < bmList.length - 1) { bmI++; bmSoalan(); }
+  else showResult(bmSkor >= 9 ? 3 : bmSkor >= 6 ? 2 : 1, tr(UI.markah) + bmSkor + " / " + bmList.length);
+}
+/* Sebut suku kata perlahan satu-satu sambil menyala, kemudian perkataan penuh */
+function sebutSuku(w, el, id) {
+  const s = sukuKata(w), bah = el ? [...el.querySelectorAll(".bsk")] : [];
+  let p = Promise.resolve();
+  s.forEach((x, j) => { p = p.then(() => { if (id !== bmId) return; bah.forEach((b, k) => b.classList.toggle("on", k === j)); return speak("~" + x, "ms").then(() => tunggu(200)); }); });
+  return p.then(() => { bah.forEach(b => b.classList.remove("on")); if (el) el.classList.add("penuh"); return id === bmId ? speak(w, "ms") : null; });
+}
+
+/* ---- Mengeja: tekan huruf ikut susunan, dikumpul ikut suku kata ---- */
+function ejaMula(w, id) {
+  const s = sukuKata(w), k = $("bmKawasan");
+  k.innerHTML = `<div class="ejaslot">${s.map((x, j) => `<span class="bsk" data-j="${j}">${[...x].map(() => `<i></i>`).join("")}</span>`).join("")}</div><div class="ejahuruf"></div>`;
+  const huruf = shuffle([...w].concat(shuffle("abdegiklmnoprstu".split("").filter(h => w.indexOf(h) < 0)).slice(0, 2)));
+  huruf.forEach(h => {
+    const b = document.createElement("button");
+    b.className = "hbtn"; b.textContent = h;
+    b.onclick = () => ejaTekan(b, h, w);
+    k.querySelector(".ejahuruf").appendChild(b);
+  });
+  bmButang("speak", tr(UI.dengar), "ungu", () => speak(w, "ms"));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual(BM_SEBUT.eja);
+  speak(BM_SEBUT.eja, "ms").then(() => id === bmId && speak(w, "ms"));
+}
+function ejaTekan(b, h, w) {
+  if (bmDone) return;
+  const slot = [...document.querySelectorAll(".ejaslot i")];
+  if (h !== w[bmPos]) { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); tone(220, 0, .15, "sawtooth"); speak(h.toUpperCase(), "ms"); return; }
+  slot[bmPos].textContent = h; slot[bmPos].classList.add("isi");
+  b.disabled = true; b.classList.add("guna");
+  tone(600 + bmPos * 50, 0, .1);
+  bmPos++;
+  /* Habis satu suku kata: sebut suku kata itu */
+  const s = sukuKata(w); let n = 0;
+  for (let j = 0; j < s.length; j++) { n += s[j].length; if (n === bmPos) { document.querySelectorAll(".ejaslot .bsk")[j].classList.add("siap"); if (bmPos < w.length) speak("~" + s[j], "ms"); } }
+  if (bmPos === w.length) { const id = bmId; bmJaya(() => sebutSuku(w, $("bmKawasan").querySelector(".ejaslot"), id)); }
+}
+
+/* ---- Bina ayat: tekan perkataan ikut susunan ---- */
+function binaMula(it, id) {
+  const kata = it[0].split(" "), k = $("bmKawasan");
+  k.innerHTML = `<div class="binaslot">${kata.map(() => `<span class="bslot"></span>`).join("")}</div><div class="binakad"></div>`;
+  shuffle(kata.map((x, i) => [x, i])).forEach(([x]) => {
+    const b = document.createElement("button");
+    b.className = "kbtn"; b.textContent = x;
+    b.onclick = () => binaTekan(b, x, kata);
+    k.querySelector(".binakad").appendChild(b);
+  });
+  bmButang("speak", tr(UI.dengar), "ungu", () => speak(it[0], "ms"));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual(BM_SEBUT.bina);
+  speak(BM_SEBUT.bina, "ms").then(() => id === bmId && speak(it[0], "ms"));
+}
+function binaTekan(b, x, kata) {
+  if (bmDone) return;
+  if (x !== kata[bmPos]) { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); tone(220, 0, .15, "sawtooth"); speak(kataBersih(x), "ms"); return; }
+  const s = document.querySelectorAll(".binaslot .bslot")[bmPos];
+  s.textContent = x; s.classList.add("isi");
+  b.disabled = true; b.classList.add("guna");
+  tone(600 + bmPos * 60, 0, .1);
+  speak(kataBersih(x), "ms");
+  bmPos++;
+  if (bmPos === kata.length) { const id = bmId; bmJaya(() => bacaSorot([...document.querySelectorAll(".binaslot .bslot")], id).then(() => id === bmId && speak(bmAyat(), "ms"))); }
+}
+
+/* ---- Membaca: setiap perkataan menyala ketika disebut; tekan perkataan untuk dengar suku kata ---- */
+function bacaMula(it, id) {
+  const k = $("bmKawasan");
+  k.innerHTML = `<div class="bacaayat">${it[0].split(" ").map(x => `<button class="bkata"><span class="bk"></span><span class="bsukuw"></span></button>`).join("")}</div>`;
+  [...k.querySelectorAll(".bkata")].forEach((b, i) => {
+    const x = it[0].split(" ")[i], w = kataBersih(x);
+    b.querySelector(".bk").textContent = x;
+    b.querySelector(".bsukuw").innerHTML = sukuKata(w).map(s => `<span class="bsk">${s}</span>`).join("-");
+    b.onclick = () => { const id2 = ++bmId; document.querySelectorAll(".bkata").forEach(z => z.classList.remove("eja", "penuh")); b.classList.add("eja"); sebutSuku(w, b, id2); };
+  });
+  const dengar = () => { const id2 = ++bmId; bmBual(BM_SEBUT.baca); return bacaSorot([...k.querySelectorAll(".bkata")], id2).then(() => id2 === bmId && speak(it[0], "ms")); };
+  bmButang("speak", tr(UI.dengar), "ungu", dengar);
+  bmButang("baca", tr(L("Saya Baca", "I Read", "我来读")), "biru", () => bacaGiliran(k));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual(BM_SEBUT.baca);
+  speak(BM_SEBUT.baca, "ms").then(() => id === bmId && bacaSorot([...k.querySelectorAll(".bkata")], id)).then(() => id === bmId && speak(it[0], "ms"))
+    .then(() => tunggu(500)).then(() => { if (id === bmId && bmOn()) bacaGiliran(k); });
+}
+/* Sorot perkataan satu-satu sambil disebut */
+function bacaSorot(el, id) {
+  let p = Promise.resolve();
+  el.forEach(b => { p = p.then(() => { if (id !== bmId) return; el.forEach(z => z.classList.remove("sorot")); b.classList.add("sorot"); return speak(kataBersih((b.querySelector(".bk") || b).textContent), "ms").then(() => tunggu(120)); }); });
+  return p.then(() => el.forEach(z => z.classList.remove("sorot")));
+}
+/* Giliran anak: perkataan menyala ikut rentak tanpa suara, anak baca sendiri */
+function bacaGiliran(k) {
+  const id = ++bmId, el = [...k.querySelectorAll(".bkata")];
+  bmBual(BM_SEBUT.kamuBaca); bmMaskot("fikir");
+  speak(BM_SEBUT.kamuBaca, "ms").then(() => tunggu(400)).then(() => {
+    let p = Promise.resolve();
+    el.forEach(b => { p = p.then(() => { if (id !== bmId) return; el.forEach(z => z.classList.remove("sorot")); b.classList.add("sorot", "giliran"); tone(500, 0, .05); return tunggu(700 + sukuKata(kataBersih(b.querySelector(".bk").textContent)).length * 450); }); });
+    return p;
+  }).then(() => {
+    if (id !== bmId) return;
+    el.forEach(z => z.classList.remove("sorot", "giliran"));
+    bmJaya(null);
+  });
+}
+
+/* ---- Menulis ayat: surih ayat bertitik dengan pensel ---- */
+function tulisAyatMula(it, id) {
+  $("bmKawasan").innerHTML = `<div class="tulisayat"></div>`;
+  $("bmKawasan").querySelector(".tulisayat").textContent = it[0];
+  bmInk = []; bmNow = null;
+  bmButang("speak", tr(UI.dengar), "ungu", () => speak(it[0], "ms"));
+  bmButang("padam", tr(UI.padam), "koral", () => { bmDone = false; bmInk = []; bmLukis(); });
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual(BM_SEBUT.tulis);
+  setTimeout(bmSaiz, 30);
+  speak(BM_SEBUT.tulis, "ms").then(() => id === bmId && speak(it[0], "ms"));
+}
+const BM_FON = '"Chalkboard SE","Comic Sans MS","Trebuchet MS",sans-serif';
+/* Lukis garis buku & ayat bertitik (1 atau 2 baris); simpan topeng huruf untuk semakan */
+function bmSaiz() {
+  if (bmMod !== "tulis" || !bmOn()) return;
+  const pp = $("bmPapan"), dpr = window.devicePixelRatio || 1, ayat = bmAyat(), kata = ayat.split(" ");
+  let baris = [ayat];
+  if (kata.length >= 3) {
+    let terbaik = 1;
+    for (let i = 1; i < kata.length; i++) if (Math.abs(kata.slice(0, i).join(" ").length - kata.slice(i).join(" ").length) < Math.abs(kata.slice(0, terbaik).join(" ").length - kata.slice(terbaik).join(" ").length)) terbaik = i;
+    baris = [kata.slice(0, terbaik).join(" "), kata.slice(terbaik).join(" ")];
+  }
+  const nisbah = baris.length > 1 ? 2.2 : 3.6;
+  pp.style.aspectRatio = nisbah + "/1";
+  pp.style.width = ""; pp.style.width = Math.min(pp.getBoundingClientRect().width, window.innerHeight * .37 * nisbah) + "px";
+  const r = pp.getBoundingClientRect();
+  if (!r.width) return;
+  [$("bmPanduan"), $("bmInk")].forEach(c => { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); });
+  const g = $("bmPanduan").getContext("2d"), W = r.width, H = r.height, lh = H / baris.length;
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  let fs = lh * .6;
+  const muat = () => baris.every(t => g.measureText(t).width <= W * .9);
+  g.font = `bold ${fs}px ${BM_FON}`;
+  while (!muat() && fs > 20) { fs -= 2; g.font = `bold ${fs}px ${BM_FON}`; }
+  bmPapanInfo = { fs: fs };
+  const m = document.createElement("canvas"), k = .25; m.width = Math.ceil(W * k); m.height = Math.ceil(H * k);
+  const mc = m.getContext("2d"); mc.scale(k, k); mc.font = g.font; mc.fillStyle = "#000";
+  const kedudukan = baris.map((t, i) => [t, (W - g.measureText(t).width) / 2, lh * i + lh * .68]);
+  kedudukan.forEach(([t, x0, base]) => {
+    g.strokeStyle = "#9cc8f0"; g.lineWidth = 1.5;
+    [base - fs * .72, base].forEach(y => { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
+    g.setLineDash([6, 6]); g.strokeStyle = "#f5a3b3";
+    [base - fs * .36, base + fs * .26].forEach(y => { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
+    g.setLineDash([]);
+    g.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--track").trim() || "#dceaf9";
+    g.fillText(t, x0, base);
+    g.setLineDash([1, 7]); g.lineCap = "round"; g.lineWidth = 2.4; g.strokeStyle = "#8a94a6";
+    g.strokeText(t, x0, base); g.setLineDash([]);
+    mc.fillText(t, x0, base);
+  });
+  const A = mc.getImageData(0, 0, m.width, m.height).data;
+  mc.lineWidth = fs * .3; mc.lineJoin = "round"; mc.strokeStyle = "#000";
+  kedudukan.forEach(([t, x0, base]) => mc.strokeText(t, x0, base));
+  bmMask = { A: A, B: mc.getImageData(0, 0, m.width, m.height).data, w: m.width, h: m.height, k: k };
+  bmLukis();
+}
+let bmPapanInfo = null;
+function bmLukis() {
+  const c = $("bmInk"), g = c.getContext("2d"), dpr = window.devicePixelRatio || 1;
+  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.lineCap = "round"; g.lineJoin = "round";
+  bmInk.forEach(s => s.p.forEach((q, i) => { const a = s.p[Math.max(0, i - 1)]; g.strokeStyle = `hsl(${q[3]},85%,52%)`; g.lineWidth = q[2]; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(q[0], q[1]); g.stroke(); }));
+}
+function bmTitik(e) {
+  const r = $("bmInk").getBoundingClientRect(), pr = e.pointerType === "pen" && e.pressure > 0 ? e.pressure : .5;
+  tHue = (tHue + 2) % 360;
+  return [e.clientX - r.left, e.clientY - r.top, (bmPapanInfo ? bmPapanInfo.fs : 60) * (.07 + pr * .06), tHue];
+}
+function bmDown(e) {
+  if (bmDone) return;
+  if (e.pointerType === "pen") tPen = true; else if (e.pointerType === "touch" && tPen) return;
+  e.preventDefault();
+  try { $("bmInk").setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ }
+  bmNow = { p: [bmTitik(e)], id: e.pointerId }; bmInk.push(bmNow); bmLukis();
+}
+function bmMove(e) {
+  if (!bmNow || e.pointerId !== bmNow.id) return;
+  e.preventDefault();
+  const g = $("bmInk").getContext("2d"), evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+  g.lineCap = "round";
+  (evs.length ? evs : [e]).forEach(ev => { const q = bmTitik(ev), a = bmNow.p[bmNow.p.length - 1]; bmNow.p.push(q); g.strokeStyle = `hsl(${q[3]},85%,52%)`; g.lineWidth = q[2]; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(q[0], q[1]); g.stroke(); });
+  if (Math.random() < .25) tPercik(e.clientX, e.clientY, 1);
+}
+function bmUp(e) {
+  if (!bmNow || e.pointerId !== bmNow.id) return;
+  bmNow = null;
+  if (!bmMask) return;
+  /* Liputan: berapa banyak huruf disurih (A) dan berapa banyak dakwat dalam kawasan huruf (B) */
+  const m = document.createElement("canvas"); m.width = bmMask.w; m.height = bmMask.h;
+  const mc = m.getContext("2d"); mc.drawImage($("bmInk"), 0, 0, m.width, m.height);
+  const px = mc.getImageData(0, 0, m.width, m.height).data;
+  let a = 0, ak = 0, ink = 0, inkB = 0;
+  for (let i = 3; i < px.length; i += 4) {
+    if (bmMask.A[i] > 100) { a++; if (px[i] > 60) ak++; }
+    if (px[i] > 60) { ink++; if (bmMask.B[i] > 60) inkB++; }
+  }
+  if (a && ak / a >= .55 && inkB / Math.max(1, ink) >= .6) { const id = bmId; bmJaya(() => id === bmId && speak(bmAyat(), "ms")); }
+}
+
 /* ===== UI ===== */
 const $ = id => document.getElementById(id);
 function show(id) {
@@ -2581,10 +2936,11 @@ function renderSubj(t) {
 function renderKuiz(t, back) {
   const st = loadStars();
   backMenu = () => renderKuiz(t, back);
-  renderMenu(t.emoji + " " + tr(t.nama) + (t.id === "pra" ? " · " + tr(UI.kuiz) : ""), t.subjek.map(id => {
+  const aktiviti = t.id === "t1" ? [["bm1", IKON.baca, tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), tr(L("Membaca, mengeja, bina ayat & menulis", "Reading, spelling, building & writing sentences", "阅读、拼写、造句和写字")), "", renderBM1]] : [];
+  renderMenu(t.emoji + " " + tr(t.nama) + (t.id === "pra" ? " · " + tr(UI.kuiz) : ""), aktiviti.concat(t.subjek.map(id => {
     const s = SUBJEK[id];
     return [id, s.emoji, tr(s.nama), tr(UI.soalan10), starText(st[id] || 0), () => startQuiz(id)];
-  }), back);
+  })), back);
 }
 function renderPra() {
   const t = curTahap;
@@ -2862,7 +3218,7 @@ try { window.speechSynthesis && window.speechSynthesis.getVoices(); } catch (e) 
 /* Tulis Huruf: butang & Apple Pencil */
 function tulisLabel() {
   const lb = (id, ik, t) => { $(id).innerHTML = IKON[ik] + "<span></span>"; $(id).querySelector("span").textContent = tr(t); };
-  $("tBack").innerHTML = IKON.back;
+  $("tBack").innerHTML = IKON.back; $("bmBack").innerHTML = IKON.back;
   lb("wSay", "speak", UI.dengar); lb("wErase", "padam", UI.padam); lb("wNext", "next", UI.lagi); $("wBack").innerHTML = IKON.back;
   lb("tShow", "play", UI.tunjuk); lb("tErase", "padam", UI.padam); lb("tSay", "speak", UI.dengar); lb("tNext", "next", UI.lagi);
 }
@@ -2896,6 +3252,12 @@ $("wSay").onclick = () => { wId++; warnaAjar(wId); };
 $("wErase").onclick = () => { wDone = false; wInk = []; wLukisSemula(); };
 $("wNext").onclick = () => warnaNext();
 window.addEventListener("resize", () => { if (wOn()) wSaiz(); });
+/* BM Tahap 1: butang & pensel */
+$("bmMas").insertAdjacentHTML("beforeend", MASKOT);
+["pointerdown", "pointermove", "pointerup", "pointercancel"].forEach((ev, i) => $("bmInk").addEventListener(ev, [bmDown, bmMove, bmUp, bmUp][i]));
+$("bmInk").addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+$("bmBack").onclick = () => { bmId++; stopSpeech(); goBack(); };
+window.addEventListener("resize", () => { if (bmOn()) bmSaiz(); });
 applyLang();
 renderHome();
 } else if (typeof module !== "undefined") {
