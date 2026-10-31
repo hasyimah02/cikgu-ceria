@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cikgu Ceria">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Belajar Seronok!</title>
+<script>try{var t=localStorage.getItem("tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+:root{--bg:#FFF8EC;--card:#FFFFFF;--text:#2F3A4A;--muted:#646F7F;--on:#1B2433;
+--biru:#4A90D9;--hijau:#4CAF7A;--kuning:#FFD166;--oren:#FFA94D;--ungu:#9B8AFB;--koral:#F28B82;
+--biru-p:#DCEAF9;--hijau-p:#D8F0E3;--kuning-p:#FFF0C2;--oren-p:#FFE3C4;--ungu-p:#E6E1FE;--koral-p:#FBDAD7;
+--sh:rgba(47,58,74,.14);--track:#DCEAF9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1E2433;--card:#2A3245;--text:#EDEFF5;--muted:#A9B2C3;
+--biru:#4C8FD6;--hijau:#45A673;--kuning:#F2C85F;--oren:#F29E47;--ungu:#9484F0;--koral:#E8837B;
+--biru-p:#33496B;--hijau-p:#2F5446;--kuning-p:#5A4F2E;--oren-p:#5C4430;--ungu-p:#463F78;--koral-p:#613B44;
+--sh:rgba(10,14,24,.4);--track:#33496B}}
+:root[data-theme="dark"]{--bg:#1E2433;--card:#2A3245;--text:#EDEFF5;--muted:#A9B2C3;
+--biru:#4C8FD6;--hijau:#45A673;--kuning:#F2C85F;--oren:#F29E47;--ungu:#9484F0;--koral:#E8837B;
+--biru-p:#33496B;--hijau-p:#2F5446;--kuning-p:#5A4F2E;--oren-p:#5C4430;--ungu-p:#463F78;--koral-p:#613B44;
+--sh:rgba(10,14,24,.4);--track:#33496B}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{font-family:"Comic Sans MS","Chalkboard SE","Trebuchet MS",system-ui,sans-serif;color:var(--text);background:var(--bg);font-size:18px;line-height:1.3}
+#app{max-width:760px;margin:0 auto;padding:52px 14px 40px}
+body{transition:background-color .3s,color .3s}
+#themeBtn{position:fixed;top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));width:36px;height:36px;border-radius:50%;border:2px solid var(--track);background:var(--card);color:var(--text);font-size:18px;line-height:1;padding:0;cursor:pointer;z-index:100;box-shadow:0 2px 6px var(--sh);transition:background-color .3s,color .3s,border-color .3s}
+.screen{display:none}.screen.on{display:block;animation:pop .35s ease}
+h1{font-size:clamp(28px,7vw,42px);text-align:center;margin:12px 0 4px}
+h2{font-size:clamp(22px,5.5vw,30px);text-align:center;margin:8px 0 14px}
+.sub{text-align:center;color:var(--muted);margin:0 0 16px}
+button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manipulation}
+.grid{display:grid;gap:14px}
+.card{--c:var(--biru);--cp:var(--biru-p);background:var(--cp);border:0;border-left:14px solid var(--c);border-radius:26px;padding:16px 18px;min-height:84px;display:flex;align-items:center;gap:14px;text-align:left;width:100%;box-shadow:0 6px 16px var(--sh);transition:transform .1s}
+.card:active{transform:translateY(4px);box-shadow:0 2px 6px var(--sh)}
+.t-pra{--c:var(--oren);--cp:var(--kuning-p)}.t-t1{--c:var(--hijau);--cp:var(--hijau-p)}.t-t2{--c:var(--biru);--cp:var(--biru-p)}
+.s-bm1,.s-bm2{--c:var(--oren);--cp:var(--oren-p)}.s-mat1,.s-mat2,.s-nombor{--c:var(--biru);--cp:var(--biru-p)}.s-eng1,.s-eng2,.s-warna{--c:var(--ungu);--cp:var(--ungu-p)}.s-sains1,.s-sains2{--c:var(--hijau);--cp:var(--hijau-p)}.s-huruf{--c:var(--kuning);--cp:var(--kuning-p)}
+.card .em{font-size:38px;flex:none;width:68px;height:68px;border-radius:50%;background:var(--c);display:grid;place-items:center}
+.card .nm{font-size:clamp(20px,5vw,26px);font-weight:700}
+.card .ds{font-size:15px;color:var(--text)}
+.card .st{margin-left:auto;font-size:26px;white-space:nowrap}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pill{background:var(--card);border-radius:999px;padding:12px 20px;min-height:52px;font-weight:700;box-shadow:0 4px 12px var(--sh)}
+.bar{flex:1;height:16px;background:var(--track);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--hijau);transition:width .3s}
+.qbox{background:var(--card);border-radius:28px;padding:18px;text-align:center;border:4px solid var(--biru);box-shadow:0 6px 16px var(--sh);margin-bottom:14px}
+#big{font-size:clamp(54px,16vw,96px);line-height:1.15;word-break:break-word;min-height:20px}
+#big:empty{display:none}
+#qt{font-size:clamp(22px,6vw,32px);font-weight:700;margin:6px 0 10px}
+.speak{font-size:30px;width:68px;height:68px;border-radius:50%;background:var(--ungu);box-shadow:0 4px 12px var(--sh)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:420px){.opts{grid-template-columns:1fr}}
+.opt{--oc:var(--biru);background:var(--op,var(--biru-p));border:4px solid var(--oc);border-radius:22px;min-height:76px;padding:10px 12px;font-size:clamp(20px,5.5vw,28px);font-weight:700;box-shadow:0 4px 12px var(--sh)}
+.opt:nth-child(4n+1){--oc:var(--biru);--op:var(--biru-p)}.opt:nth-child(4n+2){--oc:var(--hijau);--op:var(--hijau-p)}.opt:nth-child(4n+3){--oc:var(--kuning);--op:var(--kuning-p)}.opt:nth-child(4n+4){--oc:var(--ungu);--op:var(--ungu-p)}
+.opt:active{transform:translateY(3px)}
+.opt.right{background:var(--hijau);border-color:var(--hijau);color:var(--on);animation:bounce .6s}
+.opt.wrong{background:var(--koral);border-color:var(--koral);color:var(--on);animation:shake .5s}
+.opt:disabled{cursor:default}
+#fb{text-align:center;font-size:clamp(20px,5.5vw,28px);font-weight:700;min-height:40px;margin:14px 0 6px}
+.main{display:block;margin:10px auto 0;background:var(--biru);color:var(--on);font-size:24px;font-weight:700;border-radius:24px;min-height:68px;padding:10px 30px;box-shadow:0 4px 12px var(--sh)}
+.main.alt{background:var(--ungu)}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+#stars{font-size:clamp(54px,18vw,100px);margin:10px 0}
+#stars span{display:inline-block;animation:pop .6s both}
+.hide{display:none!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.tile{background:var(--card);border-radius:22px;padding:12px 6px;box-shadow:0 4px 12px var(--sh);display:flex;flex-direction:column;align-items:center;gap:6px;border-bottom:6px solid var(--c,var(--biru))}
+.tile:active{transform:translateY(3px)}
+.tile .te{font-size:52px;line-height:1.1}
+.tile .tp{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:var(--track)}
+#nImg{display:block;max-width:100%;max-height:min(42vh,340px);margin:0 auto 6px;border-radius:20px;object-fit:contain;box-shadow:0 4px 12px var(--sh)}
+#nImg.hide{display:none}
+#nBig.kecil{font-size:clamp(36px,9vw,56px)}
+.tile .tn{font-size:16px;font-weight:700;text-align:center;line-height:1.2}
+.tile:nth-child(5n+1){--c:var(--biru)}.tile:nth-child(5n+2){--c:var(--hijau)}.tile:nth-child(5n+3){--c:var(--kuning)}.tile:nth-child(5n+4){--c:var(--oren)}.tile:nth-child(5n+5){--c:var(--ungu)}
+.s-pustaka,.c0{--c:var(--oren);--cp:var(--oren-p)}.c1{--c:var(--hijau);--cp:var(--hijau-p)}.c2{--c:var(--biru);--cp:var(--biru-p)}.c3{--c:var(--ungu);--cp:var(--ungu-p)}.c4{--c:var(--kuning);--cp:var(--kuning-p)}
+.langs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 12px}
+.langs button{background:var(--card);border:3px solid var(--track);border-radius:999px;padding:8px 16px;min-height:46px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+.langs button.on{background:var(--biru);border-color:var(--biru);color:var(--on)}
+.s-nota{--c:var(--hijau);--cp:var(--hijau-p)}.s-kuiz{--c:var(--biru);--cp:var(--biru-p)}.s-game{--c:var(--ungu);--cp:var(--ungu-p)}
+.s-n-huruf,.s-g-padan{--c:var(--kuning);--cp:var(--kuning-p)}.s-n-nombor{--c:var(--biru);--cp:var(--biru-p)}.s-n-warna,.s-g-belon{--c:var(--ungu);--cp:var(--ungu-p)}.s-n-bentuk{--c:var(--oren);--cp:var(--oren-p)}
+/* Nota */
+#nBig{font-size:clamp(64px,20vw,120px);line-height:1.15;word-break:break-word}
+#nTxt{font-size:clamp(48px,14vw,84px);font-weight:700;margin:4px 0}
+#nSub{font-size:clamp(22px,6vw,32px);font-weight:700;margin:0 0 10px;color:var(--text)}
+.nav{display:flex;gap:12px;justify-content:space-between}
+.nav .main{margin:0;flex:1;font-size:22px;padding:10px 12px}
+/* Padan Kad */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:420px){.mem{grid-template-columns:repeat(3,1fr)}}
+.mc{aspect-ratio:1;border-radius:20px;font-size:clamp(30px,9vw,52px);font-weight:700;background:var(--ungu);color:var(--on);box-shadow:0 4px 12px var(--sh);display:grid;place-items:center;transition:transform .15s}
+.mc.open{background:var(--card);color:var(--text);border:4px solid var(--biru);animation:pop .3s}
+.mc.done{background:var(--hijau-p);border:4px solid var(--hijau);color:var(--text)}
+.mc.no{animation:shake .5s}
+/* Pecah Belon */
+#gTarget{font-size:clamp(24px,6.5vw,34px);font-weight:700;text-align:center;margin:6px 0 4px}
+.sky{display:flex;flex-wrap:wrap;gap:14px 10px;justify-content:center;padding:18px 0 30px}
+.bl{--b:var(--biru);width:clamp(78px,20vw,104px);height:clamp(96px,25vw,128px);border-radius:50% 50% 46% 46%;background:var(--b);color:var(--on);font-size:clamp(34px,10vw,50px);font-weight:700;position:relative;box-shadow:inset -10px -12px 0 rgba(0,0,0,.08),0 6px 12px var(--sh);animation:float 2.4s ease-in-out infinite}
+.bl::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:26px;background:var(--muted)}
+.bl:nth-child(5n+1){--b:var(--biru)}.bl:nth-child(5n+2){--b:var(--kuning);animation-delay:.4s}.bl:nth-child(5n+3){--b:var(--hijau);animation-delay:.8s}.bl:nth-child(5n+4){--b:var(--oren);animation-delay:.2s}.bl:nth-child(5n+5){--b:var(--ungu);animation-delay:.6s}
+.bl.pop{animation:burst .35s forwards}
+.bl.no{animation:shake .5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes burst{to{transform:scale(1.5);opacity:0}}
+@keyframes pop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.12) rotate(-2deg)}60%{transform:scale(.97) rotate(2deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<button id="themeBtn" type="button"></button>
+<div id="app">
+  <section id="s-home" class="screen on">
+    <h1 id="homeTitle">🌈 Belajar Seronok! 🌈</h1>
+    <div class="langs" id="langRow"><button data-l="ms">🇲🇾 BM</button><button data-l="en">🇬🇧 English</button><button data-l="zh">🇨🇳 中文</button></div>
+    <p class="sub" id="homeSub">Pilih tahap kamu</p>
+    <div class="grid" id="tahapList"></div>
+  </section>
+  <section id="s-subj" class="screen">
+    <div class="top"><button class="pill" id="subjBack">⬅️ Menu</button></div>
+    <h2 id="subjTitle"></h2>
+    <div class="grid" id="subjList"></div>
+  </section>
+  <section id="s-quiz" class="screen">
+    <div class="top">
+      <button class="pill" id="quizBack" aria-label="Keluar">✖️</button>
+      <div class="bar"><i id="prog"></i></div>
+      <div class="pill" id="count">1/10</div>
+    </div>
+    <div class="qbox">
+      <div id="big"></div>
+      <div id="qt"></div>
+      <button class="speak" id="speakBtn" aria-label="Baca soalan">🔊</button>
+    </div>
+    <div class="opts" id="opts"></div>
+    <div id="fb" aria-live="polite"></div>
+    <button class="main hide" id="nextBtn">Seterusnya ➡️</button>
+  </section>
+  <section id="s-nota" class="screen">
+    <div class="top">
+      <button class="pill" id="notaBack" aria-label="Keluar">✖️</button>
+      <div class="bar"><i id="nProg"></i></div>
+      <div class="pill" id="nCount">1/10</div>
+    </div>
+    <div class="qbox">
+      <img id="nImg" class="hide" alt="">
+      <div id="nBig"></div>
+      <div id="nTxt"></div>
+      <div id="nSub"></div>
+      <button class="speak" id="nSpeak" aria-label="Dengar">🔊</button>
+      <div class="langs hide" id="nLangs"><button data-l="ms">🔊 BM</button><button data-l="en">🔊 English</button><button data-l="zh">🔊 中文</button></div>
+    </div>
+    <div class="nav">
+      <button class="main alt" id="nPrev">⬅️ Sebelum</button>
+      <button class="main" id="nNext">Seterusnya ➡️</button>
+    </div>
+  </section>
+  <section id="s-lib" class="screen">
+    <div class="top"><button class="pill" id="libBack" aria-label="Keluar">⬅️</button><h2 id="libTitle" style="flex:1;margin:0"></h2></div>
+    <div class="tiles" id="tiles"></div>
+    <p class="sub" id="libKredit" style="font-size:13px;margin-top:16px">📷 Foto: Wikimedia Commons</p>
+  </section>
+  <section id="s-padan" class="screen">
+    <div class="top">
+      <button class="pill" id="padanBack" aria-label="Keluar">✖️</button>
+      <h2 id="padanTitle" style="flex:1;margin:0">🃏 Padan Kad</h2>
+      <div class="pill" id="padanMoves">0</div>
+    </div>
+    <p class="sub" id="padanSub">Cari pasangan huruf dan gambar!</p>
+    <div class="mem" id="mem"></div>
+  </section>
+  <section id="s-belon" class="screen">
+    <div class="top">
+      <button class="pill" id="belonBack" aria-label="Keluar">✖️</button>
+      <div class="bar"><i id="bProg"></i></div>
+      <div class="pill" id="bCount">1/10</div>
+    </div>
+    <div id="gTarget"></div>
+    <div style="text-align:center"><button class="speak" id="bSpeak" aria-label="Dengar">🔊</button></div>
+    <div class="sky" id="sky"></div>
+  </section>
+  <section id="s-result" class="screen">
+    <h2 id="resTitle"></h2>
+    <div id="stars" style="text-align:center"></div>
+    <p class="sub" id="resScore" style="font-size:24px"></p>
+    <div class="row">
+      <button class="main" id="again">🔁 Main Lagi</button>
+      <button class="main alt" id="toMenu">🏠 Menu</button>
+    </div>
+  </section>
+</div>
+
+<script src="gambar/senarai.js"></script>
+<script>
+"use strict";
+/* ===== Tema ===== */
+(function(){
+  const R = document.documentElement, btn = document.getElementById("themeBtn");
+  const T = {light:["☀️","Tema terang. Tekan untuk tema gelap"], dark:["🌙","Tema gelap. Tekan untuk tema auto"], auto:["🌓","Tema auto (ikut sistem). Tekan untuk tema terang"]};
+  const next = {light:"dark", dark:"auto", auto:"light"};
+  const cur = () => { const v = R.getAttribute("data-theme"); return v === "light" || v === "dark" ? v : "auto"; };
+  function show(){ const m = T[cur()]; btn.textContent = m[0]; btn.title = m[1]; btn.setAttribute("aria-label", m[1]); }
+  btn.addEventListener("click", () => {
+    const n = next[cur()];
+    if (n === "auto") R.removeAttribute("data-theme"); else R.setAttribute("data-theme", n);
+    try { if (n === "auto") localStorage.removeItem("tema"); else localStorage.setItem("tema", n); } catch (e) {}
+    show();
+  });
+  show();
+})();
+/* ===== Utiliti ===== */
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = arr => arr[rnd(0, arr.length - 1)];
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = rnd(0, i);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const TOTAL = 10;
+
+/* Bina soalan: jawapan betul + jawapan salah, dikocok */
+function mk(q, a, wrongs, o) {
+  return Object.assign({ q: q, a: a, opts: shuffle([a].concat(wrongs)), big: "", say: "" }, o || {});
+}
+/* Pilih n salah dari senarai lain */
+function others(list, correct, n) {
+  return shuffle(list.filter(x => x !== correct)).slice(0, n);
+}
+/* Nombor salah yang unik di sekitar jawapan */
+function wrongNums(ans, deltas, min) {
+  const set = new Set();
+  let guard = 0;
+  while (set.size < 3 && guard++ < 200) {
+    const v = ans + pick(deltas) * pick([-1, 1]);
+    if (v !== ans && v >= min) set.add(v);
+  }
+  let k = 1;
+  while (set.size < 3) { if (ans + k !== ans) set.add(ans + k); k++; }
+  return Array.from(set);
+}
+/* Kumpul 10 soalan unik dari penjana */
+function gather(fn) {
+  const out = [], seen = new Set();
+  let guard = 0;
+  while (out.length < TOTAL && guard++ < 500) {
+    const q = fn();
+    const key = q.q + q.big;
+    if (!seen.has(key)) { seen.add(key); out.push(q); }
+  }
+  return out;
+}
+const fromBank = (bank, build) => () => shuffle(bank).slice(0, TOTAL).map(build);
+const rm = sen => "RM" + (sen / 100).toFixed(2);
+
+/* ===== Bahasa ===== */
+let LANG = "ms";
+try { const b = localStorage.getItem("bahasa"); if (b === "en" || b === "zh") LANG = b; } catch (e) { /* abaikan */ }
+const L = (ms, en, zh) => ({ ms: ms, en: en, zh: zh });
+const tr = o => (o == null ? "" : typeof o === "string" ? o : o[LANG] != null ? o[LANG] : o.ms);
+
+const UI = {
+  title: L("🌈 Belajar Seronok! 🌈", "🌈 Fun Learning! 🌈", "🌈 快乐学习！🌈"),
+  pilihTahap: L("Pilih tahap kamu", "Choose your level", "选择你的阶段"),
+  soalan10: L("10 soalan", "10 questions", "10道题"),
+  kuiz: L("Kuiz", "Quiz", "测验"), kuizDs: L("Uji kefahaman kamu", "Test what you know", "测试你的理解"),
+  nota: L("Nota", "Notes", "笔记"), notaDs: L("Belajar huruf, nombor, warna & bentuk", "Learn letters, numbers, colours & shapes", "学习字母、数字、颜色和形状"),
+  game: L("Mini Game", "Mini Games", "小游戏"), gameDs: L("Bermain sambil belajar", "Learn while playing", "边玩边学"),
+  kad: L(" kad", " cards", " 张卡"),
+  menu: L("⬅️ Menu", "⬅️ Menu", "⬅️ 菜单"),
+  sebelum: L("⬅️ Sebelum", "⬅️ Back", "⬅️ 上一个"), seterusnya: L("Seterusnya ➡️", "Next ➡️", "下一个 ➡️"), siap: L("Siap ✅", "Done ✅", "完成 ✅"),
+  keputusan: L("Lihat Keputusan 🏆", "See Results 🏆", "查看成绩 🏆"),
+  betul: [L("Betul! 🎉", "Correct! 🎉", "答对了！🎉"), L("Bagus! 👏", "Good job! 👏", "很好！👏"), L("Hebat! 🌟", "Great! 🌟", "太棒了！🌟"), L("Pandai! 😄", "Clever! 😄", "真聪明！😄")],
+  takApa: L("Tak apa! Jawapan: ", "Never mind! Answer: ", "没关系！答案："),
+  r3: L("Hebat sungguh! 🎊", "Excellent! 🎊", "非常棒！🎊"), r2: L("Bagus! 👍", "Good! 👍", "很好！👍"), r1: L("Teruskan berusaha! 💪", "Keep trying! 💪", "继续加油！💪"),
+  markah: L("Markah: ", "Score: ", "得分："), langkah: L("Langkah: ", "Moves: ", "步数："),
+  mainLagi: L("🔁 Main Lagi", "🔁 Play Again", "🔁 再玩一次"), keMenu: L("🏠 Menu", "🏠 Menu", "🏠 菜单"),
+  padanNama: L("Padan Kad", "Match Cards", "配对卡"), padanDs: L("Padankan huruf dengan gambar", "Match letters with pictures", "把字母和图片配对"),
+  padanSub: L("Cari pasangan huruf dan gambar!", "Find the letter and picture pairs!", "找出字母和图片的配对！"),
+  padanSay: L("Padan kad. Cari pasangan huruf dan gambar.", "Match the cards. Find the letter and picture pairs.", "配对卡。找出字母和图片的配对。"),
+  belonNama: L("Pecah Belon", "Pop the Balloon", "戳气球"), belonDs: L("Dengar & pecahkan belon betul", "Listen & pop the right balloon", "听一听，戳破正确的气球"),
+  huruf: L("Huruf ", "Letter ", "字母 "), nombor: L("Nombor ", "Number ", "数字 "),
+  pustaka: L("Perpustakaan","Library","图书馆"), pustakaDs: L("Ratusan gambar: buah, sayur, haiwan, kenderaan & lagi","Hundreds of pictures: fruits, vegetables, animals, vehicles & more","数百张图片：水果、蔬菜、动物、交通工具等"),
+  gambar: L(" gambar"," pictures"," 张图片"),
+  cubaLagi: L("Cuba lagi. ", "Try again. ", "再试一次。"),
+  seronok: [L("Betul!", "Correct!", "答对了！"), L("Bagus!", "Good job!", "很好！"), L("Hebat!", "Great!", "太棒了！")]
+};
+
+/* ===== PRASEKOLAH ===== */
+/* [huruf, emoji BM, perkataan BM, maksud Cina, emoji EN, perkataan EN] */
+const HURUF = [
+  ["A","🐔","Ayam","鸡","🍎","Apple"],["B","⚽","Bola","球","⚽","Ball"],["C","🦎","Cicak","壁虎","🐱","Cat"],
+  ["D","🎲","Dadu","骰子","🐶","Dog"],["E","🍎","Epal","苹果","🥚","Egg"],["F","⛴️","Feri","渡轮","🐟","Fish"],
+  ["G","🐘","Gajah","大象","🐐","Goat"],["H","🐯","Harimau","老虎","🎩","Hat"],["I","🦆","Itik","鸭子","🍦","Ice cream"],
+  ["J","⏰","Jam","钟","🧃","Juice"],["K","🐱","Kucing","猫","🪁","Kite"],["L","🐝","Lebah","蜜蜂","🦁","Lion"],
+  ["M","🐒","Monyet","猴子","🐒","Monkey"],["N","🍍","Nanas","黄梨","👃","Nose"],["O","🍊","Oren","橙","🍊","Orange"],
+  ["P","🍌","Pisang","香蕉","✏️","Pencil"],["Q","📖","Quran","古兰经","👸","Queen"],["R","🏠","Rumah","房子","🐰","Rabbit"],
+  ["S","🦁","Singa","狮子","☀️","Sun"],["T","🐭","Tikus","老鼠","🐯","Tiger"],["U","🐍","Ular","蛇","☂️","Umbrella"],
+  ["V","🚐","Van","面包车","🚐","Van"],["W","💵","Wang","钱","⌚","Watch"],["X","🎶","Xilofon","木琴","🎶","Xylophone"],
+  ["Y","🦈","Yu","鲨鱼","🧶","Yarn"],["Z","🦒","Zirafah","长颈鹿","🦓","Zebra"]
+];
+const ABC = HURUF.map(h => h[0]);
+/* Perkataan & gambar ikut bahasa: mod Cina guna perkataan BM (sebutan BM) + maksud Cina */
+const hw = h => LANG === "en" ? { e: h[4], w: h[5], sl: "en" } : { e: h[1], w: h[2], zh: h[3], sl: "ms" };
+const untuk = (h, x) => x.sl === "en" ? h[0] + " for " + x.w : h[0] + " untuk " + x.w;
+function huruf() {
+  return shuffle(HURUF).slice(0, TOTAL).map(h => {
+    const x = hw(h);
+    const q = LANG === "en" ? "\"" + x.w + "\" starts with which letter?" : LANG === "zh" ? x.w + "（" + x.zh + "）的第一个字母是什么？" : x.w + " bermula dengan huruf apa?";
+    const say = x.sl === "en" ? x.w + ". " + x.w + " starts with which letter?" : x.w + ". " + x.w + " bermula dengan huruf apa?";
+    return mk(q, h[0], others(ABC, h[0], 3), { big: x.e, say: say, sl: x.sl });
+  });
+}
+
+const OBJ = ["🍎","⭐","🐟","🎈","🚗","🐥","🌸","🍪","⚽","🦋"];
+const NAMA_NOMBOR = L(
+  ["satu","dua","tiga","empat","lima","enam","tujuh","lapan","sembilan","sepuluh"],
+  ["one","two","three","four","five","six","seven","eight","nine","ten"],
+  ["一","二","三","四","五","六","七","八","九","十"]);
+function nombor() {
+  const n = rnd(1, 10), e = pick(OBJ);
+  const wr = others([1,2,3,4,5,6,7,8,9,10], n, 3).map(String);
+  return mk(tr(L("Berapakah semuanya?", "How many are there?", "一共有多少？")), String(n), wr,
+    { big: e.repeat(n), say: tr(L("Kira. Berapakah semuanya?", "Count. How many are there?", "数一数，一共有多少？")) });
+}
+
+/* Kamus istilah [BM, English, 中文] untuk Warna, Bentuk & Sains */
+const K = {
+  merah:L("Merah","Red","红色"), kuning:L("Kuning","Yellow","黄色"), hijau:L("Hijau","Green","绿色"), biru:L("Biru","Blue","蓝色"),
+  oren:L("Oren","Orange","橙色"), ungu:L("Ungu","Purple","紫色"), perang:L("Perang","Brown","褐色"), hitam:L("Hitam","Black","黑色"),
+  putih:L("Putih","White","白色"),
+  bulatan:L("Bulatan","Circle","圆形"), segitiga:L("Segi tiga","Triangle","三角形"), segiempatsama:L("Segi empat sama","Square","正方形"),
+  segiempattepat:L("Segi empat tepat","Rectangle","长方形"),
+  ayam:L("ayam","chicken","鸡"), kucing:L("kucing","cat","猫"), lembu:L("lembu","cow","牛"), kambing:L("kambing","goat","羊"),
+  singa:L("singa","lion","狮子"), harimau:L("harimau","tiger","老虎"), helang:L("helang","eagle","老鹰"), ikan:L("ikan","fish","鱼"),
+  katak:L("katak","frog","青蛙"), arnab:L("arnab","rabbit","兔子"),
+  insang:L("insang","gills","鳃"), paru:L("paru-paru","lungs","肺"), hidung:L("hidung","nose","鼻子"), telinga:L("telinga","ears","耳朵"),
+  mata:L("mata","eyes","眼睛"), lidah:L("lidah","tongue","舌头"), tangan:L("tangan","hands","手"), kaki:L("kaki","legs","脚"), kulit:L("kulit","skin","皮肤"),
+  terbang:L("terbang","fly","飞"), merayap:L("merayap","crawl","爬"), berenang:L("berenang","swim","游泳"), melompat:L("melompat","hop","跳"),
+  ramarama:L("rama-rama","butterfly","蝴蝶"), lebah:L("lebah","bee","蜜蜂"), labah:L("labah-labah","spider","蜘蛛"), semut:L("semut","ant","蚂蚁"),
+  daratair:L("darat dan air","on land and in water","陆地和水中"), udara:L("udara sahaja","in the air only","只在空中"),
+  bawahtanah:L("dalam tanah sahaja","underground only","只在地下"), ataspokok:L("atas pokok sahaja","on trees only","只在树上"),
+  airsuria:L("air dan cahaya matahari","water and sunlight","水和阳光"), plastik:L("plastik","plastic","塑料"), gula2:L("gula-gula","sweets","糖果"),
+  batu:L("batu","stones","石头"), pasir:L("pasir","sand","沙子"), air:L("air","water","水"), tanah:L("tanah","soil","泥土"),
+  akar:L("akar","root","根"), daun:L("daun","leaf","叶"), bunga:L("bunga","flower","花"), buah:L("buah","fruit","果实"), batang:L("batang","stem","茎"),
+  biji:L("biji","seed","种子"), pokokbaru:L("pokok baharu","new plant","新植物"),
+  hijau2:L("hijau","green","绿色"), biru2:L("biru","blue","蓝色"), merah2:L("merah","red","红色"), hitam2:L("hitam","black","黑色"),
+  manis:L("manis","sweet","甜"), masam:L("masam","sour","酸"), pahit:L("pahit","bitter","苦"), masin:L("masin","salty","咸"), pedas:L("pedas","spicy","辣"),
+  jantung:L("jantung","heart","心脏"), perut:L("perut","stomach","胃"), otak:L("otak","brain","大脑"), usus:L("usus","intestines","肠"),
+  bernafas:L("bernafas","breathing","呼吸"), mencerna:L("mencerna makanan","digesting food","消化食物"), mengepam:L("mengepam darah","pumping blood","输送血液"),
+  berfikir:L("berfikir","thinking","思考"),
+  pencernaan:L("pencernaan","digestive","消化"), pernafasan:L("pernafasan","respiratory","呼吸"), peredaran:L("peredaran darah","circulatory","血液循环"), saraf:L("saraf","nervous","神经"),
+  sokong:L("menyokong badan","supporting the body","支撑身体"), buatdarah:L("membuat darah sahaja","only making blood","只制造血液"), menghidu:L("menghidu bau","smelling","闻气味"),
+  bersihdarah:L("membersihkan darah dan membuang sisa","cleaning the blood and removing waste","清洁血液并排除废物"),
+  simpanudara:L("menyimpan udara","storing air","储存空气"), kawalfikiran:L("mengawal fikiran","controlling thoughts","控制思想"),
+  nutrien:L("menyerap nutrien","absorbing nutrients","吸收营养"),
+  matahari:L("Matahari","the Sun","太阳"), bulan:L("Bulan","the Moon","月亮"), angin:L("angin","wind","风"), petrol:L("petrol","petrol","汽油"),
+  cahaya:L("cahaya matahari","sunlight","阳光"), petroleum:L("petroleum","petroleum","石油"), arang:L("arang batu","coal","煤炭"), gas:L("gas asli","natural gas","天然气"),
+  airterjun:L("air terjun","waterfall","瀑布"),
+  kinetik:L("kinetik","kinetic","动"), haba:L("haba","heat","热"), kimia:L("kimia","chemical","化学"), nuklear:L("nuklear","nuclear","核"),
+  bunyi:L("bunyi","sound","声"), elektrik:L("elektrik","electrical","电"),
+  tukarbentuk:L("bertukar bentuk","change form","转换形式"), hilang:L("hilang","disappear","消失"), dibeli:L("dibeli","be bought","被购买"), dihapus:L("dihapuskan","be wiped out","被消除"),
+  ketiga:L("ketiga","third","第三"), pertama:L("pertama","first","第一"), kelima:L("kelima","fifth","第五"), kesepuluh:L("kesepuluh","tenth","第十"),
+  marikh:L("Marikh","Mars","火星"), musytari:L("Musytari","Jupiter","木星"), bumi:L("Bumi","Earth","地球"), utarid:L("Utarid","Mercury","水星"), zuhal:L("Zuhal","Saturn","土星"),
+  putar:L("Bumi berputar pada paksinya","The Earth rotates on its axis","地球绕着地轴自转"), bulangerak:L("Bulan bergerak","The Moon moves","月亮移动"),
+  mataharigerak:L("Matahari bergerak","The Sun moves","太阳移动"), bintangjatuh:L("Bintang jatuh","Stars fall","星星掉落"),
+  h365:L("365 hari","365 days","365天"), h30:L("30 hari","30 days","30天"), h7:L("7 hari","7 days","7天"), j24:L("24 jam","24 hours","24小时"),
+  pantul:L("memantulkan cahaya Matahari","reflects sunlight","反射太阳光"), sendiri:L("menghasilkan cahayanya sendiri","makes its own light","自己发光"),
+  terbakar:L("terbakar","is burning","在燃烧"), api:L("dilitupi api","is covered in fire","被火覆盖")
+};
+const kt = k => tr(K[k] || k);
+/* Baris bank: [soalan L(...), jawapan, [salah...], emoji] — jawapan/salah = kunci K atau teks biasa */
+const fromRows = rows => () => shuffle(rows).slice(0, TOTAL).map(r => mk(tr(r[0]), kt(r[1]), r[2].map(kt), { big: r[3] || "" }));
+
+const qWarna = L("Apakah warna bulatan ini?", "What colour is this circle?", "这个圆形是什么颜色？");
+const qBentuk = L("Apakah nama bentuk ini?", "What is this shape?", "这是什么形状？");
+const WB = [
+  [qWarna,"merah",["biru","hijau"],"🔴"], [qWarna,"kuning",["merah","ungu"],"🟡"], [qWarna,"hijau",["oren","biru"],"🟢"],
+  [qWarna,"biru",["hijau","kuning"],"🔵"], [qWarna,"oren",["ungu","merah"],"🟠"], [qWarna,"ungu",["oren","hijau"],"🟣"],
+  [qWarna,"perang",["putih","kuning"],"🟤"], [qWarna,"hitam",["putih","merah"],"⚫"], [qWarna,"putih",["hitam","biru"],"⚪"],
+  [L("Apakah warna pisang masak?","What colour is a ripe banana?","熟香蕉是什么颜色？"),"kuning",["biru","ungu"],"🍌"],
+  [L("Apakah warna epal ini?","What colour is this apple?","这个苹果是什么颜色？"),"merah",["biru","hitam"],"🍎"],
+  [L("Apakah warna katak?","What colour is the frog?","青蛙是什么颜色？"),"hijau",["merah","ungu"],"🐸"],
+  [L("Apakah warna lobak merah?","What colour is a carrot?","红萝卜是什么颜色？"),"oren",["biru","hijau"],"🥕"],
+  [L("Apakah warna matahari ini?","What colour is this sun?","这个太阳是什么颜色？"),"kuning",["hijau","biru"],"🌞"],
+  [L("Apakah warna awan ini?","What colour is this cloud?","这朵云是什么颜色？"),"putih",["hijau","hitam"],"☁️"],
+  [qBentuk,"segitiga",["bulatan","segiempatsama"],"🔺"], [qBentuk,"bulatan",["segitiga","segiempattepat"],"⭕"],
+  [qBentuk,"segiempatsama",["bulatan","segitiga"],"⬛"],
+  [L("Bola berbentuk apa?","What shape is a ball?","球是什么形状？"),"bulatan",["segitiga","segiempatsama"],"⚽"],
+  [L("Sesiku ini berbentuk apa?","What shape is this set square?","这把三角尺是什么形状？"),"segitiga",["bulatan","segiempatsama"],"📐"],
+  [L("Tingkap ini berbentuk apa?","What shape is this window?","这扇窗是什么形状？"),"segiempatsama",["bulatan","segitiga"],"🪟"],
+  [L("Pintu berbentuk apa?","What shape is a door?","门是什么形状？"),"segiempattepat",["bulatan","segitiga"],"🚪"],
+  [L("Telefon bimbit berbentuk apa?","What shape is a mobile phone?","手机是什么形状？"),"segiempattepat",["bulatan","segitiga"],"📱"],
+  [L("Jam dinding berbentuk apa?","What shape is a wall clock?","挂钟是什么形状？"),"bulatan",["segitiga","segiempattepat"],"🕐"]
+];
+const warnaBentuk = fromRows(WB);
+
+/* ===== TAHAP 1 ===== */
+const BM1 = [
+  ["Pecahkan suku kata: bola","bo-la",["bol-a","b-ola"]],
+  ["Pecahkan suku kata: kucing","ku-cing",["kuc-ing","k-ucing"]],
+  ["Pecahkan suku kata: meja","me-ja",["mej-a","m-eja"]],
+  ["Pecahkan suku kata: buku","bu-ku",["buk-u","b-uku"]],
+  ["Pecahkan suku kata: sekolah","se-ko-lah",["sek-olah","sekol-ah"]],
+  ["Pecahkan suku kata: gajah","ga-jah",["gaj-ah","g-ajah"]],
+  ["Pecahkan suku kata: rumah","ru-mah",["rum-ah","r-umah"]],
+  ["Pecahkan suku kata: kerusi","ke-ru-si",["ker-usi","keru-si-"]],
+  ["Berapakah suku kata dalam 'pensel'?","2",["1","3"]],
+  ["Berapakah suku kata dalam 'matahari'?","4",["2","3"]],
+  ["Berapakah suku kata dalam 'pelajar'?","3",["2","4"]],
+  ["Susun suku kata: ma + kan","makan",["kanma","nakam"]],
+  ["Ejaan yang betul?","gajah",["gaja","gajha"],"🐘"],
+  ["Ejaan yang betul?","kucing",["kuching","kucin"],"🐱"],
+  ["Ejaan yang betul?","rumah",["ruma","rumha"],"🏠"],
+  ["Ejaan yang betul?","pisang",["pesang","pisan"],"🍌"],
+  ["Ejaan yang betul?","buku",["bukku","buko"],"📖"],
+  ["Ejaan yang betul?","ikan",["ikn","ikaan"],"🐟"],
+  ["Ejaan yang betul?","kereta",["kerta","keretta"],"🚗"],
+  ["Ejaan yang betul?","bunga",["bungga","buga"],"🌸"],
+  ["Apakah lawan kata 'besar'?","kecil",["tinggi","panjang"]],
+  ["Apakah lawan kata 'panas'?","sejuk",["basah","manis"]]
+];
+const bm1 = fromBank(BM1, r => mk(r[0], r[1], r[2], { big: r[3] || "" }));
+/* Sebutan operasi ikut bahasa */
+const OP = { "+": L("tambah","plus","加"), "−": L("tolak","minus","减"), "×": L("darab","times","乘"), "÷": L("bahagi","divided by","除以") };
+const sama = L(" sama dengan berapa?", " equals what?", "等于多少？");
+const sayOp = (a, op, b) => LANG === "zh" ? a + tr(OP[op]) + b + tr(sama) : a + " " + tr(OP[op]) + " " + b + tr(sama);
+function mat1() {
+  const t = rnd(1, 3);
+  if (t === 1) {
+    const a = rnd(10, 89), b = rnd(1, 100 - a), r = a + b;
+    return mk(a + " + " + b + " = ?", String(r), wrongNums(r, [1, 2, 10, 5], 0).map(String), { say: sayOp(a, "+", b) });
+  }
+  if (t === 2) {
+    const a = rnd(20, 100), b = rnd(1, a - 1), r = a - b;
+    return mk(a + " − " + b + " = ?", String(r), wrongNums(r, [1, 2, 10, 5], 0).map(String), { say: sayOp(a, "−", b) });
+  }
+  const a = rnd(2, 5), b = rnd(1, 10), r = a * b;
+  return mk(a + " × " + b + " = ?", String(r), wrongNums(r, [1, 2, a], 0).map(String), { say: sayOp(a, "×", b) });
+}
+
+/* Vocab English: [emoji, perkataan] */
+const VOC = [
+  ["🐶","dog"],["🐱","cat"],["🍎","apple"],["🍌","banana"],["📖","book"],["🏠","house"],
+  ["🚗","car"],["🌞","sun"],["🌙","moon"],["⭐","star"],["🐟","fish"],["🐦","bird"],
+  ["🌳","tree"],["🥛","milk"],["⚽","ball"],["✏️","pencil"],["🪑","chair"],["👁️","eye"],
+  ["🦆","duck"],["🐘","elephant"],["🍚","rice"],["💧","water"],["🎂","cake"],["🌧️","rain"]
+];
+const WORDS = VOC.map(v => v[1]);
+const eng1 = fromBank(VOC, v => mk("What is this?", v[1], others(WORDS, v[1], 3), { big: v[0], say: "What is this?" }));
+const SN1 = [
+  [L("Haiwan manakah bertelur?","Which animal lays eggs?","哪种动物会下蛋？"),"ayam",["kucing","lembu","kambing"]],
+  [L("Haiwan manakah makan rumput?","Which animal eats grass?","哪种动物吃草？"),"lembu",["singa","harimau","helang"]],
+  [L("Haiwan manakah menyusukan anaknya?","Which animal feeds its young with milk?","哪种动物用奶喂养幼儿？"),"kucing",["ayam","ikan","katak"]],
+  [L("Ikan bernafas menggunakan apa?","What do fish breathe with?","鱼用什么呼吸？"),"insang",["paru","hidung","telinga"]],
+  [L("Burung bergerak dengan cara apa?","How do birds move?","鸟怎样移动？"),"terbang",["merayap","berenang","melompat"]],
+  [L("Ulat akan berubah menjadi apa?","A caterpillar turns into a ...","毛毛虫会变成什么？"),"ramarama",["lebah","labah","semut"]],
+  [L("Haiwan manakah memakan daging?","Which animal eats meat?","哪种动物吃肉？"),"harimau",["lembu","kambing","arnab"]],
+  [L("Katak boleh hidup di mana?","Where can frogs live?","青蛙可以在哪里生活？"),"daratair",["udara","bawahtanah","ataspokok"]],
+  [L("Tumbuhan memerlukan apa untuk hidup?","What do plants need to live?","植物需要什么才能生存？"),"airsuria",["plastik","gula2","batu"]],
+  [L("Bahagian tumbuhan manakah menyerap air?","Which part of a plant absorbs water?","植物的哪个部分吸收水分？"),"akar",["daun","bunga","buah"]],
+  [L("Bahagian tumbuhan manakah membuat makanan?","Which part of a plant makes food?","植物的哪个部分制造食物？"),"daun",["akar","batang","biji"]],
+  [L("Bunga akan menjadi apa?","A flower will become a ...","花会变成什么？"),"buah",["akar","batang","tanah"]],
+  [L("Biji benih yang ditanam akan tumbuh menjadi apa?","A planted seed will grow into a ...","种下的种子会长成什么？"),"pokokbaru",["batu","pasir","air"]],
+  [L("Daun kebanyakannya berwarna apa?","What colour are most leaves?","大多数叶子是什么颜色？"),"hijau2",["biru2","merah2","hitam2"]],
+  [L("Kita guna apa untuk mendengar?","What do we use to hear?","我们用什么听？"),"telinga",["mata","hidung","lidah"],"👂"],
+  [L("Kita guna apa untuk melihat?","What do we use to see?","我们用什么看？"),"mata",["telinga","tangan","lidah"],"👁️"],
+  [L("Kita guna apa untuk menghidu bunga?","What do we use to smell a flower?","我们用什么闻花香？"),"hidung",["mata","telinga","kaki"],"👃"],
+  [L("Kita guna apa untuk merasa makanan?","What do we use to taste food?","我们用什么尝食物的味道？"),"lidah",["hidung","mata","kulit"],"👅"],
+  [L("Kita guna apa untuk merasa sejuk ais?","What do we use to feel cold ice?","我们用什么感觉冰的冰冷？"),"kulit",["telinga","mata","hidung"],"🧊"],
+  [L("Bunyi guruh didengar dengan apa?","We hear thunder with our ...","我们用什么听到雷声？"),"telinga",["mata","hidung","lidah"],"⛈️"],
+  [L("Gula rasanya apa?","How does sugar taste?","糖是什么味道？"),"manis",["masam","pahit","masin"],"🍬"],
+  [L("Lemon rasanya apa?","How does a lemon taste?","柠檬是什么味道？"),"masam",["manis","masin","pedas"],"🍋"]
+];
+const sains1 = fromRows(SN1);
+
+/* ===== TAHAP 2 ===== */
+const BM2 = [
+  ["meN- + baca = ?","membaca",["mebaca","mambaca","mengbaca"]],
+  ["meN- + tulis = ?","menulis",["mentulis","membulis","mengtulis"]],
+  ["meN- + sapu = ?","menyapu",["mensapu","mesapu","mengsapu"]],
+  ["meN- + gali = ?","menggali",["mengali","menjgali","megali"]],
+  ["meN- + beli = ?","membeli",["mebeli","menbeli","mengbeli"]],
+  ["meN- + cuci = ?","mencuci",["membuci","mengcuci","mecuci"]],
+  ["peN- + jual = ?","penjual",["pejual","pemjual","pengjual"]],
+  ["peN- + baca = ?","pembaca",["pebaca","penbaca","pengbaca"]],
+  ["ber- + lari = ?","berlari",["belari","merlari","terlari"]],
+  ["di- + baca = ?","dibaca",["membaca","terbaca","berbaca"]],
+  ["ke- + baik + -an = ?","kebaikan",["pembaikan","berbaik","kebaiki"]],
+  ["Peribahasa: Rajin pangkal ...","pandai",["kaya","lemak","tinggi"]],
+  ["Peribahasa: Sedikit demi sedikit, lama-lama menjadi ...","bukit",["lautan","sungai","rumah"]],
+  ["Peribahasa: Bersatu teguh, bercerai ...","roboh",["kaya","jauh","senang"]],
+  ["Peribahasa: Malu bertanya, sesat ...","jalan",["rumah","hutan","pasar"]],
+  ["Peribahasa: Masa itu ...","emas",["air","batu","kain"]],
+  ["Peribahasa: Air dicencang tidak akan ...","putus",["panas","kering","jernih"]],
+  ["Peribahasa: Ke bukit sama didaki, ke lurah sama ...","dituruni",["ditidur","dimasuki","dilihat"]],
+  ["Peribahasa: Harimau mati meninggalkan belang, manusia mati meninggalkan ...","nama",["harta","rumah","pakaian"]],
+  ["'Berat sama dipikul, ringan sama dijinjing' bermaksud ...","bekerjasama",["bergaduh","berehat","berlumba"]],
+  ["'Seperti kucing dengan anjing' bermaksud ...","selalu bergaduh",["sangat setia","sangat rajin","sangat kaya"]],
+  ["'Seperti kacang lupakan kulit' bermaksud ...","lupa jasa orang",["suka makan","rajin belajar","cepat berlari"]]
+];
+const bm2 = fromBank(BM2, r => mk(r[0], r[1], r[2]));
+function mat2() {
+  const t = rnd(1, 6);
+  if (t === 1) {
+    const a = rnd(12, 25), b = rnd(3, 12), r = a * b;
+    return mk(a + " × " + b + " = ?", String(r), wrongNums(r, [1, 10, b, a], 1).map(String), { say: sayOp(a, "×", b) });
+  }
+  if (t === 2) {
+    const b = rnd(3, 12), r = rnd(5, 20), a = b * r;
+    return mk(a + " ÷ " + b + " = ?", String(r), wrongNums(r, [1, 2, 3, 10], 1).map(String), { say: sayOp(a, "÷", b) });
+  }
+  const frac = (a, d) => LANG === "zh" ? d + "分之" + a : LANG === "en" ? a + " over " + d : a + " per " + d;
+  if (t === 3) {
+    const d = pick([4, 5, 6, 8, 10, 12]), a = rnd(1, d - 2), b = rnd(1, d - 1 - a), s = a + b;
+    const ans = s + "/" + d;
+    const cand = [s + "/" + (2 * d), (s + 1) + "/" + d, (s + 2) + "/" + d, (s - 1) + "/" + d, (a * b) + "/" + d].filter(x => x !== ans);
+    const wr = Array.from(new Set(cand)).slice(0, 3);
+    return mk(a + "/" + d + " + " + b + "/" + d + " = ?", ans, wr, { say: sayOp(frac(a, d), "+", frac(b, d)) });
+  }
+  if (t === 4) {
+    const d = pick([2, 3, 4, 5]), a = rnd(1, d - 1), k = rnd(2, 9), n = d * k, r = a * k;
+    const q = tr(L(a + "/" + d + " daripada " + n + " = ?", a + "/" + d + " of " + n + " = ?", n + " 的 " + a + "/" + d + " = ?"));
+    const say = tr(L(frac(a, d) + " daripada " + n, frac(a, d) + " of " + n, n + "的" + frac(a, d))) + tr(sama);
+    return mk(q, String(r), wrongNums(r, [1, 2, k], 1).map(String), { say: say });
+  }
+  if (t === 5) {
+    const x = rnd(11, 99), y = rnd(11, 99), add = Math.random() < 0.5;
+    const hi = Math.max(x, y), lo = Math.min(x, y);
+    const r = add ? x + y : hi - lo, f = v => (v / 10).toFixed(1);
+    const q = add ? f(x) + " + " + f(y) + " = ?" : f(hi) + " − " + f(lo) + " = ?";
+    const say = add ? sayOp(f(x), "+", f(y)) : sayOp(f(hi), "−", f(lo));
+    return mk(q, f(r), wrongNums(r, [1, 10, 5, 2], 0).map(f), { say: say });
+  }
+  if (Math.random() < 0.5) {
+    const p = rnd(20, 190) * 5, price = rnd(20, 190) * 5, r = p + price;
+    return mk(tr(L("Pen " + rm(p) + " dan buku " + rm(price) + ". Jumlah?", "A pen costs " + rm(p) + " and a book costs " + rm(price) + ". Total?", "笔" + rm(p) + "，书" + rm(price) + "。总共多少？")),
+      rm(r), wrongNums(r, [5, 10, 50, 100], 5).map(rm),
+      { big: "✏️📖", say: tr(L("Pen " + p + " sen dan buku " + price + " sen. Berapakah jumlahnya?", "A pen costs " + p + " sen and a book costs " + price + " sen. What is the total?", "笔" + p + "仙，书" + price + "仙。总共多少？")) });
+  }
+  const cost = rnd(20, 190) * 5, r = 1000 - cost;
+  return mk(tr(L("Ali ada RM10.00. Dia beli roti " + rm(cost) + ". Baki?", "Ali has RM10.00. He buys bread for " + rm(cost) + ". How much is left?", "Ali有RM10.00，他买面包花了" + rm(cost) + "。还剩多少？")),
+    rm(r), wrongNums(r, [5, 10, 50, 100], 5).map(rm),
+    { big: "💵🍞", say: tr(L("Ali ada sepuluh ringgit. Dia beli roti " + cost + " sen. Berapakah baki?", "Ali has ten ringgit. He buys bread for " + cost + " sen. How much is left?", "Ali有十令吉，买面包花了" + cost + "仙。还剩多少？")) });
+}
+
+const EN2 = [
+  ["Plural of 'child' is ...","children",["childs","childes","childrens"]],
+  ["Plural of 'mouse' is ...","mice",["mouses","mices","mouse"]],
+  ["Plural of 'foot' is ...","feet",["foots","feets","footes"]],
+  ["Plural of 'box' is ...","boxes",["boxs","boxies","boxen"]],
+  ["Plural of 'baby' is ...","babies",["babys","babyes","babies's"]],
+  ["Plural of 'sheep' is ...","sheep",["sheeps","sheepes","sheepen"]],
+  ["Plural of 'tooth' is ...","teeth",["tooths","toothes","teeths"]],
+  ["Plural of 'leaf' is ...","leaves",["leafs","leafes","leavs"]],
+  ["Plural of 'bus' is ...","buses",["buss","busies","busen"]],
+  ["Plural of 'man' is ...","men",["mans","manes","mens"]],
+  ["Plural of 'knife' is ...","knives",["knifes","knifies","knive"]],
+  ["Plural of 'toy' is ...","toys",["toies","toyes","toy's"]],
+  ["Yesterday, I ___ to school.","went",["go","goes","going"]],
+  ["She ___ a book every day.","reads",["read","reading","readed"]],
+  ["They ___ football tomorrow.","will play",["played","plays","playing"]],
+  ["He is ___ his lunch now.","eating",["ate","eats","eaten"]],
+  ["We ___ dinner last night.","ate",["eat","eats","eating"]],
+  ["The sun ___ in the east.","rises",["rose","rising","rised"]],
+  ["Ali ___ playing football now.","is",["are","were","be"]],
+  ["Last week, she ___ a cake.","baked",["bakes","bake","baking"]],
+  ["My mother ___ to the market every Sunday.","goes",["went","go","going"]],
+  ["I ___ my homework yesterday.","finished",["finish","finishes","will finish"]]
+];
+const eng2 = fromBank(EN2, r => mk(r[0], r[1], r[2], { say: r[0].replace("___", "blank") }));
+const SN2 = [
+  [L("Organ manakah mengepam darah?","Which organ pumps blood?","哪个器官输送血液？"),"jantung",["paru","perut","otak"]],
+  [L("Paru-paru berfungsi untuk ...","The lungs are used for ...","肺的功能是……"),"bernafas",["mencerna","mengepam","berfikir"]],
+  [L("Makanan dicerna dalam sistem ...","Food is digested in the ... system.","食物在……系统中被消化。"),"pencernaan",["pernafasan","peredaran","saraf"]],
+  [L("Organ manakah mengawal pergerakan dan fikiran?","Which organ controls movement and thinking?","哪个器官控制动作和思考？"),"otak",["jantung","paru","usus"]],
+  [L("Tengkorak melindungi ...","The skull protects the ...","头骨保护……"),"otak",["jantung","paru","perut"]],
+  [L("Rangka berfungsi untuk ...","The skeleton is used for ...","骨骼的功能是……"),"sokong",["mencerna","buatdarah","menghidu"]],
+  [L("Buah pinggang berfungsi untuk ...","The kidneys are used for ...","肾脏的功能是……"),"bersihdarah",["mengepam","simpanudara","kawalfikiran"]],
+  [L("Usus kecil berfungsi untuk ...","The small intestine is used for ...","小肠的功能是……"),"nutrien",["menghidu","mengepam","bernafas"]],
+  [L("Sumber tenaga utama di Bumi ialah ...","The main source of energy on Earth is ...","地球上主要的能源是……"),"matahari",["bulan","angin","petrol"]],
+  [L("Manakah sumber tenaga boleh baharu?","Which is a renewable energy source?","哪一个是可再生能源？"),"cahaya",["petroleum","arang","gas"]],
+  [L("Manakah sumber tenaga tidak boleh baharu?","Which is a non-renewable energy source?","哪一个是不可再生能源？"),"petroleum",["angin","cahaya","airterjun"]],
+  [L("Kipas elektrik menukar tenaga elektrik kepada tenaga ...","An electric fan changes electrical energy into ... energy.","电风扇把电能转换成……能。"),"kinetik",["haba","kimia","nuklear"]],
+  [L("Tumbuhan hijau menukar tenaga cahaya kepada tenaga ...","Green plants change light energy into ... energy.","绿色植物把光能转换成……能。"),"kimia",["bunyi","elektrik","kinetik"]],
+  [L("Tenaga tidak boleh dicipta atau dimusnahkan, tetapi boleh ...","Energy cannot be created or destroyed, but it can ...","能量不能被创造或消灭，但可以……"),"tukarbentuk",["hilang","dibeli","dihapus"]],
+  [L("Bumi ialah planet yang ke berapa dari Matahari?","Earth is the ... planet from the Sun.","地球是离太阳第几颗行星？"),"ketiga",["pertama","kelima","kesepuluh"],"🌍"],
+  [L("Apakah yang mengelilingi Bumi?","What orbits the Earth?","什么围绕地球运转？"),"bulan",["matahari","marikh","musytari"],"🌙"],
+  [L("Planet manakah paling besar?","Which planet is the largest?","哪颗行星最大？"),"musytari",["bumi","marikh","utarid"],"🪐"],
+  [L("Apakah yang menyebabkan siang dan malam?","What causes day and night?","什么造成白天和黑夜？"),"putar",["bulangerak","mataharigerak","bintangjatuh"]],
+  [L("Bumi mengelilingi Matahari dalam masa kira-kira ...","The Earth orbits the Sun in about ...","地球绕太阳一周大约需要……"),"h365",["h30","h7","j24"],"☀️"],
+  [L("Planet manakah paling hampir dengan Matahari?","Which planet is closest to the Sun?","哪颗行星最靠近太阳？"),"utarid",["bumi","zuhal","musytari"]],
+  [L("Planet manakah dikenali sebagai planet merah?","Which planet is known as the red planet?","哪颗行星被称为红色星球？"),"marikh",["zuhal","utarid","bumi"],"🔴"],
+  [L("Planet manakah mempunyai cincin yang jelas?","Which planet has clear rings?","哪颗行星有明显的光环？"),"zuhal",["marikh","bumi","utarid"],"🪐"],
+  [L("Berapakah bilangan planet dalam Sistem Suria?","How many planets are there in the Solar System?","太阳系有几颗行星？"),"8",["7","9","10"]],
+  [L("Bulan bersinar kerana ...","The Moon shines because it ...","月亮发光是因为它……"),"pantul",["sendiri","terbakar","api"],"🌕"]
+];
+const sains2 = fromRows(SN2);
+
+/* ===== Nota Prasekolah: setiap kad [gambar, teks besar, keterangan, sebutan, bahasa sebutan] ===== */
+const seperti = (k, ms, en, zh) => [tr(K[k]), tr(L("seperti " + ms, "like " + en, "像" + zh))];
+const NOTA = {
+  "n-huruf": { nama: L("Huruf A - Z", "Letters A - Z", "字母 A - Z"), emoji: "🔤", items: () => HURUF.map(h => {
+    const x = hw(h), u = untuk(h, x);
+    return [x.e, h[0] + " " + h[0].toLowerCase(), LANG === "zh" ? h[0] + " — " + x.w + "（" + x.zh + "）" : u, h[0] + ". " + u, x.sl];
+  }) },
+  "n-nombor": { nama: L("Nombor 1 - 10", "Numbers 1 - 10", "数字 1 - 10"), emoji: "🔢", items: () => tr(NAMA_NOMBOR).map((w, i) =>
+    [OBJ[i].repeat(i + 1), String(i + 1), w, (i + 1) + ". " + w, LANG]) },
+  "n-warna": { nama: L("Warna", "Colours", "颜色"), emoji: "🎨", items: () => [
+    ["🔴🍎", seperti("merah", "epal", "an apple", "苹果")], ["🟡🍌", seperti("kuning", "pisang", "a banana", "香蕉")],
+    ["🟢🐸", seperti("hijau", "katak", "a frog", "青蛙")], ["🔵💧", seperti("biru", "air laut", "the sea", "海水")],
+    ["🟠🥕", seperti("oren", "lobak merah", "a carrot", "红萝卜")], ["🟣🍆", seperti("ungu", "terung", "a brinjal", "茄子")],
+    ["🟤🥥", seperti("perang", "tempurung kelapa", "a coconut shell", "椰壳")], ["⚫🐜", seperti("hitam", "semut", "an ant", "蚂蚁")],
+    ["⚪☁️", seperti("putih", "awan", "a cloud", "白云")]
+  ].map(r => [r[0], r[1][0], r[1][1], r[1][0] + ", " + r[1][1], LANG]) },
+  "n-bentuk": { nama: L("Bentuk", "Shapes", "形状"), emoji: "🔺", items: () => [
+    ["⭕🕐", seperti("bulatan", "jam dinding", "a wall clock", "挂钟")], ["🔺📐", seperti("segitiga", "sesiku", "a set square", "三角尺")],
+    ["⬛🪟", seperti("segiempatsama", "tingkap", "a window", "窗户")], ["🚪📱", seperti("segiempattepat", "pintu", "a door", "门")]
+  ].map(r => [r[0], r[1][0], r[1][1], r[1][0] + ", " + r[1][1], LANG]) }
+};
+const GAME = {
+  "g-padan": { nama: UI.padanNama, emoji: "🃏", ds: UI.padanDs },
+  "g-belon": { nama: UI.belonNama, emoji: "🎈", ds: UI.belonDs }
+};
+
+/* ===== Perpustakaan Prasekolah: setiap baris "emoji|BM|English|中文" ===== */
+const PUSTAKA_RAW = [
+  ["buah", "🍎", L("Buah-buahan","Fruits","水果"), `
+🍎|Epal|Apple|苹果
+🍌|Pisang|Banana|香蕉
+🍊|Oren|Orange|橙
+🍉|Tembikai|Watermelon|西瓜
+🍇|Anggur|Grapes|葡萄
+🍍|Nanas|Pineapple|黄梨
+🥭|Mangga|Mango|芒果
+🍓|Strawberi|Strawberry|草莓
+🍐|Pir|Pear|梨
+🍑|Pic|Peach|桃子
+🍒|Ceri|Cherry|樱桃
+🥝|Kiwi|Kiwi|奇异果
+🥥|Kelapa|Coconut|椰子
+🍋|Lemon|Lemon|柠檬
+🍈|Tembikai susu|Honeydew melon|哈密瓜
+🫐|Beri biru|Blueberry|蓝莓
+🥑|Avokado|Avocado|牛油果
+🍈|Durian|Durian|榴莲
+🍈|Rambutan|Rambutan|红毛丹
+🍈|Manggis|Mangosteen|山竹
+🍈|Betik|Papaya|木瓜
+🍈|Jambu batu|Guava|番石榴
+🍈|Nangka|Jackfruit|菠萝蜜
+🍈|Ciku|Sapodilla|人心果
+🍈|Belimbing|Starfruit|杨桃
+🍈|Langsat|Langsat|榔色果
+🍈|Mata kucing|Longan|龙眼
+🍈|Kurma|Dates|椰枣
+🍈|Limau nipis|Lime|青柠
+🍈|Limau mandarin|Mandarin orange|年柑
+🍈|Laici|Lychee|荔枝
+🍈|Delima|Pomegranate|石榴
+🍈|Jambu air|Water apple|莲雾
+🍈|Salak|Snake fruit|蛇皮果
+🍈|Cempedak|Cempedak|尖必辣
+🍈|Markisa|Passion fruit|百香果
+🍈|Buah naga|Dragon fruit|火龙果
+🍈|Plum|Plum|李子
+🍈|Aprikot|Apricot|杏子
+🍈|Kismis|Raisins|葡萄干
+🍈|Raspberi|Raspberry|覆盆子
+🍈|Beri hitam|Blackberry|黑莓
+🍈|Asam jawa|Tamarind|罗望子
+🍈|Ara|Fig|无花果
+🍈|Limau bali|Pomelo|柚子
+🍈|Kesemak|Persimmon|柿子
+🍈|Mulberi|Mulberry|桑葚
+🍈|Zaitun|Olive|橄榄
+🍈|Durian belanda|Soursop|红毛榴莲
+🍈|Nona|Custard apple|释迦
+🍈|Tebu|Sugarcane|甘蔗`],
+  ["sayur", "🥕", L("Sayur-sayuran","Vegetables","蔬菜"), `
+🥕|Lobak merah|Carrot|红萝卜
+🥦|Brokoli|Broccoli|西兰花
+🌽|Jagung|Corn|玉米
+🍅|Tomato|Tomato|番茄
+🥒|Timun|Cucumber|黄瓜
+🍆|Terung|Brinjal|茄子
+🥔|Kentang|Potato|马铃薯
+🧅|Bawang besar|Onion|洋葱
+🧄|Bawang putih|Garlic|蒜头
+🌶️|Cili|Chilli|辣椒
+🫑|Lada benggala|Capsicum|灯笼椒
+🥬|Sawi|Mustard greens|菜心
+🍄|Cendawan|Mushroom|蘑菇
+🥜|Kacang tanah|Peanut|花生
+🫛|Kacang pis|Peas|豌豆
+🍠|Ubi keledek|Sweet potato|番薯
+🎃|Labu|Pumpkin|南瓜
+🫚|Halia|Ginger|姜
+🥬|Kangkung|Water spinach|空心菜
+🥬|Bendi|Okra|羊角豆
+🥬|Kacang panjang|Long beans|长豆
+🥬|Bayam|Spinach|菠菜
+🥬|Kubis|Cabbage|包菜
+🥬|Kobis bunga|Cauliflower|花椰菜
+🥬|Salad|Lettuce|生菜
+🥬|Daun bawang|Spring onion|青葱
+🥬|Bawang merah|Shallot|红葱头
+🥬|Lobak putih|Radish|白萝卜
+🥬|Ubi kayu|Cassava|木薯
+🥬|Keladi|Taro|芋头
+🥬|Petola|Luffa|丝瓜
+🥬|Peria|Bitter gourd|苦瓜
+🥬|Taugeh|Bean sprouts|豆芽
+🥬|Kacang buncis|French beans|四季豆
+🥬|Kacang soya|Soybeans|黄豆
+🥬|Kacang hijau|Mung beans|绿豆
+🥬|Kacang merah|Red beans|红豆
+🥬|Jagung muda|Baby corn|玉米笋
+🥬|Bit|Beetroot|甜菜根
+🥬|Saderi|Celery|芹菜
+🥬|Daun ketumbar|Coriander|香菜
+🥬|Serai|Lemongrass|香茅
+🥬|Kunyit|Turmeric|黄姜
+🥬|Asparagus|Asparagus|芦笋
+🥬|Pucuk paku|Fern shoots|蕨菜
+🥬|Rebung|Bamboo shoots|竹笋
+🥬|Sawi putih|Chinese cabbage|大白菜
+🥬|Kailan|Chinese kale|芥兰
+🥬|Sengkuang|Jicama|沙葛`],
+  ["darat", "🐘", L("Haiwan Darat","Land Animals","陆地动物"), `
+🐱|Kucing|Cat|猫
+🐶|Anjing|Dog|狗
+🐄|Lembu|Cow|牛
+🐃|Kerbau|Buffalo|水牛
+🐐|Kambing|Goat|山羊
+🐑|Biri-biri|Sheep|绵羊
+🐔|Ayam|Chicken|鸡
+🦆|Itik|Duck|鸭子
+🐎|Kuda|Horse|马
+🐇|Arnab|Rabbit|兔子
+🐘|Gajah|Elephant|大象
+🐅|Harimau|Tiger|老虎
+🦁|Singa|Lion|狮子
+🐒|Monyet|Monkey|猴子
+🦧|Orang utan|Orangutan|红毛猩猩
+🦒|Zirafah|Giraffe|长颈鹿
+🦓|Kuda belang|Zebra|斑马
+🐪|Unta|Camel|骆驼
+🐊|Buaya|Crocodile|鳄鱼
+🐍|Ular|Snake|蛇
+🐢|Kura-kura|Tortoise|乌龟
+🐸|Katak|Frog|青蛙
+🐿️|Tupai|Squirrel|松鼠
+🦌|Rusa|Deer|鹿
+🐻|Beruang|Bear|熊
+🦏|Badak sumbu|Rhinoceros|犀牛
+🦛|Badak air|Hippopotamus|河马
+🐭|Tikus|Mouse|老鼠
+🦎|Cicak|Lizard|壁虎
+🐼|Panda|Panda|熊猫
+🦘|Kanggaru|Kangaroo|袋鼠
+🦔|Landak|Porcupine|豪猪
+🦇|Kelawar|Bat|蝙蝠
+🐾|Tapir|Tapir|马来貘
+🐆|Harimau bintang|Leopard|豹
+🐺|Serigala|Wolf|狼
+🐾|Musang|Civet|果子狸
+🦊|Rubah|Fox|狐狸
+🦍|Gorila|Gorilla|大猩猩
+🐾|Cimpanzi|Chimpanzee|黑猩猩
+🐴|Kuda padi|Pony|小马
+🫏|Keldai|Donkey|驴
+🐹|Hamster|Hamster|仓鼠
+🐨|Koala|Koala|树熊
+🐻‍❄️|Beruang kutub|Polar bear|北极熊
+🐆|Cheetah|Cheetah|猎豹
+🐾|Kancil|Mouse deer|鼠鹿
+🐾|Seladang|Gaur|印度野牛
+🦎|Biawak|Monitor lizard|巨蜥
+🐾|Tenggiling|Pangolin|穿山甲
+🐾|Siamang|Gibbon|长臂猿`],
+  ["laut", "🐬", L("Haiwan Air","Water Animals","水中动物"), `
+🐟|Ikan|Fish|鱼
+🐠|Ikan tropika|Tropical fish|热带鱼
+🐡|Ikan buntal|Pufferfish|河豚
+🦈|Ikan yu|Shark|鲨鱼
+🐬|Ikan lumba-lumba|Dolphin|海豚
+🐳|Ikan paus|Whale|鲸鱼
+🐙|Sotong kurita|Octopus|章鱼
+🦑|Sotong|Squid|鱿鱼
+🦀|Ketam|Crab|螃蟹
+🦞|Udang karang|Lobster|龙虾
+🦐|Udang|Prawn|虾
+🐚|Kulit kerang|Seashell|贝壳
+🐢|Penyu|Sea turtle|海龟
+🦭|Anjing laut|Seal|海豹
+🪼|Obor-obor|Jellyfish|水母
+🦦|Memerang|Otter|水獭
+⭐|Bintang laut|Starfish|海星
+🐟|Kuda laut|Seahorse|海马
+🪸|Batu karang|Coral|珊瑚
+🐟|Ikan pari|Stingray|魔鬼鱼
+🐟|Belut|Eel|鳗鱼
+🐟|Ikan emas|Goldfish|金鱼
+🐟|Ikan keli|Catfish|鲶鱼
+🐟|Ikan bilis|Anchovies|江鱼仔
+🐟|Ikan kembung|Mackerel|甘望鱼
+🐟|Ikan siakap|Sea bass|金目鲈
+🐟|Ikan salmon|Salmon|三文鱼
+🐟|Ikan tuna|Tuna|金枪鱼
+🐟|Ikan todak|Swordfish|剑鱼
+🐟|Ikan bawal|Pomfret|鲳鱼
+🐟|Ikan kerapu|Grouper|石斑鱼
+🐟|Ikan koi|Koi|锦鲤
+🐟|Ikan guppy|Guppy|孔雀鱼
+🐟|Ikan arowana|Arowana|龙鱼
+🐟|Ikan haruan|Snakehead fish|生鱼
+🐋|Paus pembunuh|Killer whale|虎鲸
+🐟|Dugong|Dugong|儒艮
+🐟|Singa laut|Sea lion|海狮
+🐟|Walrus|Walrus|海象
+🦪|Tiram|Oyster|牡蛎
+🐟|Kerang|Cockles|鲜蛤
+🐚|Siput laut|Sea snail|海螺
+🐟|Landak laut|Sea urchin|海胆
+🐟|Timun laut|Sea cucumber|海参
+🦀|Ketam pertapa|Hermit crab|寄居蟹
+🦐|Udang galah|Freshwater prawn|大头虾`],
+  ["burung", "🦋", L("Burung & Serangga","Birds & Insects","鸟类和昆虫"), `
+🐦|Burung|Bird|鸟
+🦅|Helang|Eagle|老鹰
+🦉|Burung hantu|Owl|猫头鹰
+🦜|Burung kakak tua|Parrot|鹦鹉
+🦚|Burung merak|Peacock|孔雀
+🐧|Penguin|Penguin|企鹅
+🦢|Angsa|Swan|天鹅
+🕊️|Burung merpati|Dove|鸽子
+🦩|Flamingo|Flamingo|火烈鸟
+🐤|Anak ayam|Chick|小鸡
+🦋|Rama-rama|Butterfly|蝴蝶
+🐝|Lebah|Bee|蜜蜂
+🐜|Semut|Ant|蚂蚁
+🐞|Kumbang kura-kura|Ladybird|瓢虫
+🦗|Cengkerik|Cricket|蟋蟀
+🐛|Ulat|Caterpillar|毛毛虫
+🕷️|Labah-labah|Spider|蜘蛛
+🦟|Nyamuk|Mosquito|蚊子
+🪰|Lalat|Fly|苍蝇
+🐌|Siput|Snail|蜗牛
+🪲|Kumbang|Beetle|甲虫
+🦂|Kala jengking|Scorpion|蝎子
+🐦|Burung kenyalang|Hornbill|犀鸟
+🐦‍⬛|Burung gagak|Crow|乌鸦
+🐦|Burung bangau|Egret|白鹭
+🐦|Burung belatuk|Woodpecker|啄木鸟
+🐦|Burung kolibri|Hummingbird|蜂鸟
+🐦|Burung unta|Ostrich|鸵鸟
+🐦|Burung tiung|Myna|八哥
+🐦|Burung murai|Magpie robin|鹊鸲
+🐦|Burung puyuh|Quail|鹌鹑
+🐦|Burung pelikan|Pelican|鹈鹕
+🐦|Burung camar|Seagull|海鸥
+🐦|Burung pekakak|Kingfisher|翠鸟
+🦃|Ayam belanda|Turkey|火鸡
+🐦|Burung toucan|Toucan|巨嘴鸟
+🐦|Burung layang-layang|Swallow|燕子
+🐦|Burung cinta|Lovebird|爱情鸟
+🐦|Pepatung|Dragonfly|蜻蜓
+🦗|Belalang|Grasshopper|蚱蜢
+🐦|Belalang sembah|Praying mantis|螳螂
+🐦|Kelip-kelip|Firefly|萤火虫
+🪳|Lipas|Cockroach|蟑螂
+🐦|Anai-anai|Termite|白蚁
+🐦|Tebuan|Wasp|黄蜂
+🪲|Kumbang tanduk|Rhinoceros beetle|犀牛甲虫
+🐦|Lipan|Centipede|蜈蚣
+🪱|Cacing|Earthworm|蚯蚓
+🐦|Rama-rama malam|Moth|飞蛾
+🐛|Ulat sutera|Silkworm|蚕`],
+  ["kenderaan", "🚗", L("Kenderaan","Vehicles","交通工具"), `
+🚗|Kereta|Car|汽车
+🚌|Bas|Bus|巴士
+🚕|Teksi|Taxi|德士
+🚓|Kereta polis|Police car|警车
+🚑|Ambulans|Ambulance|救护车
+🚒|Jentera bomba|Fire engine|消防车
+🚚|Lori|Lorry|罗厘
+🚛|Treler|Trailer|拖格罗厘
+🚜|Traktor|Tractor|拖拉机
+🚐|Van|Van|面包车
+🛻|Trak pikap|Pickup truck|皮卡车
+🏎️|Kereta lumba|Racing car|赛车
+🏍️|Motosikal|Motorcycle|摩托车
+🛵|Skuter|Scooter|踏板摩托车
+🚲|Basikal|Bicycle|脚踏车
+🛴|Skuter tolak|Kick scooter|滑板车
+🚂|Kereta api|Train|火车
+🚝|Monorel|Monorail|单轨列车
+🚇|Tren bawah tanah|Subway train|地铁
+🚠|Kereta kabel|Cable car|缆车
+✈️|Kapal terbang|Aeroplane|飞机
+🚁|Helikopter|Helicopter|直升机
+🚀|Roket|Rocket|火箭
+🚢|Kapal|Ship|轮船
+⛵|Perahu layar|Sailboat|帆船
+🚤|Bot laju|Speedboat|快艇
+🛶|Sampan|Canoe|独木舟
+🚌|Bas sekolah|School bus|校车
+🚗|Jengkaut|Excavator|挖土机
+🚗|Jentolak|Bulldozer|推土机
+🏗️|Kren|Crane|起重机
+🚛|Lori sampah|Garbage truck|垃圾车
+🚛|Lori simen|Concrete mixer|水泥车
+🚚|Lori tunda|Tow truck|拖车
+🐎|Kereta kuda|Horse carriage|马车
+🛺|Beca|Trishaw|三轮车
+🚗|Kereta sorong|Wheelbarrow|手推车
+🚗|Kereta bayi|Pram|婴儿车
+🚗|Kapal selam|Submarine|潜水艇
+🚤|Bot nelayan|Fishing boat|渔船
+⛴️|Feri|Ferry|渡轮
+🚗|Jet ski|Jet ski|水上摩托
+🎈|Belon udara panas|Hot air balloon|热气球
+🚄|Kereta api laju|High-speed train|高速火车
+🚍|Bas dua tingkat|Double-decker bus|双层巴士
+🚙|Jip|Jeep|吉普车
+🚊|Trem|Tram|电车
+🛶|Rakit|Raft|木筏
+🛸|Dron|Drone|无人机`],
+  ["badan", "👁️", L("Anggota Badan","Body Parts","身体部位"), `
+👁️|Mata|Eye|眼睛
+👂|Telinga|Ear|耳朵
+👃|Hidung|Nose|鼻子
+👄|Mulut|Mouth|嘴巴
+👅|Lidah|Tongue|舌头
+🦷|Gigi|Tooth|牙齿
+✋|Tangan|Hand|手
+👆|Jari|Finger|手指
+💪|Lengan|Arm|手臂
+🦵|Kaki|Leg|腿
+🦶|Tapak kaki|Foot|脚
+🗣️|Kepala|Head|头
+💇|Rambut|Hair|头发
+🙂|Muka|Face|脸
+🙂|Dahi|Forehead|额头
+🙂|Kening|Eyebrows|眉毛
+🙂|Bulu mata|Eyelashes|睫毛
+🙂|Pipi|Cheeks|脸颊
+👄|Bibir|Lips|嘴唇
+🙂|Dagu|Chin|下巴
+🙂|Leher|Neck|脖子
+🙂|Bahu|Shoulder|肩膀
+🙂|Siku|Elbow|手肘
+🙂|Pergelangan tangan|Wrist|手腕
+🖐️|Tapak tangan|Palm|手掌
+👍|Ibu jari|Thumb|大拇指
+💅|Kuku|Nails|指甲
+🙂|Perut|Tummy|肚子
+🙂|Lutut|Knee|膝盖
+🙂|Buku lali|Ankle|脚踝
+🙂|Tumit|Heel|脚跟
+🙂|Jari kaki|Toes|脚趾
+🙂|Kulit|Skin|皮肤`],
+  ["pakaian", "👕", L("Pakaian","Clothes","衣物"), `
+👕|Baju-T|T-shirt|T恤
+👔|Kemeja|Shirt|衬衫
+👖|Seluar|Trousers|长裤
+🩳|Seluar pendek|Shorts|短裤
+👗|Gaun|Dress|连衣裙
+🧥|Kot|Coat|外套
+🧕|Tudung|Headscarf|头巾
+🥻|Sari|Sari|纱丽
+🩱|Baju renang|Swimsuit|泳衣
+🧦|Stoking|Socks|袜子
+👟|Kasut sukan|Sports shoes|运动鞋
+👞|Kasut|Shoes|鞋子
+🩴|Selipar|Slippers|拖鞋
+🧢|Topi|Cap|鸭舌帽
+🧣|Selendang|Scarf|围巾
+🧤|Sarung tangan|Gloves|手套
+👓|Cermin mata|Glasses|眼镜
+🕶️|Cermin mata hitam|Sunglasses|太阳眼镜
+⌚|Jam tangan|Watch|手表
+☂️|Payung|Umbrella|雨伞
+👕|Baju kurung|Baju kurung|马来女装
+👕|Baju Melayu|Baju Melayu|马来男装
+👕|Songkok|Songkok|宋谷帽
+👕|Kain sarung|Sarong|纱笼
+👕|Samfu|Samfu|衫裤
+👕|Cheongsam|Cheongsam|旗袍
+👕|Kurta|Kurta|库尔塔
+👕|Baju sekolah|School uniform|校服
+👕|Baju tidur|Pyjamas|睡衣
+👕|Baju hujan|Raincoat|雨衣
+🧥|Jaket|Jacket|夹克
+👕|Baju sejuk|Sweater|毛衣
+👕|Skirt|Skirt|裙子
+👖|Seluar jeans|Jeans|牛仔裤
+👔|Tali leher|Necktie|领带
+👕|Tali pinggang|Belt|腰带
+👕|Butang|Buttons|纽扣
+👢|Kasut but|Boots|靴子
+👟|Kasut sekolah|School shoes|校鞋
+👡|Sandal|Sandals|凉鞋
+⛑️|Topi keledar|Helmet|头盔
+👒|Topi jerami|Straw hat|草帽
+👜|Beg tangan|Handbag|手提包
+👛|Dompet|Wallet|钱包
+👕|Gelang|Bracelet|手镯
+📿|Rantai leher|Necklace|项链
+💍|Cincin|Ring|戒指
+👕|Lampin|Diaper|尿布
+👕|Apron|Apron|围裙`],
+  ["makanan", "🍚", L("Makanan & Minuman","Food & Drinks","食物和饮料"), `
+🍚|Nasi|Rice|米饭
+🍛|Nasi kari|Curry rice|咖喱饭
+🫓|Roti canai|Roti canai|印度煎饼
+🍜|Mi|Noodles|面
+🍞|Roti|Bread|面包
+🥚|Telur|Egg|鸡蛋
+🍗|Ayam goreng|Fried chicken|炸鸡
+🍤|Udang goreng|Fried prawn|炸虾
+🍢|Sate|Satay|沙爹
+🍲|Sup|Soup|汤
+🥟|Ladu|Dumpling|饺子
+🥞|Lempeng|Pancake|煎饼
+🧀|Keju|Cheese|芝士
+🍯|Madu|Honey|蜜糖
+🎂|Kek|Cake|蛋糕
+🧁|Kek cawan|Cupcake|杯子蛋糕
+🍪|Biskut|Biscuit|饼干
+🍦|Aiskrim|Ice cream|冰淇淋
+🍫|Coklat|Chocolate|巧克力
+🍬|Gula-gula|Sweets|糖果
+🍿|Bertih jagung|Popcorn|爆米花
+🥛|Susu|Milk|牛奶
+💧|Air|Water|水
+🧃|Jus|Juice|果汁
+🍵|Teh|Tea|茶
+🧋|Teh susu|Milk tea|奶茶
+🍽️|Nasi lemak|Nasi lemak|椰浆饭
+🍽️|Nasi goreng|Fried rice|炒饭
+🍽️|Laksa|Laksa|叻沙
+🍽️|Kuetiau goreng|Fried kuey teow|炒粿条
+🥣|Bubur|Porridge|粥
+🍽️|Capati|Chapati|恰巴提
+🍽️|Tosai|Thosai|多赛
+🍽️|Pau|Steamed bun|包子
+🍽️|Kuih lapis|Layer cake|千层糕
+🍽️|Pisang goreng|Banana fritters|炸香蕉
+🥟|Karipap|Curry puff|咖喱角
+🍩|Donut|Doughnut|甜甜圈
+🍕|Piza|Pizza|披萨
+🍔|Burger|Burger|汉堡包
+🍟|Kentang goreng|French fries|薯条
+🥪|Sandwic|Sandwich|三明治
+🍽️|Yogurt|Yogurt|酸奶
+🌭|Sosej|Sausage|香肠
+🍽️|Nugget ayam|Chicken nuggets|鸡块
+🍽️|Ikan goreng|Fried fish|炸鱼
+🥥|Air kelapa|Coconut water|椰水
+🍽️|Agar-agar|Jelly|果冻
+🍧|Ais kacang|Ais kacang|红豆冰
+🍽️|Cendol|Cendol|煎蕊`],
+  ["sekolah", "✏️", L("Alat Tulis & Sekolah","School Things","文具和学校用品"), `
+🏫|Sekolah|School|学校
+✏️|Pensel|Pencil|铅笔
+🖊️|Pen|Pen|笔
+🖍️|Krayon|Crayon|蜡笔
+📏|Pembaris|Ruler|尺
+📐|Sesiku|Set square|三角尺
+✂️|Gunting|Scissors|剪刀
+📒|Buku latihan|Exercise book|练习簿
+📖|Buku|Book|书
+🎒|Beg sekolah|School bag|书包
+🖌️|Berus cat|Paintbrush|画笔
+🎨|Palet warna|Palette|调色盘
+📎|Klip kertas|Paper clip|回形针
+📌|Pin tekan|Push pin|图钉
+🗒️|Kertas nota|Notepad|便条纸
+🧮|Sempoa|Abacus|算盘
+🌐|Glob|Globe|地球仪
+🔬|Mikroskop|Microscope|显微镜
+🖥️|Komputer|Computer|电脑
+🔔|Loceng|Bell|铃
+✏️|Pemadam|Eraser|橡皮擦
+✏️|Pengasah pensel|Pencil sharpener|卷笔刀
+✏️|Kotak pensel|Pencil case|笔袋
+✏️|Gam|Glue|胶水
+✏️|Pita selofan|Sticky tape|透明胶带
+✏️|Pensel warna|Colour pencils|颜色笔
+🖊️|Pen penanda|Marker pen|马克笔
+✏️|Kapur|Chalk|粉笔
+✏️|Papan hitam|Blackboard|黑板
+✏️|Papan putih|Whiteboard|白板
+✏️|Meja|Desk|桌子
+✏️|Kelas|Classroom|教室
+✏️|Botol air|Water bottle|水壶
+🍱|Bekas makanan|Lunch box|饭盒
+🧮|Kalkulator|Calculator|计算机
+✏️|Plastisin|Plasticine|彩泥
+✏️|Kertas warna|Coloured paper|彩色纸
+🎨|Cat air|Watercolour|水彩
+✏️|Pengokot|Stapler|订书机
+📁|Fail|File folder|文件夹
+📕|Kamus|Dictionary|字典
+🗺️|Peta|Map|地图
+📚|Buku cerita|Storybook|故事书
+✏️|Perpustakaan|Library|图书馆
+✏️|Buaian|Swing|秋千
+✏️|Gelongsor|Slide|滑梯
+✏️|Jongkang-jongket|Seesaw|跷跷板
+✏️|Wisel|Whistle|哨子
+📱|Tablet|Tablet|平板电脑`],
+  ["rumah", "🏠", L("Di Rumah","At Home","家里的东西"), `
+🏠|Rumah|House|房子
+🛏️|Katil|Bed|床
+🪑|Kerusi|Chair|椅子
+🛋️|Sofa|Sofa|沙发
+🚪|Pintu|Door|门
+🪟|Tingkap|Window|窗户
+📺|Televisyen|Television|电视
+💡|Lampu|Lamp|灯
+🕰️|Jam dinding|Clock|时钟
+🪞|Cermin|Mirror|镜子
+🛁|Tab mandi|Bathtub|浴缸
+🚿|Pancuran air|Shower|花洒
+🚽|Tandas|Toilet|厕所
+🧹|Penyapu|Broom|扫把
+🪣|Baldi|Bucket|水桶
+🧺|Bakul|Basket|篮子
+🍳|Kuali|Frying pan|煎锅
+🥄|Sudu|Spoon|汤匙
+🍴|Garpu|Fork|叉子
+🔪|Pisau|Knife|刀
+🍽️|Pinggan|Plate|盘子
+🥣|Mangkuk|Bowl|碗
+☕|Cawan|Cup|杯子
+🫖|Teko|Teapot|茶壶
+🧼|Sabun|Soap|肥皂
+🪥|Berus gigi|Toothbrush|牙刷
+🧸|Anak patung beruang|Teddy bear|泰迪熊
+🔑|Kunci|Key|钥匙
+📱|Telefon bimbit|Mobile phone|手机
+🧊|Peti sejuk|Fridge|冰箱
+🏠|Mesin basuh|Washing machine|洗衣机
+🏠|Kipas|Fan|风扇
+🏠|Penghawa dingin|Air conditioner|冷气机
+🏠|Dapur gas|Stove|煤气炉
+🍚|Periuk nasi|Rice cooker|电饭锅
+🏠|Cerek|Kettle|热水壶
+🏠|Bantal|Pillow|枕头
+🏠|Selimut|Blanket|被子
+🏠|Tuala|Towel|毛巾
+🏠|Almari|Wardrobe|衣柜
+🏠|Rak buku|Bookshelf|书架
+🏠|Meja makan|Dining table|餐桌
+🏠|Langsir|Curtains|窗帘
+🏠|Penyangkut baju|Clothes hanger|衣架
+🏠|Seterika|Iron|熨斗
+🏠|Penyedut hampagas|Vacuum cleaner|吸尘器
+🗑️|Tong sampah|Rubbish bin|垃圾桶
+🥛|Gelas|Glass|玻璃杯
+🏠|Ubat gigi|Toothpaste|牙膏
+🏠|Sikat|Comb|梳子`],
+  ["alam", "🌈", L("Alam & Cuaca","Nature & Weather","大自然和天气"), `
+☀️|Matahari|Sun|太阳
+🌙|Bulan|Moon|月亮
+⭐|Bintang|Star|星星
+☁️|Awan|Cloud|云
+🌧️|Hujan|Rain|雨
+⛈️|Ribut petir|Thunderstorm|雷雨
+🌈|Pelangi|Rainbow|彩虹
+🌬️|Angin|Wind|风
+❄️|Salji|Snow|雪
+🌊|Ombak|Wave|海浪
+⛰️|Gunung|Mountain|山
+🌋|Gunung berapi|Volcano|火山
+🏝️|Pulau|Island|岛屿
+🏖️|Pantai|Beach|海滩
+🌳|Pokok|Tree|树
+🌴|Pokok kelapa|Coconut tree|椰树
+🌵|Kaktus|Cactus|仙人掌
+🌺|Bunga raya|Hibiscus|大红花
+🌸|Bunga|Flower|花
+🌻|Bunga matahari|Sunflower|向日葵
+🌹|Bunga ros|Rose|玫瑰
+🪷|Bunga teratai|Lotus|莲花
+🍃|Daun|Leaf|叶子
+🌱|Anak benih|Seedling|幼苗
+🪨|Batu|Rock|石头
+🔥|Api|Fire|火
+🌍|Bumi|Earth|地球
+🌿|Sungai|River|河流
+🌿|Tasik|Lake|湖
+🌿|Air terjun|Waterfall|瀑布
+🌿|Laut|Sea|大海
+🌿|Gua|Cave|山洞
+🌲|Hutan|Forest|森林
+🏜️|Padang pasir|Desert|沙漠
+🌿|Bukit|Hill|小山
+🌾|Sawah padi|Paddy field|稻田
+🌫️|Kabus|Fog|雾
+🌿|Pasir|Sand|沙子
+🌿|Lumpur|Mud|泥巴
+🌿|Rumput|Grass|草
+🎋|Buluh|Bamboo|竹子
+🌿|Bunga orkid|Orchid|兰花
+🌿|Bunga melur|Jasmine|茉莉花
+🌷|Bunga tulip|Tulip|郁金香
+🌿|Bunga kertas|Bougainvillea|九重葛
+🌿|Bunga raflesia|Rafflesia|大王花
+🌇|Matahari terbenam|Sunset|日落
+🧊|Ais|Ice|冰
+🌿|Langit|Sky|天空
+🌿|Ranting|Twig|树枝`],
+  ["kerja", "👩‍🏫", L("Pekerjaan","Jobs","职业"), `
+🧑‍🏫|Guru|Teacher|老师
+🩺|Doktor|Doctor|医生
+🧑‍⚕️|Jururawat|Nurse|护士
+👮|Polis|Police officer|警察
+🧑‍🚒|Ahli bomba|Firefighter|消防员
+🧑‍🍳|Tukang masak|Cook|厨师
+🧑‍🌾|Petani|Farmer|农民
+🎣|Nelayan|Fisherman|渔夫
+🧑‍✈️|Juruterbang|Pilot|机师
+👷|Pekerja binaan|Construction worker|建筑工人
+🧑‍🔧|Mekanik|Mechanic|技工
+🧑‍🔬|Saintis|Scientist|科学家
+🧑‍🎨|Pelukis|Artist|画家
+🧑‍🍼|Pengasuh|Babysitter|保姆
+🧑‍🚀|Angkasawan|Astronaut|宇航员
+🧑‍🏫|Guru tadika|Kindergarten teacher|幼儿园老师
+💈|Tukang gunting rambut|Barber|理发师
+📮|Posmen|Postman|邮差
+🎤|Penyanyi|Singer|歌手
+🚌|Pemandu bas|Bus driver|巴士司机
+🦷|Doktor gigi|Dentist|牙医
+🧑|Doktor haiwan|Vet|兽医
+💊|Ahli farmasi|Pharmacist|药剂师
+🧑|Juruwang|Cashier|收银员
+🧑|Jurujual|Shop assistant|售货员
+🍞|Tukang roti|Baker|面包师
+🪚|Tukang kayu|Carpenter|木匠
+🔧|Tukang paip|Plumber|水管工
+💡|Juruelektrik|Electrician|电工
+🌻|Tukang kebun|Gardener|园丁
+💂|Pengawal keselamatan|Security guard|保安
+🪖|Askar|Soldier|军人
+📚|Pustakawan|Librarian|图书管理员
+📷|Jurugambar|Photographer|摄影师
+📰|Wartawan|Reporter|记者
+💃|Penari|Dancer|舞蹈员
+🧑‍🔧|Jurutera|Engineer|工程师
+🦁|Penjaga zoo|Zookeeper|动物园管理员
+🧹|Pembersih|Cleaner|清洁工
+🚛|Pengutip sampah|Garbage collector|垃圾收集员
+🧵|Penjahit|Tailor|裁缝
+🛒|Peniaga pasar|Market seller|小贩
+🛵|Penghantar makanan|Food delivery rider|外卖员
+✈️|Pramugari|Flight attendant|空服员
+🚢|Kapten kapal|Ship captain|船长
+🏅|Atlet|Athlete|运动员
+🚂|Pemandu kereta api|Train driver|火车司机`],
+  ["muzik", "🥁", L("Alat Muzik","Musical Instruments","乐器"), `
+🥁|Dram|Drum|鼓
+🪘|Gendang|Gendang drum|长鼓
+🎸|Gitar|Guitar|吉他
+🎹|Piano|Piano|钢琴
+🎺|Trompet|Trumpet|小号
+🎷|Saksofon|Saxophone|萨克斯风
+🎻|Biola|Violin|小提琴
+🪈|Seruling|Flute|笛子
+🪗|Akordion|Accordion|手风琴
+🪇|Marakas|Maracas|沙槌
+🪕|Banjo|Banjo|班卓琴
+🔔|Loceng|Bell|铃
+🪘|Kompang|Kompang|马来手鼓
+🎵|Gamelan|Gamelan|甘美兰
+🎵|Angklung|Angklung|昂格隆
+🎵|Sape|Sape|沙贝琴
+🎵|Serunai|Serunai|马来唢呐
+🪘|Tabla|Tabla|塔布拉鼓
+🎵|Sitar|Sitar|西塔琴
+🎵|Erhu|Erhu|二胡
+🎵|Guzheng|Guzheng|古筝
+🎵|Pipa|Pipa|琵琶
+🎵|Gong|Gong|锣
+🎵|Simbal|Cymbals|钹
+🎵|Tamborin|Tambourine|铃鼓
+🎶|Xilofon|Xylophone|木琴
+🎵|Harmonika|Harmonica|口琴
+🪈|Rekorder|Recorder|直笛
+🎸|Ukulele|Ukulele|尤克里里
+🎸|Gitar elektrik|Electric guitar|电吉他
+🎹|Keyboard|Keyboard|电子琴
+🎺|Trombon|Trombone|长号
+🎺|Tuba|Tuba|大号
+🎻|Selo|Cello|大提琴
+🎵|Kecapi|Harp|竖琴
+🎵|Klarinet|Clarinet|单簧管
+🔺|Segi tiga muzik|Triangle|三角铁
+🎤|Mikrofon|Microphone|麦克风
+🎧|Fon kepala|Headphones|耳机
+🎵|Kastanet|Castanets|响板
+🎐|Loceng angin|Wind chimes|风铃`],
+  ["sukan", "⚽", L("Sukan & Permainan","Sports & Games","运动和游戏"), `
+⚽|Bola sepak|Football|足球
+🏸|Badminton|Badminton|羽毛球
+🏀|Bola keranjang|Basketball|篮球
+🏐|Bola tampar|Volleyball|排球
+🏓|Ping pong|Table tennis|乒乓球
+🎾|Tenis|Tennis|网球
+🏑|Hoki|Hockey|曲棍球
+🏊|Renang|Swimming|游泳
+🚴|Berbasikal|Cycling|骑脚踏车
+🏃|Lari|Running|跑步
+🤸|Gimnastik|Gymnastics|体操
+🥋|Silat|Silat|马来武术
+🪁|Wau|Kite|风筝
+🪀|Yoyo|Yo-yo|溜溜球
+🧩|Teka-teki gambar|Jigsaw puzzle|拼图
+🎲|Dadu|Dice|骰子
+♟️|Catur|Chess|象棋
+🛹|Papan luncur|Skateboard|滑板
+⚽|Sepak takraw|Sepak takraw|藤球
+🏉|Ragbi|Rugby|橄榄球
+⚽|Bola jaring|Netball|无板篮球
+🏏|Kriket|Cricket|板球
+⛳|Golf|Golf|高尔夫球
+🎳|Boling|Bowling|保龄球
+🏹|Memanah|Archery|射箭
+⚽|Lompat tali|Skipping rope|跳绳
+⚽|Lompat jauh|Long jump|跳远
+🏇|Berkuda|Horse riding|骑马
+🥾|Mendaki|Hiking|登山
+🎣|Memancing|Fishing|钓鱼
+🛶|Berkayak|Kayaking|划皮艇
+⛸️|Luncur ais|Ice skating|溜冰
+⛷️|Ski|Skiing|滑雪
+🏄|Luncur air|Surfing|冲浪
+⚽|Gasing|Spinning top|陀螺
+⚽|Congkak|Congkak|播棋
+⚽|Batu seremban|Five stones|五粒石
+⚽|Guli|Marbles|弹珠
+⚽|Sorok-sorok|Hide and seek|捉迷藏
+⚽|Teng-teng|Hopscotch|跳房子
+🧱|Blok binaan|Building blocks|积木
+🪆|Anak patung|Doll|洋娃娃
+🚗|Kereta mainan|Toy car|玩具车
+🏆|Trofi|Trophy|奖杯
+🥇|Pingat|Medal|奖牌
+🥋|Taekwondo|Taekwondo|跆拳道`],
+  ["perayaan", "🇲🇾", L("Perayaan di Malaysia","Celebrations in Malaysia","马来西亚的节日"), `
+🇲🇾|Hari Kebangsaan|National Day|国庆日
+🕌|Masjid|Mosque|清真寺
+🌙|Hari Raya Aidilfitri|Hari Raya Aidilfitri|开斋节
+🧧|Tahun Baru Cina|Chinese New Year|农历新年
+🏮|Tanglung|Lantern|灯笼
+🥮|Kuih bulan|Mooncake|月饼
+🪔|Deepavali|Deepavali|屠妖节
+🛕|Kuil|Temple|庙宇
+🎄|Krismas|Christmas|圣诞节
+⛪|Gereja|Church|教堂
+🎆|Bunga api|Fireworks|烟花
+🎁|Hadiah|Present|礼物
+🎈|Belon|Balloon|气球
+🎉|Ketupat|Ketupat|马来粽
+🪔|Pelita|Oil lamp|油灯
+🎉|Lemang|Lemang|竹筒饭
+💚|Duit raya|Green packet|青包
+🍪|Kuih raya|Raya cookies|开斋节饼干
+🧧|Angpau|Red packet|红包
+🦁|Tarian singa|Lion dance|舞狮
+🐉|Tarian naga|Dragon dance|舞龙
+🧨|Mercun|Firecrackers|鞭炮
+🎉|Kuih bakul|Nian gao|年糕
+🎉|Kolam|Kolam|彩粉画
+🎉|Muruku|Murukku|姆鲁古
+🌾|Ponggal|Ponggal|印度丰收节
+🎉|Gawai|Gawai|达雅丰收节
+🎉|Kaamatan|Kaamatan|卡达山丰收节
+🪷|Hari Wesak|Wesak Day|卫塞节
+🏯|Tokong|Chinese temple|华人庙宇
+🥳|Hari jadi|Birthday|生日
+🎂|Kek hari jadi|Birthday cake|生日蛋糕
+🕯️|Lilin|Candle|蜡烛
+🥳|Topi parti|Party hat|派对帽
+🍎|Hari Guru|Teacher's Day|教师节
+🧒|Hari Kanak-kanak|Children's Day|儿童节
+🎊|Tahun Baru|New Year|新年
+💐|Majlis perkahwinan|Wedding|婚礼
+💌|Kad ucapan|Greeting card|贺卡
+🏠|Rumah terbuka|Open house|开放门户
+🇲🇾|Jalur Gemilang|Malaysian flag|马来西亚国旗
+🎏|Perarakan|Parade|游行`]
+];
+/* Foto sebenar (gambar/senarai.js, dijana tools/ambil-gambar.py); tiada fail = emoji sahaja */
+const FOTO = (typeof window !== "undefined" && window.GAMBAR) || {};
+const PUSTAKA = PUSTAKA_RAW.map(c => ({ id: c[0], emoji: c[1], nama: c[2],
+  items: c[3].trim().split("\n").map(r => { const p = r.split("|"); return { e: p[0], n: L(p[1], p[2], p[3]), f: FOTO[c[0] + "|" + p[1]] }; }) }));
+
+/* ===== Data tahap & subjek ===== */
+/* lang: "ms"/"en" tetap (subjek bahasa), "auto" = ikut bahasa app */
+const SUBJEK = {
+  huruf:  { nama: L("Huruf","Letters","字母"),                         emoji: "🔤", lang: "auto", auto: true,  gen: huruf },
+  nombor: { nama: L("Nombor","Numbers","数字"),                        emoji: "🔢", lang: "auto", auto: true,  gen: () => gather(nombor) },
+  warna:  { nama: L("Warna & Bentuk","Colours & Shapes","颜色和形状"), emoji: "🎨", lang: "auto", auto: true,  gen: warnaBentuk },
+  bm1:    { nama: L("Bahasa Melayu","Bahasa Melayu","国文 Bahasa Melayu"), emoji: "📚", lang: "ms", auto: false, gen: bm1 },
+  mat1:   { nama: L("Matematik","Mathematics","数学"),                 emoji: "➕", lang: "auto", auto: false, gen: () => gather(mat1) },
+  eng1:   { nama: L("English","English","英文 English"),               emoji: "🗣️", lang: "en", auto: false, gen: eng1 },
+  sains1: { nama: L("Sains","Science","科学"),                         emoji: "🔬", lang: "auto", auto: false, gen: sains1 },
+  bm2:    { nama: L("Bahasa Melayu","Bahasa Melayu","国文 Bahasa Melayu"), emoji: "📚", lang: "ms", auto: false, gen: bm2 },
+  mat2:   { nama: L("Matematik","Mathematics","数学"),                 emoji: "➗", lang: "auto", auto: false, gen: () => gather(mat2) },
+  eng2:   { nama: L("English","English","英文 English"),               emoji: "🗣️", lang: "en", auto: false, gen: eng2 },
+  sains2: { nama: L("Sains","Science","科学"),                         emoji: "🔬", lang: "auto", auto: false, gen: sains2 }
+};
+const subjLang = s => s.lang === "auto" ? LANG : s.lang;
+const TAHAP = [
+  { id: "pra", nama: L("Prasekolah","Preschool","学前教育"), umur: L("4 - 6 tahun","4 - 6 years old","4至6岁"),          emoji: "🧸", subjek: ["huruf", "nombor", "warna"] },
+  { id: "t1",  nama: L("Tahap 1","Level 1","第一阶段"),       umur: L("Tahun 1, 2 & 3","Year 1, 2 & 3","一至三年级"), emoji: "🎒", subjek: ["bm1", "mat1", "eng1", "sains1"] },
+  { id: "t2",  nama: L("Tahap 2","Level 2","第二阶段"),       umur: L("Tahun 4, 5 & 6","Year 4, 5 & 6","四至六年级"), emoji: "🚀", subjek: ["bm2", "mat2", "eng2", "sains2"] }
+];
+
+if (typeof document !== "undefined") {
+/* ===== Simpanan bintang ===== */
+const KEY = "appPendidikan.bintang.v1";
+let memStars = {};
+function loadStars() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return memStars; }
+}
+function saveStar(id, n) {
+  const all = loadStars();
+  if ((all[id] || 0) >= n) return;
+  all[id] = n;
+  memStars = all;
+  try { localStorage.setItem(KEY, JSON.stringify(all)); } catch (e) { /* abaikan */ }
+}
+const starText = n => "⭐".repeat(n) + "☆".repeat(3 - n);
+
+/* ===== Bunyi ===== */
+let actx = null;
+function tone(freq, start, dur, type) {
+  try {
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime + start;
+    o.type = type || "sine"; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(actx.destination);
+    o.start(t); o.stop(t + dur + 0.02);
+  } catch (e) { /* tiada audio */ }
+}
+const sndOk = () => { tone(660, 0, 0.15); tone(880, 0.13, 0.25); };
+const sndBad = () => { tone(220, 0, 0.18, "sawtooth"); tone(160, 0.16, 0.28, "sawtooth"); };
+const sndWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.14, 0.25)); };
+
+/* ===== Suara ===== */
+const EMOJI_RE = /[\p{Extended_Pictographic}️‍]/gu;
+const VOICE = { ms: ["ms-MY", "ms", "id-ID", "id"], en: ["en-GB", "en-US", "en"], zh: ["zh-CN", "zh"] };
+function speak(text, lang) {
+  try {
+    const ss = window.speechSynthesis;
+    if (!ss) return;
+    ss.cancel();
+    lang = VOICE[lang] ? lang : "ms";
+    let clean = text.replace(EMOJI_RE, "");
+    if (lang === "ms") clean = clean.replace(/___|\.\.\./g, " titik titik ").replace(/−/g, " tolak ").replace(/×/g, " darab ").replace(/÷/g, " bahagi ");
+    else if (lang === "en") clean = clean.replace(/___|\.\.\./g, " blank ");
+    else clean = clean.replace(/……|\.\.\./g, "，");
+    const u = new SpeechSynthesisUtterance(clean);
+    const voices = ss.getVoices() || [];
+    let v = null;
+    for (const w of VOICE[lang]) {
+      v = voices.find(x => x.lang && x.lang.replace("_", "-").toLowerCase().indexOf(w.toLowerCase()) === 0);
+      if (v) break;
+    }
+    u.lang = v ? v.lang : VOICE[lang][0];
+    if (v) u.voice = v;
+    u.rate = 0.85;
+    ss.speak(u);
+  } catch (e) { /* tiada suara */ }
+}
+
+/* ===== UI ===== */
+const $ = id => document.getElementById(id);
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
+  window.scrollTo(0, 0);
+}
+function stopSpeech() { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } }
+
+function cardBtn(emoji, nama, desc, extra) {
+  const b = document.createElement("button");
+  b.className = "card";
+  b.innerHTML = '<span class="em"></span><span><div class="nm"></div><div class="ds"></div></span><span class="st"></span>';
+  b.querySelector(".em").textContent = emoji;
+  b.querySelector(".nm").textContent = nama;
+  b.querySelector(".ds").textContent = desc;
+  b.querySelector(".st").textContent = extra || "";
+  return b;
+}
+
+/* Teks statik dalam HTML */
+function applyLang() {
+  document.documentElement.lang = LANG === "zh" ? "zh" : LANG;
+  $("homeTitle").textContent = tr(UI.title);
+  $("homeSub").textContent = tr(UI.pilihTahap);
+  $("subjBack").textContent = tr(UI.menu);
+  $("nPrev").textContent = tr(UI.sebelum);
+  $("padanTitle").textContent = "🃏 " + tr(UI.padanNama);
+  $("padanSub").textContent = tr(UI.padanSub);
+  $("again").textContent = tr(UI.mainLagi);
+  $("toMenu").textContent = tr(UI.keMenu);
+  document.querySelectorAll("#langRow button").forEach(b => b.classList.toggle("on", b.dataset.l === LANG));
+}
+function setLang(l) {
+  LANG = l;
+  try { localStorage.setItem("bahasa", l); } catch (e) { /* abaikan */ }
+  applyLang();
+  renderHome();
+}
+
+let curTahap = null, curSubj = null, backMenu = null, replay = null;
+function renderHome() {
+  backMenu = null;
+  const box = $("tahapList");
+  box.innerHTML = "";
+  TAHAP.forEach(t => {
+    const b = cardBtn(t.emoji, tr(t.nama), tr(t.umur), "");
+    b.classList.add("t-" + t.id);
+    b.onclick = () => renderSubj(t);
+    box.appendChild(b);
+  });
+  show("s-home");
+}
+/* Senarai kad generik pada skrin s-subj */
+function renderMenu(title, items, back) {
+  $("subjTitle").textContent = title;
+  $("subjBack").onclick = back;
+  const box = $("subjList");
+  box.innerHTML = "";
+  items.forEach(it => {
+    const b = cardBtn(it[1], it[2], it[3], it[4]);
+    b.classList.add("s-" + it[0]);
+    b.onclick = it[5];
+    box.appendChild(b);
+  });
+  show("s-subj");
+}
+function renderSubj(t) {
+  curTahap = t;
+  if (t.id === "pra") return renderPra();
+  renderKuiz(t, renderHome);
+}
+function renderKuiz(t, back) {
+  const st = loadStars();
+  backMenu = () => renderKuiz(t, back);
+  renderMenu(t.emoji + " " + tr(t.nama) + (t.id === "pra" ? " · " + tr(UI.kuiz) : ""), t.subjek.map(id => {
+    const s = SUBJEK[id];
+    return [id, s.emoji, tr(s.nama), tr(UI.soalan10), starText(st[id] || 0), () => startQuiz(id)];
+  }), back);
+}
+function renderPra() {
+  const t = curTahap;
+  backMenu = renderPra;
+  renderMenu(t.emoji + " " + tr(t.nama), [
+    ["nota", "📒", tr(UI.nota), tr(UI.notaDs), "", renderNota],
+    ["kuiz", "❓", tr(UI.kuiz), tr(UI.kuizDs), "", () => renderKuiz(t, renderPra)],
+    ["game", "🎮", tr(UI.game), tr(UI.gameDs), "", renderGame],
+    ["pustaka", "📚", tr(UI.pustaka), tr(UI.pustakaDs), "", renderLib]
+  ], renderHome);
+}
+function renderLib() {
+  backMenu = renderLib;
+  renderMenu("📚 " + tr(UI.pustaka), PUSTAKA.map((c, i) =>
+    ["c" + (i % 5), c.emoji, tr(c.nama), c.items.length + tr(UI.gambar), "", () => openCat(c)]), renderPra);
+}
+/* Grid gambar satu kategori; tekan gambar = kad besar dengan 3 bahasa */
+function openCat(c) {
+  backMenu = () => openCat(c);
+  $("libTitle").textContent = c.emoji + " " + tr(c.nama);
+  $("libBack").onclick = () => { stopSpeech(); renderLib(); };
+  const box = $("tiles");
+  box.innerHTML = "";
+  c.items.forEach((it, i) => {
+    const b = document.createElement("button");
+    b.className = "tile";
+    if (it.f) {
+      b.innerHTML = '<img class="tp" loading="lazy" alt=""><span class="tn"></span>';
+      b.querySelector(".tp").src = it.f;
+    } else {
+      b.innerHTML = '<span class="te"></span><span class="tn"></span>';
+      b.querySelector(".te").textContent = it.e;
+    }
+    b.querySelector(".tn").textContent = tr(it.n);
+    b.onclick = () => openNota(c.items.map(x => [x.e, tr(x.n), ["ms", "en", "zh"].filter(l => l !== LANG).map(l => x.n[l]).join(" · "), tr(x.n), LANG, x.n, x.f]), i);
+    box.appendChild(b);
+  });
+  show("s-lib");
+}
+function renderNota() {
+  backMenu = renderNota;
+  renderMenu("📒 " + tr(UI.nota), Object.keys(NOTA).map(id => {
+    const n = NOTA[id];
+    return [id, n.emoji, tr(n.nama), n.items().length + tr(UI.kad), "", () => startNota(id)];
+  }), renderPra);
+}
+function renderGame() {
+  backMenu = renderGame;
+  const st = loadStars();
+  renderMenu("🎮 " + tr(UI.game), Object.keys(GAME).map(id => {
+    const g = GAME[id];
+    return [id, g.emoji, tr(g.nama), tr(g.ds), starText(st[id] || 0), id === "g-padan" ? startPadan : startBelon];
+  }), renderPra);
+}
+
+/* ===== Nota ===== */
+let notaItems = [], nIdx = 0;
+function startNota(id) { openNota(NOTA[id].items(), 0); }
+function openNota(items, i) { notaItems = items; nIdx = i; show("s-nota"); showNota(); }
+const sayNota = () => { const it = notaItems[nIdx]; speak(it[3], it[4]); };
+function showNota() {
+  const it = notaItems[nIdx], n = notaItems.length;
+  $("nBig").textContent = it[0];
+  $("nImg").classList.toggle("hide", !it[6]);
+  if (it[6]) $("nImg").src = it[6]; else $("nImg").removeAttribute("src");
+  $("nBig").classList.toggle("kecil", !!it[6]);
+  $("nTxt").textContent = it[1];
+  $("nTxt").style.fontSize = it[1].length > 12 ? "clamp(30px,8vw,48px)" : "";
+  $("nSub").textContent = it[2];
+  $("nLangs").classList.toggle("hide", !it[5]);
+  $("nCount").textContent = (nIdx + 1) + "/" + n;
+  $("nProg").style.width = ((nIdx + 1) / n * 100) + "%";
+  $("nPrev").disabled = nIdx === 0;
+  $("nPrev").style.opacity = nIdx === 0 ? .4 : 1;
+  $("nNext").textContent = tr(nIdx === n - 1 ? UI.siap : UI.seterusnya);
+  sayNota();
+}
+
+/* ===== Mini Game: Padan Kad ===== */
+let mOpen = [], mMoves = 0, mDone = 0, mBusy = false;
+function startPadan() {
+  curSubj = "g-padan"; replay = startPadan;
+  const pick6 = shuffle(HURUF.filter(h => h[0] !== "X" && h[0] !== "Q")).slice(0, 6);
+  const cards = shuffle(pick6.flatMap(h => { const x = hw(h); return [{ h: h, x: x, f: h[0] }, { h: h, x: x, f: x.e, pic: true }]; }));
+  mOpen = []; mMoves = 0; mDone = 0; mBusy = false;
+  $("padanMoves").textContent = "🔁 0";
+  const box = $("mem");
+  box.innerHTML = "";
+  cards.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "mc"; b.textContent = "❓";
+    b.onclick = () => flip(b, c);
+    box.appendChild(b);
+  });
+  show("s-padan");
+  speak(tr(UI.padanSay), LANG);
+}
+function flip(b, c) {
+  if (mBusy || b.classList.contains("open") || b.classList.contains("done")) return;
+  b.classList.add("open"); b.textContent = c.f;
+  tone(520, 0, 0.08);
+  speak(c.pic ? c.x.w : c.h[0], c.x.sl);
+  mOpen.push([b, c]);
+  if (mOpen.length < 2) return;
+  mMoves++;
+  $("padanMoves").textContent = "🔁 " + mMoves;
+  const [a, z] = mOpen;
+  mOpen = [];
+  if (a[1].h === z[1].h) {
+    [a[0], z[0]].forEach(x => { x.classList.remove("open"); x.classList.add("done"); });
+    sndOk();
+    speak(untuk(a[1].h, a[1].x), a[1].x.sl);
+    if (++mDone === 6) setTimeout(() => showResult(mMoves <= 9 ? 3 : mMoves <= 14 ? 2 : 1, tr(UI.langkah) + mMoves), 900);
+  } else {
+    mBusy = true;
+    setTimeout(() => {
+      [a[0], z[0]].forEach(x => { x.classList.remove("open"); x.classList.add("no"); x.textContent = "❓"; });
+      setTimeout(() => { [a[0], z[0]].forEach(x => x.classList.remove("no")); mBusy = false; }, 500);
+    }, 900);
+  }
+}
+
+/* ===== Mini Game: Pecah Belon ===== */
+let bRound = 0, bScore = 0, bMiss = false, bTarget = null, bBusy = false;
+const ROUNDS = 10;
+function startBelon() {
+  curSubj = "g-belon"; replay = startBelon;
+  bRound = 0; bScore = 0;
+  show("s-belon");
+  belonRound();
+}
+function belonRound() {
+  bMiss = false; bBusy = false;
+  const isHuruf = Math.random() < 0.5;
+  const pool = isHuruf ? ABC : ["1","2","3","4","5","6","7","8","9","10"];
+  const target = pick(pool);
+  const labels = shuffle([target].concat(others(pool, target, 4)));
+  const nama = isHuruf ? target : tr(NAMA_NOMBOR)[+target - 1];
+  const say = isHuruf
+    ? tr(L("Pecahkan belon huruf " + nama, "Pop the balloon with the letter " + nama, "戳破字母" + nama + "的气球"))
+    : tr(L("Pecahkan belon nombor " + nama, "Pop the balloon with the number " + nama, "戳破数字" + nama + "的气球"));
+  bTarget = { v: target, say: say };
+  $("gTarget").textContent = "🎈 " + tr(isHuruf ? UI.huruf : UI.nombor) + target;
+  $("bCount").textContent = (bRound + 1) + "/" + ROUNDS;
+  $("bProg").style.width = (bRound / ROUNDS * 100) + "%";
+  const sky = $("sky");
+  sky.innerHTML = "";
+  labels.forEach(l => {
+    const b = document.createElement("button");
+    b.className = "bl"; b.textContent = l;
+    b.onclick = () => popBalloon(b, l);
+    sky.appendChild(b);
+  });
+  speak(say, LANG);
+}
+function popBalloon(b, l) {
+  if (bBusy) return;
+  if (l === bTarget.v) {
+    bBusy = true;
+    if (!bMiss) bScore++;
+    b.classList.add("pop");
+    sndOk();
+    speak(tr(pick(UI.seronok)), LANG);
+    setTimeout(() => {
+      if (++bRound < ROUNDS) belonRound();
+      else showResult(bScore >= 8 ? 3 : bScore >= 5 ? 2 : 1, tr(UI.markah) + bScore + " / " + ROUNDS);
+    }, 800);
+  } else {
+    bMiss = true;
+    b.classList.remove("no"); void b.offsetWidth; b.classList.add("no");
+    sndBad();
+    speak(tr(UI.cubaLagi) + bTarget.say, LANG);
+  }
+}
+
+/* ===== Kuiz ===== */
+let soalan = [], idx = 0, skor = 0, locked = false;
+function startQuiz(id) {
+  curSubj = id; replay = () => startQuiz(id);
+  soalan = SUBJEK[id].gen();
+  idx = 0; skor = 0;
+  show("s-quiz");
+  showQ();
+}
+function readQ() {
+  const q = soalan[idx], s = SUBJEK[curSubj];
+  speak(q.say || q.q, q.sl || subjLang(s));
+}
+function showQ() {
+  const q = soalan[idx], s = SUBJEK[curSubj];
+  locked = false;
+  $("count").textContent = (idx + 1) + "/" + soalan.length;
+  $("prog").style.width = (idx / soalan.length * 100) + "%";
+  $("big").textContent = q.big || "";
+  $("qt").textContent = q.q;
+  $("fb").textContent = "";
+  $("nextBtn").classList.add("hide");
+  const box = $("opts");
+  box.innerHTML = "";
+  q.opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = o;
+    b.onclick = () => answer(b, o);
+    box.appendChild(b);
+  });
+  if (s.auto) readQ(); else stopSpeech();
+}
+function answer(btn, val) {
+  if (locked) return;
+  locked = true;
+  const q = soalan[idx];
+  const ok = val === q.a;
+  document.querySelectorAll(".opt").forEach(b => {
+    b.disabled = true;
+    if (b.textContent === q.a) b.classList.add("right");
+  });
+  if (ok) {
+    skor++;
+    $("fb").textContent = tr(pick(UI.betul));
+    sndOk();
+  } else {
+    btn.classList.add("wrong");
+    $("fb").textContent = tr(UI.takApa) + q.a + " 💪";
+    sndBad();
+  }
+  const nb = $("nextBtn");
+  nb.textContent = tr(idx === soalan.length - 1 ? UI.keputusan : UI.seterusnya);
+  nb.classList.remove("hide");
+}
+function next() {
+  if (idx < soalan.length - 1) { idx++; showQ(); } else finish();
+}
+function finish() {
+  stopSpeech();
+  showResult(skor >= 8 ? 3 : skor >= 5 ? 2 : 1, tr(UI.markah) + skor + " / " + soalan.length);
+}
+function showResult(n, scoreText) {
+  stopSpeech();
+  saveStar(curSubj, n);
+  $("resTitle").textContent = tr(n === 3 ? UI.r3 : n === 2 ? UI.r2 : UI.r1);
+  $("resScore").textContent = scoreText;
+  const st = $("stars");
+  st.innerHTML = "";
+  for (let i = 0; i < 3; i++) {
+    const sp = document.createElement("span");
+    sp.textContent = i < n ? "⭐" : "☆";
+    sp.style.animationDelay = (i * 0.25) + "s";
+    st.appendChild(sp);
+  }
+  show("s-result");
+  sndWin();
+}
+
+const goBack = () => { stopSpeech(); backMenu ? backMenu() : renderHome(); };
+$("quizBack").onclick = goBack;
+$("notaBack").onclick = goBack;
+$("padanBack").onclick = goBack;
+$("belonBack").onclick = goBack;
+$("speakBtn").onclick = readQ;
+$("nextBtn").onclick = next;
+$("nSpeak").onclick = sayNota;
+document.querySelectorAll("#nLangs button").forEach(b => { b.onclick = () => { const it = notaItems[nIdx]; if (it[5]) speak(it[5][b.dataset.l], b.dataset.l); }; });
+$("nPrev").onclick = () => { if (nIdx > 0) { nIdx--; showNota(); } };
+$("nNext").onclick = () => { if (nIdx < notaItems.length - 1) { nIdx++; showNota(); } else { sndWin(); goBack(); } };
+$("bSpeak").onclick = () => speak(bTarget.say, LANG);
+$("again").onclick = () => replay && replay();
+$("toMenu").onclick = goBack;
+document.querySelectorAll("#langRow button").forEach(b => { b.onclick = () => setLang(b.dataset.l); });
+try { window.speechSynthesis && window.speechSynthesis.getVoices(); } catch (e) { /* abaikan */ }
+applyLang();
+renderHome();
+} else if (typeof module !== "undefined") {
+  module.exports = { SUBJEK, TAHAP, NOTA, setLang: l => { LANG = l; } };
+}
+</script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</script>
+</body>
+</html>
