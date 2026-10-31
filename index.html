@@ -117,6 +117,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .tbatas{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}.tbatas h2{margin:0}.tbatas .masc{width:clamp(50px,7vw,72px)}.tbatas .tmas{flex-direction:row-reverse;align-items:center;gap:8px}.tbatas .tbub{margin:0}.tbatas .tbub::after{display:none}
 #tbKawasan{margin:14px 0}
 .tbnota{background:var(--card);border-radius:26px;padding:20px;box-shadow:0 6px 16px var(--sh);border-top:10px solid var(--ungu);text-align:center;animation:pop .4s}
+.tbadegan .crsvg{display:block;width:100%;max-height:30vh;border-radius:18px;margin-bottom:8px}
 .tbtajuk{font-size:clamp(26px,4.5vw,40px);font-weight:700;color:var(--ungu)}
 .tbterang{font-size:clamp(19px,2.8vw,24px);font-weight:700;margin:10px 0 16px}
 .tbcontoh{display:flex;flex-direction:column;gap:10px;align-items:center}
@@ -2688,7 +2689,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", renderTB]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3357,27 +3358,130 @@ const TB = [
     "T|Tekan perkataan yang ada partikel kah.|Adakah kamu sudah siap?|Adakah", "P|Ayat manakah betul?|Kamu sudah mandi?|Kamu sudah mandi.?|Kamu? sudah mandi", "P|Bolehkah saya duduk di sini? Ini ialah ayat ___.|tanya|perintah|seruan"] }
 ];
 TB.forEach((t, i) => { t.id = "tb" + i; });
+/* ===== Seni Bahasa: pantun, simpulan bahasa, lagu, bandingan, perumpamaan, sajak, syair (format sama dengan TB; nota boleh ada "latar,watak") ===== */
+const SB = [
+  { lv: 1, nama: "Pantun Dua Kerat", nota: [
+    "Pantun Dua Kerat|Pantun dua kerat ada dua baris. Baris pertama ialah pembayang, baris kedua ialah maksud.|Siakap senohong, gelama ikan *duri*,;Bercakap bohong, lama-lama *mencuri*.|laut,Fish",
+    "Rima Pantun|Perhatikan bunyi akhir yang sama. Itulah rima.|Ada ubi, ada *batas*,;Ada budi, ada *balas*.|kebun,Rabbit",
+    "Nasihat Pantun|Pantun ini mengajar kita supaya tidak bertanya perkara yang sudah diketahui.|Sudah gaharu, cendana *pula*,;Sudah tahu, bertanya *pula*.|hutan,Monyet"], soal: [
+    "P|Pantun dua kerat mempunyai ___ baris.|dua|empat|tiga", "P|Baris pertama pantun dua kerat dipanggil ___.|pembayang|maksud|rima", "P|Baris kedua pantun dua kerat dipanggil ___.|maksud|pembayang|tajuk",
+    "P|Ada ubi, ada batas. Ada budi, ada ___.|balas|beras|bunga", "P|Siakap senohong, gelama ikan duri. Bercakap bohong, lama-lama ___.|mencuri|menari|berlari", "P|Sudah gaharu, cendana pula. Sudah tahu, bertanya ___.|pula|lagi|sahaja",
+    "P|Pinggan tak retak, nasi tak dingin. Tuan tak hendak, kami tak ___.|ingin|makan|pergi", "P|Pantun Siakap Senohong mengajar kita supaya tidak ___.|bercakap bohong|makan ikan|pergi ke laut", "P|Pantun Ada Ubi Ada Batas mengajar kita supaya ___.|membalas budi|menanam ubi|tidur awal",
+    "P|Rima akhir bagi batas dan balas ialah ___.|as|ba|ta", "P|Perkataan yang berima dengan duri ialah ___.|mencuri|makan|pagar", "P|Perkataan yang berima dengan dingin ialah ___.|ingin|panas|nasi"] },
+  { lv: 1, nama: "Pantun Empat Kerat", nota: [
+    "Pantun Empat Kerat|Pantun empat kerat ada empat baris. Dua baris pertama ialah pembayang. Dua baris terakhir ialah maksud.|Buah cempedak di luar *pagar*,;Ambil galah tolong *jolokkan*;Saya budak baru *belajar*,;Kalau salah tolong *tunjukkan*.|kebun,Monyet",
+    "Rima Pantun|Rima pantun ialah a, b, a, b. Baris pertama berima dengan baris ketiga. Baris kedua berima dengan baris keempat.|Pulau Pandan jauh ke *tengah*,;Gunung Daik bercabang *tiga*;Hancur badan dikandung *tanah*,;Budi yang baik dikenang *juga*.|laut,Feri",
+    "Pantun Nasihat|Pantun juga memberi nasihat kepada kita.|Pisang emas dibawa *belayar*,;Masak sebiji di atas *peti*;Hutang emas boleh *dibayar*,;Hutang budi dibawa *mati*.|laut,Pisang"], soal: [
+    "P|Pantun empat kerat mempunyai ___ baris.|empat|dua|enam", "P|Dua baris pertama pantun dipanggil ___.|pembayang|maksud|rangkap", "P|Dua baris terakhir pantun dipanggil ___.|maksud|pembayang|tajuk",
+    "P|Saya budak baru belajar, Kalau salah tolong ___.|tunjukkan|bawakan|makan", "P|Hancur badan dikandung tanah, Budi yang baik dikenang ___.|juga|semua|saja", "P|Hutang emas boleh dibayar, Hutang budi dibawa ___.|mati|pergi|lari",
+    "P|Rima akhir pantun empat kerat ialah ___.|a, b, a, b|a, a, a, a|a, b, b, a", "P|Perkataan pagar berima dengan ___.|belajar|galah|salah", "P|Perkataan jolokkan berima dengan ___.|tunjukkan|pagar|budak",
+    "P|Dalam pantun Buah Cempedak, budak itu meminta ___.|ditunjukkan jika salah|buah cempedak|galah panjang", "P|Pantun Hutang Budi mengajar kita supaya ___.|mengenang jasa orang|berhutang emas|pergi belayar", "P|Baris ketiga pantun berima dengan baris ___.|pertama|kedua|keempat"] },
+  { lv: 1, nama: "Simpulan Bahasa", nota: [
+    "Simpulan Bahasa|Simpulan bahasa ialah dua perkataan yang membawa maksud tersirat.|*buah hati*: orang yang disayangi;*kaki bangku*: tidak pandai bermain bola;*panjang tangan*: suka mencuri|rumah,Kucing",
+    "Lagi Simpulan Bahasa|Kita tidak boleh mengikut maksud perkataan satu per satu.|*ringan tulang*: rajin bekerja;*besar kepala*: degil;*mulut murai*: banyak bercakap|kebun,Ayam",
+    "Lagi Simpulan Bahasa|Gunakan simpulan bahasa dalam ayat.|*anak emas*: orang yang paling disayangi;*buah tangan*: hadiah;*cakar ayam*: tulisan yang tidak kemas|sekolah,Pencil"], soal: [
+    "P|Maksud ringan tulang ialah ___.|rajin bekerja|tulang yang ringan|malas", "P|Maksud panjang tangan ialah ___.|suka mencuri|tangan yang panjang|suka menolong", "P|Maksud mulut murai ialah ___.|banyak bercakap|mulut burung|pendiam",
+    "P|Maksud buah tangan ialah ___.|hadiah|buah di tangan|tangan yang kotor", "P|Maksud cakar ayam ialah ___.|tulisan yang tidak kemas|kaki ayam|lukisan cantik", "P|Maksud besar kepala ialah ___.|degil|kepala yang besar|pandai",
+    "P|Ali selalu membantu ibu di rumah. Ali seorang yang ___.|ringan tulang|besar kepala|panjang tangan", "P|Tulisan adik seperti ___. Cikgu tidak dapat membacanya.|cakar ayam|buah hati|anak emas", "P|Nenek membawa kuih sebagai ___ untuk kami.|buah tangan|cakar ayam|kaki bangku",
+    "P|Siti tidak pandai bermain bola. Dia ___.|kaki bangku|ringan tulang|anak emas", "P|Adik ialah ___ ibu dan ayah.|buah hati|mulut murai|panjang tangan", "P|Maksud anak emas ialah ___.|orang yang paling disayangi|anak yang memakai emas|anak yang nakal"] },
+  { lv: 1, nama: "Lagu Kanak-kanak", nota: [
+    "Bangau oh Bangau|Lagu rakyat tentang bangau yang kurus. Dengar dan baca liriknya.|Bangau oh bangau, kenapa engkau kurus?;Macam mana aku tak kurus,;ikan tak mahu timbul.|sungai,Fish",
+    "Burung Kakak Tua|Lagu rakyat yang lucu tentang seekor burung dan nenek.|Burung kakak tua,;hinggap di jendela;Nenek sudah tua,;giginya tinggal dua.|rumah,Queen",
+    "Enjit-enjit Semut|Lagu permainan yang dinyanyikan sambil mencubit tangan kawan dengan lembut.|Enjit-enjit semut,;siapa sakit naik atas.|padang,Rabbit"], soal: [
+    "P|Mengapa bangau kurus? Kerana ikan tak mahu ___.|timbul|makan|tidur", "P|Burung kakak tua hinggap di ___.|jendela|pokok|bumbung", "P|Nenek sudah tua, giginya tinggal ___.|dua|tiga|satu",
+    "P|Lagu Bangau oh Bangau ialah lagu ___.|rakyat|kebangsaan|sekolah", "P|Enjit-enjit semut, siapa sakit naik ___.|atas|bawah|kereta", "P|Haiwan dalam lagu Bangau oh Bangau ialah bangau dan ___.|ikan|kucing|ayam",
+    "P|Lagu Burung Kakak Tua menceritakan tentang nenek yang sudah ___.|tua|muda|sakit", "P|Perkataan yang berima dengan tua ialah ___.|dua|nenek|gigi", "P|Lagu rakyat dinyanyikan oleh ___.|masyarakat sejak dahulu|robot|haiwan",
+    "P|Bangau ialah sejenis ___.|burung|ikan|serangga", "P|Lagu Enjit-enjit Semut dinyanyikan semasa ___.|bermain|tidur|makan", "P|Burung kakak tua, hinggap di ___.|jendela|jalan|jambatan"] },
+  { lv: 2, nama: "Bandingan Semacam", nota: [
+    "Bandingan Semacam|Bandingan semacam membandingkan sesuatu dengan benda lain menggunakan perkataan seperti, bagai atau laksana.|putih *seperti kapas*;hitam *bagai arang*;manis *seperti gula*|kebun,Egg",
+    "Lagi Contoh|Bandingan semacam menjadikan ayat lebih menarik.|lambat *seperti siput*;garang *seperti harimau*;licin *seperti belut*;lembut *seperti sutera*|hutan,Harimau",
+    "Dalam Ayat|Perhatikan bandingan semacam dalam ayat.|Kulit bayi itu lembut *seperti sutera*.;Senyuman adik manis *seperti gula*.;Abang berlari laju *bagai kilat*.|padang,Zebra"], soal: [
+    "P|Putih seperti ___.|kapas|arang|kopi", "P|Hitam bagai ___.|arang|susu|kapas", "P|Manis seperti ___.|gula|garam|cuka",
+    "P|Lambat seperti ___.|siput|kuda|kereta", "P|Garang seperti ___.|harimau|arnab|kucing", "P|Licin seperti ___.|belut|batu|kayu",
+    "P|Lembut seperti ___.|sutera|batu|kayu", "P|Sejuk seperti ___.|ais|api|matahari", "P|Perkataan yang digunakan dalam bandingan semacam ialah ___.|seperti|kerana|tetapi",
+    "P|Rambut nenek putih ___ kapas.|seperti|sangat|paling", "P|Abang berlari laju ___ kilat.|bagai|tetapi|dan", "P|Pilih bandingan semacam yang betul.|tinggi seperti zirafah|tinggi seperti semut|tinggi seperti siput"] },
+  { lv: 2, nama: "Perumpamaan", nota: [
+    "Perumpamaan|Perumpamaan ialah peribahasa yang membandingkan sesuatu dan membawa maksud tersirat.|*Bagai aur dengan tebing*: saling membantu;*Bagai pinang dibelah dua*: sama rupa;*Seperti katak di bawah tempurung*: pengetahuan sempit|sungai,Itik",
+    "Lagi Perumpamaan|Fahami maksud tersiratnya.|*Seperti kacang lupakan kulit*: lupa asal usul;*Bagai isi dengan kuku*: sangat rapat;*Seperti anjing dengan kucing*: selalu bergaduh|rumah,Dog",
+    "Lagi Perumpamaan|Gunakan perumpamaan dengan betul.|*Bagai cendawan tumbuh selepas hujan*: sangat banyak;*Seperti telur di hujung tanduk*: dalam bahaya;*Seperti lipas kudung*: sangat pantas|hutan,Goat"], soal: [
+    "P|Maksud bagai aur dengan tebing ialah ___.|saling membantu|selalu bergaduh|sangat pantas", "P|Maksud bagai pinang dibelah dua ialah ___.|sama rupa|lupa asal usul|sangat banyak", "P|Maksud seperti katak di bawah tempurung ialah ___.|pengetahuan sempit|sangat rapat|dalam bahaya",
+    "P|Maksud seperti kacang lupakan kulit ialah ___.|lupa asal usul|saling membantu|sama rupa", "P|Maksud seperti anjing dengan kucing ialah ___.|selalu bergaduh|sangat rapat|sangat pantas", "P|Maksud seperti lipas kudung ialah ___.|sangat pantas|sangat lambat|sangat banyak",
+    "P|Ali dan Abu kembar. Rupa mereka ___.|bagai pinang dibelah dua|seperti anjing dengan kucing|seperti lipas kudung", "P|Kedai makan baharu dibuka ___.|bagai cendawan tumbuh selepas hujan|seperti telur di hujung tanduk|bagai isi dengan kuku", "P|Adik-beradik itu selalu bergaduh ___.|seperti anjing dengan kucing|bagai aur dengan tebing|bagai pinang dibelah dua",
+    "P|Penduduk kampung saling membantu ___.|bagai aur dengan tebing|seperti kacang lupakan kulit|seperti lipas kudung", "P|Ibu menyiapkan kerja rumah dengan pantas ___.|seperti lipas kudung|seperti katak di bawah tempurung|bagai pinang dibelah dua", "P|Persahabatan mereka sangat rapat ___.|bagai isi dengan kuku|seperti anjing dengan kucing|seperti telur di hujung tanduk"] },
+  { lv: 2, nama: "Ciri-ciri Pantun", nota: [
+    "Pembayang dan Maksud|Pembayang ialah dua baris pertama. Maksud ialah dua baris terakhir yang membawa isi pantun.|Pembayang: Buah cempedak di luar pagar,;Pembayang: Ambil galah tolong jolokkan;Maksud: Saya budak baru belajar,;Maksud: Kalau salah tolong tunjukkan.|kebun,Monyet",
+    "Rima Akhir|Rima akhir pantun ialah a, b, a, b.|pag*ar* dan bel*ajar* ialah rima a;jolokk*an* dan tunjukk*an* ialah rima b|kebun,Monyet",
+    "Jeda dan Suku Kata|Setiap baris pantun ada jeda di tengah dan biasanya mempunyai lapan hingga dua belas suku kata.|Buah cempedak, *jeda*, di luar pagar;Ambil galah, *jeda*, tolong jolokkan|kebun,Monyet"], soal: [
+    "P|Dua baris pertama pantun empat kerat ialah ___.|pembayang|maksud|jeda", "P|Isi atau mesej pantun terdapat dalam ___.|maksud|pembayang|tajuk", "P|Rima akhir pantun empat kerat ialah ___.|a, b, a, b|a, a, b, b|a, b, b, a",
+    "P|Jeda ialah ___.|hentian sebentar di tengah baris|baris terakhir|tajuk pantun", "P|Biasanya setiap baris pantun mempunyai ___ suku kata.|lapan hingga dua belas|dua hingga tiga|dua puluh", "P|Baris pertama berima dengan baris ___.|ketiga|kedua|keempat",
+    "P|Baris kedua berima dengan baris ___.|keempat|pertama|ketiga", "P|Dalam pantun Pulau Pandan, tengah berima dengan ___.|tanah|tiga|juga", "P|Dalam pantun Pulau Pandan, tiga berima dengan ___.|juga|tanah|tengah",
+    "P|Pembayang yang sesuai untuk Hutang emas boleh dibayar, Hutang budi dibawa mati ialah ___.|Pisang emas dibawa belayar, Masak sebiji di atas peti|Saya budak baru belajar, Kalau salah tolong tunjukkan|Ada budi, ada balas", "P|Pantun empat kerat biasanya ada ___ rangkap.|satu|tiga|empat", "P|Bunyi akhir yang sama dalam pantun dipanggil ___.|rima|jeda|maksud"] },
+  { lv: 2, nama: "Sajak", nota: [
+    "Sajak Ibu|Sajak ialah puisi moden. Ia tidak terikat dengan rima yang tetap.|Ibu,;kasihmu seluas lautan,;sabarmu setinggi gunung,;doamu menemani setiap langkahku.|rumah,Queen",
+    "Sajak Sekolahku|Sajak boleh menceritakan tempat yang kita sayangi.|Sekolahku,;tempat aku menimba ilmu,;bersama guru dan kawan,;di sini aku membesar.|sekolah,Pencil",
+    "Sajak Pagi|Sajak juga menggambarkan keindahan alam.|Pagi yang cerah,;burung berkicau riang,;matahari tersenyum,;menyambut hari baharu.|padang,Sun"], soal: [
+    "P|Sajak ialah puisi ___.|moden|lama|tradisional", "P|Sajak tidak terikat dengan ___ yang tetap.|rima|perkataan|bahasa", "P|Dalam sajak Ibu, kasih ibu seluas ___.|lautan|padang|bilik",
+    "P|Dalam sajak Ibu, sabar ibu setinggi ___.|gunung|pokok|rumah", "P|Sajak Sekolahku menceritakan tentang ___.|sekolah|pasar|hutan", "P|Dalam sajak Sekolahku, aku menimba ___ di sekolah.|ilmu|air|wang",
+    "P|Dalam sajak Pagi, burung berkicau ___.|riang|sedih|marah", "P|Dalam sajak Pagi, matahari ___.|tersenyum|menangis|tidur", "P|Matahari tersenyum bermaksud matahari ___.|bersinar dengan indah|benar-benar senyum|sedang tidur",
+    "P|Nilai dalam sajak Ibu ialah ___.|menyayangi ibu|malas belajar|bergaduh", "P|Puisi yang mempunyai pembayang dan maksud ialah ___.|pantun|sajak|cerita", "P|Sajak dibaca dengan ___.|penuh perasaan|menjerit|berbisik sahaja"] },
+  { lv: 3, nama: "Syair", nota: [
+    "Syair Nasihat|Syair ialah puisi lama. Setiap rangkap ada empat baris dan rimanya a, a, a, a. Syair biasanya bercerita atau memberi nasihat.|Wahai adik dengarlah *pesan*,;Rajin belajar jangan *dilupakan*,;Ilmu dicari sepanjang *zaman*,;Barulah hidup penuh *kejayaan*.|sekolah,Pencil",
+    "Syair Kebersihan|Syair ini menasihati kita supaya menjaga kebersihan.|Kebersihan diri amalan *mulia*,;Mandi dan gosok gigi *setia*,;Badan sihat hati *gembira*,;Hidup kita sentiasa *ceria*.|rumah,Rabbit",
+    "Syair Sahabat|Syair juga boleh bercerita tentang persahabatan.|Sahabat baik sukar *dicari*,;Susah senang sama *diharungi*,;Tolong-menolong setiap *hari*,;Itulah tanda sahabat *sejati*.|padang,Dog"], soal: [
+    "P|Rima akhir syair ialah ___.|a, a, a, a|a, b, a, b|a, b, b, a", "P|Setiap rangkap syair mempunyai ___ baris.|empat|dua|enam", "P|Syair ialah puisi ___.|lama|moden|baharu",
+    "P|Wahai adik dengarlah pesan, Rajin belajar jangan ___.|dilupakan|dilupa|lagi", "P|Ilmu dicari sepanjang zaman, Barulah hidup penuh ___.|kejayaan|makanan|kesedihan", "P|Syair Kebersihan menasihati kita supaya ___.|menjaga kebersihan diri|makan banyak|tidur lewat",
+    "P|Susah senang sama diharungi, Tolong-menolong setiap ___.|hari|masa|ketika", "P|Tanda sahabat sejati ialah ___.|tolong-menolong|bergaduh|berbohong", "P|Syair berbeza dengan pantun kerana syair tidak mempunyai ___.|pembayang|baris|rima",
+    "P|Syair biasanya dilagukan dengan ___.|irama yang merdu|jeritan|tepukan sahaja", "P|Perkataan yang berima dengan dicari ialah ___.|hari|sahabat|susah", "P|Nilai dalam Syair Nasihat ialah ___.|rajin belajar|malas|sombong"] },
+  { lv: 3, nama: "Cipta Pantun", nota: [
+    "Langkah Mencipta Pantun|Mula-mula tentukan maksud. Kemudian cipta pembayang yang berima dengan maksud.|Maksud baris tiga berakhir dengan bunyi *i*;Maksud baris empat berakhir dengan bunyi *an*;Pembayang mesti berakhir dengan bunyi yang sama|sungai,Itik",
+    "Contoh Pantun Ciptaan|Ini contoh pantun yang lengkap.|Anak itik berenang ke *tepi*,;Singgah sebentar di bawah *jambatan*;Rajin belajar setiap *pagi*,;Supaya berjaya di masa *hadapan*.|sungai,Itik",
+    "Cari Perkataan Berima|Perkataan berima mempunyai bunyi akhir yang sama.|*pagi* berima dengan *tepi*;*hadapan* berima dengan *jambatan*;*sekolah* berima dengan *rumah*|sekolah,Pencil"], soal: [
+    "P|Anak itik berenang ke tepi, Singgah sebentar di bawah jambatan; Rajin belajar setiap ___, Supaya berjaya di masa hadapan.|pagi|malam|petang", "P|Anak itik berenang ke tepi, Singgah sebentar di bawah ___; Rajin belajar setiap pagi, Supaya berjaya di masa hadapan.|jambatan|pokok|rumah", "P|Perkataan yang berima dengan sekolah ialah ___.|rumah|pintu|meja",
+    "P|Perkataan yang berima dengan makan ialah ___.|jalan|minum|tidur", "P|Perkataan yang berima dengan ilmu ialah ___.|guru|kawan|kelas", "P|Pergi ke kedai membeli roti, Roti dimakan bersama kaya; Hormati guru sepenuh ___, Ilmu diberi tidak terkira.|hati|jiwa|badan",
+    "P|Pembayang pantun biasanya tentang ___.|alam dan kehidupan sekeliling|nombor|huruf", "P|Langkah pertama mencipta pantun ialah menentukan ___.|maksud|pembayang|tajuk buku", "P|Pilih pasangan rima yang betul.|tepi dan pagi|tepi dan malam|tepi dan rumah",
+    "P|Pilih pasangan rima yang betul.|jalan dan makan|jalan dan minum|jalan dan buku", "P|Bunga melur bunga melati, Kembang mekar di dalam taman; Kawan baik sukar dicari, Susah senang jadi ___.|teman|sahabat|saudara", "P|Dalam pantun Bunga Melur, melati berima dengan ___.|dicari|taman|teman"] },
+  { lv: 3, nama: "Lagu Rakyat dan Ubah Suai", nota: [
+    "Rasa Sayang|Lagu rakyat ini sangat terkenal dan sering diselitkan dengan pantun.|Rasa sayang, hei!;Rasa sayang sayang hei!;Hei lihat nona jauh,;Rasa sayang sayang hei!|padang,Kite",
+    "Geylang si Paku Geylang|Lagu rakyat ini mengajak kita pulang bersama-sama.|Geylang si paku geylang,;Geylang si rama-rama,;Pulang marilah pulang,;Marilah pulang bersama-sama.|kebun,Lebah",
+    "Ubah Suai Seni Kata|Kita boleh menukar perkataan dalam lagu tetapi mengekalkan iramanya.|Asal: Burung kakak tua, hinggap di jendela;Ubah suai: Burung kakak tua, *terbang ke angkasa*|langit,Kite"], soal: [
+    "P|Geylang si paku geylang, Geylang si ___.|rama-rama|kupu-kupu|kura-kura", "P|Pulang marilah pulang, Marilah pulang ___.|bersama-sama|seorang diri|esok hari", "P|Rasa sayang, hei! Hei lihat nona ___.|jauh|dekat|cantik",
+    "P|Lagu rakyat diwarisi daripada ___.|nenek moyang|televisyen|robot", "P|Lagu Rasa Sayang sering diselitkan dengan ___.|pantun|sajak|syair", "P|Mengubah suai seni kata lagu bermaksud ___.|menukar perkataan tetapi mengekalkan irama|menukar irama sahaja|membuang semua perkataan",
+    "P|Lagu Geylang si Paku Geylang mengajak kita ___.|pulang bersama|bergaduh|tidur", "P|Nilai dalam lagu Geylang si Paku Geylang ialah ___.|kebersamaan|kesombongan|kemalasan", "P|Lagu rakyat biasanya mempunyai lirik yang ___.|mudah diingat|sangat panjang|sukar difahami",
+    "P|Perkataan rama-rama ialah kata ganda ___.|penuh|separa|berentak", "P|Perkataan bersama-sama berima dengan ___.|rama-rama|geylang|pulang", "P|Lagu Bangau oh Bangau bercerita tentang ___.|bangau yang kurus|kucing yang gemuk|ikan yang terbang"] },
+  { lv: 3, nama: "Cipta Sajak", nota: [
+    "Langkah Mencipta Sajak|Pilih tema, kemudian tulis baris-baris pendek yang penuh perasaan.|Tema: alam;Hujan turun perlahan,;membasahi bumi yang kering,;pokok menari kegembiraan.|kebun,Umbrella",
+    "Gunakan Bahasa Indah|Gunakan bandingan dan personifikasi supaya sajak lebih menarik.|Bulan *tersenyum* di langit malam;Angin *berbisik* di telingaku;Bintang *seperti permata* berkelipan|langit,Sun"], soal: [
+    "P|Langkah pertama mencipta sajak ialah memilih ___.|tema|harga|warna", "P|Pilih baris sajak yang paling indah.|Bulan tersenyum di langit malam|Bulan ada di langit|Bulan itu bulat", "P|Angin berbisik. Ini contoh ___.|personifikasi|kata seru|kata tanya",
+    "P|Bintang seperti permata. Ini contoh ___.|bandingan semacam|kata majmuk|ayat tanya", "P|Hujan turun perlahan, membasahi bumi yang ___.|kering|biru|tinggi", "P|Tema yang sesuai untuk sajak tentang ibu ialah ___.|kasih sayang|kenderaan|sukan",
+    "P|Pilih baris yang sesuai untuk sajak bertema sekolah.|Di sini aku menimba ilmu|Ikan berenang di laut|Lori membawa pasir", "P|Dalam ayat Pokok menari kegembiraan, perkataan yang menunjukkan personifikasi ialah ___.|menari|pokok|kegembiraan", "P|Sajak yang baik ditulis dengan ___.|perasaan dan bahasa indah|nombor sahaja|huruf besar semua",
+    "P|Ayah, kau bekerja dari pagi hingga ___.|petang|pagi|tidur", "P|Tajuk yang sesuai untuk sajak Ombak memukul pantai, camar terbang bebas ialah ___.|Laut|Sekolah|Pasar", "P|Sajak dibacakan dengan ___ yang sesuai.|intonasi|jeritan|bisikan"] }
+];
+SB.forEach((t, i) => { t.id = "sb" + i; t.kat = "sb"; });
 /* Teks untuk disebut (buang tanda sorotan) */
 const tbBersih = t => t.replace(/\*/g, "");
-const tbNota = s => { const p = s.split("|"); return { tajuk: p[0], terang: p[1], contoh: p[2].split(";") }; };
+const tbNota = s => { const p = s.split("|"); return { tajuk: p[0], terang: p[1], contoh: p[2].split(";"), adegan: p[3] ? { latar: p[3].split(",")[0], watak: p[3].split(",")[1] } : null }; };
 const tbSoal = s => { const p = s.split("|"); return p[0] === "T" ? { j: "T", q: p[1], ayat: p[2], sasar: p[3].split(",") } : { j: "P", q: p[1], a: p[2], salah: p.slice(3) }; };
 /* Ayat lengkap selepas dijawab: ganti ___ dengan jawapan */
 const tbPenuh = s => s.q.indexOf("___") >= 0 ? s.q.replace(/\s*___\s*/, m => (m.charAt(0) === " " ? " " : "") + s.a + (m.slice(-1) === " " ? " " : "")).replace(/\s+([?!.,])$/, "$1") : s.a;
 let tbT = null, tbMod = "nota", tbI = 0, tbId = 0, tbList = [], tbSkor = 0, tbSalah = false;
 const tbOn = () => $("s-tb").classList.contains("on");
-function renderTB() {
-  backMenu = renderTB;
-  const st = loadStars();
-  renderMenu(tr(L("Tatabahasa", "Grammar", "语法")), [1, 2, 3].map(lv => {
-    const t = TB.filter(x => x.lv === lv), siap = t.filter(x => st[x.id]).length;
-    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON.bina, tr(BM_TAHAP[lv]), siap + " / " + t.length + tr(L(" topik selesai", " topics done", " 个主题已完成")), "", () => renderTBTahap(lv)];
+/* kat: "tb" = Tatabahasa, "sb" = Seni Bahasa (format topik sama) */
+const TB_KAT = { tb: { senarai: () => TB, nama: L("Tatabahasa", "Grammar", "语法"), ikon: "bina" }, sb: { senarai: () => SB, nama: L("Seni Bahasa", "Language Arts", "语言艺术"), ikon: "baca" } };
+function renderTB(kat) {
+  kat = kat || "tb";
+  backMenu = () => renderTB(kat);
+  const st = loadStars(), K2 = TB_KAT[kat];
+  renderMenu(tr(K2.nama), [1, 2, 3].map(lv => {
+    const t = K2.senarai().filter(x => x.lv === lv), siap = t.filter(x => st[x.id]).length;
+    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[K2.ikon], tr(BM_TAHAP[lv]), siap + " / " + t.length + tr(L(" topik selesai", " topics done", " 个主题已完成")), "", () => renderTBTahap(lv, kat)];
   }), renderBM1);
 }
-function renderTBTahap(lv) {
-  backMenu = () => renderTBTahap(lv);
-  const st = loadStars();
-  renderMenu(tr(L("Tatabahasa", "Grammar", "语法")) + " · " + tr(BM_TAHAP[lv]), TB.filter(x => x.lv === lv).map((t, i) =>
-    ["c" + (i % 5), IKON.bina, (i + 1) + ". " + t.nama, t.nota.length + tr(L(" nota · ", " notes · ", " 笔记 · ")) + t.soal.length + tr(L(" soalan", " questions", " 题")), starText(st[t.id] || 0), () => startTB(t)]), renderTB);
+function renderTBTahap(lv, kat) {
+  kat = kat || "tb";
+  backMenu = () => renderTBTahap(lv, kat);
+  const st = loadStars(), K2 = TB_KAT[kat];
+  renderMenu(tr(K2.nama) + " · " + tr(BM_TAHAP[lv]), K2.senarai().filter(x => x.lv === lv).map((t, i) =>
+    ["c" + (i % 5), IKON[K2.ikon], (i + 1) + ". " + t.nama, t.nota.length + tr(L(" nota · ", " notes · ", " 笔记 · ")) + t.soal.length + tr(L(" soalan", " questions", " 题")), starText(st[t.id] || 0), () => startTB(t)]), () => renderTB(kat));
 }
 function startTB(t) {
   tbT = t; tbMod = "nota"; tbI = 0; tbSkor = 0;
@@ -3402,7 +3506,7 @@ function tbPapar() {
     const n = tbNota(tbT.nota[tbI]);
     $("tbCount").textContent = tr(L("Nota ", "Note ", "笔记 ")) + (tbI + 1) + "/" + tbT.nota.length;
     $("tbProg").style.width = ((tbI + 1) / tbT.nota.length * 100) + "%";
-    k.innerHTML = `<div class="tbnota"><div class="tbtajuk"></div><p class="tbterang"></p><div class="tbcontoh">${n.contoh.map(c => `<div class="tbc">${tbSorot(c)}</div>`).join("")}</div></div>`;
+    k.innerHTML = `<div class="tbnota">${n.adegan ? `<div class="tbadegan">${crAdegan(n.adegan, "w-masuk")}</div>` : ""}<div class="tbtajuk"></div><p class="tbterang"></p><div class="tbcontoh">${n.contoh.map(c => `<div class="tbc">${tbSorot(c)}</div>`).join("")}</div></div>`;
     k.querySelector(".tbtajuk").textContent = n.tajuk; k.querySelector(".tbterang").textContent = n.terang;
     const c = [...k.querySelectorAll(".tbc")];
     const main = i2 => {
