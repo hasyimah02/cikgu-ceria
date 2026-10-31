@@ -187,8 +187,6 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 #nBig .art{width:min(72%,300px);height:auto;margin:0 auto;animation:apung 3s ease-in-out infinite}
 #big .art{width:min(55%,230px);height:auto;margin:0 auto}
 .mc .art{width:88%;height:auto}
-.tulisBtn{display:flex;align-items:center;gap:8px;margin:14px auto 0;background:var(--oren);animation:goyang 1.6s ease-in-out infinite}
-.tulisBtn svg{width:30px;height:30px}
 .nav .main{display:flex;align-items:center;justify-content:center;gap:6px}.nav .main svg{width:26px;height:26px}
 #nSpeak svg,#notaBack svg{width:30px;height:30px;display:block;margin:auto;color:var(--on)}#notaBack svg{color:var(--text)}
 .card .em svg{width:40px;height:40px;color:var(--on)}
@@ -247,7 +245,6 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
       <div id="nSub"></div>
       <button class="speak" id="nSpeak" aria-label="Dengar">🔊</button>
       <div class="langs hide" id="nLangs"><button data-l="ms">🔊 BM</button><button data-l="en">🔊 English</button><button data-l="zh">🔊 中文</button></div>
-      <button class="main tulisBtn hide" id="nTulis"></button>
     </div>
     <div class="nav">
       <button class="main alt" id="nPrev">⬅️ Sebelum</button>
@@ -2158,8 +2155,8 @@ function renderNota() {
   backMenu = renderNota;
   renderMenu("📒 " + tr(UI.nota), Object.keys(NOTA).map(id => {
     const n = NOTA[id];
-    return [id, n.emoji, tr(n.nama), n.items().length + tr(UI.kad), "", () => startNota(id)];
-  }).concat([["n-huruf", IKON.pensel, tr(UI.tulis), tr(UI.tulisDs), "", () => startTulis(0)]]), renderPra);
+    return [id, n.emoji, tr(n.nama), n.items().length + tr(UI.kad), "", id === "n-huruf" ? () => startTulis(0) : () => startNota(id)];
+  }), renderPra);
 }
 function renderGame() {
   backMenu = renderGame;
@@ -2178,7 +2175,6 @@ const sayNota = () => { const it = notaItems[nIdx]; speak(it[3], it[4]); };
 function showNota() {
   const it = notaItems[nIdx], n = notaItems.length;
   if (it[7]) $("nBig").innerHTML = it[7]; else $("nBig").textContent = it[0];
-  $("nTulis").classList.toggle("hide", it[8] == null);
   $("nImg").classList.toggle("hide", !it[6]);
   if (it[6]) $("nImg").src = it[6]; else $("nImg").removeAttribute("src");
   $("nBig").classList.toggle("kecil", !!it[6]);
@@ -2395,7 +2391,6 @@ function tulisLabel() {
   const lb = (id, ik, t) => { $(id).innerHTML = IKON[ik] + "<span></span>"; $(id).querySelector("span").textContent = tr(t); };
   $("tBack").innerHTML = IKON.back;
   lb("tShow", "play", UI.tunjuk); lb("tErase", "padam", UI.padam); lb("tSay", "speak", UI.dengar); lb("tNext", "next", UI.lagi);
-  lb("nTulis", "pensel", UI.jomTulis);
 }
 $("tMas").insertAdjacentHTML("beforeend", MASKOT);
 KRAYON.forEach((k, i) => {
@@ -2417,7 +2412,6 @@ document.addEventListener("pointerdown", () => { if (!actx) actx = new (window.A
 $("tNext").onclick = tulisNext;
 $("tBack").onclick = () => { tDemo++; stopSpeech(); tBalik ? tBalik() : goBack(); };
 document.querySelectorAll("#tCase button").forEach(b => { b.onclick = () => { tCs = b.dataset.c; tulisHuruf(); }; });
-$("nTulis").onclick = () => { const it = notaItems[nIdx]; stopSpeech(); startTulis(it[8], () => { show("s-nota"); showNota(); }); };
 window.addEventListener("resize", () => { if ($("s-tulis").classList.contains("on")) tSaiz(); });
 applyLang();
 renderHome();
