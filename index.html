@@ -125,6 +125,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .wsuku.penuh .suku{background:var(--wc);color:var(--wt);animation:pop .5s}
 .sengkang{font-size:36px;font-weight:700;color:var(--muted)}
 .wcontoh{width:100%;max-width:280px;text-align:center}
+.wcontoh .wfoto{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:22px;border:6px solid var(--wc);box-shadow:0 6px 16px var(--sh);animation:pop .5s,apung 3s ease-in-out .5s infinite}
 .wcontoh .art{width:100%;height:auto;animation:pop .5s,apung 3s ease-in-out .5s infinite}
 .wcap{font-weight:700;font-size:20px;margin-top:2px}
 #wKrayon button{width:34px;height:46px;outline:2px solid rgba(128,128,128,.35)}
@@ -2274,35 +2275,43 @@ const WARNA = (() => {
   const BL = (x, y) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".75"/>`;
   const MUKA = (x, y, d) => E(x - d, y) + E(x + d, y) + `<path d="M${x - 5} ${y + 7} Q${x} ${y + 12} ${x + 5} ${y + 7}" fill="none"/>` + BL(x - d - 6, y + 7) + BL(x + d + 6, y + 7);
   const MATA_BESAR = (x, y) => `<circle cx="${x}" cy="${y}" r="6" fill="#fff"/>` + E(x + 1, y + 1, 3);
-  /* k = kunci warna (K), c = warna krayon, t = warna tulisan atas warna, s = suku kata, b = benda, r = kawasan diwarna, d = garisan & butiran */
+  const kumpul = (pts, r) => pts.map(p => bulat(p[0], p[1], p[2] || r)).join(" ");
+  const kilat = (x, y) => `<path d="M${x} ${y} q2 -3 5 -3" fill="none" stroke="#fff" stroke-width="2.4" opacity=".85"/>`;
+  /* k = kunci warna (K), c = warna krayon, t = warna tulisan, s = suku kata, b = benda, f = foto sebenar, r = kawasan diwarna, d = garisan & butiran */
+  /* cermin: pantulkan laluan (arahan mutlak M L Q C sahaja) pada paksi x = 60 */
+  const cermin = d => d.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (m, x, y) => (120 - +x) + " " + y);
+  const mata = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#1f1f1f"/><circle cx="${x + r * .35}" cy="${y - r * .35}" r="${r * .35}" fill="#fff" stroke="none"/>`;
+  const kakiKetam = "M34 66 L20 70 L10 82 L13 84 L22 74 L36 71 Z M38 72 L28 80 L22 94 L25 95 L32 83 L41 76 Z M44 76 L40 86 L38 97 L41 97 L44 88 L48 78 Z";
+  const sepitKetam = "M42 46 L34 40 Q20 42 14 32 Q10 22 16 16 L14 5 Q24 7 25 17 L29 17 L31 7 Q39 12 35 24 Q36 34 44 42 Z";
+  const butirJagung = (() => { let s = ""; for (let y = 22; y < 86; y += 7) { const w = 15 - Math.abs(y - 48) * .18; for (let x = -w; x <= w; x += 6.5) s += `<rect x="${(60 + x - 2.8).toFixed(1)}" y="${y - 2.8}" width="5.6" height="5.6" rx="2.4" fill="none" stroke-width="1" opacity=".55"/>`; } return s; })();
   return [
-    { k: "merah", c: "#ff3b3b", t: "#fff", s: { ms: ["me", "rah"], en: ["red"] }, b: L("epal", "apple", "苹果"), en: "an apple",
-      r: "M60 30 q-12-8 -26 0 q-14 10 -8 32 q6 24 24 26 q6 0 10-3 q4 3 10 3 q18-2 24-26 q6-22 -8-32 q-14-8 -26 0z",
-      d: `<path d="M60 30 q0-10 5-17" fill="none" stroke-width="4"/><path d="M64 20 q12-12 25-4 q-11 12 -25 4z" fill="#6cc070"/>` + MUKA(60, 58, 10) },
-    { k: "kuning", c: "#ffd600", t: "#2f3a4a", s: { ms: ["ku", "ning"], en: ["yel", "low"] }, b: L("pisang", "banana", "香蕉"), en: "a banana",
-      r: "M22 30 q8 50 56 52 q22 0 32 -10 q-32 6 -54 -12 q-16 -14 -22 -32z",
-      d: `<path d="M20 20 l4 12 l6-2z" fill="#8a5a2b"/><circle cx="110" cy="72" r="3" fill="#8a5a2b"/>` + MUKA(64, 66, 7) },
-    { k: "hijau", c: "#3cc35b", t: "#fff", s: { ms: ["hi", "jau"], en: ["green"] }, b: L("katak", "frog", "青蛙"), en: "a frog",
-      r: "M18 72 q0-30 42-30 q42 0 42 30 q0 18 -42 20 q-42 -2 -42 -20z " + bulat(38, 40, 13) + " " + bulat(82, 40, 13) + " M24 86 q-10 2 -12 9 h20z M96 86 q10 2 12 9 h-20z",
-      d: MATA_BESAR(38, 40) + MATA_BESAR(82, 40) + `<path d="M42 66 q18 14 36 0" fill="none"/>` + BL(32, 64) + BL(88, 64) },
-    { k: "biru", c: "#2f8cff", t: "#fff", s: { ms: ["bi", "ru"], en: ["blue"] }, b: L("ikan paus", "whale", "鲸鱼"), en: "a whale",
-      r: "M16 62 q0-32 48-32 q38 0 44 26 q4 22 -22 24 h-48 q-22 0 -22 -18z M18 58 q-10 -10 -14 -22 q10 2 14 10 q2 -12 10 -16 q0 14 -4 26z",
-      d: `<path d="M70 28 q-4 -12 -12 -14 M70 28 q2 -14 10 -16 M70 28 v-16" stroke="#8fd3ff" stroke-width="3" fill="none"/><path d="M30 72 q30 10 74 -6" fill="none" stroke-width="2"/>` + E(86, 50, 4) + `<path d="M92 62 q6 4 12 0" fill="none"/>` + BL(84, 60) },
-    { k: "oren", c: "#ff8c1a", t: "#fff", s: { ms: ["o", "ren"], en: ["o", "range"] }, b: L("lobak merah", "carrot", "红萝卜"), en: "a carrot",
-      r: "M62 30 q16 0 16 12 l-12 52 q-2 6 -6 0 l-12 -52 q0 -12 14 -12z",
-      d: `<path d="M62 30 q-14 -14 -8 -24 q8 6 8 20 q2 -16 12 -22 q4 12 -8 26z" fill="#4caf50"/><path d="M52 58 h7 M66 68 h6 M57 80 h6" stroke-width="2"/>` + E(57, 44, 3) + E(67, 44, 3) + `<path d="M58 50 q4 4 8 0" fill="none" stroke-width="2"/>` },
-    { k: "ungu", c: "#9b59d6", t: "#fff", s: { ms: ["u", "ngu"], en: ["pur", "ple"] }, b: L("terung", "brinjal", "茄子"), en: "a brinjal",
-      r: "M40 32 q-16 6 -14 26 q2 20 20 32 q16 10 32 6 q14 -6 8 -22 q-6 -14 -18 -28 q-12 -16 -28 -14z",
-      d: `<path d="M50 24 q-2 -10 4 -16" fill="none" stroke-width="4"/><path d="M34 34 q8 -16 30 -8 q-2 10 -12 10 q-10 4 -18 -2z" fill="#4caf50"/><path d="M48 70 q6 8 14 8" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/>` + MUKA(54, 52, 9) },
-    { k: "perang", c: "#8b5a2b", t: "#fff", s: { ms: ["pe", "rang"], en: ["brown"] }, b: L("beruang", "bear", "熊"), en: "a bear",
-      r: bulat(60, 58, 30) + " " + bulat(36, 32, 11) + " " + bulat(84, 32, 11),
-      d: `<circle cx="36" cy="32" r="5" fill="#f3c9a0"/><circle cx="84" cy="32" r="5" fill="#f3c9a0"/><ellipse cx="60" cy="68" rx="13" ry="10" fill="#f3d8b5"/><ellipse cx="60" cy="63" rx="5" ry="3.5" fill="#3b2a20"/><path d="M60 67 v3 M54 72 q6 5 12 0" fill="none"/>` + E(48, 52, 4) + E(72, 52, 4) + BL(40, 64) + BL(80, 64) },
-    { k: "hitam", c: "#222222", t: "#fff", s: { ms: ["hi", "tam"], en: ["black"] }, b: L("semut", "ant", "蚂蚁"), en: "an ant",
-      r: bulat(86, 58, 20) + " " + bulat(58, 56, 11) + " " + bulat(30, 48, 15),
-      d: `<path d="M56 64 l-10 22 M60 66 l2 22 M62 64 l12 20 M54 50 l-8 -12 M62 48 l10 -12" fill="none" stroke-width="3"/><path d="M26 34 q-6 -14 -14 -14 M34 34 q2 -16 10 -18" fill="none" stroke-width="2.5"/>` + MATA_BESAR(24, 46) + MATA_BESAR(37, 46) + `<path d="M26 56 q5 4 10 0" fill="none" stroke="#ff8fa3" stroke-width="2.5"/>` },
-    { k: "putih", c: "#ffffff", t: "#2f3a4a", s: { ms: ["pu", "tih"], en: ["white"] }, b: L("awan", "cloud", "白云"), en: "a cloud", bg: "#bfe3ff",
-      r: "M30 76 q-18 0 -18 -15 q0 -15 18 -15 q2 -20 24 -20 q15 0 21 12 q4 -4 12 -4 q18 0 18 18 q12 2 12 12 q0 12 -12 12z",
-      d: `<circle cx="104" cy="16" r="9" fill="#ffd23f"/><path d="M104 2 v-2 M118 16 h2 M114 6 l2-2" stroke="#ffb627" stroke-width="2.5"/>` + MUKA(62, 54, 10) }
+    { k: "merah", c: "#ff3b3b", t: "#fff", s: { ms: ["me", "rah"], en: ["red"] }, b: L("ketam", "crab", "螃蟹"), en: "a crab", f: "gambar/laut-09.jpg", bg: "#fff4d6",
+      r: "M22 60 Q24 36 60 34 Q96 36 98 60 Q94 78 60 80 Q26 78 22 60 Z " + sepitKetam + " " + cermin(sepitKetam) + " " + kakiKetam + " " + cermin(kakiKetam),
+      d: `<path d="M52 36 L50 26 M68 36 L70 26" stroke-width="3"/>` + mata(50, 24, 3.2) + mata(70, 24, 3.2) + `<path d="M40 52 Q60 46 80 52 M44 62 Q60 58 76 62 M60 40 L60 48" fill="none" stroke-width="1.6" opacity=".6"/><path d="M28 18 L20 24" fill="none" stroke-width="1.6"/><path d="M92 18 L100 24" fill="none" stroke-width="1.6"/><path d="M0 97 Q30 92 60 97 T120 97 V100 H0 Z" fill="#ffe1a1" stroke="none"/>` },
+    { k: "kuning", c: "#ffd600", t: "#2f3a4a", s: { ms: ["ku", "ning"], en: ["yel", "low"] }, b: L("jagung", "corn", "玉米"), en: "corn", f: "gambar/sayur-03.jpg",
+      r: "M60 14 Q77 16 78 46 Q78 74 60 90 Q42 74 42 46 Q43 16 60 14 Z",
+      d: butirJagung + `<path d="M58 14 Q54 6 50 4 M60 14 Q60 5 62 2 M62 14 Q67 7 72 6" fill="none" stroke="#c9a227" stroke-width="1.8"/><path d="M44 44 Q24 58 30 96 Q44 86 60 92 Q44 76 44 44 Z" fill="#7cc46a"/><path d="M76 44 Q96 58 90 96 Q76 86 60 92 Q76 76 76 44 Z" fill="#5fae4f"/><path d="M38 60 Q36 78 40 90 M82 60 Q84 78 80 90" fill="none" stroke-width="1.4" opacity=".6"/>` },
+    { k: "hijau", c: "#3cc35b", t: "#fff", s: { ms: ["hi", "jau"], en: ["green"] }, b: L("buaya", "crocodile", "鳄鱼"), en: "a crocodile", f: "gambar/darat-19.jpg",
+      r: "M4 64 Q20 58 36 56 Q50 48 66 50 L92 50 Q104 50 116 56 L116 60 Q104 62 92 62 L76 64 Q66 72 50 72 Q30 72 4 66 Z M40 68 L34 82 L42 82 L48 70 Z M64 68 L62 82 L70 82 L72 68 Z M30 64 L22 74 L28 76 L36 66 Z",
+      d: `<path d="M14 61 L17 57 L20 60 M24 59 L27 55 L30 58 M34 57 L37 52 L40 56 M44 53 L47 49 L50 52 M54 51 L57 47 L60 50 M64 50 L67 47 L70 50" fill="none" stroke-width="1.8"/><path d="M92 56 L116 57" fill="none" stroke-width="1.6"/><path d="M96 56 L97 59 L98 56 M102 56 L103 59 L104 56 M108 56 L109 59 L110 56" fill="#fff" stroke-width="1.2"/><circle cx="84" cy="49" r="5" fill="#d6e86a"/>` + mata(85, 49, 2.4) + `<circle cx="112" cy="54" r="1" fill="#4a3428" stroke="none"/><path d="M40 64 Q50 66 60 64" fill="none" stroke-width="1.4" opacity=".6"/><path d="M0 84 H120" stroke="#8fd3ff" stroke-width="3"/>` },
+    { k: "biru", c: "#2f8cff", t: "#fff", s: { ms: ["bi", "ru"], en: ["blue"] }, b: L("kapal terbang", "aeroplane", "飞机"), en: "an aeroplane", f: "gambar/kenderaan-21.jpg", bg: "#e3f4ff",
+      r: "M8 50 Q8 44 18 44 L92 44 Q108 44 116 52 Q108 58 92 58 L18 58 Q8 58 8 50 Z M52 56 L36 84 L48 84 L72 56 Z M52 46 L42 28 L50 28 L66 46 Z M14 46 L6 24 L16 24 L28 46 Z M10 52 L2 60 L12 60 L18 54 Z",
+      d: [30, 38, 46, 54, 62, 70, 78].map(x => `<rect x="${x}" y="47.5" width="4" height="5" rx="2" fill="#d6f0ff" stroke-width="1.2"/>`).join("") + `<path d="M100 47 Q108 47 112 51 L102 51 Z" fill="#d6f0ff" stroke-width="1.4"/><path d="M18 54 H92" fill="none" stroke-width="1.4" opacity=".5"/><rect x="42" y="68" width="14" height="7" rx="3.5" fill="#c8ccd6"/><path d="M78 86 Q78 80 84 80 Q86 74 93 75 Q99 72 102 78 Q108 78 108 83 Q108 87 103 87 H82 Q78 87 78 86 Z M14 16 Q14 12 19 12 Q21 7 26 8 Q30 6 33 10 Q38 10 38 14 Q38 17 34 17 H18 Q14 17 14 16 Z" fill="#fff"/>` },
+    { k: "oren", c: "#ff8c1a", t: "#fff", s: { ms: ["o", "ren"], en: ["o", "range"] }, b: L("rubah", "fox", "狐狸"), en: "a fox", f: "gambar/darat-38.jpg",
+      r: "M48 90 Q36 88 38 70 Q40 54 50 46 L46 40 Q40 36 38 30 L40 12 L50 24 Q56 22 62 24 L72 12 L72 30 Q70 36 64 40 Q72 50 72 66 Q72 84 66 90 Z M66 88 Q86 92 102 82 Q114 72 108 58 Q100 50 92 62 Q86 74 70 78 Z",
+      d: `<path d="M42 28 Q46 34 54 36 Q60 40 56 46 Q50 40 44 38 Q40 34 42 28 Z" fill="#fff"/><path d="M68 28 Q66 34 60 36 Q56 40 56 46 Q62 42 66 38 Q70 34 68 28 Z" fill="#fff"/><path d="M41 14 L43 22 L48 23 Z M71 14 L69 22 L64 23 Z" fill="#3b2a20"/><path d="M50 60 Q56 54 62 60 Q64 76 56 86 Q48 76 50 60 Z" fill="#fff"/><path d="M104 60 Q112 66 108 76 Q102 72 100 64 Z" fill="#fff"/><ellipse cx="56" cy="44" rx="3" ry="2.2" fill="#1f1f1f"/>` + mata(49, 31, 2) + mata(63, 31, 2) + `<path d="M44 90 V96 M52 90 V96 M60 90 V96" stroke="#3b2a20" stroke-width="3"/>` },
+    { k: "ungu", c: "#9b59d6", t: "#fff", s: { ms: ["u", "ngu"], en: ["pur", "ple"] }, b: L("anggur", "bunch of grapes", "葡萄"), en: "a bunch of grapes", f: "gambar/buah-05.jpg",
+      r: kumpul([[40, 32], [54, 30], [68, 30], [82, 32], [34, 45], [47, 44], [61, 43], [75, 44], [88, 45], [42, 58], [55, 57], [69, 57], [82, 58], [49, 70], [62, 70], [75, 70], [55, 82], [68, 82], [61, 93]], 7.5),
+      d: [[40, 32], [54, 30], [68, 30], [82, 32], [34, 45], [47, 44], [61, 43], [75, 44], [88, 45], [42, 58], [55, 57], [69, 57], [82, 58], [49, 70], [62, 70], [75, 70], [55, 82], [68, 82], [61, 93]].map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="7.5" fill="none" stroke-width="1.4"/>`).join("") + `<path d="M61 22 Q60 12 66 4" fill="none" stroke="#8a5a2b" stroke-width="3.5"/><path d="M64 10 Q74 0 90 4 Q100 8 104 18 Q94 22 84 20 Q72 18 64 10 Z" fill="#5cc26a"/><path d="M66 10 Q82 10 102 17 M78 8 L82 13 M90 8 L90 15" fill="none" stroke-width="1.4"/>` + [[38, 30], [52, 28], [80, 30], [45, 42], [73, 42], [53, 55], [80, 56], [60, 68], [66, 80]].map(p => kilat(p[0], p[1])).join("") },
+    { k: "perang", c: "#8b5a2b", t: "#fff", s: { ms: ["pe", "rang"], en: ["brown"] }, b: L("burung hantu", "owl", "猫头鹰"), en: "an owl", f: "gambar/burung-03.jpg",
+      r: "M60 90 Q32 90 30 58 Q28 34 36 20 L32 8 L46 16 Q60 12 74 16 L88 8 L84 20 Q92 34 90 58 Q88 90 60 90 Z",
+      d: `<path d="M8 93 H112" stroke="#6b4423" stroke-width="7"/><path d="M60 46 Q50 22 40 26 Q30 32 34 46 Q38 56 50 56 Q58 54 60 46 Q62 54 70 56 Q82 56 86 46 Q90 32 80 26 Q70 22 60 46 Z" fill="#f3d8b5"/><circle cx="47" cy="40" r="9" fill="#ffc83d"/><circle cx="73" cy="40" r="9" fill="#ffc83d"/>` + mata(47, 40, 5) + mata(73, 40, 5) + `<path d="M57 48 L60 58 L63 48 Z" fill="#5b4636"/><path d="M48 66 L51 70 L54 66 M58 72 L61 76 L64 72 M66 66 L69 70 L72 66 M50 80 L53 84 L56 80 M64 80 L67 84 L70 80" fill="none" stroke-width="1.5"/><path d="M33 52 Q34 76 46 86 M87 52 Q86 76 74 86" fill="none" stroke-width="2"/><path d="M50 90 L48 96 M54 90 L54 96 M66 90 L66 96 M70 90 L72 96" stroke="#e3a21a" stroke-width="2.6"/>` },
+    { k: "hitam", c: "#222222", t: "#fff", s: { ms: ["hi", "tam"], en: ["black"] }, b: L("penguin", "penguin", "企鹅"), en: "a penguin", f: "gambar/burung-06.jpg", bg: "#e8f6ff",
+      r: "M60 8 Q42 8 40 26 Q34 40 34 62 Q34 84 46 90 L74 90 Q86 84 86 62 Q86 40 80 26 Q78 8 60 8 Z M38 42 Q24 56 24 76 Q32 72 36 64 Z M82 42 Q96 56 96 76 Q88 72 84 64 Z",
+      d: `<path d="M0 92 H120 V100 H0 Z" fill="#fff" stroke="none"/><path d="M0 92 H120" stroke="#9cc8f0" stroke-width="2"/><path d="M60 30 Q48 30 46 46 Q42 64 46 80 Q52 88 60 88 Q68 88 74 80 Q78 64 74 46 Q72 30 60 30 Z" fill="#fff"/><path d="M60 22 L68 26 L60 29 Z" fill="#ff8c1a"/>` + mata(53, 18, 2.4) + mata(67, 18, 2.4) + `<path d="M44 88 Q38 94 46 95 H56 L54 89 Z M76 88 Q82 94 74 95 H64 L66 89 Z" fill="#ffb627"/>` },
+    { k: "putih", c: "#ffffff", t: "#2f3a4a", s: { ms: ["pu", "tih"], en: ["white"] }, b: L("biri-biri", "sheep", "绵羊"), en: "a sheep", f: "gambar/darat-06.jpg", bg: "#d9f5c8",
+      r: kumpul([[30, 46, 11], [44, 38, 12], [60, 37, 12], [74, 42, 11], [80, 56, 10], [70, 68, 11], [54, 70, 11], [38, 68, 11], [24, 58, 10], [52, 54, 16]]) + " " + bulat(88, 36, 6),
+      d: `<path d="M34 76 V94 M44 78 V94 M62 78 V94 M72 74 V94" stroke="#3b3b3b" stroke-width="5"/><path d="M0 95 H120" stroke="#7cc46a" stroke-width="4"/><path d="M6 95 Q8 89 10 95 M16 95 Q18 87 20 95 M104 95 Q106 89 108 95 M112 95 Q114 87 116 95" fill="none" stroke="#5cb85c" stroke-width="2"/><path d="M80 42 Q70 40 70 48 Q76 50 82 46 Z" fill="#3b3b3b"/><path d="M84 40 Q80 54 88 62 Q96 64 100 56 Q102 44 92 38 Z" fill="#3b3b3b"/>` + mata(90, 47, 2.2) + `<path d="M96 57 L99 56" stroke="#fff" stroke-width="1.6"/>` }
   ];
 })();
 const WARNA_KEY = "appPendidikan.warna.v1";
@@ -2358,7 +2367,8 @@ function warnaItem() {
   warnaStrip();
   wPilih(w.c);
   $("wBoard").style.background = w.bg || "";
-  $("wGaris").innerHTML = `<g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="${w.r}" fill="none"/>${w.d}</g>`;
+  /* Garis luar sahaja (topeng buang garisan bertindih di dalam kawasan) */
+  $("wGaris").innerHTML = `<defs><mask id="wTopeng" maskUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="120"><rect x="-10" y="-10" width="140" height="120" fill="#fff"/><path d="${w.r}" fill="#000"/></mask></defs><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="${w.r}" fill="none" stroke-width="5" mask="url(#wTopeng)"/>${w.d}</g>`;
   $("wSuku").className = "wsuku";
   $("wSuku").innerHTML = wSuku(w).map(x => `<span class="suku">${x}</span>`).join(`<span class="sengkang">-</span>`);
   $("wContoh").innerHTML = "";
@@ -2390,7 +2400,7 @@ function warnaAjar(id) {
     }).then(() => {
       if (!ok()) return;
       tMaskot2("");
-      $("wContoh").innerHTML = wSvg(w, w.c) + `<div class="wcap"></div>`;
+      $("wContoh").innerHTML = (w.f ? `<img class="wfoto" alt="" src="${w.f}">` : wSvg(w, w.c)) + `<div class="wcap"></div>`;
       $("wContoh").querySelector(".wcap").textContent = wSeperti(w);
       return speak(wSeperti(w), LANG).then(() => tunggu(300));
     }).then(() => {
