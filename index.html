@@ -111,7 +111,25 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @keyframes bounce{0%,100%{transform:scale(1)}30%{transform:scale(1.12) rotate(-2deg)}60%{transform:scale(.97) rotate(2deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
 /* Tulis Huruf */
-#app:has(#s-tulis.on){max-width:1060px}
+#app:has(#s-tulis.on),#app:has(#s-warna.on){max-width:1060px}
+#s-warna{position:relative;z-index:0}
+.tboard.wboard{aspect-ratio:120/100;width:min(60%,calc(62vh * 1.2));border-color:var(--wc)}
+.tboard.wboard.ajak{animation:goyang .6s ease-in-out 3}.wboard.jaya{animation:lompat .6s ease 2}
+#wInk,#wGaris{position:absolute;inset:0;width:100%;height:100%}#wInk{touch-action:none;cursor:crosshair}#wGaris{pointer-events:none}
+.tstrip button.wdot{flex:none;min-width:0;width:46px;height:46px;border-radius:50%;background:var(--k);border:4px solid var(--card);box-shadow:0 3px 8px var(--sh);position:relative;transition:transform .2s}
+.tstrip button.wdot.on{background:var(--k);transform:scale(1.2);border-color:var(--kuning)}
+.tstrip button.wdot.ok::after{content:"";position:absolute;top:-8px;right:-8px;width:20px;height:20px;background:#ffc107;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.wsuku{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;min-height:90px}
+.suku{font-size:clamp(38px,6.5vw,62px);font-weight:700;padding:4px 18px;border-radius:22px;background:var(--card);color:var(--text);box-shadow:0 4px 12px var(--sh);transition:transform .3s,background .3s,color .3s;border:4px solid var(--wc)}
+.suku.on{transform:scale(1.35) translateY(-6px);background:var(--wc);color:var(--wt);letter-spacing:6px}
+.wsuku.penuh .suku{background:var(--wc);color:var(--wt);animation:pop .5s}
+.sengkang{font-size:36px;font-weight:700;color:var(--muted)}
+.wcontoh{width:100%;max-width:280px;text-align:center}
+.wcontoh .art{width:100%;height:auto;animation:pop .5s,apung 3s ease-in-out .5s infinite}
+.wcap{font-weight:700;font-size:20px;margin-top:2px}
+#wKrayon button{width:34px;height:46px;outline:2px solid rgba(128,128,128,.35)}
+@media (max-width:640px){.tboard.wboard{width:min(100%,calc(50vh * 1.2))}}
+@media (orientation:portrait) and (min-width:641px){.tboard.wboard{width:min(100%,calc(44vh * 1.2))}}
 #s-tulis{position:relative;z-index:0}
 .tbg{position:absolute;inset:-52px -14px -40px;overflow:hidden;pointer-events:none;z-index:-1}
 .tbg span{position:absolute;bottom:-90px;width:60px;height:60px;border-radius:50%;background:var(--kuning-p);opacity:.8;animation:naik 14s linear infinite}
@@ -390,6 +408,23 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
       </div>
     </div>
   </section>
+  <section id="s-warna" class="screen">
+    <div class="tbg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="top"><button class="pill ikon" id="wBack" aria-label="Keluar"></button><h2 id="wTitle" style="flex:1;margin:0"></h2></div>
+    <div class="tstrip" id="wStrip"></div>
+    <div class="tmain">
+      <div class="tboard wboard" id="wBoard"><canvas id="wInk"></canvas><svg id="wGaris" viewBox="0 0 120 100"></svg></div>
+      <div class="tside">
+        <div class="wsuku" id="wSuku"></div>
+        <div class="wcontoh" id="wContoh"></div>
+        <div class="tmas" id="wMas"><div class="tbub" id="wBub"></div></div>
+      </div>
+    </div>
+    <div class="ttools">
+      <div class="krayon" id="wKrayon"></div>
+      <div class="tbtns"><button class="tb ungu" id="wSay"></button><button class="tb koral" id="wErase"></button><button class="tb hijau" id="wNext"></button></div>
+    </div>
+  </section>
   <section id="s-result" class="screen">
     <h2 id="resTitle"></h2>
     <div id="stars" style="text-align:center"></div>
@@ -503,6 +538,8 @@ const UI = {
   cubaGaris: L("Cuba ikut garisan ya!", "Try to stay on the line!", "试着沿着线写哦！"),
   hebatTulis: [L("Hebat! Cantiknya tulisan kamu!", "Great! Beautiful writing!", "太棒了！写得真漂亮！"), L("Pandai! Betul sekali!", "Clever! Just right!", "真聪明！写对了！"), L("Wah, bagus sungguh!", "Wow, well done!", "哇，真厉害！")],
   tunjuk: L("Tunjuk", "Show me", "示范"), padam: L("Padam", "Erase", "擦掉"), dengar: L("Dengar", "Listen", "听"), lagi: L("Seterusnya", "Next", "下一个"),
+  dengarSebut: L("Dengar dan ikut sebut ya!", "Listen and say it with me!", "听一听，跟着说！"), kamuSebut: L("Sekarang kamu sebut!", "Now you say it!", "现在你来说！"),
+  hebatWarna: [L("Hebat! Cantiknya warna kamu!", "Great! Beautiful colouring!", "太棒了！涂得真漂亮！"), L("Pandai mewarna!", "Great colouring!", "涂色真棒！"), L("Wah, cantik sungguh!", "Wow, so pretty!", "哇，真漂亮！")],
   seronok: [L("Betul!", "Correct!", "答对了！"), L("Bagus!", "Good job!", "很好！"), L("Hebat!", "Great!", "太棒了！")]
 };
 
@@ -1798,7 +1835,8 @@ function speak(text, lang) {
     if (!ss) return selesai();
     ss.cancel();
     lang = VOICE[lang] ? lang : "ms";
-    let clean = text.replace(EMOJI_RE, "");
+    const pelan = text.charAt(0) === "~";
+    let clean = (pelan ? text.slice(1) : text).replace(EMOJI_RE, "");
     if (lang === "ms") clean = clean.replace(/___|\.\.\./g, " titik titik ").replace(/−/g, " tolak ").replace(/×/g, " darab ").replace(/÷/g, " bahagi ");
     else if (lang === "en") clean = clean.replace(/___|\.\.\./g, " blank ");
     else clean = clean.replace(/……|\.\.\./g, "，");
@@ -1811,7 +1849,7 @@ function speak(text, lang) {
     }
     u.lang = v ? v.lang : VOICE[lang][0];
     if (v) u.voice = v;
-    u.rate = 0.85;
+    u.rate = pelan ? 0.4 : 0.85;
     u.onend = u.onerror = () => selesai();
     ss.speak(u);
   } catch (e) { selesai(); }
@@ -2229,6 +2267,229 @@ function tKonfeti(x, y) {
   fxMula();
 }
 
+/* ===== Warna: sebut ikut suku kata, kemudian mewarna gambar ===== */
+const WARNA = (() => {
+  const bulat = (cx, cy, r) => `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0z`;
+  const E = (x, y, r) => { r = r || 3.6; return `<g class="ak" style="transform-origin:50% 50%"><circle cx="${x}" cy="${y}" r="${r}" fill="#2b2b2b" stroke="none"/><circle cx="${x + r * .35}" cy="${y - r * .35}" r="${r * .38}" fill="#fff" stroke="none"/></g>`; };
+  const BL = (x, y) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".75"/>`;
+  const MUKA = (x, y, d) => E(x - d, y) + E(x + d, y) + `<path d="M${x - 5} ${y + 7} Q${x} ${y + 12} ${x + 5} ${y + 7}" fill="none"/>` + BL(x - d - 6, y + 7) + BL(x + d + 6, y + 7);
+  const MATA_BESAR = (x, y) => `<circle cx="${x}" cy="${y}" r="6" fill="#fff"/>` + E(x + 1, y + 1, 3);
+  /* k = kunci warna (K), c = warna krayon, t = warna tulisan atas warna, s = suku kata, b = benda, r = kawasan diwarna, d = garisan & butiran */
+  return [
+    { k: "merah", c: "#ff3b3b", t: "#fff", s: { ms: ["me", "rah"], en: ["red"] }, b: L("epal", "apple", "苹果"), en: "an apple",
+      r: "M60 30 q-12-8 -26 0 q-14 10 -8 32 q6 24 24 26 q6 0 10-3 q4 3 10 3 q18-2 24-26 q6-22 -8-32 q-14-8 -26 0z",
+      d: `<path d="M60 30 q0-10 5-17" fill="none" stroke-width="4"/><path d="M64 20 q12-12 25-4 q-11 12 -25 4z" fill="#6cc070"/>` + MUKA(60, 58, 10) },
+    { k: "kuning", c: "#ffd600", t: "#2f3a4a", s: { ms: ["ku", "ning"], en: ["yel", "low"] }, b: L("pisang", "banana", "香蕉"), en: "a banana",
+      r: "M22 30 q8 50 56 52 q22 0 32 -10 q-32 6 -54 -12 q-16 -14 -22 -32z",
+      d: `<path d="M20 20 l4 12 l6-2z" fill="#8a5a2b"/><circle cx="110" cy="72" r="3" fill="#8a5a2b"/>` + MUKA(64, 66, 7) },
+    { k: "hijau", c: "#3cc35b", t: "#fff", s: { ms: ["hi", "jau"], en: ["green"] }, b: L("katak", "frog", "青蛙"), en: "a frog",
+      r: "M18 72 q0-30 42-30 q42 0 42 30 q0 18 -42 20 q-42 -2 -42 -20z " + bulat(38, 40, 13) + " " + bulat(82, 40, 13) + " M24 86 q-10 2 -12 9 h20z M96 86 q10 2 12 9 h-20z",
+      d: MATA_BESAR(38, 40) + MATA_BESAR(82, 40) + `<path d="M42 66 q18 14 36 0" fill="none"/>` + BL(32, 64) + BL(88, 64) },
+    { k: "biru", c: "#2f8cff", t: "#fff", s: { ms: ["bi", "ru"], en: ["blue"] }, b: L("ikan paus", "whale", "鲸鱼"), en: "a whale",
+      r: "M16 62 q0-32 48-32 q38 0 44 26 q4 22 -22 24 h-48 q-22 0 -22 -18z M18 58 q-10 -10 -14 -22 q10 2 14 10 q2 -12 10 -16 q0 14 -4 26z",
+      d: `<path d="M70 28 q-4 -12 -12 -14 M70 28 q2 -14 10 -16 M70 28 v-16" stroke="#8fd3ff" stroke-width="3" fill="none"/><path d="M30 72 q30 10 74 -6" fill="none" stroke-width="2"/>` + E(86, 50, 4) + `<path d="M92 62 q6 4 12 0" fill="none"/>` + BL(84, 60) },
+    { k: "oren", c: "#ff8c1a", t: "#fff", s: { ms: ["o", "ren"], en: ["o", "range"] }, b: L("lobak merah", "carrot", "红萝卜"), en: "a carrot",
+      r: "M62 30 q16 0 16 12 l-12 52 q-2 6 -6 0 l-12 -52 q0 -12 14 -12z",
+      d: `<path d="M62 30 q-14 -14 -8 -24 q8 6 8 20 q2 -16 12 -22 q4 12 -8 26z" fill="#4caf50"/><path d="M52 58 h7 M66 68 h6 M57 80 h6" stroke-width="2"/>` + E(57, 44, 3) + E(67, 44, 3) + `<path d="M58 50 q4 4 8 0" fill="none" stroke-width="2"/>` },
+    { k: "ungu", c: "#9b59d6", t: "#fff", s: { ms: ["u", "ngu"], en: ["pur", "ple"] }, b: L("terung", "brinjal", "茄子"), en: "a brinjal",
+      r: "M40 32 q-16 6 -14 26 q2 20 20 32 q16 10 32 6 q14 -6 8 -22 q-6 -14 -18 -28 q-12 -16 -28 -14z",
+      d: `<path d="M50 24 q-2 -10 4 -16" fill="none" stroke-width="4"/><path d="M34 34 q8 -16 30 -8 q-2 10 -12 10 q-10 4 -18 -2z" fill="#4caf50"/><path d="M48 70 q6 8 14 8" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/>` + MUKA(54, 52, 9) },
+    { k: "perang", c: "#8b5a2b", t: "#fff", s: { ms: ["pe", "rang"], en: ["brown"] }, b: L("beruang", "bear", "熊"), en: "a bear",
+      r: bulat(60, 58, 30) + " " + bulat(36, 32, 11) + " " + bulat(84, 32, 11),
+      d: `<circle cx="36" cy="32" r="5" fill="#f3c9a0"/><circle cx="84" cy="32" r="5" fill="#f3c9a0"/><ellipse cx="60" cy="68" rx="13" ry="10" fill="#f3d8b5"/><ellipse cx="60" cy="63" rx="5" ry="3.5" fill="#3b2a20"/><path d="M60 67 v3 M54 72 q6 5 12 0" fill="none"/>` + E(48, 52, 4) + E(72, 52, 4) + BL(40, 64) + BL(80, 64) },
+    { k: "hitam", c: "#222222", t: "#fff", s: { ms: ["hi", "tam"], en: ["black"] }, b: L("semut", "ant", "蚂蚁"), en: "an ant",
+      r: bulat(86, 58, 20) + " " + bulat(58, 56, 11) + " " + bulat(30, 48, 15),
+      d: `<path d="M56 64 l-10 22 M60 66 l2 22 M62 64 l12 20 M54 50 l-8 -12 M62 48 l10 -12" fill="none" stroke-width="3"/><path d="M26 34 q-6 -14 -14 -14 M34 34 q2 -16 10 -18" fill="none" stroke-width="2.5"/>` + MATA_BESAR(24, 46) + MATA_BESAR(37, 46) + `<path d="M26 56 q5 4 10 0" fill="none" stroke="#ff8fa3" stroke-width="2.5"/>` },
+    { k: "putih", c: "#ffffff", t: "#2f3a4a", s: { ms: ["pu", "tih"], en: ["white"] }, b: L("awan", "cloud", "白云"), en: "a cloud", bg: "#bfe3ff",
+      r: "M30 76 q-18 0 -18 -15 q0 -15 18 -15 q2 -20 24 -20 q15 0 21 12 q4 -4 12 -4 q18 0 18 18 q12 2 12 12 q0 12 -12 12z",
+      d: `<circle cx="104" cy="16" r="9" fill="#ffd23f"/><path d="M104 2 v-2 M118 16 h2 M114 6 l2-2" stroke="#ffb627" stroke-width="2.5"/>` + MUKA(62, 54, 10) }
+  ];
+})();
+const WARNA_KEY = "appPendidikan.warna.v1";
+let wI = 0, wInk = [], wNow = null, wWarna = "#ff3b3b", wId = 0, wDone = false, wMask = null;
+const wOn = () => $("s-warna").classList.contains("on");
+const wSvg = (w, isi, cls) => `<svg class="${cls || "art"}" viewBox="0 0 120 100" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="${w.r}" fill="${isi}" fill-rule="nonzero"/>${w.d}</g></svg>`;
+/* Ayat ikut bahasa */
+const wNama = w => tr(K[w.k]);
+const wSeperti = w => LANG === "en" ? wNama(w) + ", like " + w.en + "." : LANG === "zh" ? wNama(w) + "，像" + w.b.zh + "。" : wNama(w) + ", seperti " + w.b.ms + ".";
+const wAjak = w => LANG === "en" ? "Let's colour the " + w.b.en + "!" : LANG === "zh" ? "来给" + w.b.zh + "涂色吧！" : "Jom warnakan " + w.b.ms + "!";
+const wSiap = w => LANG === "en" ? "The " + w.b.en + " is " + wNama(w).toLowerCase() + "." : LANG === "zh" ? w.b.zh + "是" + wNama(w) + "的。" : w.b.ms.charAt(0).toUpperCase() + w.b.ms.slice(1) + " berwarna " + wNama(w).toLowerCase() + ".";
+const wSuku = w => w.s[LANG] || [wNama(w)];
+function wSimpan() { try { return JSON.parse(localStorage.getItem(WARNA_KEY)) || {}; } catch (e) { return {}; } }
+
+function startWarna(i) {
+  wI = i || 0;
+  show("s-warna");
+  warnaKrayon();
+  warnaItem();
+}
+function warnaStrip() {
+  const s = wSimpan(), box = $("wStrip");
+  box.innerHTML = "";
+  WARNA.forEach((w, i) => {
+    const b = document.createElement("button");
+    b.className = "wdot" + (i === wI ? " on" : "") + (s[w.k] ? " ok" : "");
+    b.style.setProperty("--k", w.c);
+    b.setAttribute("aria-label", wNama(w));
+    b.onclick = () => { wI = i; warnaItem(); };
+    box.appendChild(b);
+  });
+}
+function warnaKrayon() {
+  const box = $("wKrayon");
+  box.innerHTML = "";
+  WARNA.forEach(w => {
+    const b = document.createElement("button");
+    b.style.setProperty("--k", w.c);
+    b.dataset.c = w.c;
+    b.setAttribute("aria-label", wNama(w));
+    b.onclick = () => { wPilih(w.c); speak(wNama(w), LANG); };
+    box.appendChild(b);
+  });
+}
+function wPilih(c) { wWarna = c; document.querySelectorAll("#wKrayon button").forEach(x => x.classList.toggle("on", x.dataset.c === c)); }
+function warnaItem() {
+  const w = WARNA[wI];
+  wDone = false; wInk = []; wNow = null;
+  const id = ++wId;
+  $("wTitle").textContent = wNama(w);
+  $("s-warna").style.setProperty("--wc", w.c);
+  $("s-warna").style.setProperty("--wt", w.t);
+  warnaStrip();
+  wPilih(w.c);
+  $("wBoard").style.background = w.bg || "";
+  $("wGaris").innerHTML = `<g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="${w.r}" fill="none"/>${w.d}</g>`;
+  $("wSuku").className = "wsuku";
+  $("wSuku").innerHTML = wSuku(w).map(x => `<span class="suku">${x}</span>`).join(`<span class="sengkang">-</span>`);
+  $("wContoh").innerHTML = "";
+  $("wNext").classList.remove("goyang");
+  wSaiz();
+  /* Topeng kawasan untuk kira berapa penuh diwarna */
+  const m = document.createElement("canvas"); m.width = 120; m.height = 100;
+  const mc = m.getContext("2d"); mc.fill(new Path2D(w.r));
+  wMask = mc.getImageData(0, 0, 120, 100).data;
+  warnaAjar(id);
+}
+/* Ajar sebut: suku kata perlahan satu-satu, kemudian perkataan penuh, kemudian contoh */
+function warnaAjar(id) {
+  const w = WARNA[wI], ok = () => id === wId && wOn(), chip = [...document.querySelectorAll("#wSuku .suku")];
+  const tunggu = ms => new Promise(r => setTimeout(r, ms));
+  wBual(tr(UI.dengarSebut));
+  speak(tr(UI.dengarSebut), LANG).then(() => tunggu(300)).then(function langkah(j) {
+    j = j || 0;
+    if (!ok()) return;
+    if (j < chip.length) {
+      chip[j].classList.add("on");
+      return speak("~" + wSuku(w)[j], LANG).then(() => tunggu(350)).then(() => { chip[j].classList.remove("on"); return langkah(j + 1); });
+    }
+    $("wSuku").classList.add("penuh");
+    return speak(wNama(w), LANG).then(() => tunggu(400)).then(() => {
+      if (!ok()) return;
+      wBual(tr(UI.kamuSebut)); tMaskot2("fikir");
+      return speak(tr(UI.kamuSebut), LANG).then(() => tunggu(2200));
+    }).then(() => {
+      if (!ok()) return;
+      tMaskot2("");
+      $("wContoh").innerHTML = wSvg(w, w.c) + `<div class="wcap"></div>`;
+      $("wContoh").querySelector(".wcap").textContent = wSeperti(w);
+      return speak(wSeperti(w), LANG).then(() => tunggu(300));
+    }).then(() => {
+      if (!ok()) return;
+      wBual(wAjak(w));
+      $("wBoard").classList.add("ajak");
+      setTimeout(() => $("wBoard").classList.remove("ajak"), 2400);
+      speak(wAjak(w), LANG);
+    });
+  });
+}
+function wBual(t) { const b = $("wBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
+function tMaskot2(c) { const m = document.querySelector("#s-warna .masc"); if (!m) return; m.classList.remove("yay", "fikir"); void m.getBoundingClientRect(); if (c) m.classList.add(c); }
+
+/* Kanvas mewarna: lukisan dikerat ikut kawasan supaya tak terkeluar garisan */
+function wSaiz() {
+  const c = $("wInk"), r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  if (!r.width) return;
+  c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
+  wLukisSemula();
+}
+function wCtx() {
+  const c = $("wInk"), ctx = c.getContext("2d"), k = c.width / 120;
+  ctx.setTransform(k, 0, 0, k, 0, 0);
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  return ctx;
+}
+function wSeg(ctx, s, a, b) {
+  ctx.save(); ctx.clip(new Path2D(WARNA[wI].r));
+  ctx.strokeStyle = s.c; ctx.lineWidth = b[2];
+  ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+  ctx.restore();
+}
+function wLukisSemula() {
+  const c = $("wInk"), ctx = wCtx();
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, c.width, c.height); ctx.restore();
+  wInk.forEach(s => { if (s.penuh) { ctx.fillStyle = s.c; ctx.fill(new Path2D(WARNA[wI].r)); } s.p.forEach((q, i) => wSeg(ctx, s, s.p[Math.max(0, i - 1)], q)); });
+}
+function wTitik(e) {
+  const r = $("wInk").getBoundingClientRect(), pr = e.pointerType === "pen" && e.pressure > 0 ? e.pressure : .5;
+  return [(e.clientX - r.left) / r.width * 120, (e.clientY - r.top) / r.height * 100, 7 + pr * 8];
+}
+function wDown(e) {
+  if (wDone) return;
+  if (e.pointerType === "pen") tPen = true;
+  else if (e.pointerType === "touch" && tPen) return;
+  e.preventDefault();
+  try { $("wInk").setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ }
+  wNow = { c: wWarna, p: [wTitik(e)], id: e.pointerId };
+  wInk.push(wNow);
+  wSeg(wCtx(), wNow, wNow.p[0], wNow.p[0]);
+}
+function wMove(e) {
+  if (!wNow || e.pointerId !== wNow.id) return;
+  e.preventDefault();
+  const ctx = wCtx(), evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+  (evs.length ? evs : [e]).forEach(ev => { const q = wTitik(ev), a = wNow.p[wNow.p.length - 1]; wNow.p.push(q); wSeg(ctx, wNow, a, q); });
+  if (Math.random() < .3) tPercik(e.clientX, e.clientY, 1);
+}
+function wUp(e) {
+  if (!wNow || e.pointerId !== wNow.id) return;
+  wNow = null;
+  wSemak();
+}
+/* Berapa peratus kawasan sudah diwarna dengan warna yang betul */
+function wSemak() {
+  const w = WARNA[wI], m = document.createElement("canvas");
+  m.width = 120; m.height = 100;
+  const mc = m.getContext("2d");
+  mc.drawImage($("wInk"), 0, 0, 120, 100);
+  const px = mc.getImageData(0, 0, 120, 100).data, rgb = [1, 3, 5].map(k => parseInt(w.c.substr(k, 2), 16));
+  let jum = 0, kena = 0;
+  for (let i = 0; i < px.length; i += 4) {
+    if (wMask[i + 3] < 128) continue;
+    jum++;
+    if (px[i + 3] > 100 && Math.abs(px[i] - rgb[0]) + Math.abs(px[i + 1] - rgb[1]) + Math.abs(px[i + 2] - rgb[2]) < 90) kena++;
+  }
+  if (jum && kena / jum >= .6) warnaJaya();
+}
+function warnaJaya() {
+  wDone = true;
+  const w = WARNA[wI], s = wSimpan(), id = wId;
+  s[w.k] = 1; try { localStorage.setItem(WARNA_KEY, JSON.stringify(s)); } catch (e) { /* abaikan */ }
+  /* Isi penuh kawasan dengan warna, kemudian raikan */
+  wInk.push({ c: w.c, p: [], penuh: true });
+  wLukisSemula();
+  sndWin();
+  const r = $("wBoard").getBoundingClientRect();
+  tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
+  $("wBoard").classList.add("jaya"); setTimeout(() => $("wBoard").classList.remove("jaya"), 1500);
+  tMaskot2("yay");
+  const pj = tr(pick(UI.hebatWarna));
+  wBual(pj);
+  warnaStrip();
+  $("wNext").classList.add("goyang");
+  speak(pj, LANG).then(() => id === wId && wOn() && speak(wSiap(w), LANG)).then(() => setTimeout(() => { if (id === wId && wOn()) warnaNext(); }, 1500));
+}
+function warnaNext() { wI = (wI + 1) % WARNA.length; warnaItem(); }
+
 /* ===== UI ===== */
 const $ = id => document.getElementById(id);
 function show(id) {
@@ -2351,7 +2612,7 @@ function renderNota() {
   backMenu = renderNota;
   renderMenu("📒 " + tr(UI.nota), Object.keys(NOTA).map(id => {
     const n = NOTA[id];
-    return [id, n.emoji, tr(n.nama), n.items().length + tr(UI.kad), "", id === "n-huruf" ? () => startTulis(0) : id === "n-nombor" ? () => startTulis(0, null, "nombor") : () => startNota(id)];
+    return [id, n.emoji, tr(n.nama), n.items().length + tr(UI.kad), "", id === "n-huruf" ? () => startTulis(0) : id === "n-nombor" ? () => startTulis(0, null, "nombor") : id === "n-warna" ? () => startWarna(0) : () => startNota(id)];
   }), renderPra);
 }
 function renderGame() {
@@ -2586,6 +2847,7 @@ try { window.speechSynthesis && window.speechSynthesis.getVoices(); } catch (e) 
 function tulisLabel() {
   const lb = (id, ik, t) => { $(id).innerHTML = IKON[ik] + "<span></span>"; $(id).querySelector("span").textContent = tr(t); };
   $("tBack").innerHTML = IKON.back;
+  lb("wSay", "speak", UI.dengar); lb("wErase", "padam", UI.padam); lb("wNext", "next", UI.lagi); $("wBack").innerHTML = IKON.back;
   lb("tShow", "play", UI.tunjuk); lb("tErase", "padam", UI.padam); lb("tSay", "speak", UI.dengar); lb("tNext", "next", UI.lagi);
 }
 $("tMas").insertAdjacentHTML("beforeend", MASKOT);
@@ -2609,6 +2871,15 @@ $("tNext").onclick = tulisNext;
 $("tBack").onclick = () => { tDemo++; stopSpeech(); tBalik ? tBalik() : goBack(); };
 document.querySelectorAll("#tCase button").forEach(b => { b.onclick = () => { tCs = b.dataset.c; tulisHuruf(); }; });
 window.addEventListener("resize", () => { if ($("s-tulis").classList.contains("on")) tSaiz(); });
+/* Warna: butang & pensel */
+$("wMas").insertAdjacentHTML("beforeend", MASKOT);
+["pointerdown", "pointermove", "pointerup", "pointercancel"].forEach((ev, i) => $("wInk").addEventListener(ev, [wDown, wMove, wUp, wUp][i]));
+$("wInk").addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+$("wBack").onclick = () => { wId++; stopSpeech(); goBack(); };
+$("wSay").onclick = () => { wId++; warnaAjar(wId); };
+$("wErase").onclick = () => { wDone = false; wInk = []; wLukisSemula(); };
+$("wNext").onclick = () => warnaNext();
+window.addEventListener("resize", () => { if (wOn()) wSaiz(); });
 applyLang();
 renderHome();
 } else if (typeof module !== "undefined") {
