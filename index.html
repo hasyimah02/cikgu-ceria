@@ -128,6 +128,17 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .tbkosong{display:inline-block;min-width:110px;border-bottom:4px dashed var(--muted);margin:0 6px}
 .tbkosong.isi{border-bottom:4px solid var(--hijau);color:var(--hijau);animation:pop .4s}
 .tbayat{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:var(--card);border-radius:24px;padding:16px;box-shadow:0 6px 16px var(--sh)}
+.tbw.tanda{background:var(--koral);color:#fff;border-color:var(--koral);animation:pop .3s}
+.tbsusun{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.tbsl{display:flex;align-items:center;gap:10px;min-height:54px;padding:8px 12px;border-radius:16px;border:3px dashed var(--muted);background:var(--card)}
+.tbsl b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ungu);color:#fff;display:grid;place-items:center}
+.tbsl span{font-size:clamp(18px,2.8vw,24px);font-weight:700}.tbsl.isi{border:3px solid var(--hijau);background:var(--hijau-p);animation:pop .3s}
+.tbkad{display:flex;flex-direction:column;gap:8px}
+.tbs{background:var(--biru);color:#fff;border-radius:16px;padding:10px 16px;font-size:clamp(18px,2.8vw,24px);font-weight:700;text-align:left;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:opacity .3s,transform .15s}
+.tbs:nth-child(3n+2){background:var(--oren)}.tbs:nth-child(3n){background:var(--hijau)}
+.tbs.guna{opacity:0;transform:scale(.6);pointer-events:none;height:0;padding:0;margin:-4px 0}.tbs.no{animation:shake .5s}
+.tbkarangan{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 6px 16px var(--sh);font-size:clamp(20px,3.2vw,28px);font-weight:700;line-height:1.9;margin-bottom:14px}
+.tbkosong.kini{border-bottom-color:var(--oren);background:var(--kuning-p);animation:denyut 1s ease-in-out infinite}
 .tbw{border:3px solid var(--track)}.tbw.betul{background:var(--hijau);color:#fff;border-color:var(--hijau);animation:pop .4s}.tbw.no{animation:shake .5s}
 /* Buku cerita */
 #s-cerita{position:relative;z-index:0}
@@ -2690,7 +2701,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3551,16 +3562,113 @@ BP.forEach((t, i) => {
   t.id = "bp" + i; t.kat = "bp";
   if (t.petikan) t.nota = t.petikan.split("/").map((p, j) => t.nama + "|" + (j ? "Perenggan " + (j + 1) + "." : "Perenggan 1. Baca dengan teliti.") + "|" + p + "|" + t.adegan);
 });
+/* ===== Menulis: I = imlak, E = cari & betulkan kesalahan, S = susun ayat/perenggan, C = karangan berpandu (isi tempat kosong) ===== */
+const TL = [
+  { lv: 1, nama: "Imlak Perkataan", nota: [
+    "Cara Imlak|Imlak bermaksud mendengar dan menulis. Dengar perkataan, sebut suku katanya, kemudian tulis.|Dengar: *buku*;Sebut: bu, ku;Tulis: b, u, k, u|sekolah,Pencil"], soal: [
+    "I|buku", "I|meja", "I|kuda", "I|roti", "I|topi", "I|sudu", "I|bola", "I|gigi", "I|mata", "I|pintu", "I|kasut", "I|ikan"] },
+  { lv: 1, nama: "Tanda Baca dan Huruf Besar", nota: [
+    "Noktah dan Huruf Besar|Ayat bermula dengan huruf besar dan berakhir dengan noktah.|*S*aya suka membaca*.*;*A*dik makan roti*.*|sekolah,Pencil",
+    "Tanda Soal dan Tanda Seru|Tanda soal untuk ayat tanya. Tanda seru untuk ayat seruan.|Siapa nama kamu*?*;Wah, cantiknya*!*|sekolah,Pencil",
+    "Tanda Koma|Tanda koma memisahkan senarai benda.|Ibu membeli ikan*,* sayur dan buah.;Saya suka merah*,* biru dan kuning.|sekolah,Pencil"], soal: [
+    "E|Tekan kesalahan tanda baca dan betulkan.|Siapa nama kamu.|kamu.|kamu?|kamu!|kamu,", "E|Tekan kesalahan dan betulkan.|saya pergi ke sekolah.|saya|Saya|saya,|saya.",
+    "E|Tekan kesalahan tanda baca dan betulkan.|Wah, besarnya rumah itu?|itu?|itu!|itu.|itu,", "E|Tekan kesalahan dan betulkan.|Ibu membeli ikan sayur dan buah.|ikan|ikan,|ikan.|ikan?",
+    "E|Tekan kesalahan dan betulkan.|Ali tinggal di ipoh.|ipoh.|Ipoh.|ipoh?|ipoh!", "E|Tekan kesalahan tanda baca dan betulkan.|Bila kamu pulang!|pulang!|pulang?|pulang.|pulang,",
+    "E|Tekan kesalahan dan betulkan.|Kami bermain di padang|padang|padang.|padang?|padang,", "P|Pilih ayat yang betul.|Adik suka makan epal.|adik suka makan epal.|Adik suka makan epal",
+    "P|Pilih ayat yang betul.|Di mana rumah kamu?|Di mana rumah kamu.|di mana rumah kamu?", "P|Tanda baca di akhir ayat penyata ialah ___.|noktah|tanda soal|tanda seru"] },
+  { lv: 1, nama: "Semak Ejaan", nota: [
+    "Semak Ejaan|Selepas menulis, semak ejaan setiap perkataan. Sebut suku kata untuk membantu.|*ku-cing*, bukan kucin;*se-ko-lah*, bukan skolah;*ma-kan*, bukan makn|sekolah,Pencil"], soal: [
+    "E|Tekan perkataan yang salah eja dan betulkan.|Saya suka makan nasy.|nasy.|nasi.|nase.|nasii.", "E|Tekan perkataan yang salah eja dan betulkan.|Kucin itu comel.|Kucin|Kucing|Kuching|Kucinng",
+    "E|Tekan perkataan yang salah eja dan betulkan.|Adik pergi ke skolah.|skolah.|sekolah.|sekola.|sekulah.", "E|Tekan perkataan yang salah eja dan betulkan.|Ibu memasak di dapor.|dapor.|dapur.|dapuur.|dapo.",
+    "E|Tekan perkataan yang salah eja dan betulkan.|Burung terbang tingi.|tingi.|tinggi.|tengi.|tinggih.", "E|Tekan perkataan yang salah eja dan betulkan.|Saya minum ayer.|ayer.|air.|aer.|ayr.",
+    "E|Tekan perkataan yang salah eja dan betulkan.|Kakak membeli bunga mawer.|mawer.|mawar.|mawor.|mawaar.", "E|Tekan perkataan yang salah eja dan betulkan.|Gajah itu sanggat besar.|sanggat|sangat|sengat|sangatt",
+    "E|Tekan perkataan yang salah eja dan betulkan.|Kami berenang di kolem.|kolem.|kolam.|kulam.|kolamm.", "E|Tekan perkataan yang salah eja dan betulkan.|Ayah membaca bukku.|bukku.|buku.|bukuu.|buko."] },
+  { lv: 1, nama: "Susun Ayat Jadi Cerita", nota: [
+    "Cerita Bersiri|Cerita mempunyai permulaan, perkembangan dan penutup. Susun ayat mengikut urutan.|Mula: Adik bangun pagi.;Kemudian: Adik mandi dan bersarapan.;Akhir: Adik pergi ke sekolah.|rumah,Jam"], soal: [
+    "S|Susun ayat mengikut urutan.|Adik bangun pagi.;Adik mandi dan bersarapan.;Adik pergi ke sekolah.", "S|Susun ayat mengikut urutan.|Ibu membeli tepung.;Ibu membuat kek.;Kami makan kek bersama.",
+    "S|Susun ayat mengikut urutan.|Ali menanam biji benih.;Ali menyiram pokok setiap hari.;Pokok itu berbuah lebat.", "S|Susun ayat mengikut urutan.|Langit menjadi gelap.;Hujan turun dengan lebat.;Adik membuka payung.",
+    "S|Susun ayat mengikut urutan.|Kucing berasa lapar.;Kucing nampak ikan.;Kucing makan ikan itu.", "S|Susun ayat mengikut urutan.|Siti mengambil berus gigi.;Siti menggosok gigi.;Siti berkumur dengan air.",
+    "S|Susun ayat mengikut urutan.|Ayah menghidupkan enjin kereta.;Ayah memandu ke pejabat.;Ayah tiba di pejabat.", "S|Susun ayat mengikut urutan.|Telur ayam menetas.;Anak ayam keluar dari telur.;Anak ayam berjalan mengikut ibunya."] },
+  { lv: 2, nama: "Imlak Ayat", nota: [
+    "Imlak Ayat|Dengar seluruh ayat dan ingat susunan perkataan. Mulakan dengan huruf besar dan akhiri dengan tanda baca.|Dengar: Adik makan nasi.;Tulis: *A*dik makan nasi*.*|sekolah,Pencil"], soal: [
+    "I|Adik makan nasi.", "I|Saya suka membaca buku.", "I|Ayah pergi ke pejabat.", "I|Kucing itu tidur di sofa.", "I|Ibu memasak di dapur.",
+    "I|Kami bermain di taman.", "I|Burung terbang di langit.", "I|Siti membeli roti di kedai.", "I|Cikgu mengajar kami menulis.", "I|Hari ini cuaca sangat cerah."] },
+  { lv: 2, nama: "Bina Perenggan", nota: [
+    "Perenggan|Perenggan ialah kumpulan ayat tentang satu idea.|*Ayat topik*: ayat pertama yang memberi idea utama;*Ayat huraian*: menerangkan idea utama;*Ayat penutup*: menamatkan perenggan|sekolah,Pencil",
+    "Contoh Perenggan|Perhatikan susunan ayat dalam perenggan ini.|*Sekolah saya sangat cantik.*;Ada banyak pokok bunga di sekeliling sekolah.;Kelas-kelasnya bersih dan ceria.;*Saya sayang sekolah saya.*|sekolah,Pencil"], soal: [
+    "S|Susun ayat menjadi perenggan.|Kucing saya sangat comel.;Bulunya lembut dan berwarna putih.;Dia suka bermain bola benang.;Saya sayang kucing saya.",
+    "S|Susun ayat menjadi perenggan.|Keluarga saya pergi berkelah di pantai.;Kami bermain pasir dan mandi laut.;Ibu menyediakan nasi lemak untuk kami.;Kami pulang dengan gembira.",
+    "S|Susun ayat menjadi perenggan.|Buah-buahan baik untuk kesihatan.;Buah-buahan mengandungi banyak vitamin.;Contohnya epal, oren dan pisang.;Oleh itu, kita mesti makan buah setiap hari.",
+    "S|Susun ayat menjadi perenggan.|Ibu saya seorang yang rajin.;Setiap pagi, ibu menyediakan sarapan.;Ibu juga mengemas rumah dengan bersih.;Saya sangat menyayangi ibu.",
+    "S|Susun ayat menjadi perenggan.|Hari Guru disambut pada 16 Mei.;Murid-murid memberi kad kepada guru.;Ada juga persembahan nyanyian di dewan.;Guru-guru berasa sangat gembira.",
+    "S|Susun ayat menjadi perenggan.|Pokok sangat penting kepada kita.;Pokok memberikan udara yang bersih.;Pokok juga memberikan tempat teduh.;Kita mesti menjaga pokok.",
+    "P|Ayat pertama dalam perenggan dipanggil ___.|ayat topik|ayat penutup|ayat tanya", "P|Ayat yang menamatkan perenggan dipanggil ___.|ayat penutup|ayat topik|ayat huraian"] },
+  { lv: 2, nama: "Semak Imbuhan", nota: [
+    "Semak Imbuhan|Kata kerja dalam ayat perlu imbuhan yang betul.|Adik *bermain* bola, bukan Adik main bola.;Ibu *memasak* nasi, bukan Ibu masak nasi.;Surat itu *ditulis* oleh Ali, bukan Surat itu menulis oleh Ali.|sekolah,Pencil"], soal: [
+    "E|Tekan perkataan yang salah dan betulkan.|Adik main bola di padang.|main|bermain|dimain|mainan", "E|Tekan perkataan yang salah dan betulkan.|Surat itu menulis oleh Siti.|menulis|ditulis|bertulis|tulisan",
+    "E|Tekan perkataan yang salah dan betulkan.|Kakak sedang lukis gambar bunga.|lukis|melukis|dilukis|lukisan", "E|Tekan perkataan yang salah dan betulkan.|Ibu beli sayur di pasar.|beli|membeli|dibeli|pembeli",
+    "E|Tekan perkataan yang salah dan betulkan.|Ayah sedang baca surat khabar.|baca|membaca|dibaca|bacaan", "E|Tekan perkataan yang salah dan betulkan.|Saya suka minum makanan panas.|makanan|minuman|memakan|dimakan",
+    "E|Tekan perkataan yang salah dan betulkan.|Bola itu sepak oleh Ali.|sepak|disepak|menyepak|sepakan", "E|Tekan perkataan yang salah dan betulkan.|Kami tolong ibu mengemas rumah.|tolong|menolong|ditolong|pertolongan",
+    "E|Tekan perkataan yang salah dan betulkan.|Siti sedang tulis karangan.|tulis|menulis|ditulis|tulisan", "E|Tekan perkataan yang salah dan betulkan.|Kuih itu buat oleh nenek.|buat|dibuat|membuat|buatan"] },
+  { lv: 2, nama: "Jawapan Bertumpu dan Bercapah", nota: [
+    "Jawapan Bertumpu|Jawapan bertumpu ialah jawapan yang tepat dan ada dalam petikan. Jawab dengan ayat lengkap.|Soalan: Di manakah Ali tinggal?;Jawapan: *Ali tinggal di Ipoh.*|sekolah,Pencil",
+    "Jawapan Bercapah|Jawapan bercapah memerlukan pendapat kita sendiri. Berikan alasan.|Soalan: Mengapakah kita perlu menjaga kebersihan?;Jawapan: *Kita perlu menjaga kebersihan supaya badan sihat.*|sekolah,Pencil"], soal: [
+    "P|Apakah nama kucing Siti? Pilih jawapan yang lengkap.|Nama kucing Siti ialah Comel.|Comel.|kucing", "P|Bilakah Ali bangun? Pilih jawapan yang lengkap.|Ali bangun pada pukul enam pagi.|Pukul enam.|bangun",
+    "P|Mengapakah kita perlu bersenam? Pilih jawapan terbaik.|Kita perlu bersenam supaya badan sihat dan cergas.|Bersenam.|Sebab.", "P|Apakah yang akan kamu lakukan jika melihat sampah di kelas? Pilih jawapan terbaik.|Saya akan mengutip sampah itu dan membuangnya ke dalam tong sampah.|Biarkan.|Sampah.",
+    "P|Jawapan yang baik mesti ditulis dalam ___.|ayat lengkap|satu perkataan|nombor sahaja", "P|Jawapan bercapah memerlukan ___.|pendapat sendiri dan alasan|salinan petikan sahaja|lukisan",
+    "P|Di manakah ibu membeli ikan? Pilih jawapan yang lengkap.|Ibu membeli ikan di pasar.|Pasar.|Ikan.", "P|Mengapakah kita perlu menghormati guru? Pilih jawapan terbaik.|Kita perlu menghormati guru kerana guru mengajar kita ilmu.|Guru.|Kerana."] },
+  { lv: 3, nama: "Karangan Berpandu", nota: [
+    "Karangan Berpandu|Karangan berpandu ditulis dengan bantuan perkataan yang diberi. Pilih perkataan yang sesuai untuk setiap tempat kosong.|Tajuk;Pendahuluan;Isi;Penutup|rumah,Pencil"], soal: [
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Hari ini hari ___ saya. Ibu membuat sebiji ___ coklat. Kawan-kawan datang ke rumah. Kami menyanyikan lagu ___ hari jadi. Saya berasa sangat ___.|lahir,kek,selamat,gembira|sedih,roti",
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Pada hari Ahad, keluarga saya pergi ke ___. Kami melihat banyak ___ seperti gajah dan harimau. Adik suka melihat ___ yang lucu. Kami pulang dengan ___.|zoo,haiwan,monyet,gembira|pasar,marah",
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Saya ada seekor ___. Namanya Comel. Bulunya ___ dan lembut. Setiap pagi saya memberinya ___. Saya sangat ___ akan Comel.|kucing,putih,makan,sayang|kereta,benci",
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Setiap pagi saya bangun ___. Saya mandi dan ___ gigi. Kemudian saya memakai ___ sekolah. Ayah menghantar saya ke ___.|awal,menggosok,baju,sekolah|lewat,pasar",
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Semalam hujan turun dengan ___. Jalan di kampung saya dinaiki ___. Ayah membantu ___ yang terkandas. Kami bersyukur kerana semua orang ___.|lebat,air,jiran,selamat|kering,panas",
+    "C|Lengkapkan karangan dengan perkataan yang betul.|Kebersihan kelas sangat ___. Setiap hari kami ___ lantai. Kami membuang sampah ke dalam ___. Kelas yang bersih membuatkan kami ___ belajar.|penting,menyapu,tong sampah,seronok|kotor,malas"] },
+  { lv: 3, nama: "Kerangka Karangan", nota: [
+    "Kerangka Karangan|Kerangka ialah rangka isi penting sebelum menulis karangan.|*Pendahuluan*: memperkenalkan tajuk;*Isi*: perkara penting dengan huraian;*Penutup*: kesimpulan dan perasaan|sekolah,Pencil",
+    "Contoh Kerangka|Tajuk karangan ini ialah Hari Sukan Sekolah.|Pendahuluan: Hari sukan diadakan pada bulan Mac.;Isi 1: Murid menyertai pelbagai acara.;Isi 2: Saya memenangi acara lari.;Penutup: Saya berasa sangat gembira.|padang,Bola"], soal: [
+    "S|Susun kerangka karangan Hari Sukan.|Hari sukan diadakan pada bulan Mac.;Murid-murid menyertai pelbagai acara.;Saya memenangi acara lari berganti-ganti.;Saya berasa gembira dan bangga.",
+    "S|Susun kerangka karangan Lawatan ke Zoo.|Kelas kami membuat lawatan ke zoo.;Kami melihat pelbagai jenis haiwan.;Kami belajar cara menjaga haiwan.;Lawatan itu sangat menyeronokkan.",
+    "S|Susun kerangka karangan Ibu Saya.|Ibu saya bernama Puan Aminah.;Ibu bekerja sebagai jururawat.;Ibu sangat penyayang dan rajin.;Saya berdoa agar ibu sentiasa sihat.",
+    "P|Bahagian pertama karangan ialah ___.|pendahuluan|isi|penutup", "P|Bahagian terakhir karangan ialah ___.|penutup|pendahuluan|isi", "P|Perkara penting dalam karangan terdapat dalam bahagian ___.|isi|tajuk|penutup",
+    "P|Ayat yang sesuai untuk penutup ialah ___.|Saya berasa sangat gembira pada hari itu.|Pada suatu hari, saya bangun awal.|Kami pergi ke zoo.", "P|Ayat yang sesuai untuk pendahuluan ialah ___.|Pada hari Sabtu lalu, keluarga saya pergi bercuti.|Kami pulang dengan gembira.|Itulah pengalaman saya.",
+    "P|Karangan naratif ialah karangan yang ___.|menceritakan peristiwa|memberi senarai harga|menerangkan peta", "P|Contoh tajuk karangan bukan naratif ialah ___.|Kepentingan Membaca|Pengalaman Bercuti|Mimpi Saya"] },
+  { lv: 3, nama: "Semak Struktur Ayat", nota: [
+    "Struktur Ayat|Ayat yang betul mempunyai subjek dan predikat dalam susunan yang betul.|Betul: *Adik membaca buku.*;Salah: Membaca buku adik.|sekolah,Pencil",
+    "Kata yang Tepat|Gunakan kata sendi dan bentuk jamak dengan tepat.|Ali lebih tinggi *daripada* Abu.;Hadiah itu diberikan *kepada* guru.;Para *murid* berbaris, bukan para murid-murid.|sekolah,Pencil"], soal: [
+    "P|Pilih ayat yang strukturnya betul.|Ayah memandu kereta ke pejabat.|Memandu ayah kereta ke pejabat.|Ke pejabat kereta ayah memandu.", "P|Pilih ayat yang strukturnya betul.|Kucing itu tidur di atas sofa.|Tidur kucing itu sofa di atas.|Di atas tidur kucing sofa itu.",
+    "P|Pilih ayat yang betul.|Murid-murid sedang belajar di dalam kelas.|Murid-murid-murid sedang belajar.|Murid murid sedang belajar di dalam kelas.", "P|Pilih ayat majmuk yang betul.|Adik makan dan minum di dapur.|Adik makan dan di dapur minum.|Makan dan minum adik dapur.",
+    "E|Tekan kesalahan dan betulkan.|Para murid-murid berbaris di padang.|murid-murid|murid|muridan|bermurid", "E|Tekan kesalahan dan betulkan.|Banyak kereta-kereta di jalan raya.|kereta-kereta|kereta|berkereta|kereta-keretaan",
+    "E|Tekan kesalahan dan betulkan.|Saya pergi ke kedai daripada membeli roti.|daripada|untuk|kepada|dari", "E|Tekan kesalahan dan betulkan.|Hadiah itu diberikan pada guru.|pada|kepada|di|dari",
+    "E|Tekan kesalahan dan betulkan.|Ali lebih tinggi dari Abu.|dari|daripada|kepada|pada", "E|Tekan kesalahan dan betulkan.|Ayah pulang daripada pejabat.|daripada|dari|kepada|untuk"] },
+  { lv: 3, nama: "Imlak Ayat Panjang", nota: [
+    "Imlak Ayat Panjang|Dengar dengan teliti. Pecahkan ayat kepada bahagian kecil sebelum menulis.|Ali makan nasi, *dan*, minum air.;Siti pandai, *tetapi*, dia malu.|sekolah,Pencil"], soal: [
+    "I|Ali makan nasi dan minum air.", "I|Siti membaca buku sambil mendengar lagu.", "I|Hari hujan tetapi kami tetap ke sekolah.", "I|Ibu memasak nasi lemak untuk sarapan pagi.",
+    "I|Kami membawa payung kerana hari hujan.", "I|Adik menangis kerana jatuh dari basikal.", "I|Ayah membaca surat khabar di ruang tamu.", "I|Murid-murid beratur sebelum masuk ke kelas."] }
+];
+TL.forEach((t, i) => { t.id = "tl" + i; t.kat = "tl"; });
 /* Teks untuk disebut (buang tanda sorotan) */
 const tbBersih = t => t.replace(/\*/g, "");
 const tbNota = s => { const p = s.split("|"); return { tajuk: p[0], terang: p[1], contoh: p[2].split(";"), adegan: p[3] ? { latar: p[3].split(",")[0], watak: p[3].split(",")[1] } : null }; };
-const tbSoal = s => { const p = s.split("|"); return p[0] === "T" ? { j: "T", q: p[1], ayat: p[2], sasar: p[3].split(",") } : { j: "P", q: p[1], a: p[2], salah: p.slice(3) }; };
+const tbSoal = s => {
+  const p = s.split("|");
+  if (p[0] === "T") return { j: "T", q: p[1], ayat: p[2], sasar: p[3].split(",") };
+  if (p[0] === "I") return { j: "I", q: p[1].indexOf(" ") < 0 ? "Dengar dan tulis perkataan ini." : "Dengar dan susun ayat ini.", teks: p[1] };
+  if (p[0] === "E") return { j: "E", q: p[1], ayat: p[2], salah: p[3], betul: p[4], lain: p.slice(5) };
+  if (p[0] === "S") return { j: "S", q: p[1], bahagian: p[2].split(";") };
+  if (p[0] === "C") return { j: "C", q: p[1], teks: p[2], jawapan: p[3].split(","), lain: p[4] ? p[4].split(",") : [] };
+  return { j: "P", q: p[1], a: p[2], salah: p.slice(3) };
+};
+/* Ayat selepas kesalahan dibetulkan / karangan selepas tempat kosong diisi */
+const tbEditBetul = s => { let ok = false; return s.ayat.split(" ").map(w => { if (!ok && w === s.salah) { ok = true; return s.betul; } return w; }).join(" "); };
+const tbIsi = s => { let i = 0; return s.teks.replace(/___/g, () => s.jawapan[i++]); };
 /* Ayat lengkap selepas dijawab: ganti ___ dengan jawapan */
 const tbPenuh = s => s.q.indexOf("___") >= 0 ? s.q.replace(/\s*___\s*/, m => (m.charAt(0) === " " ? " " : "") + s.a + (m.slice(-1) === " " ? " " : "")).replace(/\s+([?!.,])$/, "$1") : s.a;
 let tbT = null, tbMod = "nota", tbI = 0, tbId = 0, tbList = [], tbSkor = 0, tbSalah = false;
 const tbOn = () => $("s-tb").classList.contains("on");
 /* kat: "tb" = Tatabahasa, "sb" = Seni Bahasa (format topik sama) */
-const TB_KAT = { tb: { senarai: () => TB, nama: L("Tatabahasa", "Grammar", "语法"), ikon: "bina" }, sb: { senarai: () => SB, nama: L("Seni Bahasa", "Language Arts", "语言艺术"), ikon: "baca" }, bp: { senarai: () => BP, nama: L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解"), ikon: "baca" } };
+const TB_KAT = { tb: { senarai: () => TB, nama: L("Tatabahasa", "Grammar", "语法"), ikon: "bina" }, sb: { senarai: () => SB, nama: L("Seni Bahasa", "Language Arts", "语言艺术"), ikon: "baca" }, bp: { senarai: () => BP, nama: L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解"), ikon: "baca" }, tl: { senarai: () => TL, nama: L("Menulis", "Writing", "写作"), ikon: "pensel" } };
 function renderTB(kat) {
   kat = kat || "tb";
   backMenu = () => renderTB(kat);
@@ -3634,6 +3742,96 @@ function tbPapar() {
       o.appendChild(b);
     });
     speak(s.q, "ms");
+  } else if (s.j === "I") {
+    /* Imlak: dengar, kemudian bina perkataan (huruf) atau ayat (kad perkataan) */
+    const satu = s.teks.indexOf(" ") < 0, unit = satu ? [...s.teks] : s.teks.split(" ");
+    const slot = document.createElement("div"); slot.className = satu ? "ejaslot" : "binaslot";
+    slot.innerHTML = satu ? `<span class="bsk">${unit.map(() => "<i></i>").join("")}</span>` : unit.map(() => `<span class="bslot"></span>`).join("");
+    const kad = document.createElement("div"); kad.className = satu ? "ejahuruf" : "binakad";
+    k.appendChild(slot); k.appendChild(kad);
+    const kotak = [...slot.querySelectorAll(satu ? "i" : ".bslot")];
+    let pos = 0;
+    (satu ? shuffle(unit.concat(shuffle("abdegiklmnoprstu".split("").filter(h => s.teks.indexOf(h) < 0)).slice(0, 2))) : shuffle(unit.slice())).forEach(x => {
+      const b = document.createElement("button");
+      b.className = satu ? "hbtn" : "kbtn"; b.textContent = x;
+      b.onclick = () => {
+        if (x !== unit[pos]) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); tone(220, 0, .15, "sawtooth"); if (satu) speak(x.toUpperCase(), "ms"); return; }
+        kotak[pos].textContent = x; kotak[pos].classList.add("isi"); b.disabled = true; b.classList.add("guna"); tone(600 + pos * 40, 0, .08); pos++;
+        if (pos === unit.length) tbBetul(s, () => speak(s.teks, "ms"));
+      };
+      kad.appendChild(b);
+    });
+    tbBual(s.q);
+    speak(s.q, "ms").then(() => id === tbId && speak(s.teks, "ms"));
+  } else if (s.j === "E") {
+    /* Edit: cari perkataan yang salah, kemudian pilih pembetulan */
+    tbBual(s.q);
+    const a = document.createElement("div"); a.className = "tbayat"; k.appendChild(a);
+    const o = document.createElement("div"); o.className = "opts hide"; k.appendChild(o);
+    let jumpa = false;
+    s.ayat.split(" ").forEach(w => {
+      const b = document.createElement("button");
+      b.className = "crk tbw"; b.textContent = w;
+      b.onclick = () => {
+        if (jumpa) return;
+        if (w !== s.salah) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); sndBad(); return; }
+        jumpa = true; b.classList.add("tanda"); tone(700, 0, .1);
+        o.classList.remove("hide");
+        shuffle([s.betul].concat(s.lain)).forEach(x => {
+          const ob = document.createElement("button");
+          ob.className = "opt"; ob.textContent = x;
+          ob.onclick = () => {
+            if (ob.disabled) return;
+            if (x !== s.betul) { tbSalah = true; ob.classList.add("wrong"); ob.disabled = true; sndBad(); return; }
+            o.querySelectorAll(".opt").forEach(z => { z.disabled = true; }); ob.classList.add("right");
+            b.textContent = s.betul; b.classList.remove("tanda"); b.classList.add("betul");
+            tbBetul(s, () => speak(tbEditBetul(s), "ms"));
+          };
+          o.appendChild(ob);
+        });
+      };
+      a.appendChild(b);
+    });
+    speak(s.q, "ms");
+  } else if (s.j === "S") {
+    /* Susun ayat menjadi cerita / perenggan / kerangka */
+    tbBual(s.q);
+    const sl = document.createElement("div"); sl.className = "tbsusun"; k.appendChild(sl);
+    sl.innerHTML = s.bahagian.map((x, i) => `<div class="tbsl"><b>${i + 1}</b><span></span></div>`).join("");
+    const kad = document.createElement("div"); kad.className = "tbkad"; k.appendChild(kad);
+    const kotak = [...sl.querySelectorAll("span")];
+    let pos = 0;
+    shuffle(s.bahagian.slice()).forEach(x => {
+      const b = document.createElement("button");
+      b.className = "tbs"; b.textContent = x;
+      b.onclick = () => {
+        if (x !== s.bahagian[pos]) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); sndBad(); speak(x, "ms"); return; }
+        kotak[pos].textContent = x; kotak[pos].parentNode.classList.add("isi"); b.disabled = true; b.classList.add("guna"); tone(600 + pos * 60, 0, .1); pos++;
+        if (pos === s.bahagian.length) tbBetul(s, () => speak(s.bahagian.join(" "), "ms")); else speak(x, "ms");
+      };
+      kad.appendChild(b);
+    });
+    speak(s.q, "ms");
+  } else if (s.j === "C") {
+    /* Karangan berpandu: isi tempat kosong ikut urutan dengan perkataan yang diberi */
+    tbBual(s.q);
+    const kr = document.createElement("div"); kr.className = "tbkarangan"; k.appendChild(kr);
+    kr.innerHTML = s.teks.split("___").map(x => x.replace(/[&<>]/g, "")).join(`<span class="tbkosong"></span>`);
+    const kotak = [...kr.querySelectorAll(".tbkosong")];
+    kotak[0].classList.add("kini");
+    const kad = document.createElement("div"); kad.className = "binakad"; k.appendChild(kad);
+    let pos = 0;
+    shuffle(s.jawapan.concat(s.lain)).forEach(x => {
+      const b = document.createElement("button");
+      b.className = "kbtn"; b.textContent = x;
+      b.onclick = () => {
+        if (x !== s.jawapan[pos]) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); sndBad(); return; }
+        kotak[pos].textContent = x; kotak[pos].classList.remove("kini"); kotak[pos].classList.add("isi"); b.disabled = true; b.classList.add("guna"); tone(600 + pos * 60, 0, .1); pos++;
+        if (pos < kotak.length) kotak[pos].classList.add("kini"); else tbBetul(s, () => speak(tbIsi(s), "ms"));
+      };
+      kad.appendChild(b);
+    });
+    speak(s.q, "ms");
   } else {
     tbBual(s.q);
     const a = document.createElement("div"); a.className = "tbayat"; k.appendChild(a);
@@ -3652,7 +3850,7 @@ function tbPapar() {
     });
     speak(s.q, "ms").then(() => id === tbId && speak(s.ayat, "ms"));
   }
-  tbButang("speak", tr(UI.dengar), "ungu", () => speak(s.q, "ms"));
+  tbButang("speak", tr(UI.dengar), "ungu", () => speak(s.j === "I" ? s.teks : s.q, "ms"));
 }
 function tbJawab(b, betul, s) {
   if (b.disabled) return;
