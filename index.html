@@ -429,6 +429,8 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
 .iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:2.1}.iqw small{direction:ltr;font-size:17px}
 .iqsurah{text-align:center;font-weight:700;font-size:22px;color:#3FA672}
+.qnsimbol{align-self:center;font-size:clamp(90px,16vw,140px);line-height:1.9;color:#3FA672;background:var(--card);border-radius:36px;padding:0 44px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh)}
+.qnterang{text-align:center;font-size:clamp(20px,3vw,26px);font-weight:700;max-width:760px;align-self:center;margin:4px 0}
 .qrbismi{line-height:2.3;padding-top:6px;text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
 .qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
 .qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:2.4;color:var(--text)}
@@ -4298,7 +4300,7 @@ function renderQuran() {
   const st = loadStars();
   renderMenu(tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), [
     ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
-    ["q-baris", QR_IKON.baris, "Jadual Baris", "Baris atas, bawah dan hadapan: a, i, u", "", qrBaris],
+    ["q-baris", QR_IKON.baris, "Nota Bacaan", "Baris, tanwin, tanda mati, sabdu, bacaan panjang, Allah & al", "", qrNotaMenu],
     ["q-surah", QR_IKON.surah.replace("#7FDDBB", "#FFD978"), "Iqra' 1 - 6", "Belajar membaca Al-Quran langkah demi langkah", "", qrIqra],
     ["q-surah", QR_IKON.surah, "Surah Lazim", SURAH.length + " surah pendek dengan rumi dan maksud", "", qrSenaraiSurah],
     ["q-doa", QR_IKON.doa, "Doa Harian", DOA.length + " doa untuk amalan setiap hari", "", qrSenaraiDoa],
@@ -4320,7 +4322,7 @@ function qrHuruf() {
   void id0;
 }
 function qrBaris() {
-  qrSkrin("Jadual Baris", renderQuran);
+  qrSkrin("Jadual Baris Penuh", qrNotaMenu);
   const k = $("qrKawasan");
   k.innerHTML = `<div class="qrnota"><span><i class="qrar">بَ</i>Baris atas: <b>a</b></span><span><i class="qrar">بِ</i>Baris bawah: <b>i</b></span><span><i class="qrar">بُ</i>Baris hadapan: <b>u</b></span></div><div class="qrbaris">${HIJAIYAH.map(h => `<div class="qrbr">${[0, 1, 2].map(j => `<button class="qrh"><span class="qrar">${barisHuruf(h[0], j)}</span><small>${h[2].split(" ")[j]}</small></button>`).join("")}</div>`).join("")}</div>`;
   const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...HIJAIYAH.map(h => h[2].split(" ").map(qrBersih)));
@@ -4606,6 +4608,45 @@ function iqSebut(w, id) {
   let p = Promise.resolve();
   w.sebut.forEach(s => { p = p.then(() => id === qrId && speak("~" + qrBersih(s), "ms")).then(() => tunggu(120)); });
   return p;
+}
+
+/* ===== Nota Bacaan: baris, tanwin, tanda mati, sabdu, mad, lafaz Allah & alif lam ===== */
+const QR_NOTA = [
+  { tajuk: "Baris Atas", simbol: "بَ", terang: "Baris atas ialah garis kecil di atas huruf. Ia dibaca a.", contoh: "بَ|ba;تَ|ta;جَ|ja;دَ|da;كَتَبَ|ka-ta-ba;خَلَقَ|kho-la-qo" },
+  { tajuk: "Baris Bawah", simbol: "بِ", terang: "Baris bawah ialah garis kecil di bawah huruf. Ia dibaca i.", contoh: "بِ|bi;تِ|ti;جِ|ji;دِ|di;سِ|si;مِ|mi" },
+  { tajuk: "Baris Depan", simbol: "بُ", terang: "Baris depan bentuknya seperti wau kecil di atas huruf. Ia dibaca u.", contoh: "بُ|bu;تُ|tu;جُ|ju;دُ|du;كُتُبُ|ku-tu-bu;رُسُلُ|ru-su-lu" },
+  { tajuk: "Dua Baris Atas", simbol: "بًا", terang: "Dua baris atas dibaca an. Biasanya diikuti huruf alif.", contoh: "بًا|ban;تًا|tan;جًا|jan;دًا|dan;سًا|san;مًا|man" },
+  { tajuk: "Dua Baris Bawah", simbol: "بٍ", terang: "Dua baris bawah dibaca in.", contoh: "بٍ|bin;تٍ|tin;جٍ|jin;دٍ|din;سٍ|sin;مٍ|min" },
+  { tajuk: "Dua Baris Depan", simbol: "بٌ", terang: "Dua baris depan dibaca un.", contoh: "بٌ|bun;تٌ|tun;جٌ|jun;دٌ|dun;سٌ|sun;مٌ|mun" },
+  { tajuk: "Tanda Mati", simbol: "بْ", terang: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya.", contoh: "أَبْ|ab;بَتْ|bat;مِنْ|min;قُلْ|qul;لَمْ|lam;عَنْ|'an" },
+  { tajuk: "Tanda Sabdu", simbol: "بَّ", terang: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan sedikit.", contoh: "رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;أُمِّ|um-mi;عَلَّمَ|'al-la-ma" },
+  { tajuk: "Bacaan Panjang 2 Harakat", simbol: "بَا", terang: "Bacaan dipanjangkan 2 harakat apabila baris atas bertemu alif, baris bawah bertemu ya mati, dan baris depan bertemu wau mati.", contoh: "بَا|baa;بِي|bii;بُو|buu;قَالَ|qoo-la;قِيلَ|qii-la;يَقُولُ|ya-quu-lu" },
+  { tajuk: "Bacaan Panjang 6 Harakat", simbol: "آ", terang: "Apabila ada tanda panjang di atas huruf (mad lazim), bacaan dipanjangkan 6 harakat. Kira enam ketukan.", contoh: "ٱلضَّآلِّينَ|dhooo-l-lin;دَآبَّةٍ|daaa-b-batin;ٱلْحَآقَّةُ|al-haaa-q-qoh;الٓمٓ|alif laaam miiim;يسٓ|yaa siiin;نٓ|nuuun" },
+  { tajuk: "Sebutan Allah", simbol: "ٱللَّهُ", terang: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau depan. Ia dibaca nipis apabila huruf sebelumnya berbaris bawah.", contoh: "ٱللَّهُ|Allahu (tebal);نَصْرُ ٱللَّهِ|nasrullahi (tebal);عَبْدُ ٱللَّهِ|'abdullahi (tebal);بِسْمِ ٱللَّهِ|bismillahi (nipis);لِلَّهِ|lillahi (nipis);بِٱللَّهِ|billahi (nipis)" },
+  { tajuk: "Sebutan Al (Alif Lam)", simbol: "ٱلْ", terang: "Alif lam qamariah: lam dibaca jelas dan ada tanda mati. Alif lam syamsiah: lam tidak dibaca, terus ke huruf bersabdu.", contoh: "ٱلْقَمَرُ|al-qamaru (qamariah);ٱلْكِتَٰبُ|al-kitabu (qamariah);ٱلْحَمْدُ|al-hamdu (qamariah);ٱلشَّمْسُ|asy-syamsu (syamsiah);ٱلنَّاسُ|an-nasu (syamsiah);ٱلرَّحْمَٰنُ|ar-rahmanu (syamsiah)" }
+];
+function qrNotaMenu() {
+  backMenu = qrNotaMenu;
+  const warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"];
+  renderMenu("Nota Bacaan", QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), (i + 1) + ". " + n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)])
+    .concat([["q-kuiz", QR_IKON.baris, "Jadual Baris Penuh", "Semua huruf dengan baris atas, bawah dan depan", "", qrBaris]]), renderQuran);
+}
+function qrNota(i) {
+  const n = QR_NOTA[i];
+  qrSkrin((i + 1) + ". " + n.tajuk, qrNotaMenu);
+  const k = $("qrKawasan"), ct = n.contoh.split(";").map(x => x.split("|"));
+  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p><div class="iqgrid">${ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
+  k.querySelector(".qnterang").textContent = n.terang;
+  const el = [...k.querySelectorAll(".iqw")];
+  const sebut = c => ({ sebut: c[1].split(" (")[0].split(/[- ]/).filter(Boolean) });
+  el.forEach((x, j) => { x.querySelector(".qrar").textContent = ct[j][0]; x.querySelector("small").textContent = ct[j][1]; x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(sebut(ct[j]), id); }; });
+  qrButang("speak", "Dengar Nota", "ungu", () => { const id = ++qrId; speak(n.terang, "ms").then(() => tunggu(300)).then(() => { let p = Promise.resolve(); el.forEach((x, j) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); return iqSebut(sebut(ct[j]), id).then(() => tunggu(300)); }); }); return p; }).then(() => el.forEach(z => z.classList.remove("on"))); });
+  if (i > 0) qrButang("back", "Sebelum", "biru", () => qrNota(i - 1));
+  if (i < QR_NOTA.length - 1) qrButang("next", "Seterusnya", "hijau", () => qrNota(i + 1));
+  else qrButang("play", "Siap", "hijau", () => { sndWin(); qrNotaMenu(); });
+  qrBual(n.tajuk);
+  const id = qrId;
+  speak(n.tajuk, "ms").then(() => id === qrId && speak(n.terang, "ms"));
 }
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
