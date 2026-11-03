@@ -430,7 +430,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:2.1}.iqw small{direction:ltr;font-size:17px}
 .iqsurah{text-align:center;font-weight:700;font-size:22px;color:#3FA672}
 .qnsimbol{align-self:center;font-size:clamp(90px,16vw,140px);line-height:1.9;color:#3FA672;background:var(--card);border-radius:36px;padding:0 44px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh)}
-.qnkecil .qrh{padding:4px 2px}.qrh .qrar{display:block;line-height:1.5!important;padding:.25em 0 .55em}.qrh small{display:block;line-height:1.2}.qnkecil small{direction:ltr}
+.qnkecil .qrh{padding:4px 2px}.qrh .qrar{display:block;line-height:1.5!important;padding:.25em 0 .75em}.qrh small{display:block;line-height:1.2}.qnkecil small{direction:ltr}
 .qnlebar small{font-size:15px}
 .qntab{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.qntab button{background:var(--card);border:3px solid var(--garis);border-radius:999px;padding:10px 20px;font-weight:700;box-shadow:0 4px 0 var(--garis)}.qntab button.on{background:#8FD9A8;border-color:#8FD9A8;color:var(--on);box-shadow:0 4px 0 #6CBF8A}
 .qnterang{text-align:center;font-size:clamp(20px,3vw,26px);font-weight:700;max-width:760px;align-self:center;margin:4px 0}
@@ -4273,7 +4273,7 @@ const DOA = [
   { nama: "Doa Naik Kenderaan", ayat: ["سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ|Subhanallazi sakhkhara lana haza wa ma kunna lahu muqrinin, wa inna ila rabbina lamunqalibun|Maha Suci Allah yang memudahkan kenderaan ini bagi kami, sedangkan kami tidak mampu menguasainya, dan kepada Tuhan kamilah kami akan kembali."] },
   { nama: "Doa Kebaikan Dunia Akhirat", ayat: ["رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ|Rabbana atina fid dunya hasanah, wa fil akhirati hasanah, wa qina 'azaban nar|Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka."] }
 ];
-const QR_SEBUT = { huruf: "Tekan huruf untuk dengar namanya.", baris: "Baris atas bunyi a, baris bawah bunyi i, baris hadapan bunyi u.", kuiz: "Dengar dan pilih huruf yang betul.", surah: "Dengar maksud ayat ini.", doa: "Jom amalkan doa ini setiap hari." };
+const QR_SEBUT = { huruf: "Tekan huruf untuk dengar namanya.", baris: "Baris atas bunyi a, baris bawah bunyi i, baris depan bunyi u.", kuiz: "Dengar dan pilih huruf yang betul.", surah: "Dengar maksud ayat ini.", doa: "Jom amalkan doa ini setiap hari." };
 const QR_IKON = {
   huruf: SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8FD9A8"/><text x="32" y="45" font-family="Geeza Pro,Damascus,serif" font-size="34" fill="#fff" text-anchor="middle">ب</text><circle cx="20" cy="18" r="3" fill="#fff" opacity=".7"/>`),
   baris: SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><text x="32" y="46" font-family="Geeza Pro,Damascus,serif" font-size="32" fill="#7A5A2E" text-anchor="middle">بَ</text>`),
@@ -4331,15 +4331,17 @@ function qrHuruf() {
   speak(QR_SEBUT.huruf, "ms");
   void id0;
 }
-function qrBaris() {
-  qrSkrin("Jadual Baris Penuh", qrNotaMenu);
-  const k = $("qrKawasan");
-  k.innerHTML = `<div class="qrnota"><span><i class="qrar">بَ</i>Baris atas: <b>a</b></span><span><i class="qrar">بِ</i>Baris bawah: <b>i</b></span><span><i class="qrar">بُ</i>Baris hadapan: <b>u</b></span></div><div class="qrbaris">${HIJAIYAH.map(h => `<div class="qrbr">${[0, 1, 2].map(j => `<button class="qrh"><span class="qrar">${barisHuruf(h[0], j)}</span><small>${h[2].split(" ")[j]}</small></button>`).join("")}</div>`).join("")}</div>`;
-  const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...HIJAIYAH.map(h => h[2].split(" ").map(qrBersih)));
+/* Jadual semua huruf: baris (a i u) atau dua baris (an in un) */
+function qrBaris(dua) {
+  qrSkrin(dua ? "Jadual Dua Baris" : "Jadual Baris Huruf", qrNotaMenu);
+  const k = $("qrKawasan"), vk = dua ? ["an", "in", "un"] : ["a", "i", "u"];
+  const sel = HIJAIYAH.map((h, i) => vk.map(v => i === 0 && v === "an" ? ["أً", "an"] : iqSuku(i, v)));
+  k.innerHTML = `<div class="qrnota">${(dua ? [["بً", "Dua baris atas", "an"], ["بٍ", "Dua baris bawah", "in"], ["بٌ", "Dua baris depan", "un"]] : [["بَ", "Baris atas", "a"], ["بِ", "Baris bawah", "i"], ["بُ", "Baris depan", "u"]]).map(x => `<span><i class="qrar">${x[0]}</i>${x[1]}: <b>${x[2]}</b></span>`).join("")}</div><div class="qrbaris">${sel.map(g => `<div class="qrbr">${g.map(x => `<button class="qrh"><span class="qrar">${x[0]}</span><small>${x[1]}</small></button>`).join("")}</div>`).join("")}</div>`;
+  const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...sel.map(g => g.map(x => qrBersih(x[1]))));
   el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); speak("~" + teks[i], "ms"); });
   qrButang("speak", "Dengar Semua", "ungu", () => qrMainSemua(el, teks.map(t => "~" + t), ++qrId));
-  qrBual(QR_SEBUT.baris);
-  speak(QR_SEBUT.baris, "ms");
+  const t = dua ? "Dua baris atas bunyi an, dua baris bawah bunyi in, dua baris depan bunyi un." : QR_SEBUT.baris;
+  qrBual(t); speak(t, "ms");
 }
 function qrSenaraiSurah() {
   backMenu = qrSenaraiSurah;
@@ -4653,8 +4655,11 @@ const QN_JANA = {
 function qrNotaMenu() {
   backMenu = qrNotaMenu;
   const warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"];
-  renderMenu("Nota Bacaan", QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), (i + 1) + ". " + n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)])
-    .concat([["q-kuiz", QR_IKON.baris, "Jadual Baris Penuh", "Semua huruf dengan baris atas, bawah dan depan", "", qrBaris]]), renderQuran);
+  const senarai = QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), (i + 1) + ". " + n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)]);
+  /* Jadual diletak selepas nota 3 (baris) dan nota 6 (dua baris) */
+  senarai.splice(6, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بً بٍ بٌ</text>`), "Jadual Dua Baris", "Semua huruf dengan dua baris atas, bawah dan depan", "", () => qrBaris(true)]);
+  senarai.splice(3, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بَ بِ بُ</text>`), "Jadual Baris Huruf", "Semua huruf dengan baris atas, bawah dan depan", "", () => qrBaris(false)]);
+  renderMenu("Nota Bacaan", senarai, renderQuran);
 }
 function qrNota(i, lembar) {
   const n = QR_NOTA[i];
