@@ -404,6 +404,44 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @keyframes xa-titis{0%,30%{transform:scaleY(0)}80%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1.2);opacity:0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 
+/* Kelas Al-Quran */
+.t-quran,.s-q-huruf,.s-q-baris,.s-q-surah,.s-q-doa,.s-q-kuiz{--c:#8FD9A8;--cp:#E4F7EA}
+.s-q-baris{--c:var(--kuning);--cp:var(--kuning-p)}.s-q-doa{--c:var(--oren);--cp:var(--oren-p)}.s-q-kuiz{--c:var(--ungu);--cp:var(--ungu-p)}
+.qrar{font-family:"Geeza Pro","Noto Naskh Arabic","Al Bayan","Damascus","Arial",sans-serif;direction:rtl;font-style:normal}
+.qratas{display:flex;justify-content:center}.qratas .tbub{max-width:520px}
+#qrKawasan{display:flex;flex-direction:column;gap:14px;align-items:stretch}
+.qrbtns{justify-content:center;margin-top:18px}
+.qrbesar{align-self:center;display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:32px;padding:6px 40px 14px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh)}
+.qrbesar .qrar{font-size:clamp(90px,16vw,150px);line-height:1.25;color:#3FA672}.qrbesar b{font-size:30px}
+.qrbesar.pop{animation:pop .35s}
+.qrgrid{direction:rtl;display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+@media (max-width:560px){.qrgrid{grid-template-columns:repeat(4,1fr)}}
+.qrh{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border:3px solid #CDEFD9;border-radius:22px;padding:6px 4px;box-shadow:0 5px 0 #CDEFD9,0 8px 14px var(--sh);transition:transform .15s}
+.qrh .qrar{font-size:clamp(34px,6vw,54px);line-height:1.3;color:var(--text)}.qrh small{font-size:16px;font-weight:700;color:var(--muted)}
+.qrh:active{transform:translateY(4px)}
+.qrh.on{background:#8FD9A8;border-color:#8FD9A8;transform:scale(1.1)}.qrh.on .qrar,.qrh.on small{color:var(--on)}
+.qrh.betul{background:var(--hijau);border-color:var(--hijau);animation:pop .4s}.qrh.no{animation:shake .5s;border-color:var(--koral)}
+.qrnota{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.qrnota span{background:var(--card);border-radius:20px;padding:6px 16px;font-weight:700;box-shadow:0 4px 0 var(--garis);display:flex;align-items:center;gap:8px}
+.qrnota .qrar{font-size:34px;color:#3FA672}
+.qrbaris{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;direction:rtl}
+.qrbr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:color-mix(in srgb,var(--card) 60%,transparent);border-radius:24px;padding:8px}
+.qrbismi{text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
+.qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
+.qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:1.9;color:var(--text)}
+.qrayat i{font-size:clamp(18px,2.6vw,22px);color:#3FA672;font-weight:700}
+.qrayat .qrmk{font-size:clamp(17px,2.4vw,20px);color:var(--muted);font-weight:700}
+.qrayat.on{border-color:#8FD9A8;transform:scale(1.02)}
+.qrno{position:absolute;left:14px;top:12px;width:34px;height:34px;border-radius:50%;background:#8FD9A8;color:var(--on);display:grid;place-items:center;font-weight:700}
+.qrpesan{text-align:center;color:var(--muted);font-size:15px;font-weight:700}
+.qrkira{align-self:center;font-weight:700;color:var(--muted)}
+.qrsoal{display:flex;align-items:center;justify-content:center;gap:14px;font-size:clamp(26px,4vw,36px)}
+.qrpilih{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:640px;width:100%;align-self:center}
+.qrpilih .qrh .qrar{font-size:clamp(56px,10vw,90px)}
+.qrtamat{align-self:center;text-align:center;background:var(--card);border-radius:32px;padding:20px 50px;box-shadow:0 8px 0 var(--garis)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .t-quran,:root:not([data-theme="light"]) .s-q-huruf,:root:not([data-theme="light"]) .s-q-surah{--cp:#2F4A3C}}:root[data-theme="dark"] .t-quran,:root[data-theme="dark"] .s-q-huruf,:root[data-theme="dark"] .s-q-surah{--cp:#2F4A3C}
+.qrtamat .qrbintang{font-size:54px;color:#FFB800}.qrtamat b{font-size:40px}
+
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -595,6 +633,12 @@ h1,h2{color:var(--text);letter-spacing:.5px}
     <div class="top"><button class="pill ikon" id="crBack" aria-label="Keluar"></button><h2 id="crTajuk" style="flex:1;margin:0"></h2><div class="pill" id="crMuka">1/3</div></div>
     <div class="crbuku" id="crBuku"><div class="crlatar" id="crLatar"></div><div class="crteks" id="crTeks"></div></div>
     <div class="tbtns crbtns" id="crBtns"></div>
+  </section>
+  <section id="s-quran" class="screen">
+    <div class="top"><button class="pill" id="qrBack" aria-label="Keluar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg></button><h2 id="qrTajuk" style="flex:1;margin:0"></h2></div>
+    <div class="qratas"><div class="tbub" id="qrBub"></div></div>
+    <div id="qrKawasan"></div>
+    <div class="tbtns qrbtns" id="qrBtns"></div>
   </section>
   <section id="s-tb" class="screen">
     <div class="tbg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -4156,6 +4200,190 @@ function setLang(l) {
 }
 
 let curTahap = null, curSubj = null, backMenu = null, replay = null;
+/* ===== Kelas Al-Quran: huruf hijaiyah, baris, surah lazim, doa harian & kuiz huruf ===== */
+/* [huruf, nama, bunyi baris a/i/u] */
+const HIJAIYAH = [["ا","alif","a i u"],["ب","ba","ba bi bu"],["ت","ta","ta ti tu"],["ث","tsa","tsa tsi tsu"],["ج","jim","ja ji ju"],["ح","ha","ha hi hu"],["خ","kho","kho khi khu"],
+  ["د","dal","da di du"],["ذ","dzal","dza dzi dzu"],["ر","ro","ro ri ru"],["ز","zai","za zi zu"],["س","sin","sa si su"],["ش","syin","sya syi syu"],["ص","shod","sho shi shu"],
+  ["ض","dhod","dho dhi dhu"],["ط","tho","tho thi thu"],["ظ","zho","zho zhi zhu"],["ع","ain","'a 'i 'u"],["غ","ghin","gho ghi ghu"],["ف","fa","fa fi fu"],["ق","qof","qo qi qu"],
+  ["ك","kaf","ka ki ku"],["ل","lam","la li lu"],["م","mim","ma mi mu"],["ن","nun","na ni nu"],["و","wau","wa wi wu"],["ه","ha","ha hi hu"],["ي","ya","ya yi yu"]];
+const BARIS = ["َ", "ِ", "ُ"];
+const barisHuruf = (h, j) => (h === "ا" ? ["أ", "إ", "أ"][j] : h) + BARIS[j];
+/* Surah & doa: "Arab|rumi|maksud" setiap ayat */
+const SURAH = [
+  { nama: "Al-Fatihah", ds: "Pembukaan · 7 ayat", ayat: [
+    "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ|Bismillahir rahmanir rahim|Dengan nama Allah, Yang Maha Pemurah, lagi Maha Mengasihani.",
+    "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ|Alhamdulillahi rabbil 'alamin|Segala puji bagi Allah, Tuhan yang memelihara sekalian alam.",
+    "الرَّحْمَٰنِ الرَّحِيمِ|Ar-rahmanir rahim|Yang Maha Pemurah, lagi Maha Mengasihani.",
+    "مَالِكِ يَوْمِ الدِّينِ|Maliki yaumid din|Yang menguasai hari pembalasan.",
+    "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ|Iyyaka na'budu wa iyyaka nasta'in|Engkaulah sahaja yang kami sembah, dan kepada Engkaulah sahaja kami memohon pertolongan.",
+    "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ|Ihdinas siratal mustaqim|Tunjukilah kami jalan yang lurus.",
+    "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ|Siratal lazina an'amta 'alaihim ghairil maghdubi 'alaihim wa lad dhallin|Iaitu jalan orang yang Engkau beri nikmat, bukan jalan orang yang Engkau murkai, dan bukan jalan orang yang sesat."] },
+  { nama: "Al-Ikhlas", ds: "Memurnikan keesaan Allah · 4 ayat", ayat: [
+    "قُلْ هُوَ اللَّهُ أَحَدٌ|Qul huwallahu ahad|Katakanlah: Allah itu Maha Esa.",
+    "اللَّهُ الصَّمَدُ|Allahus samad|Allah tempat bergantung segala makhluk.",
+    "لَمْ يَلِدْ وَلَمْ يُولَدْ|Lam yalid wa lam yulad|Dia tidak beranak dan tidak diperanakkan.",
+    "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ|Wa lam yakun lahu kufuwan ahad|Dan tidak ada sesuatu pun yang setara dengan-Nya."] },
+  { nama: "Al-Falaq", ds: "Waktu subuh · 5 ayat", ayat: [
+    "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ|Qul a'uzu birabbil falaq|Katakanlah: Aku berlindung kepada Tuhan yang menguasai waktu subuh.",
+    "مِنْ شَرِّ مَا خَلَقَ|Min syarri ma khalaq|Daripada kejahatan makhluk yang Dia ciptakan.",
+    "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ|Wa min syarri ghasiqin iza waqab|Dan daripada kejahatan malam apabila ia gelap gelita.",
+    "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ|Wa min syarrin naffasati fil 'uqad|Dan daripada kejahatan ahli sihir yang menghembus pada simpulan tali.",
+    "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ|Wa min syarri hasidin iza hasad|Dan daripada kejahatan orang yang dengki apabila dia berdengki."] },
+  { nama: "An-Nas", ds: "Manusia · 6 ayat", ayat: [
+    "قُلْ أَعُوذُ بِرَبِّ النَّاسِ|Qul a'uzu birabbin nas|Katakanlah: Aku berlindung kepada Tuhan sekalian manusia.",
+    "مَلِكِ النَّاسِ|Malikin nas|Raja sekalian manusia.",
+    "إِلَٰهِ النَّاسِ|Ilahin nas|Tuhan sekalian manusia.",
+    "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ|Min syarril waswasil khannas|Daripada kejahatan bisikan syaitan yang bersembunyi.",
+    "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ|Allazi yuwaswisu fi sudurin nas|Yang membisikkan kejahatan ke dalam hati manusia.",
+    "مِنَ الْجِنَّةِ وَالنَّاسِ|Minal jinnati wan nas|Daripada golongan jin dan manusia."] },
+  { nama: "Al-Kauthar", ds: "Nikmat yang banyak · 3 ayat", ayat: [
+    "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ|Inna a'tainakal kauthar|Sesungguhnya Kami telah mengurniakan kepadamu kebaikan yang banyak.",
+    "فَصَلِّ لِرَبِّكَ وَانْحَرْ|Fasalli lirabbika wanhar|Maka dirikanlah solat kerana Tuhanmu dan sembelihlah korban.",
+    "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ|Inna syani'aka huwal abtar|Sesungguhnya orang yang membencimu, dialah yang terputus."] },
+  { nama: "Al-'Asr", ds: "Masa · 3 ayat", ayat: [
+    "وَالْعَصْرِ|Wal 'asr|Demi masa.",
+    "إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ|Innal insana lafi khusr|Sesungguhnya manusia itu dalam kerugian.",
+    "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ|Illal lazina amanu wa 'amilus salihati wa tawasau bil haqqi wa tawasau bis sabr|Kecuali orang yang beriman dan beramal soleh, serta berpesan-pesan dengan kebenaran dan kesabaran."] }
+];
+const DOA = [
+  { nama: "Doa Sebelum Makan", ayat: ["اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ|Allahumma barik lana fima razaqtana wa qina 'azaban nar|Ya Allah, berkatilah rezeki yang Engkau berikan kepada kami, dan peliharalah kami daripada azab neraka."] },
+  { nama: "Doa Selepas Makan", ayat: ["الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ|Alhamdulillahil lazi at'amana wa saqana wa ja'alana muslimin|Segala puji bagi Allah yang memberi kami makan dan minum, serta menjadikan kami orang Islam."] },
+  { nama: "Doa Sebelum Tidur", ayat: ["بِاسْمِكَ اللَّهُمَّ أَحْيَا وَبِاسْمِكَ أَمُوتُ|Bismika Allahumma ahya wa bismika amut|Dengan nama-Mu ya Allah, aku hidup dan dengan nama-Mu aku mati."] },
+  { nama: "Doa Bangun Tidur", ayat: ["الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ|Alhamdulillahil lazi ahyana ba'da ma amatana wa ilaihin nusyur|Segala puji bagi Allah yang menghidupkan kami selepas mematikan kami, dan kepada-Nya kami dibangkitkan."] },
+  { nama: "Doa Masuk Tandas", ayat: ["اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ|Allahumma inni a'uzu bika minal khubuthi wal khaba'ith|Ya Allah, aku berlindung kepada-Mu daripada syaitan lelaki dan syaitan perempuan."] },
+  { nama: "Doa Keluar Tandas", ayat: ["غُفْرَانَكَ|Ghufranaka|Aku memohon keampunan-Mu."] },
+  { nama: "Doa Untuk Ibu Bapa", ayat: ["رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا|Rabbighfir li wa liwalidayya warhamhuma kama rabbayani saghira|Ya Tuhanku, ampunilah aku dan kedua ibu bapaku, dan kasihanilah mereka sebagaimana mereka memeliharaku semasa kecil."] },
+  { nama: "Doa Belajar", ayat: ["رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا|Rabbi zidni 'ilma warzuqni fahma|Ya Tuhanku, tambahkanlah ilmuku dan kurniakanlah aku kefahaman."] },
+  { nama: "Doa Naik Kenderaan", ayat: ["سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ|Subhanallazi sakhkhara lana haza wa ma kunna lahu muqrinin, wa inna ila rabbina lamunqalibun|Maha Suci Allah yang memudahkan kenderaan ini bagi kami, sedangkan kami tidak mampu menguasainya, dan kepada Tuhan kamilah kami akan kembali."] },
+  { nama: "Doa Kebaikan Dunia Akhirat", ayat: ["رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ|Rabbana atina fid dunya hasanah, wa fil akhirati hasanah, wa qina 'azaban nar|Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka."] }
+];
+const QR_SEBUT = { huruf: "Tekan huruf untuk dengar namanya.", baris: "Baris atas bunyi a, baris bawah bunyi i, baris hadapan bunyi u.", kuiz: "Dengar dan pilih huruf yang betul.", surah: "Dengar maksud ayat ini.", doa: "Jom amalkan doa ini setiap hari." };
+const QR_IKON = {
+  huruf: SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8FD9A8"/><text x="32" y="45" font-family="Geeza Pro,Damascus,serif" font-size="34" fill="#fff" text-anchor="middle">ب</text><circle cx="20" cy="18" r="3" fill="#fff" opacity=".7"/>`),
+  baris: SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><text x="32" y="46" font-family="Geeza Pro,Damascus,serif" font-size="32" fill="#7A5A2E" text-anchor="middle">بَ</text>`),
+  surah: SVGC(`<path d="M8 46 L32 36 L56 46 L56 50 L32 42 L8 50Z" fill="#C9A27A"/><path d="M10 18 q11-6 22 2 v22 q-11-7-22-2z" fill="#7FDDBB"/><path d="M54 18 q-11-6-22 2 v22 q11-7 22-2z" fill="#9BE6C8"/><path d="M15 24 h11 M15 29 h11 M38 24 h11 M38 29 h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M32 6 l2 4 l4 .6 l-3 3 l.7 4 l-3.7-2 l-3.7 2 l.7-4 l-3-3 l4-.6z" fill="#FFD36E"/>`),
+  doa: SVGC(`<path d="M22 58 C14 50 12 38 16 24 q2-6 6-4 l4 18 M42 58 C50 50 52 38 48 24 q-2-6-6-4 l-4 18" fill="#FFD6B8" stroke="#E8A882" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 6 c1.5 6 4 8.5 10 10 c-6 1.5-8.5 4-10 10 c-1.5-6-4-8.5-10-10 c6-1.5 8.5-4 10-10z" fill="#FFD36E"/>`),
+  kuiz: COMEL_IKON["❓"],
+  utama: SVGC(`<path d="M40 8 A24 24 0 1 0 56 44 A19 19 0 1 1 40 8z" fill="#8FD9A8"/><path d="M50 10 l2 4.5 l5 .7 l-3.6 3.4 l.9 4.9 l-4.3-2.4 l-4.3 2.4 l.9-4.9 l-3.6-3.4 l5-.7z" fill="#FFD36E"/>${MUKA(26, 36, 6)}`)
+};
+const QR_FON = '"Geeza Pro","Noto Naskh Arabic","Al Bayan","Damascus","Arial",sans-serif';
+let qrId = 0;
+const qrBersih = t => t.replace(/'/g, "");
+function qrBual(t) { const b = $("qrBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
+function qrButang(ik, label, kelas, fn) {
+  const b = document.createElement("button");
+  b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
+  $("qrBtns").appendChild(b);
+  return b;
+}
+function qrSkrin(tajuk, back) {
+  qrId++; stopSpeech();
+  $("qrTajuk").textContent = tajuk; $("qrKawasan").innerHTML = ""; $("qrBtns").innerHTML = "";
+  $("qrBack").onclick = () => { qrId++; stopSpeech(); back(); };
+  show("s-quran");
+}
+/* Sebut satu per satu sambil menyala */
+function qrMainSemua(el, teks, id) {
+  let p = Promise.resolve();
+  el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); b.scrollIntoView({ block: "nearest", behavior: "smooth" }); return speak(teks[i], "ms").then(() => tunggu(250)); }); });
+  return p.then(() => el.forEach(z => z.classList.remove("on")));
+}
+
+function renderQuran() {
+  backMenu = renderQuran;
+  const st = loadStars();
+  renderMenu(tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), [
+    ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
+    ["q-baris", QR_IKON.baris, "Baris (Iqra')", "Baris atas, bawah dan hadapan: a, i, u", "", qrBaris],
+    ["q-surah", QR_IKON.surah, "Surah Lazim", SURAH.length + " surah pendek dengan rumi dan maksud", "", qrSenaraiSurah],
+    ["q-doa", QR_IKON.doa, "Doa Harian", DOA.length + " doa untuk amalan setiap hari", "", qrSenaraiDoa],
+    ["q-kuiz", QR_IKON.kuiz, "Kuiz Huruf", "Dengar nama huruf, pilih yang betul", starText(st["quran-kuiz"] || 0), qrKuiz]
+  ], renderHome);
+}
+function qrHuruf() {
+  qrSkrin("Huruf Hijaiyah", renderQuran);
+  const k = $("qrKawasan"), id0 = qrId;
+  k.innerHTML = `<div class="qrbesar"><span class="qrar"></span><b></b></div><div class="qrgrid">${HIJAIYAH.map(h => `<button class="qrh"><span class="qrar">${h[0]}</span><small>${h[1]}</small></button>`).join("")}</div>`;
+  const el = [...k.querySelectorAll(".qrh")], besar = k.querySelector(".qrbesar");
+  const papar = i => { besar.querySelector(".qrar").textContent = HIJAIYAH[i][0]; besar.querySelector("b").textContent = HIJAIYAH[i][1]; besar.classList.remove("pop"); void besar.offsetWidth; besar.classList.add("pop"); };
+  el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); speak(HIJAIYAH[i][1], "ms"); });
+  papar(0);
+  qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return speak(HIJAIYAH[i][1], "ms").then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
+  qrButang("play", "Kuiz Huruf", "hijau", qrKuiz);
+  qrBual(QR_SEBUT.huruf);
+  speak(QR_SEBUT.huruf, "ms");
+  void id0;
+}
+function qrBaris() {
+  qrSkrin("Baris (Iqra')", renderQuran);
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="qrnota"><span><i class="qrar">بَ</i>Baris atas: <b>a</b></span><span><i class="qrar">بِ</i>Baris bawah: <b>i</b></span><span><i class="qrar">بُ</i>Baris hadapan: <b>u</b></span></div><div class="qrbaris">${HIJAIYAH.map(h => `<div class="qrbr">${[0, 1, 2].map(j => `<button class="qrh"><span class="qrar">${barisHuruf(h[0], j)}</span><small>${h[2].split(" ")[j]}</small></button>`).join("")}</div>`).join("")}</div>`;
+  const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...HIJAIYAH.map(h => h[2].split(" ").map(qrBersih)));
+  el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); speak("~" + teks[i], "ms"); });
+  qrButang("speak", "Dengar Semua", "ungu", () => qrMainSemua(el, teks.map(t => "~" + t), ++qrId));
+  qrBual(QR_SEBUT.baris);
+  speak(QR_SEBUT.baris, "ms");
+}
+function qrSenaraiSurah() {
+  backMenu = qrSenaraiSurah;
+  renderMenu("Surah Lazim", SURAH.map((s, i) => ["c" + (i % 5), QR_IKON.surah, s.nama, s.ds, "", () => qrBaca(s, qrSenaraiSurah, true)]), renderQuran);
+}
+function qrSenaraiDoa() {
+  backMenu = qrSenaraiDoa;
+  renderMenu("Doa Harian", DOA.map((d, i) => ["c" + (i % 5), QR_IKON.doa, d.nama, d.ayat[0].split("|")[1].slice(0, 42) + "...", "", () => qrBaca(d, qrSenaraiDoa, false)]), renderQuran);
+}
+/* Pembaca surah/doa: teks Arab, rumi & maksud; suara membaca maksud */
+function qrBaca(s, back, surah) {
+  qrSkrin(s.nama, back);
+  const k = $("qrKawasan"), ay = s.ayat.map(a => a.split("|"));
+  k.innerHTML = (surah && s.nama !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>` : "") +
+    ay.map((a, i) => `<button class="qrayat">${surah ? `<span class="qrno">${i + 1}</span>` : ""}<span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("") +
+    `<p class="qrpesan">Bacaan Arab: baca bersama ibu, ayah atau guru supaya sebutan dan tajwid betul.</p>`;
+  const el = [...k.querySelectorAll(".qrayat")];
+  el.forEach((b, i) => { b.querySelector(".qrar").textContent = ay[i][0]; b.querySelector("i").textContent = ay[i][1]; b.querySelector(".qrmk").textContent = ay[i][2]; b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); speak(ay[i][2], "ms"); }; });
+  qrButang("speak", "Dengar Maksud", "ungu", () => qrMainSemua(el, ay.map(a => a[2]), ++qrId));
+  qrBual(surah ? QR_SEBUT.surah : QR_SEBUT.doa);
+  const id = qrId;
+  speak(s.nama, "ms").then(() => id === qrId && speak(surah ? QR_SEBUT.surah : QR_SEBUT.doa, "ms"));
+}
+/* Kuiz: dengar nama huruf, pilih huruf yang betul (10 soalan) */
+function qrKuiz() {
+  qrSkrin("Kuiz Huruf", renderQuran);
+  const soalan = shuffle(HIJAIYAH.map((h, i) => i)).slice(0, 10);
+  let n = 0, skor = 0;
+  const k = $("qrKawasan");
+  const tanya = () => {
+    const id = ++qrId, i = soalan[n], h = HIJAIYAH[i];
+    const salah = shuffle(HIJAIYAH.map((x, j) => j).filter(j => j !== i && HIJAIYAH[j][1] !== h[1])).slice(0, 3);
+    let silap = false;
+    k.innerHTML = `<div class="qrkira">${n + 1} / 10</div><div class="qrsoal"><button class="speak qrdengar" aria-label="Dengar">${IKON.speak}</button><b>Huruf ${h[1]}</b></div><div class="qrpilih">${shuffle([i].concat(salah)).map(j => `<button class="qrh" data-j="${j}"><span class="qrar">${HIJAIYAH[j][0]}</span></button>`).join("")}</div>`;
+    k.querySelector(".qrdengar").onclick = () => speak(h[1], "ms");
+    k.querySelectorAll(".qrpilih .qrh").forEach(b => b.onclick = () => {
+      if (id !== qrId) return;
+      if (+b.dataset.j === i) {
+        qrId++; b.classList.add("betul"); if (!silap) skor++; sndOk();
+        const r = b.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
+        qrBual(pick(BM_SEBUT.hebat));
+        speak(h[1], "ms").then(() => tunggu(500)).then(() => { if (!$("s-quran").classList.contains("on")) return; n++; n < 10 ? tanya() : tamat(); });
+      } else { silap = true; b.classList.add("no"); sndBad(); setTimeout(() => b.classList.remove("no"), 500); }
+    });
+    qrBual(QR_SEBUT.kuiz);
+    speak(QR_SEBUT.kuiz, "ms").then(() => id === qrId && speak(h[1], "ms"));
+  };
+  const tamat = () => {
+    const bintang = skor >= 9 ? 3 : skor >= 6 ? 2 : 1;
+    saveStar("quran-kuiz", bintang); sndWin();
+    k.innerHTML = `<div class="qrtamat"><div class="qrbintang">${"★".repeat(bintang)}${"☆".repeat(3 - bintang)}</div><b>${skor} / 10</b><p>${bintang === 3 ? "Hebat sungguh! Kamu kenal semua huruf." : "Bagus! Jom cuba lagi."}</p></div>`;
+    const r = k.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 80);
+    qrBual(bintang === 3 ? "Hebat sungguh!" : "Bagus!");
+    speak(bintang === 3 ? "Hebat sungguh! Kamu kenal semua huruf." : "Bagus! Jom cuba lagi.", "ms");
+    $("qrBtns").innerHTML = "";
+    qrButang("play", "Main Lagi", "hijau", qrKuiz);
+    qrButang("back", "Menu", "ungu", renderQuran);
+  };
+  tanya();
+}
+
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
 const HAI = [L("Hai! Jom belajar bersama saya!", "Hi! Let's learn together!", "你好！一起学习吧！"), L("Kamu memang pandai!", "You are so clever!", "你真聪明！"), L("Hari ini kita belajar apa ya?", "What shall we learn today?", "今天学什么呢？")];
 let haiI = 0;
@@ -4169,6 +4397,8 @@ function renderHome() {
   backMenu = null;
   const box = $("tahapList");
   box.innerHTML = "";
+  const q = cardBtn(QR_IKON.utama, tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Huruf hijaiyah, Iqra', surah lazim & doa harian", "Hijaiyah letters, Iqra', short surahs & daily duas", "阿拉伯字母、短章和日常祈祷")), "");
+  q.classList.add("t-quran"); q.onclick = renderQuran; box.appendChild(q);
   TAHAP.forEach(t => {
     const b = cardBtn(t.emoji, tr(t.nama), tr(t.umur), "");
     b.classList.add("t-" + t.id);
