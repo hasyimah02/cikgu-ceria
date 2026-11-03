@@ -4662,9 +4662,10 @@ function qrNota(i, lembar) {
   const k = $("qrKawasan"), jana = QN_JANA[n.tajuk], ct = jana ? jana() : n.contoh.split(";").map(x => x.split("|"));
   let tiga = n.tajuk === "Tanda Mati" || n.tajuk === "Tanda Sabdu";
   const ada2 = n.tajuk === "Tanda Sabdu";
-  if (ada2 && lembar !== 2) { tiga = false; for (let x = ct.length - 1; x >= 0; x--) if (x % 3) ct.splice(x, 1); }
-  const kelas = !jana ? "iqgrid" : tiga ? "qrbaris" : ada2 ? "qrgrid qnkecil" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
-  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p>${ada2 ? `<div class="qntab"><button class="${lembar !== 2 ? "on" : ""}">Lembaran 1: Baris Atas</button><button class="${lembar === 2 ? "on" : ""}">Lembaran 2: Atas, Bawah &amp; Depan</button></div>` : ""}<div class="${kelas}">${tiga ? Array.from({ length: ct.length / 3 }, () => `<div class="qrbr">${[0, 1, 2].map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`).join("") : ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
+  /* Sabdu lembaran 1: baris alif berubah (أَبَّ إِبَّ أُبَّ); lembaran 2: baris huruf bersabdu berubah */
+  if (ada2 && lembar !== 2) ct.splice(0, ct.length, ...[].concat(...HIJAIYAH.slice(1).map((h, j) => ["a", "i", "u"].map(v => [{ a: "أَ", i: "إِ", u: "أُ" }[v] + h[0] + "\u0651\u064E", v + IQ_C[j + 1] + "-" + iqSuku(j + 1, "a")[1]]))));
+  const kelas = !jana ? "iqgrid" : tiga ? "qrbaris" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
+  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p>${ada2 ? `<div class="qntab"><button class="${lembar !== 2 ? "on" : ""}">Lembaran 1: Baris Alif Berubah</button><button class="${lembar === 2 ? "on" : ""}">Lembaran 2: Baris Huruf Bersabdu Berubah</button></div>` : ""}<div class="${kelas}">${tiga ? Array.from({ length: ct.length / 3 }, () => `<div class="qrbr">${[0, 1, 2].map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`).join("") : ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
   k.querySelector(".qnterang").textContent = n.terang;
   k.querySelectorAll(".qntab button").forEach((b, x) => b.onclick = () => qrNota(i, x + 1));
   const el = [...k.querySelectorAll(".iqw")];
