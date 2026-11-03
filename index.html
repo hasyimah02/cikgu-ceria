@@ -477,6 +477,17 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .tjkaki b{width:100%;text-align:center}.tjkaki span{display:inline-flex;align-items:center;gap:5px}.tjkaki i{font-style:normal;font-size:18px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .th{color:#7D8796}}:root[data-theme="dark"] .th{color:#7D8796}
 
+/* Ulum Al-Quran */
+.qusimbol{font-size:clamp(40px,7vw,64px)!important;padding:0 30px!important;line-height:2!important}
+.qubox{background:var(--card);border-radius:22px;padding:14px 18px;box-shadow:0 5px 0 var(--garis)}.qubox b{color:#3FA672;font-size:19px}.qubox p{margin:6px 0 0;font-size:clamp(16px,2.2vw,19px)}
+.quc{text-align:left;align-items:flex-start}.quc b{color:#3FA672;font-size:19px}.quc .qrmk{text-align:left}
+.qubaca{align-self:flex-start;margin-top:6px;background:#E2F8EF;border:2px solid #8FD9A8;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.qukelas{align-self:center}
+.qukitab{text-align:center;color:var(--muted);font-weight:700;font-size:15px}
+.qumm{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.qumm span{border-radius:10px;padding:3px 8px;font-size:13px;font-weight:700}
+.qumm .mk,.qubox i.mk{background:#FFE7C2;color:#9A5B00}.qumm .md,.qubox i.md{background:#D8F0FF;color:#1F5F99}.qubox i{font-style:normal;padding:0 4px;border-radius:4px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qubaca{background:#2F4A3C}}:root[data-theme="dark"] .qubaca{background:#2F4A3C}
+
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -4361,7 +4372,7 @@ function qrBaris(dua) {
 }
 function qrSenaraiSurah() {
   backMenu = qrSenaraiSurah;
-  renderMenu("Surah Lazim", SURAH.map((s, i) => ["c" + (i % 5), QR_IKON.surah, s.nama, s.ds, "", () => qrBaca(s, qrSenaraiSurah, true)]), renderAlQuranMenu);
+  renderMenu("Surah Lazim", SURAH.map((s, i) => ["c" + (i % 5), QR_IKON.surah, s.nama, s.ds, "", () => qrBaca(s, qrSenaraiSurah, true)]), renderTilawahMenu);
 }
 function qrSenaraiDoa() {
   backMenu = qrSenaraiDoa;
@@ -4770,23 +4781,30 @@ function renderIqraMenu() {
 }
 function renderAlQuranMenu() {
   backMenu = renderAlQuranMenu; qariHenti();
+  renderMenu("Al-Quran", [
+    ["q-huruf", QR_IKON.surah, "Tilawah", "Ilmu tajwid & bacaan Al-Quran 30 juz", "", renderTilawahMenu],
+    ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal Al-Fatihah & surah Juz 'Amma, uji dengan sembunyi ayat", "", qhMenu],
+    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><path d="M20 18 h18 l6 6 v22 h-24z" fill="#fff"/><path d="M25 30 h14 M25 36 h14 M25 42 h9" stroke="#8CC8FF" stroke-width="2.5" stroke-linecap="round"/>`), "Ulum Al-Quran", ULUM.length + " ilmu: asbabun nuzul, Makki & Madani, nasikh & mansukh dan lain-lain", "", quMenu]
+  ], renderQuran);
+}
+function renderTilawahMenu() {
+  backMenu = renderTilawahMenu; qariHenti();
   const bm = qjPenanda();
   const it = [
-    ["q-huruf", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8FD9A8"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="26" fill="#fff" text-anchor="middle">تَجْوِيد</text>`), "Kelas Tajwid", TAJWID.length + " hukum tajwid dengan contoh ayat & kuiz", "", qtMenu],
-    ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal Al-Fatihah & surah Juz 'Amma, uji dengan sembunyi ayat", "", qhMenu],
-    ["q-surah", QR_IKON.surah, "Bacaan Al-Quran 30 Juz", "Rasm Uthmani penuh 604 muka surat dengan maksud", "", qjMenu],
+    ["q-huruf", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8FD9A8"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="26" fill="#fff" text-anchor="middle">تَجْوِيد</text>`), "Ilmu Tajwid", TAJWID.length + " hukum tajwid dengan contoh ayat & kuiz", "", qtMenu],
+    ["q-surah", QR_IKON.surah, "Bacaan Al-Quran 30 Juz", "Rasm Uthmani penuh 604 muka surat, warna tajwid & maksud", "", qjMenu],
     ["q-doa", QR_IKON.surah.replace("#7FDDBB", "#FFB98A"), "Surah Lazim", SURAH.length + " surah pendek dengan rumi dan maksud", "", qrSenaraiSurah]
   ];
   if (bm) it.unshift(["q-kuiz", IKON.play, "Sambung Bacaan", "Juz " + bm.j + " · muka surat " + bm.p, "", () => qjBaca(bm.j, bm.p)]);
-  renderMenu("Al-Quran", it, renderQuran);
+  renderMenu("Tilawah", it, renderAlQuranMenu);
 }
 
 /* ---- Kelas Tajwid ---- */
 function qtMenu() {
   backMenu = qtMenu; qariHenti();
   const st = loadStars(), kat = [...new Set(TAJWID.map(t => t.k))];
-  renderMenu("Kelas Tajwid", TAJWID.map((t, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][kat.indexOf(t.k) % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][kat.indexOf(t.k) % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), (i + 1) + ". " + t.t, t.k, "", () => qtNota(i)])
-    .concat(kat.map((k, j) => ["q-kuiz", QR_IKON.kuiz, "Kuiz: " + k, "Teka hukum tajwid daripada contoh ayat", starText(st["tajwid-" + j] || 0), () => qtKuiz(j)])), renderAlQuranMenu);
+  renderMenu("Ilmu Tajwid", TAJWID.map((t, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][kat.indexOf(t.k) % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][kat.indexOf(t.k) % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), (i + 1) + ". " + t.t, t.k, "", () => qtNota(i)])
+    .concat(kat.map((k, j) => ["q-kuiz", QR_IKON.kuiz, "Kuiz: " + k, "Teka hukum tajwid daripada contoh ayat", starText(st["tajwid-" + j] || 0), () => qtKuiz(j)])), renderTilawahMenu);
 }
 function qtNota(i) {
   const t = TAJWID[i];
@@ -4865,11 +4883,11 @@ const QJ_KEY = "appPendidikan.bacaan.v1";
 function qjPenanda() { try { return JSON.parse(localStorage.getItem(QJ_KEY)); } catch (e) { return null; } }
 function qjMenu() {
   backMenu = qjMenu; qariHenti();
-  renderMenu("Bacaan Al-Quran 30 Juz", QMETA.j.map((m, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), "Juz " + (i + 1), "Bermula " + QS_NAMA[m[0] - 1] + " ayat " + m[1] + " · muka surat " + m[2], "", () => qjBaca(i + 1, m[2])]), renderAlQuranMenu);
+  renderMenu("Bacaan Al-Quran 30 Juz", QMETA.j.map((m, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), "Juz " + (i + 1), "Bermula " + QS_NAMA[m[0] - 1] + " ayat " + m[1] + " · muka surat " + m[2], "", () => qjBaca(i + 1, m[2])]), renderTilawahMenu);
 }
-function qjBaca(j, p, arah) {
+function qjBaca(j, p, arah, tanda, balik) {
   qariHenti();
-  qrSkrin("Juz " + j + " · Muka surat " + p, qjMenu);
+  qrSkrin("Juz " + j + " · Muka surat " + p, balik || qjMenu);
   const k = $("qrKawasan"); k.innerHTML = `<p class="qrpesan">Memuatkan...</p>`;
   qjMuat(j).then(d => {
     const ms = d.filter(x => x[3] === p), akhir = d[d.length - 1][3];
@@ -4884,11 +4902,113 @@ function qjBaca(j, p, arah) {
     k.innerHTML = h + `</div><div class="qjmaksud"></div><p class="qrpesan">Tekan ayat untuk lihat maksud. Maksud: Tafsir Pimpinan Ar-Rahman.</p>` + tjNotaKaki();
     const el = [...k.querySelectorAll(".qjayat")], mk = k.querySelector(".qjmaksud");
     el.forEach((x, i) => x.onclick = () => { el.forEach(z => z.classList.remove("on")); x.classList.add("on"); const a = ms[i]; mk.innerHTML = `<b>${QS_NAMA[a[0] - 1]} ${a[1]}:</b> `; mk.appendChild(document.createTextNode(a[5])); mk.classList.add("ada"); });
+    if (tanda) { const t = el.find(x => +x.dataset.g === tanda); if (t) { t.click(); setTimeout(() => t.scrollIntoView({ block: "center" }), 50); } }
     const ke = (jj, pp, a) => () => qjBaca(jj, pp, a), awalJuz = ms[0] === d[0];
     if (p > 1 || !awalJuz) qrButang("back", "Sebelum", "biru", awalJuz ? ke(j - 1, p, -1) : ke(j, p - 1, -1));
     if (p < 604 || j < 30) qrButang("next", "Seterusnya", "hijau", p < akhir ? ke(j, p + 1, 1) : j < 30 ? ke(j + 1, QMETA.j[j][2] === p ? p : p + 1, 1) : () => { sndWin(); qjMenu(); });
     qrBual("Juz " + j + " · " + QS_NAMA[ms[0][0] - 1]);
   }).catch(() => { k.innerHTML = `<p class="qrpesan">Data juz tidak dapat dimuatkan.</p>`; });
+}
+
+/* ===== Ulum Al-Quran: ilmu-ilmu berkaitan Al-Quran, dengan contoh & rujukan ayat ===== */
+const ULUM = [
+  { t: "Asbabun Nuzul", ar: "أَسْبَابُ النُّزُول", terang: "Asbabun Nuzul bermaksud sebab-sebab turunnya ayat. Ia ialah peristiwa atau soalan pada zaman Nabi SAW yang menjadi latar belakang sesuatu ayat atau surah diturunkan. Tidak semua ayat ada asbabun nuzul, hanya sebahagian sahaja.",
+    isi: [["Faedah", "Membantu kita memahami maksud ayat dengan tepat, mengetahui hikmah sesuatu hukum, dan melihat bagaimana Al-Quran menjawab masalah manusia."], ["Kaedah penting", "Pengajaran diambil daripada umumnya lafaz ayat, bukan khusus kepada sebab turunnya sahaja."]],
+    contoh: [["Surah Al-Masad", "Nabi SAW naik ke Bukit Safa dan menyeru kaum Quraisy kepada Islam. Abu Lahab mencela baginda, lalu turunlah surah ini.", 111, 1],
+      ["Surah 'Abasa", "Abdullah bin Ummi Maktum yang buta datang bertanya kepada Nabi SAW ketika baginda sedang berdakwah kepada pembesar Quraisy.", 80, 1],
+      ["Surah Ad-Duha", "Wahyu terhenti seketika. Orang musyrik berkata Tuhan telah meninggalkan Muhammad. Allah menurunkan surah ini untuk menenangkan Nabi SAW.", 93, 1],
+      ["Surah Al-Kauthar", "Seorang musyrik mengejek Nabi SAW sebagai 'abtar' (terputus keturunan) selepas putera baginda wafat.", 108, 1],
+      ["Surah Al-Ikhlas", "Orang musyrik meminta Nabi SAW menerangkan sifat dan keturunan Tuhan yang baginda sembah.", 112, 1],
+      ["Surah Al-Kafirun", "Pemimpin Quraisy mencadangkan agar Nabi SAW menyembah tuhan mereka setahun, dan mereka menyembah Allah setahun.", 109, 1],
+      ["Al-Baqarah ayat 144", "Nabi SAW sangat mengharapkan kiblat dipindahkan ke Kaabah. Ayat ini turun memerintahkan umat Islam menghadap Masjidil Haram.", 2, 144],
+      ["Al-Mujadalah ayat 1", "Khaulah binti Tha'labah datang mengadu kepada Nabi SAW tentang suaminya yang melafazkan zihar.", 58, 1]],
+    kitab: "Asbab al-Nuzul (Al-Wahidi) dan Lubab al-Nuqul fi Asbab al-Nuzul (Imam As-Suyuti)" },
+  { t: "Makki dan Madani", ar: "المَكِّي وَالمَدَنِي", terang: "Makki ialah ayat atau surah yang turun sebelum hijrah. Madani ialah yang turun selepas hijrah Nabi SAW ke Madinah.", makki: true,
+    isi: [["Ciri Makki", "Menekankan akidah dan tauhid, hari akhirat, kisah para nabi, ayatnya banyak yang pendek, dan sering menyeru 'Wahai manusia'."], ["Ciri Madani", "Menerangkan hukum ibadah, muamalat, keluarga dan masyarakat, ayatnya lebih panjang, dan sering menyeru 'Wahai orang yang beriman'."], ["Tempoh", "Makki kira-kira 13 tahun di Makkah. Madani kira-kira 10 tahun di Madinah."]],
+    contoh: [["Contoh Makki", "Surah Al-'Alaq, wahyu pertama yang turun di Gua Hira'.", 96, 1], ["Contoh Madani", "Surah Al-Baqarah, surah paling panjang yang banyak menerangkan hukum.", 2, 1]],
+    kitab: "Al-Itqan fi Ulum al-Quran (Imam As-Suyuti)" },
+  { t: "Nasikh dan Mansukh", ar: "النَّاسِخ وَالمَنْسُوخ", terang: "Nasikh ialah ayat yang memansuhkan hukum. Mansukh ialah ayat yang hukumnya dimansuhkan atau digantikan dengan hukum yang baharu.",
+    isi: [["Hikmah", "Hukum diturunkan secara berperingkat mengikut keadaan umat Islam supaya mudah diterima dan diamalkan."]],
+    contoh: [["Arah kiblat", "Umat Islam pada awalnya menghadap Baitul Maqdis. Hukum ini digantikan dengan arahan menghadap Kaabah.", 2, 144],
+      ["Iddah kematian suami", "Ayat 240 menyebut tempoh setahun. Menurut jumhur ulama, ia dimansuhkan oleh ayat 234 iaitu 4 bulan 10 hari.", 2, 234],
+      ["Pengharaman arak berperingkat", "Bermula dengan penerangan bahawa mudaratnya lebih besar (Al-Baqarah 219), kemudian larangan solat dalam keadaan mabuk (An-Nisa' 43), akhirnya diharamkan sepenuhnya (Al-Ma'idah 90).", 5, 90]],
+    kitab: "Al-Itqan fi Ulum al-Quran (Imam As-Suyuti)" },
+  { t: "Muhkam dan Mutasyabih", ar: "المُحْكَم وَالمُتَشَابِه", terang: "Muhkam ialah ayat yang jelas maknanya. Mutasyabih ialah ayat yang maknanya samar dan hanya Allah yang mengetahui hakikatnya.",
+    isi: [["Sikap kita", "Kita beramal dengan ayat muhkam dan beriman dengan ayat mutasyabih tanpa menyerupakan Allah dengan makhluk."]],
+    contoh: [["Ayat yang menyebut kedua-duanya", "Surah Ali 'Imran ayat 7 menerangkan Al-Quran mengandungi ayat muhkam dan mutasyabih.", 3, 7],
+      ["Contoh muhkam", "Kewajipan berpuasa pada bulan Ramadan.", 2, 183],
+      ["Contoh mutasyabih", "Huruf muqatta'ah di awal surah seperti Alif Lam Mim.", 2, 1]],
+    kitab: "Al-Burhan fi Ulum al-Quran (Az-Zarkasyi)" },
+  { t: "Qiraat", ar: "القِرَاءَات", terang: "Qiraat ialah cara-cara bacaan Al-Quran yang diriwayatkan daripada Nabi SAW dengan sanad yang sahih.",
+    isi: [["Qiraat Tujuh", "Imam Nafi', Ibn Kathir, Abu 'Amr, Ibn 'Amir, 'Asim, Hamzah dan Al-Kisa'i. Ditambah Abu Ja'far, Ya'qub dan Khalaf menjadi Qiraat Sepuluh."], ["Di Malaysia", "Bacaan yang digunakan ialah riwayat Hafs daripada Imam 'Asim. Teks dalam app ini juga riwayat Hafs."]],
+    contoh: [["Contoh perbezaan", "Dalam Al-Fatihah ayat 4, sebahagian qiraat membaca 'Maliki' (Yang Memiliki) dan sebahagian membaca 'Maliki' tanpa alif (Raja). Kedua-duanya sahih.", 1, 4]],
+    kitab: "Al-Itqan fi Ulum al-Quran (Imam As-Suyuti)" },
+  { t: "Tafsir dan Takwil", ar: "التَّفْسِير وَالتَّأْوِيل", terang: "Tafsir ialah menerangkan dan menghuraikan makna ayat Al-Quran. Takwil ialah memalingkan makna zahir kepada makna lain berdasarkan dalil.",
+    isi: [["Jenis tafsir", "Tafsir bil ma'thur berdasarkan Al-Quran, hadis dan kata sahabat. Tafsir bir ra'yi berdasarkan ijtihad ulama yang berilmu."], ["Tafsir dalam bahasa Melayu", "Tarjuman al-Mustafid (Syeikh Abdul Rauf Singkel, tafsir Melayu pertama), Tafsir Al-Azhar (Hamka) dan Tafsir Pimpinan Ar-Rahman yang digunakan dalam app ini."]],
+    contoh: [["Tafsir ayat dengan ayat", "'Jalan yang lurus' dalam Al-Fatihah ayat 6 dihuraikan oleh ayat 7: jalan orang yang diberi nikmat.", 1, 7]],
+    kitab: "Tafsir Ibn Kathir, Tafsir Al-Tabari, Tafsir Pimpinan Ar-Rahman" },
+  { t: "Ilmu Tajwid", ar: "عِلْمُ التَّجْوِيد", terang: "Ilmu tajwid ialah ilmu tentang cara menyebut huruf dan membaca Al-Quran dengan betul.", tajwid: true,
+    isi: [["Hukum", "Mempelajari ilmu tajwid fardu kifayah. Mengamalkannya ketika membaca Al-Quran fardu ain."], ["Perintah membaca dengan tartil", "Allah memerintahkan Al-Quran dibaca dengan tartil iaitu perlahan dan betul."]],
+    contoh: [["Perintah tartil", "Surah Al-Muzzammil ayat 4: bacalah Al-Quran dengan tartil.", 73, 4]],
+    kitab: "Matan Al-Jazariyyah dan Tuhfatul Atfal" },
+  { t: "Rasm Uthmani", ar: "الرَّسْمُ العُثْمَانِي", terang: "Rasm Uthmani ialah kaedah penulisan mushaf Al-Quran yang ditetapkan pada zaman Khalifah Uthman bin Affan RA.",
+    isi: [["Keistimewaan", "Ada perkataan yang ditulis berbeza daripada ejaan biasa, contohnya ٱلصَّلَوٰةَ ditulis dengan wau dan ٱلرَّحْمَٰنِ dengan alif kecil."], ["Hukum", "Jumhur ulama mewajibkan penulisan mushaf mengikut Rasm Uthmani."]],
+    contoh: [["Contoh dalam ayat", "Lihat tulisan ٱلصَّلَوٰةَ dalam Al-Baqarah ayat 3.", 2, 3]],
+    kitab: "Al-Muqni' (Abu 'Amr Ad-Dani)" },
+  { t: "Jam'ul Quran", ar: "جَمْعُ القُرْآن", terang: "Jam'ul Quran ialah sejarah pengumpulan dan pembukuan Al-Quran.",
+    isi: [["Zaman Nabi SAW", "Al-Quran dihafal oleh para sahabat dan ditulis oleh penulis wahyu seperti Zaid bin Thabit pada pelepah tamar, batu dan kulit."], ["Zaman Abu Bakar RA", "Ramai penghafal Al-Quran syahid dalam Perang Yamamah. Atas cadangan Umar RA, Zaid bin Thabit mengumpulkan Al-Quran dalam satu himpunan (suhuf)."], ["Zaman Uthman RA", "Berlaku perbezaan bacaan di wilayah Islam. Uthman RA menyalin mushaf yang seragam dan menghantarnya ke wilayah-wilayah. Inilah Mushaf Uthmani."]],
+    contoh: [["Janji Allah memelihara Al-Quran", "Surah Al-Hijr ayat 9.", 15, 9]],
+    kitab: "Al-Itqan fi Ulum al-Quran (Imam As-Suyuti)" },
+  { t: "I'jaz Al-Quran", ar: "إِعْجَازُ القُرْآن", terang: "I'jaz Al-Quran ialah kemukjizatan Al-Quran yang tidak dapat ditandingi oleh manusia.",
+    isi: [["Dari segi bahasa", "Susunan dan keindahan bahasanya tidak dapat ditiru."], ["Dari segi ilmu", "Al-Quran menyebut perkara yang selaras dengan ilmu sains, contohnya peringkat kejadian manusia."], ["Berita ghaib", "Al-Quran mengkhabarkan perkara yang akan berlaku, contohnya kemenangan Rom selepas kekalahan."]],
+    contoh: [["Cabaran mendatangkan satu surah", "Al-Baqarah ayat 23.", 2, 23], ["Peringkat kejadian manusia", "Al-Mu'minun ayat 12 hingga 14.", 23, 12], ["Kemenangan Rom", "Ar-Rum ayat 2 hingga 4.", 30, 2]],
+    kitab: "I'jaz al-Quran (Al-Baqillani)" },
+  { t: "Amthal Al-Quran", ar: "أَمْثَالُ القُرْآن", terang: "Amthal Al-Quran ialah perumpamaan dalam Al-Quran untuk memudahkan kita memahami sesuatu pengajaran.",
+    isi: [["Tujuan", "Menjadikan perkara yang abstrak mudah difahami dan meninggalkan kesan dalam hati."]],
+    contoh: [["Sedekah seperti benih", "Sebiji benih menumbuhkan tujuh tangkai, setiap tangkai seratus biji.", 2, 261], ["Kalimah yang baik seperti pokok", "Akarnya teguh dan cabangnya menjulang ke langit.", 14, 24], ["Rumah labah-labah", "Perumpamaan orang yang berlindung kepada selain Allah.", 29, 41]],
+    kitab: "Al-Amthal fi al-Quran (Ibn al-Qayyim)" },
+  { t: "Qasas Al-Quran", ar: "قَصَصُ القُرْآن", terang: "Qasas Al-Quran ialah kisah-kisah dalam Al-Quran tentang para nabi, umat terdahulu dan peristiwa yang berlaku.",
+    isi: [["Tujuan", "Memberi pengajaran, menguatkan iman dan menunjukkan akibat orang yang taat dan yang ingkar."]],
+    contoh: [["Kisah Nabi Yusuf AS", "Disebut sebagai kisah yang paling baik.", 12, 3], ["Ashabul Kahfi", "Pemuda beriman yang tidur di dalam gua.", 18, 9], ["Nasihat Luqman", "Nasihat seorang bapa kepada anaknya.", 31, 13]],
+    kitab: "Qasas al-Anbiya' (Ibn Kathir)" },
+  { t: "Munasabah", ar: "المُنَاسَبَة", terang: "Munasabah ialah kaitan antara ayat dengan ayat, atau surah dengan surah dalam Al-Quran.",
+    isi: [["Faedah", "Menunjukkan Al-Quran tersusun dengan rapi dan saling berkaitan."]],
+    contoh: [["Al-Fatihah dan Al-Baqarah", "Al-Fatihah memohon petunjuk, lalu Al-Baqarah dimulakan dengan 'petunjuk bagi orang yang bertakwa'.", 2, 2], ["Al-Fil dan Quraisy", "Allah membinasakan tentera bergajah, lalu Quraisy dapat hidup aman dan berdagang.", 106, 1]],
+    kitab: "Al-Burhan fi Ulum al-Quran (Az-Zarkasyi)" }
+];
+function quMenu() {
+  backMenu = quMenu;
+  renderMenu("Ulum Al-Quran", ULUM.map((u, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), (i + 1) + ". " + u.t, u.terang.split(".")[0] + ".", "", () => quNota(i)]), renderAlQuranMenu);
+}
+function quNota(i) {
+  const u = ULUM[i];
+  qrSkrin((i + 1) + ". " + u.t, quMenu);
+  const k = $("qrKawasan");
+  let h = `<div class="qnsimbol qrar qusimbol"></div><p class="qnterang"></p>`;
+  h += u.isi.map(() => `<div class="qubox quisi"><b></b><p></p></div>`).join("");
+  if (u.makki) {
+    const mk = QMETA.s.filter(x => x[2] === "Meccan").length;
+    h += `<div class="qubox"><b>114 surah: ${mk} Makki, ${114 - mk} Madani (ikut data mushaf ini)</b><div class="qumm">${QMETA.s.map((x, j) => `<span class="${x[2] === "Meccan" ? "mk" : "md"}">${j + 1}. ${QS_NAMA[j]}</span>`).join("")}</div><small><i class="mk">■</i> Makki &nbsp; <i class="md">■</i> Madani</small></div>`;
+  }
+  h += `<div class="qtkat">Contoh</div><div class="qtcontoh">${u.contoh.map(() => `<div class="qrayat quc"><b></b><span class="qrmk"></span><button class="qubaca">Baca ayat</button></div>`).join("")}</div>`;
+  if (u.tajwid) h += `<button class="tb hijau qukelas">${IKON.next}<span>Pergi ke Kelas Tajwid</span></button>`;
+  h += `<div class="qukitab"><b>Kitab rujukan:</b> <span></span></div>`;
+  k.innerHTML = h;
+  k.querySelector(".qusimbol").textContent = u.ar; k.querySelector(".qnterang").textContent = u.terang;
+  k.querySelectorAll(".quisi").forEach((b, j) => { b.querySelector("b").textContent = u.isi[j][0]; b.querySelector("p").textContent = u.isi[j][1]; });
+  k.querySelectorAll(".quc").forEach((c, j) => { const x = u.contoh[j]; c.querySelector("b").textContent = x[0]; c.querySelector(".qrmk").textContent = x[1]; const b = c.querySelector(".qubaca"); b.textContent = "Baca " + QS_NAMA[x[2] - 1] + " ayat " + x[3]; b.onclick = () => qjBukaAyat(x[2], x[3], () => quNota(i)); });
+  const kl = k.querySelector(".qukelas"); if (kl) kl.onclick = qtMenu;
+  k.querySelector(".qukitab span").textContent = u.kitab;
+  if (i > 0) qrButang("back", "Sebelum", "biru", () => quNota(i - 1));
+  if (i < ULUM.length - 1) qrButang("next", "Seterusnya", "hijau", () => quNota(i + 1));
+  else qrButang("play", "Siap", "hijau", () => { sndWin(); quMenu(); });
+  qrBual(u.t);
+}
+/* Buka Bacaan 30 Juz pada ayat tertentu dan tandakan ayat itu */
+function qjBukaAyat(s, a, balik) {
+  let j = 1;
+  QMETA.j.forEach((m, x) => { if (s > m[0] || (s === m[0] && a >= m[1])) j = x + 1; });
+  qjMuat(j).then(d => { const r = d.find(x => x[0] === s && x[1] === a); if (r) qjBaca(j, r[3], 1, r[2], balik); });
 }
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
