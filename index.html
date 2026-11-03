@@ -488,6 +488,23 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qumm .mk,.qubox i.mk{background:#FFE7C2;color:#9A5B00}.qumm .md,.qubox i.md{background:#D8F0FF;color:#1F5F99}.qubox i{font-style:normal;padding:0 4px;border-radius:4px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qubaca{background:#2F4A3C}}:root[data-theme="dark"] .qubaca{background:#2F4A3C}
 
+/* Al-Quran Bertafsir */
+.qbmuka .qjayat.on{background:#EDE6FF;box-shadow:0 0 0 2px #BBA6FF inset}
+.qbmk{background:#FFE7C2;color:#9A5B00;border-radius:8px;padding:1px 8px}.qbmd{background:#D8F0FF;color:#1F5F99;border-radius:8px;padding:1px 8px}
+.qjayat.qbnasikh,i.qbnasikh{background:#D9F5E3;border-radius:10px}.qjayat.qbmansukh,i.qbmansukh{background:#FFE3D0;border-radius:10px}
+.qbasbab{color:#D6338A;font-size:.55em;vertical-align:super;margin:0 2px}
+.qbkaki{color:#2E7BD6;font-weight:700;font-size:.45em;font-family:system-ui;direction:ltr}
+.qbpetunjuk{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:14px;font-weight:700;color:var(--muted)}.qbpetunjuk i{display:inline-block;width:22px;margin-right:4px;font-style:normal}.qbpetunjuk .qbasbab{font-size:16px;vertical-align:middle}
+.qbnotakaki{background:var(--card);border-radius:20px;padding:12px 18px;font-size:15px;border-top:3px solid #8CC8FF;box-shadow:0 4px 0 var(--garis)}.qbnotakaki p{margin:6px 0}.qbnotakaki sup{color:#2E7BD6;font-weight:700}
+.qbtafsir{background:var(--card);border-radius:24px;padding:14px 18px;box-shadow:0 5px 0 var(--garis);border:3px solid transparent;scroll-margin-top:12px}.qbtafsir.on{border-color:#8FD9A8}
+.qbtajuk{font-weight:700;color:#3FA672;font-size:19px;margin-bottom:6px}
+.qbbah{margin:8px 0}.qbbah b{font-size:14px;color:var(--muted)}.qbbah p{margin:4px 0 0;font-size:clamp(16px,2.2vw,18px)}
+.qbkotak{background:#FFF0F6;border-radius:16px;padding:8px 12px}.qbkotak.qbnasikh{background:#D9F5E3}.qbkotak.qbmansukh{background:#FFE3D0}
+.qbperkataan{background:#E6F3FF;border:2px solid #8CC8FF;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;margin-top:4px}
+.qbwbw{display:flex;flex-wrap:wrap;gap:8px;direction:rtl;margin-top:8px}.qbwbw span{display:flex;flex-direction:column;align-items:center;background:#F6F1FF;border-radius:14px;padding:4px 10px;min-width:70px}.qbwbw i{font-style:normal;font-size:26px;line-height:1.8}.qbwbw small{direction:ltr;font-size:13px;color:var(--muted);text-align:center;max-width:140px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qbkotak{background:#43386E}:root:not([data-theme="light"]) .qbwbw span{background:#43386E}:root:not([data-theme="light"]) .qjayat.qbnasikh{background:#2F4A3C}:root:not([data-theme="light"]) .qjayat.qbmansukh{background:#503A3E}}
+:root[data-theme="dark"] .qbkotak,:root[data-theme="dark"] .qbwbw span{background:#43386E}:root[data-theme="dark"] .qjayat.qbnasikh{background:#2F4A3C}:root[data-theme="dark"] .qjayat.qbmansukh{background:#503A3E}
+
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -4784,7 +4801,8 @@ function renderAlQuranMenu() {
   renderMenu("Al-Quran", [
     ["q-huruf", QR_IKON.surah, "Tilawah", "Ilmu tajwid & bacaan Al-Quran 30 juz", "", renderTilawahMenu],
     ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal 30 juz ikut surah, uji dengan sembunyi ayat", "", qhMenu],
-    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><path d="M20 18 h18 l6 6 v22 h-24z" fill="#fff"/><path d="M25 30 h14 M25 36 h14 M25 42 h9" stroke="#8CC8FF" stroke-width="2.5" stroke-linecap="round"/>`), "Ulum Al-Quran", ULUM.length + " ilmu: asbabun nuzul, Makki & Madani, nasikh & mansukh dan lain-lain", "", quMenu]
+    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><path d="M20 18 h18 l6 6 v22 h-24z" fill="#fff"/><path d="M25 30 h14 M25 36 h14 M25 42 h9" stroke="#8CC8FF" stroke-width="2.5" stroke-linecap="round"/>`), "Ulum Al-Quran", ULUM.length + " ilmu: asbabun nuzul, Makki & Madani, nasikh & mansukh dan lain-lain", "", quMenu],
+    ["q-doa", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFB98A"/><path d="M14 20 q9-5 18 1 v26 q-9-5-18-1z M50 20 q-9-5-18 1 v26 q9-5 18-1z" fill="#fff"/><path d="M19 27 h8 M19 32 h8 M37 27 h8 M37 32 h8" stroke="#FFB98A" stroke-width="2.2" stroke-linecap="round"/>`), "Al-Quran Bertafsir", "Lembaran 30 juz: tafsir, asbabun nuzul, Makki/Madani, nasikh & mansukh, terjemahan setiap perkataan", "", qbMenu]
   ], renderQuran);
 }
 function renderTilawahMenu() {
@@ -5024,6 +5042,111 @@ function qjBukaAyat(s, a, balik) {
   let j = 1;
   QMETA.j.forEach((m, x) => { if (s > m[0] || (s === m[0] && a >= m[1])) j = x + 1; });
   qjMuat(j).then(d => { const r = d.find(x => x[0] === s && x[1] === a); if (r) qjBaca(j, r[3], 1, r[2], balik); });
+}
+
+/* ===== Al-Quran Bertafsir: lembaran 30 juz dengan warna tajwid, Makki/Madani, asbabun nuzul,
+   nasikh & mansukh, nota kaki muhkam & mutasyabih, tafsir Jalalain dan terjemahan setiap perkataan ===== */
+const QT = {};
+function QT_ISI(n, d) { QT[n] = d; }
+window.QT_ISI = QT_ISI;
+function qtafMuat(n) {
+  if (QT[n]) return Promise.resolve(QT[n]);
+  return new Promise((ok, gagal) => { const s = document.createElement("script"); s.src = "gambar/tafsir/t" + n + ".js"; s.onload = () => ok(QT[n]); s.onerror = gagal; document.head.appendChild(s); });
+}
+/* Asbabun nuzul (ringkasan) bagi ayat yang masyhur */
+const QB_ASBAB = {
+  "2:144": "Nabi SAW sangat mengharapkan kiblat dipindahkan ke Kaabah. Ayat ini turun memerintahkan umat Islam menghadap Masjidil Haram.",
+  "2:158": "Sebahagian sahabat Ansar berasa keberatan untuk bersa'i antara Safa dan Marwah kerana amalan itu pernah dilakukan pada zaman jahiliah. Ayat ini menerangkan ia sebahagian syiar Allah.",
+  "2:187": "Pada awalnya sahabat tidak bergaul dengan isteri dan tidak makan selepas tidur pada malam Ramadan. Ayat ini memberi keringanan.",
+  "2:222": "Orang Yahudi mengasingkan wanita yang haid daripada rumah. Sahabat bertanya kepada Nabi SAW, lalu turun ayat ini.",
+  "4:43": "Seorang sahabat mengimami solat dalam keadaan mabuk lalu tersilap bacaan, sebelum arak diharamkan sepenuhnya.",
+  "8:1": "Sahabat bertanya tentang pembahagian harta rampasan selepas Perang Badar.",
+  "17:85": "Orang Yahudi menyuruh kaum Quraisy bertanya kepada Nabi SAW tentang roh.",
+  "24:11": "Peristiwa fitnah terhadap Aisyah RA (hadis al-ifk). Ayat ini membersihkan nama baginda.",
+  "49:2": "Abu Bakar dan Umar RA meninggikan suara di hadapan Nabi SAW ketika berbincang tentang perlantikan ketua rombongan.",
+  "58:1": "Khaulah binti Tha'labah datang mengadu kepada Nabi SAW tentang suaminya yang melafazkan zihar.",
+  "66:1": "Nabi SAW mengharamkan madu ke atas diri baginda kerana menjaga hati isteri-isteri baginda.",
+  "80:1": "Abdullah bin Ummi Maktum yang buta datang bertanya kepada Nabi SAW ketika baginda sedang berdakwah kepada pembesar Quraisy.",
+  "93:1": "Wahyu terhenti seketika. Orang musyrik berkata Tuhan telah meninggalkan Muhammad.",
+  "96:1": "Wahyu pertama yang diturunkan kepada Nabi SAW di Gua Hira' melalui Malaikat Jibril.",
+  "108:1": "Seorang musyrik mengejek Nabi SAW sebagai 'abtar' (terputus keturunan) selepas putera baginda wafat.",
+  "109:1": "Pemimpin Quraisy mencadangkan agar Nabi SAW menyembah tuhan mereka setahun dan mereka menyembah Allah setahun.",
+  "111:1": "Nabi SAW naik ke Bukit Safa dan menyeru kaum Quraisy kepada Islam. Abu Lahab mencela baginda.",
+  "112:1": "Orang musyrik meminta Nabi SAW menerangkan sifat dan keturunan Tuhan yang baginda sembah."
+};
+/* Nasikh (memansuhkan) & mansukh (dimansuhkan) mengikut pendapat masyhur */
+const QB_NASAKH = {
+  "2:144": ["nasikh", "Memansuhkan hukum menghadap Baitul Maqdis. Kiblat ditukar ke Kaabah."],
+  "2:184": ["mansukh", "Pilihan membayar fidyah bagi orang yang mampu berpuasa dimansuhkan oleh ayat 185."],
+  "2:185": ["nasikh", "Mewajibkan puasa Ramadan ke atas setiap yang mampu, memansuhkan pilihan fidyah dalam ayat 184."],
+  "2:234": ["nasikh", "Iddah kematian suami 4 bulan 10 hari, memansuhkan tempoh setahun dalam ayat 240."],
+  "2:240": ["mansukh", "Tempoh setahun dimansuhkan oleh ayat 234 menurut jumhur ulama."],
+  "4:15": ["mansukh", "Hukuman ke atas penzina dimansuhkan oleh Surah An-Nur ayat 2."],
+  "4:43": ["mansukh", "Larangan solat ketika mabuk ialah peringkat kedua. Arak diharamkan sepenuhnya dalam Al-Ma'idah ayat 90."],
+  "5:90": ["nasikh", "Pengharaman arak secara mutlak, peringkat terakhir selepas Al-Baqarah 219 dan An-Nisa' 43."],
+  "8:65": ["mansukh", "Nisbah seorang Muslim menghadapi sepuluh musuh diringankan oleh ayat 66."],
+  "8:66": ["nasikh", "Meringankan nisbah kepada seorang menghadapi dua musuh."],
+  "24:2": ["nasikh", "Menetapkan hukuman sebat, memansuhkan hukum dalam Surah An-Nisa' ayat 15."],
+  "58:12": ["mansukh", "Kewajipan bersedekah sebelum berbisik dengan Rasul dimansuhkan oleh ayat 13."],
+  "58:13": ["nasikh", "Memansuhkan kewajipan bersedekah dalam ayat 12."],
+  "73:2": ["mansukh", "Kewajipan qiyamullail sepanjang malam diringankan oleh ayat 20."],
+  "73:20": ["nasikh", "Meringankan kewajipan qiyamullail dalam awal surah ini."]
+};
+/* Nota kaki muhkam & mutasyabih */
+const QB_HURUF_MQ = [2, 3, 7, 10, 11, 12, 13, 14, 15, 19, 20, 26, 27, 28, 29, 30, 31, 32, 36, 38, 40, 41, 42, 43, 44, 45, 46, 50, 68];
+const QB_MM = Object.assign({}, ...QB_HURUF_MQ.map(s => ({ [s + ":1"]: ["Mutasyabih", "Huruf muqatta'ah di awal surah. Hanya Allah yang mengetahui maksud sebenarnya."] })), {
+  "3:7": ["Muhkam & Mutasyabih", "Ayat ini menerangkan Al-Quran mengandungi ayat muhkam (jelas maknanya, induk Al-Kitab) dan ayat mutasyabih (samar maknanya)."],
+  "2:115": ["Mutasyabih", "Menyebut 'wajah Allah'. Kita beriman tanpa menyerupakan Allah dengan makhluk."],
+  "7:54": ["Mutasyabih", "Menyebut Allah 'istawa' di atas Arasy. Kita beriman tanpa bertanya bagaimana."],
+  "20:5": ["Mutasyabih", "Menyebut Allah 'istawa' di atas Arasy. Kita beriman tanpa bertanya bagaimana."],
+  "48:10": ["Mutasyabih", "Menyebut 'tangan Allah'. Kita beriman tanpa menyerupakan Allah dengan makhluk."],
+  "55:27": ["Mutasyabih", "Menyebut 'wajah Tuhanmu'. Kita beriman tanpa menyerupakan Allah dengan makhluk."],
+  "2:43": ["Muhkam", "Perintah mendirikan solat dan menunaikan zakat yang jelas maknanya."],
+  "2:183": ["Muhkam", "Kewajipan berpuasa yang jelas maknanya."],
+  "17:23": ["Muhkam", "Perintah mentauhidkan Allah dan berbuat baik kepada ibu bapa yang jelas maknanya."],
+  "112:1": ["Muhkam", "Penegasan keesaan Allah yang jelas maknanya."]
+});
+const QB_KEY = "appPendidikan.bertafsir.v1";
+function qbMenu() {
+  backMenu = qbMenu;
+  let bm = null; try { bm = JSON.parse(localStorage.getItem(QB_KEY)); } catch (e) { /* abaikan */ }
+  const it = QMETA.j.map((m, i) => [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), "Juz " + (i + 1), "Bermula " + QS_NAMA[m[0] - 1] + " ayat " + m[1] + " · muka surat " + m[2], "", () => qbBaca(i + 1, m[2])]);
+  if (bm) it.unshift(["q-kuiz", IKON.play, "Sambung Bacaan Bertafsir", "Juz " + bm.j + " · muka surat " + bm.p, "", () => qbBaca(bm.j, bm.p)]);
+  renderMenu("Al-Quran Bertafsir", it, renderAlQuranMenu);
+}
+function qbBaca(j, p, arah) {
+  qrSkrin("Bertafsir · Juz " + j + " · Muka surat " + p, qbMenu);
+  const k = $("qrKawasan"); k.innerHTML = `<p class="qrpesan">Memuatkan...</p>`;
+  Promise.all([qjMuat(j), qtafMuat(j)]).then(([d, t]) => {
+    const ms = d.filter(x => x[3] === p), akhir = d[d.length - 1][3];
+    if (!ms.length) return arah < 0 ? qbBaca(j, p - 1, -1) : qbBaca(j + 1 <= 30 ? j + 1 : j, p, 1);
+    try { localStorage.setItem(QB_KEY, JSON.stringify({ j: j, p: p })); } catch (e) { /* abaikan */ }
+    const kunci = a => a[0] + ":" + a[1], kaki = [];
+    let h = `<div class="qjmuka qbmuka">`;
+    ms.forEach(a => {
+      if (a[1] === 1) { const mk = QMETA.s[a[0] - 1][2] === "Meccan"; h += `<div class="qjsurah"><span class="qrar">${QMETA.s[a[0] - 1][0]}</span><small>${QS_NAMA[a[0] - 1]} · ${QMETA.s[a[0] - 1][1]} ayat · <b class="qb${mk ? "mk" : "md"}">${mk ? "Makkiyyah" : "Madaniyyah"}</b></small></div>` + (a[0] !== 1 && a[0] !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""); }
+      const ky = kunci(a), ns = QB_NASAKH[ky], mm = QB_MM[ky];
+      let nk = ""; if (mm) { kaki.push([ky, mm]); nk = `<sup class="qbkaki">${kaki.length}</sup>`; }
+      h += `<span class="qjayat qrar${ns ? " qb" + ns[0] : ""}" data-g="${a[2]}">${QB_ASBAB[ky] ? `<span class="qbasbab" title="Asbabun Nuzul">◆</span>` : ""}${a[4]} <span class="qjno">﴿${angkaArab(a[1])}﴾</span>${nk}</span> `;
+    });
+    h += `</div><div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span></div>`;
+    if (kaki.length) h += `<div class="qbnotakaki"><b>Nota kaki:</b>${kaki.map((x, i) => `<p><sup>${i + 1}</sup> <b>${QS_NAMA[+x[0].split(":")[0] - 1]} ${x[0].split(":")[1]} · ${x[1][0]}:</b> ${x[1][1]}</p>`).join("")}</div>`;
+    h += `<div class="qtkat">Tafsir & Terjemahan</div>` + ms.map(a => `<div class="qbtafsir" data-g="${a[2]}"><div class="qbtajuk">${QS_NAMA[a[0] - 1]} · Ayat ${a[1]}</div><div class="qbbah"><b>Terjemahan (Tafsir Pimpinan Ar-Rahman)</b><p class="qbms"></p></div><div class="qbbah"><b>Tafsir Jalalain (Bahasa Indonesia)</b><p class="qbjl"></p></div>${QB_ASBAB[kunci(a)] ? `<div class="qbbah qbkotak"><b>◆ Asbabun Nuzul</b><p>${QB_ASBAB[kunci(a)]}</p></div>` : ""}${QB_NASAKH[kunci(a)] ? `<div class="qbbah qbkotak qb${QB_NASAKH[kunci(a)][0]}"><b>${QB_NASAKH[kunci(a)][0] === "nasikh" ? "Ayat Nasikh" : "Ayat Mansukh"}</b><p>${QB_NASAKH[kunci(a)][1]}</p></div>` : ""}<button class="qbperkataan">Terjemahan setiap perkataan (English)</button><div class="qbwbw"></div></div>`).join("");
+    k.innerHTML = h;
+    const kad = [...k.querySelectorAll(".qbtafsir")];
+    kad.forEach((c, i) => {
+      const a = ms[i], tf = t[a[2]];
+      c.querySelector(".qbms").textContent = a[5]; c.querySelector(".qbjl").textContent = tf ? tf[0] : "";
+      const w = c.querySelector(".qbwbw");
+      c.querySelector(".qbperkataan").onclick = () => { if (w.childElementCount) { w.innerHTML = ""; return; } (tf ? tf[1] : []).forEach(x => { const e = document.createElement("span"); e.innerHTML = `<i class="qrar"></i><small></small>`; e.querySelector("i").textContent = x[0]; e.querySelector("small").textContent = x[1]; w.appendChild(e); }); };
+    });
+    const el = [...k.querySelectorAll(".qjayat")];
+    el.forEach((x, i) => x.onclick = () => { el.forEach(z => z.classList.remove("on")); x.classList.add("on"); kad.forEach(z => z.classList.remove("on")); kad[i].classList.add("on"); kad[i].scrollIntoView({ block: "start", behavior: "smooth" }); });
+    const ke = (jj, pp, a) => () => qbBaca(jj, pp, a), awalJuz = ms[0] === d[0];
+    if (p > 1 || !awalJuz) qrButang("back", "Sebelum", "biru", awalJuz ? ke(j - 1, p, -1) : ke(j, p - 1, -1));
+    if (p < 604 || j < 30) qrButang("next", "Seterusnya", "hijau", p < akhir ? ke(j, p + 1, 1) : j < 30 ? ke(j + 1, QMETA.j[j][2] === p ? p : p + 1, 1) : () => { sndWin(); qbMenu(); });
+    qrBual("Tekan ayat untuk lihat tafsirnya");
+  }).catch(() => { k.innerHTML = `<p class="qrpesan">Data tidak dapat dimuatkan.</p>`; });
 }
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
