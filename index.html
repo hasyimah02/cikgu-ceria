@@ -4538,8 +4538,11 @@ const IQRA = (() => {
   for (let p = 0; p < 2; p++) m4.push({ nota: "Qalqalah: huruf qof, tho, ba, jim dan dal yang mati dibaca melantun.", baris: iqJana(481 + p, 8, r => iqMati(r, H, true)) });
   for (let p = 0; p < 3; p++) m4.push({ nota: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan, contohnya bat-ta.", baris: iqJana(491 + p, 8, r => iqSabdu(r, H)) });
   m4.push({ nota: "Sabdu dalam perkataan Al-Quran.", baris: iqTangan("رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;مُحَمَّدٌ|mu-ham-ma-dun;جَنَّةٌ|jan-na-tun;حَقٌّ|haq-qun;عَلَّمَ|'al-la-ma") });
+  m4.push({ nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("اللَّهُ|Allahu;بِاللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ اللَّهِ|'abdullahi;رَسُولُ اللَّهِ|rasulullahi;نَصْرُ اللَّهِ|nasrullahi;بِسْمِ اللَّهِ|bismillahi;الْحَمْدُ لِلَّهِ|alhamdulillahi") });
+  m4.push({ nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("الْقَمَرُ|al-qamaru;الْكِتَابُ|al-kitabu;الْبَيْتُ|al-baitu;الْحَمْدُ|al-hamdu;الْعِلْمُ|al-'ilmu;الْفَلَقُ|al-falaqu;الْيَوْمُ|al-yaumu;الْوَلَدُ|al-waladu") });
+  m4.push({ nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("الشَّمْسُ|asy-syamsu;النَّاسُ|an-nasu;الرَّحْمَنُ|ar-rahmanu;الدِّينُ|ad-dinu;التِّينُ|at-tinu;السَّمَاءُ|as-sama'u;اللَّيْلُ|al-lailu;الذِّكْرُ|adz-dzikru") });
   m4.push({ nota: "Campuran tanda mati dan sabdu.", baris: iqJana(499, 8, r => iqPilih(r, [0, 1]) ? iqMati(r, H, false) : iqSabdu(r, H)) });
-  buku.push({ nama: "Iqra' 4", ds: "Tanda mati & sabdu", muka: m4 });
+  buku.push({ nama: "Iqra' 4", ds: "Tanda mati, sabdu, lafaz Allah & alif lam", muka: m4 });
   /* Iqra' 5: ayat Al-Quran pendek (2, 3 & 4 ayat) */
   buku.push({ nama: "Iqra' 5", ds: "Ayat Al-Quran: 2, 3 & 4 ayat", muka: [
     ["Al-Fatihah", 1, 2], ["Al-Ikhlas", 1, 2], ["An-Nas", 1, 2], ["Quraisy", 1, 2],
