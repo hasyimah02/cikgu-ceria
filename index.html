@@ -2628,26 +2628,14 @@ function warnaNext() { wI = (wI + 1) % WARNA.length; warnaItem(); }
 /* ===== BM Tahap 1: membaca, mengeja, bina ayat & menulis ayat ===== */
 /* Latihan ikut tahap: 1 mudah, 2 sederhana, 3 susah (50 ayat setiap tahap) */
 const BM_AYAT_T = {
-  1: "Ini buku saya.|Kucing itu comel.|Adik makan nasi.|Saya minum susu.|Bunga itu cantik.|Rumah saya besar.|Arnab itu putih.|Gajah itu besar.|Bulan itu bulat.|Saya naik bas.|Ibu beli roti.|Adik pakai topi.|Itu meja cikgu.|Ayam itu gemuk.|Kuda itu laju.|Epal itu merah.|Pisang itu kuning.|Ikan itu kecil.|Lembu makan rumput.|Kambing itu comel.|Itik itu berenang.|Kereta ayah baru.|Kasut saya hitam.|Payung saya biru.|Cawan itu kosong.|Saya suka durian.|Kakak suka rambutan.|Ayah minum teh.|Burung itu terbang.|Matahari sangat panas.|Pokok itu tinggi.|Katak itu melompat.|Semut itu kecil.|Harimau itu garang.|Monyet suka pisang.|Saya ada pensel.|Pintu itu tertutup.|Tingkap itu terbuka.|Kelapa itu bulat.|Lori itu besar.|Basikal saya baru.|Teksi itu laju.|Doktor itu baik.|Cikgu itu baik.|Telur itu bulat.|Sudu itu kecil.|Bantal saya lembut.|Kapal itu besar.|Madu itu manis.|Keju itu kuning.".split("|"),
-  2: "Saya pergi ke sekolah.|Ayah memandu kereta baru.|Ibu memasak nasi goreng.|Kakak membaca buku cerita.|Adik minum susu panas.|Kucing itu tidur nyenyak.|Burung terbang di langit.|Ikan berenang di kolam.|Lembu makan rumput hijau.|Gajah mempunyai belalai panjang.|Arnab suka makan lobak.|Monyet memanjat pokok kelapa.|Itik itu berjalan perlahan.|Saya gosok gigi setiap pagi.|Matahari terbit pada waktu pagi.|Bulan bersinar pada waktu malam.|Cikgu mengajar kami membaca.|Doktor merawat orang sakit.|Ahli bomba memadam api.|Polis menjaga keselamatan kita.|Petani menanam padi di sawah.|Nelayan menangkap ikan di laut.|Adik memakai kasut sekolah.|Saya membawa payung kerana hujan.|Ayah membaca surat khabar.|Ibu membeli sayur di pasar.|Kakak menyapu lantai rumah.|Abang menunggang basikal laju.|Kami makan durian bersama.|Bas sekolah berwarna kuning.|Kapal terbang itu sangat besar.|Kereta api bergerak laju.|Pokok bunga itu sangat cantik.|Ayam jantan berkokok setiap pagi.|Katak melompat ke dalam kolam.|Semut membawa makanan ke sarang.|Rama-rama hinggap di atas bunga.|Harimau tinggal di dalam hutan.|Penyu bertelur di tepi pantai.|Ikan paus hidup di laut.|Saya suka makan buah epal.|Adik minum jus oren.|Nenek membuat kuih di dapur.|Atuk duduk di atas kerusi.|Saya menulis dengan pensel.|Cawan itu berisi air.|Bantal saya sangat lembut.|Kami bermain di taman.|Hari ini cuaca cerah.|Zirafah mempunyai leher panjang.".split("|"),
+  1: "Ini buku saya.|Ibu beli roti.|Adik minum susu.|Ayah naik bas.|Bola itu bulat.|Saya suka madu.|Itu meja guru.|Ayam itu lapar.|Kuda itu laju.|Epal itu merah.|Ikan itu kecil.|Gajah itu besar.|Rumah saya besar.|Baju adik biru.|Kasut saya hitam.|Ayah minum kopi.|Nenek suka teh.|Adik makan nasi.|Kakak baca buku.|Atuk duduk di rumah.|Tikus itu kecil.|Ular itu licin.|Lebah buat madu.|Itik itu putih.|Rusa itu comel.|Topi saya baru.|Oren itu manis.|Nanas itu masam.|Hari ini panas.|Air itu sejuk.|Saya suka ikan.|Lori itu besar.|Feri di laut.|Van ayah biru.|Ibu masak nasi.|Adik main bola.|Kakak tulis nama.|Guru itu baik.|Cicak itu kecil.|Labu itu bulat.|Lobak itu sedap.|Roti itu sedap.|Ayam makan padi.|Kuda lari laju.|Kami suka buah.|Adik tidur awal.|Saya ada dua buku.|Mata saya hitam.|Ibu beli ikan.|Kebun atuk besar.".split("|"),
+  2: "Ayah naik kereta baru.|Adik duduk di kerusi.|Buah kelapa itu jatuh.|Saya suka ke sekolah.|Harimau itu besar.|Gajah ada belalai.|Kami makan durian.|Matahari sudah naik.|Zirafah makan daun.|Petani itu rajin.|Nelayan naik perahu.|Kakak naik basikal.|Ibu bawa tuala.|Guru baca cerita.|Kepala saya sakit.|Ayah ada telefon baru.|Atuk suka radio lama.|Kakak ada kamera.|Tomato itu merah.|Kelawar suka malam.|Buaya itu besar.|Kami makan sarapan.|Ibu masak ketupat.|Jururawat itu baik.|Kerusi itu baru.|Saya ada kereta mainan.|Nenek suka kelapa muda.|Rumah kami dekat sekolah.|Harimau tidur di hutan.|Zirafah itu comel sekali.|Perahu itu laju sekali.|Basikal adik biru.|Cerita itu lucu sekali.|Bola ada di atas kerusi.|Ayah beli kelapa.|Kakak baca buku cerita.|Petani suka hari hujan.|Nelayan dapat ikan besar.|Saya pakai kasut baru.|Adik pakai topi biru.|Kami naik feri ke pulau.|Kereta api itu laju.|Matahari itu panas.|Tuala saya basah.|Ibu beli tomato.|Kakak suka ketupat.|Air kelapa itu manis.|Buaya itu suka air.|Atuk baca cerita lama.|Sekolah saya besar.".split("|"),
   3: "Saya dan adik pergi ke sekolah bersama.|Ibu memasak nasi lemak untuk sarapan pagi.|Ayah mencuci kereta di hadapan rumah.|Kakak menyiram pokok bunga setiap petang.|Abang bermain bola sepak di padang.|Kucing itu sedang tidur di atas sofa.|Burung-burung berkicau riang di atas pokok.|Nelayan pergi ke laut untuk menangkap ikan.|Petani menanam padi di sawah yang luas.|Cikgu memuji murid yang rajin belajar.|Doktor memeriksa pesakit di hospital.|Gajah menggunakan belalainya untuk minum air.|Monyet itu melompat dari dahan ke dahan.|Rama-rama yang cantik hinggap pada bunga.|Penyu menyimpan telurnya di dalam pasir.|Lembu dan kambing makan rumput di padang.|Matahari terbenam pada waktu senja.|Langit menjadi gelap apabila hujan turun.|Kami membawa payung kerana hari hujan.|Adik menggosok gigi sebelum tidur malam.|Saya membantu ibu mengemas rumah.|Ayah membaca surat khabar di ruang tamu.|Nenek menjahit baju baharu untuk saya.|Atuk menanam pokok rambutan di kebun.|Kami sekeluarga makan malam bersama-sama.|Bas sekolah berhenti di hadapan pagar sekolah.|Kereta api itu bergerak dengan sangat laju.|Kapal besar belayar di tengah lautan.|Kapal terbang mendarat di lapangan terbang.|Murid-murid beratur sebelum masuk ke kelas.|Saya menyimpan duit syiling di dalam tabung.|Kakak membeli buku cerita di kedai buku.|Abang menunggang basikal ke rumah kawan.|Ibu membeli ikan dan sayur di pasar.|Kami mengutip sampah untuk menjaga kebersihan.|Pokok kelapa tumbuh di tepi pantai.|Harimau ialah haiwan yang sangat garang.|Arnab suka makan lobak merah dan sayur.|Itik dan angsa berenang di dalam kolam.|Semut bekerjasama mengangkat makanan ke sarang.|Pada hari raya kami memakai baju baharu.|Saya berasa gembira apabila mendapat hadiah.|Adik menangis kerana jatuh dari basikal.|Kami mesti membasuh tangan sebelum makan.|Bomba datang dengan segera untuk memadam api.|Polis membantu murid melintas jalan raya.|Durian ialah raja segala buah.|Bunga raya ialah bunga kebangsaan Malaysia.|Malaysia mempunyai banyak pantai yang cantik.|Saya sayang ibu dan ayah saya.".split("|")
 };
 const BM_TAHAP = { 1: L("Mudah", "Easy", "简单"), 2: L("Sederhana", "Medium", "中等"), 3: L("Susah", "Hard", "困难") };
-/* Perkataan ejaan diambil dari Perpustakaan (ada foto) dan dibahagi ikut kesukaran suku kata */
-const bmKataTahap = (() => {
-  let c = null;
-  return lv => {
-    if (!c) {
-      c = { 1: [], 2: [], 3: [] };
-      [...new Set(Object.keys(FOTO).map(k => k.split("|")[1]))].filter(n => /^[A-Za-z]+$/.test(n)).forEach(n => {
-        const w = n.toLowerCase(), s = sukuKata(w);
-        const t = s.length === 2 && s.every(x => /^[^aeiou][aeiou]$/.test(x)) ? 1 : (s.length === 2 && w.length <= 6) || (s.length === 3 && s.every(x => /^[^aeiou]?[aeiou]$/.test(x))) ? 2 : s.length >= 3 ? 3 : 0;
-        if (t && c[t].length < 50) c[t].push(w);
-      });
-    }
-    return c[lv];
-  };
-})();
+/* Perkataan membaca & mengeja: 1 mudah = 2 suku kata terbuka, 2 sederhana = 3 suku kata atau lebih, 3 susah = imbuhan, ng/ny & suku kata tertutup */
+const BM_KATA_T = { 1: "bola saya buku mata kaki gigi baju roti susu madu topi sudu meja kuda rusa lada nasi padi biru lima batu labu paku kopi lori kayu bayi bapa guru nama suka beli bumi buka tali pipi dahi kuku dada gula tiga satu jari peti muka bulu duri lagu sapu laju".split(" "), 2: "kereta kelapa kerusi pelita kamera tomato kelawar sekolah harimau belalai keledai seluar jerami durian matahari serigala buaya zirafah kenari radio telefon petani nelayan perahu basikal tuala cerita delima kepala sepuluh delapan kelabu ketupat sayuran keladi selipar periuk udara pemadam pelukis kopiah pesawat kemeja sarapan kelulut jururawat kelopak telaga makanan mainan".split(" "), 3: "membaca memasak menulis menyanyi menari berlari bermain berenang tersenyum kucing kambing kuning singa bunga pisang payung burung hidung jagung kacang belimbing kangkung tangga bangku ranting kening dinding pinggan nyamuk nyiur penyapu menyapu mengemas menangis menggosok mendengar membawa memanjat berjalan bernyanyi gunting gendang tenggiri angsa sembilan rambutan tingkap bendera jambatan tembikai".split(" ") };
+const bmKataTahap = lv => BM_KATA_T[lv];
 /* Foto ayat: nama benda pertama (paling panjang dahulu) yang ada dalam Perpustakaan */
 const BM_ALIAS = { cikgu: "Guru", murid: "Sekolah", nelayan: "Ikan", petani: "Padi" };
 const fotoAyat = (() => {
@@ -2664,7 +2652,7 @@ const fotoAyat = (() => {
 const BM_KEMAJUAN = "appPendidikan.bm1.v1";
 function bmKemajuan() { try { return JSON.parse(localStorage.getItem(BM_KEMAJUAN)) || {}; } catch (e) { return {}; } }
 const BM_MOD = {
-  baca: { nama: L("Membaca", "Reading", "阅读"), ds: L("Dengar & baca ayat bersama", "Listen & read sentences together", "一起听和读句子"), ikon: "baca" },
+  baca: { nama: L("Membaca", "Reading", "阅读"), ds: L("Baca perkataan ikut suku kata", "Read words by syllables", "按音节读单词"), ikon: "baca" },
   eja: { nama: L("Mengeja", "Spelling", "拼写"), ds: L("Susun huruf ikut suku kata", "Spell words by syllables", "按音节拼单词"), ikon: "eja" },
   bina: { nama: L("Bina Ayat", "Build Sentences", "造句"), ds: L("Susun perkataan jadi ayat", "Arrange words into a sentence", "把词语排成句子"), ikon: "bina" },
   tulis: { nama: L("Menulis Ayat", "Writing Sentences", "写句子"), ds: L("Surih ayat dengan pensel", "Trace sentences with a pencil", "用笔描写句子"), ikon: "pensel" }
@@ -2713,7 +2701,7 @@ function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
   renderMenu(tr(BM_MOD[m].nama), [1, 2, 3].map(lv => {
-    const jum = m === "eja" ? bmKataTahap(lv).length : BM_AYAT_T[lv].length, siap = (kj[m + "-" + lv] || []).length;
+    const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
   }), renderBM1);
 }
@@ -2722,7 +2710,7 @@ function startBM(m, lv) {
   $("s-bm").className = "screen m" + m;
   curSubj = "bm1-" + m + "-" + lv; replay = () => startBM(m, lv);
   /* Utamakan latihan yang belum dibuat */
-  const siap = bmKemajuan()[m + "-" + lv] || [], semua = m === "eja" ? bmKataTahap(lv) : BM_AYAT_T[lv].map(a => [a, fotoAyat(a)]);
+  const siap = bmKemajuan()[m + "-" + lv] || [], semua = m === "eja" ? bmKataTahap(lv) : (m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv]).map(a => [a, fotoAyat(a)]);
   const kunci = it => typeof it === "string" ? it : it[0];
   bmList = shuffle(semua.filter(it => siap.indexOf(kunci(it)) < 0)).concat(shuffle(semua.filter(it => siap.indexOf(kunci(it)) >= 0))).slice(0, 10);
   $("bmTitle").textContent = tr(BM_MOD[m].nama) + " · " + tr(BM_TAHAP[lv]);
@@ -2975,73 +2963,73 @@ function bmUp(e) {
 
 /* ===== 100 Buku Cerita BM: "Tajuk|watak (ART)|latar|muka1/muka2/..." ===== */
 const CERITA_T = {
-  1: `Kucing Comel|Kucing|rumah|Ini kucing saya./Kucing itu comel./Kucing suka tidur.
-Ayam Lapar|Ayam|kebun|Ini ayam./Ayam itu lapar./Ayam makan cacing.
-Bola Adik|Bola|padang|Ini bola adik./Bola itu bulat./Adik tendang bola.
-Itik Kecil|Itik|sungai|Itik itu kecil./Itik suka air./Itik berenang laju.
+  1: `Ayam Lapar|Ayam|kebun|Ini ayam./Ayam itu lapar./Ayam makan padi.
+Bola Adik|Bola|padang|Ini bola adik./Bola itu bulat./Adik main bola.
+Itik Kecil|Itik|sungai|Itik itu kecil./Itik suka air./Itik itu laju.
 Lebah Rajin|Lebah|kebun|Ini lebah./Lebah itu rajin./Lebah buat madu.
-Gajah Besar|Gajah|hutan|Gajah itu besar./Gajah ada belalai./Gajah minum air.
-Monyet Nakal|Monyet|hutan|Ini monyet./Monyet itu nakal./Monyet makan pisang.
-Arnab Putih|Rabbit|padang|Ini arnab./Arnab itu putih./Arnab suka lobak.
-Ikan Emas|Fish|laut|Ini ikan./Ikan itu emas./Ikan suka berenang.
-Hari Pagi|Sun|langit|Hari sudah pagi./Matahari naik./Langit jadi terang.
-Layang-layang|Kite|langit|Ini layang-layang./Ia terbang tinggi./Adik suka main.
-Topi Baru|Hat|rumah|Ini topi baru./Topi itu cantik./Adik pakai topi.
-Payung Merah|Umbrella|jalan|Hari hujan./Ini payung merah./Saya pakai payung.
-Van Ayah|Van|jalan|Ini van ayah./Van itu biru./Van jalan laju.
+Gajah Besar|Gajah|hutan|Gajah itu besar./Gajah suka air./Gajah minum air.
+Ikan Emas|Fish|laut|Ini ikan./Ikan itu kecil./Ikan suka laut.
+Hari Pagi|Sun|langit|Hari sudah pagi./Adik buka mata./Adik mahu main.
+Topi Baru|Hat|rumah|Ini topi baru./Topi itu biru./Adik suka topi.
+Hari Hujan|Umbrella|jalan|Hari ini hujan./Jalan jadi basah./Adik duduk di rumah.
+Van Ayah|Van|jalan|Ini van ayah./Van itu biru./Van itu laju.
 Feri Besar|Feri|laut|Ini feri./Feri itu besar./Feri di laut.
 Tikus Kecil|Tikus|rumah|Ini tikus./Tikus itu kecil./Tikus suka keju.
-Singa Garang|Singa|hutan|Ini singa./Singa itu garang./Singa raja hutan.
-Zirafah Tinggi|Zirafah|hutan|Ini zirafah./Leher zirafah panjang./Zirafah makan daun.
-Ular Panjang|Ular|hutan|Ini ular./Ular itu panjang./Ular itu licin.
-Cicak di Dinding|Cicak|rumah|Ini cicak./Cicak di dinding./Cicak makan nyamuk.
-Anjing Setia|Dog|rumah|Ini anjing./Anjing itu setia./Anjing jaga rumah.
-Kambing Comel|Goat|padang|Ini kambing./Kambing itu comel./Kambing makan rumput.
-Zebra Belang|Zebra|padang|Ini zebra./Zebra itu belang./Zebra lari laju.
-Harimau Belang|Harimau|hutan|Ini harimau./Harimau itu belang./Harimau tinggal di hutan.
-Telur Ayam|Egg|kebun|Ini telur./Telur itu bulat./Telur ayam putih.
+Ular Licin|Ular|hutan|Ini ular./Ular itu licin./Ular itu lapar.
+Cicak Kecil|Cicak|rumah|Ini cicak./Cicak itu kecil./Cicak suka lalat.
+Comel Tidur|Kucing|rumah|Ini Comel./Comel suka tidur./Comel tidur di sofa.
+Momo Lapar|Monyet|hutan|Ini Momo./Momo suka buah./Momo naik pokok.
+Lulu Putih|Rabbit|padang|Ini Lulu./Lulu itu putih./Lulu suka lobak.
+Bola Ali|Bola|padang|Ini bola Ali./Bola Ali biru./Ali main bola.
+Raja Hutan|Singa|hutan|Ini raja hutan./Dia suka tidur./Dia tidur di batu.
+Zira Lapar|Zirafah|hutan|Ini Zira./Zira makan daun./Daun itu muda.
+Bobi Kami|Dog|rumah|Ini Bobi./Bobi jaga rumah./Bobi suka main.
+Kiki Comel|Goat|padang|Ini Kiki./Kiki suka daun./Kiki duduk di sana.
+Kuda Hutan|Zebra|padang|Ini kuda hutan./Badan dia hitam putih./Dia lari laju.
+Rimo Tidur|Harimau|hutan|Ini Rimo./Mata Rimo biru./Rimo tidur di hutan.
+Telur Ayam|Egg|kebun|Ini telur./Telur itu bulat./Telur itu putih.
 Epal Merah|Epal|kebun|Ini epal./Epal itu merah./Saya makan epal.
-Pisang Kuning|Pisang|kebun|Ini pisang./Pisang itu kuning./Monyet suka pisang.
-Oren Manis|Oren|rumah|Ini oren./Oren itu manis./Adik minum jus oren.
-Nanas Manis|Nanas|kebun|Ini nanas./Kulit nanas tajam./Nanas rasa manis.
-Aiskrim Sejuk|Ice cream|rumah|Ini aiskrim./Aiskrim itu sejuk./Adik suka aiskrim.
-Jam Dinding|Jam|rumah|Ini jam./Jam itu bulat./Jam berbunyi kring.
-Pensel Saya|Pencil|sekolah|Ini pensel./Pensel itu kuning./Saya tulis nama.
-Ikan Yu|Yu|laut|Ini ikan yu./Yu itu besar./Yu tinggal di laut.
-Benang Nenek|Yarn|rumah|Ini benang./Benang itu merah jambu./Nenek suka mengait.`,
-  2: `Kucing dan Tikus|Kucing|rumah|Kucing itu bernama Comel./Comel nampak seekor tikus./Tikus lari ke dalam lubang./Comel tidur semula di sofa.
-Ayam Jantan|Ayam|kebun|Ayam jantan bangun awal pagi./Ayam itu berkokok dengan kuat./Semua orang di kampung bangun./Ayah pergi bekerja di kebun.
-Itik Mencari Ibu|Itik|sungai|Anak itik berenang di sungai./Anak itik mencari ibunya./Ibu itik memanggil dengan kuat./Mereka berenang pulang bersama.
-Lebah dan Bunga|Lebah|kebun|Lebah terbang ke taman bunga./Lebah menghisap madu bunga./Lebah membawa madu ke sarang./Lebah sangat rajin bekerja.
-Gajah Mandi|Gajah|sungai|Gajah pergi ke tepi sungai./Gajah menyedut air dengan belalai./Gajah menyembur air ke badannya./Gajah berasa sejuk dan gembira.
-Monyet dan Pisang|Monyet|hutan|Monyet memanjat pokok yang tinggi./Monyet nampak sesikat pisang./Monyet memetik pisang itu./Monyet makan pisang dengan gembira.
-Arnab Lapar|Rabbit|kebun|Arnab berasa sangat lapar./Arnab melompat ke dalam kebun./Arnab jumpa lobak merah./Arnab makan sampai kenyang.
-Ikan Emas Kecil|Fish|laut|Ikan emas tinggal di kolam./Ikan emas suka bermain gelembung./Adik memberi ikan itu makanan./Ikan emas berenang dengan gembira.
-Hari yang Cerah|Sun|padang|Matahari bersinar dengan terang./Burung berkicau di atas pokok./Adik bermain di padang./Adik pulang apabila petang.
-Layang-layang Adik|Kite|langit|Adik membawa layang-layang ke padang./Angin bertiup dengan kencang./Layang-layang terbang sangat tinggi./Adik berasa sangat gembira.
-Hujan Turun|Umbrella|jalan|Langit menjadi gelap tiba-tiba./Hujan turun dengan lebat./Adik membuka payung merahnya./Adik tidak basah lagi.
-Pulang ke Kampung|Van|jalan|Ayah memandu van ke kampung./Kami duduk di dalam van./Kami nampak sawah padi./Nenek menunggu di rumah.
-Naik Feri|Feri|laut|Kami menaiki feri ke pulau./Feri bergerak di atas laut./Kami nampak ikan melompat./Kami tiba di pulau.
-Tikus dan Keju|Tikus|rumah|Tikus kecil berasa lapar./Tikus nampak keju di atas meja./Tikus memanjat meja perlahan-lahan./Tikus makan keju itu.
-Singa yang Baik|Singa|hutan|Singa tidur di bawah pokok./Seekor tikus terjatuh atas singa./Singa tidak marah pada tikus./Singa melepaskan tikus itu.
-Zirafah Makan Daun|Zirafah|hutan|Zirafah mempunyai leher yang panjang./Zirafah boleh makan daun tinggi./Haiwan lain tidak boleh capai./Zirafah berkongsi daun dengan kawan.
-Ular di Taman|Ular|kebun|Seekor ular masuk ke taman./Adik berasa sangat takut./Ayah memanggil pegawai bomba./Ular itu dibawa ke hutan.
-Cicak dan Nyamuk|Cicak|rumah|Cicak merayap di dinding rumah./Cicak nampak seekor nyamuk./Cicak menangkap nyamuk itu./Rumah kami bebas nyamuk.
-Anjing Penjaga|Dog|rumah|Anjing itu menjaga rumah./Anjing menyalak apabila ada orang./Tuannya pulang dari kerja./Anjing menyambut tuannya dengan gembira.
-Kambing Lapar|Goat|padang|Kambing itu berasa lapar./Kambing pergi ke padang rumput./Kambing makan rumput hijau./Kambing pulang ke kandang.
-Zebra Berlari|Zebra|padang|Zebra tinggal di padang luas./Zebra suka berlari bersama kawan./Badan zebra berbelang hitam putih./Zebra minum air di sungai.
-Harimau Lapar|Harimau|hutan|Harimau berjalan di dalam hutan./Harimau mencari makanan./Harimau minum air di sungai./Harimau tidur di dalam gua.
-Telur Menetas|Egg|kebun|Ibu ayam duduk atas telur./Telur itu mula retak./Seekor anak ayam keluar./Anak ayam berbunyi ciap-ciap.
-Pokok Epal|Epal|kebun|Atuk ada pokok epal./Buah epal masak dan merah./Atuk memetik epal itu./Kami makan epal bersama.
-Nanas dari Kebun|Nanas|kebun|Nenek menanam nanas di kebun./Nanas itu sudah masak./Nenek memotong nanas itu./Nanas itu manis sekali.
-Aiskrim Cair|Ice cream|padang|Adik membeli aiskrim coklat./Hari itu sangat panas./Aiskrim adik mula cair./Adik cepat-cepat makan aiskrim.
-Jam Loceng|Jam|rumah|Jam loceng berbunyi pagi./Adik bangun dari tidur./Adik mandi dan bersarapan./Adik pergi ke sekolah.
-Pensel Hilang|Pencil|sekolah|Pensel adik sudah hilang./Adik mencari pensel di kelas./Kawan adik menjumpai pensel itu./Adik mengucapkan terima kasih.
-Ikan Yu Lapar|Yu|laut|Ikan yu berenang di laut./Ikan yu sedang lapar./Ikan kecil bersembunyi di batu./Ikan yu pergi jauh.
-Bola Sepak|Bola|padang|Abang bermain bola sepak./Abang menendang bola dengan kuat./Bola masuk ke dalam gol./Semua kawan bersorak gembira.
-Benang Kusut|Yarn|rumah|Nenek suka mengait baju./Kucing bermain dengan benang./Benang itu menjadi kusut./Nenek tersenyum melihat kucing.
-Jus Oren|Oren|rumah|Ibu membeli oren di pasar./Ibu memerah oren menjadi jus./Adik minum jus oren./Jus itu segar dan manis.
-Topi Atuk|Hat|kebun|Atuk memakai topi ke kebun./Angin bertiup topi atuk./Topi atuk jatuh ke tanah./Adik mengambil topi untuk atuk.`,
+Oren Manis|Oren|rumah|Ini oren./Oren itu manis./Adik makan oren.
+Nanas Masam|Nanas|kebun|Ini nanas./Kulit nanas tajam./Nanas itu masam.
+Ais Sejuk|Ice cream|rumah|Ini ais./Ais itu sejuk./Adik suka ais.
+Jam Bulat|Jam|rumah|Ini jam./Jam itu bulat./Jam itu baru.
+Nama Saya|Pencil|sekolah|Saya ada buku./Saya tulis nama./Nama saya Siti.
+Ikan Yu|Yu|laut|Ini ikan yu./Yu itu besar./Yu suka laut.
+Baju Nenek|Yarn|rumah|Ini nenek./Nenek buat baju./Baju itu merah.
+Ratu Baik|Queen|rumah|Ini ratu./Ratu itu baik./Ratu suka baca.`,
+  2: `Comel dan Tikus|Kucing|rumah|Comel suka tidur di atas sofa./Comel lihat seekor tikus./Tikus lari ke bawah meja./Comel tidur semula di sofa.
+Ayam Pagi|Ayam|kebun|Hari masih awal pagi./Ayam itu kokok kuat-kuat./Adik pun jaga daripada tidur./Ayah ke kebun selepas sarapan.
+Itik Cari Ibu|Itik|sungai|Anak itik main di tepi tasik./Anak itik cari ibu./Ibu itik ada di sebelah./Mereka balik ke rumah.
+Lebah dan Madu|Lebah|kebun|Lebah cari madu di taman./Lebah bawa madu ke rumah./Lebah selalu rajin./Madu lebah itu manis sekali.
+Gajah Main Air|Gajah|sungai|Gajah ada belalai./Gajah sedut air pakai belalai./Gajah siram air ke badan./Gajah rasa sejuk sekali.
+Momo dan Kelapa|Monyet|hutan|Momo naik pokok kelapa./Momo lihat buah kelapa./Momo petik buah itu./Kelapa itu jatuh ke bawah.
+Lulu Lapar|Rabbit|kebun|Lulu rasa lapar sekali./Lulu lari ke kebun atuk./Lulu cari lobak merah./Lulu makan lobak itu.
+Ikan Emas Kecil|Fish|laut|Ikan emas duduk di kolam./Ikan emas suka main buih./Adik beri ikan itu makanan./Ikan emas suka sekali.
+Hari Panas|Sun|padang|Matahari naik pada pagi./Hari itu panas sekali./Adik main di taman./Adik minum air kelapa.
+Wau Besar|Kite|langit|Adik bawa wau ke sawah./Wau adik naik ke atas./Wau itu besar sekali./Ayah duduk di sebelah adik.
+Hujan Lebat|Umbrella|jalan|Hari jadi gelap tiba-tiba./Hujan turun lebat./Adik pakai baju hujan./Adik tidak basah lagi.
+Ke Rumah Nenek|Van|jalan|Ayah bawa van ke rumah nenek./Kami duduk di dalam van./Kami lihat petani di sawah padi./Nenek ada di depan rumah.
+Naik Feri|Feri|laut|Kami naik feri ke pulau./Feri itu laju di atas laut./Kami lihat ikan di bawah feri./Kami tiba di pulau.
+Tikus dan Keju|Tikus|rumah|Tikus kecil itu rasa lapar sekali./Tikus lihat keju di atas meja./Tikus naik meja pelan-pelan./Tikus makan keju itu.
+Raja Hutan Baik|Singa|hutan|Raja hutan tidur di bawah pokok./Seekor tikus jatuh di atas kepala raja hutan./Raja hutan tidak marah./Tikus itu lari ke rumah.
+Zirafah Baik|Zirafah|hutan|Zirafah boleh capai daun di atas./Haiwan lain tidak boleh capai./Zirafah beri daun kepada kawan./Kawan zirafah suka sekali.
+Ular di Kebun|Ular|kebun|Seekor ular masuk ke kebun./Adik rasa takut sekali./Ayah telefon polis./Ular itu dibawa ke hutan.
+Cicak dan Lalat|Cicak|rumah|Cicak suka duduk di dapur./Cicak lihat seekor lalat./Cicak makan lalat itu./Dapur kami bebas lalat.
+Bobi Jaga Rumah|Dog|rumah|Bobi selalu jaga rumah./Bobi duduk di depan rumah./Tuan Bobi balik pada malam hari./Bobi suka sekali.
+Kiki Lapar|Goat|padang|Kiki rasa lapar./Kiki lari ke sawah./Kiki makan daun kelapa./Kiki balik ke rumah.
+Kuda Hutan Laju|Zebra|padang|Kuda hutan suka lari./Badan kuda hutan hitam putih./Kuda hutan minum air di tasik./Mereka lari laju sekali.
+Harimau Lapar|Harimau|hutan|Harimau jalan di hutan./Harimau cari makanan./Harimau minum air di tasik./Harimau tidur di dalam gua.
+Telur Retak|Egg|kebun|Ibu ayam duduk atas telur./Telur itu mula retak./Seekor anak ayam keluar./Anak ayam itu comel sekali.
+Pokok Epal|Epal|kebun|Atuk ada pokok epal./Buah epal itu masak dan merah./Atuk petik epal itu./Kami makan epal selepas sarapan.
+Nanas Nenek|Nanas|kebun|Nenek tanam nanas di kebun./Nanas itu sudah masak./Nenek kupas nanas itu./Nanas itu manis sekali.
+Ais Cair|Ice cream|padang|Adik beli ais buah./Hari itu panas sekali./Ais adik mula cair./Adik cepat-cepat makan ais itu.
+Jam Pagi|Jam|rumah|Jam itu jerit pada pukul enam./Adik jaga daripada tidur./Adik makan sarapan./Adik ke sekolah.
+Buku Siti|Pencil|sekolah|Buku Siti tiada./Siti cari buku di kelas./Kawan Siti dapat buku itu./Siti kata terima kasih.
+Ikan Yu Lapar|Yu|laut|Ikan yu ada di laut./Ikan yu rasa lapar./Ikan kecil selalu sorok di balik batu./Ikan yu tidak lihat ikan kecil.
+Bola Sepak|Bola|padang|Ali main bola sepak./Ali sepak bola itu kuat-kuat./Bola masuk ke dalam gol./Semua kawan suka sekali.
+Nenek Kait Baju|Yarn|rumah|Nenek suka kait baju./Comel main tali kait./Tali itu jadi kusut./Nenek ketawa lihat Comel.
+Jus Oren|Oren|rumah|Ibu beli oren di pasar./Ibu perah oren jadi jus./Adik minum jus oren./Jus itu sejuk dan manis sekali.
+Topi Atuk|Hat|kebun|Atuk pakai topi ke kebun./Tiba-tiba topi atuk jatuh./Topi itu jatuh ke tanah./Adik beri topi itu kepada atuk.`,
   3: `Kucing yang Hilang|Kucing|rumah|Comel ialah kucing kesayangan keluarga kami./Pada suatu petang, Comel tidak pulang ke rumah./Kami mencari Comel di sekeliling kampung./Akhirnya kami menjumpai Comel di dalam stor./Kami berasa sangat gembira dan lega.
 Ibu Ayam yang Rajin|Ayam|kebun|Seekor ibu ayam tinggal di reban bersama anaknya./Setiap pagi, ibu ayam mencari makanan di kebun./Ibu ayam mengajar anaknya mencari cacing./Anak-anak ayam belajar dengan bersungguh-sungguh./Mereka membesar menjadi ayam yang sihat.
 Itik yang Berani|Itik|sungai|Anak itik itu takut untuk berenang./Ibu itik memujuknya dengan lembut./Anak itik mencuba berenang perlahan-lahan./Akhirnya anak itik boleh berenang dengan pandai./Ibu itik berasa bangga dengan anaknya.
@@ -3085,7 +3073,7 @@ const CERITA = (() => {
 /* ===== Pembaca Buku Cerita: cara membaca, suku kata berwarna, latar beranimasi ===== */
 const CR_CARA = ["Lihat gambar dahulu.", "Baca suku kata berwarna, merah kemudian biru.", "Gabungkan suku kata menjadi perkataan.", "Tekan perkataan jika mahu dengar."];
 const CR_SEBUT = { cara: "Cara membaca buku ini.", kunci: "Mari belajar kata kunci.", mula: "Jom kita baca!", kamu: "Sekarang kamu baca!", tamat: "Tamat. Syabas, kamu sudah habis membaca!" };
-const CERITA_KEY = "appPendidikan.cerita.v1";
+const CERITA_KEY = "appPendidikan.cerita.v2";
 function crDibaca() { try { return JSON.parse(localStorage.getItem(CERITA_KEY)) || {}; } catch (e) { return {}; } }
 /* Latar 240 x 140 dengan unsur bergerak */
 const LATAR = (() => {
