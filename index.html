@@ -433,6 +433,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qnkecil .qrh{padding:4px 2px}.qrh .qrar{display:block;line-height:1.5!important;padding:.25em 0 .55em}.qrh small{display:block;line-height:1.2}.qnkecil small{direction:ltr}
 .qnlebar small{font-size:15px}
 .qnterang{text-align:center;font-size:clamp(20px,3vw,26px);font-weight:700;max-width:760px;align-self:center;margin:4px 0}
+.qrbaris{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.qrbaris .qrh{min-width:0;overflow:hidden}.qrbaris .qrh .qrar{font-size:clamp(26px,4vw,40px)}.qrbaris .qrh small{font-size:14px;white-space:nowrap}
 .qrbismi{line-height:2.3;padding-top:6px;text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
 .qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
 .qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:2.4;color:var(--text)}
@@ -4626,8 +4627,8 @@ const QR_NOTA = [
   { tajuk: "Dua Baris Atas", simbol: "بًا", terang: "Dua baris atas dibaca an. Biasanya diikuti huruf alif.", contoh: "بًا|ban;تًا|tan;جًا|jan;دًا|dan;سًا|san;مًا|man" },
   { tajuk: "Dua Baris Bawah", simbol: "بٍ", terang: "Dua baris bawah dibaca in.", contoh: "بٍ|bin;تٍ|tin;جٍ|jin;دٍ|din;سٍ|sin;مٍ|min" },
   { tajuk: "Dua Baris Depan", simbol: "بٌ", terang: "Dua baris depan dibaca un.", contoh: "بٌ|bun;تٌ|tun;جٌ|jun;دٌ|dun;سٌ|sun;مٌ|mun" },
-  { tajuk: "Tanda Mati", simbol: "بْ", terang: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya.", contoh: "أَبْ|ab;بَتْ|bat;مِنْ|min;قُلْ|qul;لَمْ|lam;عَنْ|'an" },
-  { tajuk: "Tanda Sabdu", simbol: "بَّ", terang: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan sedikit.", contoh: "رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;أُمِّ|um-mi;عَلَّمَ|'al-la-ma" },
+  { tajuk: "Tanda Mati", simbol: "بْ", terang: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya yang berbaris atas, bawah atau depan, contohnya ab, ib, ub.", contoh: "أَبْ|ab;بَتْ|bat;مِنْ|min;قُلْ|qul;لَمْ|lam;عَنْ|'an" },
+  { tajuk: "Tanda Sabdu", simbol: "بَّ", terang: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan sedikit. Ia boleh berbaris atas, bawah atau depan, contohnya ab-ba, ab-bi, ab-bu.", contoh: "رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;أُمِّ|um-mi;عَلَّمَ|'al-la-ma" },
   { tajuk: "Bacaan Panjang 2 Harakat", simbol: "بَا", terang: "Bacaan dipanjangkan 2 harakat apabila baris atas bertemu alif, baris bawah bertemu ya mati, dan baris depan bertemu wau mati.", contoh: "بَا|baa;بِي|bii;بُو|buu;قَالَ|qoo-la;قِيلَ|qii-la;يَقُولُ|ya-quu-lu" },
   { tajuk: "Bacaan Panjang 6 Harakat", simbol: "آ", terang: "Apabila ada tanda panjang di atas huruf (mad lazim), bacaan dipanjangkan 6 harakat. Kira enam ketukan.", contoh: "ٱلضَّآلِّينَ|dhooo-l-lin;دَآبَّةٍ|daaa-b-batin;ٱلْحَآقَّةُ|al-haaa-q-qoh;الٓمٓ|alif laaam miiim;يسٓ|yaa siiin;نٓ|nuuun" },
   { tajuk: "Sebutan Allah", simbol: "ٱللَّهُ", terang: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau depan. Ia dibaca nipis apabila huruf sebelumnya berbaris bawah.", contoh: "ٱللَّهُ|Allahu (tebal);نَصْرُ ٱللَّهِ|nasrullahi (tebal);عَبْدُ ٱللَّهِ|'abdullahi (tebal);بِسْمِ ٱللَّهِ|bismillahi (nipis);لِلَّهِ|lillahi (nipis);بِٱللَّهِ|billahi (nipis)" },
@@ -4642,8 +4643,9 @@ const QN_JANA = {
   "Dua Baris Atas": () => HIJAIYAH.map((h, i) => i === 0 ? ["أً", "an"] : iqSuku(i, "an")),
   "Dua Baris Bawah": () => HIJAIYAH.map((h, i) => iqSuku(i, "in")),
   "Dua Baris Depan": () => HIJAIYAH.map((h, i) => iqSuku(i, "un")),
-  "Tanda Mati": () => HIJAIYAH.map((h, i) => ["أَ" + (i === 0 ? "ء" : h[0]) + "\u0652", "a" + (i === 0 ? "'" : IQ_C[i])]),
-  "Tanda Sabdu": () => HIJAIYAH.slice(1).map((h, j) => ["أَ" + h[0] + "\u0651\u064E", "a" + IQ_C[j + 1] + "-" + iqSuku(j + 1, "a")[1]]),
+  /* Tanda mati & sabdu: setiap huruf dengan baris atas, bawah & depan (kumpulan 3) */
+  "Tanda Mati": () => [].concat(...HIJAIYAH.map((h, i) => ["a", "i", "u"].map(v => [{ a: "أَ", i: "إِ", u: "أُ" }[v] + (i === 0 ? "ء" : h[0]) + "\u0652", v + (i === 0 ? "'" : IQ_C[i])]))),
+  "Tanda Sabdu": () => [].concat(...HIJAIYAH.slice(1).map((h, j) => ["a", "i", "u"].map(v => ["أَ" + h[0] + "\u0651" + IQ_HAR[v], "a" + IQ_C[j + 1] + "-" + iqSuku(j + 1, v)[1]]))),
   "Bacaan Panjang 2 Harakat": () => HIJAIYAH.map((h, i) => { const f = ["aa", "ii", "uu"].map(v => i === 0 ? [{ aa: "آ", ii: "إِي", uu: "أُو" }[v], v] : iqSuku(i, v)); return [f.map(x => x[0]).join("  "), f.map(x => x[1]).join(" ")]; }),
   "Bacaan Panjang 6 Harakat": () => HIJAIYAH.map((h, i) => [(i === 0 ? "ءَ" : h[0] + "\u064E") + "آ", (i === 0 ? "" : IQ_C[i]) + (IQ_TEBAL.has(IQ_C[i]) ? "oooooo" : "aaaaaa")])
 };
@@ -4657,8 +4659,9 @@ function qrNota(i) {
   const n = QR_NOTA[i];
   qrSkrin((i + 1) + ". " + n.tajuk, qrNotaMenu);
   const k = $("qrKawasan"), jana = QN_JANA[n.tajuk], ct = jana ? jana() : n.contoh.split(";").map(x => x.split("|"));
-  const kelas = !jana ? "iqgrid" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
-  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p><div class="${kelas}">${ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
+  const tiga = n.tajuk === "Tanda Mati" || n.tajuk === "Tanda Sabdu";
+  const kelas = !jana ? "iqgrid" : tiga ? "qrbaris" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
+  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p><div class="${kelas}">${tiga ? Array.from({ length: ct.length / 3 }, () => `<div class="qrbr">${[0, 1, 2].map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`).join("") : ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
   k.querySelector(".qnterang").textContent = n.terang;
   const el = [...k.querySelectorAll(".iqw")];
   const sebut = c => ({ sebut: c[1].split(" (")[0].split(/[- ]/).filter(Boolean) });
