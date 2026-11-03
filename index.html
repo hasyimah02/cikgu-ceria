@@ -5152,7 +5152,7 @@ function qbBaca(j, p, arah) {
     if (!ms.length) return arah < 0 ? qbBaca(j, p - 1, -1) : qbBaca(j + 1 <= 30 ? j + 1 : j, p, 1);
     try { localStorage.setItem(QB_KEY, JSON.stringify({ j: j, p: p })); } catch (e) { /* abaikan */ }
     const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-    let h = `<div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span><span><b class="qbkaki">✱</b> Nota muhkam / mutasyabih</span></div><div class="qbhalaman">`;
+    let h = `<div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span><span><b class="qbkaki">✱</b> Nota muhkam / mutasyabih</span><span>Terjemahan di bawah perkataan: Bahasa Melayu (terjemahan mesin, istilah utama disemak)</span></div><div class="qbhalaman">`;
     ms.forEach(a => {
       const ky = a[0] + ":" + a[1], ns = QB_NASAKH[ky], mm = QB_MM[ky], ab = QB_ASBAB[ky], tf = t[a[2]] || ["", []];
       if (a[1] === 1) { const mk = QMETA.s[a[0] - 1][2] === "Meccan"; h += `<div class="qjsurah"><span class="qrar">${QMETA.s[a[0] - 1][0]}</span><small>${QS_NAMA[a[0] - 1]} · ${QMETA.s[a[0] - 1][1]} ayat · <b class="qb${mk ? "mk" : "md"}">${mk ? "Makkiyyah" : "Madaniyyah"}</b></small></div>` + (a[0] !== 1 && a[0] !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""); }
