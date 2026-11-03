@@ -4783,7 +4783,7 @@ function renderAlQuranMenu() {
   backMenu = renderAlQuranMenu; qariHenti();
   renderMenu("Al-Quran", [
     ["q-huruf", QR_IKON.surah, "Tilawah", "Ilmu tajwid & bacaan Al-Quran 30 juz", "", renderTilawahMenu],
-    ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal Al-Fatihah & surah Juz 'Amma, uji dengan sembunyi ayat", "", qhMenu],
+    ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal 30 juz ikut surah, uji dengan sembunyi ayat", "", qhMenu],
     ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><path d="M20 18 h18 l6 6 v22 h-24z" fill="#fff"/><path d="M25 30 h14 M25 36 h14 M25 42 h9" stroke="#8CC8FF" stroke-width="2.5" stroke-linecap="round"/>`), "Ulum Al-Quran", ULUM.length + " ilmu: asbabun nuzul, Makki & Madani, nasikh & mansukh dan lain-lain", "", quMenu]
   ], renderQuran);
 }
@@ -4847,21 +4847,36 @@ function qtKuiz(j) {
 }
 
 /* ---- Hafazan: Al-Fatihah & Juz 'Amma ---- */
-const QH_SURAH = [1].concat(Array.from({ length: 37 }, (x, i) => 114 - i));
 const QH_KEY = "appPendidikan.hafazan.v1";
 function qhData() { try { return JSON.parse(localStorage.getItem(QH_KEY)) || {}; } catch (e) { return {}; } }
+/* Surah (dan julat ayat) dalam setiap juz: [surah, dari, hingga] */
+function qhJuzSurah(j) {
+  const [s0, a0] = QMETA.j[j - 1], [s1, a1] = j < 30 ? QMETA.j[j] : [115, 1], o = [];
+  for (let x = s0; x <= (a1 === 1 ? s1 - 1 : s1); x++) o.push([x, x === s0 ? a0 : 1, x === s1 ? a1 - 1 : QMETA.s[x - 1][1]]);
+  return o;
+}
+const qhKira = (h, r) => (h[r[0]] || []).filter(a => a >= r[1] && a <= r[2]).length;
 function qhMenu() {
   backMenu = qhMenu; qariHenti();
   const h = qhData();
-  renderMenu("Hafazan", QH_SURAH.map((s, i) => { const n = QMETA.s[s - 1][1], siap = (h[s] || []).length; return [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${siap >= n ? "#FFD36E" : "#8FD9A8"}"/>${TULIS(32, 41, s, 20, "#fff")}`), QS_NAMA[s - 1], siap + " / " + n + " ayat dihafal", siap >= n ? "★★★" : "", () => qhBaca(s)]; }), renderAlQuranMenu);
+  renderMenu("Hafazan 30 Juz", Array.from({ length: 30 }, (x, i) => {
+    const sr = qhJuzSurah(i + 1), jum = sr.reduce((t, r) => t + r[2] - r[1] + 1, 0), siap = sr.reduce((t, r) => t + qhKira(h, r), 0);
+    return [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${siap >= jum ? "#FFD36E" : ["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/>${TULIS(32, 41, i + 1, 22, "#fff")}`), "Juz " + (i + 1), sr.map(r => QS_NAMA[r[0] - 1]).slice(0, 4).join(", ") + (sr.length > 4 ? " ..." : "") + " · " + siap + " / " + jum + " ayat", siap >= jum ? "★★★" : "", () => qhJuzMenu(i + 1)];
+  }), renderAlQuranMenu);
 }
-function qhBaca(s) {
-  qrSkrin("Hafazan: " + QS_NAMA[s - 1], qhMenu);
+function qhJuzMenu(j) {
+  backMenu = () => qhJuzMenu(j); qariHenti();
+  const h = qhData();
+  renderMenu("Hafazan Juz " + j, qhJuzSurah(j).map((r, i) => { const n = r[2] - r[1] + 1, siap = qhKira(h, r), penuh = r[1] === 1 && r[2] === QMETA.s[r[0] - 1][1];
+    return [["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${siap >= n ? "#FFD36E" : "#8FD9A8"}"/>${TULIS(32, 41, r[0], 20, "#fff")}`), QS_NAMA[r[0] - 1] + (penuh ? "" : " (ayat " + r[1] + " - " + r[2] + ")"), siap + " / " + n + " ayat dihafal", siap >= n ? "★★★" : "", () => qhBaca(r[0], j, r[1], r[2])]; }), qhMenu);
+}
+function qhBaca(s, j, dari, hingga) {
+  qrSkrin("Hafazan: " + QS_NAMA[s - 1], () => qhJuzMenu(j));
   const k = $("qrKawasan"); k.innerHTML = `<p class="qrpesan">Memuatkan...</p>`;
-  qjMuat(s === 1 ? 1 : 30).then(d => {
-    const ay = d.filter(x => x[0] === s), h = qhData(); h[s] = h[s] || [];
+  qjMuat(j).then(d => {
+    const ay = d.filter(x => x[0] === s && x[1] >= dari && x[1] <= hingga), h = qhData(); h[s] = h[s] || [];
     let sembunyi = false, ulang = 1;
-    k.innerHTML = `<div class="qhsurah qrar">${QMETA.s[s - 1][0]}</div>${s !== 1 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""}` + ay.map(a => `<div class="qrayat qha"><span class="qrno">${a[1]}</span><span class="qrar"></span><span class="qrmk"></span><div class="qhbar"><button class="qhtanda">Sudah Hafal</button></div></div>`).join("") + `<p class="qrpesan">Cara hafal: baca setiap ayat 3 kali bersama guru, kemudian tekan Sembunyi Ayat dan cuba baca tanpa melihat. Tekan ayat yang disembunyi untuk semak.</p>` + tjNotaKaki();
+    k.innerHTML = `<div class="qhsurah qrar">${QMETA.s[s - 1][0]}</div>${dari === 1 && s !== 1 && s !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""}` + ay.map(a => `<div class="qrayat qha"><span class="qrno">${a[1]}</span><span class="qrar"></span><span class="qrmk"></span><div class="qhbar"><button class="qhtanda">Sudah Hafal</button></div></div>`).join("") + `<p class="qrpesan">Cara hafal: baca setiap ayat 3 kali bersama guru, kemudian tekan Sembunyi Ayat dan cuba baca tanpa melihat. Tekan ayat yang disembunyi untuk semak.</p>` + tjNotaKaki();
     const el = [...k.querySelectorAll(".qha")];
     const simpan = () => { try { localStorage.setItem(QH_KEY, JSON.stringify(h)); } catch (e) { /* abaikan */ } };
     const mainAyat = (i, kali) => { qariHenti(); const siri = qariSiri; let p = Promise.resolve(); el.forEach(z => z.classList.remove("on")); el[i].classList.add("on"); for (let x = 0; x < kali; x++) p = p.then(() => siri === qariSiri && qariMain(ay[i][2])); return p; };
@@ -4871,10 +4886,10 @@ function qhBaca(s) {
       const papar = () => { tanda.classList.toggle("on", hafal()); tanda.textContent = hafal() ? "✓ Sudah Hafal" : "Sudah Hafal"; };
       papar();
       x.querySelector(".qrar").onclick = () => x.classList.toggle("buka");
-      tanda.onclick = () => { if (hafal()) h[s].splice(h[s].indexOf(a[1]), 1); else { h[s].push(a[1]); sndOk(); const r = tanda.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top); } simpan(); papar(); if (h[s].length === ay.length) { sndWin(); qrBual("Tahniah! Kamu sudah hafal surah " + QS_NAMA[s - 1] + "."); } };
+      tanda.onclick = () => { if (hafal()) h[s].splice(h[s].indexOf(a[1]), 1); else { h[s].push(a[1]); sndOk(); const r = tanda.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top); } simpan(); papar(); if (ay.every(z => h[s].indexOf(z[1]) >= 0)) { sndWin(); qrBual("Tahniah! Kamu sudah hafal surah " + QS_NAMA[s - 1] + "."); } };
     });
     const bs = qrButang("padam", "Sembunyi Ayat", "biru", () => { sembunyi = !sembunyi; k.classList.toggle("qhsorok", sembunyi); bs.querySelector("span").textContent = sembunyi ? "Tunjuk Ayat" : "Sembunyi Ayat"; el.forEach(z => z.classList.remove("buka")); });
-    qrBual(h[s].length + " / " + ay.length + " ayat sudah dihafal");
+    qrBual(ay.filter(z => h[s].indexOf(z[1]) >= 0).length + " / " + ay.length + " ayat sudah dihafal");
   }).catch(() => { k.innerHTML = `<p class="qrpesan">Data surah tidak dapat dimuatkan.</p>`; });
 }
 
