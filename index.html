@@ -4333,13 +4333,15 @@ function qrHuruf() {
 }
 /* Jadual semua huruf: baris (a i u) atau dua baris (an in un) */
 function qrBaris(dua) {
-  qrSkrin(dua ? "Jadual Dua Baris" : "Jadual Baris Huruf", qrNotaMenu);
+  const pos = QN_URUTAN.indexOf(dua ? "t" : "b");
+  qrSkrin((pos + 1) + ". " + (dua ? "Jadual Dua Baris" : "Jadual Baris Huruf"), qrNotaMenu);
   const k = $("qrKawasan"), vk = dua ? ["an", "in", "un"] : ["a", "i", "u"];
   const sel = HIJAIYAH.map((h, i) => vk.map(v => i === 0 && v === "an" ? ["أً", "an"] : iqSuku(i, v)));
   k.innerHTML = `<div class="qrnota">${(dua ? [["بً", "Dua baris atas", "an"], ["بٍ", "Dua baris bawah", "in"], ["بٌ", "Dua baris depan", "un"]] : [["بَ", "Baris atas", "a"], ["بِ", "Baris bawah", "i"], ["بُ", "Baris depan", "u"]]).map(x => `<span><i class="qrar">${x[0]}</i>${x[1]}: <b>${x[2]}</b></span>`).join("")}</div><div class="qrbaris">${sel.map(g => `<div class="qrbr">${g.map(x => `<button class="qrh"><span class="qrar">${x[0]}</span><small>${x[1]}</small></button>`).join("")}</div>`).join("")}</div>`;
   const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...sel.map(g => g.map(x => qrBersih(x[1]))));
   el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); speak("~" + teks[i], "ms"); });
   qrButang("speak", "Dengar Semua", "ungu", () => qrMainSemua(el, teks.map(t => "~" + t), ++qrId));
+  qnNavigasi(pos);
   const t = dua ? "Dua baris atas bunyi an, dua baris bawah bunyi in, dua baris depan bunyi un." : QR_SEBUT.baris;
   qrBual(t); speak(t, "ms");
 }
@@ -4652,18 +4654,28 @@ const QN_JANA = {
   "Bacaan Panjang 2 Harakat": () => HIJAIYAH.map((h, i) => { const f = ["aa", "ii", "uu"].map(v => i === 0 ? [{ aa: "آ", ii: "إِي", uu: "أُو" }[v], v] : iqSuku(i, v)); return [f.map(x => x[0]).join("  "), f.map(x => x[1]).join(" ")]; }),
   "Bacaan Panjang 6 Harakat": () => HIJAIYAH.map((h, i) => [(i === 0 ? "ءَ" : h[0] + "\u064E") + "آ", (i === 0 ? "" : IQ_C[i]) + (IQ_TEBAL.has(IQ_C[i]) ? "oooooo" : "aaaaaa")])
 };
+/* Urutan nota & jadual (untuk nombor dan butang Sebelum/Seterusnya) */
+const QN_URUTAN = [0, 1, 2, "b", 3, 4, 5, "t", 6, 7, 8, 9, 10, 11];
+function qnBuka(p) { const x = QN_URUTAN[p]; if (x === "b") qrBaris(false); else if (x === "t") qrBaris(true); else qrNota(x); }
+function qnNavigasi(p) {
+  if (p > 0) qrButang("back", "Sebelum", "biru", () => qnBuka(p - 1));
+  if (p < QN_URUTAN.length - 1) qrButang("next", "Seterusnya", "hijau", () => qnBuka(p + 1));
+  else qrButang("play", "Siap", "hijau", () => { sndWin(); qrNotaMenu(); });
+}
 function qrNotaMenu() {
   backMenu = qrNotaMenu;
   const warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"];
-  const senarai = QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), (i + 1) + ". " + n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)]);
+  const senarai = QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)]);
   /* Jadual diletak selepas nota 3 (baris) dan nota 6 (dua baris) */
   senarai.splice(6, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بً بٍ بٌ</text>`), "Jadual Dua Baris", "Semua huruf dengan dua baris atas, bawah dan depan", "", () => qrBaris(true)]);
   senarai.splice(3, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بَ بِ بُ</text>`), "Jadual Baris Huruf", "Semua huruf dengan baris atas, bawah dan depan", "", () => qrBaris(false)]);
+  senarai.forEach((x, p) => x[2] = (p + 1) + ". " + x[2]);
   renderMenu("Nota Bacaan", senarai, renderQuran);
 }
 function qrNota(i, lembar) {
   const n = QR_NOTA[i];
-  qrSkrin((i + 1) + ". " + n.tajuk, qrNotaMenu);
+  const pos = QN_URUTAN.indexOf(i);
+  qrSkrin((pos + 1) + ". " + n.tajuk, qrNotaMenu);
   const k = $("qrKawasan"), jana = QN_JANA[n.tajuk], ct = jana ? jana() : n.contoh.split(";").map(x => x.split("|"));
   let tiga = n.tajuk === "Tanda Mati" || n.tajuk === "Tanda Sabdu";
   const ada2 = n.tajuk === "Tanda Sabdu";
@@ -4677,9 +4689,7 @@ function qrNota(i, lembar) {
   const sebut = c => ({ sebut: c[1].split(" (")[0].split(/[- ]/).filter(Boolean) });
   el.forEach((x, j) => { x.querySelector(".qrar").textContent = ct[j][0]; x.querySelector("small").textContent = ct[j][1]; x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(sebut(ct[j]), id); }; });
   qrButang("speak", "Dengar Nota", "ungu", () => { const id = ++qrId; speak(n.terang, "ms").then(() => tunggu(300)).then(() => { let p = Promise.resolve(); el.forEach((x, j) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); return iqSebut(sebut(ct[j]), id).then(() => tunggu(300)); }); }); return p; }).then(() => el.forEach(z => z.classList.remove("on"))); });
-  if (i > 0) qrButang("back", "Sebelum", "biru", () => qrNota(i - 1));
-  if (i < QR_NOTA.length - 1) qrButang("next", "Seterusnya", "hijau", () => qrNota(i + 1));
-  else qrButang("play", "Siap", "hijau", () => { sndWin(); qrNotaMenu(); });
+  qnNavigasi(pos);
   qrBual(n.tajuk);
   const id = qrId;
   speak(n.tajuk, "ms").then(() => id === qrId && speak(n.terang, "ms"));
