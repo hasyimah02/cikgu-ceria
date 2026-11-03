@@ -549,6 +549,36 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .trkjl{color:#3FA672;margin-left:auto}
 
 /* Dashboard mewah */
+.luxgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:720px){.luxgrid{grid-template-columns:repeat(2,1fr)}}
+.luxikon{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:18px 12px;border-radius:26px;color:#FFF8E7;border:1.5px solid rgba(232,196,104,.6);box-shadow:0 10px 24px rgba(20,40,30,.3),inset 0 1px 0 rgba(255,255,255,.12);background:linear-gradient(150deg,#14523F,#0B2A22);position:relative;overflow:hidden;transition:transform .15s}
+.luxikon:active{transform:translateY(3px)}
+.luxikon::before{content:"";position:absolute;inset:0;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 60 60'%3E%3Cpath d='M30 4 L36 24 L56 30 L36 36 L30 56 L24 36 L4 30 L24 24Z' fill='none' stroke='%23F2D27A' stroke-width='1.5'/%3E%3C/svg%3E");background-size:40px}
+.luxikon>*{position:relative}
+.luxikon svg{width:64px;height:64px;padding:8px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(232,196,104,.35)}
+.luxikon b{font-family:"Didot","Bodoni 72","Georgia",serif;font-size:18px;line-height:1.2}
+.luxikon small{font-size:12px;opacity:.75;line-height:1.3}
+.qnp{display:flex;flex-direction:column;gap:14px}
+.qnpkepala{border-radius:28px;padding:20px 22px;color:#FFF8E7;background:linear-gradient(140deg,#0C3326,#14523F 60%,#0B2A22);border:2px solid rgba(232,196,104,.65);display:flex;flex-direction:column;align-items:flex-start;position:relative}
+.qnpkepala h3{margin:2px 0 0;font-family:"Didot","Bodoni 72","Georgia",serif;font-size:32px}
+.qnpar{position:absolute;right:22px;top:18px;font-family:"Amiri Quran","Geeza Pro",serif;font-size:30px;color:#F2D27A}
+.qnphuruf{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:720px){.qnphuruf{grid-template-columns:repeat(2,1fr)}}
+.qnphuruf>div{background:#FFF8E7;border:1.5px solid #E8C468;border-radius:18px;padding:10px 12px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.qnphuruf small{font-size:12px;font-weight:700;color:#8A6A1E;letter-spacing:.5px}
+.qnphuruf b{font-size:28px;color:#14523F;line-height:1.8;font-weight:400}
+.qnphuruf .qnplebar{grid-column:1/-1}
+.qnpkat{background:#FFFDF6;border:1.5px solid #E8C468;border-radius:24px;padding:6px 16px 10px;box-shadow:0 6px 14px rgba(120,90,20,.12)}
+.qnpkat h4{margin:10px 0 6px;font-family:"Didot","Bodoni 72","Georgia",serif;font-size:21px;color:#14523F;border-bottom:1.5px solid #F2E2B0;padding-bottom:6px}
+.qnpbaris{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed #F2E2B0}
+.qnpbaris:last-child{border-bottom:0}
+.qnpdot{font-style:normal;font-size:22px}.qnpdot.tx{color:#B9AECB}
+.qnpisi b{color:#2A1E05;font-size:17px}.qnpisi em{font-style:normal;font-size:12px;background:#14523F;color:#F2D27A;border-radius:999px;padding:2px 8px;margin-left:4px;vertical-align:middle}
+.qnpisi small{display:block;color:#6B5A3A;font-size:14px;line-height:1.35}
+.qnpcontoh{font-size:28px;color:#14523F;line-height:1.8;white-space:nowrap}
+.qnpkaki{text-align:center;color:var(--muted);font-weight:700;font-size:14px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qnpkat,:root:not([data-theme="light"]) .qnphuruf>div{background:#2C2617;border-color:#8A6A1E}:root:not([data-theme="light"]) .qnpisi b,:root:not([data-theme="light"]) .qnpkat h4,:root:not([data-theme="light"]) .qnphuruf b,:root:not([data-theme="light"]) .qnpcontoh{color:#F2D27A}:root:not([data-theme="light"]) .qnpisi small{color:#D9C9A0}}
+:root[data-theme="dark"] .qnpkat,:root[data-theme="dark"] .qnphuruf>div{background:#2C2617;border-color:#8A6A1E}:root[data-theme="dark"] .qnpisi b,:root[data-theme="dark"] .qnpkat h4,:root[data-theme="dark"] .qnphuruf b,:root[data-theme="dark"] .qnpcontoh{color:#F2D27A}:root[data-theme="dark"] .qnpisi small{color:#D9C9A0}
 .lux{position:relative;overflow:hidden;border-radius:32px;padding:22px;color:#FFF8E7;border:2px solid rgba(232,196,104,.65);box-shadow:0 18px 40px rgba(20,40,30,.35),inset 0 1px 0 rgba(255,255,255,.15);display:flex;flex-direction:column;gap:18px}
 .luxt{background:radial-gradient(120% 90% at 100% 0%,#2A7A5E 0%,transparent 55%),linear-gradient(140deg,#0C3326 0%,#14523F 55%,#0B2A22 100%)}
 .luxh{background:radial-gradient(120% 90% at 100% 0%,#8A4B9E 0%,transparent 55%),linear-gradient(140deg,#2B1438 0%,#4A2160 55%,#21102C 100%)}
@@ -4886,15 +4916,44 @@ function renderAlQuranMenu() {
 function renderTilawahMenu() {
   backMenu = renderTilawahMenu; qariHenti();
   const bm = qjPenanda();
-  const dT = trkData();
-  const it = [
-    ["__buang", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><path d="M17 44 v-8 M27 44 v-16 M37 44 v-11 M47 44 v-22" stroke="#fff" stroke-width="6" stroke-linecap="round"/>`), "Tracker Tilawah", "Hari ini " + trkTilawahHari(dT, trkTarikh()) + " / " + dT.sasar.t + " muka · " + dT.muka.length + " / 604 ke arah khatam", "", () => trkMenu("t")],
-    ["q-huruf", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8FD9A8"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="26" fill="#fff" text-anchor="middle">تَجْوِيد</text>`), "Ilmu Tajwid", TAJWID.length + " hukum tajwid dengan contoh ayat & kuiz", "", qtMenu],
-    ["q-surah", QR_IKON.surah, "Bacaan Al-Quran 30 Juz", "Rasm Uthmani penuh 604 muka surat, warna tajwid & maksud", "", qjMenu],
-    ["q-doa", QR_IKON.surah.replace("#7FDDBB", "#FFB98A"), "Surah Lazim", SURAH.length + " surah pendek dengan rumi dan maksud", "", qrSenaraiSurah]
-  ];
-  renderMenu("Tilawah", it.filter(x => x[0] !== "__buang"), renderAlQuranMenu);
+  renderMenu("Tilawah", [], renderAlQuranMenu);
+  luxGrid([
+    [`<text x="32" y="42" font-family="Amiri Quran,Geeza Pro,serif" font-size="24" fill="url(#lxi)" text-anchor="middle">تَجْوِيد</text>`, "Ilmu Tajwid", TAJWID.length + " hukum, contoh ayat & kuiz", qtMenu],
+    [`<rect x="16" y="10" width="32" height="44" rx="5" fill="none" stroke="url(#lxi)" stroke-width="3"/><path d="M23 10 v44" stroke="url(#lxi)" stroke-width="3"/><path d="M29 22 h13 M29 30 h13 M29 38 h9" stroke="url(#lxi)" stroke-width="3" stroke-linecap="round"/>`, "Nota Poket Tajwid", "Ringkasan semua hukum dalam satu helaian", qnpBuka],
+    [`<path d="M8 46 L32 38 L56 46 L56 50 L32 43 L8 50Z" fill="url(#lxi)"/><path d="M11 18 q10-6 21 2 v20 q-11-7-21-2z M53 18 q-10-6-21 2 v20 q11-7 21-2z" fill="none" stroke="url(#lxi)" stroke-width="3" stroke-linejoin="round"/>`, "Bacaan Al-Quran 30 Juz", "604 muka surat, warna tajwid & maksud", qjMenu],
+    [`<path d="M10 16 q10-5 20 1 v26 q-10-6-20-1z M50 16 q-10-5-20 1 v8" fill="none" stroke="url(#lxi)" stroke-width="3" stroke-linejoin="round"/><circle cx="44" cy="38" r="8" fill="none" stroke="url(#lxi)" stroke-width="3"/><path d="M50 44 l6 6" stroke="url(#lxi)" stroke-width="4" stroke-linecap="round"/>`, "Al-Quran Bertafsir", "Tafsir, asbabun nuzul & terjemahan perkataan", qbMenu]
+  ], "luxgt");
   trkLux("t", bm ? ["Sambung Bacaan · Juz " + bm.j + ", muka surat " + bm.p, () => qjBaca(bm.j, bm.p)] : ["Mula Membaca · Juz 1", () => qjBaca(1, 1)]);
+}
+/* Grid ikon mewah (4 bahagian) */
+function luxGrid(it, kelas) {
+  const g = document.createElement("div"); g.className = "luxgrid " + (kelas || "");
+  g.innerHTML = it.map(x => `<button class="luxikon"><svg viewBox="0 0 64 64"><defs><linearGradient id="lxi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8E29A"/><stop offset="1" stop-color="#C9962E"/></linearGradient></defs>${x[0]}</svg><b>${x[1]}</b><small>${x[2]}</small></button>`).join("");
+  g.querySelectorAll(".luxikon").forEach((b, i) => b.onclick = it[i][3]);
+  $("subjList").appendChild(g);
+}
+/* Nota Poket Tajwid: ringkasan semua hukum dalam satu helaian */
+const QNP_WARNA = { "Izhar Halqi": "", "Idgham Maal Ghunnah": "ta", "Idgham Bila Ghunnah": "tu", "Iqlab": "ti", "Ikhfa' Haqiqi": "tf", "Ikhfa' Syafawi": "tf", "Idgham Mithlain": "ta", "Izhar Syafawi": "", "Ghunnah Musyaddadah": "tg", "Qalqalah Sughra": "tq", "Qalqalah Kubra": "tq", "Mad Asli": "tn", "Mad Wajib Muttasil": "to", "Mad Jaiz Munfasil": "tp", "Mad Aridh Lissukun": "tp", "Mad Lazim": "tm", "Alif Lam Syamsiah": "th" };
+const QNP_HARAKAT = { "Mad Asli": "2", "Mad Wajib Muttasil": "4 / 5", "Mad Jaiz Munfasil": "2 / 4 / 5", "Mad Aridh Lissukun": "2 / 4 / 6", "Mad Lazim": "6", "Ghunnah Musyaddadah": "2", "Idgham Maal Ghunnah": "2", "Iqlab": "2", "Ikhfa' Haqiqi": "2", "Ikhfa' Syafawi": "2", "Idgham Mithlain": "2" };
+function qnpBuka() {
+  qrSkrin("Nota Poket Tajwid", renderTilawahMenu);
+  const k = $("qrKawasan"), kat = [...new Set(TAJWID.map(t => t.k))];
+  const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  k.innerHTML = `<div class="qnp">
+    <div class="qnpkepala"><span class="luxlabel">Nota Poket</span><h3>Ilmu Tajwid</h3><span class="qnpar">عِلْمُ التَّجْوِيد</span></div>
+    <div class="qnphuruf">
+      <div><small>Huruf Halqi (Izhar)</small><b class="qrar">ء ه ع ح غ خ</b></div>
+      <div><small>Idgham dengung</small><b class="qrar">ي ن م و</b></div>
+      <div><small>Idgham tanpa dengung</small><b class="qrar">ل ر</b></div>
+      <div><small>Iqlab</small><b class="qrar">ب</b></div>
+      <div><small>Qalqalah</small><b class="qrar">ق ط ب ج د</b></div>
+      <div class="qnplebar"><small>Ikhfa' (15 huruf)</small><b class="qrar">ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك</b></div>
+    </div>
+    ${kat.map(kk => `<div class="qnpkat"><h4>${esc(kk)}</h4>${TAJWID.filter(t => t.k === kk).map(t => `<div class="qnpbaris"><i class="qnpdot ${QNP_WARNA[t.t] || "tx"}">●</i><div class="qnpisi"><b>${esc(t.t)}${QNP_HARAKAT[t.t] ? ` <em>${QNP_HARAKAT[t.t]} harakat</em>` : ""}</b><small>${esc(t.n)}</small></div><span class="qrar qnpcontoh">${t.c[0][0]}</span></div>`).join("")}</div>`).join("")}
+    <p class="qnpkaki">Titik berwarna = warna tajwid dalam Bacaan Al-Quran 30 Juz.</p>
+  </div>`;
+  qrButang("next", "Pergi ke Ilmu Tajwid", "hijau", qtMenu);
+  qrBual("Ringkasan semua hukum tajwid");
 }
 
 /* ---- Kelas Tajwid ---- */
