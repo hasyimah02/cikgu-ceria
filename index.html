@@ -426,6 +426,8 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qrnota .qrar{font-size:34px;color:#3FA672}
 .qrbaris{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;direction:rtl}
 .qrbr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:color-mix(in srgb,var(--card) 60%,transparent);border-radius:24px;padding:8px}
+.iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:1.7}.iqw small{direction:ltr;font-size:17px}
 .qrbismi{text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
 .qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
 .qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:1.9;color:var(--text)}
@@ -4294,7 +4296,8 @@ function renderQuran() {
   const st = loadStars();
   renderMenu(tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), [
     ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
-    ["q-baris", QR_IKON.baris, "Baris (Iqra')", "Baris atas, bawah dan hadapan: a, i, u", "", qrBaris],
+    ["q-surah", QR_IKON.surah.replace("#7FDDBB", "#FFD978"), "Iqra' 1 - 6", "Belajar membaca Al-Quran langkah demi langkah", "", qrIqra],
+    ["q-baris", QR_IKON.baris, "Jadual Baris", "Baris atas, bawah dan hadapan: a, i, u", "", qrBaris],
     ["q-surah", QR_IKON.surah, "Surah Lazim", SURAH.length + " surah pendek dengan rumi dan maksud", "", qrSenaraiSurah],
     ["q-doa", QR_IKON.doa, "Doa Harian", DOA.length + " doa untuk amalan setiap hari", "", qrSenaraiDoa],
     ["q-kuiz", QR_IKON.kuiz, "Kuiz Huruf", "Dengar nama huruf, pilih yang betul", starText(st["quran-kuiz"] || 0), qrKuiz]
@@ -4315,7 +4318,7 @@ function qrHuruf() {
   void id0;
 }
 function qrBaris() {
-  qrSkrin("Baris (Iqra')", renderQuran);
+  qrSkrin("Jadual Baris", renderQuran);
   const k = $("qrKawasan");
   k.innerHTML = `<div class="qrnota"><span><i class="qrar">بَ</i>Baris atas: <b>a</b></span><span><i class="qrar">بِ</i>Baris bawah: <b>i</b></span><span><i class="qrar">بُ</i>Baris hadapan: <b>u</b></span></div><div class="qrbaris">${HIJAIYAH.map(h => `<div class="qrbr">${[0, 1, 2].map(j => `<button class="qrh"><span class="qrar">${barisHuruf(h[0], j)}</span><small>${h[2].split(" ")[j]}</small></button>`).join("")}</div>`).join("")}</div>`;
   const el = [...k.querySelectorAll(".qrh")], teks = [].concat(...HIJAIYAH.map(h => h[2].split(" ").map(qrBersih)));
@@ -4382,6 +4385,128 @@ function qrKuiz() {
     qrButang("back", "Menu", "ungu", renderQuran);
   };
   tanya();
+}
+
+/* ===== Iqra' 1-6: latihan bacaan bertahap (dijana ikut kaedah Iqra') ===== */
+const IQ_C = ["", "b", "t", "ts", "j", "h", "kh", "d", "dz", "r", "z", "s", "sy", "sh", "dh", "th", "zh", "'", "gh", "f", "q", "k", "l", "m", "n", "w", "h", "y"];
+const IQ_TEBAL = new Set(["kh", "r", "sh", "dh", "th", "zh", "gh", "q"]);
+const IQ_HAR = { a: "َ", i: "ِ", u: "ُ", an: "ً", in: "ٍ", un: "ٌ", mati: "ْ" };
+/* Satu suku kata: [arab, rumi]. jenis: a i u | aa ii uu (panjang) | an in un (tanwin) */
+function iqSuku(i, v) {
+  const h = HIJAIYAH[i][0], c = IQ_C[i], b = v[0] === "a" && IQ_TEBAL.has(c) ? "o" : v[0];
+  const asas = i === 0 ? (v[0] === "i" ? "إ" : "أ") : h;
+  if (v.length === 2 && v[0] === v[1]) return [asas + IQ_HAR[v[0]] + { a: "ا", i: "يْ", u: "وْ" }[v[0]], c + b + b];
+  if (v.length === 2) return [asas + IQ_HAR[v] + (v === "an" ? "ا" : ""), c + b + "n"];
+  return [asas + IQ_HAR[v], c + b];
+}
+/* Rawak berbiji supaya setiap muka surat sentiasa sama */
+function iqRawak(seed) { let x = seed; return () => (x = (x * 1103515245 + 12345) % 2147483648) / 2147483648; }
+const iqPilih = (r, a) => a[Math.floor(r() * a.length)];
+/* Huruf yang tidak bersambung ke kiri */
+const IQ_PUTUS = new Set([0, 7, 8, 9, 10, 25]);
+function iqKata(r, huruf, vokal, n, akhir) {
+  const s = [];
+  for (let k = 0; k < n; k++) {
+    let i = iqPilih(r, huruf);
+    if (k > 0 && i === 0) i = iqPilih(r, huruf.filter(x => x) .concat([1]));
+    s.push(iqSuku(i, k === n - 1 && akhir ? akhir : iqPilih(r, vokal)));
+  }
+  return { ar: s.map(x => x[0]).join(""), rm: s.map(x => x[1]), sebut: s.map(x => x[1]) };
+}
+function iqMati(r, huruf, qalqalah) {
+  /* Suku kata tertutup: CV + C(sukun), cth أَبْ / بَتْ */
+  const a = iqPilih(r, huruf), m = qalqalah ? iqPilih(r, [20, 15, 1, 4, 7]) : iqPilih(r, huruf.filter(x => x));
+  const v = iqPilih(r, ["a", "i", "u"]), s1 = iqSuku(a, v), dpn = iqPilih(r, [true, false]);
+  const pre = dpn ? iqSuku(iqPilih(r, huruf.filter(x => x)), iqPilih(r, ["a", "i", "u"])) : null;
+  const ar = (pre ? pre[0] : "") + s1[0] + HIJAIYAH[m][0] + IQ_HAR.mati, akhir = s1[1] + IQ_C[m];
+  const rm = (pre ? [pre[1]] : []).concat([akhir]);
+  return { ar: ar, rm: rm, sebut: rm };
+}
+const IQ_SEMUA = HIJAIYAH.map((h, i) => i);
+const iqJana = (seed, n, fn) => { const r = iqRawak(seed), o = [], ada = new Set(); let t = 0; while (o.length < n && t++ < 400) { const w = fn(r); if (!ada.has(w.ar)) { ada.add(w.ar); o.push(w); } } return o; };
+/* Senarai tangan untuk Iqra' 5 & 6: "arab|rumi" */
+const iqTangan = s => s.split(";").map(x => { const p = x.split("|"); return { ar: p[0], rm: [p[1]], sebut: [p[1]] }; });
+const IQRA = (() => {
+  const buku = [];
+  /* Iqra' 1: huruf berbaris atas, satu-satu (2 huruf baharu setiap muka) */
+  const m1 = [];
+  for (let p = 0; p < 14; p++) {
+    const baru = [p * 2, p * 2 + 1], kenal = IQ_SEMUA.slice(0, p * 2 + 2), r = iqRawak(101 + p), baris = [];
+    baris.push({ ar: baru.map(i => iqSuku(i, "a")[0]).join(" "), rm: baru.map(i => iqSuku(i, "a")[1]), sebut: baru.map(i => iqSuku(i, "a")[1]) });
+    for (let k = 0; k < 7; k++) { const s = [0, 1, 2].map(j => iqSuku(j < 2 && k < 3 ? baru[(k + j) % 2] : iqPilih(r, kenal), "a")); baris.push({ ar: s.map(x => x[0]).join(" "), rm: s.map(x => x[1]), sebut: s.map(x => x[1]) }); }
+    m1.push({ nota: "Huruf baharu: " + baru.map(i => HIJAIYAH[i][1]).join(" dan ") + ". Baris atas dibaca " + baru.map(i => iqSuku(i, "a")[1]).join(" dan ") + ".", baris: baris });
+  }
+  buku.push({ nama: "Iqra' 1", ds: "Huruf berbaris atas", muka: m1 });
+  /* Iqra' 2: huruf bersambung & bacaan panjang (mad) alif */
+  const m2 = [];
+  for (let p = 0; p < 6; p++) m2.push({ nota: "Huruf bersambung. Baca suku kata satu-satu, kemudian sambung.", baris: iqJana(201 + p, 8, r => iqKata(r, IQ_SEMUA, ["a"], 2 + (p > 2 ? 1 : 0))) });
+  for (let p = 0; p < 4; p++) m2.push({ nota: "Baris atas bertemu alif dibaca panjang dua harakat, contohnya baa.", baris: iqJana(251 + p, 8, r => iqKata(r, IQ_SEMUA, ["a", "aa"], 2 + (p % 2))) });
+  buku.push({ nama: "Iqra' 2", ds: "Huruf bersambung & bacaan panjang", muka: m2 });
+  /* Iqra' 3: baris bawah, baris hadapan & mad ya, mad wau */
+  const m3 = [];
+  [["i", "Baris bawah dibaca i, contohnya bi, ti."], ["i", "Baris bawah dibaca i, contohnya bi, ti."], ["u", "Baris hadapan dibaca u, contohnya bu, tu."], ["u", "Baris hadapan dibaca u, contohnya bu, tu."], ["aiu", "Campuran baris atas, bawah dan hadapan."], ["aiu", "Campuran baris atas, bawah dan hadapan."],
+    ["ii", "Baris bawah bertemu ya mati dibaca panjang, contohnya bii."], ["uu", "Baris hadapan bertemu wau mati dibaca panjang, contohnya buu."], ["mad", "Campuran bacaan panjang."], ["mad", "Campuran bacaan panjang."]]
+    .forEach((x, p) => m3.push({ nota: x[1], baris: iqJana(301 + p, 8, r => iqKata(r, IQ_SEMUA, x[0] === "aiu" ? ["a", "i", "u"] : x[0] === "mad" ? ["a", "i", "u", "aa", "ii", "uu"] : x[0].length === 2 ? ["a", "i", "u", x[0]] : x[0] === "i" ? ["a", "i"] : ["a", "u"], 2 + (p % 2))) }));
+  buku.push({ nama: "Iqra' 3", ds: "Baris bawah, hadapan & mad", muka: m3 });
+  /* Iqra' 4: tanwin, huruf mati (sukun) & qalqalah */
+  const m4 = [];
+  [["an", "Baris dua di atas (tanwin) dibaca an."], ["in", "Baris dua di bawah (tanwin) dibaca in."], ["un", "Baris dua di hadapan (tanwin) dibaca un."]]
+    .forEach((x, p) => m4.push({ nota: x[1], baris: iqJana(401 + p, 8, r => iqKata(r, IQ_SEMUA, ["a", "i", "u"], 2 + (p % 2), x[0])) }));
+  for (let p = 0; p < 4; p++) m4.push({ nota: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya, contohnya ab, bat.", baris: iqJana(451 + p, 8, r => iqMati(r, IQ_SEMUA, false)) });
+  for (let p = 0; p < 3; p++) m4.push({ nota: "Qalqalah: huruf qof, tho, ba, jim dan dal yang mati dibaca melantun.", baris: iqJana(481 + p, 8, r => iqMati(r, IQ_SEMUA, true)) });
+  buku.push({ nama: "Iqra' 4", ds: "Tanwin, huruf mati & qalqalah", muka: m4 });
+  /* Iqra' 5: lafaz Allah, alif lam qamariah & syamsiah, sabdu, waqaf */
+  buku.push({ nama: "Iqra' 5", ds: "Alif lam, sabdu & waqaf", muka: [
+    { nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("اللَّهُ|Allahu;بِاللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ اللَّهِ|'abdullahi;رَسُولُ اللَّهِ|rasulullahi;نَصْرُ اللَّهِ|nasrullahi;بِسْمِ اللَّهِ|bismillahi;الْحَمْدُ لِلَّهِ|alhamdulillahi") },
+    { nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("الْقَمَرُ|al-qamaru;الْكِتَابُ|al-kitabu;الْبَيْتُ|al-baitu;الْحَمْدُ|al-hamdu;الْعِلْمُ|al-'ilmu;الْفَلَقُ|al-falaqu;الْيَوْمُ|al-yaumu;الْوَلَدُ|al-waladu") },
+    { nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("الشَّمْسُ|asy-syamsu;النَّاسُ|an-nasu;الرَّحْمَنُ|ar-rahmanu;الدِّينُ|ad-dinu;التِّينُ|at-tinu;السَّمَاءُ|as-sama'u;اللَّيْلُ|al-lailu;الذِّكْرُ|adz-dzikru") },
+    { nota: "Tanda sabdu bermaksud huruf itu dibaca dua kali, ditekan sedikit, contohnya rabbi.", baris: iqTangan("رَبِّ|rabbi;إِنَّ|inna;ثُمَّ|thumma;كُلُّ|kullu;مُحَمَّدٌ|muhammadun;جَنَّةٌ|jannatun;حَقٌّ|haqqun;عَلَّمَ|'allama") },
+    { nota: "Waqaf bermaksud berhenti. Huruf terakhir dibaca mati, contohnya al-'alamin.", baris: iqTangan("الْعَالَمِينَ|al-'alamin;الرَّحِيمِ|ar-rahim;نَسْتَعِينُ|nasta'in;أَحَدٌ|ahad;الصَّمَدُ|as-samad;الْفَلَقِ|al-falaq;خَلَقَ|khalaq;النَّاسِ|an-nas") }] });
+  /* Iqra' 6: hukum nun mati & tanwin, mim mati, bacaan ayat */
+  buku.push({ nama: "Iqra' 6", ds: "Hukum tajwid & bacaan ayat", muka: [
+    { nota: "Izhar: nun mati atau tanwin bertemu huruf halqi, dibaca jelas.", baris: iqTangan("مِنْ هَادٍ|min hadin;مَنْ آمَنَ|man amana;عَلِيمٌ حَكِيمٌ|'alimun hakim;مِنْ عِلْمٍ|min 'ilmin;مِنْ خَوْفٍ|min khaufin;يَنْأَوْنَ|yan'auna") },
+    { nota: "Idgham: nun mati atau tanwin bertemu ya, ra, mim, lam, wau atau nun, dibaca masuk ke huruf selepasnya.", baris: iqTangan("مَنْ يَعْمَلْ|may ya'mal;مِنْ رَبِّهِمْ|mir rabbihim;مِنْ مَالٍ|mim malin;مِنْ لَدُنْهُ|mil ladunhu;مِنْ وَالٍ|miw walin;مِنْ نِعْمَةٍ|min ni'matin") },
+    { nota: "Iqlab: nun mati atau tanwin bertemu ba, bunyi nun bertukar menjadi mim.", baris: iqTangan("مِنْ بَعْدِ|mim ba'di;أَنْبِئْهُمْ|ambi'hum;سَمِيعٌ بَصِيرٌ|sami'um basir;لَيُنْبَذَنَّ|layumbazanna") },
+    { nota: "Ikhfa': nun mati atau tanwin bertemu lima belas huruf, dibaca samar-samar dengan dengung.", baris: iqTangan("مِنْ قَبْلِ|ming qabli;أَنْتُمْ|antum;مِنْ شَرِّ|min syarri;كُنْتُمْ|kuntum;يُنْفِقُونَ|yunfiquna;عَنْ صَلَاتِهِمْ|'an solatihim") },
+    { nota: "Mim mati: bertemu ba dibaca samar, bertemu mim dibaca masuk, bertemu huruf lain dibaca jelas.", baris: iqTangan("تَرْمِيهِمْ بِحِجَارَةٍ|tarmihim bihijarah;لَهُمْ مَا|lahum ma;لَكُمْ دِينُكُمْ|lakum dinukum;أَلَمْ تَرَ|alam tara") },
+    { nota: "Bacaan ayat: gabungkan semua yang kamu sudah belajar.", baris: SURAH[1].ayat.concat(SURAH[5].ayat).map(a => { const p = a.split("|"); return { ar: p[0], rm: [p[1]], sebut: [p[1]] }; }) }] });
+  return buku;
+})();
+const IQ_KEY = "appPendidikan.iqra.v1";
+function iqKemajuan() { try { return JSON.parse(localStorage.getItem(IQ_KEY)) || {}; } catch (e) { return {}; } }
+function qrIqra() {
+  backMenu = qrIqra;
+  const kj = iqKemajuan(), warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz", "q-huruf"];
+  renderMenu("Iqra' 1 - 6", IQRA.map((b, i) => [warna[i], SVGC(`<rect x="10" y="8" width="44" height="50" rx="12" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF", "#FF9EC4"][i]}"/><rect x="10" y="8" width="10" height="50" rx="5" fill="#000" opacity=".08"/>${TULIS(36, 44, i + 1, 30, "#fff")}`),
+    b.nama, b.ds + " · " + (kj[i] || []).length + " / " + b.muka.length + " muka", "", () => iqBaca(i, 0)]), renderQuran);
+}
+function iqBaca(bi, mi) {
+  const b = IQRA[bi], m = b.muka[mi];
+  qrSkrin(b.nama + " · Muka " + (mi + 1) + " / " + b.muka.length, qrIqra);
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="iqgrid">${m.baris.map(w => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div><p class="qrpesan">Tekan bacaan untuk dengar suku kata perlahan-lahan. Baca bersama guru untuk tajwid yang betul.</p>`;
+  const el = [...k.querySelectorAll(".iqw")];
+  el.forEach((x, i) => { x.querySelector(".qrar").textContent = m.baris[i].ar; x.querySelector("small").textContent = m.baris[i].rm.join("-"); x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(m.baris[i], id); }; });
+  qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((x, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); x.scrollIntoView({ block: "nearest", behavior: "smooth" }); return iqSebut(m.baris[i], id).then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
+  if (mi > 0) qrButang("back", "Sebelum", "biru", () => iqBaca(bi, mi - 1));
+  const akhir = mi === b.muka.length - 1;
+  qrButang(akhir ? "play" : "next", akhir ? "Siap" : "Seterusnya", "hijau", () => {
+    const kj = iqKemajuan(); kj[bi] = kj[bi] || []; if (kj[bi].indexOf(mi) < 0) kj[bi].push(mi);
+    try { localStorage.setItem(IQ_KEY, JSON.stringify(kj)); } catch (e) { /* abaikan */ }
+    sndOk();
+    if (!akhir) return iqBaca(bi, mi + 1);
+    sndWin(); const r = k.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 60);
+    qrBual("Tahniah! Kamu sudah habis " + b.nama + "."); speak("Tahniah! Kamu sudah habis " + b.nama + ".", "ms").then(() => tunggu(400)).then(qrIqra);
+  });
+  qrBual(m.nota);
+  const id = qrId;
+  speak(m.nota, "ms");
+  void id;
+}
+function iqSebut(w, id) {
+  let p = Promise.resolve();
+  w.sebut.forEach(s => { p = p.then(() => id === qrId && speak("~" + qrBersih(s), "ms")).then(() => tunggu(120)); });
+  return p;
 }
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
