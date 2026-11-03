@@ -154,6 +154,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .crteks{padding:14px 16px 18px}
 .crayat,.crkunci{display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center}
 .crk{background:none;padding:4px 8px;border-radius:14px;font-size:clamp(30px,5vw,50px);font-weight:700;transition:transform .2s,background .2s}
+.wsk .w0{color:#e8434f}.wsk .w1{color:#2f7fe0}
 .crk .su.s0{color:#e8434f}.crk .su.s1{color:#2f7fe0}.crk .sutanda{color:var(--text)}
 .crk .su{display:inline-block;transition:transform .2s}.crk .su.on{transform:scale(1.35) translateY(-4px);text-shadow:0 0 10px #ffd23f}
 .crk.sorot{background:var(--kuning-p);transform:scale(1.08)}.crk.giliran{background:var(--hijau-p)}
@@ -2684,6 +2685,32 @@ function sukuKata(w) {
   return s;
 }
 
+/* Suku kata berwarna merah/biru untuk semua teks BM Tahap 1 (sama seperti buku cerita) */
+const SK_WARNA = ["#e8434f", "#2f7fe0"];
+function sukuPotong(t) {
+  const o = [];
+  t.split(/([A-Za-z]+)/).forEach((x, i) => {
+    if (!x) return;
+    if (i % 2 === 0 || x.length < 2) { o.push([x, null]); return; }
+    let k = 0;
+    sukuKata(x.toLowerCase()).forEach((sk, j) => { o.push([x.substr(k, sk.length), j % 2]); k += sk.length; });
+  });
+  return o;
+}
+const skEsc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+function warnaSuku(root) {
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => /[A-Za-z]{2}/.test(n.nodeValue) && !n.parentElement.closest(".wsk, .su, .ejahuruf, .bsukuw, svg, button.tb") ? 1 : 2 });
+  const ns = [];
+  while (w.nextNode()) ns.push(w.currentNode);
+  ns.forEach(n => { const s = document.createElement("span"); s.className = "wsk"; s.innerHTML = sukuPotong(n.nodeValue).map(([c, j]) => j === null ? skEsc(c) : `<span class="w${j}">${skEsc(c)}</span>`).join(""); n.replaceWith(s); });
+}
+if (typeof MutationObserver !== "undefined") document.addEventListener("DOMContentLoaded", () => {
+  const akar = ["bmKawasan", "bmBub", "tbKawasan", "tbBub"].map(i => document.getElementById(i)).filter(Boolean);
+  let sibuk = false;
+  const ob = new MutationObserver(() => { if (sibuk) return; sibuk = true; akar.forEach(warnaSuku); ob.takeRecords(); sibuk = false; });
+  akar.forEach(a => { warnaSuku(a); ob.observe(a, { childList: true, subtree: true, characterData: true }); });
+});
+
 let bmMod = "baca", bmLv = 1, bmList = [], bmI = 0, bmId = 0, bmPos = 0, bmSkor = 0, bmInk = [], bmNow = null, bmMask = null, bmDone = false;
 const bmOn = () => $("s-bm").classList.contains("on");
 const tunggu = ms => new Promise(r => setTimeout(r, ms));
@@ -2908,8 +2935,10 @@ function bmSaiz() {
     g.setLineDash([]);
     g.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--track").trim() || "#dceaf9";
     g.fillText(t, x0, base);
-    g.setLineDash([1, 7]); g.lineCap = "round"; g.lineWidth = 2.4; g.strokeStyle = "#8a94a6";
-    g.strokeText(t, x0, base); g.setLineDash([]);
+    g.setLineDash([1, 7]); g.lineCap = "round"; g.lineWidth = 2.6;
+    let x = x0;
+    sukuPotong(t).forEach(([c, w]) => { g.strokeStyle = w === null ? "#8a94a6" : SK_WARNA[w]; g.strokeText(c, x, base); x += g.measureText(c).width; });
+    g.setLineDash([]);
     mc.fillText(t, x0, base);
   });
   const A = mc.getImageData(0, 0, m.width, m.height).data;
