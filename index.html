@@ -432,6 +432,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qnsimbol{align-self:center;font-size:clamp(90px,16vw,140px);line-height:1.9;color:#3FA672;background:var(--card);border-radius:36px;padding:0 44px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh)}
 .qnkecil .qrh{padding:4px 2px}.qrh .qrar{display:block;line-height:1.5!important;padding:.25em 0 .55em}.qrh small{display:block;line-height:1.2}.qnkecil small{direction:ltr}
 .qnlebar small{font-size:15px}
+.qntab{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.qntab button{background:var(--card);border:3px solid var(--garis);border-radius:999px;padding:10px 20px;font-weight:700;box-shadow:0 4px 0 var(--garis)}.qntab button.on{background:#8FD9A8;border-color:#8FD9A8;color:var(--on);box-shadow:0 4px 0 #6CBF8A}
 .qnterang{text-align:center;font-size:clamp(20px,3vw,26px);font-weight:700;max-width:760px;align-self:center;margin:4px 0}
 .qrbaris{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.qrbaris .qrh{min-width:0;overflow:hidden}.qrbaris .qrh .qrar{font-size:clamp(26px,4vw,40px)}.qrbaris .qrh small{font-size:14px;white-space:nowrap}
 .qrbismi{line-height:2.3;padding-top:6px;text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
@@ -4655,14 +4656,17 @@ function qrNotaMenu() {
   renderMenu("Nota Bacaan", QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), (i + 1) + ". " + n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)])
     .concat([["q-kuiz", QR_IKON.baris, "Jadual Baris Penuh", "Semua huruf dengan baris atas, bawah dan depan", "", qrBaris]]), renderQuran);
 }
-function qrNota(i) {
+function qrNota(i, lembar) {
   const n = QR_NOTA[i];
   qrSkrin((i + 1) + ". " + n.tajuk, qrNotaMenu);
   const k = $("qrKawasan"), jana = QN_JANA[n.tajuk], ct = jana ? jana() : n.contoh.split(";").map(x => x.split("|"));
-  const tiga = n.tajuk === "Tanda Mati" || n.tajuk === "Tanda Sabdu";
-  const kelas = !jana ? "iqgrid" : tiga ? "qrbaris" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
-  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p><div class="${kelas}">${tiga ? Array.from({ length: ct.length / 3 }, () => `<div class="qrbr">${[0, 1, 2].map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`).join("") : ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
+  let tiga = n.tajuk === "Tanda Mati" || n.tajuk === "Tanda Sabdu";
+  const ada2 = n.tajuk === "Tanda Sabdu";
+  if (ada2 && lembar !== 2) { tiga = false; for (let x = ct.length - 1; x >= 0; x--) if (x % 3) ct.splice(x, 1); }
+  const kelas = !jana ? "iqgrid" : tiga ? "qrbaris" : ada2 ? "qrgrid qnkecil" : n.tajuk === "Bacaan Panjang 2 Harakat" ? "iqgrid qnlebar" : "qrgrid qnkecil";
+  k.innerHTML = `<div class="qnsimbol qrar">${n.simbol}</div><p class="qnterang"></p>${ada2 ? `<div class="qntab"><button class="${lembar !== 2 ? "on" : ""}">Lembaran 1: Baris Atas</button><button class="${lembar === 2 ? "on" : ""}">Lembaran 2: Atas, Bawah &amp; Depan</button></div>` : ""}<div class="${kelas}">${tiga ? Array.from({ length: ct.length / 3 }, () => `<div class="qrbr">${[0, 1, 2].map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`).join("") : ct.map(() => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div>`;
   k.querySelector(".qnterang").textContent = n.terang;
+  k.querySelectorAll(".qntab button").forEach((b, x) => b.onclick = () => qrNota(i, x + 1));
   const el = [...k.querySelectorAll(".iqw")];
   const sebut = c => ({ sebut: c[1].split(" (")[0].split(/[- ]/).filter(Boolean) });
   el.forEach((x, j) => { x.querySelector(".qrar").textContent = ct[j][0]; x.querySelector("small").textContent = ct[j][1]; x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(sebut(ct[j]), id); }; });
