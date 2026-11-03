@@ -489,6 +489,12 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qubaca{background:#2F4A3C}}:root[data-theme="dark"] .qubaca{background:#2F4A3C}
 
 /* Al-Quran Bertafsir */
+.qbhalaman{display:flex;flex-direction:column;gap:12px;background:var(--card);border-radius:28px;padding:16px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh);border:4px double #CFE9D8}
+.qbbaris{direction:rtl;display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 0;border-radius:16px;padding:4px}
+.qbbaris.qbnasikh{background:#D9F5E3}.qbbaris.qbmansukh{background:#FFE3D0}
+.qbblok .qbtafsir{margin:2px 0 6px;box-shadow:none;border:2px solid var(--garis);background:color-mix(in srgb,var(--card) 85%,#E2F8EF)}
+.qbtutup .qbblok .qbtafsir{display:none}
+.qbmm{background:#E6F3FF!important}
 .qbmuka{text-align:right;text-align-last:auto;display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 0}
 .qbmuka .qjsurah,.qbmuka .qrbismi{width:100%}
 .qbayat{display:contents}
@@ -5145,30 +5151,25 @@ function qbBaca(j, p, arah) {
     const ms = d.filter(x => x[3] === p), akhir = d[d.length - 1][3];
     if (!ms.length) return arah < 0 ? qbBaca(j, p - 1, -1) : qbBaca(j + 1 <= 30 ? j + 1 : j, p, 1);
     try { localStorage.setItem(QB_KEY, JSON.stringify({ j: j, p: p })); } catch (e) { /* abaikan */ }
-    const kunci = a => a[0] + ":" + a[1], kaki = [];
-    let h = `<div class="qjmuka qbmuka">`;
+    const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    let h = `<div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span><span><b class="qbkaki">✱</b> Nota muhkam / mutasyabih</span></div><div class="qbhalaman">`;
     ms.forEach(a => {
+      const ky = a[0] + ":" + a[1], ns = QB_NASAKH[ky], mm = QB_MM[ky], ab = QB_ASBAB[ky], tf = t[a[2]] || ["", []];
       if (a[1] === 1) { const mk = QMETA.s[a[0] - 1][2] === "Meccan"; h += `<div class="qjsurah"><span class="qrar">${QMETA.s[a[0] - 1][0]}</span><small>${QS_NAMA[a[0] - 1]} · ${QMETA.s[a[0] - 1][1]} ayat · <b class="qb${mk ? "mk" : "md"}">${mk ? "Makkiyyah" : "Madaniyyah"}</b></small></div>` + (a[0] !== 1 && a[0] !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""); }
-      const ky = kunci(a), ns = QB_NASAKH[ky], mm = QB_MM[ky];
-      let nk = ""; if (mm) { kaki.push([ky, mm]); nk = `<sup class="qbkaki">${kaki.length}</sup>`; }
-      const kata = qbPecah(a[4]), gl = (t[a[2]] || [0, []])[1];
-      h += `<span class="qjayat qbayat${ns ? " qb" + ns[0] : ""}" data-g="${a[2]}">${QB_ASBAB[ky] ? `<span class="qbasbab" title="Asbabun Nuzul">◆</span>` : ""}${kata.map((w, x) => `<span class="qbkata"><span class="qrar">${w}</span><small>${gl[x] ? gl[x][1].replace(/&/g, "&amp;").replace(/</g, "&lt;") : ""}</small></span>`).join("")}<span class="qbkata qbno"><span class="qrar qjno">﴿${angkaArab(a[1])}﴾</span>${nk}</span></span>`;
+      const kata = qbPecah(a[4]), gl = tf[1];
+      h += `<div class="qbblok" data-g="${a[2]}"><div class="qbbaris qjayat${ns ? " qb" + ns[0] : ""}">${ab ? `<span class="qbasbab" title="Asbabun Nuzul">◆</span>` : ""}${kata.map((w, x) => `<span class="qbkata"><span class="qrar">${w}</span><small>${gl[x] ? esc(gl[x][1]) : ""}</small></span>`).join("")}<span class="qbkata qbno"><span class="qrar qjno">﴿${angkaArab(a[1])}﴾</span>${mm ? `<sup class="qbkaki">✱</sup>` : ""}</span></div>`;
+      h += `<div class="qbtafsir"><div class="qbtajuk">${QS_NAMA[a[0] - 1]} · Ayat ${a[1]}</div><div class="qbbah"><b>Terjemahan (Tafsir Pimpinan Ar-Rahman)</b><p>${esc(a[5])}</p></div><div class="qbbah"><b>Tafsir Jalalain (Bahasa Indonesia)</b><p>${esc(tf[0])}</p></div>`;
+      if (ab) h += `<div class="qbbah qbkotak"><b>◆ Asbabun Nuzul</b><p>${esc(ab)}</p></div>`;
+      if (ns) h += `<div class="qbbah qbkotak qb${ns[0]}"><b>${ns[0] === "nasikh" ? "Ayat Nasikh" : "Ayat Mansukh"}</b><p>${esc(ns[1])}</p></div>`;
+      if (mm) h += `<div class="qbbah qbkotak qbmm"><b>✱ ${esc(mm[0])}</b><p>${esc(mm[1])}</p></div>`;
+      h += `</div></div>`;
     });
-    h += `</div><div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span><span>Terjemahan di bawah setiap perkataan: Bahasa Inggeris</span></div>`;
-    if (kaki.length) h += `<div class="qbnotakaki"><b>Nota kaki:</b>${kaki.map((x, i) => `<p><sup>${i + 1}</sup> <b>${QS_NAMA[+x[0].split(":")[0] - 1]} ${x[0].split(":")[1]} · ${x[1][0]}:</b> ${x[1][1]}</p>`).join("")}</div>`;
-    h += `<div class="qtkat">Tafsir & Terjemahan</div>` + ms.map(a => `<div class="qbtafsir" data-g="${a[2]}"><div class="qbtajuk">${QS_NAMA[a[0] - 1]} · Ayat ${a[1]}</div><div class="qbbah"><b>Terjemahan (Tafsir Pimpinan Ar-Rahman)</b><p class="qbms"></p></div><div class="qbbah"><b>Tafsir Jalalain (Bahasa Indonesia)</b><p class="qbjl"></p></div>${QB_ASBAB[kunci(a)] ? `<div class="qbbah qbkotak"><b>◆ Asbabun Nuzul</b><p>${QB_ASBAB[kunci(a)]}</p></div>` : ""}${QB_NASAKH[kunci(a)] ? `<div class="qbbah qbkotak qb${QB_NASAKH[kunci(a)][0]}"><b>${QB_NASAKH[kunci(a)][0] === "nasikh" ? "Ayat Nasikh" : "Ayat Mansukh"}</b><p>${QB_NASAKH[kunci(a)][1]}</p></div>` : ""}</div>`).join("");
-    k.innerHTML = h;
-    const kad = [...k.querySelectorAll(".qbtafsir")];
-    kad.forEach((c, i) => {
-      const a = ms[i], tf = t[a[2]];
-      c.querySelector(".qbms").textContent = a[5]; c.querySelector(".qbjl").textContent = tf ? tf[0] : "";
-    });
-    const el = [...k.querySelectorAll(".qjayat")];
-    el.forEach((x, i) => x.onclick = () => { el.forEach(z => z.classList.remove("on")); x.classList.add("on"); kad.forEach(z => z.classList.remove("on")); kad[i].classList.add("on"); kad[i].scrollIntoView({ block: "start", behavior: "smooth" }); });
+    k.innerHTML = h + `</div>`;
     const ke = (jj, pp, a) => () => qbBaca(jj, pp, a), awalJuz = ms[0] === d[0];
+    const bt = qrButang("padam", "Sembunyi Tafsir", "ungu", () => { const tutup = k.classList.toggle("qbtutup"); bt.querySelector("span").textContent = tutup ? "Tunjuk Tafsir" : "Sembunyi Tafsir"; });
     if (p > 1 || !awalJuz) qrButang("back", "Sebelum", "biru", awalJuz ? ke(j - 1, p, -1) : ke(j, p - 1, -1));
     if (p < 604 || j < 30) qrButang("next", "Seterusnya", "hijau", p < akhir ? ke(j, p + 1, 1) : j < 30 ? ke(j + 1, QMETA.j[j][2] === p ? p : p + 1, 1) : () => { sndWin(); qbMenu(); });
-    qrBual("Tekan ayat untuk lihat tafsirnya");
+    qrBual("Tafsir dipaparkan terus di bawah setiap ayat");
   }).catch(() => { k.innerHTML = `<p class="qrpesan">Data tidak dapat dimuatkan.</p>`; });
 }
 
