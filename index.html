@@ -139,6 +139,10 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .tbs.guna{opacity:0;transform:scale(.6);pointer-events:none;height:0;padding:0;margin:-4px 0}.tbs.no{animation:shake .5s}
 .tbkarangan{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 6px 16px var(--sh);font-size:clamp(20px,3.2vw,28px);font-weight:700;line-height:1.9;margin-bottom:14px}
 .tbkosong.kini{border-bottom-color:var(--oren);background:var(--kuning-p);animation:denyut 1s ease-in-out infinite}
+.tbgambar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tbgb{background:var(--card);border-radius:24px;padding:10px;box-shadow:0 6px 16px var(--sh);border:4px solid var(--track);transition:transform .15s}
+.tbgb .art{width:100%;height:auto}.tbgb:active{transform:scale(.96)}.tbgb.betul{border-color:var(--hijau);background:var(--hijau-p);animation:pop .4s}.tbgb.no{animation:shake .5s}
+.tbrakam{justify-content:center;margin-top:12px}.tb.merakam{animation:goyang .8s ease-in-out infinite;background:#e53935}
 .tbw{border:3px solid var(--track)}.tbw.betul{background:var(--hijau);color:#fff;border-color:var(--hijau);animation:pop .4s}.tbw.no{animation:shake .5s}
 /* Buku cerita */
 #s-cerita{position:relative;z-index:0}
@@ -2086,6 +2090,7 @@ const IKON = {
   baca: SVGI('<path d="M3 6 q4.5-2.5 9 0.5 q4.5-3 9-0.5 v13 q-4.5-2 -9 0.5 q-4.5-2.5 -9-0.5z" fill="currentColor" fill-opacity=".25"/><path d="M12 6.5 v13"/>'),
   eja: SVGI('<path d="M2.5 18 l3.5-11 l3.5 11 M3.8 14.5 h4.4 M12 7 v11 M12 12.5 q1.5-2 3.5-2 q3 0 3 3.7 q0 3.8-3 3.8 q-2 0-3.5-2"/>'),
   bina: SVGI('<rect x="2.5" y="12.5" width="8.5" height="8" rx="1.6" fill="currentColor" fill-opacity=".25"/><rect x="13" y="12.5" width="8.5" height="8" rx="1.6"/><rect x="7.7" y="3.5" width="8.5" height="8" rx="1.6" fill="currentColor" fill-opacity=".25"/>'),
+  rakam: SVGI('<rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5.5 11 q0 6 6.5 6 q6.5 0 6.5-6 M12 17 v4 M8.5 21 h7"/>'),
   pensel: SVGI('<path d="M4 20 l1.5-5 L16 4.5 l3.5 3.5 L9 18.5z" fill="currentColor" fill-opacity=".25"/><path d="M14 6.5 l3.5 3.5"/>')
 };
 const MASKOT = `<svg class="masc" viewBox="0 0 80 132" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
@@ -2701,7 +2706,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3648,12 +3653,79 @@ const TL = [
     "I|Kami membawa payung kerana hari hujan.", "I|Adik menangis kerana jatuh dari basikal.", "I|Ayah membaca surat khabar di ruang tamu.", "I|Murid-murid beratur sebelum masuk ke kelas."] }
 ];
 TL.forEach((t, i) => { t.id = "tl" + i; t.kat = "tl"; });
+/* ===== Mendengar & Bertutur: D = dengar & pilih perkataan, A = ikut arahan (tekan gambar), Q = dengar & jawab, R = rakam suara ===== */
+const DG = [
+  { lv: 1, nama: "Bunyi Vokal", nota: [
+    "Lima Huruf Vokal|Huruf vokal ialah a, e, i, o dan u. Setiap suku kata mesti ada huruf vokal.|*a*yam;*e*kor;*i*kan;*o*ren;*u*lar|kebun,Ayam",
+    "Dua Bunyi E|Huruf e ada dua bunyi. E pepet seperti dalam emak. E taling seperti dalam ekor.|*e*mak, *e*nam, s*e*kolah;*e*kor, m*e*ja, *e*sok|rumah,Kucing"], soal: [
+    "D|batu|bata|biti", "D|meja|maja|muja", "D|ikan|akan|ukan", "D|ular|olar|ilar", "D|oren|aren|uren", "D|kuda|kada|kudi", "D|topi|tapi|tipu", "D|susu|sisi|sasa", "D|emak|amak|imak", "D|ekor|akor|ikor"] },
+  { lv: 1, nama: "Bunyi Konsonan", nota: [
+    "Huruf Konsonan|Selain vokal, huruf lain ialah konsonan. Konsonan bergabung dengan vokal untuk membentuk suku kata.|*b* dan a menjadi ba;*k* dan u menjadi ku;*m* dan a menjadi ma|kebun,Ayam",
+    "Bunyi Hampir Sama|Dengar dengan teliti. Ada bunyi yang hampir sama, seperti b dan p, d dan t, g dan k.|*b*ola dan *p*ola;*d*ari dan *t*ari;*g*ali dan *k*ali|sekolah,Pencil"], soal: [
+    "D|pagi|bagi|tagi", "D|tari|dari|gari", "D|kali|gali|bali", "D|pola|bola|kola", "D|duit|tuit|buit", "D|gigi|kiki|bibi", "D|nasi|masi|lasi", "D|roti|loti|soti", "D|sapu|tapu|kapu", "D|lampu|rampu|nampu"] },
+  { lv: 1, nama: "Ikut Arahan", nota: [
+    "Mendengar Arahan|Dengar arahan dengan teliti dan ikut apa yang disuruh.|Tekan gambar *kucing*.;Ambil buku dan *duduk*.;Tolong tutup *pintu*.|sekolah,Pencil"], soal: [
+    "A|Tekan gambar kucing.|Kucing|Dog|Rabbit", "A|Tekan gambar buah yang berwarna kuning.|Pisang|Epal|Oren", "A|Tekan gambar haiwan yang mempunyai belalai.|Gajah|Zirafah|Singa",
+    "A|Tekan gambar kenderaan yang bergerak di laut.|Feri|Van|Kite", "A|Tekan gambar benda yang kita gunakan semasa hujan.|Umbrella|Hat|Watch", "A|Tekan gambar serangga yang membuat madu.|Lebah|Tikus|Ular",
+    "A|Tekan gambar benda untuk melihat masa.|Jam|Bola|Dadu", "A|Tekan gambar haiwan yang mempunyai leher paling panjang.|Zirafah|Zebra|Goat", "A|Tekan gambar benda yang kita gunakan untuk menulis.|Pencil|Juice|Egg", "A|Tekan gambar haiwan yang tinggal di dalam air.|Fish|Ayam|Kucing"] },
+  { lv: 1, nama: "Bertutur dengan Sopan", nota: [
+    "Kata-kata Sopan|Gunakan kata-kata sopan semasa bercakap.|*Tolong* ambilkan buku itu.;*Terima kasih*, cikgu.;*Maaf*, saya terlambat.;*Boleh* saya pinjam pensel?|sekolah,Pencil"], soal: [
+    "P|Kawan memberi kamu hadiah. Apakah yang patut kamu katakan?|Terima kasih.|Pergi sana.|Saya tak mahu.", "P|Kamu terlanggar kawan. Apakah yang patut kamu katakan?|Maaf, saya tidak sengaja.|Padan muka.|Tepi!",
+    "P|Kamu mahu meminjam pemadam kawan. Apakah yang patut kamu katakan?|Boleh saya pinjam pemadam awak?|Bagi pemadam itu!|Pemadam awak buruk.", "P|Kamu masuk ke bilik guru. Apakah yang patut kamu katakan?|Selamat pagi, cikgu. Boleh saya masuk?|Cikgu, saya masuk.|Hei, cikgu!",
+    "P|Ibu menyuruh kamu makan. Apakah jawapan yang sopan?|Baiklah, ibu.|Tak nak!|Nantilah.", "R|Terima kasih, cikgu.", "R|Boleh saya pinjam pensel awak?", "R|Maaf, saya terlambat.",
+    "P|Cara bercakap yang sopan ialah ___.|dengan suara yang lembut|dengan menjerit|sambil marah"] },
+  { lv: 2, nama: "Diftong dan Vokal Berganding", nota: [
+    "Diftong|Diftong ialah dua vokal yang disebut sebagai satu bunyi, iaitu ai, au dan oi.|pant*ai*;pul*au*;sep*oi*|laut,Feri",
+    "Vokal Berganding|Vokal berganding ialah dua vokal yang disebut dalam dua suku kata yang berlainan.|d*ua*, du-a;b*ua*h, bu-ah;k*ai*n, ka-in|kebun,Epal"], soal: [
+    "D|pantai|panta|pantau", "D|pulau|pula|pulai", "D|sepoi|sepai|sepau", "D|kerbau|kerba|kerbai", "D|sungai|sunga|sungau", "D|dua|da|dia", "D|buah|bah|buih", "D|kain|kan|kaun", "D|harimau|harima|harimai", "D|amboi|ambai|ambau"] },
+  { lv: 2, nama: "Digraf dan Konsonan Bergabung", nota: [
+    "Digraf|Digraf ialah dua huruf yang mewakili satu bunyi, iaitu ng, ny, sy, kh dan gh.|bu*ng*a;*ny*anyi;*sy*arikat;*kh*abar;lo*gh*at|kebun,Lebah",
+    "Konsonan Bergabung|Konsonan bergabung ialah dua konsonan yang disebut bersama, seperti pr, bl, kl dan st.|*pr*ogram;*bl*ok;*kl*inik;*st*esen|jalan,Van"], soal: [
+    "D|bunga|buna|bunda", "D|nyanyi|nanyi|yanyi", "D|syarikat|sarikat|serikat", "D|khabar|kabar|habar", "D|klinik|kinik|linik", "D|stesen|setesen|tesen", "D|blok|bolok|lok", "D|nyamuk|namuk|yamuk", "D|angsa|ansa|agsa", "D|program|porgram|pogram"] },
+  { lv: 2, nama: "Pesanan dan Permintaan", nota: [
+    "Mendengar Pesanan|Dengar pesanan dengan teliti. Ingat apa, siapa, di mana dan bila.|Ibu berpesan, tolong belikan *roti* dan *susu*.;Cikgu berpesan, bawa buku *latihan* esok.|sekolah,Pencil"], soal: [
+    "Q|Ibu berpesan, tolong belikan roti dan susu di kedai. Apakah yang perlu dibeli?|Roti dan susu.|Roti dan telur.|Susu dan gula.", "Q|Cikgu berpesan, esok bawa buku latihan dan pensel warna. Apakah yang perlu dibawa?|Buku latihan dan pensel warna.|Bola dan kasut.|Beg dan topi.",
+    "Q|Ayah berpesan, kunci pintu sebelum tidur. Apakah pesanan ayah?|Mengunci pintu sebelum tidur.|Membuka tingkap.|Menyiram pokok.", "Q|Kakak meminta, tolong ambilkan payung di dalam kereta. Di manakah payung itu?|Di dalam kereta.|Di dalam bilik.|Di atas meja.",
+    "Q|Nenek berpesan, jangan lupa makan ubat pada pukul lapan malam. Bilakah ubat perlu dimakan?|Pukul lapan malam.|Pukul lapan pagi.|Pukul dua petang.", "Q|Cikgu meminta semua murid berkumpul di dewan selepas rehat. Di manakah murid perlu berkumpul?|Di dewan.|Di padang.|Di kantin.",
+    "Q|Abang meminta, tolong siram pokok bunga di depan rumah. Apakah permintaan abang?|Menyiram pokok bunga.|Mencuci kereta.|Menyapu sampah.", "Q|Ibu berpesan, balik ke rumah sebelum pukul tujuh petang. Bilakah perlu balik?|Sebelum pukul tujuh petang.|Selepas tengah malam.|Pada waktu pagi."] },
+  { lv: 2, nama: "Sebut dengan Betul", nota: [
+    "Sebutan dan Intonasi|Sebut setiap suku kata dengan jelas. Naikkan suara di hujung ayat tanya.|Ayat penyata: Saya suka membaca.;Ayat tanya: Kamu suka membaca?;Ayat seruan: Wah, cantiknya!|sekolah,Pencil"], soal: [
+    "R|Selamat pagi, cikgu.", "R|Saya suka membaca buku.", "R|Kamu sudah makan?", "R|Wah, cantiknya bunga itu!", "R|Nama saya Ali.", "R|Terima kasih, ibu.", "R|Bolehkah saya bertanya?", "R|Mari kita bermain bersama."] },
+  { lv: 3, nama: "Silaan dan Larangan", nota: [
+    "Silaan|Silaan ialah ajakan yang sopan untuk melakukan sesuatu.|*Sila* duduk.;*Jemput* makan.;*Silakan* masuk.|rumah,Juice",
+    "Larangan|Larangan ialah tegahan supaya tidak melakukan sesuatu.|*Jangan* berlari di koridor.;*Dilarang* memetik bunga.;*Jangan* membuang sampah.|sekolah,Pencil"], soal: [
+    "Q|Jemput minum, adik-adik. Apakah yang perlu dilakukan?|Minum air yang disediakan.|Keluar dari rumah.|Tidur.", "Q|Dilarang memetik bunga di taman ini. Apakah yang tidak boleh dilakukan?|Memetik bunga.|Berjalan di taman.|Melihat bunga.",
+    "Q|Jangan berlari di koridor sekolah. Bagaimanakah kita patut bergerak di koridor?|Berjalan dengan perlahan.|Berlari laju.|Melompat.", "Q|Sila duduk di kerusi masing-masing. Apakah yang perlu dilakukan?|Duduk di kerusi.|Berdiri di luar.|Baring di lantai.",
+    "P|Yang manakah ayat silaan?|Jemput masuk ke rumah saya.|Jangan masuk.|Dilarang masuk.", "P|Yang manakah ayat larangan?|Dilarang membuang sampah di sini.|Sila duduk.|Jemput makan.",
+    "P|Kata yang digunakan untuk silaan ialah ___.|jemput|jangan|dilarang", "P|Jawapan yang sopan apabila dipelawa makan ialah ___.|Terima kasih, mak cik.|Tak sedap.|Saya tak mahu."] },
+  { lv: 3, nama: "Soal Jawab", nota: [
+    "Bersoal Jawab|Dengar soalan dengan teliti. Jawab dengan ayat lengkap dan sopan.|Soalan: Di manakah kamu tinggal?;Jawapan: *Saya tinggal di Kuantan.*|sekolah,Pencil"], soal: [
+    "Q|Ali pergi ke sekolah dengan menaiki bas setiap pagi. Bagaimanakah Ali pergi ke sekolah?|Ali menaiki bas.|Ali berjalan kaki.|Ali menaiki kereta.", "Q|Siti suka membaca buku cerita di perpustakaan. Apakah yang disukai oleh Siti?|Membaca buku cerita.|Bermain bola.|Menonton televisyen.",
+    "Q|Pada hari Sabtu, keluarga Amin pergi ke Zoo Negara. Ke manakah keluarga Amin pergi?|Ke Zoo Negara.|Ke pantai.|Ke pasar.", "Q|Kumar tidak hadir ke sekolah kerana demam. Mengapakah Kumar tidak hadir?|Kerana demam.|Kerana hujan.|Kerana bercuti.",
+    "Q|Pada pendapat kamu, mengapakah kita perlu bersarapan?|Supaya kita bertenaga untuk belajar.|Supaya kita mengantuk.|Supaya lambat ke sekolah.", "Q|Pada pendapat kamu, apakah yang perlu dilakukan jika kawan sedih?|Memujuk dan menolong kawan itu.|Mentertawakan kawan itu.|Meninggalkan kawan itu.",
+    "R|Saya tinggal di Kuala Lumpur.", "R|Saya suka makan nasi lemak."] },
+  { lv: 3, nama: "Banding Beza Maklumat", nota: [
+    "Banding Beza|Dengar dua maklumat. Cari persamaan dan perbezaannya.|Persamaan: kedua-duanya *buah*;Perbezaan: epal *merah*, pisang *kuning*|kebun,Epal"], soal: [
+    "Q|Kucing ada empat kaki. Ayam ada dua kaki. Haiwan manakah yang ada empat kaki?|Kucing.|Ayam.|Kedua-duanya.", "Q|Gajah sangat besar. Semut sangat kecil. Apakah perbezaan gajah dan semut?|Saiz badan.|Warna.|Bilangan kaki.",
+    "Q|Epal dan oren ialah buah. Epal berwarna merah. Oren berwarna oren. Apakah persamaan epal dan oren?|Kedua-duanya buah.|Kedua-duanya merah.|Kedua-duanya sayur.", "Q|Bas boleh membawa ramai penumpang. Motosikal membawa dua orang sahaja. Kenderaan manakah membawa lebih ramai penumpang?|Bas.|Motosikal.|Sama banyak.",
+    "Q|Ikan tinggal di dalam air. Burung tinggal di atas pokok. Di manakah ikan tinggal?|Di dalam air.|Di atas pokok.|Di dalam gua.", "Q|Ali tinggi. Abu rendah. Siapakah yang lebih rendah?|Abu.|Ali.|Kedua-duanya.",
+    "Q|Kereta api bergerak di atas landasan. Kapal bergerak di laut. Apakah persamaan kereta api dan kapal?|Kedua-duanya kenderaan.|Kedua-duanya terbang.|Kedua-duanya di jalan raya.", "Q|Siang hari terang. Malam hari gelap. Bilakah hari gelap?|Malam.|Siang.|Pagi."] },
+  { lv: 3, nama: "Bercerita dengan Intonasi", nota: [
+    "Bercerita|Semasa bercerita, gunakan suara yang jelas, ekspresi dan intonasi yang sesuai.|Suara gembira: Hore, kita menang!;Suara sedih: Kucing saya hilang.;Suara bertanya: Di manakah kamu?|padang,Kite"], soal: [
+    "R|Hore, kita menang!", "R|Kucing saya sudah hilang.", "R|Di manakah kamu berada?", "R|Pada suatu hari, seekor arnab berjalan di dalam hutan.", "R|Aduh, sakitnya kaki saya!", "R|Terima kasih kerana menolong saya.",
+    "P|Intonasi ayat tanya ialah ___ di hujung ayat.|naik|turun|hilang", "P|Semasa bercerita, kita perlu bercakap dengan ___.|jelas dan berekspresi|perlahan sehingga tidak didengar|menjerit sepanjang masa"] }
+];
+DG.forEach((t, i) => { t.id = "dg" + i; t.kat = "dg"; });
 /* Teks untuk disebut (buang tanda sorotan) */
 const tbBersih = t => t.replace(/\*/g, "");
 const tbNota = s => { const p = s.split("|"); return { tajuk: p[0], terang: p[1], contoh: p[2].split(";"), adegan: p[3] ? { latar: p[3].split(",")[0], watak: p[3].split(",")[1] } : null }; };
 const tbSoal = s => {
   const p = s.split("|");
   if (p[0] === "T") return { j: "T", q: p[1], ayat: p[2], sasar: p[3].split(",") };
+  if (p[0] === "D") return { j: "P", q: "Dengar dan pilih perkataan yang disebut.", a: p[1], salah: p.slice(2), dengar: p[1] };
+  if (p[0] === "Q") return { j: "P", q: "Dengar dengan teliti, kemudian pilih jawapan.", a: p[2], salah: p.slice(3), dengar: p[1] };
+  if (p[0] === "A") return { j: "A", q: "Dengar arahan dan tekan gambar yang betul.", dengar: p[1], a: p[2], salah: p.slice(3) };
+  if (p[0] === "R") return { j: "R", q: "Dengar, kemudian rakam suara kamu.", teks: p[1] };
   if (p[0] === "I") return { j: "I", q: p[1].indexOf(" ") < 0 ? "Dengar dan tulis perkataan ini." : "Dengar dan susun ayat ini.", teks: p[1] };
   if (p[0] === "E") return { j: "E", q: p[1], ayat: p[2], salah: p[3], betul: p[4], lain: p.slice(5) };
   if (p[0] === "S") return { j: "S", q: p[1], bahagian: p[2].split(";") };
@@ -3668,7 +3740,7 @@ const tbPenuh = s => s.q.indexOf("___") >= 0 ? s.q.replace(/\s*___\s*/, m => (m.
 let tbT = null, tbMod = "nota", tbI = 0, tbId = 0, tbList = [], tbSkor = 0, tbSalah = false;
 const tbOn = () => $("s-tb").classList.contains("on");
 /* kat: "tb" = Tatabahasa, "sb" = Seni Bahasa (format topik sama) */
-const TB_KAT = { tb: { senarai: () => TB, nama: L("Tatabahasa", "Grammar", "语法"), ikon: "bina" }, sb: { senarai: () => SB, nama: L("Seni Bahasa", "Language Arts", "语言艺术"), ikon: "baca" }, bp: { senarai: () => BP, nama: L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解"), ikon: "baca" }, tl: { senarai: () => TL, nama: L("Menulis", "Writing", "写作"), ikon: "pensel" } };
+const TB_KAT = { tb: { senarai: () => TB, nama: L("Tatabahasa", "Grammar", "语法"), ikon: "bina" }, sb: { senarai: () => SB, nama: L("Seni Bahasa", "Language Arts", "语言艺术"), ikon: "baca" }, bp: { senarai: () => BP, nama: L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解"), ikon: "baca" }, tl: { senarai: () => TL, nama: L("Menulis", "Writing", "写作"), ikon: "pensel" }, dg: { senarai: () => DG, nama: L("Mendengar & Bertutur", "Listening & Speaking", "听说"), ikon: "rakam" } };
 function renderTB(kat) {
   kat = kat || "tb";
   backMenu = () => renderTB(kat);
@@ -3741,7 +3813,36 @@ function tbPapar() {
       b.onclick = () => tbJawab(b, x === s.a, s);
       o.appendChild(b);
     });
-    speak(s.q, "ms");
+    speak(s.q, "ms").then(() => s.dengar && id === tbId && speak(s.dengar, "ms"));
+  } else if (s.j === "A") {
+    /* Ikut arahan: dengar, kemudian tekan gambar yang betul */
+    tbBual(s.q);
+    const g = document.createElement("div"); g.className = "tbgambar"; k.appendChild(g);
+    shuffle([s.a].concat(s.salah)).forEach(x => {
+      const b = document.createElement("button");
+      b.className = "tbgb"; b.innerHTML = artSvg(x);
+      b.onclick = () => {
+        if (b.disabled) return;
+        if (x !== s.a) { tbSalah = true; b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); sndBad(); speak(s.dengar, "ms"); return; }
+        g.querySelectorAll(".tbgb").forEach(z => { z.disabled = true; }); b.classList.add("betul");
+        tbBetul(s, () => speak(s.dengar, "ms"));
+      };
+      g.appendChild(b);
+    });
+    speak(s.q, "ms").then(() => id === tbId && speak(s.dengar, "ms"));
+  } else if (s.j === "R") {
+    /* Rakam suara: dengar contoh, rakam, dengar semula rakaman sendiri */
+    tbBual(s.q);
+    const t = document.createElement("div"); t.className = "tbsoalan crayat"; k.appendChild(t);
+    s.teks.split(" ").forEach(w => { const b = document.createElement("button"); b.className = "crk"; b.innerHTML = crKata(w); b.onclick = () => { ++tbId; crSebutSuku(kataBersih(w), b, crId); }; t.appendChild(b); });
+    const r = document.createElement("div"); r.className = "tbbtns tbrakam"; k.appendChild(r);
+    const btn = (ik, label, kelas) => { const b = document.createElement("button"); b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; r.appendChild(b); return b; };
+    const bR = btn("rakam", tr(L("Rakam", "Record", "录音")), "koral"), bM = btn("play", tr(L("Dengar Suara Saya", "Hear Me", "听我的声音")), "biru"), bS = btn("next", tr(L("Siap", "Done", "完成")), "hijau");
+    bM.disabled = true; bM.style.opacity = .5;
+    bR.onclick = () => tbRakam(bR, bM);
+    bM.onclick = () => { if (tbRekodUrl) { const a = new Audio(tbRekodUrl); a.play().catch(() => {}); } };
+    bS.onclick = () => { if (tbMr && tbMr.state === "recording") tbMr.stop(); bS.disabled = true; tbBetul(s, () => speak(s.teks, "ms")); };
+    speak(s.q, "ms").then(() => id === tbId && speak(s.teks, "ms"));
   } else if (s.j === "I") {
     /* Imlak: dengar, kemudian bina perkataan (huruf) atau ayat (kad perkataan) */
     const satu = s.teks.indexOf(" ") < 0, unit = satu ? [...s.teks] : s.teks.split(" ");
@@ -3850,7 +3951,30 @@ function tbPapar() {
     });
     speak(s.q, "ms").then(() => id === tbId && speak(s.ayat, "ms"));
   }
-  tbButang("speak", tr(UI.dengar), "ungu", () => speak(s.j === "I" ? s.teks : s.q, "ms"));
+  tbButang("speak", tr(UI.dengar), "ungu", () => speak(s.dengar || (s.j === "I" || s.j === "R" ? s.teks : s.q), "ms"));
+}
+/* Rakaman suara anak (mikrofon); berhenti sendiri selepas 8 saat */
+let tbMr = null, tbRekodUrl = "";
+function tbRakam(bR, bM) {
+  if (tbMr && tbMr.state === "recording") { tbMr.stop(); return; }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder) { tbBual(tr(L("Rakaman tidak disokong pada peranti ini. Sebut dengan kuat ya!", "Recording is not supported here. Say it out loud!", "此设备不支持录音。大声说出来吧！"))); return; }
+  stopSpeech();
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(st => {
+    const ch = [], mr = new MediaRecorder(st);
+    tbMr = mr;
+    mr.ondataavailable = e => { if (e.data && e.data.size) ch.push(e.data); };
+    mr.onstop = () => {
+      st.getTracks().forEach(t => t.stop());
+      if (tbRekodUrl) URL.revokeObjectURL(tbRekodUrl);
+      tbRekodUrl = URL.createObjectURL(new Blob(ch, { type: mr.mimeType || "audio/mp4" }));
+      bR.classList.remove("merakam"); bR.querySelector("span").textContent = tr(L("Rakam Semula", "Record Again", "重新录音"));
+      bM.disabled = false; bM.style.opacity = 1;
+      new Audio(tbRekodUrl).play().catch(() => {});
+    };
+    mr.start();
+    bR.classList.add("merakam"); bR.querySelector("span").textContent = tr(L("Henti", "Stop", "停止"));
+    setTimeout(() => { if (mr.state === "recording") mr.stop(); }, 8000);
+  }).catch(() => tbBual(tr(L("Benarkan mikrofon untuk merakam suara.", "Please allow the microphone to record.", "请允许使用麦克风录音。"))));
 }
 function tbJawab(b, betul, s) {
   if (b.disabled) return;
