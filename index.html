@@ -407,7 +407,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 /* Kelas Al-Quran */
 .t-quran,.s-q-huruf,.s-q-baris,.s-q-surah,.s-q-doa,.s-q-kuiz{--c:#8FD9A8;--cp:#E4F7EA}
 .s-q-baris{--c:var(--kuning);--cp:var(--kuning-p)}.s-q-doa{--c:var(--oren);--cp:var(--oren-p)}.s-q-kuiz{--c:var(--ungu);--cp:var(--ungu-p)}
-.qrar{font-family:"Geeza Pro","Noto Naskh Arabic","Al Bayan","Damascus","Arial",sans-serif;direction:rtl;font-style:normal}
+.qrar{font-family:"Amiri Quran","Geeza Pro","Noto Naskh Arabic","Al Bayan","Damascus","Arial",sans-serif;direction:rtl;font-style:normal}
 .qratas{display:flex;justify-content:center}.qratas .tbub{max-width:520px}
 #qrKawasan{display:flex;flex-direction:column;gap:14px;align-items:stretch}
 .qrbtns{justify-content:center;margin-top:18px}
@@ -427,11 +427,11 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qrbaris{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;direction:rtl}
 .qrbr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:color-mix(in srgb,var(--card) 60%,transparent);border-radius:24px;padding:8px}
 .iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:1.7}.iqw small{direction:ltr;font-size:17px}
+.iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:2.1}.iqw small{direction:ltr;font-size:17px}
 .iqsurah{text-align:center;font-weight:700;font-size:22px;color:#3FA672}
-.qrbismi{text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
+.qrbismi{line-height:2.3;padding-top:6px;text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
 .qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
-.qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:1.9;color:var(--text)}
+.qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:2.4;color:var(--text)}
 .qrayat i{font-size:clamp(18px,2.6vw,22px);color:#3FA672;font-weight:700}
 .qrayat .qrmk{font-size:clamp(17px,2.4vw,20px);color:var(--muted);font-weight:700}
 .qrayat.on{border-color:#8FD9A8;transform:scale(1.02)}
@@ -503,6 +503,7 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 #big svg.bigsatu{width:clamp(130px,24vw,190px);height:auto}
 #nBig svg.bigsatu{width:min(60%,260px);height:auto}#nBig svg.bigk{width:clamp(56px,10vw,84px);height:auto;margin:2px;animation:none}
 #big svg.bigk{width:clamp(56px,10vw,84px);height:auto;margin:2px}
+@font-face{font-family:"Amiri Quran";src:url("gambar/AmiriQuran.ttf") format("truetype");font-display:block}
 </style>
 </head>
 <body>
@@ -4214,39 +4215,39 @@ const barisHuruf = (h, j) => (h === "ا" ? ["أ", "إ", "أ"][j] : h) + BARIS[j]
 /* Surah & doa: "Arab|rumi|maksud" setiap ayat */
 const SURAH = [
   { nama: "Al-Fatihah", ds: "Pembukaan · 7 ayat", ayat: [
-    "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ|Bismillahir rahmanir rahim|Dengan nama Allah, Yang Maha Pemurah, lagi Maha Mengasihani.",
-    "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ|Alhamdulillahi rabbil 'alamin|Segala puji bagi Allah, Tuhan yang memelihara sekalian alam.",
-    "الرَّحْمَٰنِ الرَّحِيمِ|Ar-rahmanir rahim|Yang Maha Pemurah, lagi Maha Mengasihani.",
-    "مَالِكِ يَوْمِ الدِّينِ|Maliki yaumid din|Yang menguasai hari pembalasan.",
-    "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ|Iyyaka na'budu wa iyyaka nasta'in|Engkaulah sahaja yang kami sembah, dan kepada Engkaulah sahaja kami memohon pertolongan.",
-    "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ|Ihdinas siratal mustaqim|Tunjukilah kami jalan yang lurus.",
-    "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ|Siratal lazina an'amta 'alaihim ghairil maghdubi 'alaihim wa lad dhallin|Iaitu jalan orang yang Engkau beri nikmat, bukan jalan orang yang Engkau murkai, dan bukan jalan orang yang sesat."] },
+    "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ|Bismillahir rahmanir rahim|Dengan nama Allah, Yang Maha Pemurah, lagi Maha Mengasihani.",
+    "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ|Alhamdulillahi rabbil 'alamin|Segala puji bagi Allah, Tuhan yang memelihara sekalian alam.",
+    "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ|Ar-rahmanir rahim|Yang Maha Pemurah, lagi Maha Mengasihani.",
+    "مَٰلِكِ يَوْمِ ٱلدِّينِ|Maliki yaumid din|Yang menguasai hari pembalasan.",
+    "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ|Iyyaka na'budu wa iyyaka nasta'in|Engkaulah sahaja yang kami sembah, dan kepada Engkaulah sahaja kami memohon pertolongan.",
+    "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ|Ihdinas siratal mustaqim|Tunjukilah kami jalan yang lurus.",
+    "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ|Siratal lazina an'amta 'alaihim ghairil maghdubi 'alaihim wa lad dhallin|Iaitu jalan orang yang Engkau beri nikmat, bukan jalan orang yang Engkau murkai, dan bukan jalan orang yang sesat."] },
   { nama: "Al-Ikhlas", ds: "Memurnikan keesaan Allah · 4 ayat", ayat: [
-    "قُلْ هُوَ اللَّهُ أَحَدٌ|Qul huwallahu ahad|Katakanlah: Allah itu Maha Esa.",
-    "اللَّهُ الصَّمَدُ|Allahus samad|Allah tempat bergantung segala makhluk.",
+    "قُلْ هُوَ ٱللَّهُ أَحَدٌ|Qul huwallahu ahad|Katakanlah: Allah itu Maha Esa.",
+    "ٱللَّهُ ٱلصَّمَدُ|Allahus samad|Allah tempat bergantung segala makhluk.",
     "لَمْ يَلِدْ وَلَمْ يُولَدْ|Lam yalid wa lam yulad|Dia tidak beranak dan tidak diperanakkan.",
-    "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ|Wa lam yakun lahu kufuwan ahad|Dan tidak ada sesuatu pun yang setara dengan-Nya."] },
+    "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ|Wa lam yakun lahu kufuwan ahad|Dan tidak ada sesuatu pun yang setara dengan-Nya."] },
   { nama: "Al-Falaq", ds: "Waktu subuh · 5 ayat", ayat: [
-    "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ|Qul a'uzu birabbil falaq|Katakanlah: Aku berlindung kepada Tuhan yang menguasai waktu subuh.",
-    "مِنْ شَرِّ مَا خَلَقَ|Min syarri ma khalaq|Daripada kejahatan makhluk yang Dia ciptakan.",
-    "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ|Wa min syarri ghasiqin iza waqab|Dan daripada kejahatan malam apabila ia gelap gelita.",
-    "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ|Wa min syarrin naffasati fil 'uqad|Dan daripada kejahatan ahli sihir yang menghembus pada simpulan tali.",
-    "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ|Wa min syarri hasidin iza hasad|Dan daripada kejahatan orang yang dengki apabila dia berdengki."] },
+    "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ|Qul a'uzu birabbil falaq|Katakanlah: Aku berlindung kepada Tuhan yang menguasai waktu subuh.",
+    "مِن شَرِّ مَا خَلَقَ|Min syarri ma khalaq|Daripada kejahatan makhluk yang Dia ciptakan.",
+    "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ|Wa min syarri ghasiqin iza waqab|Dan daripada kejahatan malam apabila ia gelap gelita.",
+    "وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ|Wa min syarrin naffasati fil 'uqad|Dan daripada kejahatan ahli sihir yang menghembus pada simpulan tali.",
+    "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ|Wa min syarri hasidin iza hasad|Dan daripada kejahatan orang yang dengki apabila dia berdengki."] },
   { nama: "An-Nas", ds: "Manusia · 6 ayat", ayat: [
-    "قُلْ أَعُوذُ بِرَبِّ النَّاسِ|Qul a'uzu birabbin nas|Katakanlah: Aku berlindung kepada Tuhan sekalian manusia.",
-    "مَلِكِ النَّاسِ|Malikin nas|Raja sekalian manusia.",
-    "إِلَٰهِ النَّاسِ|Ilahin nas|Tuhan sekalian manusia.",
-    "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ|Min syarril waswasil khannas|Daripada kejahatan bisikan syaitan yang bersembunyi.",
-    "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ|Allazi yuwaswisu fi sudurin nas|Yang membisikkan kejahatan ke dalam hati manusia.",
-    "مِنَ الْجِنَّةِ وَالنَّاسِ|Minal jinnati wan nas|Daripada golongan jin dan manusia."] },
+    "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ|Qul a'uzu birabbin nas|Katakanlah: Aku berlindung kepada Tuhan sekalian manusia.",
+    "مَلِكِ ٱلنَّاسِ|Malikin nas|Raja sekalian manusia.",
+    "إِلَٰهِ ٱلنَّاسِ|Ilahin nas|Tuhan sekalian manusia.",
+    "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ|Min syarril waswasil khannas|Daripada kejahatan bisikan syaitan yang bersembunyi.",
+    "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ|Allazi yuwaswisu fi sudurin nas|Yang membisikkan kejahatan ke dalam hati manusia.",
+    "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ|Minal jinnati wan nas|Daripada golongan jin dan manusia."] },
   { nama: "Al-Kauthar", ds: "Nikmat yang banyak · 3 ayat", ayat: [
-    "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ|Inna a'tainakal kauthar|Sesungguhnya Kami telah mengurniakan kepadamu kebaikan yang banyak.",
-    "فَصَلِّ لِرَبِّكَ وَانْحَرْ|Fasalli lirabbika wanhar|Maka dirikanlah solat kerana Tuhanmu dan sembelihlah korban.",
-    "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ|Inna syani'aka huwal abtar|Sesungguhnya orang yang membencimu, dialah yang terputus."] },
+    "إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ|Inna a'tainakal kauthar|Sesungguhnya Kami telah mengurniakan kepadamu kebaikan yang banyak.",
+    "فَصَلِّ لِرَبِّكَ وَٱنْحَرْ|Fasalli lirabbika wanhar|Maka dirikanlah solat kerana Tuhanmu dan sembelihlah korban.",
+    "إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ|Inna syani'aka huwal abtar|Sesungguhnya orang yang membencimu, dialah yang terputus."] },
   { nama: "Al-'Asr", ds: "Masa · 3 ayat", ayat: [
-    "وَالْعَصْرِ|Wal 'asr|Demi masa.",
-    "إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ|Innal insana lafi khusr|Sesungguhnya manusia itu dalam kerugian.",
-    "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ|Illal lazina amanu wa 'amilus salihati wa tawasau bil haqqi wa tawasau bis sabr|Kecuali orang yang beriman dan beramal soleh, serta berpesan-pesan dengan kebenaran dan kesabaran."] }
+    "وَٱلْعَصْرِ|Wal 'asr|Demi masa.",
+    "إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ|Innal insana lafi khusr|Sesungguhnya manusia itu dalam kerugian.",
+    "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ|Illal lazina amanu wa 'amilus salihati wa tawasau bil haqqi wa tawasau bis sabr|Kecuali orang yang beriman dan beramal soleh, serta berpesan-pesan dengan kebenaran dan kesabaran."] }
 ];
 const DOA = [
   { nama: "Doa Sebelum Makan", ayat: ["اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ|Allahumma barik lana fima razaqtana wa qina 'azaban nar|Ya Allah, berkatilah rezeki yang Engkau berikan kepada kami, dan peliharalah kami daripada azab neraka."] },
@@ -4340,7 +4341,7 @@ function qrSenaraiDoa() {
 function qrBaca(s, back, surah) {
   qrSkrin(s.nama, back);
   const k = $("qrKawasan"), ay = s.ayat.map(a => a.split("|"));
-  k.innerHTML = (surah && s.nama !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>` : "") +
+  k.innerHTML = (surah && s.nama !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : "") +
     ay.map((a, i) => `<button class="qrayat">${surah ? `<span class="qrno">${i + 1}</span>` : ""}<span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("") +
     `<p class="qrpesan">Bacaan Arab: baca bersama ibu, ayah atau guru supaya sebutan dan tajwid betul.</p>`;
   const el = [...k.querySelectorAll(".qrayat")];
@@ -4396,7 +4397,7 @@ const IQ_HAR = { a: "َ", i: "ِ", u: "ُ", an: "ً", in: "ٍ", un: "ٌ", mati: 
 function iqSuku(i, v) {
   const h = HIJAIYAH[i][0], c = IQ_C[i], b = v[0] === "a" && IQ_TEBAL.has(c) ? "o" : v[0];
   const asas = i === 0 ? (v[0] === "i" ? "إ" : "أ") : h;
-  if (v.length === 2 && v[0] === v[1]) return [asas + IQ_HAR[v[0]] + { a: "ا", i: "يْ", u: "وْ" }[v[0]], c + b + b];
+  if (v.length === 2 && v[0] === v[1]) return [asas + IQ_HAR[v[0]] + { a: "ا", i: "ي", u: "و" }[v[0]], c + b + b];
   if (v.length === 2) return [asas + IQ_HAR[v] + (v === "an" ? "ا" : ""), c + b + "n"];
   return [asas + IQ_HAR[v], c + b];
 }
@@ -4430,65 +4431,65 @@ const iqTangan = s => s.split(";").map(x => { const p = x.split("|"); return { a
 /* Surah tambahan untuk Iqra' 5 & 6 (juga dalam Surah Lazim) */
 SURAH.push(
   { nama: "Quraisy", ds: "Kaum Quraisy · 4 ayat", ayat: [
-    "لِإِيلَافِ قُرَيْشٍ|Li-ilafi quraisy|Kerana kebiasaan orang Quraisy.",
-    "إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ|Ilafihim rihlatasy syita'i was saif|Iaitu kebiasaan mereka berdagang pada musim sejuk dan musim panas.",
-    "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ|Falya'budu rabba hazal bait|Maka hendaklah mereka menyembah Tuhan yang memiliki Kaabah ini.",
-    "الَّذِي أَطْعَمَهُمْ مِنْ جُوعٍ وَآمَنَهُمْ مِنْ خَوْفٍ|Allazi at'amahum min ju'iw wa amanahum min khauf|Yang memberi mereka makan ketika lapar dan menyelamatkan mereka daripada ketakutan."] },
+    "لِإِيلَٰفِ قُرَيْشٍ|Li-ilafi quraisy|Kerana kebiasaan orang Quraisy.",
+    "إِۦلَٰفِهِمْ رِحْلَةَ ٱلشِّتَآءِ وَٱلصَّيْفِ|Ilafihim rihlatasy syita'i was saif|Iaitu kebiasaan mereka berdagang pada musim sejuk dan musim panas.",
+    "فَلْيَعْبُدُوا۟ رَبَّ هَٰذَا ٱلْبَيْتِ|Falya'budu rabba hazal bait|Maka hendaklah mereka menyembah Tuhan yang memiliki Kaabah ini.",
+    "ٱلَّذِىٓ أَطْعَمَهُم مِّن جُوعٍۢ وَءَامَنَهُم مِّنْ خَوْفٍۭ|Allazi at'amahum min ju'iw wa amanahum min khauf|Yang memberi mereka makan ketika lapar dan menyelamatkan mereka daripada ketakutan."] },
   { nama: "An-Nasr", ds: "Pertolongan · 3 ayat", ayat: [
-    "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ|Iza ja'a nasrullahi wal fath|Apabila datang pertolongan Allah dan kemenangan.",
-    "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا|Wa ra'aitan nasa yadkhuluna fi dinillahi afwaja|Dan engkau melihat manusia masuk agama Allah beramai-ramai.",
-    "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا|Fasabbih bihamdi rabbika wastaghfirh, innahu kana tawwaba|Maka bertasbihlah dengan memuji Tuhanmu dan mohonlah ampun kepada-Nya. Sesungguhnya Dia Maha Penerima taubat."] },
+    "إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ|Iza ja'a nasrullahi wal fath|Apabila datang pertolongan Allah dan kemenangan.",
+    "وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًۭا|Wa ra'aitan nasa yadkhuluna fi dinillahi afwaja|Dan engkau melihat manusia masuk agama Allah beramai-ramai.",
+    "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا|Fasabbih bihamdi rabbika wastaghfirh, innahu kana tawwaba|Maka bertasbihlah dengan memuji Tuhanmu dan mohonlah ampun kepada-Nya. Sesungguhnya Dia Maha Penerima taubat."] },
   { nama: "Al-Fil", ds: "Gajah · 5 ayat", ayat: [
-    "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ|Alam tara kaifa fa'ala rabbuka bi-ashabil fil|Tidakkah engkau lihat bagaimana Tuhanmu bertindak terhadap tentera bergajah?",
-    "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ|Alam yaj'al kaidahum fi tadhlil|Bukankah Dia telah menggagalkan tipu daya mereka?",
+    "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَٰبِ ٱلْفِيلِ|Alam tara kaifa fa'ala rabbuka bi-ashabil fil|Tidakkah engkau lihat bagaimana Tuhanmu bertindak terhadap tentera bergajah?",
+    "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِى تَضْلِيلٍۢ|Alam yaj'al kaidahum fi tadhlil|Bukankah Dia telah menggagalkan tipu daya mereka?",
     "وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ|Wa arsala 'alaihim thairan ababil|Dan Dia menghantar kepada mereka burung yang berkawan-kawan.",
-    "تَرْمِيهِمْ بِحِجَارَةٍ مِنْ سِجِّيلٍ|Tarmihim bihijaratim min sijjil|Yang melontar mereka dengan batu daripada tanah yang dibakar.",
-    "فَجَعَلَهُمْ كَعَصْفٍ مَأْكُولٍ|Faja'alahum ka'asfim ma'kul|Lalu Dia menjadikan mereka seperti daun yang dimakan ulat."] },
+    "تَرْمِيهِم بِحِجَارَةٍۢ مِّن سِجِّيلٍۢ|Tarmihim bihijaratim min sijjil|Yang melontar mereka dengan batu daripada tanah yang dibakar.",
+    "فَجَعَلَهُمْ كَعَصْفٍۢ مَّأْكُولٍۭ|Faja'alahum ka'asfim ma'kul|Lalu Dia menjadikan mereka seperti daun yang dimakan ulat."] },
   { nama: "Al-Kafirun", ds: "Orang kafir · 6 ayat", ayat: [
-    "قُلْ يَا أَيُّهَا الْكَافِرُونَ|Qul ya ayyuhal kafirun|Katakanlah: Wahai orang kafir.",
-    "لَا أَعْبُدُ مَا تَعْبُدُونَ|La a'budu ma ta'budun|Aku tidak menyembah apa yang kamu sembah.",
-    "وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ|Wa la antum 'abiduna ma a'bud|Dan kamu tidak menyembah apa yang aku sembah.",
-    "وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ|Wa la ana 'abidum ma 'abattum|Dan aku tidak akan menyembah apa yang kamu sembah.",
-    "وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ|Wa la antum 'abiduna ma a'bud|Dan kamu tidak akan menyembah apa yang aku sembah.",
-    "لَكُمْ دِينُكُمْ وَلِيَ دِينِ|Lakum dinukum wa liya din|Bagi kamu agama kamu, dan bagiku agamaku."] },
+    "قُلْ يَٰٓأَيُّهَا ٱلْكَٰفِرُونَ|Qul ya ayyuhal kafirun|Katakanlah: Wahai orang kafir.",
+    "لَآ أَعْبُدُ مَا تَعْبُدُونَ|La a'budu ma ta'budun|Aku tidak menyembah apa yang kamu sembah.",
+    "وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ|Wa la antum 'abiduna ma a'bud|Dan kamu tidak menyembah apa yang aku sembah.",
+    "وَلَآ أَنَا۠ عَابِدٌۭ مَّا عَبَدتُّمْ|Wa la ana 'abidum ma 'abattum|Dan aku tidak akan menyembah apa yang kamu sembah.",
+    "وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ|Wa la antum 'abiduna ma a'bud|Dan kamu tidak akan menyembah apa yang aku sembah.",
+    "لَكُمْ دِينُكُمْ وَلِىَ دِينِ|Lakum dinukum wa liya din|Bagi kamu agama kamu, dan bagiku agamaku."] },
   { nama: "Al-Masad", ds: "Sabut · 5 ayat", ayat: [
-    "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ|Tabbat yada abi lahabiw wa tabb|Binasalah kedua-dua tangan Abu Lahab, dan binasalah dia.",
-    "مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ|Ma aghna 'anhu maluhu wa ma kasab|Harta dan usahanya tidak berguna kepadanya.",
-    "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ|Sayasla naran zata lahab|Dia akan masuk ke dalam api yang marak menyala.",
-    "وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ|Wamra'atuhu hammalatal hathab|Dan isterinya, pembawa kayu api.",
-    "فِي جِيدِهَا حَبْلٌ مِنْ مَسَدٍ|Fi jidiha hablum mim masad|Di lehernya ada tali daripada sabut."] },
+    "تَبَّتْ يَدَآ أَبِى لَهَبٍۢ وَتَبَّ|Tabbat yada abi lahabiw wa tabb|Binasalah kedua-dua tangan Abu Lahab, dan binasalah dia.",
+    "مَآ أَغْنَىٰ عَنْهُ مَالُهُۥ وَمَا كَسَبَ|Ma aghna 'anhu maluhu wa ma kasab|Harta dan usahanya tidak berguna kepadanya.",
+    "سَيَصْلَىٰ نَارًۭا ذَاتَ لَهَبٍۢ|Sayasla naran zata lahab|Dia akan masuk ke dalam api yang marak menyala.",
+    "وَٱمْرَأَتُهُۥ حَمَّالَةَ ٱلْحَطَبِ|Wamra'atuhu hammalatal hathab|Dan isterinya, pembawa kayu api.",
+    "فِى جِيدِهَا حَبْلٌۭ مِّن مَّسَدٍۭ|Fi jidiha hablum mim masad|Di lehernya ada tali daripada sabut."] },
   { nama: "Al-Qadr", ds: "Kemuliaan · 5 ayat", ayat: [
-    "إِنَّا أَنْزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ|Inna anzalnahu fi lailatil qadr|Sesungguhnya Kami menurunkan Al-Quran pada malam Lailatul Qadar.",
-    "وَمَا أَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ|Wa ma adraka ma lailatul qadr|Dan tahukah engkau apakah malam Lailatul Qadar itu?",
-    "لَيْلَةُ الْقَدْرِ خَيْرٌ مِنْ أَلْفِ شَهْرٍ|Lailatul qadri khairum min alfi syahr|Malam Lailatul Qadar lebih baik daripada seribu bulan.",
-    "تَنَزَّلُ الْمَلَائِكَةُ وَالرُّوحُ فِيهَا بِإِذْنِ رَبِّهِمْ مِنْ كُلِّ أَمْرٍ|Tanazzalul mala'ikatu war ruhu fiha bi-izni rabbihim min kulli amr|Pada malam itu turun malaikat dan Jibril dengan izin Tuhan mereka untuk setiap urusan.",
-    "سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ|Salamun hiya hatta matla'il fajr|Malam itu penuh kesejahteraan sehingga terbit fajar."] },
+    "إِنَّآ أَنزَلْنَٰهُ فِى لَيْلَةِ ٱلْقَدْرِ|Inna anzalnahu fi lailatil qadr|Sesungguhnya Kami menurunkan Al-Quran pada malam Lailatul Qadar.",
+    "وَمَآ أَدْرَىٰكَ مَا لَيْلَةُ ٱلْقَدْرِ|Wa ma adraka ma lailatul qadr|Dan tahukah engkau apakah malam Lailatul Qadar itu?",
+    "لَيْلَةُ ٱلْقَدْرِ خَيْرٌۭ مِّنْ أَلْفِ شَهْرٍۢ|Lailatul qadri khairum min alfi syahr|Malam Lailatul Qadar lebih baik daripada seribu bulan.",
+    "تَنَزَّلُ ٱلْمَلَٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍۢ|Tanazzalul mala'ikatu war ruhu fiha bi-izni rabbihim min kulli amr|Pada malam itu turun malaikat dan Jibril dengan izin Tuhan mereka untuk setiap urusan.",
+    "سَلَٰمٌ هِىَ حَتَّىٰ مَطْلَعِ ٱلْفَجْرِ|Salamun hiya hatta matla'il fajr|Malam itu penuh kesejahteraan sehingga terbit fajar."] },
   { nama: "Al-Ma'un", ds: "Barang berguna · 7 ayat", ayat: [
-    "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ|Ara'aital lazi yukazzibu bid din|Tahukah engkau orang yang mendustakan agama?",
-    "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ|Fazalikal lazi yadu''ul yatim|Itulah orang yang menengking anak yatim.",
-    "وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ|Wa la yahudhdhu 'ala tha'amil miskin|Dan tidak menggalakkan memberi makan orang miskin.",
-    "فَوَيْلٌ لِلْمُصَلِّينَ|Fawailul lil musallin|Maka celakalah orang yang solat,",
-    "الَّذِينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ|Allazina hum 'an solatihim sahun|Iaitu mereka yang lalai daripada solatnya,",
-    "الَّذِينَ هُمْ يُرَاءُونَ|Allazina hum yura'un|Mereka yang suka menunjuk-nunjuk,",
-    "وَيَمْنَعُونَ الْمَاعُونَ|Wa yamna'unal ma'un|Dan enggan memberi bantuan walaupun sedikit."] },
+    "أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ|Ara'aital lazi yukazzibu bid din|Tahukah engkau orang yang mendustakan agama?",
+    "فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ|Fazalikal lazi yadu''ul yatim|Itulah orang yang menengking anak yatim.",
+    "وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ|Wa la yahudhdhu 'ala tha'amil miskin|Dan tidak menggalakkan memberi makan orang miskin.",
+    "فَوَيْلٌۭ لِّلْمُصَلِّينَ|Fawailul lil musallin|Maka celakalah orang yang solat,",
+    "ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ|Allazina hum 'an solatihim sahun|Iaitu mereka yang lalai daripada solatnya,",
+    "ٱلَّذِينَ هُمْ يُرَآءُونَ|Allazina hum yura'un|Mereka yang suka menunjuk-nunjuk,",
+    "وَيَمْنَعُونَ ٱلْمَاعُونَ|Wa yamna'unal ma'un|Dan enggan memberi bantuan walaupun sedikit."] },
   { nama: "At-Tin", ds: "Buah tin · 8 ayat", ayat: [
-    "وَالتِّينِ وَالزَّيْتُونِ|Wat tini waz zaitun|Demi buah tin dan buah zaitun.",
+    "وَٱلتِّينِ وَٱلزَّيْتُونِ|Wat tini waz zaitun|Demi buah tin dan buah zaitun.",
     "وَطُورِ سِينِينَ|Wa thuri sinin|Dan demi Bukit Sinai.",
-    "وَهَٰذَا الْبَلَدِ الْأَمِينِ|Wa hazal baladil amin|Dan demi negeri yang aman ini.",
-    "لَقَدْ خَلَقْنَا الْإِنْسَانَ فِي أَحْسَنِ تَقْوِيمٍ|Laqad khalaqnal insana fi ahsani taqwim|Sesungguhnya Kami telah menciptakan manusia dalam bentuk yang sebaik-baiknya.",
-    "ثُمَّ رَدَدْنَاهُ أَسْفَلَ سَافِلِينَ|Thumma radadnahu asfala safilin|Kemudian Kami kembalikan dia ke tempat yang serendah-rendahnya.",
-    "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ|Illal lazina amanu wa 'amilus salihati falahum ajrun ghairu mamnun|Kecuali orang yang beriman dan beramal soleh, mereka mendapat pahala yang tidak putus-putus.",
-    "فَمَا يُكَذِّبُكَ بَعْدُ بِالدِّينِ|Fama yukazzibuka ba'du bid din|Maka apakah yang menyebabkan engkau mendustakan hari pembalasan?",
-    "أَلَيْسَ اللَّهُ بِأَحْكَمِ الْحَاكِمِينَ|Alaisallahu bi-ahkamil hakimin|Bukankah Allah hakim yang paling adil?"] },
+    "وَهَٰذَا ٱلْبَلَدِ ٱلْأَمِينِ|Wa hazal baladil amin|Dan demi negeri yang aman ini.",
+    "لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍۢ|Laqad khalaqnal insana fi ahsani taqwim|Sesungguhnya Kami telah menciptakan manusia dalam bentuk yang sebaik-baiknya.",
+    "ثُمَّ رَدَدْنَٰهُ أَسْفَلَ سَٰفِلِينَ|Thumma radadnahu asfala safilin|Kemudian Kami kembalikan dia ke tempat yang serendah-rendahnya.",
+    "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍۢ|Illal lazina amanu wa 'amilus salihati falahum ajrun ghairu mamnun|Kecuali orang yang beriman dan beramal soleh, mereka mendapat pahala yang tidak putus-putus.",
+    "فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ|Fama yukazzibuka ba'du bid din|Maka apakah yang menyebabkan engkau mendustakan hari pembalasan?",
+    "أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَٰكِمِينَ|Alaisallahu bi-ahkamil hakimin|Bukankah Allah hakim yang paling adil?"] },
   { nama: "Az-Zalzalah", ds: "Gempa bumi · 8 ayat", ayat: [
-    "إِذَا زُلْزِلَتِ الْأَرْضُ زِلْزَالَهَا|Iza zulzilatil ardhu zilzalaha|Apabila bumi digoncangkan dengan goncangan yang dahsyat,",
-    "وَأَخْرَجَتِ الْأَرْضُ أَثْقَالَهَا|Wa akhrajatil ardhu athqalaha|Dan bumi mengeluarkan segala isinya,",
-    "وَقَالَ الْإِنْسَانُ مَا لَهَا|Wa qalal insanu ma laha|Dan manusia berkata: Apa yang terjadi kepada bumi?",
-    "يَوْمَئِذٍ تُحَدِّثُ أَخْبَارَهَا|Yauma'izin tuhaddithu akhbaraha|Pada hari itu bumi menceritakan beritanya,",
-    "بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا|Bi-anna rabbaka auha laha|Kerana Tuhanmu memerintahkannya.",
-    "يَوْمَئِذٍ يَصْدُرُ النَّاسُ أَشْتَاتًا لِيُرَوْا أَعْمَالَهُمْ|Yauma'iziy yasdurun nasu asytatal liyurau a'malahum|Pada hari itu manusia keluar berkumpulan untuk diperlihatkan amalan mereka.",
-    "فَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ|Famay ya'mal mithqala zarratin khairay yarah|Sesiapa yang berbuat kebaikan seberat zarah, dia akan melihatnya.",
-    "وَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ|Wa may ya'mal mithqala zarratin syarray yarah|Dan sesiapa yang berbuat kejahatan seberat zarah, dia akan melihatnya."] }
+    "إِذَا زُلْزِلَتِ ٱلْأَرْضُ زِلْزَالَهَا|Iza zulzilatil ardhu zilzalaha|Apabila bumi digoncangkan dengan goncangan yang dahsyat,",
+    "وَأَخْرَجَتِ ٱلْأَرْضُ أَثْقَالَهَا|Wa akhrajatil ardhu athqalaha|Dan bumi mengeluarkan segala isinya,",
+    "وَقَالَ ٱلْإِنسَٰنُ مَا لَهَا|Wa qalal insanu ma laha|Dan manusia berkata: Apa yang terjadi kepada bumi?",
+    "يَوْمَئِذٍۢ تُحَدِّثُ أَخْبَارَهَا|Yauma'izin tuhaddithu akhbaraha|Pada hari itu bumi menceritakan beritanya,",
+    "بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا|Bi-anna rabbaka auha laha|Kerana Tuhanmu memerintahkannya.",
+    "يَوْمَئِذٍۢ يَصْدُرُ ٱلنَّاسُ أَشْتَاتًۭا لِّيُرَوْا۟ أَعْمَٰلَهُمْ|Yauma'iziy yasdurun nasu asytatal liyurau a'malahum|Pada hari itu manusia keluar berkumpulan untuk diperlihatkan amalan mereka.",
+    "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًۭا يَرَهُۥ|Famay ya'mal mithqala zarratin khairay yarah|Sesiapa yang berbuat kebaikan seberat zarah, dia akan melihatnya.",
+    "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍۢ شَرًّۭا يَرَهُۥ|Wa may ya'mal mithqala zarratin syarray yarah|Dan sesiapa yang berbuat kejahatan seberat zarah, dia akan melihatnya."] }
 );
 /* Baris huruf tunggal dipisah ruang, cth بِ تِ ثِ */
 function iqTunggal(r, huruf, vokal, n) {
@@ -4530,7 +4531,7 @@ const IQRA = (() => {
   [["aa", "Baris atas bertemu alif dibaca panjang 2 harakat, contohnya baa."], ["ii", "Baris bawah bertemu ya mati dibaca panjang 2 harakat, contohnya bii."], ["uu", "Baris hadapan bertemu wau mati dibaca panjang 2 harakat, contohnya buu."]]
     .forEach((x, p) => m3.push({ nota: x[1], baris: iqJana(321 + p, 8, r => iqKata(r, H, ["a", "i", "u", x[0]], 2 + (p % 2))) }));
   m3.push({ nota: "Campuran bacaan panjang 2 harakat.", baris: iqJana(331, 8, r => iqKata(r, H, ["a", "i", "u", "aa", "ii", "uu"], 3)) });
-  m3.push({ nota: "Tanda panjang di atas huruf (mad lazim) dibaca panjang 6 harakat. Kira enam ketukan.", baris: iqTangan("الضَّآلِّينَ|dhoooooo-l-lin (6 harakat);دَآبَّةٍ|daaaaaa-b-batin (6 harakat);الْحَآقَّةُ|al-haaaaaa-q-qoh (6 harakat);الطَّآمَّةُ|ath-thoooooo-m-mah (6 harakat);الٓمٓ|alif laaaaaam miiiiiim (6 harakat);يسٓ|yaa siiiiiin (6 harakat);صٓ|shoooooood (6 harakat);نٓ|nuuuuuun (6 harakat)").map(w => Object.assign(w, { sebut: [w.rm[0].split(" (")[0].replace(/(.)\1{2,}/g, "$1$1").replace(/-/g, "")] })) });
+  m3.push({ nota: "Tanda panjang di atas huruf (mad lazim) dibaca panjang 6 harakat. Kira enam ketukan.", baris: iqTangan("ٱلضَّآلِّينَ|dhoooooo-l-lin (6 harakat);دَآبَّةٍ|daaaaaa-b-batin (6 harakat);ٱلْحَآقَّةُ|al-haaaaaa-q-qoh (6 harakat);ٱلطَّآمَّةُ|ath-thoooooo-m-mah (6 harakat);ٱلٓمٓ|alif laaaaaam miiiiiim (6 harakat);يسٓ|yaa siiiiiin (6 harakat);صٓ|shoooooood (6 harakat);نٓ|nuuuuuun (6 harakat)").map(w => Object.assign(w, { sebut: [w.rm[0].split(" (")[0].replace(/(.)\1{2,}/g, "$1$1").replace(/-/g, "")] })) });
   buku.push({ nama: "Iqra' 3", ds: "Huruf bersambung & bacaan panjang", muka: m3 });
   /* Iqra' 4: tanda mati (sukun) & sabdu */
   const m4 = [];
@@ -4538,9 +4539,9 @@ const IQRA = (() => {
   for (let p = 0; p < 2; p++) m4.push({ nota: "Qalqalah: huruf qof, tho, ba, jim dan dal yang mati dibaca melantun.", baris: iqJana(481 + p, 8, r => iqMati(r, H, true)) });
   for (let p = 0; p < 3; p++) m4.push({ nota: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan, contohnya bat-ta.", baris: iqJana(491 + p, 8, r => iqSabdu(r, H)) });
   m4.push({ nota: "Sabdu dalam perkataan Al-Quran.", baris: iqTangan("رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;مُحَمَّدٌ|mu-ham-ma-dun;جَنَّةٌ|jan-na-tun;حَقٌّ|haq-qun;عَلَّمَ|'al-la-ma") });
-  m4.push({ nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("اللَّهُ|Allahu;بِاللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ اللَّهِ|'abdullahi;رَسُولُ اللَّهِ|rasulullahi;نَصْرُ اللَّهِ|nasrullahi;بِسْمِ اللَّهِ|bismillahi;الْحَمْدُ لِلَّهِ|alhamdulillahi") });
-  m4.push({ nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("الْقَمَرُ|al-qamaru;الْكِتَابُ|al-kitabu;الْبَيْتُ|al-baitu;الْحَمْدُ|al-hamdu;الْعِلْمُ|al-'ilmu;الْفَلَقُ|al-falaqu;الْيَوْمُ|al-yaumu;الْوَلَدُ|al-waladu") });
-  m4.push({ nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("الشَّمْسُ|asy-syamsu;النَّاسُ|an-nasu;الرَّحْمَنُ|ar-rahmanu;الدِّينُ|ad-dinu;التِّينُ|at-tinu;السَّمَاءُ|as-sama'u;اللَّيْلُ|al-lailu;الذِّكْرُ|adz-dzikru") });
+  m4.push({ nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("ٱللَّهُ|Allahu;بِٱللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ ٱللَّهِ|'abdullahi;رَسُولُ ٱللَّهِ|rasulullahi;نَصْرُ ٱللَّهِ|nasrullahi;بِسْمِ ٱللَّهِ|bismillahi;ٱلْحَمْدُ لِلَّهِ|alhamdulillahi") });
+  m4.push({ nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("ٱلْقَمَرُ|al-qamaru;ٱلْكِتَٰبُ|al-kitabu;ٱلْبَيْتُ|al-baitu;ٱلْحَمْدُ|al-hamdu;ٱلْعِلْمُ|al-'ilmu;ٱلْفَلَقُ|al-falaqu;ٱلْيَوْمُ|al-yaumu;ٱلْوَلَدُ|al-waladu") });
+  m4.push({ nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("ٱلشَّمْسُ|asy-syamsu;ٱلنَّاسُ|an-nasu;ٱلرَّحْمَٰنُ|ar-rahmanu;ٱلدِّينُ|ad-dinu;ٱلتِّينُ|at-tinu;ٱلسَّمَآءُ|as-sama'u;ٱلَّيْلُ|al-lailu;ٱلذِّكْرُ|adz-dzikru") });
   m4.push({ nota: "Campuran tanda mati dan sabdu.", baris: iqJana(499, 8, r => iqPilih(r, [0, 1]) ? iqMati(r, H, false) : iqSabdu(r, H)) });
   buku.push({ nama: "Iqra' 4", ds: "Tanda mati, sabdu, lafaz Allah & alif lam", muka: m4 });
   /* Iqra' 5: ayat Al-Quran pendek (2, 3 & 4 ayat) */
@@ -4580,7 +4581,7 @@ function iqBaca(bi, mi) {
 /* Muka Iqra' 5 & 6: ayat Al-Quran; tekan ayat untuk dengar maksud */
 function iqBacaAyat(b, bi, mi, m, k) {
   const ay = m.ayat.map(a => a.split("|"));
-  k.innerHTML = `<div class="iqsurah">Surah ${m.surah}</div>` + (m.mula === 1 && m.surah !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>` : "") +
+  k.innerHTML = `<div class="iqsurah">Surah ${m.surah}</div>` + (m.mula === 1 && m.surah !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : "") +
     ay.map((a, i) => `<button class="qrayat"><span class="qrno">${m.mula + i}</span><span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("") +
     `<p class="qrpesan">Baca ayat bersama ibu, ayah atau guru. Tekan ayat untuk dengar maksudnya.</p>`;
   const el = [...k.querySelectorAll(".qrayat")];
