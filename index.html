@@ -489,6 +489,16 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .qubaca{background:#2F4A3C}}:root[data-theme="dark"] .qubaca{background:#2F4A3C}
 
 /* Al-Quran Bertafsir */
+.qbmuka{text-align:right;text-align-last:auto;display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 0}
+.qbmuka .qjsurah,.qbmuka .qrbismi{width:100%}
+.qbayat{display:contents}
+.qbkata{display:inline-flex;flex-direction:column;align-items:center;padding:2px 6px;border-radius:10px;cursor:pointer}
+.qbkata .qrar{font-size:clamp(24px,3.6vw,34px);line-height:1.7;padding-bottom:.45em}
+.qbkata small{direction:ltr;font-size:11px;line-height:1.15;color:var(--muted);max-width:96px;text-align:center;font-family:system-ui,sans-serif;font-weight:600}
+.qbno .qrar{color:#3FA672}.qbno sup{font-size:12px;color:#2E7BD6;font-weight:700}
+.qbayat.qbnasikh>.qbkata{background:#D9F5E3}.qbayat.qbmansukh>.qbkata{background:#FFE3D0}
+.qbayat.on>.qbkata{background:#EDE6FF}
+.qbayat .qbasbab{align-self:flex-start;font-size:16px;margin-top:6px}
 .qbmuka .qjayat.on{background:#EDE6FF;box-shadow:0 0 0 2px #BBA6FF inset}
 .qbmk{background:#FFE7C2;color:#9A5B00;border-radius:8px;padding:1px 8px}.qbmd{background:#D8F0FF;color:#1F5F99;border-radius:8px;padding:1px 8px}
 .qjayat.qbnasikh,i.qbnasikh{background:#D9F5E3;border-radius:10px}.qjayat.qbmansukh,i.qbmansukh{background:#FFE3D0;border-radius:10px}
@@ -5107,6 +5117,20 @@ const QB_MM = Object.assign({}, ...QB_HURUF_MQ.map(s => ({ [s + ":1"]: ["Mutasya
   "112:1": ["Muhkam", "Penegasan keesaan Allah yang jelas maknanya."]
 });
 const QB_KEY = "appPendidikan.bertafsir.v1";
+/* Pecah ayat berwarna kepada perkataan (warna tajwid dikekalkan); tanda waqaf dicantum ke perkataan sebelumnya */
+function qbPecah(html) {
+  const d = document.createElement("div"), o = [];
+  d.innerHTML = html;
+  let cur = "";
+  const tolak = () => { if (!cur) return; if (!/[\u0621-\u063A\u0641-\u064A\u0671]/.test(cur.replace(/<[^>]*>/g, "")) && o.length) o[o.length - 1] += cur; else o.push(cur); cur = ""; };
+  const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  d.childNodes.forEach(n => {
+    const kl = n.nodeType === 1 ? n.className : "", bah = n.textContent.split(" ");
+    bah.forEach((b, i) => { if (i > 0) tolak(); if (b) cur += kl ? `<span class=${kl}>${esc(b)}</span>` : esc(b); });
+  });
+  tolak();
+  return o;
+}
 function qbMenu() {
   backMenu = qbMenu;
   let bm = null; try { bm = JSON.parse(localStorage.getItem(QB_KEY)); } catch (e) { /* abaikan */ }
@@ -5127,18 +5151,17 @@ function qbBaca(j, p, arah) {
       if (a[1] === 1) { const mk = QMETA.s[a[0] - 1][2] === "Meccan"; h += `<div class="qjsurah"><span class="qrar">${QMETA.s[a[0] - 1][0]}</span><small>${QS_NAMA[a[0] - 1]} · ${QMETA.s[a[0] - 1][1]} ayat · <b class="qb${mk ? "mk" : "md"}">${mk ? "Makkiyyah" : "Madaniyyah"}</b></small></div>` + (a[0] !== 1 && a[0] !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""); }
       const ky = kunci(a), ns = QB_NASAKH[ky], mm = QB_MM[ky];
       let nk = ""; if (mm) { kaki.push([ky, mm]); nk = `<sup class="qbkaki">${kaki.length}</sup>`; }
-      h += `<span class="qjayat qrar${ns ? " qb" + ns[0] : ""}" data-g="${a[2]}">${QB_ASBAB[ky] ? `<span class="qbasbab" title="Asbabun Nuzul">◆</span>` : ""}${a[4]} <span class="qjno">﴿${angkaArab(a[1])}﴾</span>${nk}</span> `;
+      const kata = qbPecah(a[4]), gl = (t[a[2]] || [0, []])[1];
+      h += `<span class="qjayat qbayat${ns ? " qb" + ns[0] : ""}" data-g="${a[2]}">${QB_ASBAB[ky] ? `<span class="qbasbab" title="Asbabun Nuzul">◆</span>` : ""}${kata.map((w, x) => `<span class="qbkata"><span class="qrar">${w}</span><small>${gl[x] ? gl[x][1].replace(/&/g, "&amp;").replace(/</g, "&lt;") : ""}</small></span>`).join("")}<span class="qbkata qbno"><span class="qrar qjno">﴿${angkaArab(a[1])}﴾</span>${nk}</span></span>`;
     });
-    h += `</div><div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span></div>`;
+    h += `</div><div class="qbpetunjuk"><span><i class="qbnasikh">&nbsp;&nbsp;&nbsp;</i> Ayat nasikh</span><span><i class="qbmansukh">&nbsp;&nbsp;&nbsp;</i> Ayat mansukh</span><span><b class="qbasbab">◆</b> Ada asbabun nuzul</span><span>Terjemahan di bawah setiap perkataan: Bahasa Inggeris</span></div>`;
     if (kaki.length) h += `<div class="qbnotakaki"><b>Nota kaki:</b>${kaki.map((x, i) => `<p><sup>${i + 1}</sup> <b>${QS_NAMA[+x[0].split(":")[0] - 1]} ${x[0].split(":")[1]} · ${x[1][0]}:</b> ${x[1][1]}</p>`).join("")}</div>`;
-    h += `<div class="qtkat">Tafsir & Terjemahan</div>` + ms.map(a => `<div class="qbtafsir" data-g="${a[2]}"><div class="qbtajuk">${QS_NAMA[a[0] - 1]} · Ayat ${a[1]}</div><div class="qbbah"><b>Terjemahan (Tafsir Pimpinan Ar-Rahman)</b><p class="qbms"></p></div><div class="qbbah"><b>Tafsir Jalalain (Bahasa Indonesia)</b><p class="qbjl"></p></div>${QB_ASBAB[kunci(a)] ? `<div class="qbbah qbkotak"><b>◆ Asbabun Nuzul</b><p>${QB_ASBAB[kunci(a)]}</p></div>` : ""}${QB_NASAKH[kunci(a)] ? `<div class="qbbah qbkotak qb${QB_NASAKH[kunci(a)][0]}"><b>${QB_NASAKH[kunci(a)][0] === "nasikh" ? "Ayat Nasikh" : "Ayat Mansukh"}</b><p>${QB_NASAKH[kunci(a)][1]}</p></div>` : ""}<button class="qbperkataan">Terjemahan setiap perkataan (English)</button><div class="qbwbw"></div></div>`).join("");
+    h += `<div class="qtkat">Tafsir & Terjemahan</div>` + ms.map(a => `<div class="qbtafsir" data-g="${a[2]}"><div class="qbtajuk">${QS_NAMA[a[0] - 1]} · Ayat ${a[1]}</div><div class="qbbah"><b>Terjemahan (Tafsir Pimpinan Ar-Rahman)</b><p class="qbms"></p></div><div class="qbbah"><b>Tafsir Jalalain (Bahasa Indonesia)</b><p class="qbjl"></p></div>${QB_ASBAB[kunci(a)] ? `<div class="qbbah qbkotak"><b>◆ Asbabun Nuzul</b><p>${QB_ASBAB[kunci(a)]}</p></div>` : ""}${QB_NASAKH[kunci(a)] ? `<div class="qbbah qbkotak qb${QB_NASAKH[kunci(a)][0]}"><b>${QB_NASAKH[kunci(a)][0] === "nasikh" ? "Ayat Nasikh" : "Ayat Mansukh"}</b><p>${QB_NASAKH[kunci(a)][1]}</p></div>` : ""}</div>`).join("");
     k.innerHTML = h;
     const kad = [...k.querySelectorAll(".qbtafsir")];
     kad.forEach((c, i) => {
       const a = ms[i], tf = t[a[2]];
       c.querySelector(".qbms").textContent = a[5]; c.querySelector(".qbjl").textContent = tf ? tf[0] : "";
-      const w = c.querySelector(".qbwbw");
-      c.querySelector(".qbperkataan").onclick = () => { if (w.childElementCount) { w.innerHTML = ""; return; } (tf ? tf[1] : []).forEach(x => { const e = document.createElement("span"); e.innerHTML = `<i class="qrar"></i><small></small>`; e.querySelector("i").textContent = x[0]; e.querySelector("small").textContent = x[1]; w.appendChild(e); }); };
     });
     const el = [...k.querySelectorAll(".qjayat")];
     el.forEach((x, i) => x.onclick = () => { el.forEach(z => z.classList.remove("on")); x.classList.add("on"); kad.forEach(z => z.classList.remove("on")); kad[i].classList.add("on"); kad[i].scrollIntoView({ block: "start", behavior: "smooth" }); });
