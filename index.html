@@ -5753,7 +5753,16 @@ function qrTulis(i) {
     /* kotak sempadan huruf */
     let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
     for (let y = 0; y < m.height; y++) for (let x = 0; x < m.width; x++) if (A[(y * m.width + x) * 4 + 3] > 100) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
-    mask = { A: A, B: B, w: m.width, h: m.height, k: kk, kotak: [x0 / kk, y0 / kk, x1 / kk, y1 / kk] };
+    /* bahagian huruf (badan & titik) dilabel berasingan supaya setiap satu mesti ditulis */
+    const lab = new Int32Array(m.width * m.height), komp = [];
+    for (let p0 = 0; p0 < lab.length; p0++) {
+      if (lab[p0] || A[p0 * 4 + 3] <= 100) continue;
+      const id = komp.length + 1, tim = [p0]; lab[p0] = id; let n = 0;
+      while (tim.length) { const q = tim.pop(), qx = q % m.width, qy = (q / m.width) | 0; n++;
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const nx = qx + dx, ny = qy + dy; if (nx < 0 || ny < 0 || nx >= m.width || ny >= m.height) continue; const r2 = ny * m.width + nx; if (!lab[r2] && A[r2 * 4 + 3] > 100) { lab[r2] = id; tim.push(r2); } } }
+      komp.push(n);
+    }
+    mask = { A: A, B: B, w: m.width, h: m.height, k: kk, kotak: [x0 / kk, y0 / kk, x1 / kk, y1 / kk], lab: lab, komp: komp };
     saiz = { W: W, H: H, fs: fs, dpr: dpr };
     lukis();
   }
@@ -5777,9 +5786,13 @@ function qrTulis(i) {
     garis.forEach(s => { mc.lineWidth = saiz.fs * .11; mc.beginPath(); s.p.forEach((q, j) => { const t = T(q[0], q[1]); j ? mc.lineTo(t[0], t[1]) : mc.moveTo(t[0], t[1]); }); if (s.p.length === 1) { const t = T(s.p[0][0], s.p[0][1]); mc.lineTo(t[0] + .1, t[1]); } mc.stroke(); });
     const px = mc.getImageData(0, 0, m.width, m.height).data;
     let a = 0, ak = 0, ink = 0, inkB = 0;
-    for (let x = 3; x < px.length; x += 4) { if (mask.A[x] > 100) { a++; if (px[x] > 60) ak++; } if (px[x] > 60) { ink++; if (mask.B[x] > 60) inkB++; } }
+    const kena = new Array(mask.komp.length).fill(0);
+    for (let x = 3; x < px.length; x += 4) { if (mask.A[x] > 100) { a++; if (px[x] > 60) { ak++; const l = mask.lab[(x - 3) / 4]; if (l) kena[l - 1]++; } } if (px[x] > 60) { ink++; if (mask.B[x] > 60) inkB++; } }
     const liput = ak / Math.max(1, a), dalam = inkB / Math.max(1, ink);
-    return sendiri ? liput >= .42 && dalam >= .55 : liput >= .55 && dalam >= .62;
+    /* setiap bahagian huruf (termasuk titik) mesti disentuh */
+    const besar = Math.max(...mask.komp, 1);
+    const semuaBahagian = mask.komp.every((n, j) => n < 3 || kena[j] / n >= (n === besar ? (sendiri ? .38 : .5) : (sendiri ? .2 : .3)));
+    return semuaBahagian && (sendiri ? liput >= .42 && dalam >= .55 : liput >= .55 && dalam >= .62);
   }
   function berjaya() {
     siap = true; lukis(); sndWin();
@@ -5803,7 +5816,7 @@ function qrTulis(i) {
   ci.addEventListener("pointerup", naik); ci.addEventListener("pointercancel", naik);
   ci.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
   qrButang("padam", "Padam", "koral", () => { garis = []; siap = false; st.textContent = ""; st.className = "thjstatus"; lukis(); });
-  qrButang("play", "Semak", "ungu", () => { if (siap) return; if (semak()) berjaya(); else { st.textContent = "Cuba lagi, ikut bentuk huruf"; st.className = "thjstatus no"; sndBad(); } });
+  qrButang("play", "Semak", "ungu", () => { if (siap) return; if (semak()) berjaya(); else { st.textContent = garis.length && mask.komp.filter(n => n >= 3).length > 1 ? "Jangan lupa titik huruf ini" : "Cuba lagi, ikut bentuk huruf"; st.className = "thjstatus no"; sndBad(); } });
   if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
   if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
   qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Surih huruf " + h[1]);
