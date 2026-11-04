@@ -735,6 +735,19 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .ioswarna small{font-size:12px;color:var(--ios-sub);text-align:center;line-height:1.2}
 .iospratonton{text-align:center;font-size:30px;line-height:2;padding:4px 16px 8px;color:var(--ios-teks)}
 
+/* Tulis huruf hijaiyah */
+.thjseg{align-self:center;display:flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:0 4px 0 var(--garis)}
+.thjseg button{border-radius:999px;padding:8px 20px;font-weight:700;background:none}.thjseg button.on{background:#8FD9A8;color:var(--on)}
+.thjh{position:relative}.thjh.siap{border-color:#FFD36E;box-shadow:0 5px 0 #FFD36E}.thjbintang{position:absolute;top:4px;right:6px;font-style:normal;color:#FFB800;font-size:16px}
+.thjatas{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.thjcontoh{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:24px;padding:0 22px 8px;box-shadow:0 6px 0 var(--garis)}
+.thjcontoh .qrar{font-size:64px;line-height:1.7;color:#3FA672}.thjcontoh small{font-weight:700;color:var(--muted)}
+.thjpapan{position:relative;align-self:center;width:min(100%,560px,62vh);aspect-ratio:1;background:var(--card);border-radius:32px;border:5px solid #8FD9A8;box-shadow:0 10px 0 var(--garis),0 16px 30px var(--sh);overflow:hidden}
+.thjpapan.sendiri{border-color:#8CC8FF}
+.thjpapan canvas{position:absolute;inset:0;width:100%;height:100%}.thjink{touch-action:none;cursor:crosshair}
+.thjstatus{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-weight:700;font-size:20px;pointer-events:none}
+.thjstatus.ok{color:#2E9E5B}.thjstatus.no{color:#E0403A}
+
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -4606,6 +4619,7 @@ function qrHuruf() {
   el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); speak(HIJAIYAH[i][1], "ms"); });
   papar(0);
   qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return speak(HIJAIYAH[i][1], "ms").then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
+  qrButang("pensel", "Tulis Huruf", "biru", qrTulisMenu);
   qrButang("play", "Kuiz Huruf", "hijau", qrKuiz);
   qrBual(QR_SEBUT.huruf);
   speak(QR_SEBUT.huruf, "ms");
@@ -5028,6 +5042,7 @@ function renderIqraMenu() {
   const st = loadStars();
   renderMenu("Iqra'", [
     ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
+    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><text x="27" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="28" fill="#fff" text-anchor="middle">ب</text><path d="M40 44 L50 18 L54 20 L44 46 Z" fill="#FFD978"/><path d="M40 44 l-1 5 l4-3z" fill="#5B4670"/>`), "Tulis Huruf Hijaiyah", "Surih dan tulis sendiri dengan jari atau Apple Pencil", "", qrTulisMenu],
     ["q-baris", QR_IKON.baris, "Nota Bacaan", "Baris, tanwin, tanda mati, sabdu, bacaan panjang, Allah & al", "", qrNotaMenu],
     ["q-surah", QR_IKON.surah.replace("#7FDDBB", "#FFD978"), "Iqra' 1 - 6", "Belajar membaca Al-Quran langkah demi langkah", "", qrIqra],
     ["q-kuiz", QR_IKON.kuiz, "Kuiz Huruf", "Dengar nama huruf, pilih yang betul", starText(st["quran-kuiz"] || 0), qrKuiz],
@@ -5688,6 +5703,113 @@ function tutupTetapan() {
 }
 document.getElementById("setBtn").onclick = bukaTetapan;
 setTerap();
+/* ===== Tulis Huruf Hijaiyah: surih atau tulis sendiri dengan jari / Apple Pencil ===== */
+const THJ_KEY = "appPendidikan.tulishijaiyah.v1";
+let thjMod = "surih";
+function thjData() { try { return JSON.parse(localStorage.getItem(THJ_KEY)) || {}; } catch (e) { return {}; } }
+function qrTulisMenu() {
+  qrSkrin("Tulis Huruf Hijaiyah", renderIqraMenu);
+  const k = $("qrKawasan"), d = thjData();
+  const siap = HIJAIYAH.filter((h, i) => (d[i] || {})[thjMod]).length;
+  k.innerHTML = `<div class="thjseg"><button data-m="surih" class="${thjMod === "surih" ? "on" : ""}">Surih Huruf</button><button data-m="sendiri" class="${thjMod === "sendiri" ? "on" : ""}">Tulis Sendiri</button></div>
+    <p class="qnterang">${thjMod === "surih" ? "Tulis di atas huruf bertitik mengikut bentuknya." : "Lihat contoh, kemudian tulis huruf itu sendiri tanpa panduan."} <b>${siap} / 28 siap</b></p>
+    <div class="qrgrid">${HIJAIYAH.map((h, i) => `<button class="qrh thjh${(d[i] || {})[thjMod] ? " siap" : ""}" data-i="${i}"><span class="qrar">${h[0]}</span><small>${h[1]}</small>${(d[i] || {})[thjMod] ? '<i class="thjbintang">★</i>' : ""}</button>`).join("")}</div>`;
+  k.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { thjMod = b.dataset.m; qrTulisMenu(); });
+  k.querySelectorAll(".thjh").forEach(b => b.onclick = () => qrTulis(+b.dataset.i));
+  qrBual("Pilih huruf untuk ditulis");
+}
+function qrTulis(i) {
+  const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
+  qrSkrin((sendiri ? "Tulis Sendiri: " : "Surih: ") + h[1], qrTulisMenu);
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="thjatas"><div class="thjcontoh"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
+    <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
+  const papan = k.querySelector(".thjpapan"), cp = k.querySelector(".thjpanduan"), ci = k.querySelector(".thjink"), st = k.querySelector(".thjstatus");
+  let garis = [], kini = null, siap = false, mask = null, saiz = null;
+  const FON = getComputedStyle(document.documentElement).getPropertyValue("--fontq").trim() || '"Amiri Quran",serif';
+  function sedia() {
+    const W = papan.clientWidth, H = papan.clientHeight, dpr = window.devicePixelRatio || 1;
+    if (!W) return;
+    [cp, ci].forEach(c => { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); });
+    const g = cp.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    /* garis panduan */
+    g.strokeStyle = "rgba(143,217,168,.5)"; g.lineWidth = 1.5; g.setLineDash([8, 8]);
+    [H * .5].forEach(y => { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
+    g.beginPath(); g.moveTo(W / 2, 0); g.lineTo(W / 2, H); g.stroke(); g.setLineDash([]);
+    const fs = Math.min(W, H) * .62;
+    g.font = `${fs}px ${FON}`; g.textAlign = "center"; g.textBaseline = "alphabetic";
+    const ukur = g.measureText(h[0]), cy = H * .5 + (ukur.actualBoundingBoxAscent - ukur.actualBoundingBoxDescent) / 2;
+    if (!sendiri) {
+      g.fillStyle = "rgba(143,217,168,.28)"; g.fillText(h[0], W / 2, cy);
+      g.setLineDash([2, 9]); g.lineCap = "round"; g.lineWidth = 3; g.strokeStyle = "#3FA672"; g.strokeText(h[0], W / 2, cy); g.setLineDash([]);
+    }
+    /* topeng huruf untuk semakan (skala kecil) */
+    const kk = .25, m = document.createElement("canvas"); m.width = Math.ceil(W * kk); m.height = Math.ceil(H * kk);
+    const mc = m.getContext("2d"); mc.scale(kk, kk); mc.font = g.font; mc.textAlign = "center"; mc.textBaseline = "alphabetic"; mc.fillStyle = "#000";
+    mc.fillText(h[0], W / 2, cy);
+    const A = mc.getImageData(0, 0, m.width, m.height).data;
+    mc.lineWidth = fs * .16; mc.lineJoin = "round"; mc.strokeStyle = "#000"; mc.strokeText(h[0], W / 2, cy);
+    const B = mc.getImageData(0, 0, m.width, m.height).data;
+    /* kotak sempadan huruf */
+    let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+    for (let y = 0; y < m.height; y++) for (let x = 0; x < m.width; x++) if (A[(y * m.width + x) * 4 + 3] > 100) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+    mask = { A: A, B: B, w: m.width, h: m.height, k: kk, kotak: [x0 / kk, y0 / kk, x1 / kk, y1 / kk] };
+    saiz = { W: W, H: H, fs: fs, dpr: dpr };
+    lukis();
+  }
+  function lukis() {
+    const g = ci.getContext("2d"); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, ci.width, ci.height); g.setTransform(saiz.dpr, 0, 0, saiz.dpr, 0, 0);
+    g.lineCap = "round"; g.lineJoin = "round"; g.strokeStyle = siap ? "#2E7BD6" : "#5B4670";
+    garis.forEach(s => { g.lineWidth = s.w; g.beginPath(); s.p.forEach((q, j) => j ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); if (s.p.length === 1) g.lineTo(s.p[0][0] + .1, s.p[0][1]); g.stroke(); });
+  }
+  function semak() {
+    if (!garis.length || !mask) return false;
+    const m = document.createElement("canvas"); m.width = mask.w; m.height = mask.h;
+    const mc = m.getContext("2d"); mc.scale(mask.k, mask.k); mc.lineCap = "round"; mc.lineJoin = "round"; mc.strokeStyle = "#000";
+    let T = (x, y) => [x, y];
+    if (sendiri) {
+      /* tulis sendiri: padankan kotak tulisan dengan kotak huruf */
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      garis.forEach(s => s.p.forEach(q => { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]); }));
+      const [a0, b0, a1, b1] = mask.kotak, sk = Math.min((a1 - a0 + 1) / Math.max(1, x1 - x0), (b1 - b0 + 1) / Math.max(1, y1 - y0)), cx = (a0 + a1) / 2, cy2 = (b0 + b1) / 2, ix = (x0 + x1) / 2, iy = (y0 + y1) / 2;
+      T = (x, y) => [cx + (x - ix) * sk, cy2 + (y - iy) * sk];
+    }
+    garis.forEach(s => { mc.lineWidth = saiz.fs * .11; mc.beginPath(); s.p.forEach((q, j) => { const t = T(q[0], q[1]); j ? mc.lineTo(t[0], t[1]) : mc.moveTo(t[0], t[1]); }); if (s.p.length === 1) { const t = T(s.p[0][0], s.p[0][1]); mc.lineTo(t[0] + .1, t[1]); } mc.stroke(); });
+    const px = mc.getImageData(0, 0, m.width, m.height).data;
+    let a = 0, ak = 0, ink = 0, inkB = 0;
+    for (let x = 3; x < px.length; x += 4) { if (mask.A[x] > 100) { a++; if (px[x] > 60) ak++; } if (px[x] > 60) { ink++; if (mask.B[x] > 60) inkB++; } }
+    const liput = ak / Math.max(1, a), dalam = inkB / Math.max(1, ink);
+    return sendiri ? liput >= .42 && dalam >= .55 : liput >= .55 && dalam >= .62;
+  }
+  function berjaya() {
+    siap = true; lukis(); sndWin();
+    const r = papan.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
+    const d = thjData(); d[i] = d[i] || {}; d[i][thjMod] = 1; try { localStorage.setItem(THJ_KEY, JSON.stringify(d)); } catch (e) { /* abaikan */ }
+    st.textContent = pick(["Hebat!", "Cantik!", "Pandai!", "Betul!"]); st.className = "thjstatus ok";
+    qrBual("Bagus! Huruf " + h[1] + " ditulis dengan betul.");
+    setTimeout(() => { if ($("s-quran").classList.contains("on") && i < 27) qrTulis(i + 1); }, 1600);
+  }
+  /* koordinat dalam unit kanvas (betul walaupun saiz teks/zoom ditukar) */
+  const titik = e => { const r = ci.getBoundingClientRect(), sk = ci.clientWidth / r.width; return [(e.clientX - r.left) * sk, (e.clientY - r.top) * sk]; };
+  ci.addEventListener("pointerdown", e => {
+    if (siap) return;
+    if (e.pointerType === "touch" && kini && kini.pen) return;
+    try { ci.setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ }
+    const pr = e.pointerType === "pen" && e.pressure > 0 ? e.pressure : .5;
+    kini = { p: [titik(e)], id: e.pointerId, w: saiz.fs * (.06 + pr * .05), pen: e.pointerType === "pen" }; garis.push(kini); lukis(); st.textContent = ""; st.className = "thjstatus";
+  });
+  ci.addEventListener("pointermove", e => { if (!kini || e.pointerId !== kini.id) return; { const ce = e.getCoalescedEvents ? e.getCoalescedEvents() : []; (ce.length ? ce : [e]).forEach(x => kini.p.push(titik(x))); } lukis(); });
+  const naik = e => { if (!kini || e.pointerId !== kini.id) return; kini = null; if (semak()) berjaya(); };
+  ci.addEventListener("pointerup", naik); ci.addEventListener("pointercancel", naik);
+  ci.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+  qrButang("padam", "Padam", "koral", () => { garis = []; siap = false; st.textContent = ""; st.className = "thjstatus"; lukis(); });
+  qrButang("play", "Semak", "ungu", () => { if (siap) return; if (semak()) berjaya(); else { st.textContent = "Cuba lagi, ikut bentuk huruf"; st.className = "thjstatus no"; sndBad(); } });
+  if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
+  if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
+  qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Surih huruf " + h[1]);
+  (document.fonts && document.fonts.load ? document.fonts.load("100px \"Amiri Quran\"") : Promise.resolve()).then(() => setTimeout(sedia, 30));
+}
+
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
 const HAI = [L("Hai! Jom belajar bersama saya!", "Hi! Let's learn together!", "你好！一起学习吧！"), L("Kamu memang pandai!", "You are so clever!", "你真聪明！"), L("Hari ini kita belajar apa ya?", "What shall we learn today?", "今天学什么呢？")];
 let haiI = 0;
