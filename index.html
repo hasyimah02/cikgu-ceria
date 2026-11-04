@@ -613,6 +613,57 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .luxutama{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05;font-weight:700;border-radius:999px;padding:12px 22px;box-shadow:0 6px 16px rgba(201,150,46,.4)}.luxutama svg{width:22px;height:22px}
 .luxkedua{background:transparent;border:1.5px solid rgba(232,196,104,.7);color:#F2D27A;font-weight:700;border-radius:999px;padding:12px 20px}
 
+/* ===== Mod mewah: bahagian Al-Quran ===== */
+body.lux-on{--text:#FFF8E7;--muted:#E3D3A8;--on:#2A1E05;--card:#123E31;--garis:rgba(232,196,104,.35);--sh:rgba(0,0,0,.35);--track:rgba(255,255,255,.12)}
+body.lux-on::before{background:radial-gradient(90% 60% at 85% 0%,#1F6A50 0%,transparent 60%),radial-gradient(70% 50% at 0% 100%,#173F55 0%,transparent 60%),linear-gradient(160deg,#08251C 0%,#0E3A2D 50%,#071E18 100%)}
+body.lux-on::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23F2D27A' stroke-width='1'%3E%3Cpath d='M30 4 L36 24 L56 30 L36 36 L30 56 L24 36 L4 30 L24 24Z'/%3E%3Crect x='17' y='17' width='26' height='26' transform='rotate(45 30 30)'/%3E%3C/g%3E%3C/svg%3E");background-size:90px}
+body.lux-on #hiasan{display:none}
+body.lux-on h2{font-family:"Didot","Bodoni 72","Georgia",serif;color:#F2D27A;letter-spacing:1px;text-shadow:0 2px 12px rgba(242,210,122,.25)}
+body.lux-on .pill,body.lux-on #themeBtn,body.lux-on #suaraBtn{background:rgba(255,255,255,.06);color:#F2D27A;border:1.5px solid rgba(232,196,104,.6);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+body.lux-on .card{background:linear-gradient(140deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1.5px solid rgba(232,196,104,.45);box-shadow:0 10px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08)}
+body.lux-on .card::after{background:#E8C468;opacity:.08}
+body.lux-on .card .nm{font-family:"Didot","Bodoni 72","Georgia",serif;color:#FFF8E7}
+body.lux-on .card .ds{color:#E3D3A8}
+body.lux-on .card .st{color:#F2D27A}
+body.lux-on .card .em{background:rgba(255,255,255,.06);border:1px solid rgba(232,196,104,.5);box-shadow:none}
+body.lux-on .card .em::before{display:none}
+body.lux-on .card .em svg{filter:sepia(1) saturate(2.2) hue-rotate(-12deg) brightness(1.05)}
+body.lux-on .tbub{background:rgba(255,255,255,.06);border:1.5px solid rgba(232,196,104,.55);color:#F2D27A}
+body.lux-on .tbub::after{border-top-color:rgba(232,196,104,.55)}
+body.lux-on .tb{border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+body.lux-on .tb.hijau{background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05}
+body.lux-on .tb.ungu,body.lux-on .tb.biru,body.lux-on .tb.koral{background:rgba(255,255,255,.06);border:1.5px solid rgba(232,196,104,.7);color:#F2D27A}
+body.lux-on .qrpesan,body.lux-on .qrkira{color:#E3D3A8}
+body.lux-on .qtkat{background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05}
+body.lux-on .qnterang{color:#FFF8E7}
+body.lux-on .qthuruf,body.lux-on .qubox,body.lux-on .qbnotakaki,body.lux-on .trkkad,body.lux-on .trkjalur,body.lux-on .qrtamat,body.lux-on .qjmaksud{background:rgba(255,255,255,.06);border:1.5px solid rgba(232,196,104,.4);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+body.lux-on .qubox b,body.lux-on .qthuruf .qrar,body.lux-on .qthuruf .qrar,body.lux-on .trkjalur b,body.lux-on .trksasar em{color:#F2D27A}
+body.lux-on .qnsimbol,body.lux-on .qusimbol{background:rgba(255,255,255,.06);border:1.5px solid rgba(232,196,104,.5);color:#F2D27A;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+/* halaman mushaf & kad bacaan: krim berbingkai emas */
+body.lux-on .qjmuka,body.lux-on .qbhalaman,body.lux-on .qrayat,body.lux-on .qha,body.lux-on .qbtafsir,body.lux-on .quc,body.lux-on .qtc{--text:#2A1E05;--muted:#7A6A4A;--card:#FFFDF6;--garis:#E8C468;background:#FFFDF6;color:#2A1E05;border-color:#E8C468}
+body.lux-on .qjmuka,body.lux-on .qbhalaman{border:5px double #C9962E;box-shadow:0 0 0 6px rgba(232,196,104,.15),0 18px 40px rgba(0,0,0,.4)}
+body.lux-on .qbblok .qbtafsir{background:#FBF5E4;border:1.5px solid #EAD9A6}
+body.lux-on .qjsurah{background:linear-gradient(90deg,#14523F,#1F6A50,#14523F);border:1.5px solid #C9962E}
+body.lux-on .qjsurah .qrar,body.lux-on .qjsurah small{color:#F2D27A}
+body.lux-on .qrbismi{color:#F2D27A}
+body.lux-on .qjmuka .qrbismi,body.lux-on .qbhalaman .qrbismi{color:#14523F}
+body.lux-on .qhsurah{color:#F2D27A}
+body.lux-on .qrno{background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05}
+body.lux-on .opt{background:rgba(255,255,255,.06);border-color:rgba(232,196,104,.5);color:#FFF8E7;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+body.lux-on .opt.right{background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05}
+body.lux-on .qhbar button,body.lux-on .qubaca,body.lux-on .trkbtn button,body.lux-on .trksasar button{background:rgba(255,255,255,.08);border:1.5px solid rgba(232,196,104,.6);color:#F2D27A;box-shadow:none}
+body.lux-on .qrayat .qhbar button,body.lux-on .quc .qubaca{background:#14523F;color:#F2D27A}
+body.lux-on .qhbar .qhtanda.on{background:linear-gradient(135deg,#F8E29A,#C9962E);color:#2A1E05}
+body.lux-on .trkjuz button{background:rgba(255,255,255,.08);color:#FFF8E7}
+body.lux-on .trkjuz button i{background:#C9962E}
+body.lux-on .trkbar i{background:linear-gradient(90deg,#C9962E,#F8E29A)}
+body.lux-on .qumm .mk{background:#3D3212;color:#F2D27A}body.lux-on .qumm .md{background:#123649;color:#A9DBFF}
+body.lux-on .quc b,body.lux-on .qbtajuk,body.lux-on .qrayat i,body.lux-on .qtc i{color:#14523F}body.lux-on .quc .qrmk,body.lux-on .qrayat .qrmk{color:#6B5A3A}body.lux-on .trkjb{background:linear-gradient(135deg,#F8E29A,#C9962E)}body.lux-on .trkjl{color:#F2D27A}body.lux-on .trkjm i{background:#C9962E}
+.luxhero .luxsub{margin:4px 0 0;color:#E3D3A8;font-size:15px}
+.luxhero .luxayat{font-size:clamp(22px,3.4vw,32px)}
+.luxstat4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:720px){.luxstat4{grid-template-columns:repeat(2,1fr)}}
+
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -4887,14 +4938,14 @@ function qariSenarai(el, gs) { qariHenti(); const siri = qariSiri; let p = Promi
 
 /* ---- Menu utama Kelas Al-Quran: Iqra' & Al-Quran ---- */
 function renderQuran() {
-  backMenu = renderQuran; qariHenti();
+  backMenu = renderQuran; qariHenti(); setLux(false);
   renderMenu(tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), [
     ["q-baris", QR_IKON.huruf, "Iqra'", "Huruf hijaiyah, nota bacaan, Iqra' 1 - 6, kuiz huruf & doa harian", "", renderIqraMenu],
     ["q-huruf", QR_IKON.surah, "Al-Quran", "Kelas tajwid, hafazan & bacaan Al-Quran 30 juz", "", renderAlQuranMenu]
   ], renderHome);
 }
 function renderIqraMenu() {
-  backMenu = renderIqraMenu; qariHenti();
+  backMenu = renderIqraMenu; qariHenti(); setLux(false);
   const st = loadStars();
   renderMenu("Iqra'", [
     ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
@@ -4904,14 +4955,23 @@ function renderIqraMenu() {
     ["q-doa", QR_IKON.doa, "Doa Harian", DOA.length + " doa untuk amalan setiap hari", "", qrSenaraiDoa]
   ], renderQuran);
 }
+/* Mod mewah untuk seluruh bahagian Al-Quran */
+function setLux(on) { document.body.classList.toggle("lux-on", !!on); }
 function renderAlQuranMenu() {
-  backMenu = renderAlQuranMenu; qariHenti();
-  renderMenu("Al-Quran", [
-    ["q-huruf", QR_IKON.surah, "Tilawah", "Ilmu tajwid & bacaan Al-Quran 30 juz", "", renderTilawahMenu],
-    ["q-baris", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFD978"/><path d="M32 47 C20 38 15 32 15 25 a8.5 8.5 0 0 1 17-2 a8.5 8.5 0 0 1 17 2 c0 7-5 13-17 22z" fill="#fff"/>`), "Hafazan", "Hafal 30 juz ikut surah, uji dengan sembunyi ayat", "", qhMenu],
-    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><path d="M20 18 h18 l6 6 v22 h-24z" fill="#fff"/><path d="M25 30 h14 M25 36 h14 M25 42 h9" stroke="#8CC8FF" stroke-width="2.5" stroke-linecap="round"/>`), "Ulum Al-Quran", ULUM.length + " ilmu: asbabun nuzul, Makki & Madani, nasikh & mansukh dan lain-lain", "", quMenu],
-    ["q-doa", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#FFB98A"/><path d="M14 20 q9-5 18 1 v26 q-9-5-18-1z M50 20 q-9-5-18 1 v26 q9-5 18-1z" fill="#fff"/><path d="M19 27 h8 M19 32 h8 M37 27 h8 M37 32 h8" stroke="#FFB98A" stroke-width="2.2" stroke-linecap="round"/>`), "Al-Quran Bertafsir", "Lembaran 30 juz: tafsir, asbabun nuzul, Makki/Madani, nasikh & mansukh, terjemahan setiap perkataan", "", qbMenu]
-  ], renderQuran);
+  backMenu = renderAlQuranMenu; qariHenti(); setLux(true);
+  renderMenu("Al-Quran", [], renderQuran);
+  const d = trkData(), hq = qhData(), hari = trkTarikh(), jumH = Object.keys(hq).reduce((a, x) => a + (hq[x] || []).length, 0);
+  const hero = document.createElement("div");
+  hero.className = "lux luxt luxhero";
+  hero.innerHTML = `<div class="luxatas"><div><span class="luxlabel">Kelas Al-Quran</span><h3>Al-Quran</h3><p class="luxsub">Tilawah, hafazan, ulum & tafsir dalam satu tempat</p></div><span class="luxayat">${QBISMI}</span></div>
+    <div class="luxstat luxstat4"><div><small>Tilawah hari ini</small><b>${trkTilawahHari(d, hari)}</b><em>muka surat</em></div><div><small>Hafazan hari ini</small><b>${d.h[hari] || 0}</b><em>ayat</em></div><div><small>Menuju khatam</small><b>${d.muka.length}<span> / 604</span></b><em>muka surat</em></div><div><small>Jumlah hafalan</small><b>${jumH}<span> / 6236</span></b><em>ayat</em></div></div>`;
+  $("subjList").appendChild(hero);
+  luxGrid([
+    [`<path d="M8 46 L32 38 L56 46 L56 50 L32 43 L8 50Z" fill="url(#lxi)"/><path d="M11 18 q10-6 21 2 v20 q-11-7-21-2z M53 18 q-10-6-21 2 v20 q11-7 21-2z" fill="none" stroke="url(#lxi)" stroke-width="3" stroke-linejoin="round"/>`, "Tilawah", "Ilmu tajwid, nota poket & bacaan 30 juz", renderTilawahMenu],
+    [`<path d="M32 52 C18 42 12 35 12 26 a10 10 0 0 1 20-3 a10 10 0 0 1 20 3 c0 9-6 16-20 26z" fill="none" stroke="url(#lxi)" stroke-width="3.2" stroke-linejoin="round"/><path d="M24 27 l6 6 l11 -12" fill="none" stroke="url(#lxi)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>`, "Hafazan", "Hafal 30 juz dengan tracker harian", qhMenu],
+    [`<path d="M18 10 h22 l8 8 v36 h-30z" fill="none" stroke="url(#lxi)" stroke-width="3" stroke-linejoin="round"/><path d="M40 10 v8 h8" fill="none" stroke="url(#lxi)" stroke-width="3"/><path d="M24 30 h18 M24 37 h18 M24 44 h11" stroke="url(#lxi)" stroke-width="3" stroke-linecap="round"/>`, "Ulum Al-Quran", ULUM.length + " ilmu termasuk asbabun nuzul", quMenu],
+    [`<path d="M10 16 q10-5 20 1 v26 q-10-6-20-1z M50 16 q-10-5-20 1 v8" fill="none" stroke="url(#lxi)" stroke-width="3" stroke-linejoin="round"/><circle cx="44" cy="38" r="8" fill="none" stroke="url(#lxi)" stroke-width="3"/><path d="M50 44 l6 6" stroke="url(#lxi)" stroke-width="4" stroke-linecap="round"/>`, "Al-Quran Bertafsir", "Tafsir, asbabun nuzul & terjemahan perkataan", qbMenu]
+  ]);
 }
 function renderTilawahMenu() {
   backMenu = renderTilawahMenu; qariHenti();
@@ -5422,6 +5482,7 @@ document.getElementById("heroBuku").addEventListener("click", e => {
   speak(tr(HAI[haiI++ % HAI.length]), LANG);
 });
 function renderHome() {
+  if (typeof setLux === "function") setLux(false);
   backMenu = null;
   const box = $("tahapList");
   box.innerHTML = "";
