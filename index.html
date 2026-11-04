@@ -659,6 +659,9 @@ body.lux-on .trkjuz button i{background:#C9962E}
 body.lux-on .trkbar i{background:linear-gradient(90deg,#C9962E,#F8E29A)}
 body.lux-on .qumm .mk{background:#3D3212;color:#F2D27A}body.lux-on .qumm .md{background:#123649;color:#A9DBFF}
 body.lux-on .quc b,body.lux-on .qbtajuk,body.lux-on .qrayat i,body.lux-on .qtc i{color:#14523F}body.lux-on .quc .qrmk,body.lux-on .qrayat .qrmk{color:#6B5A3A}body.lux-on .trkjb{background:linear-gradient(135deg,#F8E29A,#C9962E)}body.lux-on .trkjl{color:#F2D27A}body.lux-on .trkjm i{background:#C9962E}
+/* Arah mushaf (kanan ke kiri): Seterusnya di kiri, Sebelum di kanan */
+body.lux-on .qrbtns{flex-direction:row-reverse}
+body.lux-on .qrbtns .ik-next svg,body.lux-on .qrbtns .ik-back svg{transform:scaleX(-1)}
 .luxhero .luxsub{margin:4px 0 0;color:#E3D3A8;font-size:15px}
 .luxhero .luxayat{font-size:clamp(22px,3.4vw,32px)}
 .luxstat4{grid-template-columns:repeat(4,1fr)}
@@ -4501,7 +4504,7 @@ const qrBersih = t => t.replace(/'/g, "");
 function qrBual(t) { const b = $("qrBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
 function qrButang(ik, label, kelas, fn) {
   const b = document.createElement("button");
-  b.className = "tb " + kelas; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
+  b.className = "tb " + kelas + " ik-" + ik; b.innerHTML = IKON[ik] + "<span></span>"; b.querySelector("span").textContent = label; b.onclick = fn;
   $("qrBtns").appendChild(b);
   return b;
 }
