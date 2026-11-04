@@ -5744,7 +5744,7 @@ function qrTulis(i) {
       g.setLineDash([2, 9]); g.lineCap = "round"; g.lineWidth = 3; g.strokeStyle = "#3FA672"; g.strokeText(h[0], W / 2, cy); g.setLineDash([]);
     }
     /* topeng huruf untuk semakan (skala kecil) */
-    const kk = .25, m = document.createElement("canvas"); m.width = Math.ceil(W * kk); m.height = Math.ceil(H * kk);
+    const kk = .6, m = document.createElement("canvas"); m.width = Math.ceil(W * kk); m.height = Math.ceil(H * kk);
     const mc = m.getContext("2d"); mc.scale(kk, kk); mc.font = g.font; mc.textAlign = "center"; mc.textBaseline = "alphabetic"; mc.fillStyle = "#000";
     mc.fillText(h[0], W / 2, cy);
     const A = mc.getImageData(0, 0, m.width, m.height).data;
@@ -5789,9 +5789,9 @@ function qrTulis(i) {
     const kena = new Array(mask.komp.length).fill(0);
     for (let x = 3; x < px.length; x += 4) { if (mask.A[x] > 100) { a++; if (px[x] > 60) { ak++; const l = mask.lab[(x - 3) / 4]; if (l) kena[l - 1]++; } } if (px[x] > 60) { ink++; if (mask.B[x] > 60) inkB++; } }
     const liput = ak / Math.max(1, a), dalam = inkB / Math.max(1, ink);
-    /* setiap bahagian huruf (termasuk titik) mesti disentuh */
+    /* setiap bahagian huruf mesti ditulis; titik yang bercantum dalam fon (2 atau 3 titik) perlu ditutup hampir penuh supaya semua titik ditulis */
     const besar = Math.max(...mask.komp, 1);
-    const semuaBahagian = mask.komp.every((n, j) => n < 3 || kena[j] / n >= (n === besar ? (sendiri ? .38 : .5) : (sendiri ? .2 : .3)));
+    const semuaBahagian = mask.komp.every((n, j) => n < 3 || kena[j] / n >= (n === besar ? (sendiri ? .38 : .5) : (sendiri ? .6 : .7)));
     return semuaBahagian && (sendiri ? liput >= .42 && dalam >= .55 : liput >= .55 && dalam >= .62);
   }
   function berjaya() {
