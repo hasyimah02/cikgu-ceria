@@ -916,6 +916,82 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 body.no-gerak .tmtileart,body.no-gerak .tmkiraitem,body.no-gerak .tmpeliwatak{animation:none}
 .tmmahkota{width:110px;margin-bottom:-30px;position:relative;z-index:2;animation:tmgoyang 2s infinite}
 .tmpingat{display:flex;gap:8px}.tmpingat i{width:30px;height:30px;border-radius:50%;background:#EEE8F6;color:#BBA6FF;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}.tmpingat i.dapat{background:#FFD36E;color:#7A5A2E;box-shadow:0 3px 0 #E8A317}
+/* ===== Dunia Ceria (Prasekolah) ===== */
+.prdunia{display:flex;flex-direction:column;gap:18px;color:#3E3150}
+.prhero{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#FFE1EC,#E6DDFF 55%,#D8F1FF);border-radius:36px;padding:18px 20px;position:relative;overflow:hidden;box-shadow:0 6px 0 #E3D3F5}
+.prhero::before{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:#FFF6C9;opacity:.7}
+.prmaskot{width:120px;flex:0 0 120px;cursor:pointer;animation:tmapung 3s ease-in-out infinite;position:relative}
+.prmaskot.lompat{animation:tmlompat .6s}
+.prmaskot svg{width:100%;height:auto;display:block}
+.prherotks{position:relative;flex:1;min-width:0}
+.prherotks small{font-weight:700;opacity:.7}
+.prherotks h2{margin:0;font-size:2em;background:linear-gradient(90deg,#E86BB8,#9B6BFF,#4DA3FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.prbual{background:#fff;border-radius:18px 18px 18px 4px;padding:8px 12px;margin:6px 0 8px;font-weight:600;display:inline-block}
+.prumur{background:transparent;box-shadow:none;padding:0;justify-content:flex-start}
+.prumur button{padding:6px 12px}
+.prpintu{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.prpintu button{border:0;font:inherit;color:#3E3150;background:#fff;border-radius:999px 999px 24px 24px;padding:12px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 5px 0 #E6DDF5}
+.prpintu button:active{transform:translateY(3px);box-shadow:0 2px 0 #E6DDF5}
+.prpintu span{width:56px;height:56px;display:flex;align-items:center;justify-content:center}
+.prpintu span svg{width:100%;height:100%}
+.prpintu b{font-size:.78em;text-align:center}
+.prbab{background:var(--bg);border-radius:36px;padding:18px 16px 24px;position:relative;isolation:isolate;overflow:hidden}
+.prbab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40px;background:radial-gradient(circle at 20% 100%,rgba(255,255,255,.7) 0 30px,transparent 31px),radial-gradient(circle at 70% 100%,rgba(255,255,255,.6) 0 40px,transparent 41px);z-index:-1}
+.prbabtajuk{text-align:center;margin-bottom:10px}
+.prbabtajuk span{display:inline-block;background:#fff;border-radius:999px;padding:3px 14px;font-weight:800;font-size:.8em;color:#9B6BFF;box-shadow:0 3px 0 rgba(0,0,0,.06)}
+.prbabtajuk h3{margin:6px 0 2px;font-size:1.4em}
+.prbabtajuk p{margin:0;opacity:.75;font-size:.9em}
+.prjalan{display:flex;flex-direction:column;gap:22px;padding-top:6px}
+.prnod{position:relative;border:0;background:none;font:inherit;color:#3E3150;display:flex;align-items:center;gap:12px;width:min(64%,420px);cursor:pointer;text-align:left;animation:tmmuncul .5s both;padding:0}
+.prnod.kiri{align-self:flex-start}.prnod.kanan{align-self:flex-end;flex-direction:row-reverse;text-align:right}
+.prnod:not(:last-child)::after{content:"";position:absolute;top:60%;height:calc(100% + 10px);width:60%;border:4px dashed rgba(255,255,255,.95);z-index:-1}
+.prnod.kiri:not(:last-child)::after{left:46px;border-left:0;border-bottom:0;border-top-right-radius:60px}
+.prnod.kanan:not(:last-child)::after{right:46px;border-right:0;border-bottom:0;border-top-left-radius:60px}
+.prlencana{flex:0 0 96px;height:96px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px color-mix(in srgb,var(--w) 55%,#fff),0 8px 0 6px color-mix(in srgb,var(--w) 80%,#000 8%);display:flex;align-items:center;justify-content:center;padding:10px;position:relative;animation:tmapung 3.2s ease-in-out infinite}
+.prnod:nth-child(2n) .prlencana{animation-delay:-1.6s}
+.prlencana .sbart{width:100%;height:100%}
+.prlencana i{position:absolute;top:-6px;left:-6px;width:28px;height:28px;border-radius:50%;background:var(--w);color:#fff;font-style:normal;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.85em;border:3px solid #fff}
+.prpapan{flex:1;min-width:0;background:linear-gradient(#C79A6B,#A9784B);color:#FFF8EC;border-radius:16px;padding:9px 13px;position:relative;box-shadow:0 4px 0 #8A5E37;display:flex;flex-direction:column;gap:2px}
+.prpapan::before,.prpapan::after{content:"";position:absolute;top:-8px;width:6px;height:10px;background:#8A5E37;border-radius:3px}
+.prpapan::before{left:18px}.prpapan::after{right:18px}
+.prpapan b{font-size:1.05em;text-shadow:0 1px 0 #8A5E37}
+.prpapan small{font-size:.74em;opacity:.92}
+.prpapan em{font-style:normal;color:#FFE27A;font-weight:800;font-size:.8em}
+.prnod:active .prlencana{transform:scale(.93)}
+.sbart{width:100%;height:auto;display:block}.sbart g[transform]{transform-box:view-box}
+.sbhero{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#fff,color-mix(in srgb,var(--w) 35%,#fff));border-radius:32px;padding:16px 20px;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 60%,#fff)}
+.sbheroik{width:96px;flex:0 0 96px;animation:tmapung 3s infinite}
+.sbhero h2{margin:0}.sbhero p{margin:4px 0}.sbhero em{font-style:normal;color:#E8A317;font-weight:800}
+.sbtopik{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.sbtp{position:relative;border:0;font:inherit;color:#3E3150;background:#fff;border-radius:30px 30px 30px 10px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 70%,#fff);animation:tmmuncul .45s both;border-top:6px solid var(--w)}
+.sbtp:nth-child(3n+2){border-radius:30px 10px 30px 30px}.sbtp:nth-child(3n){border-radius:10px 30px 30px 30px}
+.sbtp span{width:84px}
+.sbtp b{text-align:center}.sbtp small{opacity:.65;font-size:.78em;text-align:center}
+.sbtitik{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.sbtitik i{width:10px;height:10px;border-radius:50%;background:#E6DDF5}.sbtitik i.lepas{background:#BBA6FF}.sbtitik i.on{background:#9B6BFF;width:26px;border-radius:6px}
+.sbkad{align-self:center;width:min(100%,420px);background:#fff;border-radius:40px;padding:20px 20px 24px;text-align:center;box-shadow:0 0 0 8px color-mix(in srgb,var(--w) 40%,#fff),0 12px 0 8px color-mix(in srgb,var(--w) 70%,#fff);animation:tmmuncul .4s both;cursor:pointer}
+.sbkad.goyang{animation:tmlompat .5s}
+.sbkadgbr{width:min(70%,240px);margin:0 auto}
+.sbkad h2{margin:12px 0 4px;font-size:1.7em}.sbkad p{margin:0;opacity:.8;font-size:1.05em}
+.sbkad.kecil{width:min(80%,260px);padding:14px}
+.sbopt{width:130px}
+.sbrobot{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);width:min(100%,380px);aspect-ratio:1;align-self:center;gap:4px;background:#E6DDF5;border-radius:20px;padding:4px}
+.sbsel{background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10%}
+.sbsel svg{width:100%;height:100%}
+.sbrbt{position:absolute;width:calc((100% - 8px) / var(--n));aspect-ratio:1;margin:4px;padding:2%;box-sizing:border-box;transition:left .35s,top .35s;pointer-events:none}
+.sbarahan{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:52px;background:#fff;border-radius:20px;padding:8px;align-items:center}
+.sbarahan span{width:40px;height:34px;background:#F3ECFF;border-radius:10px;padding:2px}
+.sbarahan span.aktif{background:#FFE45C;transform:scale(1.15)}
+.sbpanah{display:flex;justify-content:center;gap:12px}
+.sbpanah button{border:0;width:76px;height:70px;border-radius:22px;background:#fff;box-shadow:0 5px 0 #E6DDF5;cursor:pointer;padding:6px}
+.sbpanah button:active{transform:translateY(3px)}
+.sbgerak{display:flex;flex-direction:column;align-items:center;gap:14px}
+.sbmasa{position:relative;width:96px}
+.sbmasa svg{width:100%;display:block}
+.sbmasa b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.8em;color:#3FA672}
+.sbmasabar{transition:stroke-dashoffset 1s linear}
+@media (max-width:600px){.prpintu{grid-template-columns:repeat(3,1fr)}.prnod{width:88%}.prlencana{flex-basis:78px;height:78px}.prmaskot{width:86px;flex-basis:86px}.prherotks h2{font-size:1.5em}}
+body.no-gerak .prmaskot,body.no-gerak .prlencana,body.no-gerak .sbheroik{animation:none}
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -6015,10 +6091,10 @@ function tmSelesai(id, bintang, mainLagi) {
   const r = k.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 120);
   $("qrBtns").innerHTML = "";
   qrButang("play", "Main Lagi", "hijau", mainLagi);
-  qrButang("back", "Taman Ceria", "ungu", renderTaman);
+  qrButang("back", tmBalik ? "Kembali" : "Taman Ceria", "ungu", tmBalik || renderTaman);
   qrBual("Tahniah!"); speak("Tahniah! Kamu hebat!", "ms");
 }
-function tmSkrin(tajuk, arahan) { qrSkrin(tajuk, renderTaman); qrBual(arahan); speak(arahan, "ms"); return $("qrKawasan"); }
+function tmSkrin(tajuk, arahan) { qrSkrin(tajuk, tmBalik || renderTaman); qrBual(arahan); speak(arahan, "ms"); return $("qrKawasan"); }
 function tmBetul(el) { sndOk(); if (el) { el.classList.add("tmok"); const r = el.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } }
 function tmSalah(el) { sndBad(); if (el) { el.classList.remove("tmno"); void el.offsetWidth; el.classList.add("tmno"); } }
 
@@ -6033,7 +6109,7 @@ const TAMAN = [
   ["Ganjaran", "bintang", "#FFC94D", [["pelekat", "Buku Pelekat", "Koleksi pelekat kamu", "Kite"], ["peliharaan", "Buku Ceria", "Watak yang membesar", "Yarn"], ["ibubapa", "Mod Ibu Bapa", "Laporan minggu ini", "Juice"]]]
 ];
 function renderTaman() {
-  backMenu = renderTaman; setLux(false);
+  backMenu = renderTaman; tmBalik = null; setLux(false);
   qrSkrin("Taman Ceria", renderPra);
   const st = loadStars(), k = $("qrKawasan");
   k.innerHTML = `<div class="tmumur"><b>Umur anak:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${tmUmur === u ? "on" : ""}">${u} tahun</button>`).join("")}</div>` +
@@ -6385,7 +6461,7 @@ function tmIbuBapa() {
   const hari = []; const t = new Date(); t.setDate(t.getDate() - 6); for (let i = 0; i < 7; i++) { hari.push(trkTarikh(t)); t.setDate(t.getDate() + 1); }
   const jumHari = hari.map(h => Object.values(log[h] || {}).reduce((a, b) => a + b, 0)), maks = Math.max(1, ...jumHari);
   const perGame = {}; hari.forEach(h => Object.keys(log[h] || {}).forEach(g => perGame[g] = (perGame[g] || 0) + log[h][g]));
-  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat]));
+  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat])); SUBJEK.forEach(sb => sb.topik.forEach((tp, i) => nama["sb-" + sb.id + "-" + i] = [sb.nama + ": " + tp.n, sb.nama])); nama.robot = ["Robot Ceria", "Logik & Coding"]; nama.gerak = ["Jom Bergerak", "Jasmani & Kesihatan"];
   const kat = {}; Object.keys(perGame).forEach(g => { const kk = (nama[g] || ["", "Lain"])[1]; kat[kk] = (kat[kk] || 0) + perGame[g]; });
   const st = loadStars();
   k.innerHTML = `<div class="tmlapor"><div class="trkkad"><b>Aktiviti 7 hari</b><div class="tmgraf">${jumHari.map((v, i) => `<span><i style="height:${v / maks * 100}%"></i><em>${["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][new Date(hari[i]).getDay()]}</em><small>${v}</small></span>`).join("")}</div><small>Jumlah: ${jumHari.reduce((a, b) => a + b, 0)} aktiviti · ${tmPelekat().length} pelekat · umur ${tmUmur} tahun</small></div>
@@ -6394,6 +6470,717 @@ function tmIbuBapa() {
     <p class="qrpesan">Cadangan: ${Object.keys(kat).length < 3 ? "cuba kategori lain supaya anak belajar pelbagai kemahiran." : "teruskan rutin belajar 15 hingga 20 minit sehari."}</p></div>`;
 }
 const TM_MAIN = { kembar: () => tmKembar(), hilang: tmHilang, simon: tmSimon, saiz: tmSaiz, corak: tmCorak, asing: tmAsing, bayang: tmBayang, labirin: tmLabirin, puzzle: tmPuzzle, lukis: tmLukis, warna: tmWarna, pakai: tmPakai, muzik: tmMuzik, bunyi: tmBunyi, cerita: tmCerita, rakam: tmRakam, kira: tmKira, lebih: tmLebih, bentuk: tmBentuk, rasa: tmRasa, rutin: tmRutin, adab: tmAdab, pelekat: tmBukuPelekat, peliharaan: tmPeliharaan, ibubapa: tmIbuBapa };
+
+/* ===== Subjek Prasekolah: 18 subjek, kad belajar + kuiz, halaman hadapan "Dunia Ceria" ===== */
+let tmBalik = null;
+/* --- Kit ikon (viewBox 120x100, gaya sama dengan ART) --- */
+const SB_FC = (x, y, s) => { s = s || 1; return `<circle cx="${x - 7 * s}" cy="${y}" r="${2.6 * s}" fill="#2b2b2b" stroke="none"/><circle cx="${x + 7 * s}" cy="${y}" r="${2.6 * s}" fill="#2b2b2b" stroke="none"/><circle cx="${x - 6 * s}" cy="${y - 1 * s}" r="${.9 * s}" fill="#fff" stroke="none"/><circle cx="${x + 8 * s}" cy="${y - 1 * s}" r="${.9 * s}" fill="#fff" stroke="none"/><ellipse cx="${x - 12 * s}" cy="${y + 5 * s}" rx="${3.5 * s}" ry="${2 * s}" fill="#ff8fa3" stroke="none" opacity=".7"/><ellipse cx="${x + 12 * s}" cy="${y + 5 * s}" rx="${3.5 * s}" ry="${2 * s}" fill="#ff8fa3" stroke="none" opacity=".7"/><path d="M${x - 4 * s} ${y + 5 * s} q${4 * s} ${4 * s} ${8 * s} 0" fill="none" stroke-width="2"/>`; };
+const SB_MINI = (k, x, y, w) => ART[k] ? `<svg x="${x}" y="${y}" width="${w}" height="${w * .84}" viewBox="0 0 120 100">${ART[k]}</svg>` : "";
+const SB_LENGAN = { biasa: ["M44 60 Q36 70 36 80", "M76 60 Q84 70 84 80"], atas: ["M44 60 Q34 48 32 34", "M76 60 Q86 48 88 34"], lambai: ["M44 60 Q36 70 36 80", "M76 60 Q90 52 92 38"], regang: ["M44 60 L20 58", "M76 60 L100 58"], depan: ["M44 60 Q40 72 50 76", "M76 60 Q80 72 70 76"], baling: ["M44 60 Q36 70 36 80", "M76 60 Q92 46 84 30"] };
+const SB_KAKI = { biasa: ["M54 84 L53 96", "M66 84 L67 96"], lari: ["M54 84 L42 94", "M66 84 L76 90"], lompat: ["M54 84 L48 92", "M66 84 L72 92"], imbang: ["M54 84 L54 97", "M66 84 Q76 88 80 80"], merangkak: ["M54 84 L40 92", "M66 84 L80 92"] };
+function sbOrang(o) {
+  o = o || {}; const b = o.b || "#8CC8FF", k = o.k || "#FFE1C8", l = SB_LENGAN[o.l || "biasa"], kk = SB_KAKI[o.kaki || "biasa"], rm = o.r || "pendek";
+  const rambut = rm === "uban" ? "#D9D9D9" : "#3E2C23";
+  const anggota = (d, c, w) => `<path d="${d}" fill="none" stroke="#4a3428" stroke-width="${w + 3}"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}"/>`;
+  let s = `<ellipse cx="60" cy="97" rx="22" ry="3" fill="#000" stroke="none" opacity=".08"/>`;
+  s += anggota(kk[0], o.seluar || "#5B6FA8", 7) + anggota(kk[1], o.seluar || "#5B6FA8", 7);
+  if (rm === "tudung") s += `<path d="M40 42 q0-28 20-28 q20 0 20 28 l6 20 q-26 12-52 0z" fill="${o.t || "#FF9EC4"}"/>`;
+  if (rm === "panjang") s += `<path d="M42 34 v22 h8 v-18 M78 34 v22 h-8 v-18" fill="${rambut}"/>`;
+  s += `<path d="M42 56 q18-8 36 0 v26 q-18 5-36 0z" fill="${b}"/>`;
+  s += anggota(l[0], k, 6) + anggota(l[1], k, 6);
+  s += `<circle cx="60" cy="36" r="${rm === "tudung" ? 15 : 17}" fill="${k}"/>` + SB_FC(60, 37, .8);
+  if (rm === "pendek" || rm === "panjang" || rm === "uban" || rm === "kopiah") s += `<path d="M43 34 q2-20 17-20 q15 0 17 20 q-6-9-17-9 q-11 0-17 9z" fill="${rambut}"/>`;
+  if (rm === "kopiah") s += `<path d="M45 24 q15-9 30 0 v-6 q-15-7-30 0z" fill="#fff"/>`;
+  if (rm === "tudung") s += `<path d="M45 34 q2-16 15-16 q13 0 15 16 q-7-8-15-8 q-8 0-15 8z" fill="${o.t || "#FF9EC4"}"/>`;
+  if (o.cermin) s += `<circle cx="53" cy="37" r="5" fill="none" stroke-width="2"/><circle cx="67" cy="37" r="5" fill="none" stroke-width="2"/><path d="M58 37 h4" stroke-width="2"/>`;
+  s += o.aks || "";
+  if (o.h) s += `<circle cx="${o.h[0]}" cy="${o.h[1]}" r="${o.h[2]}" fill="#FFE45C" fill-opacity=".25" stroke="#FF5A7A" stroke-width="3.5" stroke-dasharray="5 4"/>`;
+  return o.kecil ? `<g transform="translate(12 20) scale(.8)">${s}</g>` : s;
+}
+const SB_IK = (() => {
+  const awan = (c, y) => `<path d="M30 ${70 + y} q-16 0-14-14 q2-12 16-10 q4-16 22-14 q14 2 16 16 q16-2 18 12 q0 10-12 10z" fill="${c}"/>`;
+  const tong = (c, isi) => `<path d="M36 34 h48 l-5 58 h-38z" fill="${c}"/><rect x="32" y="26" width="56" height="10" rx="4" fill="${c}"/><path d="M52 60 l8-10 l8 10 M60 50 v20" fill="none" stroke="#fff" stroke-width="3"/>${isi}`;
+  const bentuk = (d) => d + SB_FC(60, 54, .9);
+  const syiling = (n, c) => `<circle cx="60" cy="50" r="38" fill="${c}"/><circle cx="60" cy="50" r="30" fill="none" stroke-width="1.5" stroke-dasharray="3 3"/><text x="60" y="54" text-anchor="middle" font-size="26" font-weight="800" fill="#4a3428" stroke="none">${n}</text><text x="60" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#4a3428" stroke="none">SEN</text>`;
+  const nota = (n, c) => `<rect x="8" y="22" width="104" height="58" rx="8" fill="${c}"/><rect x="14" y="28" width="92" height="46" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="36" cy="51" r="13" fill="#fff" opacity=".7" stroke="none"/><text x="80" y="60" text-anchor="middle" font-size="24" font-weight="900" fill="#fff" stroke="none">RM${n}</text>`;
+  const o = sbOrang;
+  return {
+    "buku": `<path d="M60 26 q-22-12-46-6 v60 q24-6 46 6z" fill="#FFE1EC"/><path d="M60 26 q22-12 46-6 v60 q-24-6-46 6z" fill="#E1F0FF"/><path d="M60 26 v60" />${SB_FC(60, 52, .9)}`,
+    "kanta": `<circle cx="50" cy="44" r="26" fill="#DFF3FF"/><circle cx="50" cy="44" r="18" fill="#fff" fill-opacity=".5"/><path d="M70 62 l22 22" stroke="#B98A5E" stroke-width="12"/><path d="M70 62 l22 22" stroke="#4a3428" stroke-width="2" fill="none"/>${SB_FC(50, 44, .8)}`,
+    "robot": `<path d="M60 14 v10" /><circle cx="60" cy="12" r="5" fill="#FF7A8A"/><rect x="34" y="24" width="52" height="38" rx="12" fill="#BDEBFF"/><rect x="40" y="64" width="40" height="26" rx="8" fill="#8CC8FF"/><circle cx="50" cy="42" r="6" fill="#fff"/><circle cx="70" cy="42" r="6" fill="#fff"/><circle cx="50" cy="42" r="3" fill="#2b2b2b"/><circle cx="70" cy="42" r="3" fill="#2b2b2b"/><path d="M52 52 q8 5 16 0" fill="none"/><path d="M34 70 h-10 M86 70 h10" stroke-width="5"/><circle cx="60" cy="76" r="5" fill="#FFD36E"/>`,
+    "masjid": `<rect x="24" y="52" width="72" height="38" rx="4" fill="#E9FBEF"/><path d="M36 52 q0-30 24-30 q24 0 24 30z" fill="#7FDDBB"/><path d="M60 22 v-10 M56 12 a6 6 0 1 0 8 -4" fill="none" stroke-width="2.5"/><rect x="10" y="30" width="10" height="60" rx="3" fill="#FFF3D6"/><path d="M10 30 l5-12 l5 12z" fill="#7FDDBB"/><rect x="100" y="30" width="10" height="60" rx="3" fill="#FFF3D6"/><path d="M100 30 l5-12 l5 12z" fill="#7FDDBB"/><path d="M52 90 v-16 q8-10 16 0 v16z" fill="#B98A5E"/>`,
+    "palet": `<path d="M60 12 q40 0 46 32 q4 22-18 22 q-10 0-8 10 q2 14-20 14 q-40 0-46-36 q-4-40 46-42z" fill="#FFF3E0"/><circle cx="36" cy="46" r="8" fill="#FF5A7A"/><circle cx="50" cy="28" r="8" fill="#FFD23F"/><circle cx="74" cy="28" r="8" fill="#4CD07D"/><circle cx="90" cy="46" r="8" fill="#4DA3FF"/><circle cx="46" cy="68" r="8" fill="#9B6BFF"/>`,
+    "beg": `<path d="M44 26 v-6 q0-10 16-10 q16 0 16 10 v6" fill="none" stroke-width="5"/><rect x="28" y="24" width="64" height="68" rx="20" fill="#FF9EC4"/><rect x="38" y="56" width="44" height="26" rx="10" fill="#FFD6E5"/><path d="M38 64 h44" />${SB_FC(60, 42, .9)}`,
+    "hati": `<path d="M60 88 C20 62 14 40 26 26 q14-14 34 4 q20-18 34-4 q12 14-34 62z" fill="#FF7A9A"/>${SB_FC(60, 50, .9)}`,
+    "bintang": `<path d="M60 10 l12 26 l28 3 l-21 19 l6 28 l-25-14 l-25 14 l6-28 l-21-19 l28-3z" fill="#FFD36E"/>${SB_FC(60, 50, .8)}`,
+    "hadiah": `<rect x="24" y="44" width="72" height="46" rx="6" fill="#BBA6FF"/><rect x="20" y="32" width="80" height="16" rx="5" fill="#D9CCFF"/><path d="M60 32 v58" stroke="#FF7A9A" stroke-width="8"/><path d="M60 32 q-24-22-24-4 q0 6 24 4 q24 2 24-4 q0-18-24 4" fill="#FF9EC4"/>`,
+    "jampasir": `<rect x="30" y="10" width="60" height="8" rx="3" fill="#B98A5E"/><rect x="30" y="84" width="60" height="8" rx="3" fill="#B98A5E"/><path d="M36 18 h48 q0 24-20 32 q20 8 20 34 h-48 q0-26 20-34 q-20-8-20-32z" fill="#E1F0FF"/><path d="M46 84 q14-14 28 0z M52 28 h16 q-4 12-8 14 q-4-2-8-14z" fill="#FFD36E"/>`,
+    "sabun": `<rect x="24" y="48" width="72" height="38" rx="16" fill="#FF9EC4"/>${SB_FC(60, 66, .8)}<circle cx="38" cy="34" r="9" fill="#E1F0FF"/><circle cx="58" cy="24" r="12" fill="#E1F0FF"/><circle cx="80" cy="34" r="7" fill="#E1F0FF"/>`,
+    "berusgigi": `<rect x="14" y="58" width="80" height="12" rx="6" fill="#8CC8FF"/><rect x="80" y="40" width="26" height="20" rx="4" fill="#fff"/><path d="M84 40 v-8 M90 40 v-10 M96 40 v-8 M102 40 v-6" stroke="#8CC8FF" stroke-width="4"/>`,
+    "pancuran": `<path d="M30 20 h40 q10 0 10 10 v6" fill="none" stroke-width="6"/><path d="M68 36 h24 l-4 8 h-16z" fill="#BDBDBD"/><path d="M72 52 l-4 12 M80 52 v14 M88 52 l4 12 M76 72 l-2 8 M86 72 l2 8" stroke="#4DA3FF" stroke-width="3"/>`,
+    "gunting": `<circle cx="34" cy="70" r="12" fill="#FF9EC4"/><circle cx="34" cy="38" r="12" fill="#FF9EC4"/><path d="M44 64 L100 30 M44 44 L100 76" stroke-width="5"/><circle cx="66" cy="53" r="3" fill="#4a3428"/>`,
+    "bantal": `<rect x="16" y="46" width="88" height="40" rx="18" fill="#BBA6FF"/><path d="M86 12 a18 18 0 1 0 16 26 a14 14 0 0 1-16-26z" fill="#FFD36E"/><path d="M40 30 h10 l-10 10 h10" fill="none" stroke="#9B6BFF"/>`,
+    "botol": `<rect x="48" y="8" width="24" height="12" rx="3" fill="#FF7A8A"/><path d="M46 20 h28 q8 8 8 20 v44 q0 8-8 8 h-28 q-8 0-8-8 v-44 q0-12 8-20z" fill="#BDEBFF"/><path d="M38 52 h44 v32 q0 8-8 8 h-28 q-8 0-8-8z" fill="#4DA3FF" opacity=".5" stroke="none"/>${SB_FC(60, 58, .8)}`,
+    "bekal": `<rect x="18" y="38" width="84" height="50" rx="12" fill="#7FDDBB"/><rect x="16" y="30" width="88" height="14" rx="7" fill="#4CC493"/><circle cx="42" cy="62" r="9" fill="#FFD36E"/><rect x="60" y="54" width="28" height="18" rx="6" fill="#FFF3E0"/>`,
+    "pemadam": `<path d="M22 60 l40-34 l34 30 l-40 34z" fill="#FF9EC4"/><path d="M42 44 l34 30" /><path d="M56 90 l40-34 v8 l-40 34z" fill="#E27FA6"/>`,
+    "pembaris": `<rect x="8" y="38" width="104" height="26" rx="4" fill="#FFD36E"/><path d="M20 38 v10 M32 38 v6 M44 38 v10 M56 38 v6 M68 38 v10 M80 38 v6 M92 38 v10 M104 38 v6" />`,
+    "baju": `<path d="M40 16 l-26 16 l10 18 l10-6 v44 h52 v-44 l10 6 l10-18 l-26-16 q-10 10-20 0z" fill="#8CC8FF"/><circle cx="60" cy="44" r="3" fill="#fff"/><circle cx="60" cy="58" r="3" fill="#fff"/><circle cx="60" cy="72" r="3" fill="#fff"/>`,
+    "kasut": `<path d="M14 70 q0-30 20-30 q6 14 20 14 l30 10 q22 6 22 16 v6 h-92z" fill="#FF7A8A"/><path d="M14 80 h92 v6 h-92z" fill="#fff"/><path d="M42 50 l10 6 M46 44 l10 6" stroke="#fff" stroke-width="3"/>`,
+    "sikat": `<rect x="16" y="30" width="88" height="20" rx="8" fill="#BBA6FF"/><path d="M24 50 v26 M32 50 v26 M40 50 v26 M48 50 v26 M56 50 v26 M64 50 v26 M72 50 v26 M80 50 v26 M88 50 v26 M96 50 v26" stroke-width="3"/>`,
+    "kotakmainan": `<rect x="18" y="46" width="84" height="44" rx="6" fill="#FFB98A"/>${SB_MINI("Bola", 22, 18, 40)}${SB_MINI("Dadu", 58, 20, 38)}<rect x="14" y="42" width="92" height="10" rx="4" fill="#FF9F43"/>${SB_FC(60, 70, .8)}`,
+    "lipatbaju": `<rect x="22" y="64" width="76" height="16" rx="5" fill="#8CC8FF"/><rect x="26" y="48" width="68" height="16" rx="5" fill="#FF9EC4"/><rect x="30" y="32" width="60" height="16" rx="5" fill="#7FDDBB"/>`,
+    "awan": awan("#fff", 0) + SB_FC(58, 56, .8),
+    "hujan": awan("#D6E4F0", -8) + SB_FC(58, 48, .8) + `<path d="M40 78 l-4 10 M60 78 l-4 10 M80 78 l-4 10" stroke="#4DA3FF" stroke-width="4"/>`,
+    "angin": `<path d="M12 36 h62 q14 0 14-10 q0-10-10-10 M12 54 h82 q12 0 12 10 q0 10-10 10 M12 72 h44" fill="none" stroke="#8CC8FF" stroke-width="6"/><path d="M80 82 q10-12 20 0 q-10 8-20 0z" fill="#7FDDBB"/>`,
+    "ribut": awan("#9AA7B8", -10) + `<path d="M60 62 l-12 18 h10 l-6 16 l20-24 h-10 l6-10z" fill="#FFD23F"/>`,
+    "pelangi": ["#FF5A5A", "#FF9F43", "#FFD23F", "#4CD07D", "#4DA3FF", "#9B6BFF"].map((c, i) => `<path d="M${14 + i * 6} 84 a${46 - i * 6} ${46 - i * 6} 0 0 1 ${92 - i * 12} 0" fill="none" stroke="${c}" stroke-width="6.5"/>`).join("") + awan("#fff", 18).replace("M30 88", "M30 88"),
+    "benih": `<rect x="8" y="64" width="104" height="28" rx="8" fill="#B98A5E"/><ellipse cx="60" cy="58" rx="14" ry="10" fill="#E8C27A"/>${SB_FC(60, 58, .6)}`,
+    "tunas": `<rect x="8" y="64" width="104" height="28" rx="8" fill="#B98A5E"/><path d="M60 66 v-30" stroke="#3FA672" stroke-width="5"/><path d="M60 46 q-24-4-26-22 q22 0 26 22z M60 40 q20-6 24-24 q-22 0-24 24z" fill="#7FDDBB"/>`,
+    "pokok": `<rect x="52" y="56" width="16" height="36" rx="4" fill="#B98A5E"/><circle cx="60" cy="36" r="26" fill="#7FDDBB"/><circle cx="38" cy="48" r="16" fill="#7FDDBB"/><circle cx="82" cy="48" r="16" fill="#7FDDBB"/>${SB_FC(60, 40, .8)}`,
+    "bunga": `<path d="M60 56 v36" stroke="#3FA672" stroke-width="5"/><path d="M60 80 q-18-2-20-16 q16 0 20 16z" fill="#7FDDBB"/>${[0, 72, 144, 216, 288].map(a => `<circle cx="${60 + 18 * Math.sin(a * Math.PI / 180)}" cy="${36 - 18 * Math.cos(a * Math.PI / 180)}" r="13" fill="#FF9EC4"/>`).join("")}<circle cx="60" cy="36" r="13" fill="#FFD36E"/>${SB_FC(60, 36, .6)}`,
+    "siram": `<path d="M30 40 h44 v40 q0 8-8 8 h-28 q-8 0-8-8z" fill="#8CC8FF"/><path d="M74 50 l26-18 l4 6 l-26 20" fill="#8CC8FF"/><path d="M42 40 q10-20 20 0" fill="none" stroke-width="4"/><path d="M106 44 l2 8 M100 50 l0 8 M110 54 l2 6" stroke="#4DA3FF" stroke-width="3"/>${SB_FC(52, 62, .7)}`,
+    "tongbiru": tong("#4DA3FF", `<rect x="46" y="4" width="28" height="20" rx="2" fill="#fff"/><path d="M50 10 h20 M50 16 h14" stroke-width="1.5"/>`),
+    "tongoren": tong("#FF9F43", `<rect x="52" y="0" width="16" height="26" rx="5" fill="#BDEBFF"/>`),
+    "tongcoklat": tong("#B98A5E", `<path d="M54 2 h12 v6 q6 4 6 12 v6 h-24 v-6 q0-8 6-12z" fill="#7FDDBB"/>`),
+    "paip": `<path d="M14 30 h50 q14 0 14 14 v6" fill="none" stroke="#BDBDBD" stroke-width="12"/><path d="M14 30 h50 q14 0 14 14 v6" fill="none" stroke-width="2"/><rect x="38" y="14" width="16" height="8" rx="3" fill="#FF7A8A"/><path d="M46 22 v6" /><path d="M78 60 q-6 10 0 14 q6-4 0-14z" fill="#4DA3FF"/>`,
+    "tongsampah": `<path d="M32 30 h56 l-6 60 h-44z" fill="#7FDDBB"/><rect x="26" y="20" width="68" height="12" rx="5" fill="#4CC493"/><path d="M50 18 q10-10 20 0" fill="none"/>${SB_FC(60, 58, .9)}`,
+    "mentol": `<path d="M60 10 q28 0 28 28 q0 14-12 24 v10 h-32 v-10 q-12-10-12-24 q0-28 28-28z" fill="#FFE45C"/><rect x="46" y="74" width="28" height="14" rx="4" fill="#BDBDBD"/>${SB_FC(60, 38, .8)}`,
+    "kereta": `<path d="M14 66 q0-14 14-16 l12-18 h40 l14 18 q14 2 14 16 v10 h-94z" fill="#FF7A8A"/><path d="M44 36 h32 l10 14 h-52z" fill="#DFF3FF"/><circle cx="36" cy="78" r="10" fill="#555"/><circle cx="84" cy="78" r="10" fill="#555"/>${SB_FC(60, 62, .7)}`,
+    "bas": `<rect x="10" y="22" width="100" height="56" rx="10" fill="#FFD36E"/><rect x="18" y="30" width="18" height="16" rx="3" fill="#DFF3FF"/><rect x="42" y="30" width="18" height="16" rx="3" fill="#DFF3FF"/><rect x="66" y="30" width="18" height="16" rx="3" fill="#DFF3FF"/><rect x="90" y="30" width="14" height="30" rx="3" fill="#DFF3FF"/><circle cx="32" cy="80" r="10" fill="#555"/><circle cx="88" cy="80" r="10" fill="#555"/>${SB_FC(50, 60, .7)}`,
+    "kapalterbang": `<path d="M10 54 q0-10 20-10 h60 q20 0 24 10 q-4 10-24 10 h-60 q-20 0-20-10z" fill="#E1F0FF"/><path d="M50 46 l18-30 h10 l-6 30z M50 62 l18 26 h10 l-6-26z" fill="#8CC8FF"/><path d="M16 46 l-6-16 h8 l10 14z" fill="#8CC8FF"/><circle cx="96" cy="52" r="3" fill="#2b2b2b"/><circle cx="86" cy="52" r="3" fill="#2b2b2b"/>`,
+    "basikal": `<circle cx="30" cy="68" r="20" fill="none" stroke-width="5"/><circle cx="90" cy="68" r="20" fill="none" stroke-width="5"/><path d="M30 68 l20-30 h30 l10 30 M50 38 l12 30 l18-30 M44 30 h14 M80 38 l-4-12 h10" fill="none" stroke="#FF7A8A" stroke-width="5"/>`,
+    "keretapi": `<rect x="14" y="24" width="72" height="50" rx="10" fill="#7FDDBB"/><rect x="22" y="32" width="24" height="18" rx="3" fill="#DFF3FF"/><path d="M86 44 h14 q8 0 8 10 v20 h-22z" fill="#4CC493"/><rect x="60" y="10" width="12" height="16" rx="2" fill="#555"/><circle cx="32" cy="80" r="9" fill="#555"/><circle cx="68" cy="80" r="9" fill="#555"/><circle cx="96" cy="80" r="7" fill="#555"/><path d="M4 92 h112" stroke-width="3"/>${SB_FC(62, 56, .6)}`,
+    "motosikal": `<circle cx="28" cy="70" r="16" fill="#555"/><circle cx="92" cy="70" r="16" fill="#555"/><path d="M28 70 l22-22 h28 l14 22 M50 48 l-6-12 h14 M78 48 l8-14 h10" fill="none" stroke="#4DA3FF" stroke-width="6"/><path d="M48 48 h34 q6 10-4 14 h-26z" fill="#4DA3FF"/>`,
+    "bendera": `<path d="M14 10 v84" stroke-width="4"/>${Array.from({ length: 14 }, (v, i) => `<rect x="16" y="${12 + i * 4}" width="92" height="4" fill="${i % 2 ? "#fff" : "#E53935"}" stroke="none"/>`).join("")}<rect x="16" y="12" width="46" height="32" fill="#1E3C96" stroke="none"/><circle cx="34" cy="28" r="11" fill="#FFD23F" stroke="none"/><circle cx="38" cy="28" r="9.5" fill="#1E3C96" stroke="none"/><path d="M50 20 l2 6 l6 0 l-5 4 l2 6 l-5-4 l-5 4 l2-6 l-5-4 l6 0z" fill="#FFD23F" stroke="none"/><rect x="16" y="12" width="92" height="56" fill="none"/>`,
+    "bungaraya": [0, 72, 144, 216, 288].map(a => `<ellipse cx="${60 + 22 * Math.sin(a * Math.PI / 180)}" cy="${50 - 22 * Math.cos(a * Math.PI / 180)}" rx="17" ry="22" transform="rotate(${a} ${60 + 22 * Math.sin(a * Math.PI / 180)} ${50 - 22 * Math.cos(a * Math.PI / 180)})" fill="#E53935"/>`).join("") + `<circle cx="60" cy="50" r="8" fill="#B71C1C"/><path d="M60 50 l18-26" stroke="#FFD23F" stroke-width="3"/><circle cx="79" cy="22" r="4" fill="#FFD23F"/>`,
+    "notamuzik": `<path d="M44 74 v-50 l44-10 v50" fill="none" stroke-width="5"/><ellipse cx="36" cy="76" rx="10" ry="8" fill="#9B6BFF"/><ellipse cx="80" cy="66" rx="10" ry="8" fill="#9B6BFF"/>`,
+    "ketupat": `<path d="M60 14 l34 34 l-34 34 l-34-34z" fill="#C8E68A"/><path d="M43 31 l34 34 M77 31 l-34 34 M60 14 v68 M26 48 h68" stroke="#7FB13A" fill="none"/><path d="M60 14 q6-10 16-8" fill="none" stroke="#7FB13A" stroke-width="3"/>`,
+    "tanglung": `<path d="M60 6 v10" /><rect x="48" y="14" width="24" height="6" rx="2" fill="#FFD23F"/><ellipse cx="60" cy="50" rx="34" ry="30" fill="#E53935"/><path d="M60 20 q-20 30 0 60 M60 20 q20 30 0 60" fill="none" stroke="#B71C1C"/><rect x="48" y="78" width="24" height="6" rx="2" fill="#FFD23F"/><path d="M56 84 v12 M64 84 v12" stroke="#FFD23F" stroke-width="3"/>`,
+    "pelita": `<path d="M20 64 q40 30 80 0 q-6-10-40-10 q-34 0-40 10z" fill="#FF9F43"/><path d="M60 54 q-12-18 0-40 q12 22 0 40z" fill="#FFD23F"/><path d="M60 50 q-5-10 0-22 q5 12 0 22z" fill="#FF7A3D"/>${SB_FC(60, 70, .6)}`,
+    "krismas": `<path d="M60 8 l34 40 h-14 l20 26 h-80 l20-26 h-14z" fill="#4CC493"/><rect x="52" y="74" width="16" height="16" fill="#B98A5E"/><circle cx="48" cy="44" r="4" fill="#FF7A8A"/><circle cx="72" cy="58" r="4" fill="#FFD23F"/><circle cx="56" cy="64" r="4" fill="#4DA3FF"/><path d="M60 2 l3 6 h6 l-5 4 l2 6 l-6-4 l-6 4 l2-6 l-5-4 h6z" fill="#FFD23F"/>`,
+    "padi": `<path d="M60 92 v-60 M60 60 q-24-6-30-30 M60 50 q22-8 28-30" fill="none" stroke="#B5A33A" stroke-width="3"/>${[0, 1, 2, 3, 4, 5].map(i => `<ellipse cx="${34 + i * 2}" cy="${30 + i * 5}" rx="5" ry="3" fill="#E8C94A"/><ellipse cx="${86 - i * 2}" cy="${22 + i * 5}" rx="5" ry="3" fill="#E8C94A"/><ellipse cx="60" cy="${18 + i * 4}" rx="4" ry="3" fill="#E8C94A"/>`).join("")}`,
+    "bungaapi": `${[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(a => `<path d="M60 44 l${30 * Math.cos(a * Math.PI / 180)} ${30 * Math.sin(a * Math.PI / 180)}" stroke="${["#FF5A7A", "#FFD23F", "#4DA3FF", "#4CD07D"][a / 30 % 4]}" stroke-width="4"/>`).join("")}<circle cx="60" cy="44" r="6" fill="#FFD23F"/><path d="M60 96 v-30" stroke="#BDBDBD" stroke-dasharray="3 4"/>`,
+    "gendang": `<ellipse cx="60" cy="34" rx="36" ry="12" fill="#FFF3E0"/><path d="M24 34 v38 q36 20 72 0 v-38" fill="#FF7A8A"/><ellipse cx="60" cy="34" rx="36" ry="12" fill="#FFF3E0"/><path d="M24 50 l12 30 l12-34 l12 36 l12-36 l12 34 l12-30" fill="none" stroke="#FFD36E" stroke-width="3"/><path d="M88 10 l-20 22 M100 16 l-24 18" stroke="#B98A5E" stroke-width="5"/>`,
+    "seruling": `<rect x="8" y="42" width="104" height="14" rx="7" fill="#E8C27A"/>${[30, 46, 62, 78, 94].map(x => `<circle cx="${x}" cy="49" r="3" fill="#4a3428"/>`).join("")}<path d="M86 30 q6-12 14-6 M96 22 q6-10 12-4" fill="none" stroke="#9B6BFF"/>`,
+    "gitar": `<rect x="66" y="8" width="12" height="44" rx="3" fill="#B98A5E" transform="rotate(30 72 30)"/><path d="M30 50 q-18 6-12 26 q8 20 30 14 q22-6 20-28 q-2-12-14-14 q-14-6-24 2z" fill="#FF9F43"/><circle cx="44" cy="68" r="7" fill="#4a3428"/>`,
+    "piano": `<rect x="10" y="30" width="100" height="50" rx="6" fill="#fff"/>${[24, 38, 52, 66, 80, 94].map(x => `<path d="M${x} 30 v50" stroke-width="1.5"/>`).join("")}${[20, 34, 62, 76, 90].map(x => `<rect x="${x}" y="30" width="8" height="28" rx="2" fill="#3E3150"/>`).join("")}`,
+    "rebana": `<circle cx="60" cy="50" r="38" fill="#B98A5E"/><circle cx="60" cy="50" r="30" fill="#FFF3E0"/>${SB_FC(60, 50, .8)}`,
+    "angklung": `<rect x="18" y="14" width="84" height="8" rx="3" fill="#B98A5E"/><rect x="18" y="82" width="84" height="8" rx="3" fill="#B98A5E"/><rect x="30" y="26" width="14" height="52" rx="6" fill="#E8D27A"/><rect x="52" y="34" width="14" height="44" rx="6" fill="#E8D27A"/><rect x="74" y="42" width="14" height="36" rx="6" fill="#E8D27A"/><path d="M22 22 v60 M98 22 v60" stroke-width="4"/>`,
+    "brokoli": `<rect x="52" y="54" width="16" height="34" rx="6" fill="#B9E28C"/><circle cx="44" cy="44" r="16" fill="#4CC493"/><circle cx="76" cy="44" r="16" fill="#4CC493"/><circle cx="60" cy="30" r="18" fill="#4CC493"/>${SB_FC(60, 40, .7)}`,
+    "nasi": `<path d="M16 50 h88 q0 36-44 36 q-44 0-44-36z" fill="#8CC8FF"/><path d="M22 50 q38-30 76 0z" fill="#fff"/>${SB_FC(60, 66, .7)}`,
+    "susu": `<path d="M38 30 l10-16 h24 l10 16 v58 h-44z" fill="#fff"/><path d="M38 30 h44" /><rect x="38" y="48" width="44" height="22" fill="#8CC8FF" stroke="none"/>${SB_FC(60, 60, .7)}`,
+    "gulagula": `<path d="M28 50 l-18-14 v28z M92 50 l18-14 v28z" fill="#FF9EC4"/><circle cx="60" cy="50" r="30" fill="#FF7A9A"/><path d="M40 30 q20 20 0 40 M60 22 q20 28 0 56 M80 30 q-20 20 0 40" fill="none" stroke="#fff" stroke-width="3"/>`,
+    "airmanis": `<rect x="38" y="16" width="44" height="74" rx="10" fill="#E53935"/><rect x="38" y="36" width="44" height="30" fill="#fff" opacity=".85" stroke="none"/><path d="M58 16 v-10 h14" fill="none" stroke-width="3"/><circle cx="52" cy="50" r="3" fill="#E53935"/><circle cx="66" cy="46" r="2" fill="#E53935"/>`,
+    "kerepek": `<path d="M30 14 h60 l-6 76 h-48z" fill="#FFD23F"/><path d="M30 14 l6 6 l6-6 l6 6 l6-6 l6 6 l6-6 l6 6 l6-6 l6 6" fill="none"/><ellipse cx="60" cy="52" rx="16" ry="12" fill="#FF9F43"/>`,
+    "anakpanah": `<path d="M60 12 l30 34 h-16 v40 h-28 v-40 h-16z" fill="#9B6BFF"/>`,
+    "jari": `<path d="M48 88 v-34 q0-8 8-8 v-30 q0-8 7-8 q7 0 7 8 v30 l10 2 q10 2 10 12 v28z" fill="#FFE1C8"/><path d="M58 46 h12 M70 50 v-4" fill="none"/>`,
+    "sejadah": `<rect x="24" y="8" width="72" height="86" rx="6" fill="#4CC493"/><rect x="32" y="16" width="56" height="70" rx="4" fill="#7FDDBB"/><path d="M42 50 q0-24 18-24 q18 0 18 24 v28 h-36z" fill="#2E9E6E"/><path d="M24 94 v6 M36 94 v6 M48 94 v6 M60 94 v6 M72 94 v6 M84 94 v6 M96 94 v6" stroke-width="2"/>`,
+    "zakat": `<path d="M24 40 q0-14 36-14 q36 0 36 14 v34 q0 16-36 16 q-36 0-36-16z" fill="#E8C27A"/><path d="M40 28 q20-18 40 0" fill="none" stroke="#B98A5E" stroke-width="4"/><circle cx="34" cy="80" r="12" fill="#FFD23F"/><circle cx="86" cy="80" r="12" fill="#FFD23F"/><text x="60" y="64" text-anchor="middle" font-size="16" font-weight="800" fill="#7A5A2E" stroke="none">BERAS</text>`,
+    "puasa": `<path d="M72 12 a30 30 0 1 0 26 44 a24 24 0 1 1-26-44z" fill="#FFD36E"/><ellipse cx="34" cy="78" rx="10" ry="14" fill="#8B5A2B"/><ellipse cx="54" cy="82" rx="10" ry="14" fill="#8B5A2B"/><path d="M96 16 l2 5 h5 l-4 3 l2 5 l-5-3 l-5 3 l2-5 l-4-3 h5z" fill="#FFD36E"/>`,
+    "kaabah": `<path d="M24 34 l36-16 l36 16 v48 l-36 14 l-36-14z" fill="#2b2b2b"/><path d="M24 34 l36 14 l36-14 M60 48 v48" fill="none" stroke="#555"/><path d="M24 44 l36 14 l36-14 v6 l-36 14 l-36-14z" fill="#E8C94A" stroke="none"/>`,
+    "tangan": `<path d="M30 92 v-34 q0-6 6-6 v-26 q0-6 6-6 q6 0 6 6 v20 v-28 q0-6 6-6 q6 0 6 6 v28 v-24 q0-6 6-6 q6 0 6 6 v26 v-16 q0-6 6-6 q6 0 6 6 v34 q0 26-26 26 h-6 q-20 0-26-16z" fill="#FFE1C8"/>`,
+    "doa": `<path d="M38 92 C26 78 22 58 28 34 q3-8 8-6 l6 30 M82 92 C94 78 98 58 92 34 q-3-8-8-6 l-6 30" fill="#FFE1C8"/><path d="M60 8 c2 8 5 11 13 13 c-8 2-11 5-13 13 c-2-8-5-11-13-13 c8-2 11-5 13-13z" fill="#FFD36E"/>`,
+    "telefon": `<rect x="36" y="8" width="48" height="84" rx="10" fill="#8CC8FF"/><rect x="42" y="18" width="36" height="56" rx="4" fill="#fff"/><text x="60" y="54" text-anchor="middle" font-size="18" font-weight="900" fill="#E53935" stroke="none">999</text><circle cx="60" cy="83" r="4" fill="#fff"/>`,
+    "zebra": `<rect x="10" y="30" width="100" height="56" rx="6" fill="#777"/>${[18, 38, 58, 78, 98].map(x => `<rect x="${x - 6}" y="34" width="10" height="48" fill="#fff" stroke="none"/>`).join("")}`,
+    "talipinggang": `<rect x="14" y="20" width="92" height="70" rx="16" fill="#FFB98A"/><path d="M24 24 l72 62" stroke="#3E3150" stroke-width="10"/><rect x="52" y="44" width="16" height="14" rx="3" fill="#BDBDBD"/>`,
+    "api": `<path d="M60 92 q-34 0-30-34 q4-20 18-30 q0 16 10 18 q-4-22 12-38 q4 24 16 34 q12 14 6 30 q-6 20-32 20z" fill="#FF7A3D"/><path d="M60 92 q-16 0-14-16 q2-10 10-16 q2 10 8 12 q8 6 8 12 q0 8-12 8z" fill="#FFD23F"/><path d="M14 14 l92 76" stroke="#E53935" stroke-width="6"/>`,
+    "orangasing": sbOrang({ b: "#555", r: "pendek", aks: `<rect x="44" y="30" width="32" height="8" rx="3" fill="#2b2b2b"/>` }) + `<path d="M98 14 l12 12 M110 14 l-12 12" stroke="#E53935" stroke-width="5"/>`,
+    "sentuhan": sbOrang({ b: "#FF9EC4", r: "panjang", l: "depan", kecil: 1 }) + `<path d="M14 20 h20 v20 h-20z" fill="#4CD07D"/><path d="M18 30 l5 5 l8-10" fill="none" stroke="#fff" stroke-width="3"/>`,
+    "pensel3jari": `<path d="M30 90 L84 20 l10 8 L40 98z" fill="#FFD36E"/><path d="M84 20 l6-8 l10 8 l-6 8z" fill="#FF9EC4"/><path d="M30 90 l-4 8 l10-2z" fill="#4a3428"/><ellipse cx="48" cy="72" rx="12" ry="8" fill="#FFE1C8"/><ellipse cx="60" cy="62" rx="12" ry="8" fill="#FFE1C8"/><ellipse cx="40" cy="80" rx="10" ry="7" fill="#FFE1C8"/>`,
+    "kertaspensel": `<rect x="16" y="10" width="72" height="84" rx="6" fill="#fff"/><path d="M26 30 h50 M26 46 h50 M26 62 h34" stroke="#BDEBFF" stroke-width="3"/>` + SB_MINI("Pencil", 56, 40, 60),
+    /* Orang */
+    "o-ayah": o({ b: "#4DA3FF", r: "kopiah" }), "o-ibu": o({ b: "#FF9EC4", r: "tudung", t: "#FFB8D4" }), "o-abang": o({ b: "#7FDDBB", r: "pendek", kecil: 1 }),
+    "o-kakak": o({ b: "#BBA6FF", r: "tudung", t: "#D9CCFF", kecil: 1 }), "o-adik": o({ b: "#FFD36E", r: "pendek", kecil: 1, l: "lambai" }),
+    "o-datuk": o({ b: "#B98A5E", r: "uban", cermin: 1, aks: `<path d="M86 76 v20" stroke="#8B5A2B" stroke-width="4"/>` }), "o-nenek": o({ b: "#7FDDBB", r: "tudung", t: "#fff", cermin: 1 }),
+    "o-doktor": o({ b: "#fff", r: "pendek", aks: `<path d="M52 58 q0 14 8 14 q8 0 8-14" fill="none" stroke="#4DA3FF" stroke-width="2.5"/><circle cx="60" cy="74" r="3" fill="#4DA3FF"/><path d="M68 66 h8 M72 62 v8" stroke="#E53935" stroke-width="2.5"/>` }),
+    "o-guru": o({ b: "#BBA6FF", r: "tudung", t: "#9B6BFF", cermin: 1, l: "lambai", aks: `<rect x="26" y="74" width="18" height="14" rx="2" fill="#FF9EC4"/>` }),
+    "o-bomba": o({ b: "#FF7A5A", r: "pendek", aks: `<path d="M40 30 q20-24 40 0 l6 4 h-52z" fill="#FFD23F"/><path d="M44 70 h32" stroke="#FFD23F" stroke-width="4"/>` }),
+    "o-polis": o({ b: "#3B5BA9", r: "pendek", aks: `<rect x="42" y="14" width="36" height="12" rx="3" fill="#2B3F7A"/><rect x="38" y="24" width="44" height="5" rx="2" fill="#1E2C57"/><circle cx="60" cy="20" r="3" fill="#FFD23F"/>` }),
+    "o-petani": o({ b: "#7FC97F", r: "pendek", aks: `<path d="M28 28 L60 8 L92 28z" fill="#E8C27A"/>` }),
+    "o-nelayan": o({ b: "#5BC0DE", r: "pendek", aks: `<path d="M84 80 q8-8 16 0 q-8 8-16 0z M100 80 l6-6 v12z" fill="#FF9F43"/><path d="M42 22 q18-10 36 0 l4 6 h-44z" fill="#FFD36E"/>` }),
+    "o-juruterbang": o({ b: "#2B3F7A", r: "pendek", aks: `<path d="M42 22 q18-12 36 0 v5 h-36z" fill="#1E2C57"/><path d="M52 66 h16" stroke="#FFD23F" stroke-width="3"/>` }),
+    "o-chef": o({ b: "#fff", r: "pendek", aks: `<path d="M44 24 q-10-12 4-16 q4-10 12-2 q8-8 12 2 q14 4 4 16z" fill="#fff"/>` }),
+    /* Anggota badan & deria */
+    "o-kepala": o({ b: "#FFD36E", h: [60, 32, 24] }), "o-mata": o({ b: "#FFD36E", h: [60, 36, 13] }), "o-telinga": o({ b: "#FFD36E", h: [43, 38, 8] }),
+    "o-hidung": o({ b: "#FFD36E", h: [60, 41, 6] }), "o-mulut": o({ b: "#FFD36E", h: [60, 43, 7] }), "o-tangan": o({ b: "#FFD36E", h: [36, 76, 10] }),
+    "o-kaki": o({ b: "#FFD36E", h: [60, 92, 14] }), "o-perut": o({ b: "#FFD36E", h: [60, 70, 13] }), "o-muka": o({ b: "#FFD36E", h: [60, 38, 18] }),
+    "o-lidah": o({ b: "#FFD36E", h: [60, 43, 7], aks: `<path d="M57 43 q3 6 6 0z" fill="#FF7A8A"/>` }), "o-kulit": o({ b: "#FFD36E", l: "depan", h: [60, 74, 16] }),
+    /* Gerak badan */
+    "o-lompat": `<g transform="translate(0 -6)">${o({ b: "#FF9EC4", l: "atas", kaki: "lompat" })}</g>`, "o-lari": o({ b: "#7FDDBB", l: "regang", kaki: "lari" }),
+    "o-regang": o({ b: "#BBA6FF", l: "regang" }), "o-imbang": o({ b: "#FFD36E", l: "regang", kaki: "imbang" }),
+    "o-baling": o({ b: "#8CC8FF", l: "baling", aks: `<circle cx="86" cy="24" r="8" fill="#FF7A8A"/>` }), "o-sorak": o({ b: "#FFB98A", l: "atas" }),
+    "o-salam": o({ b: "#7FDDBB", r: "kopiah", l: "depan" }), "o-tolong": o({ b: "#FFD36E", l: "depan", aks: `<rect x="44" y="70" width="32" height="20" rx="3" fill="#B98A5E"/>` }),
+    /* Bentuk */
+    "b-bulatan": bentuk(`<circle cx="60" cy="50" r="38" fill="#FF9EC4"/>`), "b-segitiga": bentuk(`<path d="M60 10 l44 78 h-88z" fill="#FFD36E"/>`),
+    "b-segiempatsama": bentuk(`<rect x="22" y="12" width="76" height="76" rx="6" fill="#8CC8FF"/>`), "b-segiempattepat": bentuk(`<rect x="8" y="24" width="104" height="56" rx="6" fill="#7FDDBB"/>`),
+    "b-bujur": bentuk(`<ellipse cx="60" cy="50" rx="48" ry="32" fill="#BBA6FF"/>`), "b-bintang": `<path d="M60 8 l12 28 l30 3 l-23 20 l7 30 l-26-16 l-26 16 l7-30 l-23-20 l30-3z" fill="#FFB98A"/>${SB_FC(60, 52, .8)}`,
+    "b-hati": `<path d="M60 90 C18 62 12 38 26 24 q14-14 34 4 q20-18 34-4 q14 14-34 66z" fill="#FF7A9A"/>${SB_FC(60, 50, .8)}`, "b-berlian": bentuk(`<path d="M60 6 l40 44 l-40 44 l-40-44z" fill="#7FDDBB"/>`),
+    /* Saiz */
+    "z-besarkecil": SB_MINI("Gajah", 0, 6, 80) + SB_MINI("Gajah", 80, 52, 40), "z-panjangpendek": SB_MINI("Pencil", 0, 0, 120) + SB_MINI("Pencil", 30, 50, 60),
+    "z-tinggirendah": `<rect x="22" y="10" width="20" height="82" rx="4" fill="#8CC8FF"/><rect x="78" y="62" width="20" height="30" rx="4" fill="#FF9EC4"/><path d="M8 92 h104" stroke-width="3"/>`,
+    "z-beratringan": `<path d="M60 20 v8 M20 34 h80" stroke-width="4"/><path d="M60 28 l-6 62 h12z" fill="#BDBDBD"/>${SB_MINI("Gajah", 4, 40, 46)}${SB_MINI("Lebah", 76, 8, 36)}<path d="M14 34 l6 0 M100 34 l-2 0" />`,
+    /* Duit */
+    "s-5": syiling(5, "#E0E0E0"), "s-10": syiling(10, "#E0E0E0"), "s-20": syiling(20, "#F2D27A"), "s-50": syiling(50, "#F2D27A"),
+    "r-1": nota(1, "#4D7BD8"), "r-5": nota(5, "#4CAF6E"), "r-10": nota(10, "#E05555")
+  };
+})();
+Object.assign(ART, SB_IK);
+/* --- Gambar kad: "a:kunci" ART, "g:teks" jubin huruf, "b:teks" belon cakap, "c:#warna", "m:c1+c2=c3", "n:k", "t:a+b", "w:emosi", "p:arah" --- */
+const SB_PALET = ["#FF9EC4", "#8CC8FF", "#7FDDBB", "#FFC94D", "#BBA6FF", "#FFB98A", "#FF8A8A", "#6FD3E0"];
+const sbHash = t => [...t].reduce((a, c) => a + c.charCodeAt(0), 0);
+const sbFon = t => /[؀-ۿݐ-ݿ]/.test(t) ? QR_FON : /[஀-௿]/.test(t) ? '"Tamil Sangam MN","Noto Sans Tamil",sans-serif' : "inherit";
+const sbEsc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const sbSvg = (inner, vb) => `<svg class="art sbart" viewBox="${vb || "0 0 120 100"}" aria-hidden="true"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${inner}</g></svg>`;
+const sbBlob = (c, x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 -38 q26-4 36 18 q14 26-6 46 q-20 20-46 8 q-30-12-26-40 q4-28 42-32z" fill="${c}"/>${SB_FC(0, 4, .9)}</g>`;
+const sbBintangK = (x, y, r, c) => { let d = ""; for (let i = 0; i < 10; i++) { const a = Math.PI / 5 * i - Math.PI / 2, rr = i % 2 ? r * .45 : r; d += (i ? "L" : "M") + (x + rr * Math.cos(a)).toFixed(1) + " " + (y + rr * Math.sin(a)).toFixed(1); } return `<path d="${d}z" fill="${c}"/>`; };
+function sbGambar(spec) {
+  const i = spec.indexOf(":"), j = spec.slice(0, i), v = spec.slice(i + 1);
+  if (j === "a") return artSvg(v, "art sbart");
+  if (j === "w") return tmWajah(v).replace('class="tmwajah"', 'class="art sbart"');
+  if (j === "g") { const c = SB_PALET[sbHash(v) % SB_PALET.length], n = [...v].length, fs = n <= 1 ? 58 : n === 2 ? 46 : n === 3 ? 36 : n <= 5 ? 27 : 19; return sbSvg(`<rect x="12" y="4" width="96" height="92" rx="28" fill="${c}"/><rect x="18" y="10" width="84" height="40" rx="20" fill="#fff" opacity=".22" stroke="none"/><text x="60" y="52" dominant-baseline="central" text-anchor="middle" font-size="${fs}" font-family='${sbFon(v)}' font-weight="800" fill="#fff" stroke="#4a3428" stroke-width="1.2" paint-order="stroke">${sbEsc(v)}</text>`); }
+  if (j === "b") {
+    const kata = v.split(" "), baris = []; let b = "";
+    kata.forEach(w => { if ((b + " " + w).trim().length > 11 && b) { baris.push(b); b = w; } else b = (b + " " + w).trim(); }); baris.push(b);
+    const fs = baris.length > 2 ? 13 : Math.max(...baris.map(x => x.length)) > 8 ? 16 : 20;
+    return sbSvg(`<path d="M10 14 q0-10 10-10 h80 q10 0 10 10 v50 q0 10-10 10 h-50 l-16 16 v-16 h-14 q-10 0-10-10z" fill="#fff"/>${baris.map((x, k) => `<text x="60" y="${39 + (k - (baris.length - 1) / 2) * (fs + 3)}" dominant-baseline="central" text-anchor="middle" font-size="${fs}" font-family='${sbFon(v)}' font-weight="800" fill="#5B4670" stroke="none">${sbEsc(x)}</text>`).join("")}`);
+  }
+  if (j === "c") return sbSvg(sbBlob(v, 60, 52, 1));
+  if (j === "m") { const [a, r] = v.split("="), [x, y] = a.split("+"); return sbSvg(`${sbBlob(x, 18, 50, .42)}<text x="38" y="56" font-size="20" font-weight="900" fill="#5B4670" stroke="none">+</text>${sbBlob(y, 62, 50, .42)}<text x="80" y="56" font-size="20" font-weight="900" fill="#5B4670" stroke="none">=</text>${sbBlob(r, 104, 50, .42)}`); }
+  if (j === "n") { const k = +v, per = k <= 3 ? k : k <= 6 ? 3 : 5, rows = Math.ceil(k / per), r = k <= 3 ? 16 : k <= 6 ? 14 : 10; let s = ""; for (let q = 0; q < k; q++) { const cx = 60 + ((q % per) - (Math.min(per, k - Math.floor(q / per) * per) - 1) / 2) * r * 2.4, cy = 50 + (Math.floor(q / per) - (rows - 1) / 2) * r * 2.4; s += sbBintangK(cx, cy, r, SB_PALET[q % 8]); } return sbSvg(s); }
+  if (j === "t") { const [a, b] = v.split("+").map(Number), sel = (n, x0) => Array.from({ length: n }, (z, q) => SB_MINI("Epal", x0 + (q % 2) * 22, 14 + Math.floor(q / 2) * 22, 22)).join(""); return sbSvg(`${sel(a, 4)}<text x="60" y="58" text-anchor="middle" font-size="26" font-weight="900" fill="#9B6BFF" stroke="none">+</text>${sel(b, 72)}`); }
+  if (j === "p") { const r = { atas: 0, kanan: 90, bawah: 180, kiri: 270 }[v] || 0; return sbSvg(`<g transform="rotate(${r} 60 50)">${ART.anakpanah}</g>`); }
+  return sbSvg(`<text x="60" y="55" text-anchor="middle" font-size="30">${sbEsc(v)}</text>`);
+}
+
+/* --- Data subjek: setiap kad "gambar|tajuk|keterangan" --- */
+const SB_K = s => s.trim().split("\n").map(x => x.trim().split("|"));
+const SUBJEK = [
+  { id: "bm", nama: "Bahasa Melayu", ikon: "a:buku", w: "#FF9EC4", cerita: "Jom kenal huruf, suku kata dan perkataan!", topik: [
+    { n: "Huruf Vokal", k: SB_K(`a:Ayam|A a|A untuk Ayam
+      a:Epal|E e|E untuk Epal
+      a:Itik|I i|I untuk Itik
+      a:Oren|O o|O untuk Oren
+      a:Ular|U u|U untuk Ular`) },
+    { n: "Suku Kata", k: SB_K(`g:ba|ba|b + a = ba
+      g:bi|bi|b + i = bi
+      g:bu|bu|b + u = bu
+      g:ma|ma|m + a = ma
+      g:mi|mi|m + i = mi
+      g:sa|sa|s + a = sa
+      g:ka|ka|k + a = ka
+      g:la|la|l + a = la`) },
+    { n: "Perkataan Mudah", k: SB_K(`a:Bola|bo-la|Bola bulat dan melantun
+      a:Kucing|ku-cing|Kucing comel berbunyi meow
+      a:Rumah|ru-mah|Rumah tempat kita tinggal
+      a:Pisang|pi-sang|Pisang berwarna kuning
+      a:Gajah|ga-jah|Gajah ada belalai panjang
+      a:Nanas|na-nas|Nanas manis dan masam
+      a:Lebah|le-bah|Lebah membuat madu
+      a:Jam|jam|Jam menunjukkan waktu`) },
+    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "a:Pencil", ds: "Surih huruf A hingga Z" }
+  ] },
+  { id: "bi", nama: "Bahasa Inggeris", ikon: "g:ABC", w: "#8CC8FF", cerita: "Let's learn English together!", topik: [
+    { n: "Phonics A-H", k: SB_K(`a:Apple|A is for Apple|Epal
+      a:Ball|B is for Ball|Bola
+      a:Cat|C is for Cat|Kucing
+      a:Dog|D is for Dog|Anjing
+      a:Egg|E is for Egg|Telur
+      a:Fish|F is for Fish|Ikan
+      a:Goat|G is for Goat|Kambing
+      a:Hat|H is for Hat|Topi`) },
+    { n: "Colours", k: SB_K(`c:#FF5A5A|Red|Merah
+      c:#4DA3FF|Blue|Biru
+      c:#FFD23F|Yellow|Kuning
+      c:#4CD07D|Green|Hijau
+      c:#FF9F43|Orange|Oren
+      c:#9B6BFF|Purple|Ungu
+      c:#FF9EC4|Pink|Merah jambu`) },
+    { n: "Greetings", k: SB_K(`b:Hello!|Hello|Hai / Helo
+      b:Good morning|Good morning|Selamat pagi
+      b:Thank you|Thank you|Terima kasih
+      b:Sorry|Sorry|Maaf
+      b:Please|Please|Tolong / Sila
+      b:Goodbye!|Goodbye|Selamat tinggal`) },
+    { n: "Numbers 1-5", k: SB_K(`n:1|One|Satu
+      n:2|Two|Dua
+      n:3|Three|Tiga
+      n:4|Four|Empat
+      n:5|Five|Lima`) }
+  ] },
+  { id: "jawi", nama: "Jawi", ikon: "g:ج", w: "#7FDDBB", cerita: "Tulisan warisan kita yang cantik!", topik: [
+    { n: "Huruf Asas", k: SB_K(`g:ا|Alif|Huruf alif
+      g:ب|Ba|Huruf ba
+      g:ت|Ta|Huruf ta
+      g:ج|Jim|Huruf jim
+      g:د|Dal|Huruf dal
+      g:ر|Ra|Huruf ra
+      g:س|Sin|Huruf sin
+      g:ك|Kaf|Huruf kaf`) },
+    { n: "Huruf Istimewa Jawi", k: SB_K(`g:چ|Ca|Bunyi c, seperti cawan
+      g:ڠ|Nga|Bunyi ng, seperti bunga
+      g:ڤ|Pa|Bunyi p, seperti padi
+      g:ݢ|Ga|Bunyi g, seperti gula
+      g:ڽ|Nya|Bunyi ny, seperti nyanyi
+      g:ۏ|Va|Bunyi v, seperti van`) },
+    { n: "Perkataan Jawi", k: SB_K(`g:ايبو|Ibu|ايبو = ibu
+      g:باڤ|Bapa|باڤ = bapa
+      g:بوكو|Buku|بوكو = buku
+      g:كوچيڠ|Kucing|كوچيڠ = kucing
+      g:رومه|Rumah|رومه = rumah
+      g:باتو|Batu|باتو = batu`) }
+  ] },
+  { id: "arab", nama: "Bahasa Arab", ikon: "g:ع", w: "#FFC94D", cerita: "Bahasa Al-Quran, jom belajar sikit-sikit!", topik: [
+    { n: "Nombor", k: SB_K(`g:١|Wahid|Satu
+      g:٢|Ithnan|Dua
+      g:٣|Thalathah|Tiga
+      g:٤|Arba'ah|Empat
+      g:٥|Khamsah|Lima`) },
+    { n: "Anggota Badan", k: SB_K(`a:o-mata|'Ain (عين)|Mata
+      a:o-telinga|Uzun (أذن)|Telinga
+      a:o-hidung|Anf (أنف)|Hidung
+      a:o-mulut|Fam (فم)|Mulut
+      a:o-tangan|Yad (يد)|Tangan
+      a:o-kepala|Ra's (رأس)|Kepala`) },
+    { n: "Warna", k: SB_K(`c:#FF5A5A|Ahmar (أحمر)|Merah
+      c:#4DA3FF|Azraq (أزرق)|Biru
+      c:#FFD23F|Asfar (أصفر)|Kuning
+      c:#4CD07D|Akhdar (أخضر)|Hijau
+      c:#fff|Abyad (أبيض)|Putih`) },
+    { n: "Perbualan", k: SB_K(`b:السلام عليكم|Assalamualaikum|Salam sejahtera ke atas kamu
+      b:صباح الخير|Sabahul khair|Selamat pagi
+      b:شكرا|Syukran|Terima kasih
+      b:عفوا|'Afwan|Sama-sama
+      b:مع السلامة|Ma'as salamah|Selamat tinggal`) }
+  ] },
+  { id: "cina", nama: "Bahasa Cina & Tamil", ikon: "g:你", w: "#FF8A8A", cerita: "Kenal bahasa kawan-kawan kita!", topik: [
+    { n: "Bahasa Cina", k: SB_K(`b:你好|Nǐ hǎo|Hai / Apa khabar
+      b:谢谢|Xièxie|Terima kasih
+      b:再见|Zàijiàn|Selamat tinggal
+      g:一|Yī|Satu
+      g:二|Èr|Dua
+      g:三|Sān|Tiga
+      a:Kucing|Māo (猫)|Kucing
+      a:Fish|Yú (鱼)|Ikan`) },
+    { n: "Bahasa Tamil", k: SB_K(`b:வணக்கம்|Vanakkam|Salam / Hai
+      b:நன்றி|Nandri|Terima kasih
+      b:போய் வருகிறேன்|Poi varugiren|Selamat tinggal
+      g:ஒன்று|Ondru|Satu
+      g:இரண்டு|Irandu|Dua
+      a:Kucing|Poonai (பூனை)|Kucing
+      a:Gajah|Yaanai (யானை)|Gajah`) }
+  ] },
+  { id: "mat", nama: "Matematik", ikon: "g:123", w: "#FFC94D", cerita: "Kira, kenal bentuk dan bandingkan!", topik: [
+    { n: "Nombor 1-10", k: SB_K(`n:1|1|Satu
+      n:2|2|Dua
+      n:3|3|Tiga
+      n:4|4|Empat
+      n:5|5|Lima
+      n:6|6|Enam
+      n:7|7|Tujuh
+      n:8|8|Lapan
+      n:9|9|Sembilan
+      n:10|10|Sepuluh`) },
+    { n: "Bentuk", k: SB_K(`a:b-bulatan|Bulatan|Bulat seperti bola
+      a:b-segitiga|Segi tiga|Ada 3 sisi
+      a:b-segiempatsama|Segi empat sama|4 sisi sama panjang
+      a:b-segiempattepat|Segi empat tepat|Seperti pintu
+      a:b-bujur|Bujur|Seperti telur
+      a:b-bintang|Bintang|Ada 5 bucu
+      a:b-hati|Hati|Tanda sayang
+      a:b-berlian|Berlian|Seperti layang-layang`) },
+    { n: "Tambah Mudah", k: SB_K(`t:1+1|1 + 1 = 2|Satu tambah satu jadi dua
+      t:2+1|2 + 1 = 3|Dua tambah satu jadi tiga
+      t:2+2|2 + 2 = 4|Dua tambah dua jadi empat
+      t:3+1|3 + 1 = 4|Tiga tambah satu jadi empat
+      t:3+2|3 + 2 = 5|Tiga tambah dua jadi lima
+      t:4+2|4 + 2 = 6|Empat tambah dua jadi enam`) },
+    { n: "Banding Saiz", k: SB_K(`a:z-besarkecil|Besar & Kecil|Gajah besar, gajah kecil
+      a:z-panjangpendek|Panjang & Pendek|Pensel panjang, pensel pendek
+      a:z-tinggirendah|Tinggi & Rendah|Biru tinggi, merah jambu rendah
+      a:z-beratringan|Berat & Ringan|Gajah berat, lebah ringan`) },
+    { n: "Kira & Sentuh", aksi: () => tmKira(), ikon: "a:Fish", ds: "Permainan mengira" },
+    { n: "Lebih atau Kurang", aksi: () => tmLebih(), ikon: "a:Oren", ds: "Bandingkan bilangan" }
+  ] },
+  { id: "sains", nama: "Sains", ikon: "a:kanta", w: "#7FDDBB", cerita: "Jadi saintis kecil, selidik dunia!", topik: [
+    { n: "Deria Kita", k: SB_K(`a:o-mata|Melihat|Kita melihat dengan mata
+      a:o-telinga|Mendengar|Kita mendengar dengan telinga
+      a:o-hidung|Menghidu|Kita menghidu dengan hidung
+      a:o-lidah|Merasa|Kita merasa dengan lidah
+      a:o-kulit|Menyentuh|Kita menyentuh dengan kulit`) },
+    { n: "Cuaca", k: SB_K(`a:Sun|Cerah|Matahari bersinar terang
+      a:awan|Berawan|Langit penuh awan
+      a:hujan|Hujan|Air turun dari awan
+      a:angin|Berangin|Angin bertiup kencang
+      a:ribut|Ribut|Ada kilat dan guruh
+      a:pelangi|Pelangi|Muncul selepas hujan`) },
+    { n: "Pokok Membesar", k: SB_K(`a:benih|Biji benih|Tanam biji benih dalam tanah
+      a:siram|Siram air|Pokok perlu air
+      a:Sun|Cahaya matahari|Pokok perlu cahaya
+      a:tunas|Tunas|Biji benih bercambah
+      a:pokok|Pokok|Pokok membesar tinggi
+      a:bunga|Bunga|Pokok berbunga cantik`) },
+    { n: "Haiwan & Makanan", k: SB_K(`a:Monyet|Monyet|Suka makan pisang
+      a:Rabbit|Arnab|Suka makan lobak
+      a:Kucing|Kucing|Suka makan ikan
+      a:Lebah|Lebah|Suka hisap madu bunga
+      a:Gajah|Gajah|Suka makan rumput dan daun
+      a:Ayam|Ayam|Suka makan bijirin`) }
+  ] },
+  { id: "logik", nama: "Logik & Coding", ikon: "a:robot", w: "#8CC8FF", cerita: "Beri arahan kepada robot, jadi pengaturcara cilik!", topik: [
+    { n: "Robot Ceria", aksi: () => sbRobot(), ikon: "a:robot", ds: "Susun anak panah untuk robot" },
+    { n: "Arah", k: SB_K(`p:atas|Atas|Ke atas
+      p:bawah|Bawah|Ke bawah
+      p:kiri|Kiri|Ke kiri
+      p:kanan|Kanan|Ke kanan`) },
+    { n: "Urutan", k: SB_K(`g:1|Pertama|Nombor satu dalam barisan
+      g:2|Kedua|Nombor dua dalam barisan
+      g:3|Ketiga|Nombor tiga dalam barisan
+      g:4|Keempat|Nombor empat dalam barisan
+      g:5|Kelima|Nombor lima dalam barisan`) },
+    { n: "Labirin Arnab", aksi: () => tmLabirin(), ikon: "a:Rabbit", ds: "Cari jalan keluar" },
+    { n: "Corak Seterusnya", aksi: () => tmCorak(), ikon: "a:Epal", ds: "Teka corak" }
+  ] },
+  { id: "alam", nama: "Alam Sekitar", ikon: "a:pokok", w: "#7FDDBB", cerita: "Sayangi bumi, rumah kita bersama!", topik: [
+    { n: "Rumah Haiwan", k: SB_K(`a:Fish|Ikan|Tinggal di dalam air
+      a:Harimau|Harimau|Tinggal di hutan
+      a:Itik|Itik|Tinggal di kolam
+      a:Zirafah|Zirafah|Tinggal di padang rumput
+      a:Lebah|Lebah|Tinggal di sarang
+      a:Ayam|Ayam|Tinggal di reban`) },
+    { n: "Kitar Semula", k: SB_K(`a:tongbiru|Tong biru|Untuk kertas
+      a:tongoren|Tong oren|Untuk plastik dan tin
+      a:tongcoklat|Tong coklat|Untuk kaca`) },
+    { n: "Jaga Alam", k: SB_K(`a:paip|Tutup paip|Jimat air
+      a:tongsampah|Buang sampah|Buang ke dalam tong sampah
+      a:tunas|Tanam pokok|Bumi jadi hijau
+      a:mentol|Tutup lampu|Jimat elektrik`) }
+  ] },
+  { id: "islam", nama: "Pendidikan Islam", ikon: "a:masjid", w: "#7FDDBB", cerita: "Kenal Allah, sayang Rasul, amal setiap hari!", topik: [
+    { n: "Rukun Islam", k: SB_K(`a:jari|1. Mengucap dua kalimah syahadah|Rukun Islam pertama
+      a:sejadah|2. Solat lima waktu|Rukun Islam kedua
+      a:puasa|3. Puasa di bulan Ramadan|Rukun Islam ketiga
+      a:zakat|4. Membayar zakat|Rukun Islam keempat
+      a:kaabah|5. Menunaikan haji|Rukun Islam kelima`) },
+    { n: "Rukun Iman", k: SB_K(`g:١|Beriman kepada Allah|Rukun Iman pertama
+      g:٢|Beriman kepada malaikat|Rukun Iman kedua
+      g:٣|Beriman kepada kitab|Rukun Iman ketiga
+      g:٤|Beriman kepada rasul|Rukun Iman keempat
+      g:٥|Beriman kepada hari akhirat|Rukun Iman kelima
+      g:٦|Beriman kepada qada dan qadar|Rukun Iman keenam`) },
+    { n: "Langkah Wuduk", k: SB_K(`a:hati|1. Niat|Berniat di dalam hati
+      a:o-tangan|2. Basuh tangan|Basuh kedua-dua tapak tangan
+      a:o-mulut|3. Berkumur|Bersihkan mulut
+      a:o-hidung|4. Bersihkan hidung|Masukkan air ke hidung
+      a:o-muka|5. Basuh muka|Basuh seluruh muka
+      a:o-tangan|6. Basuh tangan hingga siku|Kanan dahulu, kemudian kiri
+      a:o-kepala|7. Sapu kepala|Sapu sebahagian kepala
+      a:o-telinga|8. Sapu telinga|Bersihkan kedua-dua telinga
+      a:o-kaki|9. Basuh kaki|Basuh hingga buku lali`), kuiz: false },
+    { n: "Doa Harian", aksi: id => sbDoa(id), ikon: "a:doa", ds: "Doa makan, tidur dan lain-lain" },
+    { n: "Adab Islam", aksi: () => tmAdab(), ikon: "a:Quran", ds: "Permainan amalan baik" }
+  ] },
+  { id: "moral", nama: "Nilai Murni", ikon: "a:hati", w: "#FF9EC4", cerita: "Budak baik disayangi semua!", topik: [
+    { n: "Nilai Murni", k: SB_K(`a:hati|Jujur|Ali jumpa dompet, dia serahkan kepada guru
+      a:hadiah|Berkongsi|Siti kongsi mainan dengan adik
+      a:o-salam|Hormat|Salam dan cium tangan ibu bapa
+      a:o-tolong|Tolong-menolong|Bantu kawan angkat kotak
+      a:doa|Bersyukur|Ucap Alhamdulillah selepas makan
+      a:jampasir|Sabar|Tunggu giliran dengan tenang
+      a:sabun|Bersih|Jaga kebersihan diri dan kelas
+      a:bintang|Berani|Berani mencuba perkara baharu`) },
+    { n: "Kata Ajaib", k: SB_K(`b:Tolong|Tolong|Bila meminta bantuan
+      b:Terima kasih|Terima kasih|Bila menerima sesuatu
+      b:Maaf|Maaf|Bila membuat salah
+      b:Sama-sama|Sama-sama|Bila orang berterima kasih
+      b:Assalamualaikum|Assalamualaikum|Bila berjumpa orang`) }
+  ] },
+  { id: "emosi", nama: "Emosi & Sosial", ikon: "w:gembira", w: "#FFC94D", cerita: "Kenal perasaan dan jadi kawan yang baik!", topik: [
+    { n: "Perasaanku", k: SB_K(`w:gembira|Gembira|Hati suka dan senyum
+      w:sedih|Sedih|Rasa mahu menangis
+      w:marah|Marah|Rasa panas di hati
+      w:takut|Takut|Rasa mahu lari
+      w:terkejut|Terkejut|Tidak sangka`) },
+    { n: "Tenangkan Diri", k: SB_K(`a:angin|Tarik nafas|Tarik nafas dalam-dalam, hembus perlahan
+      g:1 2 3|Kira 1 hingga 10|Kira perlahan-lahan
+      a:botol|Minum air|Minum air sejuk
+      a:hati|Peluk|Minta peluk daripada ibu
+      b:Saya sedih...|Bercakap|Beritahu ibu atau guru`) },
+    { n: "Berkawan", k: SB_K(`w:gembira|Senyum|Senyum kepada kawan
+      a:Bola|Ajak bermain|Jom main sama-sama!
+      a:jampasir|Tunggu giliran|Bergilir-gilir bermain
+      a:hadiah|Berkongsi|Kongsi mainan dan makanan
+      b:Maaf ya|Minta maaf|Bila tersalah`) },
+    { n: "Kenal Perasaan", aksi: () => tmRasa(), ikon: "w:sedih", ds: "Permainan teka perasaan" }
+  ] },
+  { id: "diri", nama: "Kenali Diri & Dunia", ikon: "a:o-adik", w: "#8CC8FF", cerita: "Siapa saya? Siapa keluarga saya?", topik: [
+    { n: "Anggota Badan", k: SB_K(`a:o-kepala|Kepala|Kepala di atas badan
+      a:o-mata|Mata|Untuk melihat
+      a:o-telinga|Telinga|Untuk mendengar
+      a:o-hidung|Hidung|Untuk menghidu
+      a:o-mulut|Mulut|Untuk makan dan bercakap
+      a:o-tangan|Tangan|Untuk memegang
+      a:o-perut|Perut|Makanan masuk ke perut
+      a:o-kaki|Kaki|Untuk berjalan`) },
+    { n: "Keluarga Saya", k: SB_K(`a:o-ayah|Ayah|Ayah sayang saya
+      a:o-ibu|Ibu|Ibu jaga saya
+      a:o-abang|Abang|Abang lebih tua
+      a:o-kakak|Kakak|Kakak suka membantu
+      a:o-adik|Adik|Adik lebih muda
+      a:o-datuk|Datuk|Ayah kepada ayah atau ibu
+      a:o-nenek|Nenek|Ibu kepada ayah atau ibu`) },
+    { n: "Pekerjaan", k: SB_K(`a:o-doktor|Doktor|Merawat orang sakit
+      a:o-guru|Guru|Mengajar murid
+      a:o-bomba|Bomba|Memadam kebakaran
+      a:o-polis|Polis|Menjaga keselamatan
+      a:o-petani|Petani|Menanam padi dan sayur
+      a:o-nelayan|Nelayan|Menangkap ikan
+      a:o-juruterbang|Juruterbang|Menerbangkan kapal terbang
+      a:o-chef|Chef|Memasak makanan sedap`) },
+    { n: "Kenderaan", k: SB_K(`a:kereta|Kereta|Bergerak di jalan raya
+      a:bas|Bas|Membawa ramai penumpang
+      a:Van|Van|Van sekolah
+      a:motosikal|Motosikal|Ada dua roda
+      a:basikal|Basikal|Dikayuh dengan kaki
+      a:keretapi|Kereta api|Bergerak di landasan
+      a:Feri|Feri|Bergerak di laut
+      a:kapalterbang|Kapal terbang|Terbang di langit`) },
+    { n: "Keselamatan Diri", k: SB_K(`a:zebra|Lintas di zebra|Pegang tangan ibu, lihat kiri dan kanan
+      a:talipinggang|Pakai tali pinggang|Setiap kali naik kereta
+      a:orangasing|Jangan ikut orang asing|Jangan terima gula-gula orang asing
+      a:sentuhan|Sentuhan selamat|Badan saya milik saya. Katakan "Jangan!"
+      a:api|Jauhi api|Api panas dan bahaya
+      a:telefon|Hubungi 999|Nombor kecemasan`), kuiz: true }
+  ] },
+  { id: "negara", nama: "Negaraku Malaysia", ikon: "a:bendera", w: "#FF8A8A", cerita: "Malaysia tanah airku!", topik: [
+    { n: "Simbol Negara", k: SB_K(`a:bendera|Jalur Gemilang|Bendera Malaysia
+      a:bungaraya|Bunga Raya|Bunga kebangsaan
+      a:notamuzik|Negaraku|Lagu kebangsaan
+      a:Harimau|Harimau Malaya|Haiwan kebangsaan`) },
+    { n: "Perayaan", k: SB_K(`a:ketupat|Hari Raya Aidilfitri|Selepas puasa Ramadan
+      a:tanglung|Tahun Baru Cina|Ada tanglung dan angpau
+      a:pelita|Deepavali|Pesta cahaya
+      a:krismas|Krismas|Ada pokok Krismas
+      a:padi|Kaamatan & Gawai|Pesta menuai di Sabah dan Sarawak
+      a:bungaapi|Hari Kebangsaan|31 Ogos, Merdeka!`) },
+    { n: "Negeri-negeri", k: SB_K(`g:Perlis|Perlis|Negeri paling kecil
+      g:Kedah|Kedah|Jelapang padi
+      g:Pulau Pinang|Pulau Pinang|Pulau Mutiara
+      g:Perak|Perak|Negeri Perak
+      g:Selangor|Selangor|Negeri Selangor
+      g:N. Sembilan|Negeri Sembilan|Negeri Sembilan
+      g:Melaka|Melaka|Negeri bersejarah
+      g:Johor|Johor|Selatan Semenanjung
+      g:Pahang|Pahang|Negeri paling besar di Semenanjung
+      g:Terengganu|Terengganu|Pantai timur
+      g:Kelantan|Kelantan|Negeri Cik Siti Wan Kembang
+      g:Sabah|Sabah|Negeri di Bawah Bayu
+      g:Sarawak|Sarawak|Bumi Kenyalang
+      g:K. Lumpur|Kuala Lumpur|Ibu negara`), kuiz: false }
+  ] },
+  { id: "hidup", nama: "Kemahiran Hidup", ikon: "a:baju", w: "#FFB98A", cerita: "Saya boleh buat sendiri!", topik: [
+    { n: "Urus Diri", k: SB_K(`a:baju|Pakai baju|Masukkan kepala, kemudian tangan
+      a:kasut|Pakai kasut|Kasut kanan di kaki kanan
+      a:sikat|Sikat rambut|Rambut kemas dan cantik
+      a:kotakmainan|Kemas mainan|Simpan mainan selepas bermain
+      a:lipatbaju|Lipat baju|Lipat dan susun baju`) },
+    { n: "Kenal Duit", k: SB_K(`a:s-5|5 sen|Syiling lima sen
+      a:s-10|10 sen|Syiling sepuluh sen
+      a:s-20|20 sen|Syiling dua puluh sen
+      a:s-50|50 sen|Syiling lima puluh sen
+      a:r-1|RM1|Satu ringgit, warna biru
+      a:r-5|RM5|Lima ringgit, warna hijau
+      a:r-10|RM10|Sepuluh ringgit, warna merah`) },
+    { n: "Bantu di Rumah", k: SB_K(`a:siram|Siram pokok|Bantu ibu siram pokok
+      a:o-tolong|Angkat barang|Bantu ayah angkat barang ringan
+      a:kasut|Susun kasut|Susun kasut di rak
+      a:tongsampah|Buang sampah|Buang sampah ke tong`) }
+  ] },
+  { id: "jasmani", nama: "Jasmani & Kesihatan", ikon: "a:o-lompat", w: "#7FDDBB", cerita: "Badan sihat, otak cerdas!", topik: [
+    { n: "Jom Bergerak", aksi: () => sbGerak(), ikon: "a:o-lari", ds: "Ikut arahan gerak badan" },
+    { n: "Gerak Badan", k: SB_K(`a:o-lompat|Lompat|Lompat tinggi-tinggi
+      a:o-lari|Lari|Lari setempat
+      a:o-regang|Regang|Depakan tangan luas-luas
+      a:o-imbang|Imbang|Berdiri atas satu kaki
+      a:o-baling|Baling bola|Baling bola ke depan
+      a:o-sorak|Angkat tangan|Angkat tangan tinggi-tinggi`) },
+    { n: "Makanan Sihat", k: SB_K(`a:brokoli|Sayur|Sihat, makan setiap hari
+      a:Epal|Buah|Sihat, penuh vitamin
+      a:nasi|Nasi|Beri tenaga
+      a:Fish|Ikan|Bantu badan membesar
+      a:susu|Susu|Tulang dan gigi kuat
+      a:gulagula|Gula-gula|Kurangkan, gigi rosak
+      a:airmanis|Air manis|Kurangkan, terlalu banyak gula
+      a:kerepek|Kerepek|Kurangkan, terlalu masin`) },
+    { n: "Kebersihan", k: SB_K(`a:sabun|Basuh tangan|Guna sabun sebelum makan
+      a:berusgigi|Gosok gigi|Pagi dan malam
+      a:pancuran|Mandi|Dua kali sehari
+      a:gunting|Potong kuku|Kuku pendek dan bersih
+      a:bantal|Tidur awal|Badan cergas esok hari`) }
+  ] },
+  { id: "seni", nama: "Seni & Muzik", ikon: "a:palet", w: "#BBA6FF", cerita: "Lukis, warna dan bernyanyi!", topik: [
+    { n: "Studio Lukis", aksi: () => tmLukis(), ikon: "a:Pencil", ds: "Lukis bebas" },
+    { n: "Mewarna", aksi: id => { tmBalik = () => sbSubjek(id); backMenu = tmBalik; startWarna(0); }, ikon: "a:Umbrella", ds: "Warnakan gambar" },
+    { n: "Campur Warna", k: SB_K(`m:#FF5A5A+#FFD23F=#FF9F43|Merah + Kuning = Oren|Campur jadi oren
+      m:#4DA3FF+#FFD23F=#4CD07D|Biru + Kuning = Hijau|Campur jadi hijau
+      m:#FF5A5A+#4DA3FF=#9B6BFF|Merah + Biru = Ungu|Campur jadi ungu
+      m:#FF5A5A+#fff=#FF9EC4|Merah + Putih = Merah jambu|Campur jadi merah jambu`) },
+    { n: "Alat Muzik", k: SB_K(`a:gendang|Gendang|Dipalu dengan kayu
+      a:rebana|Rebana|Dipalu dengan tangan
+      a:seruling|Seruling|Ditiup
+      a:gitar|Gitar|Dipetik talinya
+      a:piano|Piano|Ditekan kekuncinya
+      a:Xilofon|Xilofon|Diketuk
+      a:angklung|Angklung|Digoncang`) },
+    { n: "Muzik Kecil", aksi: () => tmMuzik(), ikon: "a:notamuzik", ds: "Main piano dan dram" }
+  ] },
+  { id: "sekolah", nama: "Sedia ke Tahun 1", ikon: "a:beg", w: "#FF9EC4", cerita: "Jom bersedia ke sekolah besar!", topik: [
+    { n: "Barang Sekolah", k: SB_K(`a:beg|Beg sekolah|Simpan buku dan alat tulis
+      a:buku|Buku|Untuk membaca dan menulis
+      a:Pencil|Pensel|Untuk menulis
+      a:pemadam|Pemadam|Untuk memadam
+      a:pembaris|Pembaris|Untuk membuat garis lurus
+      a:botol|Botol air|Minum air di sekolah
+      a:bekal|Bekas makanan|Bekal dari rumah`) },
+    { n: "Cara Pegang Pensel", k: SB_K(`a:pensel3jari|Guna tiga jari|Ibu jari, jari telunjuk dan jari hantu
+      a:kertaspensel|Duduk tegak|Kertas di depan, belakang lurus
+      a:tangan|Tangan rileks|Jangan genggam terlalu kuat`), kuiz: false },
+    { n: "Tulis Nombor", aksi: id => startTulis(0, () => sbSubjek(id), "nombor"), ikon: "g:123", ds: "Surih nombor 1 hingga 10" },
+    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "g:Aa", ds: "Surih huruf A hingga Z" },
+    { n: "Ikut Arahan", k: SB_K(`b:Bulatkan|Bulatkan|Lukis bulatan pada jawapan
+      b:Garis|Garis|Buat garis di bawah
+      b:Warnakan|Warnakan|Warnakan gambar
+      b:Tanda betul|Tanda betul|Tanda pada jawapan betul
+      b:Padankan|Padankan|Sambungkan yang sama`) }
+  ] }
+];
+const SB_BAB = [
+  ["Pulau Bahasa", "Buku Ceria mahu belajar bercakap dalam banyak bahasa. Jom ikut!", "#FFE8F1", ["bm", "bi", "jawi", "arab", "cina"]],
+  ["Hutan Nombor & Sains", "Di dalam hutan ini ada nombor, bentuk dan rahsia alam.", "#E3F8EC", ["mat", "sains", "logik", "alam"]],
+  ["Taman Hati", "Hati yang baik, kawan pun ramai.", "#FFF4D9", ["islam", "moral", "emosi"]],
+  ["Kampung Diriku", "Kenali diri, keluarga, kerja dan negaraku.", "#E4F1FF", ["diri", "negara", "hidup", "jasmani"]],
+  ["Istana Seni & Sekolah", "Lukis, nyanyi dan bersedia ke Tahun 1!", "#F0E8FF", ["seni", "sekolah"]]
+];
+const sbCari = id => SUBJEK.find(s => s.id === id);
+const sbBintangSub = (s, st) => s.topik.reduce((a, t, i) => a + (st["tm-sb-" + s.id + "-" + i] || 0), 0);
+
+/* --- Halaman hadapan Prasekolah: peta cerita --- */
+function renderPra() {
+  const t = curTahap;
+  backMenu = renderPra; tmBalik = null; setLux(false);
+  qrSkrin("Prasekolah", renderHome);
+  const k = $("qrKawasan"), st = loadStars();
+  const maskot = document.querySelector("#heroBuku svg") ? document.querySelector("#heroBuku svg").outerHTML : "";
+  const pintu = [["Taman Ceria", "a:Rabbit", renderTaman], ["Nota", COMEL_IKON["📒"], renderNota], ["Kuiz", COMEL_IKON["❓"], () => renderKuiz(t, renderPra)], ["Mini Game", COMEL_IKON["🎮"], renderGame], ["Perpustakaan", COMEL_IKON["📚"], renderLib]];
+  let no = 0;
+  k.innerHTML = `<div class="prdunia">
+    <div class="prhero"><div class="prmaskot">${maskot}</div><div class="prherotks"><small>Selamat datang ke</small><h2>Dunia Ceria</h2><p class="prbual">Hai! Saya Buku Ceria. Jom jelajah ${SUBJEK.length} rumah ilmu bersama saya!</p>
+      <div class="tmumur prumur"><b>Umur:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${tmUmur === u ? "on" : ""}">${u}</button>`).join("")}</div></div></div>
+    <div class="prpintu">${pintu.map((p, i) => `<button data-p="${i}"><span>${p[1].indexOf("a:") === 0 ? sbGambar(p[1]) : p[1]}</span><b>${p[0]}</b></button>`).join("")}</div>
+    ${SB_BAB.map(([nama, cerita, bg, ids], bi) => `<section class="prbab" style="--bg:${bg}"><div class="prbabtajuk"><span>Bab ${bi + 1}</span><h3>${nama}</h3><p>${cerita}</p></div>
+      <div class="prjalan">${ids.map((id, j) => { const s = sbCari(id), b = sbBintangSub(s, st); no++; return `<button class="prnod ${j % 2 ? "kanan" : "kiri"}" data-s="${id}" style="--w:${s.w};animation-delay:${no * .05}s"><span class="prlencana"><i>${no}</i>${sbGambar(s.ikon)}</span><span class="prpapan"><b>${s.nama}</b><small>${s.cerita}</small>${b ? `<em>★ ${b}</em>` : ""}</span></button>`; }).join("")}</div></section>`).join("")}
+  </div>`;
+  k.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { tmUmur = +b.dataset.u; try { localStorage.setItem(TM_UMUR_KEY, tmUmur); } catch (e) { /* abaikan */ } renderPra(); });
+  k.querySelectorAll("[data-p]").forEach(b => b.onclick = () => pintu[b.dataset.p][2]());
+  k.querySelectorAll("[data-s]").forEach(b => b.onclick = () => sbSubjek(b.dataset.s));
+  k.querySelector(".prmaskot").onclick = e => { const m = e.currentTarget; m.classList.remove("lompat"); void m.offsetWidth; m.classList.add("lompat"); sndOk(); qrBual(pick(["Jom belajar!", "Pilih satu rumah ilmu!", "Kamu hebat!", "Saya sayang kamu!"])); };
+  qrBual("Pilih rumah ilmu yang kamu suka!");
+}
+/* --- Rumah subjek --- */
+function sbSubjek(id) {
+  const s = sbCari(id), st = loadStars();
+  backMenu = () => sbSubjek(id); tmBalik = backMenu; setLux(false);
+  qrSkrin(s.nama, renderPra);
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="sbhero" style="--w:${s.w}"><span class="sbheroik">${sbGambar(s.ikon)}</span><div><h2>${s.nama}</h2><p>${s.cerita}</p><em>★ ${sbBintangSub(s, st)}</em></div></div>
+    <div class="sbtopik">${s.topik.map((t, i) => `<button class="sbtp" data-i="${i}" style="--w:${s.w};animation-delay:${i * .06}s"><span>${sbGambar(t.ikon || t.k[0][0])}</span><b>${t.n}</b><small>${t.aksi ? t.ds : t.k.length + " kad" + (t.kuiz === false ? "" : " · kuiz")}</small>${st["tm-sb-" + id + "-" + i] ? `<i class="tmst">${"★".repeat(st["tm-sb-" + id + "-" + i])}</i>` : ""}</button>`).join("")}</div>`;
+  k.querySelectorAll(".sbtp").forEach(b => b.onclick = () => { const t = s.topik[+b.dataset.i]; if (t.aksi) { tmBalik = () => sbSubjek(id); backMenu = tmBalik; t.aksi(id); } else sbKad(id, +b.dataset.i, 0); });
+  qrBual(s.cerita);
+}
+/* --- Kad belajar --- */
+function sbKad(id, ti, i) {
+  const s = sbCari(id), t = s.topik[ti], c = t.k[i], n = t.k.length;
+  qrSkrin(t.n, () => sbSubjek(id));
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="sbtitik">${t.k.map((x, j) => `<i class="${j === i ? "on" : j < i ? "lepas" : ""}"></i>`).join("")}</div>
+    <div class="sbkad" style="--w:${s.w}"><div class="sbkadgbr">${sbGambar(c[0])}</div><h2>${sbEsc(c[1])}</h2><p>${sbEsc(c[2] || "")}</p></div>`;
+  const kad = k.querySelector(".sbkad"); kad.onclick = () => { kad.classList.remove("goyang"); void kad.offsetWidth; kad.classList.add("goyang"); tone(660, 0, .08); };
+  if (i > 0) qrButang("back", "Sebelum", "biru", () => sbKad(id, ti, i - 1));
+  if (i < n - 1) qrButang("next", "Seterusnya", "hijau", () => sbKad(id, ti, i + 1));
+  else if (t.kuiz !== false) qrButang("play", "Jom Kuiz!", "ungu", () => sbKuiz(id, ti));
+  else qrButang("play", "Siap!", "ungu", () => tmSelesai("sb-" + id + "-" + ti, 3, () => sbKad(id, ti, 0)));
+  qrBual((i + 1) + " / " + n); speak(c[1] + ". " + (c[2] || ""), "ms");
+}
+/* --- Kuiz automatik daripada kad --- */
+function sbKuiz(id, ti) {
+  const s = sbCari(id), t = s.topik[ti], k = tmSkrin(t.n + ": Kuiz", "Pilih jawapan yang betul!");
+  const jum = Math.min(5, t.k.length), set = tmAmbil(t.k, jum), pil = Math.min(t.k.length, tmTahap(2, 3, 3, 4));
+  let soal = 0, betul = 0;
+  const satu = () => {
+    const c = set[soal], jenis = c[0][0], lain = tmAmbil(t.k.filter(x => x !== c), pil - 1), opsyen = shuffle([c].concat(lain));
+    const pilihGbr = jenis === "g" || jenis === "b";
+    const tanya = jenis === "b" ? c[2] : c[1];
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div>` + (pilihGbr
+      ? `<h3 class="tmtanyaan">Yang mana <b>${sbEsc(tanya)}</b>?</h3><div class="tmpilih">${opsyen.map((x, j) => `<button class="tmopt sbopt" data-j="${j}">${sbGambar(x[0])}</button>`).join("")}</div>`
+      : `<div class="sbkad kecil" style="--w:${s.w}"><div class="sbkadgbr">${sbGambar(c[0])}</div></div><h3 class="tmtanyaan">Ini apa?</h3><div class="tmpilih tmpilihlajur">${opsyen.map((x, j) => `<button class="tmopt tmlabel" data-j="${j}">${sbEsc(x[1])}</button>`).join("")}</div>`);
+    let cuba = 0;
+    k.querySelectorAll("[data-j]").forEach(b => b.onclick = () => { if (opsyen[+b.dataset.j] === c) { tmBetul(b); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("sb-" + id + "-" + ti, betul >= jum ? 3 : betul >= jum - 2 ? 2 : 1, () => sbKuiz(id, ti)), 900); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+function sbDoa(id) {
+  backMenu = () => sbDoa(id);
+  renderMenu("Doa Harian", DOA.map((d, i) => ["c" + (i % 5), QR_IKON.doa, d.nama, d.ayat[0].split("|")[1].slice(0, 42) + "...", "", () => qrBaca(d, () => sbDoa(id), false)]), () => sbSubjek(id));
+}
+/* --- Robot Ceria: susun arahan anak panah --- */
+function sbRobot(pus, skor) {
+  pus = pus || 1; skor = skor || 0;
+  const N = tmTahap(4, 4, 5, 5), k = tmSkrin("Robot Ceria", "Susun anak panah, kemudian tekan Jalan!");
+  const mula = [0, N - 1]; let batu = [], bintang;
+  const kunci = (x, y) => x + "," + y;
+  const adaJalan = () => { const q = [mula], lw = { [kunci(...mula)]: 1 }; while (q.length) { const [x, y] = q.shift(); if (x === bintang[0] && y === bintang[1]) return true; [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => { const nx = x + dx, ny = y + dy, kk = kunci(nx, ny); if (nx >= 0 && ny >= 0 && nx < N && ny < N && !lw[kk] && !batu.includes(kk)) { lw[kk] = 1; q.push([nx, ny]); } }); } return false; };
+  do { bintang = [rnd(1, N - 1), rnd(0, N - 2)]; } while (Math.abs(bintang[0] - mula[0]) + Math.abs(bintang[1] - mula[1]) < tmTahap(2, 3, 4, 5));
+  do { batu = []; for (let i = 0; i < tmTahap(0, 1, 2, 4); i++) { const c = kunci(rnd(0, N - 1), rnd(0, N - 1)); if (c !== kunci(...mula) && c !== kunci(...bintang) && !batu.includes(c)) batu.push(c); } } while (!adaJalan());
+  let arahan = [], jalan = false, pos = mula.slice();
+  const ARAH = { atas: [0, -1], bawah: [0, 1], kiri: [-1, 0], kanan: [1, 0] };
+  k.innerHTML = `<div class="tmsoalno">Pusingan ${pus} / 5</div><div class="sbrobot" style="--n:${N}">${Array.from({ length: N * N }, (v, i) => { const c = kunci(i % N, Math.floor(i / N)); return `<div class="sbsel">${batu.includes(c) ? `<svg viewBox="0 0 40 40"><path d="M6 32 q0-16 14-20 q14 0 16 20z" fill="#B0A8B9" stroke="#4a3428" stroke-width="2"/></svg>` : c === kunci(...bintang) ? sbGambar("a:bintang") : ""}</div>`; }).join("")}<span class="sbrbt">${sbGambar("a:robot")}</span></div>
+    <div class="sbarahan"></div><div class="sbpanah">${Object.keys(ARAH).map(a => `<button data-a="${a}">${sbGambar("p:" + a)}</button>`).join("")}</div>`;
+  const rbt = k.querySelector(".sbrbt"), senarai = k.querySelector(".sbarahan");
+  const letak = () => { rbt.style.left = pos[0] * 100 / N + "%"; rbt.style.top = pos[1] * 100 / N + "%"; };
+  const papar = () => { senarai.innerHTML = arahan.length ? arahan.map((a, i) => `<span class="${i === jalan - 1 ? "aktif" : ""}">${sbGambar("p:" + a)}</span>`).join("") : "<small>Tekan anak panah di bawah</small>"; };
+  k.querySelectorAll("[data-a]").forEach(b => b.onclick = () => { if (jalan || arahan.length >= 12) return; arahan.push(b.dataset.a); tone(500 + arahan.length * 30, 0, .06); papar(); });
+  qrButang("padam", "Buang", "koral", () => { if (!jalan) { arahan.pop(); papar(); } });
+  qrButang("play", "Jalan!", "hijau", () => {
+    if (jalan || !arahan.length) return; jalan = 1; pos = mula.slice(); letak();
+    const langkah = () => {
+      if (jalan > arahan.length) {
+        if (pos[0] === bintang[0] && pos[1] === bintang[1]) { tmBetul(rbt); const sk = skor + (arahan.length <= Math.abs(bintang[0] - mula[0]) + Math.abs(bintang[1] - mula[1]) + 1 ? 3 : 2); setTimeout(() => pus < 5 ? sbRobot(pus + 1, sk) : tmSelesai("robot", Math.max(1, Math.round(sk / 5)), () => sbRobot()), 900); }
+        else { tmSalah(rbt); qrBual("Belum sampai. Cuba lagi!"); setTimeout(() => { jalan = false; pos = mula.slice(); letak(); papar(); }, 900); }
+        return;
+      }
+      const d = ARAH[arahan[jalan - 1]], nx = pos[0] + d[0], ny = pos[1] + d[1];
+      papar();
+      if (nx < 0 || ny < 0 || nx >= N || ny >= N || batu.includes(kunci(nx, ny))) { tmSalah(rbt); qrBual("Oops! Robot terlanggar. Cuba lagi!"); setTimeout(() => { jalan = false; pos = mula.slice(); letak(); papar(); }, 900); return; }
+      pos = [nx, ny]; letak(); tone(400 + jalan * 40, 0, .08); jalan++;
+      setTimeout(langkah, 450);
+    };
+    setTimeout(langkah, 300);
+  });
+  letak(); papar();
+}
+/* --- Jom Bergerak: ikut arahan gerak badan --- */
+function sbGerak(i, set) {
+  const S = sbCari("jasmani").topik[1].k; set = set || tmAmbil(S, 6); i = i || 0;
+  const c = set[i], k = tmSkrin("Jom Bergerak", c[1] + "! " + c[2]);
+  const masa = tmTahap(8, 10, 12, 15);
+  k.innerHTML = `<div class="tmsoalno">${i + 1} / ${set.length}</div><div class="sbgerak"><div class="sbkad" style="--w:#7FDDBB"><div class="sbkadgbr tmgoyang">${sbGambar(c[0])}</div><h2>${c[1]}</h2><p>${c[2]}</p></div><div class="sbmasa"><b>${masa}</b><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="#E6DDF5" stroke-width="8"/><circle class="sbmasabar" cx="40" cy="40" r="34" fill="none" stroke="#4CD07D" stroke-width="8" stroke-linecap="round" stroke-dasharray="213.6" transform="rotate(-90 40 40)"/></svg></div></div>`;
+  const id = qrId; let baki = masa; const bar = k.querySelector(".sbmasabar"), no = k.querySelector(".sbmasa b");
+  const tik = setInterval(() => {
+    if (id !== qrId) { clearInterval(tik); return; }
+    baki--; no.textContent = baki; bar.style.strokeDashoffset = 213.6 * (1 - baki / masa); tone(baki <= 3 ? 880 : 520, 0, .05);
+    if (baki <= 0) { clearInterval(tik); sndOk(); setTimeout(() => i < set.length - 1 ? sbGerak(i + 1, set) : tmSelesai("gerak", 3, () => sbGerak()), 500); }
+  }, 1000);
+  qrButang("next", "Langkau", "biru", () => { clearInterval(tik); i < set.length - 1 ? sbGerak(i + 1, set) : tmSelesai("gerak", 3, () => sbGerak()); });
+}
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
 const HAI = [L("Hai! Jom belajar bersama saya!", "Hi! Let's learn together!", "你好！一起学习吧！"), L("Kamu memang pandai!", "You are so clever!", "你真聪明！"), L("Hari ini kita belajar apa ya?", "What shall we learn today?", "今天学什么呢？")];
@@ -6446,17 +7233,6 @@ function renderKuiz(t, back) {
     const s = SUBJEK[id];
     return [id, s.emoji, tr(s.nama), tr(UI.soalan10), starText(st[id] || 0), () => startQuiz(id)];
   })), back);
-}
-function renderPra() {
-  const t = curTahap;
-  backMenu = renderPra;
-  renderMenu(tr(t.nama), [
-    ["taman", SVGC(`<path d="M8 50 q24-14 48 0 v6 H8z" fill="#9FE3B0"/><circle cx="20" cy="26" r="11" fill="#FF9EC4"/><circle cx="20" cy="26" r="4" fill="#FFD36E"/><path d="M20 37 v14" stroke="#3FA672" stroke-width="3"/><path d="M36 50 V28 a10 10 0 0 1 20 0 V50" fill="#BBA6FF"/><path d="M40 50 V34 h12 V50" fill="#8CC8FF"/><circle cx="46" cy="14" r="6" fill="#FFD36E"/>`), "Taman Ceria", "25 aktiviti: ingatan, logik, kreatif, emosi", "", renderTaman],
-    ["nota", "📒", tr(UI.nota), tr(UI.notaDs), "", renderNota],
-    ["kuiz", "❓", tr(UI.kuiz), tr(UI.kuizDs), "", () => renderKuiz(t, renderPra)],
-    ["game", "🎮", tr(UI.game), tr(UI.gameDs), "", renderGame],
-    ["pustaka", "📚", tr(UI.pustaka), tr(UI.pustakaDs), "", renderLib]
-  ], renderHome);
 }
 function renderLib() {
   backMenu = renderLib;
