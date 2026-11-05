@@ -748,6 +748,174 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .thjstatus{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-weight:700;font-size:20px;pointer-events:none}
 .thjstatus.ok{color:#2E9E5B}.thjstatus.no{color:#E0403A}
 
+/* ===== Taman Ceria ===== */
+.s-taman{--c:var(--koral);--cp:var(--koral-p)}
+.tmart{width:100%;height:auto;display:block}
+.tmumur{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;background:var(--kad,#fff);border-radius:22px;padding:10px 12px;box-shadow:0 4px 0 rgba(0,0,0,.05)}
+.tmumur b{margin-right:4px}
+.tmumur button{border:0;border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;background:#F3ECFF;color:#5B4670;cursor:pointer}
+.tmumur button.on{background:#9B6BFF;color:#fff;transform:scale(1.06)}
+.tmkat h3{margin:6px 4px 10px;display:flex;align-items:center;gap:8px;font-size:1.15em}
+.tmkat h3::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--w);box-shadow:0 0 0 4px color-mix(in srgb,var(--w) 30%,transparent)}
+.tmgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.tmtile{position:relative;border:0;font:inherit;color:#3E3150;cursor:pointer;padding:16px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(160deg,#fff,color-mix(in srgb,var(--w) 35%,#fff));box-shadow:0 6px 0 color-mix(in srgb,var(--w) 70%,#000 8%);transition:transform .15s;animation:tmmuncul .5s both}
+.tmtile:active{transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--w) 70%,#000 8%)}
+.tmtile b{font-size:.98em;text-align:center}.tmtile small{opacity:.7;font-size:.78em;text-align:center}
+.tmtileart{width:78px;display:block;animation:tmapung 3s ease-in-out infinite}
+.tmgrid .tmtile:nth-child(2n) .tmtileart{animation-delay:-1.4s}
+.tmst{position:absolute;top:8px;right:10px;color:#FFB800;font-style:normal;font-size:.8em;letter-spacing:-1px}
+.tm-gel{border-radius:36px 36px 36px 10px}
+.tm-heks{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);padding:22px 28px;box-shadow:none}
+.tm-awan{border-radius:60px 60px 40px 40px/50px 50px 30px 30px}
+.tm-daun{border-radius:60px 8px 60px 8px}
+.tm-bulat{border-radius:50%;aspect-ratio:1;justify-content:center}
+.tm-hati{border-radius:44px 44px 18px 18px;border:3px dashed color-mix(in srgb,var(--w) 80%,#fff)}
+.tm-bintang{border-radius:28px;background:radial-gradient(circle at 30% 20%,#fff 0,color-mix(in srgb,var(--w) 45%,#fff) 70%);border:3px solid #FFE08A}
+@keyframes tmmuncul{from{opacity:0;transform:scale(.7) rotate(-4deg)}to{opacity:1;transform:none}}
+@keyframes tmapung{50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes tmlompat{30%{transform:translateY(-14px) scale(1.08)}60%{transform:translateY(0) scale(.96)}}
+@keyframes tmgegar{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes tmgoyang{50%{transform:rotate(-6deg)}}
+.tmok{animation:tmlompat .5s;outline:4px solid #4CD07D;outline-offset:2px}
+.tmno{animation:tmgegar .4s;outline:4px solid #FF7A8A;outline-offset:2px}
+.tmgoyang{animation:tmgoyang 1.6s ease-in-out infinite;display:inline-block}
+.tmsoalno{align-self:center;background:#F3ECFF;color:#5B4670;font-weight:800;border-radius:999px;padding:4px 14px;font-size:.9em}
+.tmtanyaan{text-align:center;margin:4px 0}
+.tmpilih{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.tmpilihlajur{flex-direction:column;align-items:center}
+.tmopt{border:0;font:inherit;background:#fff;border-radius:26px;padding:10px;width:120px;cursor:pointer;box-shadow:0 5px 0 #E6DDF5;display:flex;flex-direction:column;align-items:center;gap:4px;color:#3E3150}
+.tmopt:active{transform:translateY(3px);box-shadow:0 2px 0 #E6DDF5}
+.tmopt small{font-size:.8em;text-align:center}
+.tmhuruf{font-size:2.2em;font-weight:800;width:90px;height:90px;justify-content:center;color:#9B6BFF}
+.tmlabel{width:auto;min-width:200px;font-size:1.1em;font-weight:700;padding:14px 22px}
+.tmrak,.tmcorak{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;background:#FFF8E6;border-radius:28px;padding:16px;position:relative}
+.tmitem{width:96px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:22px;padding:6px;box-shadow:0 3px 0 #F1E3C0}
+.tmitem.kecil{width:76px}
+.tmtanya,.tmkosong{font-size:2.4em;font-weight:800;color:#FF9EC4;font-style:normal;min-height:60px;display:flex;align-items:center;justify-content:center;animation:tmapung 1.5s infinite}
+.tmtirai{height:0;transition:height .8s;background:repeating-linear-gradient(90deg,#FF9EC4 0 30px,#FFB8D4 30px 60px);border-radius:0 0 28px 28px;margin-top:-14px;position:relative;z-index:2}
+.tmtirai.tutup{height:150px;margin-top:-160px}
+.tmkembar{display:grid;grid-template-columns:repeat(var(--c),1fr);gap:12px;max-width:460px;width:100%;align-self:center}
+.tmkad{border:0;padding:0;background:none;aspect-ratio:1;perspective:600px;cursor:pointer;position:relative}
+.tmkad span{position:absolute;inset:0;border-radius:22px;display:flex;align-items:center;justify-content:center;transition:transform .22s,opacity .22s}
+.tmdepan{background:#fff;padding:8px;box-shadow:0 4px 0 #E6DDF5;transform:scaleX(0);opacity:0}
+.tmbelakang{background:radial-gradient(circle at 50% 50%,#fff 0 12%,transparent 13%),repeating-conic-gradient(#FF9EC4 0 15deg,#FFB8D4 15deg 30deg);box-shadow:0 4px 0 #E27FA6}
+.tmkad.buka .tmdepan{transform:none;opacity:1;transition-delay:.18s}.tmkad.buka .tmbelakang{transform:scaleX(0);opacity:0;transition-delay:0s}
+.tmsimonskor{text-align:center;font-weight:800;font-size:1.2em}
+.tmsimon{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:420px;width:100%;align-self:center}
+.tmpad{border:0;aspect-ratio:1;border-radius:40px;background:color-mix(in srgb,var(--w) 55%,#fff);padding:18px;cursor:pointer;transition:transform .12s,filter .12s;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 80%,#000 10%)}
+.tmpad:nth-child(1){border-radius:60px 20px 20px 20px}.tmpad:nth-child(2){border-radius:20px 60px 20px 20px}.tmpad:nth-child(3){border-radius:20px 20px 20px 60px}.tmpad:nth-child(4){border-radius:20px 20px 60px 20px}
+.tmpad.nyala{background:var(--w);transform:scale(1.07);filter:brightness(1.12) drop-shadow(0 0 18px var(--w))}
+.tmsaiz{display:flex;justify-content:center;align-items:flex-end;gap:12px;flex-wrap:wrap;min-height:170px}
+.tmsz{border:0;background:#fff;border-radius:22px;padding:6px;cursor:pointer;box-shadow:0 4px 0 #E6DDF5}
+.tmbaris{display:flex;justify-content:center;align-items:flex-end;gap:10px;min-height:120px;background:linear-gradient(transparent 85%,#9FE3B0 85%);border-radius:24px;padding:10px;flex-wrap:wrap}
+.tmasing{display:flex;flex-direction:column;align-items:center;gap:16px}
+.tmjatuh{display:flex;flex-direction:column;align-items:center;gap:4px}
+.tmjatuh .tmitem{width:150px}
+.tmbakul{display:flex;gap:18px}
+.tmbakul button{border:0;font:inherit;font-weight:800;width:150px;padding:14px;border-radius:20px 20px 46px 46px;background:var(--w);color:#fff;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.12);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 8px,transparent 8px 16px)}
+.tmbakul .art{width:70px}
+.tmbayang{width:220px;align-self:center;background:#FFF8E6;border-radius:50%;padding:28px}
+.tmbayang svg{filter:brightness(0) opacity(.75);transition:filter .6s}
+.tmbayang.buka svg{filter:none}
+.tmlabirin{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);width:min(100%,460px);aspect-ratio:1;align-self:center;background:#E9FBEF;border:4px solid #3FA672;border-radius:16px;touch-action:none}
+.tmsel{border:0 solid #3FA672;box-sizing:border-box;position:relative}
+.tmlobak{position:absolute;inset:12%;animation:tmapung 1.5s infinite}
+.tmarnab{position:absolute;width:calc(100% / var(--n));aspect-ratio:1;padding:4%;box-sizing:border-box;transition:left .12s,top .12s;pointer-events:none}
+.tmpuzcontoh{width:110px;align-self:center;text-align:center;opacity:.85}
+.tmpuzzle{display:grid;grid-template-columns:repeat(var(--g),1fr);gap:4px;width:min(100%,420px);aspect-ratio:6/5;align-self:center;background:#E6DDF5;padding:4px;border-radius:18px}
+.tmkep{border:0;padding:0;background:#fff;cursor:pointer;border-radius:10px;overflow:hidden}
+.tmkep svg{width:100%;height:100%;display:block}
+.tmkep.pilih{outline:4px solid #9B6BFF;transform:scale(.94)}
+.tmpuzzle.siap{gap:0;padding:0;background:#fff}.tmpuzzle.siap .tmkep{border-radius:0}
+.tmalat{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+.tmwarna{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer}
+.tmwarna.on{transform:scale(1.2);box-shadow:0 0 0 3px #5B4670}
+.tmpisah{width:2px;height:28px;background:#E6DDF5}
+.tmalatb{border:0;border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;background:#F3ECFF;color:#5B4670;cursor:pointer}
+.tmalatb.on{background:#9B6BFF;color:#fff}
+.tmkanvas{height:min(56vh,520px);background:#fff;border-radius:26px;box-shadow:inset 0 0 0 4px #F3ECFF;overflow:hidden;touch-action:none}
+.tmkanvas canvas{width:100%;height:100%;display:block;touch-action:none}
+.tmpelekatbar{display:flex;gap:8px;overflow-x:auto;padding:6px}
+.tmpelekatbar button{flex:0 0 70px;border:0;background:#fff;border-radius:16px;padding:4px;cursor:pointer;box-shadow:0 3px 0 #E6DDF5}
+.tmpelekatbar button.on{outline:3px solid #9B6BFF}
+.hide{display:none!important}
+.tmpakai{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:flex-start}
+.tmpentas{width:230px;background:radial-gradient(circle at 50% 30%,#FFF3E0,#FFE1EC);border-radius:40px;padding:14px}
+.tmwatak{width:100%;display:block}
+.tmpakaipilih{display:flex;flex-direction:column;gap:10px;flex:1;min-width:260px}
+.tmpakaibar b{display:block;margin-bottom:4px}
+.tmpakaibar div{display:flex;flex-wrap:wrap;gap:8px}
+.tmpakaibar button{border:0;min-width:52px;height:52px;border-radius:16px;background:#fff;cursor:pointer;box-shadow:0 3px 0 #E6DDF5;font:inherit;font-size:.8em;padding:4px;display:flex;align-items:center;justify-content:center}
+.tmpakaibar button.on{outline:3px solid #9B6BFF}
+.tmpakaibar i{width:34px;height:34px;border-radius:50%;display:block}
+.tmpakaibar svg{width:44px;height:30px}
+.tmpiano{display:flex;gap:6px;justify-content:center;height:230px}
+.tmpiano button{flex:1;max-width:80px;border:0;border-radius:0 0 22px 22px;background:linear-gradient(#fff 55%,color-mix(in srgb,var(--w) 40%,#fff));box-shadow:0 6px 0 var(--w);cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:8px 4px;font:inherit;font-weight:800;color:var(--w)}
+.tmpiano span{width:100%}
+.tmpiano button.main,.tmdram button.main{animation:tmlompat .35s}
+.tmdram{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.tmdram button{border:0;width:90px;height:90px;border-radius:50%;font:inherit;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.15)}
+.tmdram button:nth-child(1){background:#FF7A8A}.tmdram button:nth-child(2){background:#FFB84D}.tmdram button:nth-child(3){background:#4DA3FF}.tmdram button:nth-child(4){background:#9B6BFF}
+.tmbunyi{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tmbunyi .art{width:200px}
+.tmbunyi b{font-size:2.2em;letter-spacing:2px}
+.tmawal{color:#FF5A7A;text-decoration:underline wavy #FFB8D4}
+.tmtajukcerita{text-align:center;margin:0}
+.tmslot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tmslotk{width:130px;min-height:150px;border:3px dashed #D9CCF2;border-radius:26px;display:flex;align-items:center;justify-content:center;position:relative}
+.tmslotk>b{position:absolute;top:6px;left:12px;color:#BBA6FF}
+.tmslotk .tmopt{box-shadow:none;outline:0}
+.tmcer svg{width:100px}
+.tmcer.retak svg{filter:drop-shadow(0 0 0 #000);transform:rotate(-8deg)}
+.tmcer.pelangi{background:linear-gradient(#fff 40%,#FFE1EC,#E1F0FF,#E6FFEF)}
+.tmcer.terbang svg{transform:translate(8px,-8px) rotate(10deg)}.tmcer.tinggi svg{transform:scale(.7) translate(10px,-20px)}
+.tmcer.kupas{background:#FFF7D6}
+.tmrakam{display:flex;flex-direction:column;align-items:center;gap:12px}
+.tmrek{border:0;width:130px;height:130px;border-radius:50%;background:#FF7A8A;color:#fff;font:inherit;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 7px 0 #E25368}
+.tmrek i{width:34px;height:34px;border-radius:50%;background:#fff}
+.tmrek.on i{border-radius:8px;animation:tmapung .8s infinite}
+.tmpadang{position:relative;height:300px;background:linear-gradient(#DFF3FF 60%,#9FE3B0 60%);border-radius:30px;overflow:hidden}
+.tmkiraitem{position:absolute;width:19%;border:0;background:none;padding:0;cursor:pointer;animation:tmapung 2.4s ease-in-out infinite}
+.tmkiraitem i{position:absolute;top:-6px;right:-4px;background:#9B6BFF;color:#fff;font-style:normal;font-weight:800;border-radius:50%;width:30px;height:30px;display:none;align-items:center;justify-content:center}
+.tmkiraitem.dikira i{display:flex}.tmkiraitem.dikira{filter:saturate(1.3);animation:none}
+.tmkirano{align-self:center;font-size:3em;font-weight:900;color:#9B6BFF}
+.tmdua{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.tmpinggan{border:0;width:min(44%,240px);min-height:170px;border-radius:50%;background:radial-gradient(circle,#fff 55%,#F3ECFF 56%,#fff 70%);box-shadow:0 6px 0 #E6DDF5;cursor:pointer;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;padding:24px;gap:2px}
+.tmpinggan .art{width:42px}
+.tmsama{align-self:center;width:auto;padding:12px 22px;font-weight:800}
+.tmrumah{width:min(100%,520px);align-self:center;border-radius:26px;box-shadow:0 6px 0 #E6DDF5}
+.tmrumah [data-b]{cursor:pointer;transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.tmrumah .tmbentukok{stroke:#4CD07D;stroke-width:5;animation:tmlompat .5s}
+.tmrumah .tmbentukno{animation:tmgegar .4s}
+.tmrasabesar{width:180px;align-self:center;animation:tmapung 2s infinite}
+.tmwajah{width:90px;display:block}
+.tmrasabesar .tmwajah{width:100%}
+.tmadab{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tmadab .tmwajah{width:120px;animation:tmgoyang 2s infinite}
+.tmtamat{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;animation:tmmuncul .5s}
+.tmbintang{font-size:3.4em;color:#FFC400;letter-spacing:6px;text-shadow:0 4px 0 #E8A317}
+.tmbintang span{color:#E6DDF5;text-shadow:none}
+.tmpelekatbaru{width:170px;background:#fff;border-radius:50%;padding:22px;box-shadow:0 0 0 8px #FFE08A,0 8px 0 8px #F1C24F;animation:tmlompat 1s .3s both}
+.tmbuku h3{text-align:center}
+.tmpelekatgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px}
+.tmpelekatgrid span{background:#fff;border-radius:50%;aspect-ratio:1;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 0 #F1E3C0;border:3px dashed #FFE08A}
+.tmpelekatgrid span small{font-size:.7em}
+.tmpelekatgrid .kunci svg{filter:grayscale(1) opacity(.25)}
+.tmpeli{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.tmpeliwatak{width:200px;transform:scale(var(--s));animation:tmapung 2.5s infinite}
+.tmpeliwatak.lompat{animation:tmlompat .6s}
+.tmpeliwatak svg{width:100%;height:auto}
+.tmpeli .trkbar{width:min(100%,360px)}
+.tmlapor{display:flex;flex-direction:column;gap:14px}
+.tmgraf{display:flex;gap:8px;align-items:flex-end;height:140px;margin:10px 0}
+.tmgraf span{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:2px}
+.tmgraf i{width:70%;background:linear-gradient(#BBA6FF,#9B6BFF);border-radius:10px 10px 4px 4px;min-height:4px}
+.tmgraf em{font-style:normal;font-size:.75em;opacity:.7}.tmgraf small{font-size:.75em;font-weight:800}
+.tmkemahiran{display:grid;grid-template-columns:1fr 1.4fr auto;gap:10px;align-items:center;margin:6px 0;font-size:.9em}
+.tmkemahiran em{font-style:normal;opacity:.7}
+body.no-gerak .tmtileart,body.no-gerak .tmkiraitem,body.no-gerak .tmpeliwatak{animation:none}
+.tmmahkota{width:110px;margin-bottom:-30px;position:relative;z-index:2;animation:tmgoyang 2s infinite}
+.tmpingat{display:flex;gap:8px}.tmpingat i{width:30px;height:30px;border-radius:50%;background:#EEE8F6;color:#BBA6FF;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}.tmpingat i.dapat{background:#FFD36E;color:#7A5A2E;box-shadow:0 3px 0 #E8A317}
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -5823,6 +5991,404 @@ function qrTulis(i) {
   (document.fonts && document.fonts.load ? document.fonts.load("100px \"Amiri Quran\"") : Promise.resolve()).then(() => setTimeout(sedia, 30));
 }
 
+/* ===== Taman Ceria: 25 aktiviti prasekolah (ingatan, kognitif, kreatif, bahasa, matematik, sahsiah, motivasi) ===== */
+const TM_UMUR_KEY = "appPendidikan.umur", TM_PELEKAT = "appPendidikan.pelekat.v1", TM_LOG = "appPendidikan.tmlog.v1";
+let tmUmur = (() => { try { return +localStorage.getItem(TM_UMUR_KEY) || 4; } catch (e) { return 4; } })();
+const TM_HAIWAN = ["Ayam", "Cicak", "Gajah", "Harimau", "Itik", "Kucing", "Lebah", "Monyet", "Singa", "Tikus", "Ular", "Zirafah", "Rabbit", "Goat", "Dog", "Fish", "Zebra", "Yu"];
+const TM_MAKAN = ["Epal", "Nanas", "Oren", "Pisang", "Ice cream", "Juice", "Egg"];
+const TM_BENDA = ["Bola", "Dadu", "Feri", "Jam", "Rumah", "Van", "Wang", "Xilofon", "Hat", "Kite", "Pencil", "Sun", "Umbrella", "Watch", "Yarn"];
+const TM_SEMUA = TM_HAIWAN.concat(TM_MAKAN, TM_BENDA);
+const TM_NAMA = { Rabbit: "Arnab", Goat: "Kambing", Dog: "Anjing", Fish: "Ikan", Zebra: "Zebra", "Ice cream": "Aiskrim", Juice: "Jus", Egg: "Telur", Hat: "Topi", Kite: "Layang-layang", Pencil: "Pensel", Sun: "Matahari", Umbrella: "Payung", Watch: "Jam Tangan", Yarn: "Benang" };
+const tmNama = k => TM_NAMA[k] || k;
+const tmArt = (k, cls) => artSvg(k, "art tmart " + (cls || ""));
+const tmAmbil = (arr, n) => shuffle(arr).slice(0, n);
+const tmTahap = (a, b, c, d) => [a, b, c, d][Math.min(3, Math.max(0, tmUmur - 3))];
+function tmLog(id) { let d = {}; try { d = JSON.parse(localStorage.getItem(TM_LOG)) || {}; } catch (e) { /* abaikan */ } const k = trkTarikh(); d[k] = d[k] || {}; d[k][id] = (d[k][id] || 0) + 1; try { localStorage.setItem(TM_LOG, JSON.stringify(d)); } catch (e) { /* abaikan */ } }
+function tmPelekat() { try { return JSON.parse(localStorage.getItem(TM_PELEKAT)) || []; } catch (e) { return []; } }
+/* Tamat permainan: bintang, pelekat baharu & pilihan main lagi */
+function tmSelesai(id, bintang, mainLagi) {
+  saveStar("tm-" + id, bintang); tmLog(id); sndWin();
+  const p = tmPelekat(), baki = TM_SEMUA.filter(x => p.indexOf(x) < 0), baru = baki.length ? pick(baki) : null;
+  if (baru) { p.push(baru); try { localStorage.setItem(TM_PELEKAT, JSON.stringify(p)); } catch (e) { /* abaikan */ } }
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="tmtamat"><div class="tmbintang">${"★".repeat(bintang)}<span>${"★".repeat(3 - bintang)}</span></div><h3>${pick(["Hebat!", "Pandai!", "Syabas!", "Bagus sekali!"])}</h3>${baru ? `<p>Kamu dapat pelekat baharu!</p><div class="tmpelekatbaru">${tmArt(baru)}<b>${tmNama(baru)}</b></div>` : "<p>Semua pelekat sudah dikumpul!</p>"}</div>`;
+  const r = k.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 120);
+  $("qrBtns").innerHTML = "";
+  qrButang("play", "Main Lagi", "hijau", mainLagi);
+  qrButang("back", "Taman Ceria", "ungu", renderTaman);
+  qrBual("Tahniah!"); speak("Tahniah! Kamu hebat!", "ms");
+}
+function tmSkrin(tajuk, arahan) { qrSkrin(tajuk, renderTaman); qrBual(arahan); speak(arahan, "ms"); return $("qrKawasan"); }
+function tmBetul(el) { sndOk(); if (el) { el.classList.add("tmok"); const r = el.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } }
+function tmSalah(el) { sndBad(); if (el) { el.classList.remove("tmno"); void el.offsetWidth; el.classList.add("tmno"); } }
+
+/* ---------- Senarai aktiviti ---------- */
+const TAMAN = [
+  ["Ingatan", "gel", "#FF9EC4", [["kembar", "Kad Kembar Ajaib", "Cari pasangan kad", "Kucing"], ["hilang", "Apa Yang Hilang?", "Ingat & teka", "Lebah"], ["simon", "Ikut Rentak", "Ulang urutan bunyi", "Itik"]]],
+  ["Kognitif & Logik", "heks", "#8CC8FF", [["saiz", "Susun Saiz", "Kecil ke besar", "Gajah"], ["corak", "Corak Seterusnya", "Teka apa seterusnya", "Epal"], ["asing", "Asingkan Kumpulan", "Haiwan atau makanan?", "Pisang"], ["bayang", "Teka Bayang", "Bayang siapa ini?", "Zirafah"], ["labirin", "Labirin Arnab", "Bantu arnab cari lobak", "Rabbit"], ["puzzle", "Puzzle Gambar", "Susun kepingan", "Singa"]]],
+  ["Kreatif", "awan", "#BBA6FF", [["lukis", "Studio Lukis", "Lukis bebas & pelekat", "Pencil"], ["warna", "Mewarna", "Warnakan gambar", "Umbrella"], ["pakai", "Pakaikan Watak", "Pilih baju & topi", "Hat"], ["muzik", "Muzik Kecil", "Piano & dram haiwan", "Xilofon"]]],
+  ["Bahasa Awal", "daun", "#7FDDBB", [["bunyi", "Bunyi Huruf", "Huruf awal gambar", "Ayam"], ["cerita", "Susun Cerita", "Apa berlaku dahulu?", "Egg"], ["rakam", "Rakam Suaraku", "Sebut & dengar", "Monyet"]]],
+  ["Matematik Awal", "bulat", "#FFD978", [["kira", "Kira & Sentuh", "Kira objek bergerak", "Fish"], ["lebih", "Lebih atau Kurang", "Pinggan mana lebih?", "Oren"], ["bentuk", "Cari Bentuk", "Bentuk di rumah", "Rumah"]]],
+  ["Sahsiah & Emosi", "hati", "#FFB98A", [["rasa", "Kenal Perasaan", "Gembira, sedih, marah", "Sun"], ["rutin", "Rutin Harianku", "Susun aktiviti harian", "Watch"], ["adab", "Adab Islam", "Amalan baik setiap hari", "Quran"]]],
+  ["Ganjaran", "bintang", "#FFC94D", [["pelekat", "Buku Pelekat", "Koleksi pelekat kamu", "Kite"], ["peliharaan", "Buku Ceria", "Watak yang membesar", "Yarn"], ["ibubapa", "Mod Ibu Bapa", "Laporan minggu ini", "Juice"]]]
+];
+function renderTaman() {
+  backMenu = renderTaman; setLux(false);
+  qrSkrin("Taman Ceria", renderPra);
+  const st = loadStars(), k = $("qrKawasan");
+  k.innerHTML = `<div class="tmumur"><b>Umur anak:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${tmUmur === u ? "on" : ""}">${u} tahun</button>`).join("")}</div>` +
+    TAMAN.map(([kat, bentuk, warna, it]) => `<div class="tmkat"><h3 style="--w:${warna}">${kat}</h3><div class="tmgrid">${it.map(x => `<button class="tmtile tm-${bentuk}" style="--w:${warna}" data-g="${x[0]}"><span class="tmtileart">${tmArt(x[3])}</span><b>${x[1]}</b><small>${x[2]}</small>${st["tm-" + x[0]] ? `<i class="tmst">${"★".repeat(st["tm-" + x[0]])}</i>` : ""}</button>`).join("")}</div></div>`).join("");
+  k.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { tmUmur = +b.dataset.u; try { localStorage.setItem(TM_UMUR_KEY, tmUmur); } catch (e) { /* abaikan */ } renderTaman(); });
+  k.querySelectorAll("[data-g]").forEach(b => b.onclick = () => TM_MAIN[b.dataset.g]());
+  qrBual("Pilih permainan kegemaran kamu!");
+}
+
+/* ---------- INGATAN ---------- */
+function tmKembar() {
+  const pas = tmTahap(2, 3, 6, 8), k = tmSkrin("Kad Kembar Ajaib", "Terbalikkan kad dan cari pasangannya!");
+  const kad = shuffle([].concat(...tmAmbil(TM_SEMUA, pas).map(x => [x, x])));
+  k.innerHTML = `<div class="tmkembar" style="--c:${pas <= 3 ? 3 : 4}">${kad.map((x, i) => `<button class="tmkad" data-i="${i}"><span class="tmdepan">${tmArt(x)}</span><span class="tmbelakang"></span></button>`).join("")}</div>`;
+  let buka = [], kunci = false, jumpa = 0, cubaan = 0;
+  k.querySelectorAll(".tmkad").forEach(b => b.onclick = () => {
+    if (kunci || b.classList.contains("buka")) return;
+    b.classList.add("buka"); tone(700, 0, .08); buka.push(b);
+    if (buka.length < 2) return;
+    cubaan++; kunci = true;
+    const [a, c] = buka;
+    if (kad[a.dataset.i] === kad[c.dataset.i]) { setTimeout(() => { tmBetul(a); tmBetul(c); buka = []; kunci = false; jumpa++; if (jumpa === pas) setTimeout(() => tmSelesai("kembar", cubaan <= pas + 2 ? 3 : cubaan <= pas * 2 ? 2 : 1, tmKembar), 700); }, 350); }
+    else setTimeout(() => { a.classList.remove("buka"); c.classList.remove("buka"); buka = []; kunci = false; }, 900);
+  });
+}
+function tmHilang() {
+  const n = tmTahap(3, 4, 5, 6), k = tmSkrin("Apa Yang Hilang?", "Ingat semua gambar ini!");
+  const set = tmAmbil(TM_SEMUA, n), hilang = pick(set);
+  k.innerHTML = `<div class="tmrak">${set.map(x => `<span class="tmitem">${tmArt(x)}</span>`).join("")}</div><div class="tmtirai"></div><div class="tmpilih"></div>`;
+  const mula = tmTahap(5000, 4000, 3500, 3000);
+  setTimeout(() => {
+    if (!$("s-quran").classList.contains("on")) return;
+    k.querySelector(".tmtirai").classList.add("tutup");
+    setTimeout(() => {
+      const rak = k.querySelector(".tmrak"); rak.innerHTML = set.map(x => `<span class="tmitem">${x === hilang ? '<i class="tmkosong">?</i>' : tmArt(x)}</span>`).join("");
+      k.querySelector(".tmtirai").classList.remove("tutup");
+      qrBual("Gambar apa yang hilang?"); speak("Gambar apa yang hilang?", "ms");
+      const pil = shuffle([hilang].concat(tmAmbil(TM_SEMUA.filter(x => set.indexOf(x) < 0), 2)));
+      const p = k.querySelector(".tmpilih"); p.innerHTML = pil.map(x => `<button class="tmopt" data-x="${x}">${tmArt(x)}</button>`).join("");
+      let salah = 0;
+      p.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === hilang) { tmBetul(b); setTimeout(() => tmSelesai("hilang", salah ? 2 : 3, tmHilang), 800); } else { salah++; tmSalah(b); } });
+    }, 900);
+  }, mula);
+}
+function tmSimon() {
+  const k = tmSkrin("Ikut Rentak", "Dengar dan lihat, kemudian ulang urutannya!");
+  const pad = [["Kucing", "#FF9EC4", 523], ["Itik", "#FFD978", 659], ["Lebah", "#7FDDBB", 784], ["Gajah", "#8CC8FF", 392]];
+  k.innerHTML = `<div class="tmsimonskor">Pusingan <b>1</b></div><div class="tmsimon">${pad.map((p, i) => `<button class="tmpad" data-i="${i}" style="--w:${p[1]}">${tmArt(p[0])}</button>`).join("")}</div>`;
+  const el = [...k.querySelectorAll(".tmpad")], sasar = tmTahap(3, 4, 6, 8);
+  let urut = [], giliran = false, pos = 0;
+  const nyala = i => { el[i].classList.add("nyala"); tone(pad[i][2], 0, .35); setTimeout(() => el[i].classList.remove("nyala"), 420); };
+  const tunjuk = () => { giliran = false; urut.push(rnd(0, 3)); k.querySelector(".tmsimonskor b").textContent = urut.length; urut.forEach((i, j) => setTimeout(() => nyala(i), 700 + j * 650)); setTimeout(() => { giliran = true; pos = 0; qrBual("Giliran kamu!"); }, 700 + urut.length * 650); };
+  el.forEach((b, i) => b.onclick = () => {
+    if (!giliran) return; nyala(i);
+    if (i !== urut[pos]) { giliran = false; tmSalah(b); qrBual("Hampir! Cuba lagi."); setTimeout(() => tmSelesai("simon", urut.length > sasar / 2 ? 2 : 1, tmSimon), 900); return; }
+    pos++;
+    if (pos === urut.length) { giliran = false; if (urut.length >= sasar) setTimeout(() => tmSelesai("simon", 3, tmSimon), 700); else { qrBual("Betul! Seterusnya..."); setTimeout(tunjuk, 900); } }
+  });
+  setTimeout(tunjuk, 800);
+}
+
+/* ---------- KOGNITIF ---------- */
+function tmSaiz() {
+  const n = tmTahap(3, 3, 4, 5), x = pick(TM_HAIWAN), k = tmSkrin("Susun Saiz", "Tekan " + tmNama(x) + " paling kecil hingga paling besar!");
+  const saiz = Array.from({ length: n }, (v, i) => 50 + i * (110 / (n - 1)));
+  k.innerHTML = `<div class="tmsaiz">${shuffle(saiz.map((s, i) => [s, i])).map(([s, i]) => `<button class="tmsz" data-i="${i}" style="width:${s}px">${tmArt(x)}</button>`).join("")}</div><div class="tmbaris"></div>`;
+  let ke = 0, salah = 0; const baris = k.querySelector(".tmbaris");
+  k.querySelectorAll(".tmsz").forEach(b => b.onclick = () => { if (+b.dataset.i === ke) { tmBetul(b); baris.appendChild(b); b.onclick = null; ke++; if (ke === n) setTimeout(() => tmSelesai("saiz", salah ? 2 : 3, tmSaiz), 700); } else { salah++; tmSalah(b); } });
+}
+function tmCorak() {
+  const k = tmSkrin("Corak Seterusnya", "Apa gambar seterusnya?");
+  let soal = 0, betul = 0; const jum = 5;
+  const satu = () => {
+    const jenis = pick(tmTahap(["AB"], ["AB", "AAB"], ["AB", "AAB", "ABC"], ["AAB", "ABC", "ABB", "AABB"]));
+    const huruf = [...new Set(jenis)], peta = {}; tmAmbil(TM_SEMUA, huruf.length).forEach((x, i) => peta[huruf[i]] = x);
+    const panjang = jenis.length * 2 + 1, siri = Array.from({ length: panjang }, (v, i) => peta[jenis[i % jenis.length]]), jawab = siri.pop();
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div><div class="tmcorak">${siri.map(x => `<span class="tmitem kecil">${tmArt(x)}</span>`).join("")}<span class="tmitem kecil tmtanya">?</span></div><div class="tmpilih">${shuffle([jawab].concat(tmAmbil(TM_SEMUA.filter(x => x !== jawab), 2))).map(x => `<button class="tmopt" data-x="${x}">${tmArt(x)}</button>`).join("")}</div>`;
+    let cuba = 0;
+    k.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === jawab) { tmBetul(b); k.querySelector(".tmtanya").innerHTML = tmArt(jawab); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("corak", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmCorak), 900); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+function tmAsing() {
+  const k = tmSkrin("Asingkan Kumpulan", "Haiwan atau makanan? Tekan bakul yang betul!");
+  const item = shuffle(tmAmbil(TM_HAIWAN, 4).concat(tmAmbil(TM_MAKAN, 4))).slice(0, tmTahap(4, 6, 8, 8));
+  let i = 0, betul = 0;
+  k.innerHTML = `<div class="tmasing"><div class="tmjatuh"></div><div class="tmbakul"><button data-b="h" style="--w:#7FDDBB"><b>Haiwan</b>${tmArt("Kucing", "mini")}</button><button data-b="m" style="--w:#FFB98A"><b>Makanan</b>${tmArt("Epal", "mini")}</button></div><div class="tmsoalno"></div></div>`;
+  const jatuh = k.querySelector(".tmjatuh");
+  const papar = () => { k.querySelector(".tmsoalno").textContent = (i + 1) + " / " + item.length; jatuh.innerHTML = `<span class="tmitem tmgoyang">${tmArt(item[i])}</span><b>${tmNama(item[i])}</b>`; };
+  k.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
+    const isH = TM_HAIWAN.indexOf(item[i]) >= 0;
+    if ((b.dataset.b === "h") === isH) { tmBetul(b); setTimeout(() => b.classList.remove("tmok"), 500); betul++; i++; if (i >= item.length) setTimeout(() => tmSelesai("asing", betul >= item.length ? 3 : 2, tmAsing), 600); else papar(); }
+    else tmSalah(b);
+  });
+  papar();
+}
+function tmBayang() {
+  const k = tmSkrin("Teka Bayang", "Ini bayang siapa?");
+  let soal = 0, betul = 0; const jum = 5;
+  const satu = () => {
+    const x = pick(TM_SEMUA), pil = shuffle([x].concat(tmAmbil(TM_SEMUA.filter(y => y !== x), tmTahap(1, 2, 2, 3))));
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div><div class="tmbayang">${tmArt(x)}</div><div class="tmpilih">${pil.map(y => `<button class="tmopt" data-x="${y}">${tmArt(y)}</button>`).join("")}</div>`;
+    let cuba = 0;
+    k.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === x) { tmBetul(b); k.querySelector(".tmbayang").classList.add("buka"); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("bayang", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmBayang), 1100); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+function tmLabirin() {
+  const n = tmTahap(4, 5, 6, 7), k = tmSkrin("Labirin Arnab", "Seret arnab ke lobak!");
+  /* jana labirin (DFS) */
+  const dinding = Array.from({ length: n * n }, () => [1, 1, 1, 1]), lawat = new Array(n * n).fill(0), tind = [0]; lawat[0] = 1;
+  while (tind.length) {
+    const c = tind[tind.length - 1], x = c % n, y = (c / n) | 0, jir = [];
+    [[0, -1, 0, 2], [1, 0, 1, 3], [0, 1, 2, 0], [-1, 0, 3, 1]].forEach(([dx, dy, a, b]) => { const nx = x + dx, ny = y + dy; if (nx >= 0 && ny >= 0 && nx < n && ny < n && !lawat[ny * n + nx]) jir.push([ny * n + nx, a, b]); });
+    if (!jir.length) { tind.pop(); continue; }
+    const [nc, a, b] = pick(jir); dinding[c][a] = 0; dinding[nc][b] = 0; lawat[nc] = 1; tind.push(nc);
+  }
+  k.innerHTML = `<div class="tmlabirin" style="--n:${n}">${dinding.map((d, i) => `<div class="tmsel" style="border-top-width:${d[0] ? 4 : 0}px;border-right-width:${d[1] ? 4 : 0}px;border-bottom-width:${d[2] ? 4 : 0}px;border-left-width:${d[3] ? 4 : 0}px">${i === n * n - 1 ? '<span class="tmlobak"><svg viewBox="0 0 40 40"><path d="M20 38 L11 14 q9-5 18 0z" fill="#FF8A3D"/><path d="M20 14 q-6-10-2-12 M20 14 q2-11 6-11 M20 14 q8-6 10-2" stroke="#3FA672" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span>' : ""}</div>`).join("")}<span class="tmarnab">${tmArt("Rabbit")}</span></div>`;
+  const lab = k.querySelector(".tmlabirin"), arnab = k.querySelector(".tmarnab"); let pos = 0, langkah = 0, siap = false;
+  const letak = () => { arnab.style.left = (pos % n) * (100 / n) + "%"; arnab.style.top = ((pos / n) | 0) * (100 / n) + "%"; };
+  const gerak = e => {
+    if (siap) return; const r = lab.getBoundingClientRect(), cx = Math.floor((e.clientX - r.left) / r.width * n), cy = Math.floor((e.clientY - r.top) / r.height * n);
+    if (cx < 0 || cy < 0 || cx >= n || cy >= n) return; const sel = cy * n + cx, x = pos % n, y = (pos / n) | 0;
+    const arah = cx === x + 1 && cy === y ? 1 : cx === x - 1 && cy === y ? 3 : cy === y + 1 && cx === x ? 2 : cy === y - 1 && cx === x ? 0 : -1;
+    if (arah < 0 || dinding[pos][arah]) return;
+    pos = sel; langkah++; letak(); tone(500 + langkah * 10, 0, .05);
+    if (pos === n * n - 1) { siap = true; tmBetul(arnab); setTimeout(() => tmSelesai("labirin", 3, tmLabirin), 800); }
+  };
+  let tekan = false;
+  lab.addEventListener("pointerdown", e => { tekan = true; try { lab.setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ } gerak(e); });
+  lab.addEventListener("pointermove", e => { if (tekan) gerak(e); });
+  lab.addEventListener("pointerup", () => tekan = false);
+  lab.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+  letak();
+}
+function tmPuzzle() {
+  const g = tmTahap(2, 2, 3, 3), x = pick(TM_HAIWAN), k = tmSkrin("Puzzle Gambar", "Tekan dua kepingan untuk tukar tempat!");
+  const N = g * g, kep = Array.from({ length: N }, (v, i) => i); let susun = shuffle(kep); while (susun.every((v, i) => v === i)) susun = shuffle(kep);
+  const svgK = i => { const cx = i % g, cy = (i / g) | 0, w = 120 / g, h = 100 / g; return `<svg viewBox="${cx * w} ${cy * h} ${w} ${h}" preserveAspectRatio="none"><g stroke="#4a3428" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${ART[x]}</g></svg>`; };
+  k.innerHTML = `<div class="tmpuzcontoh">${tmArt(x)}<small>Contoh</small></div><div class="tmpuzzle" style="--g:${g}"></div>`;
+  const papan = k.querySelector(".tmpuzzle"); let pilih = null, gerak = 0;
+  const papar = () => { papan.innerHTML = susun.map((p, i) => `<button class="tmkep${p === i ? " betul" : ""}" data-i="${i}">${svgK(p)}</button>`).join(""); papan.querySelectorAll(".tmkep").forEach(b => b.onclick = () => {
+    const i = +b.dataset.i; if (pilih === null) { pilih = i; b.classList.add("pilih"); tone(600, 0, .06); return; }
+    [susun[pilih], susun[i]] = [susun[i], susun[pilih]]; pilih = null; gerak++; sndOk(); papar();
+    if (susun.every((v, j) => v === j)) { papan.classList.add("siap"); setTimeout(() => tmSelesai("puzzle", gerak <= N ? 3 : gerak <= N * 2 ? 2 : 1, tmPuzzle), 900); }
+  }); };
+  papar();
+}
+
+/* ---------- KREATIF ---------- */
+function tmLukis() {
+  const k = tmSkrin("Studio Lukis", "Lukis apa sahaja yang kamu suka!");
+  const warna = ["#FF5A7A", "#FF9F43", "#FFD93D", "#4CD07D", "#4DA3FF", "#9B6BFF", "#5B4670", "pelangi"];
+  k.innerHTML = `<div class="tmalat">${warna.map((w, i) => `<button class="tmwarna${i === 0 ? " on" : ""}" data-w="${w}" style="background:${w === "pelangi" ? "conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)" : w}"></button>`).join("")}<span class="tmpisah"></span><button class="tmalatb on" data-s="8">Halus</button><button class="tmalatb" data-s="18">Tebal</button><button class="tmalatb" data-cermin="1">Cermin</button><button class="tmalatb" data-pel="1">Pelekat</button></div>
+    <div class="tmkanvas"><canvas></canvas></div><div class="tmpelekatbar hide">${TM_SEMUA.slice(0, 18).map(x => `<button data-p="${x}">${tmArt(x)}</button>`).join("")}</div>`;
+  const c = k.querySelector("canvas"), box = k.querySelector(".tmkanvas"), pb = k.querySelector(".tmpelekatbar");
+  let w = "#FF5A7A", tebal = 8, cermin = false, pel = null, hue = 0, akhir = null;
+  const sedia = () => { const dpr = devicePixelRatio || 1; c.width = box.clientWidth * dpr; c.height = box.clientHeight * dpr; const g = c.getContext("2d"); g.scale(dpr, dpr); g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); };
+  setTimeout(sedia, 30);
+  const xy = e => { const r = c.getBoundingClientRect(), sk = c.clientWidth / r.width; return [(e.clientX - r.left) * sk, (e.clientY - r.top) * sk]; };
+  const garis = (a, b) => { const g = c.getContext("2d"); g.lineCap = "round"; g.lineJoin = "round"; g.lineWidth = tebal; hue = (hue + 4) % 360; g.strokeStyle = w === "pelangi" ? `hsl(${hue},90%,58%)` : w;
+    [[a, b]].concat(cermin ? [[[c.clientWidth - a[0], a[1]], [c.clientWidth - b[0], b[1]]]] : []).forEach(([p, q]) => { g.beginPath(); g.moveTo(p[0], p[1]); g.lineTo(q[0], q[1]); g.stroke(); }); };
+  c.addEventListener("pointerdown", e => {
+    const p = xy(e);
+    if (pel) { const img = new Image(), s = new XMLSerializer().serializeToString(document.querySelector(`.tmpelekatbar [data-p="${pel}"] svg`)); img.onload = () => { const g = c.getContext("2d"); g.drawImage(img, p[0] - 45, p[1] - 38, 90, 75); if (cermin) g.drawImage(img, c.clientWidth - p[0] - 45, p[1] - 38, 90, 75); }; img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(s); sndOk(); return; }
+    akhir = p; try { c.setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ } garis(p, [p[0] + .1, p[1]]);
+  });
+  c.addEventListener("pointermove", e => { if (!akhir) return; const p = xy(e); garis(akhir, p); akhir = p; });
+  c.addEventListener("pointerup", () => akhir = null);
+  c.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+  k.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { w = b.dataset.w; pel = null; k.querySelectorAll("[data-w]").forEach(z => z.classList.toggle("on", z === b)); });
+  k.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { tebal = +b.dataset.s; k.querySelectorAll("[data-s]").forEach(z => z.classList.toggle("on", z === b)); });
+  k.querySelector("[data-cermin]").onclick = e => { cermin = !cermin; e.currentTarget.classList.toggle("on", cermin); };
+  k.querySelector("[data-pel]").onclick = e => { pb.classList.toggle("hide"); e.currentTarget.classList.toggle("on"); if (pb.classList.contains("hide")) pel = null; };
+  pb.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { pel = b.dataset.p; pb.querySelectorAll("[data-p]").forEach(z => z.classList.toggle("on", z === b)); });
+  qrButang("padam", "Padam Semua", "koral", sedia);
+  qrButang("play", "Siap!", "hijau", () => tmSelesai("lukis", 3, tmLukis));
+}
+function tmWarna() { tmLog("warna"); saveStar("tm-warna", 1); startWarna(0); }
+function tmPakai() {
+  const k = tmSkrin("Pakaikan Watak", "Pilih baju, topi dan aksesori untuk Ceria!");
+  const BAJU = ["#FF9EC4", "#8CC8FF", "#7FDDBB", "#FFD978", "#BBA6FF", "#FFB98A"];
+  const TOPI = [null, `<path d="M30 30 q30-26 60 0z" fill="#FF7A8A"/><circle cx="60" cy="12" r="6" fill="#FFD36E"/>`, `<rect x="36" y="14" width="48" height="16" rx="4" fill="#5B4670"/><rect x="28" y="28" width="64" height="6" rx="3" fill="#5B4670"/>`, `<path d="M38 30 l6-18 l10 10 l6-14 l6 14 l10-10 l6 18z" fill="#FFD36E" stroke="#E8A317" stroke-width="2"/>`, `<path d="M32 32 q28-30 56 0" fill="none" stroke="#7FDDBB" stroke-width="8" stroke-linecap="round"/><circle cx="86" cy="26" r="7" fill="#FF9EC4"/>`];
+  const AKS = [null, `<circle cx="47" cy="58" r="9" fill="none" stroke="#3E3150" stroke-width="3"/><circle cx="73" cy="58" r="9" fill="none" stroke="#3E3150" stroke-width="3"/><path d="M56 58 h8" stroke="#3E3150" stroke-width="3"/>`, `<path d="M50 84 l10 6 l10-6 l-3 12 l-7-4 l-7 4z" fill="#FF5A7A"/>`, `<path d="M40 86 q20 10 40 0 l2 8 q-22 10-44 0z" fill="#4DA3FF"/>`];
+  const KASUT = ["#5B4670", "#FF7A8A", "#4DA3FF", "#FFD36E"];
+  let s = { baju: 0, topi: 1, aks: 0, kasut: 0 };
+  const watak = () => `<svg viewBox="0 0 120 150" class="tmwatak"><ellipse cx="60" cy="144" rx="34" ry="5" fill="#000" opacity=".08"/><rect x="40" y="126" width="16" height="12" rx="6" fill="${KASUT[s.kasut]}"/><rect x="64" y="126" width="16" height="12" rx="6" fill="${KASUT[s.kasut]}"/><path d="M34 90 q26-12 52 0 v34 q-26 8-52 0z" fill="${BAJU[s.baju]}"/><circle cx="60" cy="60" r="32" fill="#FFE1C8"/><ellipse cx="48" cy="58" rx="4" ry="5" fill="#3E3150"/><ellipse cx="72" cy="58" rx="4" ry="5" fill="#3E3150"/><circle cx="49.5" cy="56" r="1.6" fill="#fff"/><circle cx="73.5" cy="56" r="1.6" fill="#fff"/><ellipse cx="40" cy="68" rx="6" ry="3.5" fill="#FF9EC4"/><ellipse cx="80" cy="68" rx="6" ry="3.5" fill="#FF9EC4"/><path d="M54 70 q6 6 12 0" stroke="#3E3150" stroke-width="2.6" fill="none" stroke-linecap="round"/>${TOPI[s.topi] || ""}${AKS[s.aks] || ""}</svg>`;
+  const baris = (lbl, kunci, n, rupa) => `<div class="tmpakaibar"><b>${lbl}</b><div>${Array.from({ length: n }, (v, i) => `<button data-k="${kunci}" data-v="${i}" class="${s[kunci] === i ? "on" : ""}">${rupa(i)}</button>`).join("")}</div></div>`;
+  const papar = () => {
+    k.innerHTML = `<div class="tmpakai"><div class="tmpentas">${watak()}</div><div class="tmpakaipilih">${baris("Baju", "baju", BAJU.length, i => `<i style="background:${BAJU[i]}"></i>`)}${baris("Topi", "topi", TOPI.length, i => i ? `<svg viewBox="20 0 80 40">${TOPI[i]}</svg>` : "Tiada")}${baris("Aksesori", "aks", AKS.length, i => i ? `<svg viewBox="30 40 60 60">${AKS[i]}</svg>` : "Tiada")}${baris("Kasut", "kasut", KASUT.length, i => `<i style="background:${KASUT[i]}"></i>`)}</div></div>`;
+    k.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { s[b.dataset.k] = +b.dataset.v; tone(650, 0, .06); papar(); k.querySelector(".tmwatak").classList.add("tmgoyang"); });
+  };
+  papar();
+  qrButang("play", "Siap!", "hijau", () => tmSelesai("pakai", 3, tmPakai));
+}
+function tmMuzik() {
+  const k = tmSkrin("Muzik Kecil", "Tekan kekunci piano dan dram!");
+  const not = [["Do", 262, "#FF5A7A", "Kucing"], ["Re", 294, "#FF9F43", "Itik"], ["Mi", 330, "#FFD93D", "Lebah"], ["Fa", 349, "#4CD07D", "Fish"], ["So", 392, "#4DA3FF", "Gajah"], ["La", 440, "#9B6BFF", "Monyet"], ["Ti", 494, "#FF7AC8", "Rabbit"], ["Do", 523, "#FF5A7A", "Zirafah"]];
+  k.innerHTML = `<div class="tmpiano">${not.map((n, i) => `<button data-i="${i}" style="--w:${n[2]}"><span>${tmArt(n[3])}</span><b>${n[0]}</b></button>`).join("")}</div>
+    <div class="tmdram"><button data-d="0">Dram</button><button data-d="1">Tepuk</button><button data-d="2">Loceng</button><button data-d="3">Gong</button></div>
+    <p class="qrpesan">Cuba main lagu "Bintang Kecil": Do Do So So La La So</p>`;
+  k.querySelectorAll("[data-i]").forEach(b => b.onpointerdown = () => { const n = not[b.dataset.i]; tone(n[1], 0, .45, "triangle"); b.classList.remove("main"); void b.offsetWidth; b.classList.add("main"); });
+  const dram = [() => tone(90, 0, .25, "sine"), () => { tone(1800, 0, .04, "square"); tone(1200, .02, .04, "square"); }, () => { tone(1320, 0, .5, "sine"); tone(1980, 0, .3, "sine"); }, () => { tone(110, 0, 1.2, "sine"); tone(165, 0, .9, "sine"); }];
+  k.querySelectorAll("[data-d]").forEach(b => b.onpointerdown = () => { dram[b.dataset.d](); b.classList.remove("main"); void b.offsetWidth; b.classList.add("main"); });
+  qrButang("play", "Siap!", "hijau", () => tmSelesai("muzik", 3, tmMuzik));
+}
+
+/* ---------- BAHASA ---------- */
+function tmBunyi() {
+  const k = tmSkrin("Bunyi Huruf", "Apakah huruf awal gambar ini?");
+  const calon = ["Ayam", "Bola", "Cicak", "Dadu", "Epal", "Feri", "Gajah", "Harimau", "Itik", "Jam", "Kucing", "Lebah", "Monyet", "Nanas", "Oren", "Pisang", "Rumah", "Singa", "Tikus", "Ular", "Van", "Wang", "Yu", "Zirafah"];
+  let soal = 0, betul = 0; const jum = 5;
+  const satu = () => {
+    const x = pick(calon), h = x[0], pil = shuffle([h].concat(tmAmbil("ABCDEFGHIJKLMNOPRSTUVWYZ".split("").filter(y => y !== h), tmTahap(1, 2, 2, 3))));
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div><div class="tmbunyi">${tmArt(x)}<b><span class="tmawal">${tmUmur <= 3 ? h : "_"}</span>${x.slice(1).toLowerCase()}</b></div><div class="tmpilih">${pil.map(y => `<button class="tmopt tmhuruf" data-x="${y}">${y}</button>`).join("")}</div>`;
+    speak(x, "ms"); let cuba = 0;
+    k.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === h) { tmBetul(b); k.querySelector(".tmawal").textContent = h; if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("bunyi", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmBunyi), 900); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+const TM_CERITA = [
+  ["Telur Menetas", [["Egg", "Ada sebiji telur"], ["Egg", "Telur mula retak", "retak"], ["Ayam", "Anak ayam keluar"]]],
+  ["Hujan & Pelangi", [["Sun", "Hari cerah"], ["Umbrella", "Hujan turun"], ["Sun", "Pelangi muncul", "pelangi"]]],
+  ["Main Layang-layang", [["Kite", "Ambil layang-layang"], ["Kite", "Lari dan lepaskan", "terbang"], ["Kite", "Layang-layang terbang tinggi", "tinggi"]]],
+  ["Makan Pisang", [["Pisang", "Ambil pisang"], ["Pisang", "Kupas kulitnya", "kupas"], ["Monyet", "Monyet kenyang"]]]
+];
+function tmCerita() {
+  const [tajuk, adegan] = pick(TM_CERITA), k = tmSkrin("Susun Cerita", "Susun gambar ikut urutan cerita: " + tajuk);
+  const n = tmTahap(3, 3, 3, 3), urut = adegan.slice(0, n), kacau = shuffle(urut.map((a, i) => [a, i]));
+  k.innerHTML = `<h3 class="tmtajukcerita">${tajuk}</h3><div class="tmslot">${urut.map((a, i) => `<div class="tmslotk"><b>${i + 1}</b></div>`).join("")}</div><div class="tmpilih">${kacau.map(([a, i]) => `<button class="tmopt tmcer ${a[2] || ""}" data-i="${i}">${tmArt(a[0])}<small>${a[1]}</small></button>`).join("")}</div>`;
+  let ke = 0, salah = 0; const slot = [...k.querySelectorAll(".tmslotk")];
+  k.querySelectorAll(".tmcer").forEach(b => b.onclick = () => { if (+b.dataset.i === ke) { tmBetul(b); slot[ke].appendChild(b); b.onclick = null; ke++; if (ke === n) setTimeout(() => tmSelesai("cerita", salah ? 2 : 3, tmCerita), 800); } else { salah++; tmSalah(b); } });
+}
+function tmRakam() {
+  const x = pick(TM_HAIWAN), k = tmSkrin("Rakam Suaraku", "Sebut nama haiwan ini, kemudian dengar suara kamu!");
+  k.innerHTML = `<div class="tmbunyi">${tmArt(x)}<b>${tmNama(x)}</b></div><div class="tmrakam"><button class="tmrek"><i></i><span>Rakam</span></button><audio controls class="hide"></audio></div>`;
+  const b = k.querySelector(".tmrek"), au = k.querySelector("audio"); let rec = null, bah = [];
+  b.onclick = async () => {
+    if (rec && rec.state === "recording") { rec.stop(); return; }
+    try {
+      const st = await navigator.mediaDevices.getUserMedia({ audio: true }); bah = []; rec = new MediaRecorder(st);
+      rec.ondataavailable = e => bah.push(e.data);
+      rec.onstop = () => { st.getTracks().forEach(t => t.stop()); au.src = URL.createObjectURL(new Blob(bah)); au.classList.remove("hide"); au.play(); b.classList.remove("on"); b.querySelector("span").textContent = "Rakam Lagi"; qrBual("Dengar suara kamu!"); };
+      rec.start(); b.classList.add("on"); b.querySelector("span").textContent = "Berhenti"; setTimeout(() => rec && rec.state === "recording" && rec.stop(), 5000);
+    } catch (e) { qrBual("Mikrofon tidak dapat dibuka."); }
+  };
+  qrButang("next", "Haiwan Lain", "biru", tmRakam);
+  qrButang("play", "Siap!", "hijau", () => tmSelesai("rakam", 3, tmRakam));
+}
+
+/* ---------- MATEMATIK ---------- */
+function tmKira() {
+  const n = rnd(tmTahap(2, 3, 4, 6), tmTahap(4, 6, 9, 10)), x = pick(TM_HAIWAN.concat(TM_MAKAN)), k = tmSkrin("Kira & Sentuh", "Sentuh setiap " + tmNama(x) + " untuk mengira!");
+  k.innerHTML = `<div class="tmpadang">${Array.from({ length: n }, (v, i) => `<button class="tmkiraitem" style="left:${8 + (i % 4) * 22 + rnd(0, 6)}%;top:${8 + ((i / 4) | 0) * 30 + rnd(0, 8)}%;animation-delay:${i * .2}s">${tmArt(x)}<i></i></button>`).join("")}</div><div class="tmkirano">0</div><div class="tmpilih"></div>`;
+  let kira = 0;
+  k.querySelectorAll(".tmkiraitem").forEach(b => b.onclick = () => {
+    if (b.classList.contains("dikira")) return; kira++; b.classList.add("dikira"); b.querySelector("i").textContent = kira; k.querySelector(".tmkirano").textContent = kira; tone(400 + kira * 50, 0, .12); speak(String(kira), "ms");
+    if (kira === n) { qrBual("Semuanya ada berapa?"); const p = k.querySelector(".tmpilih"); p.innerHTML = shuffle([n, n + 1, Math.max(1, n - 1)].filter((v, i, a) => a.indexOf(v) === i)).map(v => `<button class="tmopt tmhuruf" data-v="${v}">${v}</button>`).join(""); let cuba = 0; p.querySelectorAll(".tmopt").forEach(o => o.onclick = () => { if (+o.dataset.v === n) { tmBetul(o); setTimeout(() => tmSelesai("kira", cuba ? 2 : 3, tmKira), 800); } else { cuba++; tmSalah(o); } }); }
+  });
+}
+function tmLebih() {
+  const k = tmSkrin("Lebih atau Kurang", "Pinggan mana lebih banyak?");
+  let soal = 0, betul = 0; const jum = 5;
+  const satu = () => {
+    const x = pick(TM_MAKAN), maks = tmTahap(4, 6, 8, 10), a = rnd(1, maks), samaSoal = tmUmur >= 5 && Math.random() < .25, b = samaSoal ? a : (() => { let v; do v = rnd(1, maks); while (v === a); return v; })();
+    const tanya = samaSoal ? pick(["lebih", "kurang"]) : pick(tmUmur >= 4 ? ["lebih", "kurang"] : ["lebih"]), jawab = a === b ? "sama" : (tanya === "lebih" ? (a > b ? "a" : "b") : (a < b ? "a" : "b"));
+    const pinggan = (n, id) => `<button class="tmpinggan" data-p="${id}">${Array.from({ length: n }, () => tmArt(x, "kecil")).join("")}</button>`;
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div><h3 class="tmtanyaan">Pinggan mana <b>${tanya === "lebih" ? "LEBIH banyak" : "KURANG"}</b>?</h3><div class="tmdua">${pinggan(a, "a")}${pinggan(b, "b")}</div>${tmUmur >= 5 ? `<button class="tmopt tmsama" data-p="sama">Sama banyak</button>` : ""}`;
+    qrBual("Pinggan mana " + (tanya === "lebih" ? "lebih banyak" : "kurang") + "?"); let cuba = 0;
+    k.querySelectorAll("[data-p]").forEach(o => o.onclick = () => { if (o.dataset.p === jawab) { tmBetul(o); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("lebih", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmLebih), 900); } else { cuba++; tmSalah(o); } });
+  };
+  satu();
+}
+function tmBentuk() {
+  const k = tmSkrin("Cari Bentuk", "Cari bentuk di dalam gambar rumah!");
+  const B = [["bulatan", "Bulatan"], ["segitiga", "Segi tiga"], ["segiempat", "Segi empat sama"], ["tepat", "Segi empat tepat"]];
+  k.innerHTML = `<div class="tmsoalno"></div><h3 class="tmtanyaan"></h3><svg viewBox="0 0 300 220" class="tmrumah"><rect width="300" height="220" fill="#DFF3FF"/><rect y="180" width="300" height="40" fill="#9FE3B0"/>
+    <circle data-b="bulatan" cx="250" cy="45" r="26" fill="#FFD36E"/><polygon data-b="segitiga" points="70,95 150,35 230,95" fill="#FF7A8A"/><rect data-b="tepat" x="85" y="95" width="130" height="85" fill="#FFF3E0"/>
+    <rect data-b="segiempat" x="100" y="110" width="34" height="34" fill="#8CC8FF"/><rect data-b="segiempat" x="166" y="110" width="34" height="34" fill="#8CC8FF"/><rect data-b="tepat" x="136" y="135" width="28" height="45" fill="#B98A5E"/>
+    <circle data-b="bulatan" cx="40" cy="160" r="14" fill="#FF9EC4"/><polygon data-b="segitiga" points="20,182 40,140 60,182" fill="#7FDDBB" opacity="0"/></svg>`;
+  const soal = shuffle(B).slice(0, tmTahap(2, 3, 4, 4)); let i = 0, salah = 0;
+  const tanya = () => { k.querySelector(".tmsoalno").textContent = (i + 1) + " / " + soal.length; k.querySelector(".tmtanyaan").innerHTML = "Tekan <b>" + soal[i][1] + "</b>"; qrBual("Tekan " + soal[i][1]); speak("Tekan " + soal[i][1], "ms"); };
+  k.querySelectorAll("[data-b]").forEach(el => el.addEventListener("click", () => { if (el.dataset.b === soal[i][0]) { tmBetul(); el.classList.add("tmbentukok"); i++; if (i >= soal.length) setTimeout(() => tmSelesai("bentuk", salah ? 2 : 3, tmBentuk), 700); else setTimeout(tanya, 600); } else { salah++; sndBad(); el.classList.remove("tmbentukno"); void el.getBBox(); el.classList.add("tmbentukno"); } }));
+  tanya();
+}
+
+/* ---------- SAHSIAH & EMOSI ---------- */
+const TM_WAJAH = { gembira: ["Gembira", "#FFD978", `<path d="M40 64 q20 18 40 0" stroke="#3E3150" stroke-width="5" fill="none" stroke-linecap="round"/>`, ""], sedih: ["Sedih", "#8CC8FF", `<path d="M42 74 q18-14 36 0" stroke="#3E3150" stroke-width="5" fill="none" stroke-linecap="round"/>`, `<path d="M38 52 q3 8 0 12" stroke="#4DA3FF" stroke-width="4" fill="none"/>`], marah: ["Marah", "#FF8A8A", `<path d="M44 72 h32" stroke="#3E3150" stroke-width="5" stroke-linecap="round"/>`, `<path d="M34 36 l14 6 M86 36 l-14 6" stroke="#3E3150" stroke-width="4" stroke-linecap="round"/>`], takut: ["Takut", "#BBA6FF", `<ellipse cx="60" cy="72" rx="8" ry="10" fill="#3E3150"/>`, `<path d="M34 34 q10-6 16 0 M70 34 q6-6 16 0" stroke="#3E3150" stroke-width="3" fill="none"/>`], terkejut: ["Terkejut", "#7FDDBB", `<circle cx="60" cy="72" r="8" fill="#3E3150"/>`, ""] };
+const tmWajah = k => { const w = TM_WAJAH[k]; return `<svg viewBox="0 0 120 120" class="tmwajah"><circle cx="60" cy="60" r="48" fill="${w[1]}"/><ellipse cx="44" cy="48" rx="5" ry="7" fill="#3E3150"/><ellipse cx="76" cy="48" rx="5" ry="7" fill="#3E3150"/><circle cx="46" cy="45" r="2" fill="#fff"/><circle cx="78" cy="45" r="2" fill="#fff"/><ellipse cx="32" cy="64" rx="7" ry="4" fill="#FF9EC4" opacity=".8"/><ellipse cx="88" cy="64" rx="7" ry="4" fill="#FF9EC4" opacity=".8"/>${w[2]}${w[3]}</svg>`; };
+function tmRasa() {
+  const k = tmSkrin("Kenal Perasaan", "Bagaimana perasaannya?");
+  const situasi = [["Adik dapat hadiah hari jadi.", "gembira"], ["Aiskrim adik jatuh ke tanah.", "sedih"], ["Mainan adik dirampas.", "marah"], ["Bunyi guruh yang kuat!", "takut"], ["Kawan datang tanpa diduga.", "terkejut"], ["Ibu memeluk adik.", "gembira"], ["Kucing adik hilang.", "sedih"]];
+  let soal = 0, betul = 0; const jum = 5, set = tmAmbil(situasi, jum);
+  const satu = () => {
+    const [ayat, jawab] = set[soal], mod = tmUmur <= 3 || Math.random() < .4;
+    const pil = shuffle([jawab].concat(tmAmbil(Object.keys(TM_WAJAH).filter(x => x !== jawab), tmTahap(1, 2, 3, 3))));
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div>` + (mod ? `<div class="tmrasabesar">${tmWajah(jawab)}</div><h3 class="tmtanyaan">Wajah ini rasa apa?</h3><div class="tmpilih">${pil.map(x => `<button class="tmopt tmlabel" data-x="${x}">${TM_WAJAH[x][0]}</button>`).join("")}</div>`
+      : `<h3 class="tmtanyaan">${ayat}</h3><p class="qrpesan">Bagaimana perasaan adik?</p><div class="tmpilih">${pil.map(x => `<button class="tmopt" data-x="${x}">${tmWajah(x)}<small>${TM_WAJAH[x][0]}</small></button>`).join("")}</div>`);
+    speak(mod ? "Wajah ini rasa apa?" : ayat, "ms"); let cuba = 0;
+    k.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === jawab) { tmBetul(b); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("rasa", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmRasa), 900); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+const TM_RUTIN = [["Bangun tidur", `<rect x="10" y="60" width="100" height="30" rx="8" fill="#BBA6FF"/><rect x="14" y="48" width="30" height="16" rx="8" fill="#fff"/><circle cx="90" cy="30" r="16" fill="#FFD36E"/>`], ["Gosok gigi", `<rect x="20" y="52" width="70" height="12" rx="6" fill="#8CC8FF"/><rect x="80" y="44" width="22" height="16" rx="4" fill="#fff" stroke="#8CC8FF" stroke-width="3"/><circle cx="96" cy="34" r="5" fill="#BDEBFF"/><circle cx="104" cy="26" r="3" fill="#BDEBFF"/>`], ["Mandi", `<path d="M12 56 h96 q0 30-30 30 h-36 q-30 0-30-30z" fill="#8CC8FF"/><circle cx="40" cy="48" r="8" fill="#fff"/><circle cx="58" cy="42" r="10" fill="#fff"/><circle cx="78" cy="48" r="7" fill="#fff"/>`], ["Makan", `<ellipse cx="60" cy="70" rx="44" ry="14" fill="#fff" stroke="#FFB98A" stroke-width="4"/><circle cx="48" cy="62" r="10" fill="#FF9F43"/><circle cx="68" cy="60" r="9" fill="#7FDDBB"/>`], ["Ke sekolah", `<rect x="30" y="30" width="60" height="56" rx="14" fill="#FF9EC4"/><rect x="42" y="56" width="36" height="22" rx="8" fill="#FFD6E5"/><path d="M48 30 v-8 a12 12 0 0 1 24 0 v8" stroke="#E27FA6" stroke-width="5" fill="none"/>`], ["Tidur malam", `<path d="M78 20 a26 26 0 1 0 22 36 a20 20 0 0 1-22-36z" fill="#FFD36E"/><circle cx="30" cy="30" r="3" fill="#FFD36E"/><circle cx="48" cy="18" r="2" fill="#FFD36E"/>`]];
+function tmRutin() {
+  const k = tmSkrin("Rutin Harianku", "Susun aktiviti dari pagi hingga malam!");
+  const pilih = tmTahap([0, 1, 3], [0, 1, 2, 3], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5]);
+  k.innerHTML = `<div class="tmslot">${pilih.map((v, i) => `<div class="tmslotk"><b>${i + 1}</b></div>`).join("")}</div><div class="tmpilih">${shuffle(pilih.map((v, i) => [v, i])).map(([v, i]) => `<button class="tmopt tmcer" data-i="${i}"><svg viewBox="0 0 120 100">${TM_RUTIN[v][1]}</svg><small>${TM_RUTIN[v][0]}</small></button>`).join("")}</div>`;
+  let ke = 0, salah = 0; const slot = [...k.querySelectorAll(".tmslotk")];
+  k.querySelectorAll(".tmcer").forEach(b => b.onclick = () => { if (+b.dataset.i === ke) { tmBetul(b); slot[ke].appendChild(b); b.onclick = null; ke++; if (ke === pilih.length) setTimeout(() => tmSelesai("rutin", salah ? 2 : 3, tmRutin), 800); } else { salah++; tmSalah(b); } });
+}
+function tmAdab() {
+  const k = tmSkrin("Adab Islam", "Pilih perbuatan yang baik!");
+  const S = [["Sebelum makan, kita...", "Baca doa makan", ["Terus makan", "Main dahulu"]], ["Bila jumpa kawan, kita...", "Beri salam", ["Buat tidak tahu", "Lari"]], ["Kawan tiada mainan, kita...", "Kongsi mainan", ["Sorok mainan", "Ketawakan dia"]], ["Ibu memberi hadiah, kita ucap...", "Terima kasih", ["Tidak mahu", "Diam sahaja"]], ["Makan menggunakan tangan...", "Kanan", ["Kiri", "Kaki"]], ["Selepas buang sampah, kita...", "Basuh tangan", ["Terus makan", "Lap pada baju"]], ["Masuk rumah, kita ucap...", "Assalamualaikum", ["Hei!", "Tiada apa"]], ["Bila bersin, kita ucap...", "Alhamdulillah", ["Aduh", "Tidak apa"]]];
+  let soal = 0, betul = 0; const jum = 5, set = tmAmbil(S, jum);
+  const satu = () => {
+    const [ayat, jawab, salahP] = set[soal];
+    k.innerHTML = `<div class="tmsoalno">${soal + 1} / ${jum}</div><div class="tmadab"><svg viewBox="0 0 120 120" class="tmwajah"><circle cx="60" cy="60" r="48" fill="#FFE1C8"/><path d="M14 52 q46-60 92 0 q-4-34-46-40 q-42 6-46 40z" fill="#7FDDBB"/><ellipse cx="44" cy="62" rx="5" ry="6" fill="#3E3150"/><ellipse cx="76" cy="62" rx="5" ry="6" fill="#3E3150"/><ellipse cx="34" cy="76" rx="7" ry="4" fill="#FF9EC4"/><ellipse cx="86" cy="76" rx="7" ry="4" fill="#FF9EC4"/><path d="M52 80 q8 7 16 0" stroke="#3E3150" stroke-width="3" fill="none" stroke-linecap="round"/></svg><h3 class="tmtanyaan">${ayat}</h3></div><div class="tmpilih tmpilihlajur">${shuffle([jawab].concat(salahP)).map(x => `<button class="tmopt tmlabel" data-x="${x}">${x}</button>`).join("")}</div>`;
+    speak(ayat, "ms"); let cuba = 0;
+    k.querySelectorAll(".tmopt").forEach(b => b.onclick = () => { if (b.dataset.x === jawab) { tmBetul(b); if (!cuba) betul++; soal++; setTimeout(() => soal < jum ? satu() : tmSelesai("adab", betul >= 5 ? 3 : betul >= 3 ? 2 : 1, tmAdab), 900); } else { cuba++; tmSalah(b); } });
+  };
+  satu();
+}
+
+/* ---------- GANJARAN ---------- */
+function tmBukuPelekat() {
+  const k = tmSkrin("Buku Pelekat", "Main permainan untuk kumpul pelekat!"), p = tmPelekat();
+  k.innerHTML = `<div class="tmbuku"><h3>${p.length} / ${TM_SEMUA.length} pelekat</h3><div class="tmpelekatgrid">${TM_SEMUA.map(x => `<span class="${p.indexOf(x) >= 0 ? "ada" : "kunci"}">${tmArt(x)}<small>${p.indexOf(x) >= 0 ? tmNama(x) : "?"}</small></span>`).join("")}</div></div>`;
+}
+function tmPeliharaan() {
+  const k = tmSkrin("Buku Ceria", "Buku Ceria membesar bila kamu belajar!"), p = tmPelekat().length, st = loadStars();
+  const bintang = Object.keys(st).reduce((a, x) => a + (st[x] || 0), 0), mata = p * 2 + bintang, aras = Math.min(5, Math.floor(mata / 10)), baki = 10 - (mata % 10);
+  const nama = ["Bayi", "Kecil", "Pandai", "Bijak", "Hebat", "Juara"][aras];
+  const svg = document.querySelector("#heroBuku svg") ? document.querySelector("#heroBuku svg").outerHTML : tmArt("Kucing");
+  const mahkota = aras >= 3 ? `<svg viewBox="0 0 120 50" class="tmmahkota"><path d="M10 46 l8-36 l22 22 l20-30 l20 30 l22-22 l8 36z" fill="#FFD36E" stroke="#E8A317" stroke-width="4" stroke-linejoin="round"/><circle cx="60" cy="30" r="6" fill="#FF7A8A"/></svg>` : "";
+  const pingat = Array.from({ length: 6 }, (v, i) => `<i class="${i <= aras ? "dapat" : ""}">${i + 1}</i>`).join("");
+  k.innerHTML = `<div class="tmpeli">${mahkota}<div class="tmpeliwatak" style="--s:${.75 + aras * .07}">${svg}</div><div class="tmpingat">${pingat}</div><h3>Aras ${aras + 1}: Buku Ceria ${nama}</h3><div class="trkbar"><i style="width:${(10 - baki) * 10}%"></i></div><p class="qrpesan">${aras >= 5 ? "Buku Ceria sudah menjadi Juara!" : baki + " mata lagi untuk naik aras"} · ${p} pelekat · ${bintang} bintang</p><button class="tb hijau tmsuap">${IKON.play}<span>Main dengan Buku Ceria</span></button></div>`;
+  k.querySelector(".tmsuap").onclick = () => { const w = k.querySelector(".tmpeliwatak"); w.classList.remove("lompat"); void w.offsetWidth; w.classList.add("lompat"); sndOk(); const r = w.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 40); qrBual(pick(["Terima kasih kerana belajar!", "Jom main lagi!", "Kamu kawan terbaik aku!"])); };
+}
+function tmIbuBapa() {
+  const k = tmSkrin("Mod Ibu Bapa", "Laporan pembelajaran 7 hari terakhir");
+  let log = {}; try { log = JSON.parse(localStorage.getItem(TM_LOG)) || {}; } catch (e) { /* abaikan */ }
+  const hari = []; const t = new Date(); t.setDate(t.getDate() - 6); for (let i = 0; i < 7; i++) { hari.push(trkTarikh(t)); t.setDate(t.getDate() + 1); }
+  const jumHari = hari.map(h => Object.values(log[h] || {}).reduce((a, b) => a + b, 0)), maks = Math.max(1, ...jumHari);
+  const perGame = {}; hari.forEach(h => Object.keys(log[h] || {}).forEach(g => perGame[g] = (perGame[g] || 0) + log[h][g]));
+  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat]));
+  const kat = {}; Object.keys(perGame).forEach(g => { const kk = (nama[g] || ["", "Lain"])[1]; kat[kk] = (kat[kk] || 0) + perGame[g]; });
+  const st = loadStars();
+  k.innerHTML = `<div class="tmlapor"><div class="trkkad"><b>Aktiviti 7 hari</b><div class="tmgraf">${jumHari.map((v, i) => `<span><i style="height:${v / maks * 100}%"></i><em>${["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][new Date(hari[i]).getDay()]}</em><small>${v}</small></span>`).join("")}</div><small>Jumlah: ${jumHari.reduce((a, b) => a + b, 0)} aktiviti · ${tmPelekat().length} pelekat · umur ${tmUmur} tahun</small></div>
+    <div class="trkkad"><b>Kemahiran yang dilatih</b>${Object.keys(kat).length ? Object.keys(kat).sort((a, b) => kat[b] - kat[a]).map(x => `<div class="tmkemahiran"><span>${x}</span><div class="trkbar"><i style="width:${kat[x] / Math.max(...Object.values(kat)) * 100}%"></i></div><b>${kat[x]}</b></div>`).join("") : "<small>Belum ada aktiviti minggu ini.</small>"}</div>
+    <div class="trkkad"><b>Permainan & bintang</b>${TAMAN.map(([kk, b, w, it]) => it.filter(x => perGame[x[0]] || st["tm-" + x[0]]).map(x => `<div class="tmkemahiran"><span>${x[1]}</span><em>${perGame[x[0]] || 0} kali</em><b class="tmst">${"★".repeat(st["tm-" + x[0]] || 0)}</b></div>`).join("")).join("") || "<small>Belum ada permainan dimainkan.</small>"}</div>
+    <p class="qrpesan">Cadangan: ${Object.keys(kat).length < 3 ? "cuba kategori lain supaya anak belajar pelbagai kemahiran." : "teruskan rutin belajar 15 hingga 20 minit sehari."}</p></div>`;
+}
+const TM_MAIN = { kembar: tmKembar, hilang: tmHilang, simon: tmSimon, saiz: tmSaiz, corak: tmCorak, asing: tmAsing, bayang: tmBayang, labirin: tmLabirin, puzzle: tmPuzzle, lukis: tmLukis, warna: tmWarna, pakai: tmPakai, muzik: tmMuzik, bunyi: tmBunyi, cerita: tmCerita, rakam: tmRakam, kira: tmKira, lebih: tmLebih, bentuk: tmBentuk, rasa: tmRasa, rutin: tmRutin, adab: tmAdab, pelekat: tmBukuPelekat, peliharaan: tmPeliharaan, ibubapa: tmIbuBapa };
+
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
 const HAI = [L("Hai! Jom belajar bersama saya!", "Hi! Let's learn together!", "你好！一起学习吧！"), L("Kamu memang pandai!", "You are so clever!", "你真聪明！"), L("Hari ini kita belajar apa ya?", "What shall we learn today?", "今天学什么呢？")];
 let haiI = 0;
@@ -5879,6 +6445,7 @@ function renderPra() {
   const t = curTahap;
   backMenu = renderPra;
   renderMenu(tr(t.nama), [
+    ["taman", SVGC(`<path d="M8 50 q24-14 48 0 v6 H8z" fill="#9FE3B0"/><circle cx="20" cy="26" r="11" fill="#FF9EC4"/><circle cx="20" cy="26" r="4" fill="#FFD36E"/><path d="M20 37 v14" stroke="#3FA672" stroke-width="3"/><path d="M36 50 V28 a10 10 0 0 1 20 0 V50" fill="#BBA6FF"/><path d="M40 50 V34 h12 V50" fill="#8CC8FF"/><circle cx="46" cy="14" r="6" fill="#FFD36E"/>`), "Taman Ceria", "25 aktiviti: ingatan, logik, kreatif, emosi", "", renderTaman],
     ["nota", "📒", tr(UI.nota), tr(UI.notaDs), "", renderNota],
     ["kuiz", "❓", tr(UI.kuiz), tr(UI.kuizDs), "", () => renderKuiz(t, renderPra)],
     ["game", "🎮", tr(UI.game), tr(UI.gameDs), "", renderGame],
