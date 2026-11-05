@@ -794,7 +794,7 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .tmtanya,.tmkosong{font-size:2.4em;font-weight:800;color:#FF9EC4;font-style:normal;min-height:60px;display:flex;align-items:center;justify-content:center;animation:tmapung 1.5s infinite}
 .tmtirai{height:0;transition:height .8s;background:repeating-linear-gradient(90deg,#FF9EC4 0 30px,#FFB8D4 30px 60px);border-radius:0 0 28px 28px;margin-top:-14px;position:relative;z-index:2}
 .tmtirai.tutup{height:150px;margin-top:-160px}
-.tmkembar{display:grid;grid-template-columns:repeat(var(--c),1fr);gap:12px;max-width:460px;width:100%;align-self:center}
+.tmkembar{display:grid;grid-template-columns:repeat(var(--c),1fr);gap:12px;max-width:min(560px,calc(var(--c) * 150px));width:100%;align-self:center}
 .tmkad{border:0;padding:0;background:none;aspect-ratio:1;perspective:600px;cursor:pointer;position:relative}
 .tmkad span{position:absolute;inset:0;border-radius:22px;display:flex;align-items:center;justify-content:center;transition:transform .22s,opacity .22s}
 .tmdepan{background:#fff;padding:8px;box-shadow:0 4px 0 #E6DDF5;transform:scaleX(0);opacity:0}
@@ -6044,10 +6044,12 @@ function renderTaman() {
 }
 
 /* ---------- INGATAN ---------- */
-function tmKembar() {
+/* Kad Kembar: 10 permainan bagi setiap umur; bilangan kad ikut umur */
+function tmKembar(ke, skor) {
+  ke = ke || 1; skor = skor || 0;
   const pas = tmTahap(2, 3, 6, 8), k = tmSkrin("Kad Kembar Ajaib", "Terbalikkan kad dan cari pasangannya!");
   const kad = shuffle([].concat(...tmAmbil(TM_SEMUA, pas).map(x => [x, x])));
-  k.innerHTML = `<div class="tmkembar" style="--c:${pas <= 3 ? 3 : 4}">${kad.map((x, i) => `<button class="tmkad" data-i="${i}"><span class="tmdepan">${tmArt(x)}</span><span class="tmbelakang"></span></button>`).join("")}</div>`;
+  k.innerHTML = `<div class="tmsoalno">${tmUmur} tahun · Permainan ${ke} / 10</div><div class="tmkembar" style="--c:${pas === 2 ? 2 : pas === 3 ? 3 : 4}">${kad.map((x, i) => `<button class="tmkad" data-i="${i}"><span class="tmdepan">${tmArt(x)}</span><span class="tmbelakang"></span></button>`).join("")}</div>`;
   let buka = [], kunci = false, jumpa = 0, cubaan = 0;
   k.querySelectorAll(".tmkad").forEach(b => b.onclick = () => {
     if (kunci || b.classList.contains("buka")) return;
@@ -6055,7 +6057,11 @@ function tmKembar() {
     if (buka.length < 2) return;
     cubaan++; kunci = true;
     const [a, c] = buka;
-    if (kad[a.dataset.i] === kad[c.dataset.i]) { setTimeout(() => { tmBetul(a); tmBetul(c); buka = []; kunci = false; jumpa++; if (jumpa === pas) setTimeout(() => tmSelesai("kembar", cubaan <= pas + 2 ? 3 : cubaan <= pas * 2 ? 2 : 1, tmKembar), 700); }, 350); }
+    if (kad[a.dataset.i] === kad[c.dataset.i]) { setTimeout(() => { tmBetul(a); tmBetul(c); buka = []; kunci = false; jumpa++; if (jumpa === pas) {
+      const sk = skor + (cubaan <= pas + 2 ? 3 : cubaan <= pas * 2 ? 2 : 1);
+      if (ke < 10) setTimeout(() => { qrBual("Hebat! Permainan seterusnya..."); sndOk(); setTimeout(() => tmKembar(ke + 1, sk), 700); }, 600);
+      else setTimeout(() => tmSelesai("kembar", Math.max(1, Math.round(sk / 10)), () => tmKembar()), 700);
+    } }, 350); }
     else setTimeout(() => { a.classList.remove("buka"); c.classList.remove("buka"); buka = []; kunci = false; }, 900);
   });
 }
@@ -6387,7 +6393,7 @@ function tmIbuBapa() {
     <div class="trkkad"><b>Permainan & bintang</b>${TAMAN.map(([kk, b, w, it]) => it.filter(x => perGame[x[0]] || st["tm-" + x[0]]).map(x => `<div class="tmkemahiran"><span>${x[1]}</span><em>${perGame[x[0]] || 0} kali</em><b class="tmst">${"★".repeat(st["tm-" + x[0]] || 0)}</b></div>`).join("")).join("") || "<small>Belum ada permainan dimainkan.</small>"}</div>
     <p class="qrpesan">Cadangan: ${Object.keys(kat).length < 3 ? "cuba kategori lain supaya anak belajar pelbagai kemahiran." : "teruskan rutin belajar 15 hingga 20 minit sehari."}</p></div>`;
 }
-const TM_MAIN = { kembar: tmKembar, hilang: tmHilang, simon: tmSimon, saiz: tmSaiz, corak: tmCorak, asing: tmAsing, bayang: tmBayang, labirin: tmLabirin, puzzle: tmPuzzle, lukis: tmLukis, warna: tmWarna, pakai: tmPakai, muzik: tmMuzik, bunyi: tmBunyi, cerita: tmCerita, rakam: tmRakam, kira: tmKira, lebih: tmLebih, bentuk: tmBentuk, rasa: tmRasa, rutin: tmRutin, adab: tmAdab, pelekat: tmBukuPelekat, peliharaan: tmPeliharaan, ibubapa: tmIbuBapa };
+const TM_MAIN = { kembar: () => tmKembar(), hilang: tmHilang, simon: tmSimon, saiz: tmSaiz, corak: tmCorak, asing: tmAsing, bayang: tmBayang, labirin: tmLabirin, puzzle: tmPuzzle, lukis: tmLukis, warna: tmWarna, pakai: tmPakai, muzik: tmMuzik, bunyi: tmBunyi, cerita: tmCerita, rakam: tmRakam, kira: tmKira, lebih: tmLebih, bentuk: tmBentuk, rasa: tmRasa, rutin: tmRutin, adab: tmAdab, pelekat: tmBukuPelekat, peliharaan: tmPeliharaan, ibubapa: tmIbuBapa };
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
 const HAI = [L("Hai! Jom belajar bersama saya!", "Hi! Let's learn together!", "你好！一起学习吧！"), L("Kamu memang pandai!", "You are so clever!", "你真聪明！"), L("Hari ini kita belajar apa ya?", "What shall we learn today?", "今天学什么呢？")];
