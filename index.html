@@ -2601,7 +2601,21 @@ const VOICE = { ms: ["ms-MY", "ms"], en: ["en-GB", "en-US", "en"], zh: ["zh-CN",
 const SUARA = (typeof window !== "undefined" && window.SUARA) || {};
 const KLIP = {};
 let klipMain = null, klipNo = 0;
+/* Rakaman ElevenLabs (el-*) dimainkan ikut umur anak: 3 tahun paling perlahan; nada tidak berubah */
+const KLIP_KADAR = { 3: .85, 4: .93, 5: 1, 6: 1.07 };
+let klipAudio = null;
+function mainKlipUmur(f, no) {
+  return new Promise(selesai => {
+    const a = new Audio(f), umur = typeof tmUmur !== "undefined" ? tmUmur : 4;
+    a.preservesPitch = true; a.webkitPreservesPitch = true; a.playbackRate = KLIP_KADAR[umur] || .93;
+    a.onended = a.onerror = () => selesai(); a.onpause = () => selesai();
+    klipAudio = a;
+    if (no !== klipNo) return selesai();
+    a.play().catch(() => selesai());
+  });
+}
 function mainKlip(f) {
+  if (f.indexOf("/el-") >= 0) return mainKlipUmur(f, ++klipNo);
   const no = ++klipNo;
   if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
   if (actx.state === "suspended") actx.resume();
@@ -2618,6 +2632,7 @@ function mainKlip(f) {
 function henti() {
   klipNo++;
   try { if (klipMain) klipMain.stop(); } catch (e) { /* abaikan */ }
+  try { if (klipAudio) { klipAudio.pause(); klipAudio = null; } } catch (e) { /* abaikan */ }
   klipMain = null;
 }
 /* Suara boleh dimatikan (butang di penjuru atas); jika mati, tunggu sebentar supaya aliran latihan kekal sama */
