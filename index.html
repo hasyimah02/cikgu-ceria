@@ -2621,10 +2621,12 @@ function henti() {
   klipMain = null;
 }
 /* Suara boleh dimatikan (butang di penjuru atas); jika mati, tunggu sebentar supaya aliran latihan kekal sama */
-let SUARA_ON = (() => { try { return localStorage.getItem("suara") === "on"; } catch (e) { return false; } })();
+let SUARA_ON = (() => { try { return localStorage.getItem("suara2") !== "off"; } catch (e) { return true; } })();
+/* Kelas Al-Quran: tiada suara pembaca (pemilik akan masukkan sendiri) */
+let qrSenyap = false;
 function speak(text, lang) {
   henti();
-  if (!SUARA_ON) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } return tunggu(Math.min(2500, 300 + String(text || "").length * 35)); }
+  if (!SUARA_ON || qrSenyap) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } return tunggu(Math.min(2500, 300 + String(text || "").length * 35)); }
   const f = SUARA[(VOICE[lang] ? lang : "ms") + "|" + text];
   if (f) {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ }
@@ -5238,7 +5240,7 @@ function qrNota(i, lembar) {
 (function () {
   const b = document.getElementById("suaraBtn");
   const papar = () => { b.innerHTML = SUARA_ON ? IKON.speak : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 h4 l5-4 v14 l-5-4 h-4z" fill="currentColor"/><path d="M17 9 l5 6 M22 9 l-5 6"/></svg>'; b.title = SUARA_ON ? "Suara hidup. Tekan untuk matikan" : "Suara mati. Tekan untuk hidupkan"; b.setAttribute("aria-label", b.title); };
-  b.addEventListener("click", () => { SUARA_ON = !SUARA_ON; try { localStorage.setItem("suara", SUARA_ON ? "on" : "off"); } catch (e) { /* abaikan */ } if (!SUARA_ON) stopSpeech(); papar(); });
+  b.addEventListener("click", () => { SUARA_ON = !SUARA_ON; try { localStorage.setItem("suara2", SUARA_ON ? "on" : "off"); } catch (e) { /* abaikan */ } if (!SUARA_ON) stopSpeech(); papar(); });
   papar();
 })();
 /* ===== Bahagian Al-Quran: Kelas Tajwid, Hafazan & Bacaan 30 Juz =====
@@ -5276,6 +5278,7 @@ function qariSenarai(el, gs) { qariHenti(); const siri = qariSiri; let p = Promi
 
 /* ---- Menu utama Kelas Al-Quran: Iqra' & Al-Quran ---- */
 function renderQuran() {
+  qrSenyap = true;
   backMenu = renderQuran; qariHenti(); setLux(false);
   renderMenu(tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), [
     ["q-baris", QR_IKON.huruf, "Iqra'", "Huruf hijaiyah, nota bacaan, Iqra' 1 - 6, kuiz huruf & doa harian", "", renderIqraMenu],
@@ -7219,6 +7222,7 @@ document.getElementById("heroBuku").addEventListener("click", e => {
   speak(tr(HAI[haiI++ % HAI.length]), LANG);
 });
 function renderHome() {
+  qrSenyap = false;
   if (typeof setLux === "function") setLux(false);
   backMenu = null;
   const box = $("tahapList");
