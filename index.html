@@ -6480,7 +6480,7 @@ function tmIbuBapa() {
   const hari = []; const t = new Date(); t.setDate(t.getDate() - 6); for (let i = 0; i < 7; i++) { hari.push(trkTarikh(t)); t.setDate(t.getDate() + 1); }
   const jumHari = hari.map(h => Object.values(log[h] || {}).reduce((a, b) => a + b, 0)), maks = Math.max(1, ...jumHari);
   const perGame = {}; hari.forEach(h => Object.keys(log[h] || {}).forEach(g => perGame[g] = (perGame[g] || 0) + log[h][g]));
-  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat])); SUBJEK.forEach(sb => sb.topik.forEach((tp, i) => nama["sb-" + sb.id + "-" + i] = [sb.nama + ": " + tp.n, sb.nama])); nama.robot = ["Robot Ceria", "Logik & Coding"]; nama.gerak = ["Jom Bergerak", "Jasmani & Kesihatan"];
+  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat])); SB_SUBJEK.forEach(sb => sb.topik.forEach((tp, i) => nama["sb-" + sb.id + "-" + i] = [sb.nama + ": " + tp.n, sb.nama])); nama.robot = ["Robot Ceria", "Logik & Coding"]; nama.gerak = ["Jom Bergerak", "Jasmani & Kesihatan"];
   const kat = {}; Object.keys(perGame).forEach(g => { const kk = (nama[g] || ["", "Lain"])[1]; kat[kk] = (kat[kk] || 0) + perGame[g]; });
   const st = loadStars();
   k.innerHTML = `<div class="tmlapor"><div class="trkkad"><b>Aktiviti 7 hari</b><div class="tmgraf">${jumHari.map((v, i) => `<span><i style="height:${v / maks * 100}%"></i><em>${["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][new Date(hari[i]).getDay()]}</em><small>${v}</small></span>`).join("")}</div><small>Jumlah: ${jumHari.reduce((a, b) => a + b, 0)} aktiviti · ${tmPelekat().length} pelekat · umur ${tmUmur} tahun</small></div>
@@ -6673,7 +6673,7 @@ function sbGambar(spec) {
 
 /* --- Data subjek: setiap kad "gambar|tajuk|keterangan" --- */
 const SB_K = s => s.trim().split("\n").map(x => x.trim().split("|"));
-const SUBJEK = [
+const SB_SUBJEK = [
   { id: "bm", nama: "Bahasa Melayu", ikon: "a:buku", w: "#FF9EC4", cerita: "Jom kenal huruf, suku kata dan perkataan!", topik: [
     { n: "Huruf Vokal", k: SB_K(`a:Ayam|A a|A untuk Ayam
       a:Epal|E e|E untuk Epal
@@ -7079,7 +7079,7 @@ const SB_BAB = [
   ["Kampung Diriku", "Kenali diri, keluarga, kerja dan negaraku.", "#E4F1FF", ["diri", "negara", "hidup", "jasmani"]],
   ["Istana Seni & Sekolah", "Lukis, nyanyi dan bersedia ke Tahun 1!", "#F0E8FF", ["seni", "sekolah"]]
 ];
-const sbCari = id => SUBJEK.find(s => s.id === id);
+const sbCari = id => SB_SUBJEK.find(s => s.id === id);
 const sbBintangSub = (s, st) => s.topik.reduce((a, t, i) => a + (st["tm-sb-" + s.id + "-" + i] || 0), 0);
 
 /* Adegan cerita setiap bab (SVG, gaya buku cerita) */
@@ -7118,7 +7118,7 @@ function renderPra() {
   const pintu = [["Taman Ceria", "a:Rabbit", renderTaman], ["Nota", COMEL_IKON["📒"], renderNota], ["Kuiz", COMEL_IKON["❓"], () => renderKuiz(t, renderPra)], ["Mini Game", COMEL_IKON["🎮"], renderGame], ["Perpustakaan", COMEL_IKON["📚"], renderLib]];
   let no = 0;
   k.innerHTML = `<div class="prdunia">
-    <div class="prhero"><div class="prmaskot">${maskot}</div><div class="prherotks"><small>Selamat datang ke</small><h2>Dunia Ceria</h2><p class="prbual">Hai! Saya Buku Ceria. Jom jelajah ${SUBJEK.length} rumah ilmu bersama saya!</p>
+    <div class="prhero"><div class="prmaskot">${maskot}</div><div class="prherotks"><small>Selamat datang ke</small><h2>Dunia Ceria</h2><p class="prbual">Hai! Saya Buku Ceria. Jom jelajah ${SB_SUBJEK.length} rumah ilmu bersama saya!</p>
       <div class="tmumur prumur"><b>Umur:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${tmUmur === u ? "on" : ""}">${u}</button>`).join("")}</div></div></div>
     <div class="prpintu">${pintu.map((p, i) => `<button data-p="${i}"><span>${p[1].indexOf("a:") === 0 ? sbGambar(p[1]) : p[1]}</span><b>${p[0]}</b></button>`).join("")}</div>
     ${SB_BAB.map(([nama, cerita, bg, ids], bi) => `<section class="prbab" style="--bg:${bg}">${SB_ADEGAN[bi]}<div class="prbabtajuk"><span>Bab ${bi + 1}</span><h3>${nama}</h3><p>${cerita}</p></div>
