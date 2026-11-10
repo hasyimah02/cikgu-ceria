@@ -993,6 +993,148 @@ body.no-gerak .tmtileart,body.no-gerak .tmkiraitem,body.no-gerak .tmpeliwatak{an
 .sbmasabar{transition:stroke-dashoffset 1s linear}
 @media (max-width:600px){.prpintu{grid-template-columns:repeat(3,1fr)}.prnod{width:88%}.prlencana{flex-basis:78px;height:78px}.prmaskot{width:86px;flex-basis:86px}.prherotks h2{font-size:1.5em}}
 body.no-gerak .prmaskot,body.no-gerak .prlencana,body.no-gerak .sbheroik{animation:none}
+/* ===== Modul Prasekolah ===== */
+.prpintu.n6{grid-template-columns:repeat(6,1fr)}
+.prprofil{border:0;font:inherit;background:#fff;border-radius:999px;padding:4px 12px 4px 4px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 3px 0 #E6DDF5;color:#3E3150;margin:4px 0}
+.prprofil .sbart{width:40px;height:34px}.prprofil small{opacity:.6}
+.prtahapnama{font-size:.78em;opacity:.75;margin-left:6px}
+.prlencana.watak{padding:6px;background:radial-gradient(circle,#fff 60%,color-mix(in srgb,var(--w) 25%,#fff))}
+.prlencana.ada::after{content:"";position:absolute;top:-14px;right:-6px;width:34px;height:24px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E%3Cpath d='M10 46 l8-36 l22 22 l20-30 l20 30 l22-22 l8 36z' fill='%23FFD36E' stroke='%234a3428' stroke-width='4'/%3E%3C/svg%3E")}
+.prbar{display:block;height:6px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden;margin-top:3px}.prbar i{display:block;height:100%;background:#FFE27A}
+.mpwatak{display:inline-block;width:120px;flex:0 0 auto;animation:tmapung 3s ease-in-out infinite;position:relative}
+.mpwatak .sbart{width:100%}
+.mpwatak.kecil{width:52px;animation:none}
+.mpwatak.lambai{animation:mplambai 1.6s ease-in-out infinite;transform-origin:50% 100%}
+.mpwatak.girang{animation:tmlompat .6s}
+.mpwatak.fikir{animation:mpfikir .8s}
+.mpwatak.mahkota::before{content:"";position:absolute;top:-16%;left:30%;width:40%;height:22%;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E%3Cpath d='M10 46 l8-36 l22 22 l20-30 l20 30 l22-22 l8 36z' fill='%23FFD36E' stroke='%234a3428' stroke-width='4'/%3E%3C/svg%3E");z-index:2}
+@keyframes mplambai{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+@keyframes mpfikir{30%{transform:rotate(-10deg)}60%{transform:rotate(6deg)}}
+.mphero{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#fff,var(--bg));border-radius:32px;padding:16px 20px;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 50%,#fff);color:#3E3150}
+.mphero h2{margin:2px 0}.mphero p{margin:2px 0 8px}.mphero small{opacity:.65;font-weight:700}
+.mptahap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mptahap b{background:var(--w);color:#fff;border-radius:999px;padding:3px 12px}
+.mptahap span{font-size:.85em;opacity:.8}.mptahap em{font-style:normal;background:#FFE27A;border-radius:999px;padding:3px 10px;font-weight:800;font-size:.8em}
+.mpsemak{background:#FFF7D6;border:2px dashed #F1C24F;border-radius:16px;padding:8px 12px;margin:0;font-size:.85em;color:#7A5A2E}
+.mpbahasa{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.mpbahasa button{border:0;font:inherit;background:#fff;border-radius:20px;padding:6px 12px 6px 6px;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 3px 0 #E6DDF5;color:#3E3150}
+.mpbahasa button .sbart{width:38px}
+.mpbahasa button.on{box-shadow:0 0 0 3px #9B6BFF,0 3px 0 #E6DDF5}
+.mpgames{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.mpg{position:relative;border:0;font:inherit;color:#3E3150;background:#fff;border-radius:28px;padding:16px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 65%,#fff);animation:tmmuncul .45s both}
+.mpg:active{transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--w) 65%,#fff)}
+.mpg .mpno{position:absolute;top:8px;left:10px;width:26px;height:26px;border-radius:50%;background:var(--w);color:#fff;font-style:normal;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.8em}
+.mpgik{width:78px;height:66px;display:flex;align-items:center;justify-content:center}.mpgik .sbart,.mpgik .art{width:100%;max-height:66px}
+.mpg b{text-align:center;font-size:.95em}.mpg small{opacity:.65;font-size:.75em;color:#B07A00}
+.mpg.kunci{filter:grayscale(.8);opacity:.6}.mpg.kunci::after{content:"";position:absolute;top:10px;right:12px;width:18px;height:20px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 22'%3E%3Crect x='2' y='9' width='16' height='12' rx='3' fill='%235B4670'/%3E%3Cpath d='M6 9V6a4 4 0 0 1 8 0v3' fill='none' stroke='%235B4670' stroke-width='2.5'/%3E%3C/svg%3E")}
+.mpsubtajuk{margin:8px 4px 0}
+.mpkad{display:flex;gap:10px;flex-wrap:wrap}
+.mpkad button{border:0;font:inherit;color:#3E3150;background:#fff;border-radius:18px;padding:8px 12px 8px 8px;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 3px 0 color-mix(in srgb,var(--w) 60%,#fff)}
+.mpkad .sbart{width:44px}
+.mpintro{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#fff,var(--bg));border-radius:32px;padding:20px;color:#3E3150}
+.mpintro .mpwatak{width:150px}
+.mpbelon{flex:1;background:#fff;border-radius:24px 24px 24px 6px;padding:14px 18px;box-shadow:0 4px 0 color-mix(in srgb,var(--w) 40%,#fff);position:relative}
+.mpbelon p{margin:4px 0 0;font-size:1.35em;font-weight:800}.mpbelon small{color:var(--w);font-weight:800;filter:brightness(.8)}
+.mparahan{margin:0;padding:10px 14px 10px 34px;background:#fff;border-radius:18px;font-size:.9em;opacity:.85;color:#3E3150}
+.mpkepala{display:flex;align-items:center;gap:10px;color:#3E3150}
+.mpkepala span{font-weight:800;font-size:.9em;white-space:nowrap}
+.mpbar{flex:1;height:12px;border-radius:8px;background:#EEE8F6;overflow:hidden}.mpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--w),#FFE27A);border-radius:8px;transition:width .4s}
+.mparea{position:relative;display:flex;flex-direction:column;gap:12px;align-items:stretch;color:#3E3150}
+.mparea.contoh{outline:3px dashed #BBA6FF;outline-offset:6px;border-radius:24px}
+.mptangan{position:absolute;width:56px;z-index:5;pointer-events:none;animation:mptangan .9s ease-in-out infinite;transition:left .6s,top .6s}
+@keyframes mptangan{50%{transform:translateY(-10px) scale(1.05)}}
+.mptanya{text-align:center;margin:2px 0;font-size:1.25em}
+.mpgambar{width:min(46%,200px);align-self:center}.mpgambar.kecil{width:min(36%,150px)}
+.mphurufbesar{width:110px;align-self:center;animation:tmlompat 1s .2s both}
+.mppilih{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.mppilih.lajur{flex-direction:column;align-items:center}
+.mpopt{border:0;font:inherit;color:#3E3150;background:#fff;border-radius:26px;padding:10px;min-width:120px;cursor:pointer;box-shadow:0 5px 0 #E6DDF5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:opacity .3s,transform .15s}
+.mpopt:active{transform:translateY(3px);box-shadow:0 2px 0 #E6DDF5}
+.mppilih.n2 .mpopt{min-width:170px;min-height:150px}
+.mpgbr{width:110px;display:block}.mppilih.n2 .mpgbr{width:140px}.mpopt small{font-size:.8em}
+.mptks{font-size:1.2em;padding:6px 10px}.mptks.panjang{font-size:1.05em;max-width:320px}
+.mpmalap{opacity:.25;pointer-events:none;transform:scale(.9)}
+.mpsorot{animation:mpsorot 1s ease-in-out 3;box-shadow:0 0 0 5px #FFE27A,0 0 26px 6px #FFD36E!important}
+@keyframes mpsorot{50%{transform:scale(1.08)}}
+.mpdengar{border:0;font:inherit;align-self:center;background:#8CC8FF;color:#fff;border-radius:999px;padding:10px 20px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.1em;cursor:pointer;box-shadow:0 5px 0 #5FA3E0}
+.mpdengar svg{width:28px;height:28px}
+.mpcantum{display:flex;align-items:center;justify-content:center;gap:10px}.mpcantum span{width:90px;transition:transform .8s}.mpcantum .plus{width:auto;font-size:2em;font-weight:900;color:#9B6BFF}
+.mpcantum.cantum .kiri{transform:translateX(28px)}.mpcantum.cantum .kanan{transform:translateX(-28px)}.mpcantum.rtl{flex-direction:row-reverse}
+.mpayat{text-align:center;font-size:1.7em;font-weight:800;background:#fff;border-radius:20px;padding:12px;align-self:center}.mpayat.rtl{direction:rtl;font-family:"Geeza Pro","Noto Naskh Arabic",serif}
+.mpkira{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;background:#FFF8E6;border-radius:24px;padding:12px;max-width:520px;align-self:center}
+.mpkira span{width:60px;animation:tmmuncul .4s both}.mpkira span.dimakan{opacity:.25;filter:grayscale(1)}
+.mppilih.mpsaiz{align-items:flex-end}.mppilih.mpsaiz .mpopt{min-width:0}
+.mpdua{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}.mpdua>div{background:#fff;border-radius:50%;padding:20px;width:min(42%,220px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 5px 0 #E6DDF5}
+.mppinggan{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}.mppinggan .sbart{width:34px}
+.mppola{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#FFF8E6;border-radius:24px;padding:12px}
+.mppola span{width:62px;background:#fff;border-radius:16px;padding:4px;display:flex;align-items:center;justify-content:center}.mppola .tanya{font-size:2em;font-weight:900;color:#FF9EC4;animation:tmapung 1.4s infinite}
+.mptambah{display:flex;align-items:center;justify-content:center;gap:10px}.mptambah span{display:flex;flex-wrap:wrap;width:120px;gap:2px;background:#FFF8E6;border-radius:18px;padding:6px}.mptambah span .art{width:34px}.mptambah b{font-size:2em;color:#9B6BFF}
+.mpduit{display:flex;flex-wrap:wrap;gap:4px;width:190px;justify-content:center}.mpduit .sbart{width:84px}
+.mppadan{display:flex;gap:28px;justify-content:center}.mppadan .kol{display:flex;flex-direction:column;gap:10px}
+.mpp{border:0;font:inherit;color:#3E3150;background:#fff;border-radius:20px;padding:6px 10px;min-width:130px;min-height:80px;cursor:pointer;box-shadow:0 4px 0 #E6DDF5;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none}
+.mpp .mpgbr{width:84px}.mpp.on{box-shadow:0 0 0 4px #9B6BFF}
+.mpp.siap{background:var(--pw);box-shadow:none;transform:scale(.95)}
+.mpklon{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) scale(1.08);opacity:.9;box-shadow:0 12px 24px rgba(0,0,0,.2)}
+.diseret{opacity:.35}
+.mpslot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mps{width:128px;min-height:140px;border:3px dashed #D9CCF2;border-radius:24px;display:flex;align-items:center;justify-content:center;position:relative}
+.mps>i{position:absolute;top:6px;left:12px;color:#BBA6FF;font-style:normal;font-weight:900}
+.mps .mpopt{box-shadow:none;min-width:0}
+.mpdulang{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.mpitem{touch-action:none}.mpitem .mpgbr{width:96px}
+.mpasing{display:flex;flex-direction:column;align-items:center;gap:14px}.mpjatuh .mpitem{min-width:150px}
+.mpbakul{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.mpbk{min-width:150px;border-radius:22px 22px 50px 50px;background:linear-gradient(#fff,#F3ECFF)}.mpbk .mpgbr{width:70px}
+.mpbk em{display:flex;flex-wrap:wrap;gap:2px;max-width:150px;justify-content:center}.mpbk em span{width:26px}
+.mpbina{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.mpbina.rtl{flex-direction:row-reverse}
+.mpbs{min-width:70px;height:62px;border:3px dashed #D9CCF2;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6em;font-weight:800;padding:0 10px}
+.mpbs.isi{border-style:solid;border-color:#7FDDBB;background:#E9FBEF;animation:tmlompat .4s}
+.mpjubin{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.mpjubin.rtl{flex-direction:row-reverse}
+.mpjb{min-width:72px;font-size:1.5em;font-weight:800;touch-action:none}.mpjb.siap{visibility:hidden}
+.mpjubin.rtl .mpjb,.mpbina.rtl .mpbs{font-family:"Geeza Pro","Noto Naskh Arabic",serif}
+.mprakam{display:flex;flex-direction:column;align-items:center;gap:10px}.mprakam h2{margin:0;font-size:2em}.mprakam h2.rtl{font-family:"Geeza Pro","Noto Naskh Arabic",serif}
+.mprakambtn{display:flex;gap:16px;align-items:center}
+.mpcerita{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}.mpcerita>p{font-size:1.2em;margin:0;max-width:520px}
+.mpkesan p{font-weight:800;padding:8px 14px;border-radius:14px}.mpkesan .ok{background:#E9FBEF;color:#2E8B57}.mpkesan .no{background:#FFF0F0;color:#C0392B}
+.mpmazebtn{display:flex;gap:12px;justify-content:center}
+.sbarahan button{border:0;width:44px;height:38px;background:#F3ECFF;border-radius:10px;padding:2px;cursor:pointer}.sbarahan button.aktif{background:#FFE45C;transform:scale(1.15)}
+.mpbaris{position:relative;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.mpbaris .mpopt{min-width:100px}.mpbaris .mpopt .art{width:80px}
+.mpbaris .giliran{background:#FFF3B8}
+.mpanak{position:absolute;bottom:-34px;left:0;width:40px}
+.mpwajahbina{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;align-items:center}
+.mpwajahbesar{width:200px}.mpmuka{width:100%}
+.mppilihkecil{display:flex;gap:8px;margin:6px 0 10px}.mppilihkecil .mpopt{min-width:76px;padding:6px}.mppilihkecil svg{width:64px;height:36px}.mppilihkecil .on{box-shadow:0 0 0 4px #9B6BFF}
+.mptelefon{width:240px;align-self:center;background:#3E3150;border-radius:32px;padding:16px}
+.mpskrin{background:#DFF3FF;border-radius:14px;text-align:center;font-size:1.8em;font-weight:900;padding:8px;margin-bottom:12px;min-height:44px;color:#C0392B}
+.mpkekunci{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mpkekunci button{border:0;height:56px;border-radius:50%;font:inherit;font-size:1.5em;font-weight:800;background:#fff;cursor:pointer}
+.mppeta{position:relative;width:min(100%,560px);aspect-ratio:4/3;align-self:center;background:#CDEFD5;border-radius:28px;overflow:hidden}
+.mpjalanpeta{position:absolute;inset:0;width:100%;height:100%}
+.mptempat{position:absolute;width:16%;min-width:0;padding:4px;border-radius:16px}.mptempat small{font-size:.65em}
+.mpbasbibi{position:absolute;left:44%;top:40%;width:14%;transition:left 1s,top 1s;pointer-events:none}
+.mpbaju{position:relative;width:240px;align-self:center}.mpbaju svg{width:100%}
+.mpbtg{position:absolute;left:calc(50% - 18px);width:36px;height:36px;min-width:0;border-radius:50%;background:#fff;border:3px dashed #4a3428;padding:0}
+.mpbtg.siap{background:#FFD36E;border-style:solid}
+.mpnafas{display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px}
+.mpbelonnafas{width:120px;transition:transform 4s ease-in-out}.mpbelonnafas.besar{transform:scale(1.7)}
+.mpnafastks{font-size:1.5em;margin-top:40px}
+.mpsebab{display:flex;flex-direction:column;gap:8px}
+.mpuk{text-align:center;margin:0;font-weight:800;color:#9B6BFF}
+.mplencana{display:flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(135deg,#FFF6C9,#FFE1EC);border-radius:28px;padding:14px;animation:tmlompat .8s}
+.mpprofil{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.mpprof{border:0;font:inherit;color:#3E3150;background:#fff;border-radius:28px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 5px 0 #E6DDF5}
+.mpprof span{width:90px}.mpprof.on{box-shadow:0 0 0 4px #9B6BFF,0 5px 0 #E6DDF5}.mpprof small{opacity:.6}
+.mpbaru{background:#fff;border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;color:#3E3150}
+.mpnama{font:inherit;font-size:1.2em;border:3px solid #E6DDF5;border-radius:16px;padding:10px 14px}
+.mpav{display:flex;gap:8px;flex-wrap:wrap}.mpav button{border:0;width:70px;background:#F3ECFF;border-radius:18px;padding:4px;cursor:pointer}.mpav button.on{box-shadow:0 0 0 3px #9B6BFF}
+.mptetamu{align-self:center}
+.mpprofilbaris{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.mpprofilbaris span{display:flex;align-items:center;gap:6px;background:#F3ECFF;border-radius:999px;padding:4px 12px 4px 4px;font-size:.85em}.mpprofilbaris span.on{background:#E1D4FF;font-weight:800}.mpprofilbaris .sbart{width:34px}
+.mpmood{display:flex;gap:8px;margin:8px 0}.mpmood span{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}.mpmood .sbart{width:42px}.mpmood i{width:34px;height:34px;border-radius:50%;background:#EEE8F6;display:block}.mpmood small{font-size:.7em;opacity:.7}
+.mplap{display:flex;gap:10px;align-items:center;margin:8px 0}.mplapik{width:46px;flex:0 0 46px}.mplap>div{flex:1}.mplap small{font-size:.75em;opacity:.8}
+.mprehat{position:fixed;inset:0;z-index:9000;background:rgba(62,49,80,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.mprehat>div{background:#fff;border-radius:32px;padding:30px 24px;max-width:420px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;color:#3E3150}
+.mprehat .mpbelonnafas{animation:mpnafas 8s ease-in-out infinite;transform:none}
+@keyframes mpnafas{50%{transform:scale(1.5)}}
+@media (max-width:600px){.prpintu.n6{grid-template-columns:repeat(3,1fr)}.mpintro{flex-direction:column}.mpintro .mpwatak{width:110px}.mpgbr{width:84px}.mpopt{min-width:96px}.mppadan{gap:12px}.mpp{min-width:104px}}
+body.no-gerak .mpwatak,body.no-gerak .mptangan{animation:none}
 /* ===== Tema Comel: pastel, bulat, berkilau ===== */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;background:var(--latar);z-index:-2;pointer-events:none}
@@ -1222,6 +1364,7 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 
 <script src="gambar/senarai.js"></script>
 <script src="gambar/suara.js"></script>
+<script src="gambar/modul-pra.js"></script>
 <script>
 "use strict";
 /* ===== Tema ===== */
@@ -5970,7 +6113,9 @@ setTerap();
 const THJ_KEY = "appPendidikan.tulishijaiyah.v1";
 let thjMod = "surih";
 function thjData() { try { return JSON.parse(localStorage.getItem(THJ_KEY)) || {}; } catch (e) { return {}; } }
+let thjBalik = null;
 function qrTulisMenu() {
+  thjBalik = null;
   qrSkrin("Tulis Huruf Hijaiyah", renderIqraMenu);
   const k = $("qrKawasan"), d = thjData();
   const siap = HIJAIYAH.filter((h, i) => (d[i] || {})[thjMod]).length;
@@ -5983,7 +6128,7 @@ function qrTulisMenu() {
 }
 function qrTulis(i) {
   const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
-  qrSkrin((sendiri ? "Tulis Sendiri: " : "Surih: ") + h[1], qrTulisMenu);
+  qrSkrin((sendiri ? "Tulis Sendiri: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
   const k = $("qrKawasan");
   k.innerHTML = `<div class="thjatas"><div class="thjcontoh"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
     <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
@@ -6480,7 +6625,7 @@ function tmIbuBapa() {
   const hari = []; const t = new Date(); t.setDate(t.getDate() - 6); for (let i = 0; i < 7; i++) { hari.push(trkTarikh(t)); t.setDate(t.getDate() + 1); }
   const jumHari = hari.map(h => Object.values(log[h] || {}).reduce((a, b) => a + b, 0)), maks = Math.max(1, ...jumHari);
   const perGame = {}; hari.forEach(h => Object.keys(log[h] || {}).forEach(g => perGame[g] = (perGame[g] || 0) + log[h][g]));
-  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat])); SB_SUBJEK.forEach(sb => sb.topik.forEach((tp, i) => nama["sb-" + sb.id + "-" + i] = [sb.nama + ": " + tp.n, sb.nama])); nama.robot = ["Robot Ceria", "Logik & Coding"]; nama.gerak = ["Jom Bergerak", "Jasmani & Kesihatan"];
+  const nama = {}; TAMAN.forEach(([kat, b, w, it]) => it.forEach(x => nama[x[0]] = [x[1], kat])); SB_SUBJEK.forEach(sb => sb.topik.forEach((tp, i) => nama["sb-" + sb.id + "-" + i] = [sb.nama + ": " + tp.n, sb.nama])); nama.robot = ["Robot Ceria", "Logik & Coding"]; MP_MODUL.forEach(m => nama["mp-" + m.id] = [m.nama, m.nama]); nama.gerak = ["Jom Bergerak", "Jasmani & Kesihatan"];
   const kat = {}; Object.keys(perGame).forEach(g => { const kk = (nama[g] || ["", "Lain"])[1]; kat[kk] = (kat[kk] || 0) + perGame[g]; });
   const st = loadStars();
   k.innerHTML = `<div class="tmlapor"><div class="trkkad"><b>Aktiviti 7 hari</b><div class="tmgraf">${jumHari.map((v, i) => `<span><i style="height:${v / maks * 100}%"></i><em>${["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][new Date(hari[i]).getDay()]}</em><small>${v}</small></span>`).join("")}</div><small>Jumlah: ${jumHari.reduce((a, b) => a + b, 0)} aktiviti · ${tmPelekat().length} pelekat · umur ${tmUmur} tahun</small></div>
@@ -7108,28 +7253,6 @@ const SB_ADEGAN = (() => {
       ik("palet", 40, 80, 100) + ik("notamuzik", 320, 40, 70) + ik("beg", 470, 70, 90) + kilau(150, 40, "#FFD36E"))
   ];
 })();
-/* --- Halaman hadapan Prasekolah: peta cerita --- */
-function renderPra() {
-  const t = curTahap;
-  backMenu = renderPra; tmBalik = null; setLux(false);
-  qrSkrin("Prasekolah", renderHome);
-  const k = $("qrKawasan"), st = loadStars();
-  const maskot = document.querySelector("#heroBuku svg") ? document.querySelector("#heroBuku svg").outerHTML : "";
-  const pintu = [["Taman Ceria", "a:Rabbit", renderTaman], ["Nota", COMEL_IKON["📒"], renderNota], ["Kuiz", COMEL_IKON["❓"], () => renderKuiz(t, renderPra)], ["Mini Game", COMEL_IKON["🎮"], renderGame], ["Perpustakaan", COMEL_IKON["📚"], renderLib]];
-  let no = 0;
-  k.innerHTML = `<div class="prdunia">
-    <div class="prhero"><div class="prmaskot">${maskot}</div><div class="prherotks"><small>Selamat datang ke</small><h2>Dunia Ceria</h2><p class="prbual">Hai! Saya Buku Ceria. Jom jelajah ${SB_SUBJEK.length} rumah ilmu bersama saya!</p>
-      <div class="tmumur prumur"><b>Umur:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${tmUmur === u ? "on" : ""}">${u}</button>`).join("")}</div></div></div>
-    <div class="prpintu">${pintu.map((p, i) => `<button data-p="${i}"><span>${p[1].indexOf("a:") === 0 ? sbGambar(p[1]) : p[1]}</span><b>${p[0]}</b></button>`).join("")}</div>
-    ${SB_BAB.map(([nama, cerita, bg, ids], bi) => `<section class="prbab" style="--bg:${bg}">${SB_ADEGAN[bi]}<div class="prbabtajuk"><span>Bab ${bi + 1}</span><h3>${nama}</h3><p>${cerita}</p></div>
-      <div class="prjalan">${ids.map((id, j) => { const s = sbCari(id), b = sbBintangSub(s, st); no++; return `<button class="prnod ${j % 2 ? "kanan" : "kiri"}" data-s="${id}" style="--w:${s.w};animation-delay:${no * .05}s"><span class="prlencana"><i>${no}</i>${sbGambar(s.ikon)}</span><span class="prpapan"><b>${s.nama}</b><small>${s.cerita}</small>${b ? `<em>★ ${b}</em>` : ""}</span></button>`; }).join("")}</div></section>`).join("")}
-  </div>`;
-  k.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { tmUmur = +b.dataset.u; try { localStorage.setItem(TM_UMUR_KEY, tmUmur); } catch (e) { /* abaikan */ } renderPra(); });
-  k.querySelectorAll("[data-p]").forEach(b => b.onclick = () => pintu[b.dataset.p][2]());
-  k.querySelectorAll("[data-s]").forEach(b => b.onclick = () => sbSubjek(b.dataset.s));
-  k.querySelector(".prmaskot").onclick = e => { const m = e.currentTarget; m.classList.remove("lompat"); void m.offsetWidth; m.classList.add("lompat"); sndOk(); qrBual(pick(["Jom belajar!", "Pilih satu rumah ilmu!", "Kamu hebat!", "Saya sayang kamu!"])); };
-  qrBual("Pilih rumah ilmu yang kamu suka!");
-}
 /* --- Rumah subjek --- */
 function sbSubjek(id) {
   const s = sbCari(id), st = loadStars();
@@ -7225,6 +7348,758 @@ function sbGerak(i, set) {
     if (baki <= 0) { clearInterval(tik); sndOk(); setTimeout(() => i < set.length - 1 ? sbGerak(i + 1, set) : tmSelesai("gerak", 3, () => sbGerak()), 500); }
   }, 1000);
   qrButang("next", "Langkau", "biru", () => { clearInterval(tik); i < set.length - 1 ? sbGerak(i + 1, set) : tmSelesai("gerak", 3, () => sbGerak()); });
+}
+
+/* --- Ikon & watak pembimbing Modul Prasekolah (viewBox 120x100) --- */
+const MP_IK = (() => {
+  const F = SB_FC, M = SB_MINI, o = sbOrang;
+  const bangunan = (c, bumbung, isi) => `<rect x="22" y="40" width="76" height="52" rx="4" fill="${c}"/><path d="M14 42 L60 12 L106 42z" fill="${bumbung}"/>${isi}<rect x="52" y="66" width="16" height="26" rx="2" fill="#B98A5E"/>`;
+  const tanda = (bg, isi) => `<rect x="30" y="10" width="60" height="60" rx="10" fill="${bg}"/><path d="M60 70 v24" stroke-width="5"/>${isi}`;
+  const lampu = on => `<rect x="44" y="6" width="32" height="76" rx="10" fill="#3E3150"/><path d="M60 82 v14" stroke-width="5"/>${["#FF5A5A", "#FFD23F", "#4CD07D"].map((c, i) => `<circle cx="60" cy="${22 + i * 22}" r="8" fill="${i === on ? c : "#6B5C7A"}"${i === on ? ` style="filter:drop-shadow(0 0 6px ${c})"` : ""}/>`).join("")}`;
+  const solat = (d) => `<ellipse cx="60" cy="96" rx="40" ry="4" fill="#7FDDBB" stroke="none"/>${d}`;
+  return {
+    burunghantu: `<path d="M34 30 l-6-18 l16 10z M86 30 l6-18 l-16 10z" fill="#9B7BCB"/><ellipse cx="60" cy="56" rx="34" ry="38" fill="#B69BE0"/><ellipse cx="60" cy="68" rx="20" ry="22" fill="#F3E9FF"/><circle cx="46" cy="42" r="13" fill="#fff"/><circle cx="74" cy="42" r="13" fill="#fff"/><circle cx="47" cy="43" r="6" fill="#2b2b2b"/><circle cx="73" cy="43" r="6" fill="#2b2b2b"/><circle cx="49" cy="41" r="2" fill="#fff" stroke="none"/><circle cx="75" cy="41" r="2" fill="#fff" stroke="none"/><path d="M56 52 l4 7 l4-7z" fill="#FFB84D"/><path d="M26 58 q-8 14 4 26 M94 58 q8 14-4 26" fill="none"/><ellipse cx="36" cy="56" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".7"/><ellipse cx="84" cy="56" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".7"/><rect x="40" y="6" width="40" height="6" rx="2" fill="#3E3150"/><path d="M60 4 l24 6 l-24 6 l-24-6z" fill="#3E3150"/><path d="M82 10 v12" stroke="#FFD36E" stroke-width="2"/>`,
+    beruang: `<circle cx="34" cy="22" r="11" fill="#C08A5B"/><circle cx="86" cy="22" r="11" fill="#C08A5B"/><circle cx="34" cy="22" r="5" fill="#F3C9A0" stroke="none"/><circle cx="86" cy="22" r="5" fill="#F3C9A0" stroke="none"/><ellipse cx="60" cy="84" rx="26" ry="16" fill="#C08A5B"/><circle cx="60" cy="44" r="30" fill="#D19B6A"/><ellipse cx="60" cy="54" rx="14" ry="10" fill="#F3D3B0"/><ellipse cx="60" cy="50" rx="5" ry="3.5" fill="#3E2C23"/><path d="M56 57 q4 4 8 0" fill="none" stroke-width="2"/><circle cx="48" cy="40" r="3.2" fill="#2b2b2b" stroke="none"/><circle cx="72" cy="40" r="3.2" fill="#2b2b2b" stroke="none"/><ellipse cx="40" cy="50" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".7"/><ellipse cx="80" cy="50" rx="5" ry="3" fill="#ff8fa3" stroke="none" opacity=".7"/><path d="M40 76 h40 v10 h-40z" fill="#FF9EC4"/>`,
+    bulansabit: `<path d="M74 8 a42 42 0 1 0 34 64 a34 34 0 1 1 -34 -64z" fill="#FFE27A"/>${F(52, 54, 1)}<path d="M98 20 l3 7 h7 l-6 4 l2 7 l-6-4 l-6 4 l2-7 l-6-4 h7z" fill="#FFD36E"/><circle cx="90" cy="50" r="2" fill="#FFD36E" stroke="none"/>`,
+    gengcomel: M("Rabbit", 0, 18, 52) + M("Kucing", 34, 30, 56) + M("Itik", 72, 26, 50),
+    laut: `<rect x="6" y="40" width="108" height="52" rx="8" fill="#8CC8FF"/><path d="M6 52 q14-10 27 0 q14 10 27 0 q14-10 27 0 q14 10 27 0" fill="none" stroke="#fff" stroke-width="3"/><path d="M6 70 q14-10 27 0 q14 10 27 0 q14-10 27 0 q14 10 27 0" fill="none" stroke="#fff" stroke-width="3"/><circle cx="92" cy="22" r="12" fill="#FFD36E"/>`,
+    sarang: `<path d="M40 12 h40" stroke="#B98A5E" stroke-width="5"/><path d="M60 12 v6"/><ellipse cx="60" cy="54" rx="30" ry="36" fill="#FFC94D"/><path d="M32 42 h56 M30 56 h60 M32 70 h56" stroke="#E8A317" fill="none"/><ellipse cx="60" cy="78" rx="7" ry="5" fill="#7A5A2E"/>`,
+    reban: `<path d="M16 46 L60 14 L104 46z" fill="#FF7A5A"/><rect x="22" y="44" width="76" height="46" fill="#E8C27A"/><path d="M30 44 v46 M44 44 v46 M76 44 v46 M90 44 v46" stroke="#B98A5E"/><path d="M50 90 v-22 q10-10 20 0 v22z" fill="#7A5A2E"/>`,
+    hutan: `<path d="M24 92 l18-60 l18 60z" fill="#4CC493"/><path d="M60 92 l20-72 l20 72z" fill="#2E9E6E"/><path d="M4 92 l14-44 l14 44z" fill="#7FDDBB"/><path d="M90 92 l12-38 l12 38z" fill="#7FDDBB"/>`,
+    kolam: `<ellipse cx="60" cy="64" rx="50" ry="24" fill="#8CC8FF"/><ellipse cx="44" cy="62" rx="10" ry="5" fill="#7FDDBB"/><ellipse cx="80" cy="70" rx="8" ry="4" fill="#7FDDBB"/><path d="M20 44 v-20 M26 46 v-24 M100 46 v-22" stroke="#3FA672" stroke-width="3"/><ellipse cx="20" cy="22" rx="3" ry="7" fill="#B98A5E"/><ellipse cx="26" cy="20" rx="3" ry="7" fill="#B98A5E"/>`,
+    gunung: `<path d="M4 90 L40 24 L66 70 L82 44 L116 90z" fill="#9DB8D6"/><path d="M32 38 L40 24 L48 38 q-4 4-8 0 q-4 4-8 0z" fill="#fff"/>`,
+    bajuhujan: `<path d="M44 14 h32 l20 18 l-8 10 l-6-4 v52 h-44 v-52 l-6 4 l-8-10z" fill="#FFD23F"/><path d="M48 14 q12 12 24 0" fill="#FFE27A"/><path d="M60 26 v64"/><circle cx="66" cy="44" r="2.5" fill="#4a3428"/><circle cx="66" cy="60" r="2.5" fill="#4a3428"/>`,
+    topimatahari: `<ellipse cx="60" cy="58" rx="54" ry="12" fill="#F2D27A"/><path d="M30 56 q0-36 30-36 q30 0 30 36z" fill="#F2D27A"/><path d="M30 50 h60" stroke="#FF7A9A" stroke-width="6"/><rect x="34" y="72" width="22" height="12" rx="6" fill="#3E3150"/><rect x="64" y="72" width="22" height="12" rx="6" fill="#3E3150"/><path d="M56 78 h8"/>`,
+    sejuk: `<path d="M30 54 q-16 0-14-14 q2-12 16-10 q4-16 22-14 q14 2 16 16 q16-2 18 12 q0 10-12 10z" fill="#E1F0FF"/>${[40, 60, 80].map(x => `<g stroke="#4DA3FF" stroke-width="2.5"><path d="M${x} 66 v20 M${x - 9} 71 l18 10 M${x - 9} 81 l18-10"/></g>`).join("")}`,
+    bajutebal: `<path d="M40 16 l-24 14 l8 22 l10-4 v42 h52 v-42 l10 4 l8-22 l-24-14 q-10 10-20 0z" fill="#FF7A8A"/><path d="M34 60 h52 M34 70 h52" stroke="#fff" stroke-width="3" stroke-dasharray="4 4"/><path d="M44 16 q16 14 32 0" fill="#FFB8C4"/>`,
+    batu: `<path d="M18 84 q-6-30 18-40 q14-22 40-14 q28 4 30 32 q4 22-14 26z" fill="#B0A8B9"/><path d="M44 52 q8-6 14 0 M70 64 q6-4 10 2" fill="none"/>${F(62, 68, .7)}`,
+    span: `<rect x="20" y="34" width="80" height="44" rx="10" fill="#FFE45C"/><rect x="20" y="64" width="80" height="14" rx="6" fill="#7FDDBB"/>${[34, 50, 70, 86, 42, 78].map((x, i) => `<circle cx="${x}" cy="${44 + (i % 2) * 8}" r="2.5" fill="#E8C94A" stroke="none"/>`).join("")}`,
+    tuala: `<rect x="30" y="12" width="60" height="78" rx="8" fill="#8CC8FF"/><path d="M30 70 h60 M30 78 h60" stroke="#fff" stroke-width="3"/><path d="M24 12 h72" stroke="#B98A5E" stroke-width="5"/><path d="M48 86 v8 M60 88 v8 M72 86 v8" stroke="#4DA3FF" stroke-width="2.5"/>`,
+    ais: `<path d="M22 44 l24-10 l24 10 v30 l-24 10 l-24-10z" fill="#DFF6FF"/><path d="M22 44 l24 10 l24-10 M46 54 v30" fill="none"/><path d="M62 34 l20-8 l20 8 v24 l-20 8 l-20-8z" fill="#E9FAFF"/>${F(46, 66, .6)}`,
+    anakayam: `<ellipse cx="60" cy="62" rx="26" ry="24" fill="#FFE45C"/><circle cx="60" cy="40" r="18" fill="#FFE45C"/><path d="M76 40 l10 3 l-10 4z" fill="#FF9F43"/>${F(60, 40, .6)}<path d="M52 86 v8 M68 86 v8" stroke="#FF9F43" stroke-width="3"/><path d="M58 22 q2-8 6-4" fill="none"/>`,
+    pintu: `<rect x="32" y="8" width="56" height="86" rx="6" fill="#B98A5E"/><rect x="40" y="16" width="40" height="30" rx="3" fill="#D9AE85"/><rect x="40" y="52" width="40" height="34" rx="3" fill="#D9AE85"/><circle cx="78" cy="52" r="3.5" fill="#FFD36E"/><path d="M96 30 l10-6 M98 40 h12 M96 50 l10 6" stroke="#FF7A9A" stroke-width="3"/>`,
+    aiskrimjatuh: `<ellipse cx="66" cy="84" rx="34" ry="8" fill="#FFB8D4"/><circle cx="60" cy="76" r="14" fill="#FF9EC4"/><path d="M84 48 l20-28 l8 6 l-22 26z" fill="#E8C27A"/>${F(60, 76, .55).replace("q3.2 3.2 6.4 0", "q3.2 -3.2 6.4 0")}`,
+    mainanrampas: `${M("kotakmainan", 4, 30, 60)}<path d="M74 48 h32 m-10-10 l10 10 l-10 10" fill="none" stroke="#E53935" stroke-width="5"/><path d="M14 20 l14 6 M20 10 l6 12" stroke="#E53935" stroke-width="3"/>`,
+    kejutan: `<rect x="30" y="50" width="60" height="40" rx="5" fill="#BBA6FF"/><path d="M30 50 l-12-20 l60-6" fill="#D9CCFF"/><path d="M60 50 q-4-20 6-30" fill="none" stroke-width="3" stroke-dasharray="4 3"/>${F(60, 70, .7)}<circle cx="70" cy="16" r="6" fill="#FFD36E"/><path d="M90 20 l6-4 M96 32 h8 M86 10 l2-6" stroke="#FF9EC4" stroke-width="3"/>`,
+    sudu: `<ellipse cx="60" cy="28" rx="16" ry="20" fill="#E0E0E0"/><rect x="56" y="44" width="8" height="48" rx="4" fill="#E0E0E0"/>`,
+    garpu: `<path d="M44 10 v24 q0 12 16 12 q16 0 16-12 v-24" fill="none" stroke-width="5"/><path d="M60 10 v24" stroke-width="5"/><rect x="56" y="44" width="8" height="48" rx="4" fill="#E0E0E0"/>`,
+    cawan: `<path d="M30 30 h52 l-6 56 h-40z" fill="#FF9EC4"/><path d="M82 40 q18 0 14 18 q-2 12-16 10" fill="none" stroke-width="5"/><path d="M38 24 q4-8 0-14 M56 24 q4-8 0-14" fill="none" stroke="#BDBDBD"/>${F(56, 56, .7)}`,
+    pinggan: `<ellipse cx="60" cy="56" rx="50" ry="22" fill="#fff"/><ellipse cx="60" cy="54" rx="34" ry="13" fill="#F3ECFF"/>${F(60, 54, .6)}`,
+    rakbuku: `<rect x="14" y="10" width="92" height="84" rx="4" fill="#C79A6B"/><path d="M14 38 h92 M14 66 h92" stroke-width="3"/>${[20, 30, 40, 52].map((x, i) => `<rect x="${x}" y="${14 + (i % 2) * 4}" width="8" height="${22 - (i % 2) * 4}" fill="${SB_PALET[i]}"/>`).join("")}${[60, 70, 82].map((x, i) => `<rect x="${x}" y="44" width="9" height="20" fill="${SB_PALET[i + 3]}"/>`).join("")}`,
+    rakkasut: `<rect x="10" y="30" width="100" height="62" rx="4" fill="#C79A6B"/><path d="M10 60 h100" stroke-width="3"/>${M("kasut", 14, 30, 40)}${M("kasut", 60, 62, 40)}`,
+    almari: `<rect x="22" y="6" width="76" height="88" rx="6" fill="#D9AE85"/><path d="M60 6 v88"/><circle cx="54" cy="50" r="3" fill="#7A5A2E"/><circle cx="66" cy="50" r="3" fill="#7A5A2E"/>${F(60, 30, .7)}`,
+    pisau: `<path d="M14 64 L84 30 q14 0 10 10 L28 74z" fill="#E0E0E0"/><rect x="82" y="40" width="30" height="12" rx="5" fill="#7A5A2E" transform="rotate(-26 97 46)"/><path d="M14 64 l-4 8 l18 2z" fill="#E0E0E0"/>`,
+    ubat: `<rect x="40" y="26" width="40" height="64" rx="8" fill="#FF9F43"/><rect x="38" y="12" width="44" height="16" rx="4" fill="#fff"/><rect x="46" y="44" width="28" height="24" rx="3" fill="#fff"/><path d="M60 48 v16 M52 56 h16" stroke="#E53935" stroke-width="3"/><ellipse cx="22" cy="80" rx="9" ry="5" fill="#FF7A9A"/><ellipse cx="96" cy="84" rx="9" ry="5" fill="#8CC8FF"/>`,
+    cerek: `<path d="M30 46 q0-22 30-22 q30 0 30 22 v38 h-60z" fill="#BDBDBD"/><path d="M90 52 l20-14 l2 8 l-16 14" fill="#BDBDBD"/><path d="M40 24 q20-20 40 0" fill="none" stroke-width="5"/><path d="M104 28 q-4-8 2-14 M112 26 q-4-8 2-14" fill="none" stroke="#FF7A5A" stroke-width="3"/><circle cx="60" cy="64" r="10" fill="#FF5A5A"/><path d="M60 58 v6 M60 68 v1" stroke="#fff" stroke-width="3"/>`,
+    jalanraya: `<rect x="4" y="46" width="112" height="44" fill="#777"/><path d="M8 68 h18 M38 68 h18 M68 68 h18 M98 68 h14" stroke="#fff" stroke-width="3"/>${M("kereta", 66, 30, 50)}${M("Bola", 10, 40, 34)}`,
+    topikeledar: `<path d="M18 70 q0-52 42-52 q42 0 42 52z" fill="#FF7A5A"/><path d="M18 70 h84 v8 h-84z" fill="#3E3150"/><path d="M46 24 q14-6 28 0" fill="none" stroke="#fff" stroke-width="4"/><path d="M40 78 q20 16 40 0" fill="none" stroke-width="3"/>`,
+    lampumerah: lampu(0), lampukuning: lampu(1), lampuhijau: lampu(2),
+    jaketkeselamatan: `<path d="M40 14 h40 l14 14 v62 h-68 v-62z" fill="#FF7A3D"/><path d="M48 14 q12 18 24 0" fill="#fff"/><path d="M26 56 h68 M26 70 h68" stroke="#FFE45C" stroke-width="5"/><path d="M60 30 v60"/>`,
+    berhenti: `<path d="M44 92 v-40 q0-6 6-6 v-26 q0-6 6-6 q6 0 6 6 v20 v-24 q0-6 6-6 q6 0 6 6 v28 v-20 q0-6 6-6 q6 0 6 6 v34 q0 14-16 14z" fill="#FFE1C8"/><circle cx="26" cy="30" r="16" fill="#FF5A5A"/><rect x="18" y="27" width="16" height="6" rx="2" fill="#fff" stroke="none"/>`,
+    mata2: `<ellipse cx="40" cy="50" rx="18" ry="14" fill="#fff"/><ellipse cx="80" cy="50" rx="18" ry="14" fill="#fff"/><circle cx="32" cy="50" r="6" fill="#2b2b2b"/><circle cx="72" cy="50" r="6" fill="#2b2b2b"/><path d="M6 80 l-0 0 M14 80 h-10 l6-6 M4 80 l6 6 M106 80 h10 l-6-6 M116 80 l-6 6" fill="none" stroke="#9B6BFF" stroke-width="4"/>`,
+    pencuci: `<path d="M44 30 h32 v60 h-32z" fill="#8CC8FF"/><rect x="50" y="16" width="18" height="14" fill="#fff"/><path d="M68 18 h16 v6" fill="none" stroke-width="3"/><path d="M60 46 l10 18 h-20z" fill="#FFD23F"/><path d="M60 52 v6 M60 61 v1" stroke-width="2"/>`,
+    ambulans: `<rect x="8" y="30" width="72" height="46" rx="6" fill="#fff"/><path d="M80 44 h16 l14 16 v16 h-30z" fill="#fff"/><path d="M84 48 h10 l8 10 h-18z" fill="#DFF3FF"/><path d="M44 42 v22 M33 53 h22" stroke="#E53935" stroke-width="6"/><rect x="36" y="22" width="16" height="8" rx="2" fill="#4DA3FF"/><circle cx="28" cy="80" r="9" fill="#555"/><circle cx="92" cy="80" r="9" fill="#555"/>`,
+    trakbomba: `<rect x="8" y="34" width="76" height="40" rx="5" fill="#E53935"/><path d="M84 44 h14 l12 14 v16 h-26z" fill="#E53935"/><path d="M88 48 h8 l7 8 h-15z" fill="#DFF3FF"/><path d="M14 30 l64-14" stroke="#BDBDBD" stroke-width="5"/><path d="M14 46 h64 M14 58 h64" stroke="#fff" stroke-width="2"/><circle cx="28" cy="78" r="9" fill="#555"/><circle cx="94" cy="78" r="9" fill="#555"/>`,
+    lorisampah: `<rect x="8" y="30" width="72" height="44" rx="5" fill="#4CC493"/><path d="M80 44 h16 l14 14 v16 h-30z" fill="#4CC493"/><path d="M84 48 h10 l8 8 h-18z" fill="#DFF3FF"/><path d="M30 44 l8-10 l8 10 M38 34 v20" fill="none" stroke="#fff" stroke-width="3"/><circle cx="28" cy="78" r="9" fill="#555"/><circle cx="92" cy="78" r="9" fill="#555"/>`,
+    stetoskop: `<path d="M36 14 v26 q0 24 24 24 q24 0 24-24 v-26" fill="none" stroke="#4DA3FF" stroke-width="5"/><path d="M60 64 v12 q0 12 14 12" fill="none" stroke="#4DA3FF" stroke-width="5"/><circle cx="82" cy="88" r="9" fill="#BDBDBD"/>`,
+    hos: `<circle cx="40" cy="56" r="28" fill="none" stroke="#FF7A5A" stroke-width="10"/><path d="M68 56 h24" stroke="#FF7A5A" stroke-width="10"/><path d="M92 50 h14 v12 h-14z" fill="#BDBDBD"/><path d="M108 50 q8-8 6-20 M110 56 q10 0 8 0 M108 62 q8 8 6 20" fill="none" stroke="#4DA3FF" stroke-width="3"/>`,
+    kuali: `<path d="M14 46 h80 q0 34-40 34 q-40 0-40-34z" fill="#555"/><path d="M94 52 h20" stroke="#7A5A2E" stroke-width="6"/><circle cx="44" cy="52" r="6" fill="#FFD23F"/><circle cx="60" cy="56" r="5" fill="#4CD07D"/><path d="M40 36 q4-8 0-14 M60 36 q4-8 0-14" fill="none" stroke="#BDBDBD"/>`,
+    cangkul: `<path d="M20 90 L84 22" stroke="#B98A5E" stroke-width="6"/><path d="M76 14 l26 6 l-8 26 l-18-18z" fill="#BDBDBD"/>`,
+    sekolah: bangunan("#FFE1EC", "#FF7A9A", `<rect x="30" y="50" width="16" height="14" fill="#DFF3FF"/><rect x="74" y="50" width="16" height="14" fill="#DFF3FF"/><path d="M60 12 v-10" /><path d="M60 2 h16 v8 h-16" fill="#4DA3FF"/><circle cx="60" cy="30" r="6" fill="#FFD36E"/>`),
+    klinik: bangunan("#fff", "#8CC8FF", `<path d="M60 22 v16 M52 30 h16" stroke="#E53935" stroke-width="5"/><rect x="30" y="50" width="16" height="14" fill="#DFF3FF"/><rect x="74" y="50" width="16" height="14" fill="#DFF3FF"/>`),
+    kedai: `<rect x="18" y="40" width="84" height="52" rx="4" fill="#FFF3E0"/>${[0, 1, 2, 3, 4, 5].map(i => `<path d="M${14 + i * 15.3} 26 h15.3 v14 q-7.6 8-15.3 0z" fill="${i % 2 ? "#fff" : "#FF7A8A"}"/>`).join("")}<rect x="28" y="54" width="30" height="22" rx="3" fill="#DFF3FF"/><rect x="68" y="54" width="20" height="38" rx="2" fill="#B98A5E"/>${M("Epal", 30, 58, 22)}`,
+    taman: `<path d="M8 92 h104" stroke-width="3"/><path d="M20 92 L36 30 L52 92 M36 30 h40 M60 92 L76 30 L92 92" fill="none" stroke="#FF7A9A" stroke-width="4"/><path d="M50 30 v34 M62 30 v34" stroke-width="2"/><rect x="46" y="62" width="20" height="6" rx="2" fill="#FFD36E"/>${M("pokok", 82, 40, 40)}`,
+    sawah: `<rect x="4" y="50" width="112" height="44" rx="6" fill="#B9E28C"/>${[0, 1, 2, 3, 4, 5, 6].map(i => `<path d="M${12 + i * 16} 90 v-30 M${12 + i * 16} 64 l-5-8 M${12 + i * 16} 64 l5-8" fill="none" stroke="#3FA672" stroke-width="2.5"/>`).join("")}<circle cx="96" cy="22" r="12" fill="#FFD36E"/>`,
+    suratkhabar: `<rect x="18" y="16" width="84" height="70" rx="4" fill="#fff"/><rect x="26" y="24" width="30" height="24" fill="#BDBDBD"/><path d="M62 28 h32 M62 38 h32 M62 48 h24 M26 58 h68 M26 68 h68 M26 78 h50" stroke="#999" stroke-width="3"/>`,
+    kotak: `<path d="M20 40 l40-16 l40 16 v40 l-40 16 l-40-16z" fill="#D9AE85"/><path d="M20 40 l40 16 l40-16 M60 56 v40" fill="none"/><path d="M38 33 l40 16" stroke="#B98A5E" stroke-width="4"/>`,
+    botolplastik: `<rect x="50" y="6" width="20" height="10" rx="2" fill="#4DA3FF"/><path d="M50 16 h20 l6 14 v56 q0 8-8 8 h-16 q-8 0-8-8 v-56z" fill="#DFF3FF"/><rect x="44" y="44" width="32" height="20" fill="#8CC8FF" stroke="none"/>`,
+    tin: `<rect x="38" y="14" width="44" height="76" rx="8" fill="#BDBDBD"/><ellipse cx="60" cy="16" rx="22" ry="6" fill="#E0E0E0"/><rect x="38" y="36" width="44" height="28" fill="#4CD07D" stroke="none"/>`,
+    balangkaca: `<rect x="36" y="10" width="48" height="12" rx="3" fill="#FF9F43"/><path d="M34 22 h52 q6 0 6 8 v54 q0 8-8 8 h-48 q-8 0-8-8 v-54 q0-8 6-8z" fill="#E1F7F1" fill-opacity=".9"/><path d="M42 34 v40" stroke="#fff" stroke-width="4"/>`,
+    botolkaca: `<rect x="52" y="4" width="16" height="22" rx="3" fill="#7FB13A"/><path d="M52 26 h16 q14 10 14 26 v34 q0 8-8 8 h-28 q-8 0-8-8 v-34 q0-16 14-26z" fill="#9BD08A" fill-opacity=".85"/><path d="M46 52 v30" stroke="#fff" stroke-width="4"/>`,
+    tandatandas: tanda("#4DA3FF", `<circle cx="46" cy="24" r="5" fill="#fff" stroke="none"/><path d="M40 32 h12 v20 h-12z" fill="#fff" stroke="none"/><circle cx="74" cy="24" r="5" fill="#fff" stroke="none"/><path d="M74 30 l9 22 h-18z" fill="#fff" stroke="none"/><path d="M60 18 v44" stroke="#fff" stroke-width="2"/>`),
+    tandalintas: tanda("#4DA3FF", `<path d="M40 30 l40 0 l10 30 h-60z" fill="#fff" stroke="none"/>${[44, 54, 64, 74].map(x => `<rect x="${x}" y="48" width="5" height="10" fill="#3E3150" stroke="none"/>`).join("")}<circle cx="60" cy="22" r="5" fill="#3E3150" stroke="none"/><path d="M60 27 v12 l-6 8 M60 39 l6 8 M54 32 h12" stroke="#3E3150" stroke-width="3"/>`),
+    tandahospital: tanda("#4DA3FF", `<text x="60" y="54" text-anchor="middle" font-size="40" font-weight="900" fill="#fff" stroke="none">H</text>`),
+    tandaberhenti: `<path d="M44 10 h32 l22 22 v32 l-22 22 h-32 l-22-22 v-32z" fill="#E53935"/><text x="60" y="53" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" stroke="none">BERHENTI</text><path d="M60 86 v12" stroke-width="5"/>`,
+    sampahsepah: `<ellipse cx="60" cy="80" rx="54" ry="12" fill="#D9C7A8"/>${M("tin", 10, 46, 34)}${M("botolplastik", 70, 40, 36)}${M("suratkhabar", 38, 58, 34)}<path d="M28 40 q4-6 0-12 M90 30 q4-6 0-12" fill="none" stroke="#7FB13A" stroke-width="2"/>`,
+    lumpur: `<path d="M8 80 q10-30 40-24 q20-24 44-8 q24 6 20 32 q-50 18-104 0z" fill="#8B5A2B"/><circle cx="38" cy="68" r="4" fill="#6B4220" stroke="none"/><circle cx="76" cy="60" r="5" fill="#6B4220" stroke="none"/>`,
+    "s-berdiri": solat(o({ b: "#fff", r: "kopiah", l: "depan", seluar: "#fff" })),
+    "s-rukuk": solat(`<path d="M44 96 L46 64" stroke="#4a3428" stroke-width="10"/><path d="M44 96 L46 64" stroke="#fff" stroke-width="7"/><path d="M44 62 q16-8 40-2 l0 10 q-22 4-40 2z" fill="#fff"/><path d="M80 66 L76 88" stroke="#4a3428" stroke-width="9"/><path d="M80 66 L76 88" stroke="#FFE1C8" stroke-width="6"/><circle cx="96" cy="62" r="13" fill="#FFE1C8"/><path d="M90 52 q8-8 16 2" fill="#fff"/>`),
+    "s-sujud": solat(`<path d="M30 94 L30 76 L46 70" fill="none" stroke="#4a3428" stroke-width="10"/><path d="M30 94 L30 76 L46 70" fill="none" stroke="#fff" stroke-width="7"/><path d="M40 70 q10-26 40-10 q10 10 6 20 q-20 10-46-10z" fill="#fff"/><path d="M78 76 L86 92" stroke="#4a3428" stroke-width="9"/><path d="M78 76 L86 92" stroke="#FFE1C8" stroke-width="6"/><circle cx="96" cy="86" r="11" fill="#FFE1C8"/>`),
+    "s-duduk": solat(`<path d="M34 94 h40" stroke="#4a3428" stroke-width="10"/><path d="M34 94 h40" stroke="#fff" stroke-width="7"/><path d="M42 56 q16-8 32 0 v30 q-16 6-32 0z" fill="#fff"/><path d="M72 62 Q82 74 76 84" fill="none" stroke="#4a3428" stroke-width="9"/><path d="M72 62 Q82 74 76 84" fill="none" stroke="#FFE1C8" stroke-width="6"/><circle cx="58" cy="40" r="15" fill="#FFE1C8"/><path d="M45 32 q13-14 26 0 v-4 q-13-8-26 0z" fill="#fff"/>${F(58, 42, .6)}`),
+    sahur: `<path d="M84 8 a22 22 0 1 0 18 34 a17 17 0 1 1-18-34z" fill="#FFD36E"/>${M("nasi", 0, 30, 70)}${M("Jam", 66, 46, 50)}`,
+    quranbaca: ART.Quran || "",
+    kurma: `<ellipse cx="60" cy="74" rx="48" ry="14" fill="#fff"/>${[[40, 64], [58, 60], [76, 64], [50, 72], [68, 72]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="8" ry="12" fill="#8B5A2B" transform="rotate(-20 ${x} ${y})"/>`).join("")}<path d="M90 30 a12 12 0 1 0 10 18 a9 9 0 1 1-10-18z" fill="#FFD36E"/>`
+  };
+})();
+Object.assign(ART, MP_IK);
+
+/* ===== Modul Prasekolah: profil, tahap 3-6, 9 modul x 11 game, struktur pengenalan > contoh > cubaan > petunjuk > ganjaran ===== */
+const MP_KEY = "appPendidikan.mp.v1";
+const mpData = () => { let d = null; try { d = JSON.parse(localStorage.getItem(MP_KEY)); } catch (e) { /* abaikan */ } d = d || {}; d.profil = d.profil || []; d.rekod = d.rekod || {}; d.mood = d.mood || {}; d.tetap = d.tetap || { minit: 0 }; d.bahasa = d.bahasa || "ms"; return d; };
+const mpSimpan = d => { try { localStorage.setItem(MP_KEY, JSON.stringify(d)); } catch (e) { /* abaikan */ } };
+const mpProfil = () => { const d = mpData(); return d.profil.find(p => p.id === d.aktif) || null; };
+const mpPid = () => (mpProfil() || { id: "tetamu" }).id;
+const mpUmur = () => Math.min(6, Math.max(3, tmUmur || 4));
+const mpT = () => MP_TAHAP[mpUmur()];
+const mpModul = id => MP_MODUL.find(m => m.id === id);
+const mpRekod = (mid, gid) => ((mpData().rekod[mpPid()] || {})[mid + "." + gid]) || null;
+const mpBolehMain = (gi) => gi < mpT().game;
+const mpMinTahap = gi => gi < 5 ? 3 : gi < 7 ? 4 : gi < 9 ? 5 : 6;
+const mpWatak = (m, cls) => `<span class="mpwatak ${cls || ""}">${artSvg(m.watak, "art sbart")}</span>`;
+const MP_PUJI = ["Bagus, awak berjaya!", "Hebat!", "Pandai!", "Syabas!", "Betul sekali!", "Wah, cantik!"];
+const MP_CUBA = ["Cuba dengar sekali lagi.", "Hampir! Cuba lagi.", "Tak apa, cuba lagi ya."];
+/* Kesan bunyi lembut (Web Audio, tiada fail) */
+const mpBunyi = {
+  pop: () => { tone(880, 0, .06, "sine"); tone(1320, .05, .08, "sine"); },
+  kilau: () => [1047, 1319, 1568, 2093].forEach((f, i) => tone(f, i * .07, .12, "triangle")),
+  lembut: () => { tone(330, 0, .12, "sine"); tone(294, .1, .16, "sine"); },
+  lencana: () => [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, i * .1, .18, "triangle"))
+};
+
+/* ---------- Profil anak ---------- */
+const MP_AVATAR = ["Kucing", "Rabbit", "Itik", "Lebah", "Monyet", "Singa", "Zirafah", "Gajah"];
+function mpProfilSkrin(lepas) {
+  const d = mpData(), k = $("qrKawasan");
+  qrSkrin("Pilih Profil Anak", d.profil.length || d.tetamu ? renderPra : renderHome);
+  k.innerHTML = `<div class="mpprofil">${d.profil.map(p => `<button class="mpprof${p.id === d.aktif ? " on" : ""}" data-p="${p.id}"><span>${artSvg(p.avatar, "art sbart")}</span><b>${sbEsc(p.nama)}</b><small>${p.umur} tahun</small></button>`).join("")}
+    <button class="mpprof baru" data-baru="1"><span>${sbGambar("g:+")}</span><b>Tambah anak</b><small>Profil baharu</small></button></div>
+    <div class="mpbaru hide"><h3>Profil baharu</h3><input class="mpnama" maxlength="16" placeholder="Nama anak"><div class="mpav">${MP_AVATAR.map((a, i) => `<button data-a="${a}" class="${i ? "" : "on"}">${artSvg(a, "art sbart")}</button>`).join("")}</div>
+    <div class="tmumur"><b>Umur:</b>${[3, 4, 5, 6].map(u => `<button data-u="${u}" class="${u === 4 ? "on" : ""}">${u} tahun</button>`).join("")}</div><button class="tb hijau mpsimpanp">${IKON.play}<span>Simpan</span></button></div>
+    <button class="tb biru mptetamu">${IKON.next}<span>Main sebagai tetamu</span></button>`;
+  let av = MP_AVATAR[0], um = 4;
+  k.querySelector(".mptetamu").onclick = () => { const d2 = mpData(); d2.tetamu = true; d2.aktif = null; mpSimpan(d2); renderPra(); };
+  k.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { const d2 = mpData(); d2.aktif = b.dataset.p; mpSimpan(d2); const p = mpProfil(); mpSetUmur(p.umur); sndOk(); (lepas || renderPra)(); });
+  k.querySelector("[data-baru]").onclick = () => { k.querySelector(".mpbaru").classList.remove("hide"); k.querySelector(".mpnama").focus(); };
+  k.querySelectorAll(".mpav button").forEach(b => b.onclick = () => { av = b.dataset.a; k.querySelectorAll(".mpav button").forEach(x => x.classList.toggle("on", x === b)); });
+  k.querySelectorAll(".mpbaru [data-u]").forEach(b => b.onclick = () => { um = +b.dataset.u; k.querySelectorAll(".mpbaru [data-u]").forEach(x => x.classList.toggle("on", x === b)); });
+  k.querySelector(".mpsimpanp").onclick = () => {
+    const nama = k.querySelector(".mpnama").value.trim() || "Adik"; const d2 = mpData(), id = "p" + Date.now().toString(36);
+    d2.profil.push({ id, nama, avatar: av, umur: um }); d2.aktif = id; mpSimpan(d2); mpSetUmur(um); sndWin(); (lepas || renderPra)();
+  };
+  qrBual("Siapa yang mahu belajar hari ini?");
+}
+function mpSetUmur(u) {
+  tmUmur = u; try { localStorage.setItem(TM_UMUR_KEY, u); } catch (e) { /* abaikan */ }
+  const d = mpData(), p = d.profil.find(x => x.id === d.aktif); if (p && p.umur !== u) { p.umur = u; mpSimpan(d); }
+}
+
+/* ---------- Halaman modul ---------- */
+function mpBuka(mid) {
+  const m = mpModul(mid), u = mpUmur(), T = mpT();
+  backMenu = () => mpBuka(mid); tmBalik = backMenu; setLux(false);
+  qrSkrin(m.nama, renderPra);
+  const k = $("qrKawasan"), lencana = mpLencana(mid);
+  const bl = m.bahasa ? mpData().bahasa : null;
+  k.innerHTML = `<div class="mphero" style="--w:${m.w};--bg:${m.latar}">${mpWatak(m, lencana ? "mahkota" : "")}<div><small>Pembimbing: ${m.namaWatak}</small><h2>${m.nama}</h2><p>${m.cerita}</p>
+      <div class="mptahap"><b>Tahap ${u}</b><span>${T.nama} · ${T.game} game</span>${lencana ? `<em>Lencana Tahap ${u}</em>` : ""}</div></div></div>
+    ${m.semak ? `<p class="mpsemak">Kandungan agama: sila semak bersama guru atau ibu bapa.</p>` : ""}
+    ${m.bahasa ? `<div class="mpbahasa">${Object.keys(MP_BAHASA).map(x => `<button data-l="${x}" class="${x === bl ? "on" : ""}">${sbGambar(MP_BAHASA[x].ikon)}<b>${MP_BAHASA[x].nama}</b></button>`).join("")}</div>` : ""}
+    <div class="mpgames">${m.game.map((g, i) => { const r = mpRekod(mid + (bl ? "-" + bl : ""), g.id), buka = mpBolehMain(i); return `<button class="mpg${buka ? "" : " kunci"}" data-g="${i}" style="--w:${m.w};animation-delay:${i * .04}s"><i class="mpno">${i + 1}</i><span class="mpgik">${mpIkonGame(m, g)}</span><b>${g.nama}</b>${buka ? `<small>${r ? "★".repeat(r.b) + " · " + r.k + " kali" : "Belum dicuba"}</small>` : `<small>Tahap ${mpMinTahap(i)}</small>`}</button>`; }).join("")}</div>
+    <h3 class="mpsubtajuk">Kad Imbas</h3><div class="mpkad">${m.kad.map(sid => { const s = sbCari(sid); return s ? `<button data-s="${sid}" style="--w:${s.w}">${sbGambar(s.ikon)}<b>${s.nama}</b></button>` : ""; }).join("")}</div>`;
+  k.querySelectorAll("[data-l]").forEach(b => b.onclick = () => { const d = mpData(); d.bahasa = b.dataset.l; mpSimpan(d); mpBuka(mid); });
+  k.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { const i = +b.dataset.g; if (!mpBolehMain(i)) { mpBunyi.lembut(); qrBual("Game ini dibuka pada Tahap " + mpMinTahap(i) + ". Ibu bapa boleh tukar tahap."); return; } mpMain(mid, i); });
+  k.querySelectorAll("[data-s]").forEach(b => b.onclick = () => sbSubjek(b.dataset.s));
+  qrBual(m.namaWatak + ": " + m.cerita);
+}
+function mpIkonGame(m, g) {
+  const peta = { huruf: "g:A", dengarGambar: "a:Kucing", memoriKata: "a:Bola", rakamKata: "a:o-mulut", jejak: "a:Pencil", cantum: "g:ba", padanHuruf: "g:Aa", binaKata: "a:Pisang", binaAyat: "b:Saya suka", bacaAyat: "a:buku", lengkapCerita: "a:buku", kira: "n:3", padanNombor: "g:5", saiz: "a:z-besarkecil", lebih: "a:Oren", pola: "a:bintang", tambah: "t:2+1", susunNombor: "g:123", tolak: "a:Epal", kedai: "a:kedai", maze: "a:robot", labirin: "a:Rabbit", debug: "p:kanan", berubah: "a:kanta", nafas: "a:angin", checkin: "w:gembira", giliran: "a:jampasir", wajah: "w:terkejut", butang: "a:baju", dail: "a:telefon", peta: "a:sekolah", binaAyatTetap: "b:Tolong!" };
+  let s = peta[g.e];
+  if (!s && g.soalan) s = g.soalan[0][1]; if (!s && g.pasangan) s = g.pasangan[0][0]; if (!s && g.item) s = g.item[0][0];
+  if (!s && g.set) s = g.set[0].langkah[0][0]; if (!s && g.cerita) s = g.cerita[0].adegan[0].g;
+  return sbGambar(s || "a:bintang");
+}
+const mpLencana = mid => { const m = mpModul(mid), bl = m.bahasa ? "-" + mpData().bahasa : ""; return m.game.slice(0, mpT().game).every(g => mpRekod(mid + bl, g.id)); };
+
+/* ---------- Kitaran satu game ---------- */
+let mpSesi = null;
+function mpMain(mid, gi) {
+  const m = mpModul(mid), g = m.game[gi], u = mpUmur(), T = mpT(), bl = m.bahasa ? mpData().bahasa : null;
+  tmBalik = () => mpBuka(mid); backMenu = tmBalik;
+  const ctx = { m, g, u, T, bl, L: bl ? MP_BAHASA[bl] : null, n: T.pilihan, R: T.pusingan };
+  /* game pelancar (bukan pusingan) */
+  if (g.e === "jejak") { mpCatat(mid, bl, g.id, 3); return mpJejak(ctx); }
+  if (g.e === "labirin") { mpCatat(mid, bl, g.id, 3); tmBalik = () => mpBuka(mid); return tmLabirin(); }
+  const en = MP_ENJIN[g.e]; if (!en) return qrBual("Game belum tersedia.");
+  const pus = en.pusingan(ctx);
+  mpSesi = { ctx, pus, i: 0, salah: 0, petunjuk: 0, mid, gi };
+  qrSkrin(g.nama, () => mpBuka(mid));
+  const k = $("qrKawasan"), arahan = g.arahan[u] || g.arahan[Object.keys(g.arahan)[0]];
+  k.innerHTML = `<div class="mpintro" style="--w:${m.w};--bg:${m.latar}">${mpWatak(m, "lambai")}<div class="mpbelon"><small>${m.namaWatak}</small><p>${arahan}</p></div></div>
+    <ol class="mparahan">${T.arahan.slice(0, 2).map(x => `<li>${x}</li>`).join("")}</ol>`;
+  qrButang("speak", "Dengar lagi", "biru", () => speak(arahan, "ms"));
+  qrButang("play", "Lihat contoh", "hijau", () => mpContoh());
+  qrBual(arahan); speak(arahan, "ms");
+}
+function mpKepala(teks) {
+  const s = mpSesi, m = s.ctx.m;
+  return `<div class="mpkepala" style="--w:${m.w}">${mpWatak(m, "kecil")}<div class="mpbar"><i style="width:${s.i / s.pus.length * 100}%"></i></div><span>${teks || (s.i + 1) + " / " + s.pus.length}</span></div>`;
+}
+/* Contoh: tunjuk cara menjawab soalan pertama dengan tangan */
+function mpContoh() {
+  const s = mpSesi, k = $("qrKawasan"); $("qrBtns").innerHTML = "";
+  k.innerHTML = mpKepala("Contoh") + `<div class="mparea contoh"></div>`;
+  const area = k.querySelector(".mparea"), api = mpApi(area, true);
+  MP_ENJIN[s.ctx.g.e].lukis(area, s.pus[0], s.ctx, api);
+  qrBual("Lihat contoh ini dahulu.");
+  setTimeout(() => {
+    const j = area.querySelector(".mpjwp"); if (!j) return mpMula();
+    const r = j.getBoundingClientRect(), a = area.getBoundingClientRect(), tg = document.createElement("div");
+    tg.className = "mptangan"; tg.innerHTML = sbGambar("a:jari"); area.appendChild(tg);
+    tg.style.left = (r.left - a.left + r.width / 2 - 20) + "px"; tg.style.top = (r.top - a.top + r.height / 2) + "px";
+    setTimeout(() => { j.classList.add("mpsorot"); mpBunyi.pop(); qrBual("Inilah jawapannya. Sekarang giliran kamu!"); }, 900);
+  }, 500);
+  qrButang("play", "Giliran saya!", "hijau", () => mpMula());
+}
+function mpMula() { mpSesi.i = 0; mpPusingan(); }
+function mpPusingan() {
+  const s = mpSesi, k = $("qrKawasan"); $("qrBtns").innerHTML = "";
+  s.petunjuk = 0;
+  k.innerHTML = mpKepala() + `<div class="mparea"></div>`;
+  const area = k.querySelector(".mparea");
+  MP_ENJIN[s.ctx.g.e].lukis(area, s.pus[s.i], s.ctx, mpApi(area, false));
+  qrButang("speak", "Ulang arahan", "biru", () => { const r = s.pus[s.i]; speak(r && r.sebut || s.ctx.g.arahan[s.ctx.u] || "", r && r.lang || "ms"); });
+  qrButang("next", "Petunjuk", "ungu", () => mpPetunjuk(area));
+}
+function mpApi(area, contoh) {
+  return {
+    contoh,
+    betul(el, lanjut) {
+      if (contoh) return;
+      mpBunyi.kilau(); if (el) { el.classList.add("tmok"); const r = el.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); }
+      const w = document.querySelector(".mpkepala .mpwatak"); if (w) { w.classList.remove("girang"); void w.offsetWidth; w.classList.add("girang"); }
+      qrBual(pick(MP_PUJI));
+      if (lanjut === false) return;
+      setTimeout(() => { mpSesi.i++; mpSesi.i < mpSesi.pus.length ? mpPusingan() : mpUlangKaji(); }, 950);
+    },
+    salah(el) {
+      if (contoh) return;
+      const s = mpSesi; s.salah++; s.petunjuk++; mpBunyi.lembut();
+      if (el) { el.classList.remove("tmno"); void el.offsetWidth; el.classList.add("tmno"); }
+      const w = document.querySelector(".mpkepala .mpwatak"); if (w) { w.classList.remove("fikir"); void w.offsetWidth; w.classList.add("fikir"); }
+      if (s.petunjuk >= 2) mpPetunjuk(area, true); else { qrBual(pick(MP_CUBA)); const r = s.pus[s.i]; if (r && r.sebut) speak(r.sebut, r.lang || "ms"); }
+    },
+    sebut(t, l) { speak(t, l || "ms"); }
+  };
+}
+/* Petunjuk berperingkat: 1 malapkan satu pilihan salah, 2 sorot jawapan */
+function mpPetunjuk(area, auto) {
+  const s = mpSesi, lv = auto ? s.petunjuk - 1 : ++s.petunjuk;
+  const salah = [...area.querySelectorAll(".mpopt:not(.mpjwp):not(.mpmalap)")];
+  if (lv <= 1 && salah.length > 1) { pick(salah).classList.add("mpmalap"); qrBual("Petunjuk: satu jawapan sudah disembunyikan."); }
+  else { const j = area.querySelector(".mpjwp"); if (j) { j.classList.remove("mpsorot"); void j.offsetWidth; j.classList.add("mpsorot"); } qrBual("Petunjuk: lihat yang bersinar."); }
+}
+/* Ulang kaji (Tahap 5-6): satu soalan pilih daripada game lain dalam modul ini */
+function mpUlangKaji() {
+  const s = mpSesi, c = s.ctx;
+  if (c.u < 5 || s.ulangkaji) return mpTamat();
+  const calon = c.m.game.filter((g, i) => g.e === "pilih" && i < c.T.game && g !== c.g);
+  if (!calon.length) return mpTamat();
+  const g = pick(calon), r = MP_ENJIN.pilih.pusingan({ ...c, g })[0];
+  s.ulangkaji = true; const k = $("qrKawasan"); $("qrBtns").innerHTML = "";
+  k.innerHTML = mpKepala("Ulang kaji") + `<p class="mpuk">Soalan ulang kaji daripada "${g.nama}"</p><div class="mparea"></div>`;
+  const area = k.querySelector(".mparea"), api = mpApi(area, false);
+  api.betul = el => { mpBunyi.kilau(); if (el) el.classList.add("tmok"); qrBual("Ingatan kamu hebat!"); setTimeout(mpTamat, 900); };
+  MP_ENJIN.pilih.lukis(area, r, c, api);
+}
+function mpCatat(mid, bl, gid, b) {
+  const d = mpData(), pid = mpPid(), key = mid + (bl ? "-" + bl : "") + "." + gid;
+  d.rekod[pid] = d.rekod[pid] || {}; const r = d.rekod[pid][key] || { b: 0, k: 0 };
+  r.b = Math.max(r.b, b); r.k++; r.t = trkTarikh(); d.rekod[pid][key] = r; mpSimpan(d); tmLog("mp-" + mid);
+}
+function mpTamat() {
+  const s = mpSesi, c = s.ctx, sebelum = mpLencana(c.m.id);
+  const b = s.salah <= s.pus.length ? 3 : 2; /* tiada hukuman: siap = sekurang-kurangnya 2 bintang */
+  mpCatat(c.m.id, c.bl, c.g.id, b);
+  const baru = !sebelum && mpLencana(c.m.id);
+  tmBalik = () => mpBuka(c.m.id);
+  tmSelesai("mp-" + c.m.id + "-" + c.g.id, b, () => mpMain(c.m.id, s.gi));
+  if (baru) setTimeout(() => { mpBunyi.lencana(); const k = $("qrKawasan"); k.insertAdjacentHTML("afterbegin", `<div class="mplencana">${mpWatak(c.m, "mahkota")}<b>Lencana ${c.m.nama} Tahap ${c.u}!</b><small>Semua game tahap ini sudah dicuba.</small></div>`); }, 600);
+  if (c.g.e !== "checkin") qrBual(c.m.namaWatak + ": " + pick(["Awak berjaya!", "Saya bangga dengan awak!", "Jom main lagi nanti!"]));
+}
+
+/* ---------- Pembantu paparan ---------- */
+const mpOpsi = (x, cls) => { const t = typeof x === "object" ? x : (x.indexOf(":") > 0 && /^[a-z]:/.test(x) ? { g: x } : { t: x }); return t.g ? `<span class="mpgbr">${sbGambar(t.g)}</span>${t.l ? `<small>${sbEsc(t.l)}</small>` : ""}` : `<b class="mptks ${cls || ""}">${sbEsc(t.t)}</b>`; };
+const mpCampur = (betul, salah, n) => { const o = shuffle([betul].concat(shuffle(salah).slice(0, n - 1))); return { o, j: o.indexOf(betul) }; };
+/* Soalan pilih umum: r = {tanya, sebut, gambar, opsyen[], betul, tks} */
+function mpLukisPilih(area, r, ctx, api) {
+  area.innerHTML = `<h3 class="mptanya">${sbEsc(r.tanya)}</h3>${r.gambar ? `<div class="mpgambar${r.bayang ? " bayang" : ""}">${sbGambar(r.gambar)}</div>` : ""}${r.html || ""}
+    <div class="mppilih n${r.opsyen.length}">${r.opsyen.map((x, i) => `<button class="mpopt${i === r.betul ? " mpjwp" : ""}" data-i="${i}">${mpOpsi(x, r.tks)}</button>`).join("")}</div>`;
+  area.querySelectorAll(".mpopt").forEach(b => b.onclick = () => { if (api.contoh) return; +b.dataset.i === r.betul ? api.betul(b) : api.salah(b); });
+  const dg = area.querySelector(".mpdengar"); if (dg) dg.onclick = () => api.sebut(r.sebut, r.lang);
+  if (!api.contoh && r.sebut) setTimeout(() => api.sebut(r.sebut, r.lang), 250);
+}
+const mpPilihEnjin = fn => ({ pusingan: fn, lukis: mpLukisPilih });
+const mpSoalanPilih = (ctx, senarai, buat) => shuffle(senarai).slice(0, ctx.R).map(buat);
+
+/* ---------- Enjin ---------- */
+const MP_ENJIN = {
+  pilih: mpPilihEnjin(ctx => mpSoalanPilih(ctx, ctx.g.soalan, ([t, j, s, gbr]) => { const c = mpCampur(j, s, ctx.n); return { tanya: t, sebut: t, gambar: gbr, opsyen: c.o, betul: c.j }; })),
+  huruf: mpPilihEnjin(ctx => {
+    const L = ctx.L, nm = h => (L.hurufNama && L.hurufNama[h]) || h;
+    return Array.from({ length: ctx.R }, () => {
+      if (ctx.u >= 5 && L.kata) {
+        const [w, gbr] = pick(L.kata), akhir = ctx.u >= 6 && L.dir === "ltr" && ctx.bl !== "cina" && Math.random() < .5;
+        const h = (akhir ? [...w].pop() : [...w][0]).toUpperCase(), c = mpCampur("g:" + h, L.huruf.filter(x => x !== h).map(x => "g:" + x), ctx.n);
+        if (ctx.bl === "cina") { const ch = pick(L.huruf), c2 = mpCampur("g:" + ch, L.huruf.filter(x => x !== ch).map(x => "g:" + x), ctx.n); return { tanya: "Aksara mana maksudnya " + nm(ch).replace(/^.*\(|\)$/g, "") + "?", sebut: nm(ch), gambar: L.gambarHuruf[ch], opsyen: c2.o, betul: c2.j }; }
+        return { tanya: (akhir ? "Huruf akhir " : "Huruf awal ") + (L.dir === "rtl" ? "perkataan ini?" : w + "?"), sebut: w, lang: L.suara, gambar: gbr, opsyen: c.o, betul: c.j };
+      }
+      const h = pick(L.huruf), c = mpCampur("g:" + h, L.huruf.filter(x => x !== h).map(x => "g:" + x), ctx.n);
+      return { tanya: "Cari huruf " + nm(h), sebut: nm(h), lang: L.suara === "en" ? "en" : "ms", html: `<div class="mphurufbesar">${sbGambar("g:" + h)}</div>`, opsyen: c.o, betul: c.j };
+    });
+  }),
+  dengarGambar: mpPilihEnjin(ctx => mpSoalanPilih(ctx, ctx.L.kata, ([w, gbr, , rumi]) => { const c = mpCampur(gbr, ctx.L.kata.map(x => x[1]).filter(x => x !== gbr), ctx.n); return { tanya: ctx.u >= 5 ? (rumi ? w + " (" + rumi + ")" : w) : "Dengar dan tekan gambarnya", sebut: rumi ? rumi.replace(/ \(.*/, "") : w, lang: ctx.L.suara, html: `<button class="mpdengar">${IKON.speak}<span>${ctx.u >= 5 ? "" : sbEsc(rumi || w)}</span></button>`, opsyen: c.o, betul: c.j }; })),
+  cantum: {
+    pusingan: ctx => mpSoalanPilih(ctx, ctx.L.sukukata, ([a, b, h]) => { const c = mpCampur("g:" + h, ctx.L.sukukata.map(x => "g:" + x[2]).filter(x => x !== "g:" + h), ctx.n); return { tanya: "Cantumkan bunyi", a, b, h, opsyen: c.o, betul: c.j, sebut: ctx.bl === "ms" ? a + ", " + b + ", " + h : h, lang: ctx.L.suara }; }),
+    lukis(area, r, ctx, api) {
+      mpLukisPilih(area, { ...r, html: `<div class="mpcantum ${ctx.L.dir}"><span class="kiri">${sbGambar("g:" + r.a)}</span><span class="plus">+</span><span class="kanan">${sbGambar("g:" + r.b)}</span></div>` }, ctx, api);
+      setTimeout(() => area.querySelector(".mpcantum") && area.querySelector(".mpcantum").classList.add("cantum"), 400);
+    }
+  },
+  bacaAyat: mpPilihEnjin(ctx => mpSoalanPilih(ctx, ctx.L.ayat, ([a, gbr, maksud]) => {
+    if (maksud) { const c = mpCampur("b:" + maksud, ctx.L.ayat.filter(x => x[2] && x[2] !== maksud).map(x => "b:" + x[2]), ctx.n); return { tanya: "Apakah maksudnya?", html: `<div class="mpayat ${ctx.L.dir}">${sbEsc(a)}</div>`, opsyen: c.o, betul: c.j }; }
+    const c = mpCampur(gbr, ctx.L.ayat.map(x => x[1]).filter(x => x !== gbr), ctx.n); return { tanya: "Baca. Pilih gambar.", sebut: a, lang: ctx.L.suara, html: `<div class="mpayat ${ctx.L.dir}">${sbEsc(a)}</div>`, opsyen: c.o, betul: c.j };
+  })),
+  lengkapCerita: mpPilihEnjin(ctx => mpSoalanPilih(ctx, ctx.L.cerita, ([t, j, s, gbr]) => { const c = mpCampur(j, s, Math.min(ctx.n, s.length + 1)); return { tanya: t, sebut: t, lang: ctx.L.suara, gambar: gbr, opsyen: c.o, betul: c.j, tks: "panjang" }; })),
+  kira: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const [a, b] = { 3: [1, 5], 4: [1, 8], 5: [3, 10], 6: [5, 15] }[ctx.u], n = rnd(a, b), buah = pick(["Epal", "Oren", "Pisang", "Nanas", "Fish", "Itik"]);
+    const salah = [n - 2, n - 1, n + 1, n + 2].filter(x => x > 0), c = mpCampur("g:" + n, salah.map(x => "g:" + x), ctx.n);
+    return { tanya: "Berapa " + tmNama(buah).toLowerCase() + "?", sebut: "Kira " + tmNama(buah).toLowerCase(), html: `<div class="mpkira">${Array.from({ length: n }, (v, i) => `<span style="animation-delay:${i * .15}s">${tmArt(buah)}</span>`).join("")}</div>`, opsyen: c.o, betul: c.j };
+  })),
+  saiz: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const x = pick(TM_HAIWAN), bil = ctx.u === 3 ? 2 : ctx.u === 4 ? 3 : 4, panjang = ctx.u === 6 && Math.random() < .4, besar = ctx.u === 3 || Math.random() < .5;
+    const saiz = shuffle(Array.from({ length: bil }, (v, i) => 40 + i * (60 / (bil - 1)))), betul = saiz.indexOf(besar ? Math.max(...saiz) : Math.min(...saiz));
+    return { tanya: panjang ? (besar ? "Tekan pensel paling panjang" : "Tekan pensel paling pendek") : (bil > 2 ? (besar ? "Tekan yang paling besar" : "Tekan yang paling kecil") : (besar ? "Tekan yang besar" : "Tekan yang kecil")), sebut: "", opsyen: saiz.map(s => ({ g: panjang ? "a:Pencil" : "a:" + x, s })), betul, saiz };
+  })),
+  lebih: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const mx = { 4: 6, 5: 8, 6: 10 }[ctx.u] || 6, a = rnd(1, mx); let b = ctx.u === 6 && Math.random() < .25 ? a : rnd(1, mx); while (b === a && !(ctx.u === 6 && b === a && Math.random() < .3)) b = rnd(1, mx);
+    const tanya = ctx.u >= 5 ? pick(["lebih", "kurang"]) : "lebih", buah = pick(["Epal", "Oren", "Itik", "bintang"]);
+    const grp = n => `<span class="mppinggan">${Array.from({ length: n }, () => sbGambar("a:" + buah)).join("")}</span>`;
+    const o = [{ t: "A" }, { t: "B" }].concat(ctx.u === 6 ? [{ t: "Sama banyak" }] : []), betul = a === b ? 2 : (tanya === "lebih" ? (a > b ? 0 : 1) : (a < b ? 0 : 1));
+    return { tanya: "Kumpulan mana " + (tanya === "lebih" ? "LEBIH banyak" : "KURANG") + "?", html: `<div class="mpdua"><div><b>A</b>${grp(a)}</div><div><b>B</b>${grp(b)}</div></div>`, opsyen: o, betul };
+  })),
+  pola: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const jenis = pick({ 3: ["AB"], 4: ["AB", "AAB"], 5: ["AB", "AAB", "ABC"], 6: ["AAB", "ABC", "ABB", "AABB"] }[ctx.u]), huruf = [...new Set(jenis)], peta = {};
+    tmAmbil(["a:bintang", "a:hati", "a:b-bulatan", "a:b-segitiga", "a:Epal", "a:Itik", "c:#4DA3FF", "c:#FFD23F"], huruf.length).forEach((x, i) => peta[huruf[i]] = x);
+    const siri = Array.from({ length: jenis.length * 2 + 1 }, (v, i) => peta[jenis[i % jenis.length]]);
+    const pos = ctx.u === 6 ? rnd(1, siri.length - 1) : siri.length - 1, j = siri[pos];
+    const c = mpCampur(j, Object.values(peta).filter(x => x !== j).concat(["a:Bola", "a:Lebah", "c:#FF5A5A"]), ctx.n);
+    return { tanya: ctx.u === 6 ? "Apa yang hilang dalam corak?" : "Apa seterusnya?", html: `<div class="mppola">${siri.map((x, i) => i === pos ? `<span class="tanya">?</span>` : `<span>${sbGambar(x)}</span>`).join("")}</div>`, opsyen: c.o, betul: c.j };
+  })),
+  tambah: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const mx = ctx.u === 5 ? 6 : 10, a = rnd(1, mx - 1), b = rnd(1, Math.min(5, mx - a)), n = a + b, c = mpCampur("g:" + n, [n - 1, n + 1, n + 2, n - 2].filter(x => x > 0).map(x => "g:" + x), ctx.n);
+    return { tanya: a + " + " + b + " = ?", sebut: a + " tambah " + b, html: `<div class="mptambah"><span>${Array.from({ length: a }, () => tmArt("Epal")).join("")}</span><b>+</b><span>${Array.from({ length: b }, () => tmArt("Epal")).join("")}</span></div>`, opsyen: c.o, betul: c.j };
+  })),
+  tolak: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const a = rnd(3, 9), b = rnd(1, a - 1), n = a - b, c = mpCampur("g:" + n, [n - 1, n + 1, n + 2, a].filter(x => x >= 0 && x !== n).map(x => "g:" + x), ctx.n);
+    return { tanya: "Ada " + a + " epal. Arnab makan " + b + ". Tinggal berapa?", sebut: "Ada " + a + " epal. Arnab makan " + b + ". Tinggal berapa?", html: `<div class="mpkira">${Array.from({ length: a }, (v, i) => `<span class="${i < b ? "dimakan" : ""}">${tmArt("Epal")}</span>`).join("")}</div>`, opsyen: c.o, betul: c.j };
+  })),
+  kedai: mpPilihEnjin(ctx => Array.from({ length: ctx.R }, () => {
+    const harga = rnd(2, 8), barang = pick(["Epal", "Pisang", "Bola", "Kite", "buku", "Pencil"]);
+    const set = n => { const a = []; let x = n; while (x >= 5) { a.push(5); x -= 5; } while (x > 0) { a.push(1); x--; } return a; };
+    const duit = a => `<span class="mpduit">${a.map(v => sbGambar("a:r-" + v)).join("")}</span>`;
+    const cubaan = shuffle([harga - 1, harga + 1, harga - 2, harga + 2].filter(x => x > 0)).slice(0, ctx.n - 1);
+    const o = shuffle([harga].concat(cubaan)), betul = o.indexOf(harga);
+    const nb = tmNama(barang).replace(/^./, c => c.toUpperCase()); return { tanya: nb + " berharga RM" + harga + ". Pilih duit yang tepat.", sebut: nb + " berharga " + harga + " ringgit", gambar: "a:" + barang, opsyen: o.map(v => ({ t: "" , h: duit(set(v)) })), betul, duit: o.map(v => duit(set(v))) };
+  })),
+  checkin: {
+    pusingan: () => [{}],
+    lukis(area, r, ctx, api) {
+      const muka = ["gembira", "sedih", "marah", "takut", "terkejut"];
+      area.innerHTML = `<h3 class="mptanya">Bagaimana perasaan kamu hari ini?</h3><div class="mppilih n5">${muka.map((x, i) => `<button class="mpopt${i ? "" : " mpjwp"}" data-x="${x}"><span class="mpgbr">${sbGambar("w:" + x)}</span><small>${TM_WAJAH[x][0]}</small></button>`).join("")}</div><div class="mpsebab"></div>`;
+      area.querySelectorAll("[data-x]").forEach(b => b.onclick = () => {
+        if (api.contoh) return; const x = b.dataset.x, d = mpData(), pid = mpPid(); d.mood[pid] = d.mood[pid] || {}; d.mood[pid][trkTarikh()] = x; mpSimpan(d);
+        const balas = { gembira: "Seronoknya! Saya pun gembira bersama kamu.", sedih: "Tak apa rasa sedih. Cuba peluk ibu atau cerita kepada cikgu.", marah: "Jom tarik nafas perlahan bersama saya.", takut: "Kamu selamat. Beritahu orang dewasa yang kamu percaya.", terkejut: "Wah! Apa yang berlaku?" }[x];
+        if (ctx.u < 5) { qrBual(balas); return api.betul(b); }
+        area.querySelector(".mpsebab").innerHTML = `<h3 class="mptanya">Kenapa?</h3><div class="mppilih n4">${["Main dengan kawan", "Penat", "Rindu seseorang", "Dapat hadiah", "Lain-lain"].map(s => `<button class="mpopt mpjwp" data-s="1"><b class="mptks">${s}</b></button>`).join("")}</div>`;
+        area.querySelectorAll("[data-s]").forEach(s => s.onclick = () => { qrBual(balas); api.betul(s); });
+      });
+    }
+  },
+  nafas: {
+    pusingan: ctx => [{ kali: { 3: 3, 4: 3, 5: 4, 6: 5 }[ctx.u] }],
+    lukis(area, r, ctx, api) {
+      area.innerHTML = `<div class="mpnafas"><div class="mpbelonnafas">${sbGambar("w:gembira")}</div><b class="mpnafastks">Sedia...</b><small class="mpnafasno"></small></div>`;
+      if (api.contoh) { area.querySelector(".mpbelonnafas").classList.add("mpjwp"); return; }
+      const bel = area.querySelector(".mpbelonnafas"), tks = area.querySelector(".mpnafastks"), no = area.querySelector(".mpnafasno"), id = qrId; let i = 0;
+      const kitar = () => {
+        if (id !== qrId) return; if (i >= r.kali) return api.betul(bel);
+        no.textContent = (i + 1) + " / " + r.kali; tks.textContent = "Tarik nafas..."; bel.className = "mpbelonnafas besar"; api.sebut("Tarik nafas");
+        setTimeout(() => { if (id !== qrId) return; tks.textContent = "Hembus perlahan..."; bel.className = "mpbelonnafas"; api.sebut("Hembus perlahan"); i++; setTimeout(kitar, 4000); }, 4000);
+      };
+      setTimeout(kitar, 800);
+    }
+  },
+  padan: {
+    pusingan: ctx => { const n = { 3: 2, 4: 3, 5: 4, 6: 5 }[ctx.u]; return [0, 1].map(() => ({ p: tmAmbil(ctx.g.pasangan, Math.min(n, ctx.g.pasangan.length)) })).slice(0, ctx.u >= 5 ? 2 : 1); },
+    lukis: mpLukisPadan
+  },
+  padanNombor: { pusingan: ctx => [0, 1].map(() => { const mx = { 3: 5, 4: 6, 5: 8, 6: 10 }[ctx.u], n = { 3: 2, 4: 3, 5: 4, 6: 4 }[ctx.u]; return { p: tmAmbil(Array.from({ length: mx }, (v, i) => i + 1), n).map(x => ["g:" + x, "n:" + x]) }; }), lukis: mpLukisPadan },
+  padanHuruf: { pusingan: ctx => [0, 1].map(() => { const L = ctx.L, n = { 4: 3, 5: 4, 6: 5 }[ctx.u] || 3; let p;
+      if (L.besarkecil) p = tmAmbil(L.huruf, n).map(h => ["g:" + h, "g:" + h.toLowerCase()]);
+      else if (L.bentuk) p = tmAmbil(L.bentuk, n).map(b => ["g:" + b[0], "g:" + b[ctx.u >= 6 ? rnd(1, 3) : 1]]);
+      else if (L.gambarHuruf) p = tmAmbil(Object.keys(L.gambarHuruf), n).map(h => ["g:" + h, L.gambarHuruf[h]]);
+      else p = tmAmbil(L.huruf, n).map(h => ["g:" + h, (L.hurufNama[h] || h)]);
+      return { p }; }), lukis: mpLukisPadan },
+  memoriKata: { pusingan: ctx => [{ n: { 3: 2, 4: 3, 5: 4, 6: 6 }[ctx.u] }], lukis: mpLukisMemori },
+  susun: { pusingan: ctx => { const set = pick(ctx.g.set); return [{ set }].concat(ctx.u >= 5 && ctx.g.set.length > 1 ? [{ set: ctx.g.set.find(x => x !== set) }] : []); }, lukis: mpLukisSusun },
+  susunNombor: { pusingan: ctx => [0, 1].map(() => { const n = ctx.u === 5 ? 4 : 5, mx = ctx.u === 5 ? 10 : 20, a = tmAmbil(Array.from({ length: mx }, (v, i) => i + 1), n).sort((x, y) => x - y); return { set: { tajuk: "Kecil ke besar", langkah: a.map(x => ["g:" + x, String(x)]) }, semua: true }; }), lukis: mpLukisSusun },
+  asing: { pusingan: ctx => [{}], lukis: mpLukisAsing },
+  binaKata: { pusingan: ctx => mpSoalanPilih(ctx, ctx.L.kata.filter(k => k[2].length > 1), k => ({ gambar: k[1], bahagian: k[2], perkataan: k[0], tambahan: ctx.u >= 6 })), lukis: mpLukisBina },
+  binaAyat: { pusingan: ctx => { const L = ctx.L; const sumber = L.ayat.map(a => [a[0].replace(/[.!?]/g, ""), a[1]]).filter(a => (ctx.bl === "cina" ? [...a[0]] : a[0].split(" ")).length > 1);
+      return shuffle(sumber).slice(0, Math.min(ctx.R, 4)).map(([a, g]) => ({ gambar: g, bahagian: ctx.bl === "cina" ? [...a] : a.split(" "), perkataan: a, ayat: true, tambahan: ctx.u >= 6 })); }, lukis: mpLukisBina },
+  binaAyatTetap: { pusingan: ctx => ctx.g.ayat.map(([a, g]) => ({ gambar: g, bahagian: a.split(" "), perkataan: a, ayat: true })), lukis: mpLukisBina },
+  rakamKata: { pusingan: ctx => mpSoalanPilih(ctx, ctx.u >= 6 && ctx.L.ayat ? ctx.L.ayat.filter(a => /^[a-z]:/.test(a[1])) : ctx.L.kata, k => ({ teks: k[0], gambar: k[1], rumi: k[3] || k[2] && typeof k[2] === "string" && k[2] })), lukis: mpLukisRakam },
+  cerita: { pusingan: ctx => { const c = pick(ctx.g.cerita), bil = { 3: 1, 4: 1, 5: 2, 6: 3 }[ctx.u]; return c.adegan.slice(0, bil).map(a => ({ ...a, tajuk: c.tajuk })); }, lukis: mpLukisCerita },
+  maze: { pusingan: ctx => Array.from({ length: Math.min(ctx.R, 4) }, () => ({ langkah: (ctx.g.langkah || {})[ctx.u] || 2, satu: ctx.g.mod === "satu" })), lukis: mpLukisMaze },
+  debug: { pusingan: ctx => Array.from({ length: 3 }, () => ({ langkah: 4, debug: true })), lukis: mpLukisMaze },
+  berubah: { pusingan: ctx => Array.from({ length: 3 }, () => ({ n: 5 })), lukis: mpLukisBerubah },
+  giliran: { pusingan: ctx => Array.from({ length: ctx.R }, () => ({ n: ctx.u === 4 ? 3 : ctx.u === 5 ? 4 : 5 })), lukis: mpLukisGiliran },
+  wajah: { pusingan: ctx => tmAmbil(["gembira", "sedih", "marah", "terkejut"], 3).map(e => ({ e })), lukis: mpLukisWajah },
+  dail: { pusingan: () => [{}], lukis: mpLukisDail },
+  peta: { pusingan: ctx => tmAmbil(ctx.u >= 6 ? MP_TEMPAT : MP_TEMPAT.slice(0, 5), ctx.R).map(t => ({ t })), lukis: mpLukisPeta },
+  butang: { pusingan: () => [{}], lukis: mpLukisButang }
+};
+/* Kedai: paparan duit dalam pilihan */
+MP_ENJIN.kedai.lukis = (area, r, ctx, api) => { mpLukisPilih(area, { ...r, opsyen: r.opsyen.map(() => ({ t: "" })) }, ctx, api); area.querySelectorAll(".mpopt").forEach((b, i) => b.innerHTML = r.duit[i]); };
+/* Saiz: lukis ikut saiz */
+MP_ENJIN.saiz.lukis = (area, r, ctx, api) => { mpLukisPilih(area, r, ctx, api); area.querySelector(".mppilih").classList.add("mpsaiz"); area.querySelectorAll(".mpopt").forEach((b, i) => { b.querySelector(".mpgbr").style.width = r.saiz[i] * 1.6 + "px"; }); };
+
+/* ---------- Padan: tekan kiri, kemudian kanan (atau seret) ---------- */
+function mpLukisPadan(area, r, ctx, api) {
+  const kiri = r.p.map((x, i) => ({ x: x[0], i })), kanan = shuffle(r.p.map((x, i) => ({ x: x[1], i })));
+  area.innerHTML = `<h3 class="mptanya">Padankan yang sepasang</h3><div class="mppadan"><div class="kol">${kiri.map(o => `<button class="mpp" data-k="${o.i}">${mpOpsi(o.x)}</button>`).join("")}</div><div class="kol">${kanan.map(o => `<button class="mpp kn" data-n="${o.i}">${mpOpsi(o.x)}</button>`).join("")}</div></div>`;
+  let pilih = null, siap = 0; const warna = ["#FF9EC4", "#8CC8FF", "#7FDDBB", "#FFC94D", "#BBA6FF", "#FFB98A"];
+  const tanda = () => { area.querySelectorAll(".mpjwp").forEach(x => x.classList.remove("mpjwp")); const k = area.querySelector(".mpp[data-k]:not(.siap)"); if (!k) return; (pilih === null ? k : area.querySelector(`.mpp[data-n="${pilih}"]`)).classList.add("mpjwp"); };
+  const padan = (ki, kn, elKn) => {
+    const a = area.querySelector(`[data-k="${ki}"]`);
+    if (ki === kn) { [a, elKn].forEach(e => { e.classList.add("siap"); e.style.setProperty("--pw", warna[siap % 6]); }); siap++; pilih = null; mpBunyi.pop(); if (siap === r.p.length) api.betul(elKn); else tanda(); }
+    else { api.salah(elKn); a.classList.remove("on"); pilih = null; tanda(); }
+  };
+  area.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { if (api.contoh || b.classList.contains("siap")) return; area.querySelectorAll("[data-k]").forEach(x => x.classList.remove("on")); b.classList.add("on"); pilih = +b.dataset.k; mpBunyi.pop(); tanda(); });
+  area.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { if (api.contoh || b.classList.contains("siap") || pilih === null) return; padan(pilih, +b.dataset.n, b); });
+  mpSeret(area, "[data-k]", "[data-n]", (dari, ke) => { if (api.contoh || dari.classList.contains("siap") || ke.classList.contains("siap")) return; pilih = +dari.dataset.k; padan(pilih, +ke.dataset.n, ke); });
+  tanda();
+}
+/* Seret dan lepas umum (penunjuk/jari); tap biasa tetap berfungsi */
+function mpSeret(area, dariSel, keSel, lepas) {
+  area.querySelectorAll(dariSel).forEach(el => el.addEventListener("pointerdown", e => {
+    if (el.classList.contains("siap")) return;
+    const x0 = e.clientX, y0 = e.clientY; let klon = null;
+    const gerak = ev => {
+      if (!klon && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 10) return;
+      if (!klon) { const r = el.getBoundingClientRect(); klon = el.cloneNode(true); klon.className += " mpklon"; klon.style.width = r.width + "px"; document.body.appendChild(klon); el.classList.add("diseret"); }
+      klon.style.left = ev.clientX + "px"; klon.style.top = ev.clientY + "px";
+    };
+    const habis = ev => {
+      window.removeEventListener("pointermove", gerak); window.removeEventListener("pointerup", habis);
+      if (!klon) return; klon.remove(); el.classList.remove("diseret");
+      const sasar = document.elementsFromPoint(ev.clientX, ev.clientY).find(x => x.matches && x.matches(keSel));
+      if (sasar) lepas(el, sasar); el.dataset.seret = "1"; setTimeout(() => delete el.dataset.seret, 50);
+    };
+    window.addEventListener("pointermove", gerak); window.addEventListener("pointerup", habis);
+  }));
+}
+/* ---------- Susun ikut urutan ---------- */
+function mpLukisSusun(area, r, ctx, api) {
+  const L = r.set.langkah, u = ctx.u;
+  if (u === 3 && !r.semua) { /* Tahap 3: pilih gambar aktiviti */
+    const c = mpCampur(L[0][0], ["a:Bola", "a:Kite", "a:Dadu", "a:kereta"], 2);
+    return mpLukisPilih(area, { tanya: "Tekan gambar: " + r.set.tajuk.toLowerCase(), sebut: r.set.tajuk, opsyen: c.o, betul: c.j }, ctx, api);
+  }
+  let pilih = L.map((x, i) => i);
+  if (!r.semua) { const n = u === 4 ? 2 : u === 5 ? Math.min(4, L.length) : L.length; pilih = n >= L.length ? pilih : [0].concat(tmAmbil(pilih.slice(1, -1), n - 2).sort((a, b) => a - b), L.length - 1); }
+  const langkah = pilih.map(i => L[i]);
+  area.innerHTML = `<h3 class="mptanya">${sbEsc(r.set.tajuk)}: susun ikut urutan</h3><div class="mpslot">${langkah.map((x, i) => `<div class="mps" data-s="${i}"><i>${i + 1}</i></div>`).join("")}</div>
+    <div class="mpdulang">${shuffle(langkah.map((x, i) => ({ x, i }))).map(o => `<button class="mpopt mpitem" data-i="${o.i}">${mpOpsi({ g: o.x[0], l: o.x[1] })}</button>`).join("")}</div>`;
+  let ke = 0;
+  const tanda = () => { area.querySelectorAll(".mpjwp").forEach(x => x.classList.remove("mpjwp")); const b = area.querySelector(`.mpitem[data-i="${ke}"]`); if (b) b.classList.add("mpjwp"); };
+  const letak = b => {
+    if (+b.dataset.i !== ke) return api.salah(b);
+    area.querySelector(`[data-s="${ke}"]`).appendChild(b); b.classList.add("siap"); b.onclick = null; mpBunyi.pop(); ke++;
+    if (ke === langkah.length) { if (u === 6 && r.set.sebab) setTimeout(() => mpSebab(area, r.set.sebab, ctx, api), 600); else api.betul(b); } else tanda();
+  };
+  area.querySelectorAll(".mpitem").forEach(b => b.onclick = () => { if (!api.contoh && !b.dataset.seret) letak(b); });
+  mpSeret(area, ".mpitem", ".mps", (b, s) => { if (api.contoh) return; if (+s.dataset.s !== ke) return api.salah(b); letak(b); });
+  tanda();
+}
+function mpSebab(area, [t, j, s], ctx, api) { const c = mpCampur(j, s, 3); const div = document.createElement("div"); area.appendChild(div); mpLukisPilih(div, { tanya: t, sebut: t, opsyen: c.o, betul: c.j, tks: "panjang" }, ctx, api); div.scrollIntoView({ behavior: "smooth", block: "center" }); }
+/* ---------- Asing ke dalam bakul ---------- */
+function mpLukisAsing(area, r, ctx, api) {
+  const g = ctx.g, u = ctx.u, kum = g.kumpulan.slice(0, u >= 5 ? g.kumpulan.length : 2);
+  const bil = { 3: 4, 4: 6, 5: 8, 6: 10 }[u], item = shuffle(g.item.filter(x => x[2] < kum.length)).slice(0, bil);
+  area.innerHTML = `<h3 class="mptanya">Seret atau tekan bakul yang betul</h3><div class="mpasing"><div class="mpjatuh"></div><div class="mpbakul n${kum.length}">${kum.map(([n, ik], i) => `<button class="mpopt mpbk" data-k="${i}"><span class="mpgbr">${sbGambar(ik)}</span><b>${n}</b><em></em></button>`).join("")}</div><small class="mpbaki"></small></div>`;
+  let i = 0; const jt = area.querySelector(".mpjatuh");
+  const tanda = () => { area.querySelectorAll(".mpbk").forEach(b => b.classList.toggle("mpjwp", item[i] && +b.dataset.k === item[i][2])); };
+  const papar = () => { jt.innerHTML = `<button class="mpopt mpitem tmgoyang">${mpOpsi({ g: item[i][0], l: item[i][1] })}</button>`; area.querySelector(".mpbaki").textContent = (i + 1) + " / " + item.length; tanda(); mpSeret(area, ".mpjatuh .mpitem", ".mpbk", (el, bk) => cuba(bk)); if (!api.contoh) api.sebut(item[i][1]); };
+  const cuba = bk => {
+    if (api.contoh) return;
+    if (+bk.dataset.k !== item[i][2]) return api.salah(bk);
+    bk.querySelector("em").innerHTML += `<span>${sbGambar(item[i][0])}</span>`; mpBunyi.pop(); i++;
+    if (i >= item.length) { jt.innerHTML = ""; api.betul(bk); } else papar();
+  };
+  area.querySelectorAll(".mpbk").forEach(b => b.onclick = () => cuba(b));
+  papar();
+}
+/* ---------- Memori kata ---------- */
+function mpLukisMemori(area, r, ctx, api) {
+  const L = ctx.L, k = tmAmbil(L.kata, r.n), sama = ctx.u === 3;
+  const kad = shuffle([].concat(...k.map((x, i) => [{ i, s: x[1] }, { i, s: sama ? x[1] : "g:" + x[0] }])));
+  area.innerHTML = `<h3 class="mptanya">${sama ? "Cari dua gambar yang sama" : "Padankan gambar dengan perkataan"}</h3><div class="tmkembar" style="--c:${r.n <= 2 ? 2 : r.n <= 4 ? 4 : 4}">${kad.map((c, j) => `<button class="tmkad" data-j="${j}"><span class="tmdepan">${sbGambar(c.s)}</span><span class="tmbelakang"></span></button>`).join("")}</div>`;
+  if (api.contoh) { const a = area.querySelectorAll(".tmkad"); a[0].classList.add("buka", "mpjwp"); return; }
+  let buka = [], kunci = false, jumpa = 0;
+  area.querySelectorAll(".tmkad").forEach(b => b.onclick = () => {
+    if (kunci || b.classList.contains("buka")) return; b.classList.add("buka"); mpBunyi.pop(); buka.push(b); if (buka.length < 2) return;
+    kunci = true; const [a, c] = buka;
+    if (kad[a.dataset.j].i === kad[c.dataset.j].i) { setTimeout(() => { a.classList.add("tmok"); c.classList.add("tmok"); buka = []; kunci = false; jumpa++; api.sebut(k[kad[a.dataset.j].i][3] ? k[kad[a.dataset.j].i][3].replace(/ \(.*/, "") : k[kad[a.dataset.j].i][0], L.suara); if (jumpa === r.n) api.betul(c); }, 350); }
+    else setTimeout(() => { a.classList.remove("buka"); c.classList.remove("buka"); buka = []; kunci = false; mpSesi.salah++; }, 900);
+  });
+}
+/* ---------- Bina perkataan / ayat dengan jubin ---------- */
+function mpLukisBina(area, r, ctx, api) {
+  const L = ctx.L || { dir: "ltr" }, kolam = !ctx.L ? [] : r.ayat ? [].concat(...ctx.L.ayat.map(a => a[0].replace(/[.!?]/g, "").split(" "))) : [].concat(...ctx.L.kata.map(k => k[2])), tam = r.tambahan ? tmAmbil(kolam.filter(x => r.bahagian.indexOf(x) < 0), 1) : [];
+  const jubin = shuffle(r.bahagian.map((t, i) => ({ t, i })).concat(tam.map(t => ({ t, i: -1 }))));
+  area.innerHTML = `<h3 class="mptanya">${r.ayat ? "Susun menjadi ayat" : "Susun menjadi perkataan"}</h3>${r.gambar ? `<div class="mpgambar kecil">${sbGambar(r.gambar)}</div>` : ""}
+    <div class="mpbina ${L.dir}">${r.bahagian.map((t, i) => `<span class="mpbs" data-s="${i}"></span>`).join("")}</div><div class="mpjubin ${L.dir}">${jubin.map((o, j) => `<button class="mpopt mpjb" data-i="${o.i}" data-j="${j}">${sbEsc(o.t)}</button>`).join("")}</div>`;
+  let ke = 0;
+  const tanda = () => { area.querySelectorAll(".mpjwp").forEach(x => x.classList.remove("mpjwp")); const b = [...area.querySelectorAll(".mpjb")].find(x => !x.classList.contains("siap") && r.bahagian[+x.dataset.i] === r.bahagian[ke]); if (b) b.classList.add("mpjwp"); };
+  const letak = b => {
+    if (r.bahagian[+b.dataset.i] !== r.bahagian[ke] || +b.dataset.i < 0) return api.salah(b);
+    const s = area.querySelector(`[data-s="${ke}"]`); s.textContent = b.textContent; s.classList.add("isi"); b.classList.add("siap"); mpBunyi.pop(); ke++;
+    if (ke === r.bahagian.length) { api.sebut(r.perkataan, L.suara); api.betul(area.querySelector(".mpbina")); } else tanda();
+  };
+  area.querySelectorAll(".mpjb").forEach(b => b.onclick = () => { if (!api.contoh && !b.classList.contains("siap") && !b.dataset.seret) letak(b); });
+  mpSeret(area, ".mpjb", ".mpbs", (b, s) => { if (api.contoh || b.classList.contains("siap")) return; if (+s.dataset.s !== ke) return api.salah(b); letak(b); });
+  tanda();
+}
+/* ---------- Dengar & ulang (rakam suara) ---------- */
+function mpLukisRakam(area, r, ctx, api) {
+  const L = ctx.L;
+  area.innerHTML = `<div class="mprakam"><div class="mpgambar">${sbGambar(r.gambar)}</div><h2 class="${L.dir}">${sbEsc(r.teks)}</h2>${r.rumi ? `<small>${sbEsc(r.rumi)}</small>` : ""}
+    <div class="mprakambtn"><button class="mpdengar mpjwp">${IKON.speak}<span>Dengar</span></button><button class="tmrek"><i></i><span>Rakam</span></button></div><audio class="hide"></audio>
+    <button class="tb hijau mpdahsebut">${IKON.play}<span>Saya dah sebut!</span></button></div>`;
+  const sebut = () => api.sebut(r.rumi && L.dir === "rtl" ? r.rumi.replace(/ \(.*/, "") : r.teks.replace(/ \(.*/, ""), L.suara);
+  area.querySelector(".mpdengar").onclick = sebut; if (!api.contoh) setTimeout(sebut, 300);
+  const b = area.querySelector(".tmrek"), au = area.querySelector("audio"); let rec = null;
+  b.onclick = async () => {
+    if (api.contoh) return; if (rec && rec.state === "recording") { rec.stop(); return; }
+    try { const st = await navigator.mediaDevices.getUserMedia({ audio: true }), bah = []; rec = new MediaRecorder(st); rec.ondataavailable = e => bah.push(e.data);
+      rec.onstop = () => { st.getTracks().forEach(t => t.stop()); au.src = URL.createObjectURL(new Blob(bah)); au.play(); b.classList.remove("on"); b.querySelector("span").textContent = "Rakam lagi"; qrBual("Dengar suara kamu!"); };
+      rec.start(); b.classList.add("on"); b.querySelector("span").textContent = "Berhenti"; setTimeout(() => rec && rec.state === "recording" && rec.stop(), 4000);
+    } catch (e) { qrBual("Mikrofon tidak dapat dibuka. Sebut kuat-kuat sahaja!"); }
+  };
+  area.querySelector(".mpdahsebut").onclick = e => api.betul(e.currentTarget);
+}
+/* ---------- Cerita interaktif ---------- */
+function mpLukisCerita(area, r, ctx, api) {
+  const pilihan = r.pilihan.slice(0, ctx.u === 3 ? 2 : r.pilihan.length), c = shuffle(pilihan.map((p, i) => ({ p, i })));
+  area.innerHTML = `<div class="mpcerita"><small>${sbEsc(r.tajuk)}</small><div class="mpgambar">${sbGambar(r.g)}</div><p>${sbEsc(r.t)}</p><h3 class="mptanya">${sbEsc(r.tanya)}</h3>
+    <div class="mppilih lajur">${c.map(o => `<button class="mpopt${o.p[1] ? " mpjwp" : ""}" data-i="${o.i}"><b class="mptks panjang">${sbEsc(o.p[0])}</b></button>`).join("")}</div><div class="mpkesan"></div></div>`;
+  if (!api.contoh) api.sebut(r.t + " " + r.tanya);
+  area.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
+    if (api.contoh) return; const p = r.pilihan[+b.dataset.i]; area.querySelector(".mpkesan").innerHTML = `<p class="${p[1] ? "ok" : "no"}">${sbEsc(p[2])}</p>`; api.sebut(p[2]);
+    p[1] ? setTimeout(() => api.betul(b), 900) : api.salah(b);
+  });
+}
+/* ---------- Maze Robo (1 arahan / beberapa arahan / betulkan ralat) ---------- */
+function mpLukisMaze(area, r, ctx, api) {
+  const N = r.langkah >= 4 ? 5 : r.langkah >= 2 ? 4 : 3, ARAH = { atas: [0, -1], bawah: [0, 1], kiri: [-1, 0], kanan: [1, 0] }, kunci = (x, y) => x + "," + y;
+  /* laluan rawak sepanjang 'langkah' */
+  let mula, jalan, batu = [];
+  for (let cuba = 0; cuba < 200; cuba++) {
+    mula = [rnd(0, N - 1), rnd(0, N - 1)]; jalan = []; let p = mula.slice(), ok = true; const lawat = { [kunci(...p)]: 1 };
+    for (let s = 0; s < r.langkah; s++) { const d = shuffle(Object.keys(ARAH)).find(a => { const nx = p[0] + ARAH[a][0], ny = p[1] + ARAH[a][1]; return nx >= 0 && ny >= 0 && nx < N && ny < N && !lawat[kunci(nx, ny)]; }); if (!d) { ok = false; break; } p = [p[0] + ARAH[d][0], p[1] + ARAH[d][1]]; lawat[kunci(...p)] = 1; jalan.push(d); }
+    if (ok) { if (ctx.u >= 6 && r.langkah >= 4) { for (let i = 0; i < 3; i++) { const c = kunci(rnd(0, N - 1), rnd(0, N - 1)); if (!lawat[c]) batu.push(c); } } break; }
+  }
+  let tamat = mula.slice(); jalan.forEach(d => { tamat = [tamat[0] + ARAH[d][0], tamat[1] + ARAH[d][1]]; });
+  let arahan = r.debug ? jalan.slice() : [], ralat = -1;
+  if (r.debug) { ralat = rnd(0, jalan.length - 1); const salah = Object.keys(ARAH).filter(a => a !== jalan[ralat]); arahan[ralat] = pick(salah); }
+  area.innerHTML = `<h3 class="mptanya">${r.debug ? "Tekan anak panah yang salah untuk menukarnya" : r.satu ? "Tekan anak panah ke arah bintang" : "Susun " + r.langkah + " anak panah, kemudian Jalan"}</h3>
+    <div class="sbrobot" style="--n:${N}">${Array.from({ length: N * N }, (v, i) => { const c = kunci(i % N, Math.floor(i / N)); return `<div class="sbsel">${batu.includes(c) ? sbGambar("a:batu") : c === kunci(...tamat) ? sbGambar("a:bintang") : ""}</div>`; }).join("")}<span class="sbrbt">${sbGambar("a:robot")}</span></div>
+    <div class="sbarahan"></div>${r.debug ? "" : `<div class="sbpanah">${Object.keys(ARAH).map(a => `<button class="mpopt${(r.satu ? jalan[0] : jalan[0]) === a ? " mpjwp" : ""}" data-a="${a}">${sbGambar("p:" + a)}</button>`).join("")}</div>`}
+    ${r.satu ? "" : `<div class="mpmazebtn"><button class="tb koral mpbuang">${IKON.padam}<span>Buang</span></button><button class="tb hijau mpjalan">${IKON.play}<span>Jalan!</span></button></div>`}`;
+  const rbt = area.querySelector(".sbrbt"), senarai = area.querySelector(".sbarahan"); let pos = mula.slice(), aktif = -1, gerak = false;
+  const letak = () => { rbt.style.left = pos[0] * 100 / N + "%"; rbt.style.top = pos[1] * 100 / N + "%"; };
+  const papar = () => {
+    senarai.innerHTML = arahan.length ? arahan.map((a, i) => `<button class="${i === aktif ? "aktif" : ""}${r.debug && i === ralat ? " mpjwp" : ""}" data-x="${i}">${sbGambar("p:" + a)}</button>`).join("") : "<small>Tekan anak panah di bawah</small>";
+    if (r.debug) senarai.querySelectorAll("[data-x]").forEach(b => b.onclick = () => { if (api.contoh || gerak) return; const i = +b.dataset.x, k = Object.keys(ARAH); arahan[i] = k[(k.indexOf(arahan[i]) + 1) % 4]; mpBunyi.pop(); papar(); });
+  };
+  const jalankan = () => {
+    if (gerak || !arahan.length) return; gerak = true; pos = mula.slice(); letak(); let i = 0;
+    const satu = () => {
+      if (i >= arahan.length) { gerak = false; aktif = -1; papar(); if (pos[0] === tamat[0] && pos[1] === tamat[1]) api.betul(rbt); else { api.salah(rbt); qrBual("Robo belum sampai. Ubah susunan dan cuba lagi!"); setTimeout(() => { pos = mula.slice(); letak(); if (!r.debug) { arahan = []; papar(); } }, 800); } return; }
+      const d = ARAH[arahan[i]], nx = pos[0] + d[0], ny = pos[1] + d[1]; aktif = i; papar();
+      if (nx < 0 || ny < 0 || nx >= N || ny >= N || batu.includes(kunci(nx, ny))) { gerak = false; api.salah(rbt); qrBual("Oops! Robo terlanggar. Cuba lagi."); setTimeout(() => { pos = mula.slice(); letak(); aktif = -1; papar(); }, 800); return; }
+      pos = [nx, ny]; letak(); tone(420 + i * 50, 0, .08); i++; setTimeout(satu, 450);
+    };
+    setTimeout(satu, 250);
+  };
+  area.querySelectorAll("[data-a]").forEach(b => b.onclick = () => { if (api.contoh || gerak) return; if (arahan.length >= r.langkah + 3) return; arahan.push(b.dataset.a); mpBunyi.pop(); papar(); if (r.satu) jalankan(); else { const nx = jalan[arahan.length]; area.querySelectorAll("[data-a]").forEach(x => x.classList.toggle("mpjwp", x.dataset.a === nx)); } });
+  const bb = area.querySelector(".mpbuang"); if (bb) bb.onclick = () => { if (!gerak && !r.debug) { arahan.pop(); papar(); } };
+  const bj = area.querySelector(".mpjalan"); if (bj) bj.onclick = jalankan;
+  letak(); papar();
+}
+/* ---------- Apa yang berubah ---------- */
+function mpLukisBerubah(area, r, ctx, api) {
+  const set = tmAmbil(TM_SEMUA, r.n), lain = pick(TM_SEMUA.filter(x => set.indexOf(x) < 0)), pos = rnd(0, r.n - 1);
+  area.innerHTML = `<h3 class="mptanya">Ingat gambar ini!</h3><div class="tmrak">${set.map(x => `<span class="tmitem">${tmArt(x)}</span>`).join("")}</div><div class="tmtirai"></div>`;
+  if (api.contoh) { area.querySelectorAll(".tmitem")[pos].classList.add("mpjwp"); return; }
+  setTimeout(() => {
+    if (!area.isConnected) return; area.querySelector(".tmtirai").classList.add("tutup");
+    setTimeout(() => {
+      const baru = set.slice(); baru[pos] = lain; area.querySelector(".mptanya").textContent = "Apa yang berubah? Tekan gambarnya.";
+      area.querySelector(".tmrak").innerHTML = baru.map((x, i) => `<button class="tmitem mpopt${i === pos ? " mpjwp" : ""}" data-i="${i}">${tmArt(x)}</button>`).join("");
+      area.querySelector(".tmtirai").classList.remove("tutup");
+      area.querySelectorAll("[data-i]").forEach(b => b.onclick = () => +b.dataset.i === pos ? api.betul(b) : api.salah(b));
+    }, 900);
+  }, 4000);
+}
+/* ---------- Giliran siapa ---------- */
+function mpLukisGiliran(area, r, ctx, api) {
+  const h = tmAmbil(["Kucing", "Rabbit", "Itik", "Monyet", "Lebah", "Zirafah"], r.n), sekarang = rnd(0, r.n - 2);
+  area.innerHTML = `<h3 class="mptanya">${tmNama(h[sekarang])} sedang main buaian. Siapa seterusnya?</h3><div class="mpbaris">${h.map((x, i) => `<button class="mpopt${i === sekarang + 1 ? " mpjwp" : ""}${i === sekarang ? " giliran" : ""}" data-i="${i}">${tmArt(x)}<small>${i === sekarang ? "Sedang main" : i + 1}</small></button>`).join("")}<span class="mpanak">${sbGambar("p:kiri")}</span></div><p class="qrpesan">Barisan bermula dari kiri.</p>`;
+  area.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { if (api.contoh) return; const i = +b.dataset.i; if (i === sekarang) return qrBual("Dia sedang bermain. Siapa selepasnya?"); i === sekarang + 1 ? api.betul(b) : api.salah(b); });
+}
+/* ---------- Bina wajah emosi ---------- */
+function mpLukisWajah(area, r, ctx, api) {
+  const MATA = { biasa: `<ellipse cx="44" cy="48" rx="5" ry="7" fill="#3E3150"/><ellipse cx="76" cy="48" rx="5" ry="7" fill="#3E3150"/>`, bulat: `<circle cx="44" cy="46" r="9" fill="#fff" stroke="#3E3150" stroke-width="3"/><circle cx="76" cy="46" r="9" fill="#fff" stroke="#3E3150" stroke-width="3"/><circle cx="44" cy="46" r="4" fill="#3E3150"/><circle cx="76" cy="46" r="4" fill="#3E3150"/>`, marah: `<ellipse cx="44" cy="50" rx="5" ry="6" fill="#3E3150"/><ellipse cx="76" cy="50" rx="5" ry="6" fill="#3E3150"/><path d="M34 36 l16 7 M86 36 l-16 7" stroke="#3E3150" stroke-width="4" stroke-linecap="round"/>`, sedih: `<ellipse cx="44" cy="50" rx="5" ry="6" fill="#3E3150"/><ellipse cx="76" cy="50" rx="5" ry="6" fill="#3E3150"/><path d="M34 40 l14-5 M86 40 l-14-5" stroke="#3E3150" stroke-width="3" stroke-linecap="round"/><path d="M38 58 q3 8 0 12" stroke="#4DA3FF" stroke-width="4" fill="none"/>` };
+  const MULUT = { senyum: `<path d="M40 68 q20 18 40 0" stroke="#3E3150" stroke-width="5" fill="none" stroke-linecap="round"/>`, sedih: `<path d="M42 78 q18-14 36 0" stroke="#3E3150" stroke-width="5" fill="none" stroke-linecap="round"/>`, garis: `<path d="M44 74 h32" stroke="#3E3150" stroke-width="5" stroke-linecap="round"/>`, o: `<circle cx="60" cy="74" r="8" fill="#3E3150"/>` };
+  const SASAR = { gembira: ["biasa", "senyum"], sedih: ["sedih", "sedih"], marah: ["marah", "garis"], terkejut: ["bulat", "o"] }[r.e];
+  const muka = (m, u) => `<svg viewBox="0 0 120 120" class="mpmuka"><circle cx="60" cy="60" r="50" fill="${TM_WAJAH[r.e][1]}"/>${m ? MATA[m] : ""}${u ? MULUT[u] : ""}</svg>`;
+  let pm = null, pu = null;
+  area.innerHTML = `<h3 class="mptanya">Bina wajah <b>${TM_WAJAH[r.e][0].toUpperCase()}</b></h3><div class="mpwajahbina"><div class="mpwajahbesar">${muka()}</div>
+    <div><b>Mata</b><div class="mppilihkecil">${Object.keys(MATA).map(k => `<button class="mpopt${k === SASAR[0] ? " mpjwp" : ""}" data-m="${k}">${`<svg viewBox="24 26 72 40">${MATA[k]}</svg>`}</button>`).join("")}</div>
+    <b>Mulut</b><div class="mppilihkecil">${Object.keys(MULUT).map(k => `<button class="mpopt" data-u="${k}">${`<svg viewBox="30 56 60 30">${MULUT[k]}</svg>`}</button>`).join("")}</div></div></div>`;
+  const papar = () => { area.querySelector(".mpwajahbesar").innerHTML = muka(pm, pu); };
+  const semak = b => { if (!pm || !pu) return; if (pm === SASAR[0] && pu === SASAR[1]) { if (ctx.u >= 6) { const c = mpCampur("Saya rasa " + TM_WAJAH[r.e][0].toLowerCase() + ".", Object.keys(TM_WAJAH).filter(x => x !== r.e).map(x => "Saya rasa " + TM_WAJAH[x][0].toLowerCase() + "."), 3); const d = document.createElement("div"); area.appendChild(d); mpLukisPilih(d, { tanya: "Pilih ayat untuk wajah ini", opsyen: c.o, betul: c.j, tks: "panjang" }, ctx, api); } else api.betul(area.querySelector(".mpwajahbesar")); } else { api.salah(b); } };
+  area.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { if (api.contoh) return; pm = b.dataset.m; area.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b)); area.querySelectorAll("[data-u]").forEach(x => x.classList.toggle("mpjwp", x.dataset.u === SASAR[1])); area.querySelectorAll("[data-m]").forEach(x => x.classList.remove("mpjwp")); papar(); mpBunyi.pop(); semak(b); });
+  area.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { if (api.contoh) return; pu = b.dataset.u; area.querySelectorAll("[data-u]").forEach(x => x.classList.toggle("on", x === b)); papar(); mpBunyi.pop(); semak(b); });
+}
+/* ---------- Dail 999 ---------- */
+function mpLukisDail(area, r, ctx, api) {
+  area.innerHTML = `<h3 class="mptanya">Kecemasan! Tekan 9, 9, 9</h3><div class="mptelefon"><div class="mpskrin">&nbsp;</div><div class="mpkekunci">${[1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, ""].map(n => n === "" ? "<span></span>" : `<button class="${n === 9 ? "mpjwp" : ""}" data-n="${n}">${n}</button>`).join("")}</div></div>`;
+  let s = ""; const sk = area.querySelector(".mpskrin");
+  area.querySelectorAll("[data-n]").forEach(b => b.onclick = () => {
+    if (api.contoh) return; const n = b.dataset.n; tone(700 + +n * 40, 0, .1); if (n !== "9") { s = ""; sk.textContent = n; return api.salah(b); }
+    s += n; sk.textContent = s;
+    if (s === "999") { sk.textContent = "999 · Menyambung..."; api.betul(b, false); setTimeout(() => { const d = document.createElement("div"); area.appendChild(d); const c = mpCampur("Bila ada kecemasan", ["Bila mahu main", "Bila lapar", "Bila bosan"], 4); mpLukisPilih(d, { tanya: "Bila kita telefon 999?", sebut: "Bila kita telefon 999?", opsyen: c.o, betul: c.j, tks: "panjang" }, ctx, { ...api, betul: el => { api.betul(el); } }); d.scrollIntoView({ behavior: "smooth", block: "center" }); }, 900); }
+  });
+}
+/* ---------- Peta kampung ---------- */
+const MP_TEMPAT = [["sekolah", "sekolah"], ["klinik", "klinik"], ["kedai", "kedai"], ["taman", "taman permainan"], ["masjid", "masjid"], ["Rumah", "rumah"], ["sawah", "sawah padi"], ["laut", "pantai"]];
+function mpLukisPeta(area, r, ctx, api) {
+  const tempat = ctx.u >= 6 ? MP_TEMPAT : MP_TEMPAT.slice(0, 5).concat([MP_TEMPAT[5]]);
+  const posisi = [[8, 6], [62, 4], [8, 52], [62, 50], [36, 28], [86, 28], [34, 74], [80, 74]];
+  area.innerHTML = `<h3 class="mptanya">Tekan ${r.t[1]}</h3><div class="mppeta"><svg viewBox="0 0 100 100" preserveAspectRatio="none" class="mpjalanpeta"><path d="M0 46 H100 M48 0 V100" stroke="#C9B9A6" stroke-width="7" fill="none"/><path d="M0 46 H100 M48 0 V100" stroke="#fff" stroke-width="1" stroke-dasharray="3 3" fill="none"/></svg>
+    ${tempat.map((t, i) => `<button class="mpopt mptempat${t === r.t ? " mpjwp" : ""}" data-i="${i}" style="left:${posisi[i][0]}%;top:${posisi[i][1]}%">${sbGambar("a:" + t[0])}<small>${t[1]}</small></button>`).join("")}<span class="mpbasbibi">${sbGambar("a:bas")}</span></div>`;
+  if (!api.contoh) api.sebut("Tekan " + r.t[1]);
+  area.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { if (api.contoh) return; if (tempat[+b.dataset.i] === r.t) { const bas = area.querySelector(".mpbasbibi"); bas.style.left = b.style.left; bas.style.top = b.style.top; api.betul(b); } else api.salah(b); });
+}
+/* ---------- Butang & zip ---------- */
+function mpLukisButang(area, r, ctx, api) {
+  area.innerHTML = `<h3 class="mptanya">Tekan butang dari atas ke bawah</h3><div class="mpbaju"><svg viewBox="0 0 120 120"><path d="M40 10 l-26 16 l10 20 l10-6 v72 h52 v-72 l10 6 l10-20 l-26-16 q-10 12-20 0z" fill="#8CC8FF" stroke="#4a3428" stroke-width="2.5"/><path d="M60 22 v90" stroke="#4a3428" stroke-width="2" stroke-dasharray="4 3"/></svg>${[0, 1, 2, 3].map(i => `<button class="mpopt mpbtg${i ? "" : " mpjwp"}" data-i="${i}" style="top:${24 + i * 19}%"></button>`).join("")}</div>`;
+  let ke = 0;
+  area.querySelectorAll(".mpbtg").forEach(b => b.onclick = () => {
+    if (api.contoh) return; if (+b.dataset.i !== ke) return api.salah(b);
+    b.classList.add("siap"); b.classList.remove("mpjwp"); mpBunyi.pop(); ke++;
+    const nx = area.querySelector(`.mpbtg[data-i="${ke}"]`); if (nx) nx.classList.add("mpjwp"); else api.betul(area.querySelector(".mpbaju"));
+  });
+}
+/* ---------- Jejak (guna modul tulis sedia ada) ---------- */
+function mpJejak(ctx) {
+  const balik = () => mpBuka(ctx.m.id);
+  if (ctx.bl === "jawi" || ctx.bl === "arab") { thjBalik = balik; thjMod = ctx.u >= 5 ? "sendiri" : "surih"; return qrTulis(rnd(0, 6)); }
+  if (ctx.bl === "cina") return startTulis(0, balik, "nombor");
+  startTulis(ctx.u >= 5 ? rnd(0, 25) : 0, balik);
+}
+
+/* ---------- Had masa sesi & rehat ---------- */
+let mpMasaMula = Date.now(), mpRehatAktif = false;
+setInterval(() => {
+  const d = mpData(); if (!d.tetap.minit || mpRehatAktif) return;
+  const s = document.querySelector(".screen.on"); if (!s || s.id === "s-home") { mpMasaMula = Date.now(); return; }
+  if (Date.now() - mpMasaMula > d.tetap.minit * 60000) mpRehat();
+}, 15000);
+function mpRehat() {
+  mpRehatAktif = true; stopSpeech();
+  const o = document.createElement("div"); o.className = "mprehat";
+  o.innerHTML = `<div><div class="mpbelonnafas besar">${sbGambar("w:gembira")}</div><h2>Masa berehat!</h2><p>Kamu sudah belajar dengan hebat. Rehatkan mata, minum air dan bergerak sebentar.</p><button class="tb ungu">${IKON.play}<span>Ibu bapa: sambung</span></button></div>`;
+  document.body.appendChild(o); mpBunyi.lencana();
+  o.querySelector("button").onclick = () => mpGerbang(() => { o.remove(); mpRehatAktif = false; mpMasaMula = Date.now(); });
+}
+/* Gerbang ibu bapa: soalan tambah mudah */
+function mpGerbang(ok) {
+  const a = rnd(3, 9), b = rnd(3, 9), j = prompt("Untuk ibu bapa: berapa " + a + " + " + b + "?");
+  if (j !== null && +j === a + b) ok(); else if (j !== null) alert("Jawapan tidak tepat.");
+}
+
+/* --- Halaman hadapan Prasekolah: peta cerita 9 modul --- */
+const MP_BAB = [
+  ["Pulau Bahasa", "Cik Huhu si burung hantu mengajak kita membaca dalam 5 bahasa.", "#FFE8F1", ["bahasa"], 0],
+  ["Hutan Nombor & Sains", "Arnab Kiki, Kucing Comot dan Robo menunggu di dalam hutan.", "#E3F8EC", ["matematik", "sains", "koding"], 1],
+  ["Taman Hati", "Geng Comel dan Bulan Nur mengajar adab, perasaan dan iman.", "#FFF4D9", ["sosial", "islam"], 2],
+  ["Kampung Diriku", "Bobo, Doggo dan Bas Bibi bawa kita urus diri, selamat dan kenal dunia.", "#E4F1FF", ["hidup", "selamat", "dunia", "s:seni"], 3]
+];
+function renderPra() {
+  const t = curTahap;
+  backMenu = renderPra; tmBalik = null; setLux(false);
+  const d = mpData();
+  if (!d.profil.length && !d.tetamu) return mpProfilSkrin();
+  const p = mpProfil(); if (p && p.umur !== tmUmur) tmUmur = p.umur;
+  qrSkrin("Prasekolah", renderHome);
+  const k = $("qrKawasan"), u = mpUmur(), T = mpT(), st = loadStars();
+  const pintu = [["Taman Ceria", "a:Rabbit", renderTaman], ["Nota", COMEL_IKON["📒"], renderNota], ["Kuiz", COMEL_IKON["❓"], () => renderKuiz(t, renderPra)], ["Mini Game", COMEL_IKON["🎮"], renderGame], ["Perpustakaan", COMEL_IKON["📚"], renderLib], ["Ibu Bapa", "a:o-ibu", () => mpGerbang(mpIbuBapa)]];
+  let no = 0;
+  const nod = (id, j) => {
+    no++;
+    if (id.indexOf("s:") === 0) { const s = sbCari(id.slice(2)), b = sbBintangSub(s, st); return `<button class="prnod ${j % 2 ? "kanan" : "kiri"}" data-s="${s.id}" style="--w:${s.w};animation-delay:${no * .05}s"><span class="prlencana"><i>${no}</i>${sbGambar(s.ikon)}</span><span class="prpapan"><b>${s.nama}</b><small>${s.cerita}</small>${b ? `<em>★ ${b}</em>` : ""}</span></button>`; }
+    const m = mpModul(id), bl = m.bahasa ? "-" + d.bahasa : "", siap = m.game.slice(0, T.game).filter(g => mpRekod(id + bl, g.id)).length, len = mpLencana(id);
+    return `<button class="prnod ${j % 2 ? "kanan" : "kiri"}" data-m="${id}" style="--w:${m.w};animation-delay:${no * .05}s"><span class="prlencana watak${len ? " ada" : ""}"><i>${no}</i>${artSvg(m.watak, "art sbart")}</span><span class="prpapan"><b>${m.nama}</b><small>${m.namaWatak} · ${siap} / ${T.game} game</small><span class="prbar"><i style="width:${siap / T.game * 100}%"></i></span>${len ? `<em>Lencana Tahap ${u}</em>` : ""}</span></button>`;
+  };
+  const maskot = document.querySelector("#heroBuku svg") ? document.querySelector("#heroBuku svg").outerHTML : "";
+  k.innerHTML = `<div class="prdunia">
+    <div class="prhero"><div class="prmaskot">${maskot}</div><div class="prherotks"><small>Selamat datang ke</small><h2>Dunia Ceria</h2>
+      <button class="prprofil">${p ? artSvg(p.avatar, "art sbart") : sbGambar("a:o-adik")}<b>${p ? sbEsc(p.nama) : "Tetamu"}</b><small>Tukar</small></button>
+      <p class="prbual">Hai${p ? " " + sbEsc(p.nama) : ""}! Pilih modul dan jom main bersama kawan-kawan pembimbing.</p>
+      <div class="tmumur prumur"><b>Tahap:</b>${[3, 4, 5, 6].map(x => `<button data-u="${x}" class="${u === x ? "on" : ""}">${x}</button>`).join("")}<span class="prtahapnama">${T.nama} · ${T.game} game setiap modul</span></div></div></div>
+    <div class="prpintu n6">${pintu.map((x, i) => `<button data-p="${i}"><span>${x[1].indexOf("a:") === 0 ? sbGambar(x[1]) : x[1]}</span><b>${x[0]}</b></button>`).join("")}</div>
+    ${MP_BAB.map(([nama, cerita, bg, ids, ad], bi) => `<section class="prbab" style="--bg:${bg}">${SB_ADEGAN[ad]}<div class="prbabtajuk"><span>Bab ${bi + 1}</span><h3>${nama}</h3><p>${cerita}</p></div><div class="prjalan">${ids.map(nod).join("")}</div></section>`).join("")}
+  </div>`;
+  k.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { mpSetUmur(+b.dataset.u); renderPra(); });
+  k.querySelectorAll("[data-p]").forEach(b => b.onclick = () => pintu[b.dataset.p][2]());
+  k.querySelectorAll("[data-m]").forEach(b => b.onclick = () => mpBuka(b.dataset.m));
+  k.querySelectorAll("[data-s]").forEach(b => b.onclick = () => sbSubjek(b.dataset.s));
+  k.querySelector(".prprofil").onclick = () => mpProfilSkrin();
+  k.querySelector(".prmaskot").onclick = e => { const m = e.currentTarget; m.classList.remove("lompat"); void m.offsetWidth; m.classList.add("lompat"); sndOk(); qrBual(pick(["Jom belajar!", "Pilih satu modul!", "Kamu hebat!", "Saya sayang kamu!"])); };
+  qrBual("Pilih modul yang kamu suka!");
+}
+/* --- Mod Ibu Bapa / Guru --- */
+function mpIbuBapa() {
+  backMenu = mpIbuBapa; tmBalik = null;
+  qrSkrin("Mod Ibu Bapa & Guru", renderPra);
+  const d = mpData(), p = mpProfil(), u = mpUmur(), T = mpT(), pid = mpPid(), rek = d.rekod[pid] || {};
+  const hari = []; const t = new Date(); t.setDate(t.getDate() - 6); for (let i = 0; i < 7; i++) { hari.push(trkTarikh(t)); t.setDate(t.getDate() + 1); }
+  const mood = d.mood[pid] || {};
+  const baris = MP_MODUL.map(m => {
+    const bl = m.bahasa ? "-" + d.bahasa : "", g = m.game.slice(0, T.game), cuba = g.filter(x => rek[m.id + bl + "." + x.id]), ulang = g.filter(x => { const r = rek[m.id + bl + "." + x.id]; return r && r.b < 3; });
+    return `<div class="mplap"><span class="mplapik">${artSvg(m.watak, "art sbart")}</span><div><b>${m.nama}${m.bahasa ? " (" + MP_BAHASA[d.bahasa].nama + ")" : ""}</b><div class="trkbar"><i style="width:${cuba.length / g.length * 100}%"></i></div>
+      <small>${cuba.length} / ${g.length} game dicuba${ulang.length ? " · Boleh diulang: " + ulang.map(x => x.nama).join(", ") : ""}${g.length > cuba.length ? " · Belum: " + g.filter(x => !rek[m.id + bl + "." + x.id]).map(x => x.nama).join(", ") : ""}</small></div></div>`;
+  }).join("");
+  const k = $("qrKawasan");
+  k.innerHTML = `<div class="tmlapor">
+    <div class="trkkad"><b>Profil anak</b><div class="mpprofilbaris">${d.profil.map(x => `<span class="${x.id === d.aktif ? "on" : ""}">${artSvg(x.avatar, "art sbart")}${sbEsc(x.nama)} · ${x.umur} thn</span>`).join("") || "<small>Tiada profil. Main sebagai tetamu.</small>"}</div>
+      <button class="tb biru mpkeprofil">${IKON.next}<span>Urus profil</span></button></div>
+    <div class="trkkad"><b>Tahap untuk ${p ? sbEsc(p.nama) : "tetamu"}</b><div class="tmumur">${[3, 4, 5, 6].map(x => `<button data-u="${x}" class="${u === x ? "on" : ""}">Tahap ${x}</button>`).join("")}</div>
+      <small>${T.nama}: ${T.arahan.join(" ")}</small></div>
+    <div class="trkkad"><b>Had masa sesi</b><div class="tmumur">${[0, 10, 15, 20, 30].map(x => `<button data-minit="${x}" class="${(d.tetap.minit || 0) === x ? "on" : ""}">${x ? x + " minit" : "Tiada"}</button>`).join("")}</div><small>Apabila masa tamat, app memaparkan peringatan rehat. Ibu bapa boleh menyambung.</small></div>
+    <div class="trkkad"><b>Perasaan 7 hari</b><div class="mpmood">${hari.map(h => `<span>${mood[h] ? sbGambar("w:" + mood[h]) : "<i></i>"}<small>${["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][new Date(h + "T12:00").getDay()]}</small></span>`).join("")}</div><small>Dicatat melalui game "Perasaanku Hari Ini".</small></div>
+    <div class="trkkad"><b>Kemajuan modul (Tahap ${u})</b>${baris}</div>
+    <div class="trkkad"><b>Untuk semakan</b><small>Kandungan Pendidikan Islam, Jawi, Arab dan Cina serta audio sebutan perlu disemak oleh guru atau pihak yang mahir sebelum diterbitkan. Senarai penuh: folder projek-pra/KANDUNGAN.</small></div>
+    <button class="tb ungu mplapor7">${IKON.next}<span>Laporan aktiviti 7 hari</span></button></div>`;
+  k.querySelector(".mpkeprofil").onclick = () => mpProfilSkrin(mpIbuBapa);
+  k.querySelectorAll("[data-u]").forEach(b => b.onclick = () => { mpSetUmur(+b.dataset.u); mpIbuBapa(); });
+  k.querySelectorAll("[data-minit]").forEach(b => b.onclick = () => { const d2 = mpData(); d2.tetap.minit = +b.dataset.minit; mpSimpan(d2); mpMasaMula = Date.now(); mpIbuBapa(); });
+  k.querySelector(".mplapor7").onclick = () => { tmBalik = mpIbuBapa; tmIbuBapa(); };
+  qrBual("Ringkasan kemajuan dan tetapan pembelajaran.");
 }
 
 /* Kejutan: tekan buku comel di skrin utama, ia melompat dan menyapa */
