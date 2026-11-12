@@ -436,7 +436,7 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qnterang{text-align:center;font-size:clamp(20px,3vw,26px);font-weight:700;max-width:760px;align-self:center;margin:4px 0}
 .qrbaris{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.qrbaris .qrh{min-width:0;overflow:hidden}.qrbaris .qrh .qrar{font-size:clamp(26px,4vw,40px)}.qrbaris .qrh small{font-size:14px;white-space:nowrap}
 .qrbismi{line-height:2.3;padding-top:6px;text-align:center;font-size:clamp(28px,5vw,42px);color:#3FA672;margin:4px 0}
-.qrayat{display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
+.qrayat{cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--card);border-radius:28px;padding:16px 20px;text-align:center;box-shadow:0 6px 0 var(--garis),0 10px 20px var(--sh);border:3px solid transparent;position:relative;transition:transform .2s}
 .qrayat .qrar{font-size:clamp(30px,5.2vw,46px);line-height:2.4;color:var(--text)}
 .qrayat i{font-size:clamp(18px,2.6vw,22px);color:#3FA672;font-weight:700}
 .qrayat .qrmk{font-size:clamp(17px,2.4vw,20px);color:var(--muted);font-weight:700}
@@ -2782,7 +2782,7 @@ function henti() {
 }
 /* Suara boleh dimatikan (butang di penjuru atas); jika mati, tunggu sebentar supaya aliran latihan kekal sama */
 let SUARA_ON = (() => { try { return localStorage.getItem("suara2") !== "off"; } catch (e) { return true; } })();
-/* Kelas Al-Quran: tiada suara pembaca (pemilik akan masukkan sendiri) */
+/* Kelas Al-Quran: suara TTS dimatikan; bacaan ayat guna rakaman qari (QARI) */
 let qrSenyap = false;
 function speak(text, lang) {
   henti();
@@ -5059,12 +5059,13 @@ function qrBaca(s, back, surah) {
   qrSkrin(s.nama, back);
   const k = $("qrKawasan"), ay = s.ayat.map(a => a.split("|"));
   k.innerHTML = (surah && s.nama !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : "") +
-    ay.map((a, i) => `<button class="qrayat">${surah ? `<span class="qrno">${i + 1}</span>` : ""}<span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("") +
+    ay.map((a, i) => `<div class="qrayat" role="button">${surah ? `<span class="qrno">${i + 1}</span>` : ""}<span class="qrar"></span><i></i><span class="qrmk"></span>${surah ? qariBtn() : ""}</div>`).join("") +
     `<p class="qrpesan">Bacaan Arab: baca bersama ibu, ayah atau guru supaya sebutan dan tajwid betul.</p>` + (surah ? tjNotaKaki() : "");
   const el = [...k.querySelectorAll(".qrayat")];
   el.forEach((b, i) => { b.querySelector(".qrar").innerHTML = ay[i][0]; b.querySelector("i").textContent = ay[i][1]; b.querySelector(".qrmk").textContent = ay[i][2]; b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); speak(ay[i][2], "ms"); }; });
-  qrButang("speak", "Dengar Maksud", "ungu", () => qrMainSemua(el, ay.map(a => a[2]), ++qrId));
+  qrButang("speak", "Dengar Maksud", "ungu", () => { qariHenti(); qrMainSemua(el, ay.map(a => a[2]), ++qrId); });
   qrBual(surah ? QR_SEBUT.surah : QR_SEBUT.doa);
+  if (surah) { const no = QS_NAMA.indexOf(s.nama) + 1; if (no) qariPasang(k, el, ay.map((a, i) => [no, i + 1]), "husary"); }
   const id = qrId;
   speak(s.nama, "ms").then(() => id === qrId && speak(surah ? QR_SEBUT.surah : QR_SEBUT.doa, "ms"));
 }
@@ -5299,11 +5300,12 @@ function iqBaca(bi, mi) {
 function iqBacaAyat(b, bi, mi, m, k) {
   const ay = m.ayat.map(a => a.split("|"));
   k.innerHTML = `<div class="iqsurah">Surah ${m.surah}</div>` + (m.mula === 1 && m.surah !== "Al-Fatihah" ? `<div class="qrbismi qrar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : "") +
-    ay.map((a, i) => `<button class="qrayat"><span class="qrno">${m.mula + i}</span><span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("") +
+    ay.map((a, i) => `<div class="qrayat" role="button"><span class="qrno">${m.mula + i}</span><span class="qrar"></span><i></i><span class="qrmk"></span>${qariBtn()}</div>`).join("") +
     `<p class="qrpesan">Baca ayat bersama ibu, ayah atau guru. Tekan ayat untuk dengar maksudnya.</p>` + tjNotaKaki();
   const el = [...k.querySelectorAll(".qrayat")];
   el.forEach((x, i) => { x.querySelector(".qrar").innerHTML = ay[i][0]; x.querySelector("i").textContent = ay[i][1]; x.querySelector(".qrmk").textContent = ay[i][2]; x.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); speak(ay[i][2], "ms"); }; });
-  qrButang("speak", "Dengar Maksud", "ungu", () => qrMainSemua(el, ay.map(a => a[2]), ++qrId));
+  qrButang("speak", "Dengar Maksud", "ungu", () => { qariHenti(); qrMainSemua(el, ay.map(a => a[2]), ++qrId); });
+  { const no = QS_NAMA.indexOf(m.surah) + 1; if (no) qariPasang(k, el, ay.map((a, i) => [no, m.mula + i]), "husary"); }
   iqNavigasi(b, bi, mi, k);
   qrBual(m.nota); speak(m.nota, "ms");
 }
@@ -5405,7 +5407,7 @@ function qrNota(i, lembar) {
 })();
 /* ===== Bahagian Al-Quran: Kelas Tajwid, Hafazan & Bacaan 30 Juz =====
    Teks: Rasm Uthmani riwayat Hafs (Tanzil). Maksud: Tafsir Pimpinan Ar-Rahman (Abdullah Basmeih, JAKIM).
-   Bacaan suara belum dimasukkan (akan ditambah kemudian). */
+   Bacaan qari dari EveryAyah (lihat QARI). */
 const QS_NAMA = "Al-Fatihah|Al-Baqarah|Ali 'Imran|An-Nisa'|Al-Ma'idah|Al-An'am|Al-A'raf|Al-Anfal|At-Taubah|Yunus|Hud|Yusuf|Ar-Ra'd|Ibrahim|Al-Hijr|An-Nahl|Al-Isra'|Al-Kahfi|Maryam|Taha|Al-Anbiya'|Al-Hajj|Al-Mu'minun|An-Nur|Al-Furqan|Asy-Syu'ara'|An-Naml|Al-Qasas|Al-'Ankabut|Ar-Rum|Luqman|As-Sajdah|Al-Ahzab|Saba'|Fatir|Yasin|As-Saffat|Sad|Az-Zumar|Ghafir|Fussilat|Asy-Syura|Az-Zukhruf|Ad-Dukhan|Al-Jathiyah|Al-Ahqaf|Muhammad|Al-Fath|Al-Hujurat|Qaf|Az-Zariyat|At-Tur|An-Najm|Al-Qamar|Ar-Rahman|Al-Waqi'ah|Al-Hadid|Al-Mujadalah|Al-Hasyr|Al-Mumtahanah|As-Saff|Al-Jumu'ah|Al-Munafiqun|At-Taghabun|At-Talaq|At-Tahrim|Al-Mulk|Al-Qalam|Al-Haqqah|Al-Ma'arij|Nuh|Al-Jinn|Al-Muzzammil|Al-Muddaththir|Al-Qiyamah|Al-Insan|Al-Mursalat|An-Naba'|An-Nazi'at|'Abasa|At-Takwir|Al-Infitar|Al-Mutaffifin|Al-Insyiqaq|Al-Buruj|At-Tariq|Al-A'la|Al-Ghasyiyah|Al-Fajr|Al-Balad|Asy-Syams|Al-Lail|Ad-Duha|Asy-Syarh|At-Tin|Al-'Alaq|Al-Qadr|Al-Bayyinah|Az-Zalzalah|Al-'Adiyat|Al-Qari'ah|At-Takathur|Al-'Asr|Al-Humazah|Al-Fil|Quraisy|Al-Ma'un|Al-Kauthar|Al-Kafirun|An-Nasr|Al-Masad|Al-Ikhlas|Al-Falaq|An-Nas".split("|");
 const QMETA = {"s":[["ٱلْفَاتِحَةِ",7,"Meccan"],["البَقَرَةِ",286,"Medinan"],["آلِ عِمۡرَانَ",200,"Medinan"],["النِّسَاءِ",176,"Medinan"],["المَائـِدَةِ",120,"Medinan"],["الأَنۡعَامِ",165,"Meccan"],["الأَعۡرَافِ",206,"Meccan"],["الأَنفَالِ",75,"Medinan"],["التَّوۡبَةِ",129,"Medinan"],["يُونُسَ",109,"Meccan"],["هُودٍ",123,"Meccan"],["يُوسُفَ",111,"Meccan"],["الرَّعۡدِ",43,"Medinan"],["إِبۡرَاهِيمَ",52,"Meccan"],["الحِجۡرِ",99,"Meccan"],["النَّحۡلِ",128,"Meccan"],["الإِسۡرَاءِ",111,"Meccan"],["الكَهۡفِ",110,"Meccan"],["مَرۡيَمَ",98,"Meccan"],["طه",135,"Meccan"],["الأَنبِيَاءِ",112,"Meccan"],["الحَجِّ",78,"Medinan"],["المُؤۡمِنُونَ",118,"Meccan"],["النُّورِ",64,"Medinan"],["الفُرۡقَانِ",77,"Meccan"],["الشُّعَرَاءِ",227,"Meccan"],["النَّمۡلِ",93,"Meccan"],["القَصَصِ",88,"Meccan"],["العَنكَبُوتِ",69,"Meccan"],["الرُّومِ",60,"Meccan"],["لُقۡمَانَ",34,"Meccan"],["السَّجۡدَةِ",30,"Meccan"],["الأَحۡزَابِ",73,"Medinan"],["سَبَإٍ",54,"Meccan"],["فَاطِرٍ",45,"Meccan"],["يسٓ",83,"Meccan"],["الصَّافَّاتِ",182,"Meccan"],["صٓ",88,"Meccan"],["الزُّمَرِ",75,"Meccan"],["غَافِرٍ",85,"Meccan"],["فُصِّلَتۡ",54,"Meccan"],["الشُّورَىٰ",53,"Meccan"],["الزُّخۡرُفِ",89,"Meccan"],["الدُّخَانِ",59,"Meccan"],["الجَاثِيَةِ",37,"Meccan"],["الأَحۡقَافِ",35,"Meccan"],["مُحَمَّدٍ",38,"Medinan"],["الفَتۡحِ",29,"Medinan"],["الحُجُرَاتِ",18,"Medinan"],["قٓ",45,"Meccan"],["الذَّارِيَاتِ",60,"Meccan"],["الطُّورِ",49,"Meccan"],["النَّجۡمِ",62,"Meccan"],["القَمَرِ",55,"Meccan"],["الرَّحۡمَٰن",78,"Medinan"],["الوَاقِعَةِ",96,"Meccan"],["الحَدِيدِ",29,"Medinan"],["المُجَادلَةِ",22,"Medinan"],["الحَشۡرِ",24,"Medinan"],["المُمۡتَحنَةِ",13,"Medinan"],["الصَّفِّ",14,"Medinan"],["الجُمُعَةِ",11,"Medinan"],["المُنَافِقُونَ",11,"Medinan"],["التَّغَابُنِ",18,"Medinan"],["الطَّلَاقِ",12,"Medinan"],["التَّحۡرِيمِ",12,"Medinan"],["المُلۡكِ",30,"Meccan"],["القَلَمِ",52,"Meccan"],["الحَاقَّةِ",52,"Meccan"],["المَعَارِجِ",44,"Meccan"],["نُوحٍ",28,"Meccan"],["الجِنِّ",28,"Meccan"],["المُزَّمِّلِ",20,"Meccan"],["المُدَّثِّرِ",56,"Meccan"],["القِيَامَةِ",40,"Meccan"],["الإِنسَانِ",31,"Medinan"],["المُرۡسَلَاتِ",50,"Meccan"],["النَّبَإِ",40,"Meccan"],["النَّازِعَاتِ",46,"Meccan"],["عَبَسَ",42,"Meccan"],["التَّكۡوِيرِ",29,"Meccan"],["الانفِطَارِ",19,"Meccan"],["المُطَفِّفِينَ",36,"Meccan"],["الانشِقَاقِ",25,"Meccan"],["البُرُوجِ",22,"Meccan"],["الطَّارِقِ",17,"Meccan"],["الأَعۡلَىٰ",19,"Meccan"],["الغَاشِيَةِ",26,"Meccan"],["الفَجۡرِ",30,"Meccan"],["البَلَدِ",20,"Meccan"],["الشَّمۡسِ",15,"Meccan"],["اللَّيۡلِ",21,"Meccan"],["الضُّحَىٰ",11,"Meccan"],["الشَّرۡحِ",8,"Meccan"],["التِّينِ",8,"Meccan"],["العَلَقِ",19,"Meccan"],["القَدۡرِ",5,"Meccan"],["البَيِّنَةِ",8,"Medinan"],["الزَّلۡزَلَةِ",8,"Medinan"],["العَادِيَاتِ",11,"Meccan"],["القَارِعَةِ",11,"Meccan"],["التَّكَاثُرِ",8,"Meccan"],["العَصۡرِ",3,"Meccan"],["الهُمَزَةِ",9,"Meccan"],["الفِيلِ",5,"Meccan"],["قُرَيۡشٍ",4,"Meccan"],["المَاعُونِ",7,"Meccan"],["الكَوۡثَرِ",3,"Meccan"],["الكَافِرُونَ",6,"Meccan"],["النَّصۡرِ",3,"Medinan"],["المَسَدِ",5,"Meccan"],["الإِخۡلَاصِ",4,"Meccan"],["الفَلَقِ",5,"Meccan"],["النَّاسِ",6,"Meccan"]],"j":[[1,1,1],[2,142,22],[2,253,42],[3,93,62],[4,24,82],[4,148,102],[5,82,121],[6,111,142],[7,88,162],[8,41,182],[9,93,201],[11,6,222],[12,53,242],[15,1,262],[17,1,282],[18,75,302],[21,1,322],[23,1,342],[25,21,362],[27,56,382],[29,46,402],[33,31,422],[36,28,442],[39,32,462],[41,47,482],[46,1,502],[51,31,522],[58,1,542],[67,1,562],[78,1,582]]};
 const TAJWID = [{"k":"Hukum Nun Mati & Tanwin","t":"Izhar Halqi","n":"Nun mati atau tanwin bertemu huruf halqi (ء ه ع ح غ خ). Dibaca jelas tanpa dengung.","h":"ء ه ع ح غ خ","c":[["مَنْ ءَامَنَ","man amana",2,62,69],["أَنْعَمْتَ","an'amta",1,7,7],["عَلِيمٌ حَكِيمٌۭ","'alimun hakim",4,26,519],["مِّنْ خَوْفٍۭ","min khauf",106,4,6197],["عَنْهُ","'anhu",111,2,6218],["نَارٌ حَامِيَةٌۢ","narun hamiyah",101,11,6168]]},{"k":"Hukum Nun Mati & Tanwin","t":"Idgham Maal Ghunnah","n":"Nun mati atau tanwin bertemu ya, nun, mim atau wau (ي ن م و). Dibaca masuk ke huruf selepasnya dengan dengung 2 harakat.","h":"ي ن م و","c":[["فَمَن يَعْمَلْ","famay ya'mal",99,7,6145],["خَيْرًۭا يَرَهُۥ","khairay yarah",99,7,6145],["مِن نِّعْمَةٍۢ","min ni'matin",92,19,6077],["مِّن مَّسَدٍۭ","mim masad",111,5,6221],["يَوْمَئِذٍۢ يَصْدُرُ","yauma'iziy yasdur",99,6,6144],["مِن وَالٍ","miw wal",13,11,1718]]},{"k":"Hukum Nun Mati & Tanwin","t":"Idgham Bila Ghunnah","n":"Nun mati atau tanwin bertemu lam atau ra (ل ر). Dibaca masuk ke huruf selepasnya tanpa dengung.","h":"ل ر","c":[["مِّن رَّبِّهِمْ","mir rabbihim",2,5,12],["هُدًۭى لِّلْمُتَّقِينَ","hudal lil muttaqin",2,2,9],["وَيْلٌۭ لِّكُلِّ","wailul likulli",104,1,6180],["غَفُورٌۭ رَّحِيمٌ","ghafurur rahim",2,173,180]]},{"k":"Hukum Nun Mati & Tanwin","t":"Iqlab","n":"Nun mati atau tanwin bertemu ba (ب). Bunyi nun ditukar kepada mim dengan dengung.","h":"ب","c":[["مِنۢ بَعْدِ","mim ba'di",2,27,34],["لَيُنۢبَذَنَّ","layumbazanna",104,4,6183],["سَمِيعٌۢ بَصِيرٌ","sami'um basir",58,1,5105],["أَنۢبِئْهُم","ambi'hum",2,33,40]]},{"k":"Hukum Nun Mati & Tanwin","t":"Ikhfa' Haqiqi","n":"Nun mati atau tanwin bertemu 15 huruf ikhfa'. Dibaca samar-samar dengan dengung.","h":"ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك","c":[["أَنتُمْ","antum",109,3,6210],["مِن شَرِّ","min syarri",113,2,6227],["يُنفِقُونَ","yunfiqun",2,3,10],["عَن صَلَاتِهِمْ","'an solatihim",107,5,6202],["مِن قَبْلِكَ","ming qablika",2,4,11],["مَّنضُودٍۢ","mandhud",56,29,5008]]},{"k":"Hukum Mim Mati","t":"Ikhfa' Syafawi","n":"Mim mati bertemu ba (ب). Dibaca samar di bibir dengan dengung.","h":"ب","c":[["تَرْمِيهِم بِحِجَارَةٍۢ","tarmihim bihijarah",105,4,6192],["رَبَّهُم بِهِمْ","rabbahum bihim",100,11,6157],["يَعْتَصِم بِٱللَّهِ","ya'tasim billah",3,101,394]]},{"k":"Hukum Mim Mati","t":"Idgham Mithlain","n":"Mim mati bertemu mim (م). Dibaca masuk dengan dengung 2 harakat.","h":"م","c":[["كَم مِّن","kam min",2,249,256],["وَلَكُم مَّا","wa lakum ma",2,134,141],["أَطْعَمَهُم مِّن","at'amahum min",106,4,6197]]},{"k":"Hukum Mim Mati","t":"Izhar Syafawi","n":"Mim mati bertemu huruf selain ba dan mim. Dibaca jelas di bibir.","h":"selain ب dan م","c":[["لَكُمْ دِينُكُمْ","lakum dinukum",109,6,6213],["أَلَمْ تَرَ","alam tara",105,1,6189],["عَلَيْهِمْ غَيْرِ","'alaihim ghairi",1,7,7],["هُمْ فِيهَا","hum fiha",2,39,46]]},{"k":"Ghunnah & Qalqalah","t":"Ghunnah Musyaddadah","n":"Nun atau mim bersabdu. Dibaca dengan dengung 2 harakat.","h":"نّ مّ","c":[["إِنَّآ أَعْطَيْنَٰكَ","inna a'tainaka",108,1,6205],["ٱلنَّاسِ","an-nas",114,1,6231],["ٱلْجِنَّةِ","al-jinnah",114,6,6236],["وَمِمَّا","mimma",2,3,10],["ثُمَّ","thumma",102,7,6175]]},{"k":"Ghunnah & Qalqalah","t":"Qalqalah Sughra","n":"Huruf qalqalah (ق ط ب ج د) yang mati di tengah bacaan. Dibaca melantun sedikit.","h":"ق ط ب ج د","c":[["يَجْعَلْ","yaj'al",105,2,6190],["أَطْعَمَهُم","at'amahum",106,4,6197],["يَدْخُلُونَ","yadkhulun",110,2,6215],["قَبْلِكَ","qablika",2,4,11]]},{"k":"Ghunnah & Qalqalah","t":"Qalqalah Kubra","n":"Huruf qalqalah di hujung ayat apabila berhenti (waqaf). Dibaca melantun dengan jelas.","h":"ق ط ب ج د","c":[["ٱلْفَلَقِ","al-falaq",113,1,6226],["خَلَقَ","khalaq",113,2,6227],["وَقَبَ","waqab",113,3,6228],["حَسَدَ","hasad",113,5,6230],["مَّسَدٍۭ","masad",111,5,6221],["أَحَدٌ","ahad",112,1,6222]]},{"k":"Hukum Mad","t":"Mad Asli","n":"Baris atas bertemu alif, baris bawah bertemu ya mati, baris depan bertemu wau mati. Dibaca panjang 2 harakat.","h":"ا ي و","c":[["قَالَ","qala",2,30,37],["مَٰلِكِ يَوْمِ","maliki yaumi",1,4,4],["يَقُولُ","yaqulu",2,8,15],["قِيلَ","qila",2,11,18]]},{"k":"Hukum Mad","t":"Mad Wajib Muttasil","n":"Huruf mad bertemu hamzah dalam satu perkataan. Dibaca panjang 4 atau 5 harakat.","h":"mad + ء","c":[["جَآءَ","ja'a",110,1,6214],["ٱلسَّمَآءِ","as-sama'",2,19,26],["ٱلْمَلَٰٓئِكَةُ","al-mala'ikah",97,4,6129],["يُرَآءُونَ","yura'un",107,6,6203]]},{"k":"Hukum Mad","t":"Mad Jaiz Munfasil","n":"Huruf mad di hujung perkataan bertemu hamzah di awal perkataan seterusnya. Dibaca panjang 2, 4 atau 5 harakat.","h":"mad | ء","c":[["إِنَّآ أَعْطَيْنَٰكَ","inna a'tainaka",108,1,6205],["يَٰٓأَيُّهَا","ya ayyuha",109,1,6208],["وَمَآ أَدْرَىٰكَ","wa ma adraka",97,2,6127]]},{"k":"Hukum Mad","t":"Mad Aridh Lissukun","n":"Huruf mad sebelum huruf terakhir apabila berhenti (waqaf). Dibaca panjang 2, 4 atau 6 harakat.","h":"mad + waqaf","c":[["ٱلْعَٰلَمِينَ","al-'alamin",1,2,2],["ٱلرَّحِيمِ","ar-rahim",1,3,3],["ٱلدِّينِ","ad-din",1,4,4],["نَسْتَعِينُ","nasta'in",1,5,5],["ٱلنَّاسِ","an-nas",114,1,6231]]},{"k":"Hukum Mad","t":"Mad Lazim","n":"Huruf mad bertemu huruf bersabdu atau huruf mati asal. Dibaca panjang 6 harakat.","h":"mad + sabdu","c":[["ٱلضَّآلِّينَ","adh-dhollin",1,7,7],["ٱلْحَآقَّةُ","al-haqqah",69,1,5324],["ٱلطَّآمَّةُ","ath-thommah",79,34,5746],["الٓمٓ","alif lam mim",2,1,8],["يسٓ","ya sin",36,1,3706]]},{"k":"Lain-lain","t":"Lam Jalalah","n":"Lafaz Allah dibaca tebal selepas baris atas atau depan, dan nipis selepas baris bawah.","h":"ٱللَّه","c":[["ٱللَّهُ ٱلصَّمَدُ","Allahus samad (tebal)",112,2,6223],["نَصْرُ ٱللَّهِ","nasrullah (tebal)",110,1,6214],["رَّسُولُ ٱللَّهِ","rasulullah (tebal)",48,29,4612],["بِسْمِ ٱللَّهِ","bismillah (nipis)",1,1,1],["لِلَّهِ","lillah (nipis)",1,2,2],["بِٱللَّهِ","billah (nipis)",2,8,15]]},{"k":"Lain-lain","t":"Ra Tebal & Nipis","n":"Ra dibaca tebal apabila berbaris atas atau depan. Ra dibaca nipis apabila berbaris bawah.","h":"ر","c":[["رَبِّ","rabbi (tebal)",1,2,2],["وَٱلرُّوحُ","war ruh (tebal)",97,4,6129],["شَرِّ","syarri (nipis)",113,2,6227],["وَفِرْعَوْنَ","wa fir'aun (nipis)",89,10,6003]]},{"k":"Lain-lain","t":"Alif Lam Qamariah","n":"Lam dibaca jelas apabila bertemu huruf qamariah.","h":"ا ب غ ح ج ك و خ ف ع ق ي م ه","c":[["ٱلْحَمْدُ","al-hamdu",1,2,2],["ٱلْفَلَقِ","al-falaq",113,1,6226],["ٱلْقَدْرِ","al-qadr",97,1,6126],["ٱلْكَوْثَرَ","al-kauthar",108,1,6205]]},{"k":"Lain-lain","t":"Alif Lam Syamsiah","n":"Lam tidak dibaca apabila bertemu huruf syamsiah. Huruf selepasnya bersabdu.","h":"ت ث د ذ ر ز س ش ص ض ط ظ ل ن","c":[["ٱلنَّاسِ","an-nas",114,1,6231],["ٱلرَّحْمَٰنِ","ar-rahman",1,3,3],["ٱلصَّمَدُ","as-samad",112,2,6223],["وَٱلشَّمْسِ","wasy syams",91,1,6044],["وَٱلتِّينِ","wat tin",95,1,6099]]}];
@@ -5424,17 +5426,29 @@ function qjMuat(n) {
 }
 /* Bacaan qari satu ayat (nombor ayat global 1-6236) */
 let qariAudio = null, qariSiri = 0;
-function qariMain(g) {
+/* Qari (EveryAyah, riwayat Hafs): Husary Muallim untuk Iqra'/Surah Lazim/Tajwid, Minshawi bersama kanak-kanak untuk Hafazan, Alafasy untuk 30 Juz */
+const QARI = { husary: ["Husary_Muallim_128kbps", "Syeikh Mahmoud Khalil Al-Husary"], minshawi: ["Minshawy_Teacher_128kbps", "Syeikh Al-Minshawi bersama kanak-kanak"], alafasy: ["Alafasy_128kbps", "Syeikh Mishary Alafasy"] };
+const qariUrl = (q, s, a) => "https://everyayah.com/data/" + QARI[q][0] + "/" + String(s).padStart(3, "0") + String(a).padStart(3, "0") + ".mp3";
+function qariMain(s, a, q) {
   if (!qariAudio) qariAudio = new Audio();
   return new Promise(ok => {
-    const a = qariAudio; a.onended = () => ok(true); a.onerror = () => { ok(false); qrBual("Bacaan qari perlukan internet."); };
-    a.src = "https://cdn.islamic.network/quran/audio/128/ar.alafasy/" + g + ".mp3";
-    a.play().catch(() => ok(false));
+    const au = qariAudio; au.onended = () => ok(true); au.onerror = () => { ok(false); qrBual("Bacaan qari perlukan internet."); };
+    au.src = qariUrl(q || "husary", s, a);
+    au.play().catch(() => ok(false));
   });
 }
+/* Butang kecil dengar qari dalam setiap ayat */
+const qariBtn = (label) => `<div class="qhbar"><button class="qrqari" type="button">${IKON.speak}<span>${label || "Dengar Qari"}</span></button></div>`;
 function qariHenti() { qariSiri++; if (qariAudio) { qariAudio.onended = null; qariAudio.onerror = null; qariAudio.pause(); } }
 /* Main beberapa ayat berturut-turut; berhenti jika qariHenti() dipanggil */
-function qariSenarai(el, gs) { qariHenti(); const siri = qariSiri; let p = Promise.resolve(); el.forEach((x, i) => { p = p.then(() => { if (siri !== qariSiri) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); x.scrollIntoView({ block: "center", behavior: "smooth" }); return qariMain(gs[i]); }); }); return p; }
+/* gs = [[surah, ayat], ...]; basmalah dimainkan dahulu jika bermula ayat 1 (kecuali Al-Fatihah & At-Taubah) */
+function qariSenarai(el, gs, q) { qariHenti(); const siri = qariSiri; let p = Promise.resolve(); el.forEach((x, i) => { if (gs[i][1] === 1 && gs[i][0] !== 1 && gs[i][0] !== 9) p = p.then(() => siri === qariSiri && qariMain(1, 1, q)); p = p.then(() => { if (siri !== qariSiri) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); x.scrollIntoView({ block: "center", behavior: "smooth" }); return qariMain(gs[i][0], gs[i][1], q); }); }); return p.then(() => { if (siri === qariSiri) el.forEach(z => z.classList.remove("on")); }); }
+/* Pasang butang qari dalam ayat + butang "Dengar Semua" */
+function qariPasang(k, el, gs, q) {
+  el.forEach((x, i) => { const b = x.querySelector(".qrqari"); if (b) b.onclick = e => { e.stopPropagation(); qrId++; stopSpeech(); qariHenti(); const siri = qariSiri; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); qariMain(gs[i][0], gs[i][1], q).then(() => siri === qariSiri && x.classList.remove("on")); }; });
+  const bt = qrButang("speak", "Dengar Qari", "hijau", () => { qrId++; stopSpeech(); if (bt.classList.contains("main")) { qariHenti(); el.forEach(z => z.classList.remove("on")); bt.classList.remove("main"); bt.querySelector("span").textContent = "Dengar Qari"; return; } bt.classList.add("main"); bt.querySelector("span").textContent = "Henti"; qariSenarai(el, gs, q).then(() => { bt.classList.remove("main"); bt.querySelector("span").textContent = "Dengar Qari"; }); });
+  qrBual("Bacaan: " + QARI[q][1]);
+}
 
 /* ---- Menu utama Kelas Al-Quran: Iqra' & Al-Quran ---- */
 function renderQuran() {
@@ -5529,11 +5543,12 @@ function qtNota(i) {
   const t = TAJWID[i];
   qrSkrin((i + 1) + ". " + t.t, qtMenu);
   const k = $("qrKawasan");
-  k.innerHTML = `<div class="qtkat">${t.k}</div><p class="qnterang"></p><div class="qthuruf"><b>Huruf:</b> <span class="qrar"></span></div><div class="qtcontoh">${t.c.map(() => `<button class="qrayat qtc"><span class="qrar"></span><i></i><span class="qrmk"></span></button>`).join("")}</div><p class="qrpesan">Baca contoh ini bersama guru untuk sebutan yang betul.</p>`;
+  k.innerHTML = `<div class="qtkat">${t.k}</div><p class="qnterang"></p><div class="qthuruf"><b>Huruf:</b> <span class="qrar"></span></div><div class="qtcontoh">${t.c.map(() => `<div class="qrayat qtc" role="button"><span class="qrar"></span><i></i><span class="qrmk"></span>${qariBtn("Dengar Ayat Penuh")}</div>`).join("")}</div><p class="qrpesan">Baca contoh ini bersama guru untuk sebutan yang betul.</p>`;
   k.querySelector(".qnterang").textContent = t.n;
   k.querySelector(".qthuruf .qrar").textContent = t.h;
   const el = [...k.querySelectorAll(".qtc")];
   el.forEach((x, j) => { const c = t.c[j]; x.querySelector(".qrar").textContent = c[0]; x.querySelector("i").textContent = c[1]; x.querySelector(".qrmk").textContent = "Surah " + QS_NAMA[c[2] - 1] + ", ayat " + c[3]; x.onclick = () => { el.forEach(z => z.classList.remove("on")); x.classList.add("on"); }; });
+  qariPasang(k, el, t.c.map(c => [c[2], c[3]]), "husary");
   if (i > 0) qrButang("back", "Sebelum", "biru", () => { qariHenti(); qtNota(i - 1); });
   if (i < TAJWID.length - 1) qrButang("next", "Seterusnya", "hijau", () => { qariHenti(); qtNota(i + 1); });
   else qrButang("play", "Siap", "hijau", () => { qariHenti(); sndWin(); qtMenu(); });
@@ -5597,20 +5612,23 @@ function qhBaca(s, j, dari, hingga) {
   qjMuat(j).then(d => {
     const ay = d.filter(x => x[0] === s && x[1] >= dari && x[1] <= hingga), h = qhData(); h[s] = h[s] || [];
     let sembunyi = false, ulang = 1;
-    k.innerHTML = `<div class="qhsurah qrar">${QMETA.s[s - 1][0]}</div>${dari === 1 && s !== 1 && s !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""}` + ay.map(a => `<div class="qrayat qha"><span class="qrno">${a[1]}</span><span class="qrar"></span><span class="qrmk"></span><div class="qhbar"><button class="qhtanda">Sudah Hafal</button></div></div>`).join("") + `<p class="qrpesan">Cara hafal: baca setiap ayat 3 kali bersama guru, kemudian tekan Sembunyi Ayat dan cuba baca tanpa melihat. Tekan ayat yang disembunyi untuk semak.</p>` + tjNotaKaki();
+    k.innerHTML = `<div class="qhsurah qrar">${QMETA.s[s - 1][0]}</div>${dari === 1 && s !== 1 && s !== 9 ? `<div class="qrbismi qrar">${QBISMI}</div>` : ""}` + ay.map(a => `<div class="qrayat qha"><span class="qrno">${a[1]}</span><span class="qrar"></span><span class="qrmk"></span><div class="qhbar"><button class="qhdengar" type="button">${IKON.speak}<span>Dengar</span></button><button class="qhulang" type="button">${IKON.speak}<span>Ulang 3x</span></button><button class="qhtanda">Sudah Hafal</button></div></div>`).join("") + `<p class="qrpesan">Cara hafal: baca setiap ayat 3 kali bersama guru, kemudian tekan Sembunyi Ayat dan cuba baca tanpa melihat. Tekan ayat yang disembunyi untuk semak.</p>` + tjNotaKaki();
     const el = [...k.querySelectorAll(".qha")];
     const simpan = () => { try { localStorage.setItem(QH_KEY, JSON.stringify(h)); } catch (e) { /* abaikan */ } };
-    const mainAyat = (i, kali) => { qariHenti(); const siri = qariSiri; let p = Promise.resolve(); el.forEach(z => z.classList.remove("on")); el[i].classList.add("on"); for (let x = 0; x < kali; x++) p = p.then(() => siri === qariSiri && qariMain(ay[i][2])); return p; };
+    const mainAyat = (i, kali) => { qariHenti(); const siri = qariSiri; let p = Promise.resolve(); el.forEach(z => z.classList.remove("on")); el[i].classList.add("on"); for (let x = 0; x < kali; x++) p = p.then(() => siri === qariSiri && qariMain(ay[i][0], ay[i][1], "minshawi")); return p; };
     el.forEach((x, i) => {
       const a = ay[i]; x.querySelector(".qrar").innerHTML = a[4]; x.querySelector(".qrmk").textContent = a[5];
       const tanda = x.querySelector(".qhtanda"), hafal = () => h[s].indexOf(a[1]) >= 0;
       const papar = () => { tanda.classList.toggle("on", hafal()); tanda.textContent = hafal() ? "✓ Sudah Hafal" : "Sudah Hafal"; };
       papar();
       x.querySelector(".qrar").onclick = () => x.classList.toggle("buka");
+      x.querySelector(".qhdengar").onclick = () => { stopSpeech(); mainAyat(i, 1).then(() => x.classList.remove("on")); };
+      x.querySelector(".qhulang").onclick = () => { stopSpeech(); mainAyat(i, 3).then(() => x.classList.remove("on")); };
       tanda.onclick = () => { if (hafal()) { h[s].splice(h[s].indexOf(a[1]), 1); trkHafal(-1); } else { h[s].push(a[1]); trkHafal(1); sndOk(); const r = tanda.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top); } simpan(); papar(); if (ay.every(z => h[s].indexOf(z[1]) >= 0)) { sndWin(); qrBual("Tahniah! Kamu sudah hafal surah " + QS_NAMA[s - 1] + "."); } };
     });
     const bs = qrButang("padam", "Sembunyi Ayat", "biru", () => { sembunyi = !sembunyi; k.classList.toggle("qhsorok", sembunyi); bs.querySelector("span").textContent = sembunyi ? "Tunjuk Ayat" : "Sembunyi Ayat"; el.forEach(z => z.classList.remove("buka")); });
-    qrBual(ay.filter(z => h[s].indexOf(z[1]) >= 0).length + " / " + ay.length + " ayat sudah dihafal");
+    { const bt = qrButang("speak", "Dengar Semua", "hijau", () => { stopSpeech(); if (bt.classList.contains("main")) { qariHenti(); el.forEach(z => z.classList.remove("on")); bt.classList.remove("main"); bt.querySelector("span").textContent = "Dengar Semua"; return; } bt.classList.add("main"); bt.querySelector("span").textContent = "Henti"; qariSenarai(el, ay.map(a => [a[0], a[1]]), "minshawi").then(() => { bt.classList.remove("main"); bt.querySelector("span").textContent = "Dengar Semua"; }); }); }
+    qrBual(ay.filter(z => h[s].indexOf(z[1]) >= 0).length + " / " + ay.length + " ayat sudah dihafal. Bacaan: " + QARI.minshawi[1]);
   }).catch(() => { k.innerHTML = `<p class="qrpesan">Data surah tidak dapat dimuatkan.</p>`; });
 }
 
@@ -5644,7 +5662,14 @@ function qjBaca(j, p, arah, tanda, balik) {
     const ke = (jj, pp, a) => () => qjBaca(jj, pp, a), awalJuz = ms[0] === d[0];
     if (p > 1 || !awalJuz) qrButang("back", "Sebelum", "biru", awalJuz ? ke(j - 1, p, -1) : ke(j, p - 1, -1));
     if (p < 604 || j < 30) qrButang("next", "Seterusnya", "hijau", p < akhir ? ke(j, p + 1, 1) : j < 30 ? ke(j + 1, QMETA.j[j][2] === p ? p : p + 1, 1) : () => { sndWin(); qjMenu(); });
-    qrBual("Juz " + j + " · " + QS_NAMA[ms[0][0] - 1]);
+    { const bt = qrButang("speak", "Dengar Qari", "ungu", () => {
+        const tukar = t => { bt.querySelector("span").textContent = t; };
+        if (bt.classList.contains("main")) { qariHenti(); bt.classList.remove("main"); tukar("Dengar Qari"); return; }
+        const mula = Math.max(0, el.findIndex(x => x.classList.contains("on")));
+        bt.classList.add("main"); tukar("Henti");
+        qariSenarai(el.slice(mula), ms.slice(mula).map(a => [a[0], a[1]]), "alafasy").then(() => { bt.classList.remove("main"); tukar("Dengar Qari"); });
+      }); }
+    qrBual("Juz " + j + " · " + QS_NAMA[ms[0][0] - 1] + ". Bacaan: " + QARI.alafasy[1]);
   }).catch(() => { k.innerHTML = `<p class="qrpesan">Data juz tidak dapat dimuatkan.</p>`; });
 }
 
