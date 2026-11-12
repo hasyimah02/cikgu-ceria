@@ -3615,14 +3615,14 @@ function bmSoalan() {
   bmPos = 0; bmDone = false;
   $("bmCount").textContent = (bmI + 1) + "/" + bmList.length;
   $("bmProg").style.width = (bmI / bmList.length * 100) + "%";
-  const foto = bqJenis === 2 ? "" : bqJenis || bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : it[1];
+  const foto = bqJenis === 2 ? "" : bqJenis === 4 ? it[1] : bqJenis || bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : it[1];
   $("bmFoto").src = foto; $("bmFoto").classList.toggle("hide", !foto);
   $("bmFoto").classList.remove("lompat");
   $("bmKawasan").innerHTML = "";
   $("bmPapan").classList.toggle("hide", bmMod !== "tulis");
   $("bmBtns").innerHTML = "";
   bmMaskot("");
-  (bqJenis ? [null, bq1Mula, bq2Mula, bq3Mula][bqJenis] : { eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula }[bmMod])(it, id);
+  (bqJenis ? [null, bq1Mula, bq2Mula, bq3Mula, binaMula][bqJenis] : { eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula }[bmMod])(it, id);
 }
 const bmAyat = () => bmList[bmI][0];
 function bmButang(ik, label, kelas, fn) {
@@ -3657,14 +3657,15 @@ let bqJenis = 0, bqSlh = 0, bqTahap = (() => { try { return +localStorage.getIte
 const BQ = [null,
   [L("Kuiz 1: Dengar & Pilih", "Quiz 1: Listen & Choose", "测验1：听和选"), L("Dengar perkataan, lihat gambar, pilih perkataan yang betul", "Listen, look and choose the word", "听词语，看图，选正确的词")],
   [L("Kuiz 2: Sambung Garisan", "Quiz 2: Draw Lines", "测验2：连线"), L("Sambung suku kata dengan garisan supaya ejaan betul", "Join the syllables with lines", "用线连接音节")],
-  [L("Kuiz 3: Lengkapkan Ejaan", "Quiz 3: Complete the Spelling", "测验3：补全拼写"), L("Lihat gambar, satu suku kata diberi, eja yang lain sendiri", "One syllable is given, spell the rest", "给一个音节，拼出其余部分")]];
+  [L("Kuiz 3: Lengkapkan Ejaan", "Quiz 3: Complete the Spelling", "测验3：补全拼写"), L("Lihat gambar, satu suku kata diberi, eja yang lain sendiri", "One syllable is given, spell the rest", "给一个音节，拼出其余部分")],
+  [L("Kuiz 4: Bina Ayat", "Quiz 4: Build Sentences", "测验4：造句"), L("Lihat gambar, susun perkataan jadi ayat yang betul", "Look at the picture and arrange the words", "看图，把词语排成句子")]];
 const bqCap = w => w.charAt(0).toUpperCase() + w.slice(1);
 const bqBergambar = lv => bmKataTahap(lv).filter(w => fotoNama(bqCap(w)) && sukuKata(w).length >= 2);
 function renderBQ(lv) {
   backMenu = () => renderBQ(lv);
   const st = loadStars();
   bqTahap = lv; try { localStorage.setItem("appPendidikan.bqTahap", lv); } catch (e) { /* abaikan */ }
-  renderMenu(tr(L("Kuiz Membaca", "Reading Quiz", "阅读测验")), [1, 2, 3].map(q => [["t-pra", "t-t1", "t-t2"][q - 1], IKON[["", "speak", "bina", "eja"][q]] || IKON.baca, tr(BQ[q][0]), tr(BQ[q][1]) + " · " + tr(BM_TAHAP[lv]), starText(st["bm1-bq" + q + "-" + lv] || 0), () => startBQ(q, lv)]), () => renderBMTahap("baca"));
+  renderMenu(tr(L("Kuiz Membaca", "Reading Quiz", "阅读测验")), [1, 2, 3, 4].map(q => [["t-pra", "t-t1", "t-t2", "bm1"][q - 1], IKON[["", "speak", "bina", "eja", "bina"][q]] || IKON.baca, tr(BQ[q][0]), tr(BQ[q][1]) + " · " + tr(BM_TAHAP[lv]), starText(st["bm1-bq" + q + "-" + lv] || 0), () => startBQ(q, lv)]), () => renderBMTahap("baca"));
   /* pilih tahap di dalam kuiz */
   const seg = document.createElement("div"); seg.className = "thjseg bqseg";
   seg.innerHTML = [1, 2, 3].map(t => `<button class="${t === lv ? "on" : ""}">${skEsc(tr(BM_TAHAP[t]))}</button>`).join("");
@@ -3672,11 +3673,16 @@ function renderBQ(lv) {
   $("subjList").prepend(seg);
 }
 function startBQ(q, lv) {
-  bqJenis = q; bmMod = "baca"; bmLv = lv; bmI = 0; bmSkor = 0;
+  bqJenis = q; bmMod = q === 4 ? "bina" : "baca"; bmLv = lv; bmI = 0; bmSkor = 0;
   $("s-bm").className = "screen mbaca mbq" + q;
   curSubj = "bm1-bq" + q + "-" + lv; replay = () => startBQ(q, lv);
-  const siap = bmKemajuan()["baca-" + lv] || [], semua = bqBergambar(lv);
-  bmList = shuffle(semua.filter(w => siap.indexOf(w) < 0)).concat(shuffle(semua.filter(w => siap.indexOf(w) >= 0))).slice(0, 10);
+  if (q === 4) {
+    const sa = bmKemajuan()["bina-" + lv] || [], sm = BM_AYAT_T[lv].map(a => [a, fotoAyat(a)]).filter(x => x[1]);
+    bmList = shuffle(sm.filter(x => sa.indexOf(x[0]) < 0)).concat(shuffle(sm.filter(x => sa.indexOf(x[0]) >= 0))).slice(0, 10);
+  } else {
+    const siap = bmKemajuan()["baca-" + lv] || [], semua = bqBergambar(lv);
+    bmList = shuffle(semua.filter(w => siap.indexOf(w) < 0)).concat(shuffle(semua.filter(w => siap.indexOf(w) >= 0))).slice(0, 10);
+  }
   $("bmTitle").textContent = tr(BQ[q][0]) + " · " + tr(BM_TAHAP[lv]);
   show("s-bm");
   bmSoalan();
