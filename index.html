@@ -735,6 +735,13 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .ioswarna small{font-size:12px;color:var(--ios-sub);text-align:center;line-height:1.2}
 .iospratonton{text-align:center;font-size:30px;line-height:2;padding:4px 16px 8px;color:var(--ios-teks)}
 
+/* Buku Bacaan Vokal (gaya Iqra') */
+.bvbanner{display:flex;align-items:center;gap:16px;justify-content:center;background:var(--card);border-radius:28px;padding:10px 22px;box-shadow:0 6px 0 var(--garis);margin:0 auto 12px;max-width:640px}
+.bvbanner b{font-size:clamp(54px,9vw,80px);line-height:1;color:#e8434f;font-weight:800}.bvbanner p{margin:0;font-weight:700;font-size:clamp(14px,2.6vw,18px);text-align:left}
+.bvgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
+.bvkad{background:var(--card);border-radius:22px;border:3px solid transparent;box-shadow:0 5px 0 var(--garis);padding:12px 6px;font-weight:800;font-size:clamp(15px,2.9vw,24px);line-height:1.35;min-width:0;overflow-wrap:anywhere;position:relative}
+.bvkad i{position:absolute;top:4px;left:8px;font-style:normal;font-size:12px;color:var(--muted)}
+.bvkad.on{border-color:#FFD36E;transform:scale(1.04)}
 /* Tulis huruf hijaiyah */
 .thjseg{align-self:center;display:flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:0 4px 0 var(--garis)}
 .thjseg button{border-radius:999px;padding:8px 20px;font-weight:700;background:none}.thjseg button.on{background:#8FD9A8;color:var(--on)}
@@ -3569,7 +3576,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c0", IKON.baca, tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), tr(L("Macam Iqra': vokal a, i, u, e, o · 15 ayat setiap vokal", "Like Iqra': vowels a, i, u, e, o · 15 sentences each", "元音 a i u e o，每个15句")), "", renderBV], ["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3698,6 +3705,46 @@ function binaTekan(b, x, kata) {
   if (bmPos === kata.length) { const id = bmId; bmJaya(() => bacaSorot([...document.querySelectorAll(".binaslot .bslot")], id).then(() => id === bmId && speak(bmAyat(), "ms"))); }
 }
 
+/* ===== Buku Bacaan Vokal (gaya Iqra'): satu bahagian satu vokal, 15 ayat mudah; vokal terkumpul a -> i -> u -> e -> o ===== */
+const BV = [
+  ["a", "Vokal a. Ayat hanya guna huruf vokal a.", "Saya makan.|Ada katak.|Mama masak.|Abang lapar.|Ayah sayang abang.|Saya ada kapal.|Kakak tanam lada.|Mama bawa garam.|Ada lalat.|Bapa ada kayak.|Katak lapar.|Saya sayang mama.|Kakak bawa cawan.|Abang makan nanas.|Ayam bapa banyak."],
+  ["i", "Vokal i. Kini kita baca vokal a dan i.", "Ini itik.|Adik makan nasi.|Itik makan padi.|Kaki adik sakit.|Ini bilik adik.|Kakak pasang kipas.|Adik ada lima ikan.|Gigi adik cantik.|Kancil cari makan.|Adik mandi pagi.|Mama cari kain.|Ini pisang adik.|Adik minta air.|Bapa ikat kambing.|Saya minta maaf."],
+  ["u", "Vokal u. Kini kita baca vokal a, i dan u.", "Itu buku saya.|Adik minum susu.|Ibu masak bubur.|Kucing itu lapar.|Guru baca buku.|Ada burung di pagar.|Bulan itu bulat.|Rumah atuk di kampung.|Ubi itu manis.|Tutup pintu itu.|Abang bawa payung.|Buka lampu itu.|Kuda itu laju.|Ibu buat kuih.|Datuk tanam ubi."],
+  ["e", "Vokal e. Kini kita baca vokal a, i, u dan e.", "Emak beli telur.|Gajah itu besar.|Semut itu kecil.|Air ini sejuk.|Kereta ayah merah.|Adik minum segelas susu.|Kakak sedang belajar.|Nasi lemak sedap.|Kancil lari cepat.|Ayah cuci kereta.|Emak beli sayur.|Perahu di tepi pantai.|Abang pakai seluar biru.|Adik bawa bekal.|Telur itik besar."],
+  ["o", "Vokal o. Kini kita baca semua vokal a, e, i, o, u.", "Adik main bola.|Ayah minum kopi.|Ibu beli roti.|Kami pergi ke sekolah.|Botol itu kosong.|Monyet panjat pokok.|Kakak pakai topi.|Oren itu masam.|Itik di kolam.|Baju adik kotor.|Lori itu besar.|Polis tolong orang.|Kotak itu berat.|Atuk tanam pokok.|Tolong tutup pintu."]
+].map(x => ({ v: x[0], nota: x[1], ayat: x[2].split("|") }));
+const BV_KEY = "appPendidikan.bacaVokal.v1";
+function bvData() { try { return JSON.parse(localStorage.getItem(BV_KEY)) || {}; } catch (e) { return {}; } }
+function renderBV() {
+  backMenu = renderBV;
+  const d = bvData();
+  renderMenu(tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), BV.map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[i] ? "#FFD36E" : ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"][i]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
+    "Bahagian " + (i + 1) + ": Vokal " + b.v, "15 ayat mudah", d[i] ? "★★★" : "", () => bvBaca(i)]), renderBM1);
+}
+function bvBaca(i) {
+  const b = BV[i], id = ++bmId;
+  stopSpeech();
+  $("s-bm").className = "screen mbv"; curSubj = "bm1-bv"; replay = () => bvBaca(i);
+  $("bmTitle").textContent = "Vokal " + b.v + " · Bahagian " + (i + 1) + " / " + BV.length;
+  $("bmCount").textContent = (i + 1) + "/" + BV.length; $("bmProg").style.width = ((i + 1) / BV.length * 100) + "%";
+  $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = ""; bmMaskot("");
+  const k = $("bmKawasan");
+  k.innerHTML = `<div class="bvbanner"><b>${b.v.toUpperCase()} ${b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i>${skEsc(a)}</button>`).join("")}</div>`;
+  k.querySelector(".bvbanner p").textContent = b.nota;
+  show("s-bm");
+  const el = [...k.querySelectorAll(".bvkad")];
+  el.forEach((x, j) => x.onclick = () => { const id2 = ++bmId; stopSpeech(); el.forEach(z => z.classList.remove("on")); x.classList.add("on"); speak(b.ayat[j], "ms").then(() => id2 === bmId && x.classList.remove("on")); });
+  bmButang("speak", tr(L("Dengar Semua", "Listen All", "全部听")), "ungu", () => { const id2 = ++bmId; stopSpeech(); let p = Promise.resolve(); el.forEach((x, j) => { p = p.then(() => { if (id2 !== bmId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); x.scrollIntoView({ block: "nearest", behavior: "smooth" }); return speak(b.ayat[j], "ms").then(() => tunggu(400)); }); }); p.then(() => id2 === bmId && el.forEach(z => z.classList.remove("on"))); });
+  if (i > 0) bmButang("back", tr(L("Sebelum", "Previous", "上一页")), "biru", () => bvBaca(i - 1));
+  const akhir = i === BV.length - 1;
+  bmButang(akhir ? "play" : "next", akhir ? tr(L("Siap", "Done", "完成")) : tr(L("Seterusnya", "Next", "下一页")), "hijau", () => {
+    const d = bvData(); d[i] = 1; try { localStorage.setItem(BV_KEY, JSON.stringify(d)); } catch (e) { /* abaikan */ }
+    sndWin(); akhir ? renderBV() : bvBaca(i + 1);
+  });
+  bmBual(b.nota);
+  speak(b.nota, "ms");
+  void id;
+}
 /* ---- Membaca: setiap perkataan menyala ketika disebut; tekan perkataan untuk dengar suku kata ---- */
 function bacaMula(it, id) {
   const k = $("bmKawasan");
