@@ -1,0 +1,78 @@
+/* peralihan.css - kesan peralihan skrin Cikgu Ceria (transform/opacity sahaja, ringan untuk iPad)
+   PEMASANGAN (Mei Ling):
+   1. Pautkan dalam index.html selepas CSS sedia ada:
+      <link rel="stylesheet" href="gambar/depan/peralihan.css">
+   2. Pop lembut + stagger kad jalan sendiri pada setiap .screen.on.
+   3. Pilihan: dalam show(), sebelum menambah 'on', letak pada skrin sasaran
+      el.classList.remove('pr-maju','pr-undur'); el.classList.add('pr-maju');   (ke hadapan)
+      atau 'pr-undur' (butang Kembali). Buang kelas itu selepas ~500ms jika mahu.
+   4. Stagger guna --i (el.style.setProperty('--i', n)); jika tiada, nth-child 1-12 digunakan.
+   Semua dimatikan oleh prefers-reduced-motion. */
+
+@keyframes pr-pop {
+  0%   { opacity: 0; transform: translateY(12px) scale(.94); }
+  65%  { opacity: 1; transform: translateY(0) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pr-masuk-kanan {
+  from { opacity: 0; transform: translateX(40px) scale(.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes pr-masuk-kiri {
+  from { opacity: 0; transform: translateX(-40px) scale(.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes pr-item {
+  0%   { opacity: 0; transform: translateY(10px) scale(.88); }
+  70%  { opacity: 1; transform: translateY(0) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 1. pop lembut */
+.screen.on {
+  animation: pr-pop .42s cubic-bezier(.34,1.56,.64,1) both;
+  will-change: transform, opacity;
+}
+
+/* 2. arah */
+.screen.on.pr-maju  { animation: pr-masuk-kanan .4s cubic-bezier(.34,1.3,.64,1) both; }
+.screen.on.pr-undur { animation: pr-masuk-kiri  .4s cubic-bezier(.34,1.3,.64,1) both; }
+
+/* 3. stagger */
+.screen.on .card {
+  animation: pr-item .4s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: calc(var(--i, 0) * 50ms + 80ms);
+}
+.screen.on .card:nth-child(1)  { --i: 0; }
+.screen.on .card:nth-child(2)  { --i: 1; }
+.screen.on .card:nth-child(3)  { --i: 2; }
+.screen.on .card:nth-child(4)  { --i: 3; }
+.screen.on .card:nth-child(5)  { --i: 4; }
+.screen.on .card:nth-child(6)  { --i: 5; }
+.screen.on .card:nth-child(7)  { --i: 6; }
+.screen.on .card:nth-child(8)  { --i: 7; }
+.screen.on .card:nth-child(9)  { --i: 8; }
+.screen.on .card:nth-child(10) { --i: 9; }
+.screen.on .card:nth-child(11) { --i: 10; }
+.screen.on .card:nth-child(12) { --i: 11; }
+
+/* 4. kesan tekan */
+.card, button, .pr-tekan {
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.card:active, button:active, .pr-tekan:active {
+  transform: scale(.95);
+  transition-duration: .08s;
+}
+
+/* 5. kurangkan gerakan */
+@media (prefers-reduced-motion: reduce) {
+  .screen.on, .screen.on.pr-maju, .screen.on.pr-undur, .screen.on .card {
+    animation: none !important;
+  }
+  .card, button, .pr-tekan, .card:active, button:active, .pr-tekan:active {
+    transition: none !important;
+    transform: none !important;
+  }
+}
