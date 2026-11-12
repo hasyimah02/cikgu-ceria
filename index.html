@@ -3733,23 +3733,24 @@ const BV = [
   ["y", "Huruf y. ya yi yu ye yo.", "Yoyo|Yuyu|Saya|Kaya|Gaya|Raya|Daya|Maya|Kayu|Sayu|Layu|Bayi|Paya|Jaya|Rayu"]
 ].map(x => ({ v: x[0], vokal: "aeiou".includes(x[0]), nota: x[1], ayat: x[2].split("|") })).sort((a, b) => a.v.localeCompare(b.v));
 const BVA = [
-  ["w", "Huruf akhir w. Contoh wow.", "Wow"],
+  ["b", "Huruf akhir b. Contoh bab dan sebab.", "Bab|Bob|Sub|Tab|Hab|Web|Sebab|Kitab|Jawab|Nasib|Wajib|Rebab|Hijab|Kebab|Kelab"],
   ["c", "Huruf akhir c. Contoh koc.", "Koc"],
-  ["g", "Huruf akhir g. Contoh beg.", "Beg|Log|Tag|Rig|Mug|Jog"],
-  ["b", "Huruf akhir b. Contoh bab dan sebab.", "Bab|Lab|Web|Sub|Hab|Tab|Sebab|Kitab|Jawab|Nasib|Wajib|Rebab|Hijab|Kebab"],
-  ["d", "Huruf akhir d. Contoh kod dan murid.", "Kod|Mod|Pad|Pod|Wad|Had|Murid|Wujud|Tekad|Sujud|Jasad|Wirid|Lahad"],
-  ["f", "Huruf akhir f. Contoh saf dan huruf.", "Saf|Kaf|Daf|Lif|Puf|Huruf|Wakaf|Saraf|Tarif"],
+  ["d", "Huruf akhir d. Contoh kod dan murid.", "Kod|Mod|Pad|Pod|Wad|Had|Murid|Wujud|Tekad|Sujud|Jasad|Wirid|Lahad|Salad|Rekod"],
+  ["f", "Huruf akhir f. Contoh saf dan huruf.", "Saf|Kaf|Qaf|Lif|Cef|Huruf|Wakaf|Saraf|Tarif|Motif|Pasif|Tawaf|Kahaf"],
+  ["g", "Huruf akhir g. Contoh beg.", "Beg|Log|Jag|Wig"],
   ["h", "Huruf akhir h. Contoh teh dan rumah.", "Teh|Sah|Roh|Doh|Gah|Wah|Rumah|Tanah|Basah|Susah|Mudah|Murah|Merah|Putih|Kasih"],
-  ["j", "Huruf akhir j. Contoh haj dan kolej.", "Haj|Taj|Kolej|Mesej|Garaj|Pakej"],
+  ["j", "Huruf akhir j. Contoh haj dan kolej.", "Haj|Taj|Caj|Baj|Kolej|Mesej|Garaj|Pakej|Sosej|Kolaj|Kotej"],
   ["k", "Huruf akhir k. Contoh kek dan katak.", "Kek|Cek|Dek|Pek|Rak|Bak|Katak|Kakak|Budak|Masak|Cicak|Kotak|Pokok|Duduk|Sejuk"],
   ["l", "Huruf akhir l. Contoh bil dan kapal.", "Bil|Pil|Gol|Sel|Tol|Bol|Kapal|Botol|Betul|Tebal|Nakal|Pukul|Bakul|Kenal|Katil"],
   ["m", "Huruf akhir m. Contoh jam dan malam.", "Jam|Kem|Gam|Dam|Rim|Pam|Malam|Garam|Minum|Jarum|Kolam|Tanam|Masam|Hitam|Demam"],
   ["n", "Huruf akhir n. Contoh van dan makan.", "Van|Pin|Tin|Sen|Pen|Kon|Makan|Jalan|Bulan|Timun|Hujan|Laman|Teman|Bukan|Sabun"],
   ["p", "Huruf akhir p. Contoh sup dan sayap.", "Sup|Cap|Tip|Lap|Kep|Jip|Sayap|Sedap|Tutup|Hidup|Lelap|Tetap|Gelap|Harap|Sikap"],
-  ["r", "Huruf akhir r. Contoh tar dan lapar.", "Tar|Par|Pir|Bor|Kur|Lapar|Pasar|Pasir|Sabar|Telur|Tidur|Besar|Tukar|Bubur"],
+  ["q", "Huruf akhir q. Contoh buraq.", "Buraq"],
+  ["r", "Huruf akhir r. Contoh nur dan lapar.", "Nur|Tar|Par|Bor|Per|Cor|Lapar|Pasar|Pasir|Sabar|Telur|Tidur|Besar|Tukar|Bubur"],
   ["s", "Huruf akhir s. Contoh bas dan nanas.", "Bas|Kes|Pas|Bos|Kos|Jus|Nanas|Kipas|Panas|Malas|Beras|Keras|Rebus|Habis|Manis"],
   ["t", "Huruf akhir t. Contoh cat dan lalat.", "Cat|Set|Pot|Jet|Kit|Bot|Lalat|Kilat|Sakit|Sikit|Bukit|Rakit|Surat|Takut|Perut"],
-  ["z", "Huruf akhir z. Contoh jaz dan hafiz.", "Jaz|Hafiz|Lafaz"]
+  ["w", "Huruf akhir w. Contoh wow dan makaw.", "Wow|Makaw"],
+  ["z", "Huruf akhir z. Contoh gaz dan hafiz.", "Gaz|Jaz|Juz|Hafiz|Lafaz|Topaz"]
 ].map(x => ({ v: x[0], vokal: false, akhir: true, nota: x[1], ayat: x[2].split("|") })).sort((a, b) => a.v.localeCompare(b.v));
 /* Dua buku: v = vokal (a e i o u), k = huruf konsonan ikut abjad */
 const BV_G = { v: BV.filter(x => x.vokal), k: BV.filter(x => !x.vokal), a: BVA };
