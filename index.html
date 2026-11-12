@@ -735,6 +735,16 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .ioswarna small{font-size:12px;color:var(--ios-sub);text-align:center;line-height:1.2}
 .iospratonton{text-align:center;font-size:30px;line-height:2;padding:4px 16px 8px;color:var(--ios-teks)}
 
+/* Kuiz Membaca */
+.bqpilih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,560px);margin:0 auto}
+.bqpilih .kbtn{font-size:clamp(24px,5vw,36px);padding:16px 10px}.bqpilih .kbtn.betul{background:var(--hijau);color:var(--on)}.bqpilih .kbtn.guna{opacity:.4}
+.bqgaris{position:relative;display:flex;justify-content:space-between;gap:30%;width:min(100%,620px);margin:0 auto}
+.bqsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.bqsvg line{stroke-width:6;stroke-linecap:round}.bqsvg line.betul{stroke:#2E9E5B}.bqsvg line.salah{stroke:#E0403A}
+.bqkol{display:flex;flex-direction:column;gap:14px;flex:1;justify-content:space-around}
+.bqk,.bqn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;color:#1d1d1f;border-radius:22px;padding:8px 12px;box-shadow:0 5px 0 var(--garis);border:4px solid transparent;font-size:clamp(24px,4.6vw,36px);min-height:84px}
+.bqk img{width:64px;height:64px;object-fit:cover;border-radius:14px}.bqk.on{border-color:#FFD36E}.bqk.siap,.bqn.siap{border-color:#8FD9A8;background:#EAFBF0}
+.bqn.no{animation:shake .5s}
 /* Buku Bacaan Vokal (gaya Iqra') */
 .bvbanner{display:flex;align-items:center;gap:16px;justify-content:center;background:var(--card);border-radius:28px;padding:10px 22px;box-shadow:0 6px 0 var(--garis);margin:0 auto 12px;max-width:640px}
 .bvbanner b.bvakhir{color:#1d1d1f;background:#FFE066;border-radius:18px;padding:4px 14px}.bvbanner b{font-size:clamp(54px,9vw,80px);line-height:1;color:#e8434f;font-weight:800}.bvbanner p{margin:0;font-weight:700;font-size:clamp(14px,2.6vw,18px);text-align:left}
@@ -3584,10 +3594,11 @@ function renderBMTahap(m) {
   const st = loadStars(), kj = bmKemajuan();
   renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")], ["c3", IKON.baca, tr(BV_NAMA.n), tr(L("Bunyi ang, eng, ing, ong, ung · contoh wang, pi - sang", "ang, eng, ing, ong, ung sounds", "ang eng ing ong ung")), "", () => renderBV("n")], ["c4", IKON.baca, tr(BV_NAMA.g), tr(L("Huruf gabung gh, kh, ny, sy · contoh nya - nyi, sya - rat", "Digraphs gh, kh, ny, sy", "组合字母 gh kh ny sy")), "", () => renderBV("g")]] : []).concat([1, 2, 3].map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
-    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
+    return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => m === "baca" ? renderBQ(lv) : startBM(m, lv)];
   })), renderBM1);
 }
 function startBM(m, lv) {
+  bqJenis = 0;
   bmMod = m; bmLv = lv; bmI = 0; bmSkor = 0;
   $("s-bm").className = "screen m" + m;
   curSubj = "bm1-" + m + "-" + lv; replay = () => startBM(m, lv);
@@ -3604,14 +3615,14 @@ function bmSoalan() {
   bmPos = 0; bmDone = false;
   $("bmCount").textContent = (bmI + 1) + "/" + bmList.length;
   $("bmProg").style.width = (bmI / bmList.length * 100) + "%";
-  const foto = bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : it[1];
+  const foto = bqJenis === 2 ? "" : bqJenis || bmMod === "eja" ? fotoNama(it.charAt(0).toUpperCase() + it.slice(1)) : it[1];
   $("bmFoto").src = foto; $("bmFoto").classList.toggle("hide", !foto);
   $("bmFoto").classList.remove("lompat");
   $("bmKawasan").innerHTML = "";
   $("bmPapan").classList.toggle("hide", bmMod !== "tulis");
   $("bmBtns").innerHTML = "";
   bmMaskot("");
-  ({ eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula })[bmMod](it, id);
+  (bqJenis ? [null, bq1Mula, bq2Mula, bq3Mula][bqJenis] : { eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula }[bmMod])(it, id);
 }
 const bmAyat = () => bmList[bmI][0];
 function bmButang(ik, label, kelas, fn) {
@@ -3639,6 +3650,97 @@ function bmJaya(sebut) {
 function bmSeterusnya() {
   if (bmI < bmList.length - 1) { bmI++; bmSoalan(); }
   else showResult(bmSkor >= 9 ? 3 : bmSkor >= 6 ? 2 : 1, tr(UI.markah) + bmSkor + " / " + bmList.length);
+}
+
+/* ===== Kuiz Membaca ikut tahap: 1 Dengar & Pilih, 2 Sambung Garisan, 3 Lengkapkan Ejaan ===== */
+let bqJenis = 0, bqSlh = 0;
+const BQ = [null,
+  [L("Kuiz 1: Dengar & Pilih", "Quiz 1: Listen & Choose", "测验1：听和选"), L("Dengar perkataan, lihat gambar, pilih perkataan yang betul", "Listen, look and choose the word", "听词语，看图，选正确的词")],
+  [L("Kuiz 2: Sambung Garisan", "Quiz 2: Draw Lines", "测验2：连线"), L("Sambung suku kata dengan garisan supaya ejaan betul", "Join the syllables with lines", "用线连接音节")],
+  [L("Kuiz 3: Lengkapkan Ejaan", "Quiz 3: Complete the Spelling", "测验3：补全拼写"), L("Lihat gambar, satu suku kata diberi, eja yang lain sendiri", "One syllable is given, spell the rest", "给一个音节，拼出其余部分")]];
+const bqCap = w => w.charAt(0).toUpperCase() + w.slice(1);
+const bqBergambar = lv => bmKataTahap(lv).filter(w => fotoNama(bqCap(w)) && sukuKata(w).length >= 2);
+function renderBQ(lv) {
+  backMenu = () => renderBQ(lv);
+  const st = loadStars();
+  renderMenu(tr(BM_MOD.baca.nama) + " · " + tr(BM_TAHAP[lv]), [1, 2, 3].map(q => [["t-pra", "t-t1", "t-t2"][q - 1], IKON[["", "speak", "bina", "eja"][q]] || IKON.baca, tr(BQ[q][0]), tr(BQ[q][1]), starText(st["bm1-bq" + q + "-" + lv] || 0), () => startBQ(q, lv)]), () => renderBMTahap("baca"));
+}
+function startBQ(q, lv) {
+  bqJenis = q; bmMod = "baca"; bmLv = lv; bmI = 0; bmSkor = 0;
+  $("s-bm").className = "screen mbaca mbq" + q;
+  curSubj = "bm1-bq" + q + "-" + lv; replay = () => startBQ(q, lv);
+  const siap = bmKemajuan()["baca-" + lv] || [], semua = bqBergambar(lv);
+  bmList = shuffle(semua.filter(w => siap.indexOf(w) < 0)).concat(shuffle(semua.filter(w => siap.indexOf(w) >= 0))).slice(0, 10);
+  $("bmTitle").textContent = tr(BQ[q][0]) + " · " + tr(BM_TAHAP[lv]);
+  show("s-bm");
+  bmSoalan();
+}
+/* Salah kali pertama: markah soalan itu hilang */
+function bqSalah(el) { if (el) { el.classList.remove("no"); void el.offsetWidth; el.classList.add("no"); } tone(220, 0, .15, "sawtooth"); if (!bqSlh) { bqSlh = 1; bmSkor--; } }
+/* Kuiz 1: dengar + gambar, pilih perkataan (jawapan tidak ditunjuk dahulu) */
+function bq1Mula(w, id) {
+  bqSlh = 0;
+  const k = $("bmKawasan"), lain = shuffle(bmKataTahap(bmLv).filter(x => x !== w && x.charAt(0) !== "-")).slice(0, 3);
+  k.innerHTML = `<div class="bqpilih">${shuffle([w].concat(lain)).map(x => `<button class="kbtn bqp" data-w="${x}">${skEsc(x)}</button>`).join("")}</div>`;
+  k.querySelectorAll(".bqp").forEach(b => b.onclick = () => {
+    if (bmDone) return;
+    if (b.dataset.w !== w) { bqSalah(b); b.disabled = true; b.classList.add("guna"); speak("Cuba lagi", "ms"); return; }
+    b.classList.add("betul"); bmJaya(() => speak(w, "ms"));
+  });
+  bmButang("speak", tr(UI.dengar), "ungu", () => speak(w, "ms"));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual("Dengar dan pilih perkataan yang betul");
+  speak("Dengar dan pilih perkataan yang betul", "ms").then(() => id === bmId && speak(w, "ms"));
+}
+/* Kuiz 2: sambung garisan suku kata pertama (dengan gambar) ke baki ejaan */
+function bq2Mula(w, id) {
+  bqSlh = 0;
+  const k = $("bmKawasan"), set = [w].concat(shuffle(bqBergambar(bmLv).filter(x => x !== w)).slice(0, 2));
+  const kiri = shuffle(set.slice()), kanan = shuffle(set.slice()), dpn = x => sukuKata(x)[0], blk = x => x.slice(dpn(x).length);
+  k.innerHTML = `<div class="bqgaris"><svg class="bqsvg"></svg><div class="bqkol">${kiri.map(x => `<button class="bqk" data-w="${x}"><img src="${fotoNama(bqCap(x))}" alt=""><b>${skEsc(dpn(x))}</b></button>`).join("")}</div><div class="bqkol">${kanan.map(x => `<button class="bqn" data-w="${x}"><b>${skEsc(blk(x))}</b></button>`).join("")}</div></div>`;
+  const kotak = k.querySelector(".bqgaris"), svg = k.querySelector(".bqsvg");
+  let pilih = null, siap = 0;
+  /* koordinat dalam unit CSS (betul walaupun zum/saiz teks ditukar) */
+  const titik = (el, kanan) => { const a = kotak.getBoundingClientRect(), b = el.getBoundingClientRect(), sk = kotak.clientWidth / a.width; return [((kanan ? b.left : b.right) - a.left) * sk, (b.top + b.height / 2 - a.top) * sk]; };
+  const garis = (a, b, kelas) => { const [x1, y1] = titik(a, false), [x2, y2] = titik(b, true); svg.insertAdjacentHTML("beforeend", `<line class="${kelas}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`); return svg.lastChild; };
+  k.querySelectorAll(".bqk").forEach(b => b.onclick = () => { if (b.classList.contains("siap")) return; k.querySelectorAll(".bqk").forEach(z => z.classList.remove("on")); b.classList.add("on"); pilih = b; speak("~" + dpn(b.dataset.w), "ms"); });
+  k.querySelectorAll(".bqn").forEach(b => b.onclick = () => {
+    if (!pilih || b.classList.contains("siap") || bmDone) { if (!pilih) bmBual("Tekan gambar dahulu"); return; }
+    if (b.dataset.w !== pilih.dataset.w) { const l = garis(pilih, b, "salah"); setTimeout(() => l.remove(), 600); bqSalah(b); return; }
+    garis(pilih, b, "betul"); tone(700, 0, .1);
+    pilih.classList.remove("on"); pilih.classList.add("siap"); b.classList.add("siap"); const wd = pilih.dataset.w; pilih = null; siap++;
+    if (siap === set.length) bmJaya(); else speak(wd, "ms");
+  });
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual("Tekan gambar, kemudian tekan suku kata yang menyambung ejaannya");
+  speak("Sambungkan suku kata supaya ejaan betul", "ms");
+  void id;
+}
+/* Kuiz 3: gambar + satu suku kata diberi; eja suku kata lain sendiri */
+function bq3Mula(w, id) {
+  bqSlh = 0;
+  const s = sukuKata(w), beri = rnd(0, s.length - 1), k = $("bmKawasan");
+  let pos = [], n = 0;
+  s.forEach((x, j) => { for (let c = 0; c < x.length; c++, n++) if (j !== beri) pos.push(n); });
+  n = 0;
+  k.innerHTML = `<div class="ejaslot">${s.map((x, j) => `<span class="bsk${j === beri ? " siap" : ""}" data-j="${j}">${[...x].map(c => `<i class="${j === beri ? "isi" : ""}">${j === beri ? c : ""}</i>`).join("")}</span>`).join("")}</div><div class="ejahuruf"></div>`;
+  const perlu = pos.map(i => w[i]), huruf = shuffle(perlu.concat(shuffle("abdegiklmnoprstu".split("").filter(h => perlu.indexOf(h) < 0)).slice(0, 3)));
+  const slot = [...k.querySelectorAll(".ejaslot i")];
+  let kk = 0;
+  huruf.forEach(h => {
+    const b = document.createElement("button"); b.className = "hbtn"; b.textContent = h;
+    b.onclick = () => {
+      if (bmDone) return;
+      if (h !== w[pos[kk]]) { bqSalah(b); speak(h.toUpperCase(), "ms"); return; }
+      slot[pos[kk]].textContent = h; slot[pos[kk]].classList.add("isi"); b.disabled = true; b.classList.add("guna"); tone(600 + kk * 50, 0, .1); kk++;
+      if (kk === pos.length) bmJaya(() => sebutSuku(w, k.querySelector(".ejaslot"), bmId));
+    };
+    k.querySelector(".ejahuruf").appendChild(b);
+  });
+  bmButang("speak", tr(UI.dengar), "ungu", () => speak(w, "ms"));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual("Satu suku kata sudah diberi. Eja yang lain sendiri");
+  speak("Lihat gambar. Eja suku kata yang tinggal", "ms").then(() => id === bmId && speak(w, "ms"));
 }
 /* Sebut suku kata perlahan satu-satu sambil menyala, kemudian perkataan penuh */
 function sebutSuku(w, el, id) {
