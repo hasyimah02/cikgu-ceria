@@ -4094,7 +4094,7 @@ function renderTW(lv) {
   backMenu = () => renderTW(lv);
   const st = loadStars();
   renderMenu(tr(L("Menulis", "Writing", "写作")), [["c0", IKON.baca, tr(L("Nota Menulis", "Writing Notes", "写作笔记")), twData().nota.length + " nota: cara pegang pensel hingga karangan", "", twNotaMenu]]
-    .concat([1, 2, 3, 4, 5].map(a => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][a - 1], IKON.pensel, tr(TW[a][0]), TW[a][1][lv - 1] + " · 10 latihan · Apple Pencil", starText(st["bm1-tw" + a + "-" + lv] || 0), () => startTW(a, lv)]))
+    .concat([2, 3, 4, 5].map(a => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][a - 1], IKON.pensel, tr(TW[a][0]), TW[a][1][lv - 1] + " · 10 latihan · Apple Pencil", starText(st["bm1-tw" + a + "-" + lv] || 0), () => startTW(a, lv)]))
     .concat([["c2", IKON.pensel, tr(L("Surih Ayat", "Trace Sentences", "描写句子")), tr(L("Surih ayat bertitik dengan pensel", "Trace dotted sentences", "描写虚线句子")), starText(st["bm1-tulis-" + lv] || 0), () => startBM("tulis", lv)]]), renderBM1);
   const seg = document.createElement("div"); seg.className = "thjseg bqseg";
   seg.innerHTML = [1, 2, 3].map(t => `<button class="${t === lv ? "on" : ""}">${skEsc(tr(BM_TAHAP[t]))}</button>`).join("");
