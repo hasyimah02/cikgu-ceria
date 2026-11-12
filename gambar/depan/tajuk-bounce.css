@@ -1,0 +1,4 @@
+.dpn-tajuk-img{display:block;margin:0 auto;transform-origin:50% 100%;animation:dpn-pop .9s cubic-bezier(.34,1.56,.64,1) 1 both,dpn-bounce 2s ease-in-out .9s infinite}
+@keyframes dpn-pop{0%{transform:translateY(-40px) scale(.7,1.2);opacity:0}60%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes dpn-bounce{0%,100%{transform:translateY(0) scale(1.04,.96)}50%{transform:translateY(-10px) scale(.96,1.04)}}
+@media (prefers-reduced-motion:reduce){.dpn-tajuk-img{animation:none}}
