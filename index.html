@@ -3582,7 +3582,7 @@ function renderBM1() {
 function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
-  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), tr(L("Macam Iqra': vokal a, i, u, e, o · 15 perkataan dua suku kata", "Like Iqra': vowels a, i, u, e, o · 15 two-syllable words each", "元音 a i u e o，每个15个双音节词")), "", renderBV]] : []).concat([1, 2, 3].map(lv => {
+  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(L("Buku Bacaan", "Reading Book", "阅读本")), tr(L("Macam Iqra': vokal a, i, u, e, o · 15 perkataan dua suku kata", "Like Iqra': vowels a, i, u, e, o · 15 two-syllable words each", "元音 a i u e o，每个15个双音节词")), "", renderBV]] : []).concat([1, 2, 3].map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
   })), renderBM1);
@@ -3705,14 +3705,34 @@ function binaTekan(b, x, kata) {
   if (bmPos === kata.length) { const id = bmId; bmJaya(() => bacaSorot([...document.querySelectorAll(".binaslot .bslot")], id).then(() => id === bmId && speak(bmAyat(), "ms"))); }
 }
 
-/* ===== Buku Bacaan Vokal (gaya Iqra'): satu bahagian satu vokal, 15 perkataan dua suku kata ===== */
+/* ===== Buku Bacaan (gaya Iqra'): vokal a-o, kemudian konsonan b-q; setiap bahagian 15 perkataan dua suku kata ===== */
 const BV = [
   ["a", "Vokal a. Baca perkataan dua suku kata.", "Bapa|Saya|Mama|Ada|Apa|Mata|Nama|Raja|Lada|Gajah|Katak|Kapal|Ayam|Nanas|Kakak"],
   ["i", "Vokal i. Baca perkataan dua suku kata.", "Itik|Ini|Gigi|Biji|Pipi|Lidi|Titi|Kiri|Bibir|Licin|Nipis|Sikit|Pipit|Cicit|Lilin"],
   ["u", "Vokal u. Baca perkataan dua suku kata.", "Buku|Susu|Guru|Kuku|Bulu|Sudu|Cucu|Lutut|Rumput|Bubur|Pulut|Tujuh|Kumpul|Duduk|Tunduk"],
   ["e", "Vokal e. Baca perkataan dua suku kata.", "Emak|Enam|Empat|Besar|Kecil|Sejuk|Telur|Sedap|Cepat|Lemak|Beli|Gelas|Rebus|Tebu|Meja"],
-  ["o", "Vokal o. Baca perkataan dua suku kata.", "Bola|Kotor|Botol|Tolong|Pokok|Sotong|Potong|Obor|Gosok|Kosong|Roti|Topi|Lori|Kopi|Kotak"]
-].map(x => ({ v: x[0], nota: x[1], ayat: x[2].split("|") }));
+  ["o", "Vokal o. Baca perkataan dua suku kata.", "Bola|Kotor|Botol|Tolong|Pokok|Sotong|Potong|Obor|Gosok|Kosong|Roti|Topi|Lori|Kopi|Kotak"],
+  ["b", "Huruf b. ba bi bu be bo.", "Bapa|Batu|Baju|Bola|Buku|Biru|Beli|Bawa|Bumi|Bibir|Bubur|Bulan|Bunga|Besar|Botol"],
+  ["c", "Huruf c. ca ci cu ce co.", "Cari|Cuci|Cuti|Cucu|Cili|Cuka|Cara|Cawan|Cicak|Cacing|Cepat|Cerah|Cincin|Coklat|Comel"],
+  ["d", "Huruf d. da di du de do.", "Dada|Dadu|Dari|Dua|Daun|Duri|Debu|Dodol|Datuk|Duduk|Dapur|Dalam|Dulang|Dinding|Dukung"],
+  ["g", "Huruf g. ga gi gu ge go.", "Gigi|Gula|Gali|Gua|Guni|Gajah|Garam|Gitar|Galah|Gelas|Gemuk|Gosok|Goreng|Gambar|Gunung"],
+  ["h", "Huruf h. ha hi hu he ho.", "Hati|Hari|Hulu|Hujan|Hutan|Habis|Hitam|Hijau|Harum|Hasil|Hidung|Helang|Hantar|Hormat|Hiris"],
+  ["j", "Huruf j. ja ji ju je jo.", "Jari|Jala|Jaga|Jalan|Jual|Juga|Jauh|Jubah|Jambu|Jagung|Jarum|Jatuh|Jeti|Jemur|Jerung"],
+  ["k", "Huruf k. ka ki ku ke ko.", "Kaki|Kuda|Kuku|Kayu|Kopi|Kota|Kain|Kipas|Kapal|Katak|Kunci|Kucing|Kotak|Kambing|Kecil"],
+  ["l", "Huruf l. la li lu le lo.", "Labu|Lagu|Lada|Lidi|Lima|Lori|Laut|Lalat|Lampu|Lilin|Lebah|Lembu|Lutut|Langit|Lantai"],
+  ["m", "Huruf m. ma mi mu me mo.", "Mata|Meja|Madu|Mama|Makan|Minum|Mandi|Merah|Mulut|Manis|Masak|Motor|Mangga|Monyet|Minyak"],
+  ["n", "Huruf n. na ni nu ne no.", "Naga|Nadi|Nama|Nasi|Nuri|Nanas|Nakal|Nenek|Nipis|Nangka|Nombor|Nyanyi|Nyamuk|Nyala|Nyiur"],
+  ["p", "Huruf p. pa pi pu pe po.", "Padi|Paku|Pipi|Papan|Pagar|Pasar|Pasir|Pintu|Pisang|Pokok|Putih|Pukul|Payung|Pensel|Pondok"],
+  ["r", "Huruf r. ra ri ru re ro.", "Rasa|Raja|Roda|Roti|Rusa|Rumah|Rebus|Ribut|Rakit|Rajin|Rindu|Rambut|Rumput|Rantai|Ringan"],
+  ["s", "Huruf s. sa si su se so.", "Satu|Sapu|Siku|Sudu|Susu|Sabun|Sayur|Sikat|Sakit|Semut|Sejuk|Sotong|Sampah|Sungai|Senyum"],
+  ["t", "Huruf t. ta ti tu te to.", "Tali|Tiga|Topi|Tebu|Tikus|Tikar|Tidur|Timun|Tanah|Tujuh|Telur|Tolong|Tangan|Tingkap|Tunggu"],
+  ["w", "Huruf w. wa wi wu we wo.", "Wira|Wajah|Wangi|Warna|Warga|Warung|Wayang|Wakil|Wajib|Wakaf|Wabak|Wuduk|Wisel|Waris|Waktu"],
+  ["y", "Huruf y. ya yi yu ye yo.", "Yoyo|Yakin|Yatim|Yuran|Saya|Kaya|Ayah|Ayam|Bayi|Kayu|Sayur|Sayap|Payung|Layang|Wayang"],
+  ["f", "Huruf f. fa fi fu fe fo.", "Foto|Feri|Fail|Fikir|Filem|Fajar|Faham|Fasih|Fakta|Fokus|Fesyen|Fardu|Fitrah|Forum|Fizik"],
+  ["v", "Huruf v. va vi vu ve vo.", "Visa|Vila|Voli|Vena|Virus|Vokal|Vakum|Vinil|Vaksin|Versi|Volum|Veto|Vista|Vektor|Valid"],
+  ["z", "Huruf z. za zi zu ze zo.", "Zuhal|Zikir|Zakat|Zaman|Zapin|Zabib|Zuhur|Zarah|Zamrud|Zahir|Zalim|Zigzag|Zamzam|Zuhud|Zabur"],
+  ["q", "Huruf q. qa qi qu qe qo.", "Qari|Qada|Qadar|Qasar|Qamar|Qiblat|Quran|Qudrat"]
+].map(x => ({ v: x[0], vokal: "aeiou".includes(x[0]), nota: x[1], ayat: x[2].split("|") }));
 const BV_KEY = "appPendidikan.bacaVokal.v1";
 function bvData() { try { return JSON.parse(localStorage.getItem(BV_KEY)) || {}; } catch (e) { return {}; } }
 /* Huruf vokal berwarna, huruf lain hitam */
@@ -3720,14 +3740,14 @@ const bvVokal = t => skEsc(t).replace(/[aeiouAEIOU]/g, c => `<b class="bvv">${c}
 function renderBV() {
   backMenu = renderBV;
   const d = bvData();
-  renderMenu(tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), BV.map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[i] ? "#FFD36E" : ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"][i]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
-    "Bahagian " + (i + 1) + ": Vokal " + b.v, "15 perkataan dua suku kata", d[i] ? "★★★" : "", () => bvBaca(i)]), () => renderBMTahap("baca"));
+  renderMenu(tr(L("Buku Bacaan", "Reading Book", "阅读本")), BV.map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[i] ? "#FFD36E" : ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"][i]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
+    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : "Huruf ") + b.v, b.ayat.length + " perkataan dua suku kata", d[i] ? "★★★" : "", () => bvBaca(i)]), () => renderBMTahap("baca"));
 }
 function bvBaca(i) {
   const b = BV[i], id = ++bmId;
   stopSpeech();
   $("s-bm").className = "screen mbv"; curSubj = "bm1-bv"; replay = () => bvBaca(i);
-  $("bmTitle").textContent = "Vokal " + b.v + " · Bahagian " + (i + 1) + " / " + BV.length;
+  $("bmTitle").textContent = (b.vokal ? "Vokal " : "Huruf ") + b.v + " · Bahagian " + (i + 1) + " / " + BV.length;
   $("bmCount").textContent = (i + 1) + "/" + BV.length; $("bmProg").style.width = ((i + 1) / BV.length * 100) + "%";
   $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = ""; bmMaskot("");
   const k = $("bmKawasan");
