@@ -8989,6 +8989,25 @@ $("tbMas").insertAdjacentHTML("beforeend", MASKOT);
 window.addEventListener("resize", () => { if (bmOn()) bmSaiz(); });
 applyLang();
 renderHome();
+/* ===== Bunyi pembuka app (BKA_): sekali setiap sesi; Mac terus, iPad pada sentuhan pertama ===== */
+let BKA_siap = false;
+function BKA_main() {
+  if (BKA_siap) return Promise.resolve(true);
+  if (!SUARA_ON) { BKA_siap = true; return Promise.resolve(true); }
+  try {
+    const a = new Audio("gambar/suara/buka-app.m4a"); a.volume = .9;
+    const p = a.play();
+    BKA_siap = true;
+    return p && p.then ? p.then(() => true).catch(() => { BKA_siap = false; return false; }) : Promise.resolve(true);
+  } catch (e) { return Promise.resolve(false); }
+}
+function BKA_sentuh() {
+  const fn = () => { if (BKA_siap) { BKA_lepas(); return; } BKA_main().then(ok => { if (ok) BKA_lepas(); }); };
+  const ev = ["click", "touchend", "keydown"];
+  const BKA_lepas = () => ev.forEach(e => document.removeEventListener(e, fn, true));
+  ev.forEach(e => document.addEventListener(e, fn, true));
+}
+BKA_main().then(ok => { if (!ok) BKA_sentuh(); });
 } else if (typeof module !== "undefined") {
   module.exports = { SUBJEK, TAHAP, NOTA, setLang: l => { LANG = l; } };
 }
