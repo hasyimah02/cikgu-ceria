@@ -3782,7 +3782,7 @@ function bvBaca(g, i) {
   $("bmCount").textContent = (i + 1) + "/" + G.length; $("bmProg").style.width = ((i + 1) / G.length * 100) + "%";
   $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = ""; bmMaskot("");
   const k = $("bmKawasan");
-  k.innerHTML = `<div class="bvbanner"><b${b.akhir ? ' class="bvakhir"' : ""}>${b.bunyi ? b.v : b.v.toUpperCase() + " " + b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i><span class="wsk">${bvTanda(a, b.akhir)}</span><small class="wsk">${sukuKata(a.toLowerCase()).map((x, n, z) => bvTanda(x, b.akhir && n === z.length - 1)).join(" - ")}</small></button>`).join("")}</div>`;
+  k.innerHTML = `<div class="bvbanner"><b${b.akhir ? ' class="bvakhir"' : ""}>${b.bunyi ? b.v : b.v.toUpperCase() + " " + b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i><span class="wsk">${bvTanda(a, b.akhir)}</span><small class="wsk">${sukuKata(a.toLowerCase()).map((x, n, z) => bvTanda(x, n === z.length - 1 ? b.akhir : 0)).join(" - ")}</small></button>`).join("")}</div>`;
   k.querySelector(".bvbanner p").textContent = b.nota;
   show("s-bm");
   const el = [...k.querySelectorAll(".bvkad")];
