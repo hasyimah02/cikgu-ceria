@@ -1227,6 +1227,8 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 @font-face{font-family:"Amiri Quran";src:url("gambar/AmiriQuran.ttf") format("truetype");font-display:block}
 @font-face{font-family:"Aref Ruqaa";src:url("gambar/ArefRuqaa.ttf") format("truetype");font-display:block}
 .thjkhat .qrar,.qrar.thjkhat{font-family:var(--thjfon)!important}
+.lt-kepala{display:flex;justify-content:center;margin:-6px 0 4px;pointer-events:none}.lt-kepala div{width:clamp(90px,16vw,130px);height:clamp(90px,16vw,130px)}
+.lt-main{position:fixed;left:50%;top:50%;width:min(46vw,230px);height:min(46vw,230px);margin:calc(min(46vw,230px)/-2) 0 0 calc(min(46vw,230px)/-2);pointer-events:none;z-index:60;opacity:1;transition:opacity .3s}.lt-main.hilang{opacity:0}
 </style>
 </head>
 <body>
@@ -1397,6 +1399,8 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 <script src="gambar/suara.js"></script>
 <script src="gambar/modul-pra.js"></script>
 <script src="gambar/menulis-data.js"></script>
+<script src="gambar/lottie/lottie_light.min.js"></script>
+<script src="gambar/lottie/lottie-data.js"></script>
 <script>
 "use strict";
 /* ===== Tema ===== */
@@ -3595,15 +3599,37 @@ const tunggu = ms => new Promise(r => setTimeout(r, ms));
 function bmBual(t) { const b = $("bmBub"); b.textContent = t; b.classList.remove("muncul"); void b.offsetWidth; b.classList.add("muncul"); }
 function bmMaskot(c) { const m = document.querySelector("#s-bm .masc"); if (!m) return; m.classList.remove("yay", "fikir"); void m.getBoundingClientRect(); if (c) m.classList.add(c); }
 
+/* ===== Animasi Lottie (LT_): hiasan hub BM Tahap 1 + betul/salah. Pustaka & data tempatan (luar talian) ===== */
+const LT_ADA = () => window.lottie && window.LT_DATA;
+function LT_kepala(kunci) {
+  try {
+    if (!LT_ADA() || !LT_DATA[kunci]) return;
+    const box = $("subjList"), w = document.createElement("div"), d = document.createElement("div");
+    w.className = "lt-kepala"; w.appendChild(d); box.parentNode.insertBefore(w, box);
+    lottie.loadAnimation({ container: d, renderer: "svg", loop: true, autoplay: true, animationData: JSON.parse(JSON.stringify(LT_DATA[kunci])) });
+  } catch (e) { /* hiasan sahaja */ }
+}
+function LT_buangKepala() { document.querySelectorAll(".lt-kepala").forEach(e => e.remove()); }
+function LT_main(kunci, ms) {
+  try {
+    if (!LT_ADA() || !LT_DATA[kunci]) return;
+    document.querySelectorAll(".lt-main").forEach(e => e.remove());
+    const d = document.createElement("div"); d.className = "lt-main"; document.body.appendChild(d);
+    const a = lottie.loadAnimation({ container: d, renderer: "svg", loop: false, autoplay: true, animationData: JSON.parse(JSON.stringify(LT_DATA[kunci])) });
+    const sp = ms || 1500; a.setSpeed(Math.max(.5, Math.min(3, (a.totalFrames / a.frameRate * 1000) / sp)));
+    setTimeout(() => d.classList.add("hilang"), sp - 300);
+    setTimeout(() => { try { a.destroy(); } catch (e) { /* abaikan */ } d.remove(); }, sp + 100);
+  } catch (e) { /* hiasan sahaja */ }
+}
 function renderBM1() {
-  backMenu = renderBM1;
+  backMenu = renderBM1; setTimeout(() => LT_kepala("LT_BACA"), 0);
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).filter(m => m !== "eja" && m !== "bina").map(m =>
     ["bm1", IKON[BM_MOD[m].ikon], m === "tulis" ? tr(L("Menulis", "Writing", "写作")) : tr(BM_MOD[m].nama), m === "tulis" ? tr(L("Nota & 5 latihan tulisan dengan Apple Pencil", "Notes & 5 Apple Pencil writing practices", "笔记和5个写作练习")) : tr(BM_MOD[m].ds), "", () => m === "tulis" ? renderTW() : renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
-  backMenu = () => renderBMTahap(m);
+  backMenu = () => renderBMTahap(m); if (m === "baca") setTimeout(() => LT_kepala("LT_BACA"), 0);
   const st = loadStars(), kj = bmKemajuan();
   renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")], ["c3", IKON.baca, tr(BV_NAMA.n), tr(L("Bunyi ang, eng, ing, ong, ung · contoh wang, pi - sang", "ang, eng, ing, ong, ung sounds", "ang eng ing ong ung")), "", () => renderBV("n")], ["c4", IKON.baca, tr(BV_NAMA.g), tr(L("Huruf gabung gh, kh, ny, sy · contoh nya - nyi, sya - rat", "Digraphs gh, kh, ny, sy", "组合字母 gh kh ny sy")), "", () => renderBV("g")], ["c0", IKON.baca, tr(BV_NAMA.m), tr(L("Imbuhan me-, mem-, men-, meng-, meny-, menge-, ber-, di-, ter- · contoh mem + baca", "Prefixes me-, mem-, men-...", "前缀")), "", () => renderBV("m")], ["t-t1", IKON.bina, tr(L("Kuiz", "Quiz", "测验")), tr(L("Dengar & Pilih, Sambung Garisan, Lengkapkan Ejaan · tahap boleh diubah di dalam", "3 quizzes · change level inside", "3个测验 · 可在里面换级别")), "", () => renderBQ(bqTahap)]] : []).concat((m === "baca" ? [] : [1, 2, 3]).map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
@@ -3651,7 +3677,7 @@ function bmJaya(sebut) {
   kj[k] = kj[k] || [];
   if (kj[k].indexOf(kunci) < 0) kj[k].push(kunci);
   try { localStorage.setItem(BM_KEMAJUAN, JSON.stringify(kj)); } catch (e) { /* abaikan */ }
-  sndWin();
+  sndWin(); LT_main("LT_BINTANG");
   const r = $("bmKawasan").getBoundingClientRect();
   tKonfeti(r.left + r.width / 2, r.top + r.height / 2);
   bmMaskot("yay");
@@ -3702,7 +3728,7 @@ function startBQ(q, lv) {
   bmSoalan();
 }
 /* Salah kali pertama: markah soalan itu hilang */
-function bqSalah(el) { if (el) { el.classList.remove("no"); void el.offsetWidth; el.classList.add("no"); } tone(220, 0, .15, "sawtooth"); if (!bqSlh) { bqSlh = 1; bmSkor--; } }
+function bqSalah(el) { LT_main("LT_CUBA"); if (el) { el.classList.remove("no"); void el.offsetWidth; el.classList.add("no"); } tone(220, 0, .15, "sawtooth"); if (!bqSlh) { bqSlh = 1; bmSkor--; } }
 /* Kuiz 1: dengar + gambar, pilih perkataan (jawapan tidak ditunjuk dahulu) */
 function bq1Mula(w, id) {
   bqSlh = 0;
@@ -4105,6 +4131,7 @@ const TW = [null,
 const TW_MOD = { 1: ["surih", "salin", "ingat"], 2: ["surih", "salin", "ingat"], 3: ["ingat", "ingat", "ingat"], 4: ["surih", "salin", "susun"], 5: ["bebas", "bebas", "bebas"] };
 const twData = () => typeof TW_DATA !== "undefined" ? TW_DATA : { nota: [], imlak: { 1: [], 2: [], 3: [] }, karangan: { 1: [], 2: [], 3: [] } };
 function renderTW(lv) {
+  setTimeout(() => LT_kepala("LT_PENSEL"), 0);
   lv = lv || twTahap; twTahap = lv; try { localStorage.setItem("appPendidikan.twTahap", lv); } catch (e) { /* abaikan */ }
   backMenu = () => renderTW(lv);
   const st = loadStars(), kssr = TL.filter(x => x.lv === lv);
@@ -8593,6 +8620,7 @@ function renderHome() {
 }
 /* Senarai kad generik pada skrin s-subj */
 function renderMenu(title, items, back) {
+  LT_buangKepala();
   $("subjTitle").textContent = title;
   $("subjBack").onclick = back;
   const box = $("subjList");
