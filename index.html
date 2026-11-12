@@ -1196,6 +1196,8 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 #nBig svg.bigsatu{width:min(60%,260px);height:auto}#nBig svg.bigk{width:clamp(56px,10vw,84px);height:auto;margin:2px;animation:none}
 #big svg.bigk{width:clamp(56px,10vw,84px);height:auto;margin:2px}
 @font-face{font-family:"Amiri Quran";src:url("gambar/AmiriQuran.ttf") format("truetype");font-display:block}
+@font-face{font-family:"Aref Ruqaa";src:url("gambar/ArefRuqaa.ttf") format("truetype");font-display:block}
+.thjkhat .qrar,.qrar.thjkhat{font-family:var(--thjfon)!important}
 </style>
 </head>
 <body>
@@ -6112,6 +6114,8 @@ setTerap();
 /* ===== Tulis Huruf Hijaiyah: surih atau tulis sendiri dengan jari / Apple Pencil ===== */
 const THJ_KEY = "appPendidikan.tulishijaiyah.v1";
 let thjMod = "surih";
+const THJ_KHAT = { naskh: ["Nasakh", '"Amiri Quran",serif'], ruqaa: ["Riq\'ah", '"Aref Ruqaa","Amiri Quran",serif'] };
+let thjKhat = (() => { try { return THJ_KHAT[localStorage.getItem("appPendidikan.thjKhat")] ? localStorage.getItem("appPendidikan.thjKhat") : "naskh"; } catch (e) { return "naskh"; } })();
 function thjData() { try { return JSON.parse(localStorage.getItem(THJ_KEY)) || {}; } catch (e) { return {}; } }
 let thjBalik = null;
 function qrTulisMenu() {
@@ -6120,9 +6124,11 @@ function qrTulisMenu() {
   const k = $("qrKawasan"), d = thjData();
   const siap = HIJAIYAH.filter((h, i) => (d[i] || {})[thjMod]).length;
   k.innerHTML = `<div class="thjseg"><button data-m="surih" class="${thjMod === "surih" ? "on" : ""}">Surih Huruf</button><button data-m="sendiri" class="${thjMod === "sendiri" ? "on" : ""}">Tulis Sendiri</button></div>
+    <div class="thjseg">${Object.keys(THJ_KHAT).map(c => `<button data-khat="${c}" class="${thjKhat === c ? "on" : ""}">Khat ${THJ_KHAT[c][0]}</button>`).join("")}</div>
     <p class="qnterang">${thjMod === "surih" ? "Tulis di atas huruf bertitik mengikut bentuknya." : "Lihat contoh, kemudian tulis huruf itu sendiri tanpa panduan."} <b>${siap} / 28 siap</b></p>
-    <div class="qrgrid">${HIJAIYAH.map((h, i) => `<button class="qrh thjh${(d[i] || {})[thjMod] ? " siap" : ""}" data-i="${i}"><span class="qrar">${h[0]}</span><small>${h[1]}</small>${(d[i] || {})[thjMod] ? '<i class="thjbintang">★</i>' : ""}</button>`).join("")}</div>`;
+    <div class="qrgrid thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}">${HIJAIYAH.map((h, i) => `<button class="qrh thjh${(d[i] || {})[thjMod] ? " siap" : ""}" data-i="${i}"><span class="qrar">${h[0]}</span><small>${h[1]}</small>${(d[i] || {})[thjMod] ? '<i class="thjbintang">★</i>' : ""}</button>`).join("")}</div>`;
   k.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { thjMod = b.dataset.m; qrTulisMenu(); });
+  k.querySelectorAll("[data-khat]").forEach(b => b.onclick = () => { thjKhat = b.dataset.khat; try { localStorage.setItem("appPendidikan.thjKhat", thjKhat); } catch (e) { /* abaikan */ } qrTulisMenu(); });
   k.querySelectorAll(".thjh").forEach(b => b.onclick = () => qrTulis(+b.dataset.i));
   qrBual("Pilih huruf untuk ditulis");
 }
@@ -6130,11 +6136,11 @@ function qrTulis(i) {
   const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
   qrSkrin((sendiri ? "Tulis Sendiri: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
   const k = $("qrKawasan");
-  k.innerHTML = `<div class="thjatas"><div class="thjcontoh"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
+  k.innerHTML = `<div class="thjatas"><div class="thjcontoh thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
     <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
   const papan = k.querySelector(".thjpapan"), cp = k.querySelector(".thjpanduan"), ci = k.querySelector(".thjink"), st = k.querySelector(".thjstatus");
   let garis = [], kini = null, siap = false, mask = null, saiz = null;
-  const FON = getComputedStyle(document.documentElement).getPropertyValue("--fontq").trim() || '"Amiri Quran",serif';
+  const FON = THJ_KHAT[thjKhat][1];
   function sedia() {
     const W = papan.clientWidth, H = papan.clientHeight, dpr = window.devicePixelRatio || 1;
     if (!W) return;
@@ -6176,8 +6182,13 @@ function qrTulis(i) {
   }
   function lukis() {
     const g = ci.getContext("2d"); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, ci.width, ci.height); g.setTransform(saiz.dpr, 0, 0, saiz.dpr, 0, 0);
-    g.lineCap = "round"; g.lineJoin = "round"; g.strokeStyle = siap ? "#2E7BD6" : "#5B4670";
-    garis.forEach(s => { g.lineWidth = s.w; g.beginPath(); s.p.forEach((q, j) => j ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); if (s.p.length === 1) g.lineTo(s.p[0][0] + .1, s.p[0][1]); g.stroke(); });
+    /* pena khat: mata pena rata condong ~55 darjah, garisan mendatar tebal & menegak nipis */
+    g.fillStyle = g.strokeStyle = siap ? "#2E7BD6" : "#3A2E4F"; g.lineWidth = 1; g.lineJoin = "round";
+    const sd = -55 * Math.PI / 180;
+    garis.forEach(s => {
+      const nx = Math.cos(sd) * s.w * .85, ny = Math.sin(sd) * s.w * .85, p = s.p.length > 1 ? s.p : [s.p[0], [s.p[0][0] + .5, s.p[0][1] + .5]];
+      for (let j = 1; j < p.length; j++) { const a = p[j - 1], b = p[j]; g.beginPath(); g.moveTo(a[0] - nx, a[1] - ny); g.lineTo(a[0] + nx, a[1] + ny); g.lineTo(b[0] + nx, b[1] + ny); g.lineTo(b[0] - nx, b[1] - ny); g.closePath(); g.fill(); g.stroke(); }
+    });
   }
   function semak() {
     if (!garis.length || !mask) return false;
@@ -6228,7 +6239,7 @@ function qrTulis(i) {
   if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
   if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
   qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Surih huruf " + h[1]);
-  (document.fonts && document.fonts.load ? document.fonts.load("100px \"Amiri Quran\"") : Promise.resolve()).then(() => setTimeout(sedia, 30));
+  (document.fonts && document.fonts.load ? Promise.all([document.fonts.load("100px \"Amiri Quran\""), document.fonts.load("100px \"Aref Ruqaa\"")]) : Promise.resolve()).then(() => setTimeout(sedia, 30));
 }
 
 /* ===== Taman Ceria: 25 aktiviti prasekolah (ingatan, kognitif, kreatif, bahasa, matematik, sahsiah, motivasi) ===== */
