@@ -736,7 +736,7 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .iospratonton{text-align:center;font-size:30px;line-height:2;padding:4px 16px 8px;color:var(--ios-teks)}
 
 /* Kuiz Membaca */
-.bqpilih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,560px);margin:0 auto}
+.bqseg{margin:0 auto 6px;grid-column:1/-1;justify-self:center}.bqpilih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,560px);margin:0 auto}
 .bqpilih .kbtn{font-size:clamp(24px,5vw,36px);padding:16px 10px}.bqpilih .kbtn.betul{background:var(--hijau);color:var(--on)}.bqpilih .kbtn.guna{opacity:.4}
 .bqgaris{position:relative;display:flex;justify-content:space-between;gap:30%;width:min(100%,620px);margin:0 auto}
 .bqsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
@@ -3592,7 +3592,7 @@ function renderBM1() {
 function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
-  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")], ["c3", IKON.baca, tr(BV_NAMA.n), tr(L("Bunyi ang, eng, ing, ong, ung · contoh wang, pi - sang", "ang, eng, ing, ong, ung sounds", "ang eng ing ong ung")), "", () => renderBV("n")], ["c4", IKON.baca, tr(BV_NAMA.g), tr(L("Huruf gabung gh, kh, ny, sy · contoh nya - nyi, sya - rat", "Digraphs gh, kh, ny, sy", "组合字母 gh kh ny sy")), "", () => renderBV("g")]] : []).concat([1, 2, 3].map(lv => {
+  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")], ["c3", IKON.baca, tr(BV_NAMA.n), tr(L("Bunyi ang, eng, ing, ong, ung · contoh wang, pi - sang", "ang, eng, ing, ong, ung sounds", "ang eng ing ong ung")), "", () => renderBV("n")], ["c4", IKON.baca, tr(BV_NAMA.g), tr(L("Huruf gabung gh, kh, ny, sy · contoh nya - nyi, sya - rat", "Digraphs gh, kh, ny, sy", "组合字母 gh kh ny sy")), "", () => renderBV("g")], ["t-t1", IKON.bina, tr(L("Kuiz", "Quiz", "测验")), tr(L("Dengar & Pilih, Sambung Garisan, Lengkapkan Ejaan · tahap boleh diubah di dalam", "3 quizzes · change level inside", "3个测验 · 可在里面换级别")), "", () => renderBQ(bqTahap)]] : []).concat((m === "baca" ? [] : [1, 2, 3]).map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => m === "baca" ? renderBQ(lv) : startBM(m, lv)];
   })), renderBM1);
@@ -3653,7 +3653,7 @@ function bmSeterusnya() {
 }
 
 /* ===== Kuiz Membaca ikut tahap: 1 Dengar & Pilih, 2 Sambung Garisan, 3 Lengkapkan Ejaan ===== */
-let bqJenis = 0, bqSlh = 0;
+let bqJenis = 0, bqSlh = 0, bqTahap = (() => { try { return +localStorage.getItem("appPendidikan.bqTahap") || 1; } catch (e) { return 1; } })();
 const BQ = [null,
   [L("Kuiz 1: Dengar & Pilih", "Quiz 1: Listen & Choose", "测验1：听和选"), L("Dengar perkataan, lihat gambar, pilih perkataan yang betul", "Listen, look and choose the word", "听词语，看图，选正确的词")],
   [L("Kuiz 2: Sambung Garisan", "Quiz 2: Draw Lines", "测验2：连线"), L("Sambung suku kata dengan garisan supaya ejaan betul", "Join the syllables with lines", "用线连接音节")],
@@ -3663,7 +3663,13 @@ const bqBergambar = lv => bmKataTahap(lv).filter(w => fotoNama(bqCap(w)) && suku
 function renderBQ(lv) {
   backMenu = () => renderBQ(lv);
   const st = loadStars();
-  renderMenu(tr(BM_MOD.baca.nama) + " · " + tr(BM_TAHAP[lv]), [1, 2, 3].map(q => [["t-pra", "t-t1", "t-t2"][q - 1], IKON[["", "speak", "bina", "eja"][q]] || IKON.baca, tr(BQ[q][0]), tr(BQ[q][1]), starText(st["bm1-bq" + q + "-" + lv] || 0), () => startBQ(q, lv)]), () => renderBMTahap("baca"));
+  bqTahap = lv; try { localStorage.setItem("appPendidikan.bqTahap", lv); } catch (e) { /* abaikan */ }
+  renderMenu(tr(L("Kuiz Membaca", "Reading Quiz", "阅读测验")), [1, 2, 3].map(q => [["t-pra", "t-t1", "t-t2"][q - 1], IKON[["", "speak", "bina", "eja"][q]] || IKON.baca, tr(BQ[q][0]), tr(BQ[q][1]) + " · " + tr(BM_TAHAP[lv]), starText(st["bm1-bq" + q + "-" + lv] || 0), () => startBQ(q, lv)]), () => renderBMTahap("baca"));
+  /* pilih tahap di dalam kuiz */
+  const seg = document.createElement("div"); seg.className = "thjseg bqseg";
+  seg.innerHTML = [1, 2, 3].map(t => `<button class="${t === lv ? "on" : ""}">${skEsc(tr(BM_TAHAP[t]))}</button>`).join("");
+  [...seg.children].forEach((b, t) => b.onclick = () => renderBQ(t + 1));
+  $("subjList").prepend(seg);
 }
 function startBQ(q, lv) {
   bqJenis = q; bmMod = "baca"; bmLv = lv; bmI = 0; bmSkor = 0;
