@@ -3582,7 +3582,7 @@ function renderBM1() {
 function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
-  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")]] : []).concat([1, 2, 3].map(lv => {
+  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")], ["c3", IKON.baca, tr(BV_NAMA.n), tr(L("Bunyi ang, eng, ing, ong, ung · contoh wang, pi - sang", "ang, eng, ing, ong, ung sounds", "ang eng ing ong ung")), "", () => renderBV("n")]] : []).concat([1, 2, 3].map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
   })), renderBM1);
@@ -3752,30 +3752,37 @@ const BVA = [
   ["w", "Huruf akhir w. Contoh wow dan makaw.", "Wow|Makaw"],
   ["z", "Huruf akhir z. Contoh gaz dan hafiz.", "Gaz|Jaz|Juz|Hafiz|Lafaz|Topaz"]
 ].map(x => ({ v: x[0], vokal: false, akhir: true, nota: x[1], ayat: x[2].split("|") })).sort((a, b) => a.v.localeCompare(b.v));
+const BVN = [
+  ["ang", "Bunyi ang. Contoh wang dan pisang.", "Wang|Yang|Bang|Lang|Sang|Tang|Pisang|Kacang|Bawang|Padang|Tulang|Datang|Barang|Lubang|Sayang"],
+  ["eng", "Bunyi eng. Contoh geng dan goreng.", "Geng|Seng|Goreng|Loceng|Topeng|Lereng|Loteng"],
+  ["ing", "Bunyi ing. Contoh ting dan kucing.", "Ting|Kucing|Kuning|Daging|Piring|Kering|Gasing|Kening|Cacing|Bising|Pusing|Jaring|Gading|Pening|Keping"],
+  ["ong", "Bunyi ong. Contoh tong dan sotong.", "Tong|Gong|Jong|Sotong|Tolong|Kosong|Potong|Lorong|Borong|Corong|Sokong|Bohong|Dorong|Lolong"],
+  ["ung", "Bunyi ung. Contoh payung.", "Payung|Burung|Hidung|Jagung|Gunung|Tudung|Sarung|Patung|Hitung|Kurung|Dukung|Lesung|Gulung|Tabung|Hujung"]
+].map(x => ({ v: x[0], vokal: false, akhir: 2, bunyi: true, nota: x[1], ayat: x[2].split("|") }));
 /* Dua buku: v = vokal (a e i o u), k = huruf konsonan ikut abjad */
-const BV_G = { v: BV.filter(x => x.vokal), k: BV.filter(x => !x.vokal), a: BVA };
-const BV_NAMA = { v: L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本"), k: L("Buku Bacaan Huruf", "Letter Reading Book", "字母阅读本"), a: L("Buku Bacaan Huruf Akhir", "Final Letter Reading Book", "尾字母阅读本") };
+const BV_G = { v: BV.filter(x => x.vokal), k: BV.filter(x => !x.vokal), a: BVA, n: BVN };
+const BV_NAMA = { v: L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本"), k: L("Buku Bacaan Huruf", "Letter Reading Book", "字母阅读本"), a: L("Buku Bacaan Huruf Akhir", "Final Letter Reading Book", "尾字母阅读本"), n: L("Buku Bacaan Bunyi ng", "ng Sound Reading Book", "ng 音阅读本") };
 const BV_KEY = "appPendidikan.bacaVokal.v1";
 function bvData() { try { return JSON.parse(localStorage.getItem(BV_KEY)) || {}; } catch (e) { return {}; } }
 /* Huruf vokal berwarna, huruf lain hitam */
 const bvVokal = t => skEsc(t).replace(/[aeiouAEIOU]/g, c => `<b class="bvv">${c}</b>`);
 /* Buku Huruf Akhir: huruf terakhir perkataan di-highlight */
-const bvTanda = (t, akhir) => akhir ? bvVokal(t.slice(0, -1)) + `<b class="bva">${skEsc(t.slice(-1))}</b>` : bvVokal(t);
+const bvTanda = (t, akhir) => { const n = akhir === true ? 1 : akhir || 0; return n ? bvVokal(t.slice(0, -n)) + `<b class="bva">${skEsc(t.slice(-n))}</b>` : bvVokal(t); };
 function renderBV(g) {
   g = g || "v"; backMenu = () => renderBV(g);
   const d = bvData(), L5 = ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"];
   renderMenu(tr(BV_NAMA[g]), BV_G[g].map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[b.v] ? "#FFD36E" : L5[i % 5]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
-    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v, (b.akhir ? b.ayat.length + " perkataan: 1 suku kata & 2 suku kata" : b.ayat.length + " perkataan (2 huruf + 2 huruf)"), d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
+    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : b.bunyi ? "Bunyi " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v, (b.akhir ? b.ayat.length + " perkataan: 1 suku kata & 2 suku kata" : b.ayat.length + " perkataan (2 huruf + 2 huruf)"), d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
 }
 function bvBaca(g, i) {
   const G = BV_G[g], b = G[i], id = ++bmId;
   stopSpeech();
   $("s-bm").className = "screen mbv"; curSubj = "bm1-bv"; replay = () => bvBaca(g, i);
-  $("bmTitle").textContent = (b.vokal ? "Vokal " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v + " · Bahagian " + (i + 1) + " / " + G.length;
+  $("bmTitle").textContent = (b.vokal ? "Vokal " : b.bunyi ? "Bunyi " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v + " · Bahagian " + (i + 1) + " / " + G.length;
   $("bmCount").textContent = (i + 1) + "/" + G.length; $("bmProg").style.width = ((i + 1) / G.length * 100) + "%";
   $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = ""; bmMaskot("");
   const k = $("bmKawasan");
-  k.innerHTML = `<div class="bvbanner"><b${b.akhir ? ' class="bvakhir"' : ""}>${b.v.toUpperCase()} ${b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i><span class="wsk">${bvTanda(a, b.akhir)}</span><small class="wsk">${sukuKata(a.toLowerCase()).map((x, n, z) => bvTanda(x, b.akhir && n === z.length - 1)).join(" - ")}</small></button>`).join("")}</div>`;
+  k.innerHTML = `<div class="bvbanner"><b${b.akhir ? ' class="bvakhir"' : ""}>${b.bunyi ? b.v : b.v.toUpperCase() + " " + b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i><span class="wsk">${bvTanda(a, b.akhir)}</span><small class="wsk">${sukuKata(a.toLowerCase()).map((x, n, z) => bvTanda(x, b.akhir && n === z.length - 1)).join(" - ")}</small></button>`).join("")}</div>`;
   k.querySelector(".bvbanner p").textContent = b.nota;
   show("s-bm");
   const el = [...k.querySelectorAll(".bvkad")];
