@@ -5353,7 +5353,7 @@ const QN_JANA = {
   "Tanda Mati": () => [].concat(...HIJAIYAH.map((h, i) => ["a", "i", "u"].map(v => [{ a: "أَ", i: "إِ", u: "أُ" }[v] + (i === 0 ? "ء" : h[0]) + "\u0652", v + (i === 0 ? "'" : IQ_C[i])]))),
   "Tanda Sabdu": () => [].concat(...HIJAIYAH.slice(1).map((h, j) => ["a", "i", "u"].map(v => ["أَ" + h[0] + "\u0651" + IQ_HAR[v], "a" + IQ_C[j + 1] + "-" + iqSuku(j + 1, v)[1]]))),
   "Bacaan Panjang 2 Harakat": () => HIJAIYAH.map((h, i) => { const f = ["aa", "ii", "uu"].map(v => i === 0 ? [{ aa: "آ", ii: "إِي", uu: "أُو" }[v], v] : iqSuku(i, v)); return [f.map(x => x[0]).join("  "), f.map(x => x[1]).join(" ")]; }),
-  "Bacaan Panjang 6 Harakat": () => HIJAIYAH.map((h, i) => [(i === 0 ? "ءَ" : h[0] + "\u064E") + "آ", (i === 0 ? "" : IQ_C[i]) + (IQ_TEBAL.has(IQ_C[i]) ? "oooooo" : "aaaaaa")])
+  "Bacaan Panjang 6 Harakat": () => HIJAIYAH.map((h, i) => [(i === 0 ? "ءَ\u2009" : h[0] + "\u064E" + ("اأدذرزوء".includes(h[0]) ? "\u2009" : "\u0640\u0640")) + "آ", (i === 0 ? "" : IQ_C[i]) + (IQ_TEBAL.has(IQ_C[i]) ? "oooooo" : "aaaaaa")])
 };
 /* Urutan nota & jadual (untuk nombor dan butang Sebelum/Seterusnya) */
 const QN_URUTAN = [0, 1, 2, "b", 3, 4, 5, "t", 6, 7, 8, 9, 10, 11];
