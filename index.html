@@ -1229,6 +1229,19 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 .thjkhat .qrar,.qrar.thjkhat{font-family:var(--thjfon)!important}
 .lt-kepala{display:flex;justify-content:center;margin:-6px 0 4px;pointer-events:none}.lt-kepala div{width:clamp(90px,16vw,130px);height:clamp(90px,16vw,130px)}
 .lt-main{position:fixed;left:50%;top:50%;width:min(46vw,230px);height:min(46vw,230px);margin:calc(min(46vw,230px)/-2) 0 0 calc(min(46vw,230px)/-2);pointer-events:none;z-index:60;opacity:1;transition:opacity .3s}.lt-main.hilang{opacity:0}
+/* ===== Halaman depan: latar + kad modul 3D (DPN_) ===== */
+body.dpn-home::before{background:#EBD9F5 url(gambar/depan/latar-potret.jpg) center/cover no-repeat}
+@media (orientation:landscape){body.dpn-home::before{background-image:url(gambar/depan/latar-landskap.jpg)}}
+body.dpn-home #homeTitle{background:none;-webkit-text-fill-color:#5B3A8C;color:#5B3A8C;filter:none;text-shadow:0 0 6px #fff,0 0 12px #fff,0 3px 0 rgba(255,255,255,.9)}
+body.dpn-home .sub{color:#5B3A8C;font-weight:700;text-shadow:0 0 6px #fff,0 0 10px #fff}
+body.dpn-home .hero svg{width:clamp(70px,11vh,110px)}
+#tahapList.dpn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,3vw,28px);width:min(86vw,520px);margin:6px auto 24px}
+@media (orientation:landscape){#tahapList.dpn-grid{width:min(86vw,520px,max(300px,calc(100vh - 400px)))}}
+.dpn-kad{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;cursor:pointer;color:#4A2C6E;font:inherit}
+.dpn-kad img{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 10px rgba(90,50,120,.28));transition:transform .15s}
+.dpn-kad:active img{transform:scale(.95) translateY(3px)}
+.dpn-kad b{display:block;font-size:clamp(16px,2.6vw,22px);line-height:1.15;background:rgba(255,255,255,.88);color:#4A2C6E;border-radius:14px;padding:4px 12px;box-shadow:0 3px 8px rgba(90,50,120,.2)}
+.dpn-kad small{display:block;font-size:clamp(12px,2vw,15px);font-weight:700;color:#4A2C6E;text-shadow:0 0 5px #fff,0 0 8px #fff}
 </style>
 </head>
 <body>
@@ -5323,6 +5336,7 @@ function tbBetul(s, sebut) {
 const $ = id => document.getElementById(id);
 function show(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
+  document.body.classList.toggle("dpn-home", id === "s-home");
   window.scrollTo(0, 0);
 }
 function stopSpeech() { henti(); try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } }
@@ -8608,14 +8622,15 @@ function renderHome() {
   backMenu = null;
   const box = $("tahapList");
   box.innerHTML = "";
-  const q = cardBtn(QR_IKON.utama, tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Huruf hijaiyah, Iqra', surah lazim & doa harian", "Hijaiyah letters, Iqra', short surahs & daily duas", "阿拉伯字母、短章和日常祈祷")), "");
-  q.classList.add("t-quran"); q.onclick = renderQuran; box.appendChild(q);
-  TAHAP.forEach(t => {
-    const b = cardBtn(t.emoji, tr(t.nama), tr(t.umur), "");
-    b.classList.add("t-" + t.id);
-    b.onclick = () => renderSubj(t);
-    box.appendChild(b);
-  });
+  box.className = "grid dpn-grid";
+  const DPN_kad = (gbr, nama, umur, fn) => {
+    const b = document.createElement("button");
+    b.className = "dpn-kad"; b.innerHTML = '<img alt=""><b></b><small></small>';
+    b.querySelector("img").src = "gambar/depan/" + gbr + ".png"; b.querySelector("b").textContent = nama; b.querySelector("small").textContent = umur;
+    b.onclick = fn; box.appendChild(b);
+  };
+  DPN_kad("quran", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), renderQuran);
+  TAHAP.forEach(t => DPN_kad(t.id, tr(t.nama), tr(t.umur), () => renderSubj(t)));
   show("s-home");
 }
 /* Senarai kad generik pada skrin s-subj */
