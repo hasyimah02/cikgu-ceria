@@ -3576,16 +3576,16 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c0", IKON.baca, tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), tr(L("Macam Iqra': vokal a, i, u, e, o · 15 perkataan dua suku kata", "Like Iqra': vowels a, i, u, e, o · 15 sentences each", "元音 a i u e o，每个15句")), "", renderBV], ["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
-  renderMenu(tr(BM_MOD[m].nama), [1, 2, 3].map(lv => {
+  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), tr(L("Macam Iqra': vokal a, i, u, e, o · 15 perkataan dua suku kata", "Like Iqra': vowels a, i, u, e, o · 15 two-syllable words each", "元音 a i u e o，每个15个双音节词")), "", renderBV]] : []).concat([1, 2, 3].map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
-  }), renderBM1);
+  })), renderBM1);
 }
 function startBM(m, lv) {
   bmMod = m; bmLv = lv; bmI = 0; bmSkor = 0;
@@ -3721,7 +3721,7 @@ function renderBV() {
   backMenu = renderBV;
   const d = bvData();
   renderMenu(tr(L("Buku Bacaan Vokal", "Vowel Reading Book", "元音阅读本")), BV.map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[i] ? "#FFD36E" : ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"][i]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
-    "Bahagian " + (i + 1) + ": Vokal " + b.v, "15 perkataan dua suku kata", d[i] ? "★★★" : "", () => bvBaca(i)]), renderBM1);
+    "Bahagian " + (i + 1) + ": Vokal " + b.v, "15 perkataan dua suku kata", d[i] ? "★★★" : "", () => bvBaca(i)]), () => renderBMTahap("baca"));
 }
 function bvBaca(i) {
   const b = BV[i], id = ++bmId;
