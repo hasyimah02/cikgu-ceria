@@ -735,6 +735,14 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .ioswarna small{font-size:12px;color:var(--ios-sub);text-align:center;line-height:1.2}
 .iospratonton{text-align:center;font-size:30px;line-height:2;padding:4px 16px 8px;color:var(--ios-teks)}
 
+/* Menulis */
+.twkad{background:#fff;color:#1d1d1f;border-radius:24px;padding:14px 20px;box-shadow:0 6px 0 var(--garis);width:min(100%,720px);margin:0 auto 10px;text-align:left}
+.twkad h3{margin:0 0 6px;font-size:clamp(22px,4vw,30px);text-align:center}
+.twpanduan{margin:4px 0;padding-left:24px;font-size:clamp(15px,2.6vw,19px);line-height:1.5}
+.twkata{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}.twkata > span{background:#FFE066;color:#1d1d1f;border-radius:999px;padding:4px 14px;font-weight:800;font-size:clamp(16px,3vw,22px)}
+.twcontoh{margin-top:8px;background:#EAFBF0;border-radius:16px;padding:8px 12px;font-size:clamp(16px,3vw,22px);line-height:1.5}
+.twnota ul{margin:0;padding-left:24px;font-size:clamp(17px,3.2vw,24px);line-height:1.6}.twnota .twcontoh{font-size:clamp(17px,3.2vw,24px)}
+.twsorok{visibility:hidden}
 /* Kuiz Membaca */
 .bqseg{margin:0 auto 6px;grid-column:1/-1;justify-self:center}.bqpilih{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,560px);margin:0 auto}
 .bqpilih .kbtn{font-size:clamp(24px,5vw,36px);padding:16px 10px}.bqpilih .kbtn.betul{background:var(--hijau);color:var(--on)}.bqpilih .kbtn.guna{opacity:.4}
@@ -1384,6 +1392,7 @@ h1,h2{color:var(--text);letter-spacing:.5px}
 <script src="gambar/senarai.js"></script>
 <script src="gambar/suara.js"></script>
 <script src="gambar/modul-pra.js"></script>
+<script src="gambar/menulis-data.js"></script>
 <script>
 "use strict";
 /* ===== Tema ===== */
@@ -3586,7 +3595,7 @@ function renderBM1() {
   backMenu = renderBM1;
   const st = loadStars();
   renderMenu(tr(L("Bahasa Melayu Seronok", "Fun Malay Language", "快乐学马来语")), Object.keys(BM_MOD).filter(m => m !== "eja" && m !== "bina").map(m =>
-    ["bm1", IKON[BM_MOD[m].ikon], tr(BM_MOD[m].nama), tr(BM_MOD[m].ds), "", () => renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
+    ["bm1", IKON[BM_MOD[m].ikon], m === "tulis" ? tr(L("Menulis", "Writing", "写作")) : tr(BM_MOD[m].nama), m === "tulis" ? tr(L("Nota & 5 latihan tulisan dengan Apple Pencil", "Notes & 5 Apple Pencil writing practices", "笔记和5个写作练习")) : tr(BM_MOD[m].ds), "", () => m === "tulis" ? renderTW() : renderBMTahap(m)]).concat([["c1", IKON.baca, tr(L("Buku Cerita", "Story Books", "故事书")), tr(L("100 buku cerita ikut tahap", "100 story books by level", "100本分级故事书")), "", renderCerita], ["c3", IKON.bina, tr(L("Tatabahasa", "Grammar", "语法")), tr(L("20 topik dengan nota & latihan", "20 topics with notes & practice", "20个主题：笔记和练习")), "", () => renderTB("tb")], ["c4", IKON.baca, tr(L("Seni Bahasa", "Language Arts", "语言艺术")), tr(L("Pantun, simpulan bahasa, lagu, sajak & syair", "Pantun, idioms, songs, poems & syair", "班顿、成语、歌曲、诗歌")), "", () => renderTB("sb")], ["c0", IKON.baca, tr(L("Membaca & Pemahaman", "Reading & Comprehension", "阅读理解")), tr(L("Petikan, label, manual & notis dengan soalan", "Passages, labels, manuals & notices with questions", "短文、标签、说明书和通告")), "", () => renderTB("bp")], ["c2", IKON.pensel, tr(L("Menulis", "Writing", "写作")), tr(L("Imlak, edit, bina perenggan & karangan", "Dictation, editing, paragraphs & compositions", "听写、改错、段落和作文")), "", () => renderTB("tl")], ["c1", IKON.rakam, tr(L("Mendengar & Bertutur", "Listening & Speaking", "听说")), tr(L("Bunyi, arahan, soal jawab & rakam suara", "Sounds, instructions, Q&A & voice recording", "发音、指令、问答和录音")), "", () => renderTB("dg")]]), () => renderKuiz(curTahap, renderHome));
 }
 /* Pilih tahap: Mudah / Sederhana / Susah, dengan kemajuan x/50 */
 function renderBMTahap(m) {
@@ -3598,7 +3607,7 @@ function renderBMTahap(m) {
   })), renderBM1);
 }
 function startBM(m, lv) {
-  bqJenis = 0;
+  bqJenis = 0; twAkt = 0; twMod = ""; twBarisKini = null;
   bmMod = m; bmLv = lv; bmI = 0; bmSkor = 0;
   $("s-bm").className = "screen m" + m;
   curSubj = "bm1-" + m + "-" + lv; replay = () => startBM(m, lv);
@@ -3622,7 +3631,7 @@ function bmSoalan() {
   $("bmPapan").classList.toggle("hide", bmMod !== "tulis");
   $("bmBtns").innerHTML = "";
   bmMaskot("");
-  (bqJenis ? [null, bq1Mula, bq2Mula, bq3Mula, binaMula][bqJenis] : { eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula }[bmMod])(it, id);
+  (twAkt ? twMula : bqJenis ? [null, bq1Mula, bq2Mula, bq3Mula, binaMula][bqJenis] : { eja: ejaMula, bina: binaMula, baca: bacaMula, tulis: tulisAyatMula }[bmMod])(it, id);
 }
 const bmAyat = () => bmList[bmI][0];
 function bmButang(ik, label, kelas, fn) {
@@ -3673,6 +3682,7 @@ function renderBQ(lv) {
   $("subjList").prepend(seg);
 }
 function startBQ(q, lv) {
+  twAkt = 0; twMod = ""; twBarisKini = null;
   bqJenis = q; bmMod = q === 4 ? "bina" : "baca"; bmLv = lv; bmI = 0; bmSkor = 0;
   $("s-bm").className = "screen mbaca mbq" + q;
   curSubj = "bm1-bq" + q + "-" + lv; replay = () => startBQ(q, lv);
@@ -3972,16 +3982,21 @@ function tulisAyatMula(it, id) {
   speak(BM_SEBUT.tulis, "ms").then(() => id === bmId && speak(it[0], "ms"));
 }
 const BM_FON = '"Chalkboard SE","Comic Sans MS","Trebuchet MS",sans-serif';
+/* Pecah ayat kepada 1-3 baris yang hampir sama panjang (nPaksa = bilangan baris tetap) */
+function bmPecah(ayat, nPaksa) {
+  const kata = ayat.split(" "), n = nPaksa || (kata.length > 6 ? 3 : kata.length >= 3 ? 2 : 1), sasaran = ayat.length / n, baris = [];
+  let cur = [];
+  kata.forEach((w, i) => { cur.push(w); if (baris.length < n - 1 && cur.join(" ").length >= sasaran - 2 && kata.length - i - 1 >= n - 1 - baris.length) { baris.push(cur.join(" ")); cur = []; } });
+  if (cur.length) baris.push(cur.join(" "));
+  return baris;
+}
 /* Lukis garis buku & ayat bertitik (1 atau 2 baris); simpan topeng huruf untuk semakan */
 function bmSaiz() {
   if (bmMod !== "tulis" || !bmOn()) return;
   const pp = $("bmPapan"), dpr = window.devicePixelRatio || 1, ayat = bmAyat(), kata = ayat.split(" ");
   /* Pecah ayat kepada 1-3 baris yang hampir sama panjang */
-  const n = kata.length > 6 ? 3 : kata.length >= 3 ? 2 : 1, sasaran = ayat.length / n, baris = [];
-  let cur = [];
-  kata.forEach((w, i) => { cur.push(w); if (baris.length < n - 1 && cur.join(" ").length >= sasaran - 2 && kata.length - i - 1 >= n - 1 - baris.length) { baris.push(cur.join(" ")); cur = []; } });
-  if (cur.length) baris.push(cur.join(" "));
-  const nisbah = [3.6, 2.2, 1.6][baris.length - 1];
+  const baris = twBarisKini || bmPecah(ayat, twMod && twMod !== "surih" ? (kata.length > 4 ? 2 : 1) : 0);
+  const nisbah = [3.6, 2.2, 1.6, 1.25, 1.05][Math.min(5, baris.length) - 1];
   pp.style.aspectRatio = nisbah + "/1";
   pp.style.width = ""; pp.style.width = Math.min(pp.getBoundingClientRect().width, window.innerHeight * (baris.length > 2 ? .46 : .37) * nisbah) + "px";
   const r = pp.getBoundingClientRect();
@@ -4003,12 +4018,14 @@ function bmSaiz() {
     g.setLineDash([6, 6]); g.strokeStyle = "#f5a3b3";
     [base - fs * .36, base + fs * .26].forEach(y => { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
     g.setLineDash([]);
+    if (!twMod || twMod === "surih" || twTunjuk) {
     g.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--track").trim() || "#dceaf9";
     g.fillText(t, x0, base);
     g.setLineDash([1, 7]); g.lineCap = "round"; g.lineWidth = 2.6;
     let x = x0;
     sukuPotong(t).forEach(([c, w]) => { g.strokeStyle = w === null ? "#8a94a6" : SK_WARNA[w]; g.strokeText(c, x, base); x += g.measureText(c).width; });
     g.setLineDash([]);
+    }
     mc.fillText(t, x0, base);
   });
   const A = mc.getImageData(0, 0, m.width, m.height).data;
@@ -4047,7 +4064,7 @@ function bmMove(e) {
 function bmUp(e) {
   if (!bmNow || e.pointerId !== bmNow.id) return;
   bmNow = null;
-  if (!bmMask) return;
+  if (!bmMask || (twMod && twMod !== "surih")) return;
   /* Liputan: berapa banyak huruf disurih (A) dan berapa banyak dakwat dalam kawasan huruf (B) */
   const m = document.createElement("canvas"); m.width = bmMask.w; m.height = bmMask.h;
   const mc = m.getContext("2d"); mc.drawImage($("bmInk"), 0, 0, m.width, m.height);
@@ -4058,6 +4075,152 @@ function bmUp(e) {
     if (px[i] > 60) { ink++; if (bmMask.B[i] > 60) inkB++; }
   }
   if (a && ak / a >= .55 && inkB / Math.max(1, ink) >= .6) { const id = bmId; bmJaya(() => id === bmId && speak(bmAyat(), "ms")); }
+}
+
+
+/* ===== MENULIS (Tahap 1): nota + 5 latihan Apple Pencil, 10 soalan ikut tahap =====
+   Mod: surih (titik panduan, semak automatik), salin (contoh di atas), ingat (dengar & tulis tanpa contoh), bebas (karangan berpandu) */
+let twAkt = 0, twMod = "", twTunjuk = false, twBarisKini = null, twTahap = (() => { try { return +localStorage.getItem("appPendidikan.twTahap") || 1; } catch (e) { return 1; } })();
+const TW = [null,
+  [L("Tulis Huruf", "Write Letters", "写字母"), ["Surih huruf kecil", "Salin huruf kecil", "Dengar & tulis huruf besar"]],
+  [L("Tulis Suku Kata & Perkataan", "Write Syllables & Words", "写音节和词语"), ["Surih suku kata", "Salin perkataan", "Dengar & tulis perkataan"]],
+  [L("Imlak", "Dictation", "听写"), ["Dengar & tulis perkataan", "Dengar & tulis frasa", "Dengar & tulis ayat"]],
+  [L("Tulis Ayat Bergambar", "Write Picture Sentences", "看图写句"), ["Surih ayat", "Salin ayat", "Susun kata & tulis ayat"]],
+  [L("Karangan Berpandu", "Guided Composition", "引导写作"), ["Salin 3 ayat", "Tulis 3 ayat dengan kata bantu", "Tulis 5 ayat sendiri"]]];
+const TW_MOD = { 1: ["surih", "salin", "ingat"], 2: ["surih", "salin", "ingat"], 3: ["ingat", "ingat", "ingat"], 4: ["surih", "salin", "susun"], 5: ["bebas", "bebas", "bebas"] };
+const twData = () => typeof TW_DATA !== "undefined" ? TW_DATA : { nota: [], imlak: { 1: [], 2: [], 3: [] }, karangan: { 1: [], 2: [], 3: [] } };
+function renderTW(lv) {
+  lv = lv || twTahap; twTahap = lv; try { localStorage.setItem("appPendidikan.twTahap", lv); } catch (e) { /* abaikan */ }
+  backMenu = () => renderTW(lv);
+  const st = loadStars();
+  renderMenu(tr(L("Menulis", "Writing", "写作")), [["c0", IKON.baca, tr(L("Nota Menulis", "Writing Notes", "写作笔记")), twData().nota.length + " nota: cara pegang pensel hingga karangan", "", twNotaMenu]]
+    .concat([1, 2, 3, 4, 5].map(a => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][a - 1], IKON.pensel, tr(TW[a][0]), TW[a][1][lv - 1] + " · 10 latihan · Apple Pencil", starText(st["bm1-tw" + a + "-" + lv] || 0), () => startTW(a, lv)]))
+    .concat([["c2", IKON.pensel, tr(L("Surih Ayat", "Trace Sentences", "描写句子")), tr(L("Surih ayat bertitik dengan pensel", "Trace dotted sentences", "描写虚线句子")), starText(st["bm1-tulis-" + lv] || 0), () => startBM("tulis", lv)]]), renderBM1);
+  const seg = document.createElement("div"); seg.className = "thjseg bqseg";
+  seg.innerHTML = [1, 2, 3].map(t => `<button class="${t === lv ? "on" : ""}">${skEsc(tr(BM_TAHAP[t]))}</button>`).join("");
+  [...seg.children].forEach((b, t) => b.onclick = () => renderTW(t + 1));
+  $("subjList").prepend(seg);
+}
+/* Senarai 10 soalan: [teks, foto, info] */
+function twSenarai(a, lv) {
+  const cap = w => w.charAt(0).toUpperCase() + w.slice(1), foto = w => fotoNama(cap(w)) || "", huruf = "abcdefghijklmnoprstuwyz".split("");
+  const D = twData();
+  if (a === 1) return (lv === 1 ? ["a", "e", "i", "o", "u"].concat(shuffle(huruf.filter(h => !"aeiou".includes(h))).slice(0, 5)) : shuffle(huruf).slice(0, 10)).map(h => [lv === 3 ? h.toUpperCase() : h, "", {}]);
+  if (a === 2) {
+    if (lv === 1) return shuffle([].concat(..."bcdgjklmnprst".split("").map(c => "aiu".split("").map(v => c + v)))).slice(0, 10).map(x => [x, "", {}]);
+    const sumber = lv === 2 ? BV.filter(x => !x.vokal) : BVA;
+    const kata = shuffle([].concat(...sumber.map(x => x.ayat.map(w => w.toLowerCase()))).filter(w => sukuKata(w).length === 2));
+    return kata.sort((x, y) => (foto(y) ? 1 : 0) - (foto(x) ? 1 : 0)).slice(0, 10).sort(() => Math.random() - .5).map(w => [w, foto(w), {}]);
+  }
+  if (a === 3) return shuffle((D.imlak[lv] || []).slice()).slice(0, 10).map(x => [x, "", {}]);
+  if (a === 4) { const ay = shuffle(BM_AYAT_T[Math.min(2, lv)].map(x => [x, fotoAyat(x)]).filter(x => x[1])); return ay.slice(0, 10).map(x => [x[0], x[1], {}]); }
+  if (a === 5) return shuffle((D.karangan[lv] || []).slice()).slice(0, 10).map(x => [x.contoh.join(" "), "", x]);
+  return [];
+}
+function startTW(a, lv) {
+  bqJenis = 0; twAkt = a; bmMod = "tulis"; bmLv = lv; bmI = 0; bmSkor = 0;
+  $("s-bm").className = "screen mtulis mtw" + a;
+  curSubj = "bm1-tw" + a + "-" + lv; replay = () => startTW(a, lv);
+  bmList = twSenarai(a, lv);
+  if (!bmList.length) { bmBual("Latihan belum tersedia"); return; }
+  $("bmTitle").textContent = tr(TW[a][0]) + " · " + tr(BM_TAHAP[lv]);
+  show("s-bm");
+  bmSoalan();
+}
+function twMula(it, id) {
+  const a = twAkt, mod = TW_MOD[a][bmLv - 1], k = $("bmKawasan"), teks = it[0], info = it[2] || {};
+  twMod = mod === "susun" ? "salin" : mod; twTunjuk = false; bqSlh = 0; bmInk = []; bmNow = null; bmDone = false;
+  twBarisKini = mod === "bebas" ? info.contoh.slice() : null;
+  const sebut = () => speak(mod === "ingat" && a === 1 ? "Huruf " + teks : teks, "ms");
+  let arahan = "";
+  if (mod === "bebas") {
+    k.innerHTML = `<div class="twkad"><h3></h3><ol class="twpanduan">${info.panduan.map(() => "<li></li>").join("")}</ol><div class="twkata">${info.kata.map(() => "<span></span>").join("")}</div><div class="twcontoh hide"></div></div>`;
+    k.querySelector("h3").textContent = info.tajuk;
+    k.querySelectorAll(".twpanduan li").forEach((li, j) => li.textContent = info.panduan[j]);
+    k.querySelectorAll(".twkata span").forEach((sp, j) => sp.textContent = info.kata[j]);
+    const ct = k.querySelector(".twcontoh");
+    if (bmLv === 1) { ct.classList.remove("hide"); ct.textContent = info.contoh.join(" "); }
+    else if (bmLv === 2) { ct.classList.remove("hide"); ct.textContent = "Mula dengan: " + (info.mula || info.contoh[0]); }
+    arahan = bmLv === 1 ? "Salin karangan ini di dalam kotak, satu ayat satu baris" : bmLv === 2 ? "Tulis tiga ayat. Guna kata bantu" : "Tulis lima ayat sendiri. Jawab soalan panduan";
+  } else {
+    k.innerHTML = `<div class="tulisayat twmodel"></div><div class="twkata hide"></div>`;
+    const md = k.querySelector(".twmodel");
+    if (mod === "surih" || mod === "salin") md.innerHTML = bmPecah(teks, mod === "salin" ? (teks.split(" ").length > 4 ? 2 : 1) : 0).map(skEsc).join("<br>");
+    if (mod === "susun") { md.classList.add("hide"); const kk = k.querySelector(".twkata"); kk.classList.remove("hide"); kk.innerHTML = shuffle(teks.replace(/[.!?]$/, "").split(" ")).map(w => `<span>${skEsc(w)}</span>`).join(""); }
+    if (mod === "ingat") { md.classList.add("twsorok"); md.textContent = teks; }
+    arahan = { surih: "Surih mengikut titik", salin: "Salin dengan kemas di dalam kotak", ingat: "Dengar, kemudian tulis tanpa melihat", susun: "Lihat gambar. Susun kata dan tulis ayat yang betul" }[mod];
+  }
+  bmButang("speak", tr(UI.dengar), "ungu", () => mod === "bebas" ? speak(info.tajuk, "ms") : sebut());
+  bmButang("padam", tr(UI.padam), "koral", () => { bmDone = false; bmInk = []; bmLukis(); });
+  if (mod !== "surih") bmButang("play", mod === "bebas" ? "Siap" : "Semak", "biru", () => twSemakBtn(it));
+  bmButang("next", tr(UI.lagi), "hijau", bmSeterusnya);
+  bmBual(arahan);
+  setTimeout(bmSaiz, 30);
+  speak(arahan, "ms").then(() => id === bmId && (mod === "bebas" ? speak(info.tajuk, "ms") : sebut()));
+}
+/* Semak tulisan tanpa titik: padankan kotak tulisan dengan kotak huruf contoh, kemudian kira liputan */
+function twSemak() {
+  if (!bmInk.length || !bmMask) return false;
+  const { A, B, w, h, k } = bmMask;
+  let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1, a0 = 1e9, b0 = 1e9, a1 = -1e9, b1 = -1e9;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (A[(y * w + x) * 4 + 3] > 100) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  bmInk.forEach(st => st.p.forEach(q => { a0 = Math.min(a0, q[0]); a1 = Math.max(a1, q[0]); b0 = Math.min(b0, q[1]); b1 = Math.max(b1, q[1]); }));
+  if (x1 < 0 || a1 - a0 < 4) return false;
+  const sx = (x1 - x0 + 1) / Math.max(4, a1 - a0), sy = (y1 - y0 + 1) / Math.max(4, b1 - b0);
+  const T = (x, y) => [x0 + (x - a0) * sx, y0 + (y - b0) * sy];
+  const m = document.createElement("canvas"); m.width = w; m.height = h;
+  const mc = m.getContext("2d"); mc.lineCap = "round"; mc.lineJoin = "round"; mc.strokeStyle = "#000"; mc.lineWidth = Math.max(2, (bmPapanInfo ? bmPapanInfo.fs : 60) * k * .12);
+  bmInk.forEach(st => { mc.beginPath(); st.p.forEach((q, j) => { const t = T(q[0], q[1]); j ? mc.lineTo(t[0], t[1]) : mc.moveTo(t[0], t[1]); }); if (st.p.length === 1) { const t = T(st.p[0][0], st.p[0][1]); mc.lineTo(t[0] + .5, t[1]); } mc.stroke(); });
+  const px = mc.getImageData(0, 0, w, h).data;
+  let a = 0, ak = 0, ink = 0, inkB = 0;
+  for (let i = 3; i < px.length; i += 4) { if (A[i] > 100) { a++; if (px[i] > 60) ak++; } if (px[i] > 60) { ink++; if (B[i] > 60) inkB++; } }
+  /* huruf/suku kata pendek lebih ketat supaya conteng tidak lulus */
+  const pendek = bmAyat().replace(/\s/g, "").length <= 2;
+  if (pendek) {
+    /* bentuk: bandingkan petak 4x4 yang berisi dakwat dengan petak huruf contoh (Jaccard) */
+    const G = 5, gw = (x1 - x0 + 1) / G, gh = (y1 - y0 + 1) / G, cA = new Array(G * G).fill(0), cI = new Array(G * G).fill(0);
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const c = Math.min(G - 1, ((y - y0) / gh) | 0) * G + Math.min(G - 1, ((x - x0) / gw) | 0), i = (y * w + x) * 4 + 3; if (A[i] > 100) cA[c]++; if (px[i] > 60) cI[c]++; }
+    const lu = gw * gh, oA = cA.map(n => n > lu * .06), oI = cI.map(n => n > lu * .06);
+    let sama = 0, gabung = 0; oA.forEach((v, j) => { if (v || oI[j]) gabung++; if (v && oI[j]) sama++; });
+    if (sama / Math.max(1, gabung) < .65) return false;
+  }
+  return ak / Math.max(1, a) >= (pendek ? .5 : .42) && inkB / Math.max(1, ink) >= (pendek ? .72 : .5);
+}
+function twSemakBtn(it) {
+  if (bmDone) return;
+  if (twMod === "bebas") {
+    if (bmInk.length < 3) { bmBual("Tulis ayat dahulu di dalam kotak"); return; }
+    const ct = $("bmKawasan").querySelector(".twcontoh"); ct.classList.remove("hide"); ct.innerHTML = "<b>Contoh jawapan:</b> " + skEsc((it[2].contoh || []).join(" "));
+    bmJaya(); return;
+  }
+  if (twSemak()) { const md = $("bmKawasan").querySelector(".twmodel"); if (md) md.classList.remove("twsorok", "hide"); bmJaya(() => speak(it[0], "ms")); return; }
+  bqSalah(); twTunjuk = true; bmSaiz();
+  const md = $("bmKawasan").querySelector(".twmodel"); if (md) { md.classList.remove("twsorok", "hide"); md.innerHTML = bmPecah(it[0], it[0].split(" ").length > 4 ? 2 : 1).map(skEsc).join("<br>"); }
+  bmBual("Lihat contoh. Tekan Padam dan cuba lagi"); speak("Cuba lagi", "ms");
+}
+/* Nota Menulis */
+function twNotaMenu() {
+  backMenu = twNotaMenu;
+  renderMenu(tr(L("Nota Menulis", "Writing Notes", "写作笔记")), twData().nota.map((n, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1", "c2"][i % 6], IKON.baca, (i + 1) + ". " + n.tajuk, n.isi[0], "", () => twNota(i)]), () => renderTW());
+}
+function twNota(i) {
+  const N = twData().nota, n = N[i];
+  bqJenis = 0; twAkt = 0; twMod = ""; bmMod = "nota"; bmId++;
+  $("s-bm").className = "screen mnota";
+  $("bmTitle").textContent = "Nota " + (i + 1) + ": " + n.tajuk;
+  $("bmCount").textContent = (i + 1) + "/" + N.length; $("bmProg").style.width = ((i + 1) / N.length * 100) + "%";
+  $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = "";
+  const k = $("bmKawasan");
+  k.innerHTML = `<div class="twkad twnota"><ul>${n.isi.map(() => "<li></li>").join("")}</ul><div class="twcontoh"></div></div>`;
+  k.querySelectorAll("li").forEach((li, j) => li.textContent = n.isi[j]);
+  k.querySelector(".twcontoh").innerHTML = "<b>Contoh:</b> " + skEsc(n.contoh);
+  show("s-bm");
+  const dengar = () => { const id = ++bmId; let p = speak(n.tajuk, "ms"); n.isi.forEach(x => { p = p.then(() => id === bmId && speak(x, "ms")); }); };
+  bmButang("speak", tr(UI.dengar), "ungu", dengar);
+  if (i > 0) bmButang("back", tr(L("Sebelum", "Previous", "上一页")), "biru", () => twNota(i - 1));
+  bmButang(i < N.length - 1 ? "next" : "play", i < N.length - 1 ? tr(L("Seterusnya", "Next", "下一页")) : tr(L("Mula Latihan", "Start Practice", "开始练习")), "hijau", () => i < N.length - 1 ? twNota(i + 1) : renderTW());
+  bmBual(n.tajuk);
+  dengar();
 }
 
 /* ===== 100 Buku Cerita BM: "Tajuk|watak (ART)|latar|muka1/muka2/..." ===== */
