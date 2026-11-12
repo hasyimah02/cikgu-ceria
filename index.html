@@ -5361,7 +5361,7 @@ let PR_undur = false;
 function show(id) {
   const PR_el = document.getElementById(id), PR_arah = PR_undur ? "pr-undur" : "pr-maju"; PR_undur = false;
   document.querySelectorAll(".screen").forEach(s => { s.classList.remove("pr-maju", "pr-undur"); s.classList.toggle("on", s.id === id); });
-  if (PR_el && (id === "s-home" || id === "s-subj")) { void PR_el.offsetWidth; PR_el.classList.add(PR_arah); setTimeout(() => PR_el.classList.remove(PR_arah), 700); }
+  if (PR_el && (id === "s-home" || id === "s-subj")) { void PR_el.offsetWidth; PR_el.classList.add(PR_arah); /* kelas dikekalkan hingga show() seterusnya: membuangnya menukar nama animasi dan memainkan pop kali kedua */ }
   document.body.classList.toggle("dpn-home", id === "s-home");
   window.scrollTo(0, 0);
 }
