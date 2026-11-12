@@ -3707,31 +3707,30 @@ function binaTekan(b, x, kata) {
 
 /* ===== Buku Bacaan (gaya Iqra'): Buku Vokal (a e i o u) & Buku Huruf (b-z ikut abjad); setiap bahagian 15 perkataan dua suku kata ===== */
 const BV = [
-  ["a", "Vokal a. Baca perkataan dua suku kata.", "Bapa|Saya|Mama|Ada|Apa|Mata|Nama|Raja|Lada|Gajah|Katak|Kapal|Ayam|Nanas|Kakak"],
-  ["i", "Vokal i. Baca perkataan dua suku kata.", "Itik|Ini|Gigi|Biji|Pipi|Lidi|Titi|Kiri|Bibir|Licin|Nipis|Sikit|Pipit|Cicit|Lilin"],
-  ["u", "Vokal u. Baca perkataan dua suku kata.", "Buku|Susu|Guru|Kuku|Bulu|Sudu|Cucu|Lutut|Rumput|Bubur|Pulut|Tujuh|Kumpul|Duduk|Tunduk"],
-  ["e", "Vokal e. Baca perkataan dua suku kata.", "Emak|Enam|Empat|Besar|Kecil|Sejuk|Telur|Sedap|Cepat|Lemak|Beli|Gelas|Rebus|Tebu|Meja"],
-  ["o", "Vokal o. Baca perkataan dua suku kata.", "Bola|Kotor|Botol|Tolong|Pokok|Sotong|Potong|Obor|Gosok|Kosong|Roti|Topi|Lori|Kopi|Kotak"],
-  ["b", "Huruf b. ba bi bu be bo.", "Bapa|Batu|Baju|Bola|Buku|Biru|Beli|Bawa|Bumi|Bibir|Bubur|Bulan|Bunga|Besar|Botol"],
-  ["c", "Huruf c. ca ci cu ce co.", "Cari|Cuci|Cuti|Cucu|Cili|Cuka|Cara|Cawan|Cicak|Cacing|Cepat|Cerah|Cincin|Coklat|Comel"],
-  ["d", "Huruf d. da di du de do.", "Dada|Dadu|Dari|Dua|Daun|Duri|Debu|Dodol|Datuk|Duduk|Dapur|Dalam|Dulang|Dinding|Dukung"],
-  ["g", "Huruf g. ga gi gu ge go.", "Gigi|Gula|Gali|Gua|Guni|Gajah|Garam|Gitar|Galah|Gelas|Gemuk|Gosok|Goreng|Gambar|Gunung"],
-  ["h", "Huruf h. ha hi hu he ho.", "Hati|Hari|Hulu|Hujan|Hutan|Habis|Hitam|Hijau|Harum|Hasil|Hidung|Helang|Hantar|Hormat|Hiris"],
-  ["j", "Huruf j. ja ji ju je jo.", "Jari|Jala|Jaga|Jalan|Jual|Juga|Jauh|Jubah|Jambu|Jagung|Jarum|Jatuh|Jeti|Jemur|Jerung"],
-  ["k", "Huruf k. ka ki ku ke ko.", "Kaki|Kuda|Kuku|Kayu|Kopi|Kota|Kain|Kipas|Kapal|Katak|Kunci|Kucing|Kotak|Kambing|Kecil"],
-  ["l", "Huruf l. la li lu le lo.", "Labu|Lagu|Lada|Lidi|Lima|Lori|Laut|Lalat|Lampu|Lilin|Lebah|Lembu|Lutut|Langit|Lantai"],
-  ["m", "Huruf m. ma mi mu me mo.", "Mata|Meja|Madu|Mama|Makan|Minum|Mandi|Merah|Mulut|Manis|Masak|Motor|Mangga|Monyet|Minyak"],
-  ["n", "Huruf n. na ni nu ne no.", "Naga|Nadi|Nama|Nasi|Nuri|Nanas|Nakal|Nenek|Nipis|Nangka|Nombor|Nyanyi|Nyamuk|Nyala|Nyiur"],
-  ["p", "Huruf p. pa pi pu pe po.", "Padi|Paku|Pipi|Papan|Pagar|Pasar|Pasir|Pintu|Pisang|Pokok|Putih|Pukul|Payung|Pensel|Pondok"],
-  ["r", "Huruf r. ra ri ru re ro.", "Rasa|Raja|Roda|Roti|Rusa|Rumah|Rebus|Ribut|Rakit|Rajin|Rindu|Rambut|Rumput|Rantai|Ringan"],
-  ["s", "Huruf s. sa si su se so.", "Satu|Sapu|Siku|Sudu|Susu|Sabun|Sayur|Sikat|Sakit|Semut|Sejuk|Sotong|Sampah|Sungai|Senyum"],
-  ["t", "Huruf t. ta ti tu te to.", "Tali|Tiga|Topi|Tebu|Tikus|Tikar|Tidur|Timun|Tanah|Tujuh|Telur|Tolong|Tangan|Tingkap|Tunggu"],
-  ["w", "Huruf w. wa wi wu we wo.", "Wira|Wajah|Wangi|Warna|Warga|Warung|Wayang|Wakil|Wajib|Wakaf|Wabak|Wuduk|Wisel|Waris|Waktu"],
-  ["y", "Huruf y. ya yi yu ye yo.", "Yoyo|Yakin|Yatim|Yuran|Saya|Kaya|Ayah|Ayam|Bayi|Kayu|Sayur|Sayap|Payung|Layang|Wayang"],
-  ["f", "Huruf f. fa fi fu fe fo.", "Foto|Feri|Fail|Fikir|Filem|Fajar|Faham|Fasih|Fakta|Fokus|Fesyen|Fardu|Fitrah|Forum|Fizik"],
-  ["v", "Huruf v. va vi vu ve vo.", "Visa|Vila|Voli|Vena|Virus|Vokal|Vakum|Vinil|Vaksin|Versi|Volum|Veto|Vista|Vektor|Valid"],
-  ["z", "Huruf z. za zi zu ze zo.", "Zuhal|Zikir|Zakat|Zaman|Zapin|Zabib|Zuhur|Zarah|Zamrud|Zahir|Zalim|Zigzag|Zamzam|Zuhud|Zabur"],
-  ["q", "Huruf q. qa qi qu qe qo.", "Qari|Qada|Qadar|Qasar|Qamar|Qiblat|Quran|Qudrat"]
+  ["a", "Vokal a. Baca perkataan dua suku kata.", "Bapa|Mama|Saya|Kata|Mata|Nama|Raja|Lada|Dada|Bata|Jala|Kaca|Cara|Mana|Lama"],
+  ["e", "Vokal e. Baca perkataan dua suku kata.", "Meja|Beli|Tebu|Tepi|Pena|Sewa|Desa|Kera|Peta|Beca|Gema|Rela|Bela|Sepi|Dewi"],
+  ["i", "Vokal i. Baca perkataan dua suku kata.", "Gigi|Pipi|Lidi|Titi|Kiri|Biji|Sisi|Cili|Diri|Kini|Dini|Sini|Mini|Lili|Pili"],
+  ["o", "Vokal o. Baca perkataan dua suku kata.", "Bola|Roti|Topi|Lori|Kopi|Kota|Roda|Sofa|Foto|Soda|Hobi|Solo|Toko|Polo|Logo"],
+  ["u", "Vokal u. Baca perkataan dua suku kata.", "Buku|Susu|Guru|Kuku|Bulu|Sudu|Cucu|Kutu|Batu|Baju|Labu|Madu|Paku|Lagu|Kuda"],
+  ["b", "Huruf b. ba bi bu be bo.", "Bapa|Batu|Baju|Bola|Buku|Biru|Beli|Bawa|Bumi|Bata|Bulu|Baca|Bagi|Budi|Beca"],
+  ["c", "Huruf c. ca ci cu ce co.", "Cari|Cuci|Cuti|Cucu|Cili|Cuka|Cara|Cuma|Cita|Cuba|Ceri|Kaca|Baca|Suci|Laci"],
+  ["d", "Huruf d. da di du de do.", "Dada|Dadu|Dari|Duri|Debu|Dahi|Dagu|Desa|Dewi|Dulu|Duka|Diri|Madu|Lada|Sudu"],
+  ["f", "Huruf f. fa fi fu fe fo.", "Foto|Sofa|Feri|Fasa|Kafe|Sifu"],
+  ["g", "Huruf g. ga gi gu ge go.", "Gigi|Gula|Gali|Guni|Gaji|Gaya|Gari|Gusi|Guru|Goda|Gema|Lagu|Sagu|Ragu|Tiga"],
+  ["h", "Huruf h. ha hi hu he ho.", "Hati|Hari|Hulu|Haji|Hala|Haba|Hama|Hawa|Hiba|Hobi|Dahi|Tahu|Bahu|Mahu|Paha"],
+  ["j", "Huruf j. ja ji ju je jo.", "Jari|Jala|Jaga|Juga|Jamu|Jati|Jeti|Jemu|Juta|Jiwa|Juri|Jitu|Baju|Raja|Gaji"],
+  ["k", "Huruf k. ka ki ku ke ko.", "Kaki|Kuda|Kuku|Kayu|Kopi|Kota|Kita|Kiri|Kera|Kaca|Buku|Paku|Suka|Cuka|Duka"],
+  ["l", "Huruf l. la li lu le lo.", "Labu|Lagu|Lada|Lidi|Lima|Lori|Lalu|Lama|Laci|Lucu|Leka|Bulu|Bola|Gula|Mula"],
+  ["m", "Huruf m. ma mi mu me mo.", "Mata|Meja|Madu|Mama|Mana|Mahu|Mula|Muka|Masa|Mutu|Kami|Sama|Lima|Nama|Lama"],
+  ["n", "Huruf n. na ni nu ne no.", "Nasi|Nama|Naga|Nadi|Nuri|Nota|Nada|Nafi|Mana|Sini|Kini|Lena|Bina|Guna|Pena"],
+  ["p", "Huruf p. pa pi pu pe po.", "Padi|Paku|Pipi|Pagi|Pasu|Peta|Pena|Pita|Puji|Paha|Pula|Sapu|Tepi|Kopi|Topi"],
+  ["q", "Huruf q. qa qi qu qe qo.", "Qari|Qada"],
+  ["r", "Huruf r. ra ri ru re ro.", "Rasa|Raja|Roda|Roti|Rusa|Ribu|Rupa|Rela|Ragu|Rabu|Baru|Biru|Guru|Cari|Kiri"],
+  ["s", "Huruf s. sa si su se so.", "Satu|Sapu|Siku|Sudu|Susu|Sate|Sagu|Sisi|Suka|Sama|Sewa|Sofa|Soda|Sini|Rusa"],
+  ["t", "Huruf t. ta ti tu te to.", "Tali|Tiga|Topi|Tebu|Tahu|Tepi|Tiba|Tuju|Teko|Titi|Batu|Kita|Kota|Mata|Peta"],
+  ["v", "Huruf v. va vi vu ve vo.", "Visa|Vila|Voli|Vena|Veto|Lava"],
+  ["w", "Huruf w. wa wi wu we wo.", "Wira|Wali|Waja|Wudu|Bawa|Dewa|Dewi|Sewa|Jiwa|Hawa|Lawa|Tawa"],
+  ["y", "Huruf y. ya yi yu ye yo.", "Yoyo|Yuyu|Saya|Kaya|Gaya|Raya|Daya|Maya|Kayu|Sayu|Layu|Bayi|Paya|Jaya|Rayu"]
 ].map(x => ({ v: x[0], vokal: "aeiou".includes(x[0]), nota: x[1], ayat: x[2].split("|") })).sort((a, b) => a.v.localeCompare(b.v));
 /* Dua buku: v = vokal (a e i o u), k = huruf konsonan ikut abjad */
 const BV_G = { v: BV.filter(x => x.vokal), k: BV.filter(x => !x.vokal) };
@@ -3744,7 +3743,7 @@ function renderBV(g) {
   g = g || "v"; backMenu = () => renderBV(g);
   const d = bvData(), L5 = ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"];
   renderMenu(tr(BV_NAMA[g]), BV_G[g].map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[b.v] ? "#FFD36E" : L5[i % 5]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
-    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : "Huruf ") + b.v, b.ayat.length + " perkataan dua suku kata", d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
+    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : "Huruf ") + b.v, b.ayat.length + " perkataan (2 huruf + 2 huruf)", d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
 }
 function bvBaca(g, i) {
   const G = BV_G[g], b = G[i], id = ++bmId;
