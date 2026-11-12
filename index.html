@@ -739,9 +739,9 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .bvbanner{display:flex;align-items:center;gap:16px;justify-content:center;background:var(--card);border-radius:28px;padding:10px 22px;box-shadow:0 6px 0 var(--garis);margin:0 auto 12px;max-width:640px}
 .bvbanner b{font-size:clamp(54px,9vw,80px);line-height:1;color:#e8434f;font-weight:800}.bvbanner p{margin:0;font-weight:700;font-size:clamp(14px,2.6vw,18px);text-align:left}
 .bvgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
-.bvkad{background:var(--card);border-radius:22px;border:3px solid transparent;box-shadow:0 5px 0 var(--garis);padding:12px 6px;font-weight:800;font-size:clamp(24px,5vw,42px);line-height:1.3;min-width:0;overflow-wrap:anywhere;position:relative}
+.bvkad{background:#fff;color:#1d1d1f;border-radius:22px;border:3px solid transparent;box-shadow:0 5px 0 var(--garis);padding:12px 6px;font-weight:800;font-size:clamp(24px,5vw,42px);line-height:1.3;min-width:0;overflow-wrap:anywhere;position:relative}
 .bvkad i{position:absolute;top:4px;left:8px;font-style:normal;font-size:12px;color:var(--muted)}
-.bvkad small{display:block;font-size:.55em;color:var(--muted);margin-top:2px}.bvkad.on{border-color:#FFD36E;transform:scale(1.04)}
+.bvkad small{display:block;font-size:.55em;color:#1d1d1f;margin-top:2px}.bvkad .bvv{color:#e8434f;font-weight:800}.bvkad i{color:#8a8a8e}.bvkad.on{border-color:#FFD36E;transform:scale(1.04)}
 /* Tulis huruf hijaiyah */
 .thjseg{align-self:center;display:flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:0 4px 0 var(--garis)}
 .thjseg button{border-radius:999px;padding:8px 20px;font-weight:700;background:none}.thjseg button.on{background:#8FD9A8;color:var(--on)}
@@ -3715,6 +3715,8 @@ const BV = [
 ].map(x => ({ v: x[0], nota: x[1], ayat: x[2].split("|") }));
 const BV_KEY = "appPendidikan.bacaVokal.v1";
 function bvData() { try { return JSON.parse(localStorage.getItem(BV_KEY)) || {}; } catch (e) { return {}; } }
+/* Huruf vokal berwarna, huruf lain hitam */
+const bvVokal = t => skEsc(t).replace(/[aeiouAEIOU]/g, c => `<b class="bvv">${c}</b>`);
 function renderBV() {
   backMenu = renderBV;
   const d = bvData();
@@ -3729,7 +3731,7 @@ function bvBaca(i) {
   $("bmCount").textContent = (i + 1) + "/" + BV.length; $("bmProg").style.width = ((i + 1) / BV.length * 100) + "%";
   $("bmFoto").classList.add("hide"); $("bmPapan").classList.add("hide"); $("bmBtns").innerHTML = ""; bmMaskot("");
   const k = $("bmKawasan");
-  k.innerHTML = `<div class="bvbanner"><b>${b.v.toUpperCase()} ${b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i>${skEsc(a)}<small class="wsk">${sukuKata(a.toLowerCase()).map((x, n) => `<span class="w${n % 2}">${x}</span>`).join(" - ")}</small></button>`).join("")}</div>`;
+  k.innerHTML = `<div class="bvbanner"><b>${b.v.toUpperCase()} ${b.v}</b><p></p></div><div class="bvgrid">${b.ayat.map((a, j) => `<button class="bvkad"><i>${j + 1}</i><span class="wsk">${bvVokal(a)}</span><small class="wsk">${sukuKata(a.toLowerCase()).map(bvVokal).join(" - ")}</small></button>`).join("")}</div>`;
   k.querySelector(".bvbanner p").textContent = b.nota;
   show("s-bm");
   const el = [...k.querySelectorAll(".bvkad")];
