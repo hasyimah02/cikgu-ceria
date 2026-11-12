@@ -3582,7 +3582,7 @@ function renderBM1() {
 function renderBMTahap(m) {
   backMenu = () => renderBMTahap(m);
   const st = loadStars(), kj = bmKemajuan();
-  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh ka - tak · huruf akhir di-highlight", "3-letter syllables, e.g. ka - tak", "三字母音节，如 ka - tak")), "", () => renderBV("a")]] : []).concat([1, 2, 3].map(lv => {
+  renderMenu(tr(BM_MOD[m].nama), (m === "baca" ? [["c0", IKON.baca, tr(BV_NAMA.v), tr(L("Vokal a, e, i, o, u · perkataan dua suku kata", "Vowels a, e, i, o, u · two-syllable words", "元音 a e i o u")), "", () => renderBV("v")], ["c1", IKON.baca, tr(BV_NAMA.k), tr(L("Huruf b hingga z ikut abjad · perkataan dua suku kata", "Letters b to z in order · two-syllable words", "字母 b 到 z")), "", () => renderBV("k")], ["c2", IKON.baca, tr(BV_NAMA.a), tr(L("Suku kata 3 huruf, contoh bab dan ke - bab · huruf akhir di-highlight", "3-letter syllables, e.g. bab, ke - bab", "三字母音节，如 bab, ke - bab")), "", () => renderBV("a")]] : []).concat([1, 2, 3].map(lv => {
     const sen = m === "eja" || m === "baca" ? bmKataTahap(lv) : BM_AYAT_T[lv], jum = sen.length, siap = (kj[m + "-" + lv] || []).filter(x => sen.indexOf(x) >= 0).length;
     return [["t-pra", "t-t1", "t-t2"][lv - 1], IKON[BM_MOD[m].ikon], tr(BM_TAHAP[lv]), siap + " / " + jum + tr(L(" latihan selesai", " exercises done", " 个练习已完成")), starText(st["bm1-" + m + "-" + lv] || 0), () => startBM(m, lv)];
   })), renderBM1);
@@ -3733,20 +3733,20 @@ const BV = [
   ["y", "Huruf y. ya yi yu ye yo.", "Yoyo|Yuyu|Saya|Kaya|Gaya|Raya|Daya|Maya|Kayu|Sayu|Layu|Bayi|Paya|Jaya|Rayu"]
 ].map(x => ({ v: x[0], vokal: "aeiou".includes(x[0]), nota: x[1], ayat: x[2].split("|") })).sort((a, b) => a.v.localeCompare(b.v));
 const BVA = [
-  ["b", "Huruf akhir b. Contoh sebab.", "Sebab|Kitab|Jawab|Nasib|Wajib|Rebab|Hijab|Kebab"],
-  ["d", "Huruf akhir d. Contoh murid.", "Murid|Wujud|Tekad|Sujud|Jasad|Wirid|Lahad"],
-  ["f", "Huruf akhir f. Contoh huruf.", "Huruf|Wakaf|Saraf|Tarif"],
-  ["h", "Huruf akhir h. Contoh rumah.", "Rumah|Tanah|Basah|Susah|Mudah|Murah|Merah|Putih|Kasih|Buluh|Tujuh|Sawah|Pecah|Rebah|Jatuh"],
-  ["j", "Huruf akhir j. Contoh kolej.", "Kolej|Mesej|Garaj|Pakej"],
-  ["k", "Huruf akhir k. Contoh katak.", "Katak|Kakak|Budak|Masak|Cicak|Kotak|Pokok|Duduk|Sejuk|Bedak|Retak|Tegak|Lapuk|Rusuk|Tidak"],
-  ["l", "Huruf akhir l. Contoh kapal.", "Kapal|Botol|Betul|Tebal|Nakal|Pukul|Bakul|Kenal|Katil|Kecil|Mahal|Hafal|Gatal|Kekal|Pukal"],
-  ["m", "Huruf akhir m. Contoh malam.", "Malam|Garam|Minum|Jarum|Kolam|Tanam|Masam|Hitam|Demam|Selam|Padam|Macam|Tajam|Dalam|Tilam"],
-  ["n", "Huruf akhir n. Contoh makan.", "Makan|Jalan|Bulan|Timun|Hujan|Laman|Teman|Bukan|Sabun|Papan|Cawan|Lilin|Taman|Kawan|Beban"],
-  ["p", "Huruf akhir p. Contoh sayap.", "Sayap|Sedap|Tutup|Hidup|Lelap|Tetap|Gelap|Harap|Sikap|Tegap|Sayup|Redup|Hirup|Ratap|Dakap"],
-  ["r", "Huruf akhir r. Contoh lapar.", "Lapar|Pasar|Pasir|Sabar|Telur|Tidur|Besar|Tukar|Bubur|Pagar|Bakar|Sukar|Tikar|Lebar|Kotor"],
-  ["s", "Huruf akhir s. Contoh nanas.", "Nanas|Kipas|Panas|Malas|Beras|Keras|Rebus|Habis|Manis|Nipis|Pedas|Kurus|Halus|Tikus|Lepas"],
-  ["t", "Huruf akhir t. Contoh lalat.", "Lalat|Kilat|Sakit|Sikit|Bukit|Rakit|Surat|Takut|Perut|Ketat|Lekat|Kusut|Sabit|Cepat|Lipat"],
-  ["z", "Huruf akhir z. Contoh hafiz.", "Hafiz|Lafaz"]
+  ["b", "Huruf akhir b. Contoh bab dan sebab.", "Bab|Lab|Web|Sub|Hab|Tab|Sebab|Kitab|Jawab|Nasib|Wajib|Rebab|Hijab|Kebab"],
+  ["d", "Huruf akhir d. Contoh kod dan murid.", "Kod|Mod|Pad|Pod|Wad|Had|Murid|Wujud|Tekad|Sujud|Jasad|Wirid|Lahad"],
+  ["f", "Huruf akhir f. Contoh saf dan huruf.", "Saf|Kaf|Daf|Lif|Puf|Huruf|Wakaf|Saraf|Tarif"],
+  ["h", "Huruf akhir h. Contoh teh dan rumah.", "Teh|Sah|Roh|Doh|Gah|Wah|Rumah|Tanah|Basah|Susah|Mudah|Murah|Merah|Putih|Kasih"],
+  ["j", "Huruf akhir j. Contoh haj dan kolej.", "Haj|Taj|Kolej|Mesej|Garaj|Pakej"],
+  ["k", "Huruf akhir k. Contoh kek dan katak.", "Kek|Cek|Dek|Pek|Rak|Bak|Katak|Kakak|Budak|Masak|Cicak|Kotak|Pokok|Duduk|Sejuk"],
+  ["l", "Huruf akhir l. Contoh bil dan kapal.", "Bil|Pil|Gol|Sel|Tol|Bol|Kapal|Botol|Betul|Tebal|Nakal|Pukul|Bakul|Kenal|Katil"],
+  ["m", "Huruf akhir m. Contoh jam dan malam.", "Jam|Kem|Gam|Dam|Rim|Pam|Malam|Garam|Minum|Jarum|Kolam|Tanam|Masam|Hitam|Demam"],
+  ["n", "Huruf akhir n. Contoh van dan makan.", "Van|Pin|Tin|Sen|Pen|Kon|Makan|Jalan|Bulan|Timun|Hujan|Laman|Teman|Bukan|Sabun"],
+  ["p", "Huruf akhir p. Contoh sup dan sayap.", "Sup|Cap|Tip|Lap|Kep|Jip|Sayap|Sedap|Tutup|Hidup|Lelap|Tetap|Gelap|Harap|Sikap"],
+  ["r", "Huruf akhir r. Contoh tar dan lapar.", "Tar|Par|Pir|Bor|Kur|Lapar|Pasar|Pasir|Sabar|Telur|Tidur|Besar|Tukar|Bubur"],
+  ["s", "Huruf akhir s. Contoh bas dan nanas.", "Bas|Kes|Pas|Bos|Kos|Jus|Nanas|Kipas|Panas|Malas|Beras|Keras|Rebus|Habis|Manis"],
+  ["t", "Huruf akhir t. Contoh cat dan lalat.", "Cat|Set|Pot|Jet|Kit|Bot|Lalat|Kilat|Sakit|Sikit|Bukit|Rakit|Surat|Takut|Perut"],
+  ["z", "Huruf akhir z. Contoh jaz dan hafiz.", "Jaz|Hafiz|Lafaz"]
 ].map(x => ({ v: x[0], vokal: false, akhir: true, nota: x[1], ayat: x[2].split("|") }));
 /* Dua buku: v = vokal (a e i o u), k = huruf konsonan ikut abjad */
 const BV_G = { v: BV.filter(x => x.vokal), k: BV.filter(x => !x.vokal), a: BVA };
@@ -3761,7 +3761,7 @@ function renderBV(g) {
   g = g || "v"; backMenu = () => renderBV(g);
   const d = bvData(), L5 = ["#FF9EC4", "#8FD9A8", "#8CC8FF", "#FFB98A", "#BBA6FF"];
   renderMenu(tr(BV_NAMA[g]), BV_G[g].map((b, i) => [["t-pra", "t-t1", "t-t2", "bm1", "c1"][i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${d[b.v] ? "#FFD36E" : L5[i % 5]}"/><text x="32" y="45" font-family="Comic Sans MS,sans-serif" font-weight="800" font-size="34" fill="#fff" text-anchor="middle">${b.v}</text>`),
-    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v, b.ayat.length + (b.akhir ? " perkataan (2 huruf + 3 huruf)" : " perkataan (2 huruf + 2 huruf)"), d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
+    "Bahagian " + (i + 1) + ": " + (b.vokal ? "Vokal " : b.akhir ? "Huruf akhir " : "Huruf ") + b.v, (b.akhir ? b.ayat.length + " perkataan: 1 suku kata & 2 suku kata" : b.ayat.length + " perkataan (2 huruf + 2 huruf)"), d[b.v] ? "★★★" : "", () => bvBaca(g, i)]), () => renderBMTahap("baca"));
 }
 function bvBaca(g, i) {
   const G = BV_G[g], b = G[i], id = ++bmId;
