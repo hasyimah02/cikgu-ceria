@@ -426,8 +426,8 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qrnota .qrar{font-size:34px;color:#3FA672}
 .qrbaris{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;direction:rtl}
 .qrbr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:color-mix(in srgb,var(--card) 60%,transparent);border-radius:24px;padding:8px}
-.iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.iqw{padding:12px 8px}.iqw .qrar{font-size:clamp(34px,5.5vw,50px);line-height:2.1}.iqw small{direction:ltr;font-size:17px}
+.iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.iqw{padding:10px 6px;min-width:0}.iqw .qrar{font-size:clamp(26px,5vw,46px);line-height:2}.iqw small{direction:ltr;font-size:clamp(12px,2.4vw,16px);overflow-wrap:anywhere;line-height:1.25}
 .iqsurah{text-align:center;font-weight:700;font-size:22px;color:#3FA672}
 .qnsimbol{align-self:center;font-size:clamp(90px,16vw,140px);line-height:1.9;color:#3FA672;background:var(--card);border-radius:36px;padding:0 44px;box-shadow:0 8px 0 var(--garis),0 14px 28px var(--sh)}
 .qnkecil .qrh{padding:4px 2px}.qrh .qrar{display:block;line-height:1.5!important;padding:.25em 0 .75em}.qrh small{display:block;line-height:1.2}.qnkecil small{direction:ltr}
@@ -5227,12 +5227,12 @@ const IQRA = (() => {
   for (let p = 0; p < 14; p++) {
     const baru = [p * 2, p * 2 + 1], kenal = H.slice(0, p * 2 + 2), r = iqRawak(101 + p), baris = [];
     baris.push({ ar: baru.map(i => iqSuku(i, "a")[0]).join("  "), rm: baru.map(i => iqSuku(i, "a")[1]), sebut: baru.map(i => iqSuku(i, "a")[1]) });
-    for (let k = 0; k < 7; k++) { const s = [0, 1, 2].map(j => iqSuku(j < 2 && k < 3 ? baru[(k + j) % 2] : iqPilih(r, kenal), "a")); baris.push({ ar: s.map(x => x[0]).join("  "), rm: s.map(x => x[1]), sebut: s.map(x => x[1]) }); }
+    for (let k = 0; k < 14; k++) { const s = [0, 1, 2].map(j => iqSuku(j < 2 && k < 3 ? baru[(k + j) % 2] : iqPilih(r, kenal), "a")); baris.push({ ar: s.map(x => x[0]).join("  "), rm: s.map(x => x[1]), sebut: s.map(x => x[1]) }); }
     m1.push({ nota: "Huruf baharu: " + baru.map(i => HIJAIYAH[i][1]).join(" dan ") + ". Baris atas dibaca " + baru.map(i => iqSuku(i, "a")[1]).join(" dan ") + ".", baris: baris });
   }
   buku.push({ nama: "Iqra' 1", ds: "Huruf & baris atas", muka: m1 });
   /* Iqra' 2: baris bawah, baris hadapan & baris dua (tanwin) */
-  const m2 = [], tg = (seed, v, nota) => m2.push({ nota: nota, baris: iqJana(seed, 8, r => iqTunggal(r, H, v, 3)) });
+  const m2 = [], tg = (seed, v, nota) => m2.push({ nota: nota, baris: iqJana(seed, 15, r => iqTunggal(r, H, v, 3)) });
   for (let p = 0; p < 4; p++) tg(211 + p, ["i"], "Baris bawah dibaca i, contohnya bi, ti, tsi.");
   for (let p = 0; p < 4; p++) tg(221 + p, ["u"], "Baris hadapan dibaca u, contohnya bu, tu, tsu.");
   for (let p = 0; p < 2; p++) tg(231 + p, ["a", "i", "u"], "Campuran baris atas, bawah dan hadapan: a, i, u.");
@@ -5243,23 +5243,23 @@ const IQRA = (() => {
   buku.push({ nama: "Iqra' 2", ds: "Baris bawah, hadapan & baris dua", muka: m2 });
   /* Iqra' 3: huruf bersambung, mad 2 harakat & 6 harakat */
   const m3 = [];
-  for (let p = 0; p < 3; p++) m3.push({ nota: "Huruf bersambung. Baca suku kata satu-satu, kemudian sambung.", baris: iqJana(301 + p, 8, r => iqKata(r, H, ["a"], 2 + (p > 0 ? 1 : 0))) });
-  for (let p = 0; p < 3; p++) m3.push({ nota: "Huruf bersambung dengan baris atas, bawah dan hadapan.", baris: iqJana(311 + p, 8, r => iqKata(r, H, ["a", "i", "u"], 2 + (p % 2))) });
+  for (let p = 0; p < 3; p++) m3.push({ nota: "Huruf bersambung. Baca suku kata satu-satu, kemudian sambung.", baris: iqJana(301 + p, 15, r => iqKata(r, H, ["a"], 2 + (p > 0 ? 1 : 0))) });
+  for (let p = 0; p < 3; p++) m3.push({ nota: "Huruf bersambung dengan baris atas, bawah dan hadapan.", baris: iqJana(311 + p, 15, r => iqKata(r, H, ["a", "i", "u"], 2 + (p % 2))) });
   [["aa", "Baris atas bertemu alif dibaca panjang 2 harakat, contohnya baa."], ["ii", "Baris bawah bertemu ya mati dibaca panjang 2 harakat, contohnya bii."], ["uu", "Baris hadapan bertemu wau mati dibaca panjang 2 harakat, contohnya buu."]]
-    .forEach((x, p) => m3.push({ nota: x[1], baris: iqJana(321 + p, 8, r => iqKata(r, H, ["a", "i", "u", x[0]], 2 + (p % 2))) }));
-  m3.push({ nota: "Campuran bacaan panjang 2 harakat.", baris: iqJana(331, 8, r => iqKata(r, H, ["a", "i", "u", "aa", "ii", "uu"], 3)) });
-  m3.push({ nota: "Tanda panjang di atas huruf (mad lazim) dibaca panjang 6 harakat. Kira enam ketukan.", baris: iqTangan("ٱلضَّآلِّينَ|dhoooooo-l-lin (6 harakat);دَآبَّةٍ|daaaaaa-b-batin (6 harakat);ٱلْحَآقَّةُ|al-haaaaaa-q-qoh (6 harakat);ٱلطَّآمَّةُ|ath-thoooooo-m-mah (6 harakat);ٱلٓمٓ|alif laaaaaam miiiiiim (6 harakat);يسٓ|yaa siiiiiin (6 harakat);صٓ|shoooooood (6 harakat);نٓ|nuuuuuun (6 harakat)").map(w => Object.assign(w, { sebut: [w.rm[0].split(" (")[0].replace(/(.)\1{2,}/g, "$1$1").replace(/-/g, "")] })) });
+    .forEach((x, p) => m3.push({ nota: x[1], baris: iqJana(321 + p, 15, r => iqKata(r, H, ["a", "i", "u", x[0]], 2 + (p % 2))) }));
+  m3.push({ nota: "Campuran bacaan panjang 2 harakat.", baris: iqJana(331, 15, r => iqKata(r, H, ["a", "i", "u", "aa", "ii", "uu"], 3)) });
+  m3.push({ nota: "Tanda panjang di atas huruf (mad lazim) dibaca panjang 6 harakat. Kira enam ketukan.", baris: iqTangan("ٱلضَّآلِّينَ|dhoooooo-l-lin (6 harakat);دَآبَّةٍ|daaaaaa-b-batin (6 harakat);ٱلْحَآقَّةُ|al-haaaaaa-q-qoh (6 harakat);ٱلطَّآمَّةُ|ath-thoooooo-m-mah (6 harakat);ٱلٓمٓ|alif laaaaaam miiiiiim (6 harakat);يسٓ|yaa siiiiiin (6 harakat);صٓ|shoooooood (6 harakat);نٓ|nuuuuuun (6 harakat);ٱلصَّآخَّةُ|ash-shoooooo-kh-khoh (6 harakat);طسٓ|tho siiiiiin (6 harakat);حمٓ|haa miiiiiim (6 harakat);قٓ|qoooooof (6 harakat);ٱلٓر|alif laaaaaam ro (6 harakat);طسٓمٓ|tho siiiiiin miiiiiim (6 harakat);ٱلٓمٓصٓ|alif laaaaaam miiiiiim shoooooood (6 harakat)").map(w => Object.assign(w, { sebut: [w.rm[0].split(" (")[0].replace(/(.)\1{2,}/g, "$1$1").replace(/-/g, "")] })) });
   buku.push({ nama: "Iqra' 3", ds: "Huruf bersambung & bacaan panjang", muka: m3 });
   /* Iqra' 4: tanda mati (sukun) & sabdu */
   const m4 = [];
-  for (let p = 0; p < 4; p++) m4.push({ nota: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya, contohnya ab, bat.", baris: iqJana(451 + p, 8, r => iqMati(r, H, false)) });
-  for (let p = 0; p < 2; p++) m4.push({ nota: "Qalqalah: huruf qof, tho, ba, jim dan dal yang mati dibaca melantun.", baris: iqJana(481 + p, 8, r => iqMati(r, H, true)) });
-  for (let p = 0; p < 3; p++) m4.push({ nota: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan, contohnya bat-ta.", baris: iqJana(491 + p, 8, r => iqSabdu(r, H)) });
-  m4.push({ nota: "Sabdu dalam perkataan Al-Quran.", baris: iqTangan("رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;مُحَمَّدٌ|mu-ham-ma-dun;جَنَّةٌ|jan-na-tun;حَقٌّ|haq-qun;عَلَّمَ|'al-la-ma") });
-  m4.push({ nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("ٱللَّهُ|Allahu;بِٱللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ ٱللَّهِ|'abdullahi;رَسُولُ ٱللَّهِ|rasulullahi;نَصْرُ ٱللَّهِ|nasrullahi;بِسْمِ ٱللَّهِ|bismillahi;ٱلْحَمْدُ لِلَّهِ|alhamdulillahi") });
-  m4.push({ nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("ٱلْقَمَرُ|al-qamaru;ٱلْكِتَٰبُ|al-kitabu;ٱلْبَيْتُ|al-baitu;ٱلْحَمْدُ|al-hamdu;ٱلْعِلْمُ|al-'ilmu;ٱلْفَلَقُ|al-falaqu;ٱلْيَوْمُ|al-yaumu;ٱلْوَلَدُ|al-waladu") });
-  m4.push({ nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("ٱلشَّمْسُ|asy-syamsu;ٱلنَّاسُ|an-nasu;ٱلرَّحْمَٰنُ|ar-rahmanu;ٱلدِّينُ|ad-dinu;ٱلتِّينُ|at-tinu;ٱلسَّمَآءُ|as-sama'u;ٱلَّيْلُ|al-lailu;ٱلذِّكْرُ|adz-dzikru") });
-  m4.push({ nota: "Campuran tanda mati dan sabdu.", baris: iqJana(499, 8, r => iqPilih(r, [0, 1]) ? iqMati(r, H, false) : iqSabdu(r, H)) });
+  for (let p = 0; p < 4; p++) m4.push({ nota: "Tanda mati (sukun) bermaksud huruf itu tidak berbaris. Ia disambung dengan huruf sebelumnya, contohnya ab, bat.", baris: iqJana(451 + p, 15, r => iqMati(r, H, false)) });
+  for (let p = 0; p < 2; p++) m4.push({ nota: "Qalqalah: huruf qof, tho, ba, jim dan dal yang mati dibaca melantun.", baris: iqJana(481 + p, 15, r => iqMati(r, H, true)) });
+  for (let p = 0; p < 3; p++) m4.push({ nota: "Tanda sabdu bermaksud huruf itu dibaca dua kali dan ditekan, contohnya bat-ta.", baris: iqJana(491 + p, 15, r => iqSabdu(r, H)) });
+  m4.push({ nota: "Sabdu dalam perkataan Al-Quran.", baris: iqTangan("رَبِّ|rab-bi;إِنَّ|in-na;ثُمَّ|thum-ma;كُلُّ|kul-lu;مُحَمَّدٌ|mu-ham-ma-dun;جَنَّةٌ|jan-na-tun;حَقٌّ|haq-qun;عَلَّمَ|'al-la-ma;إِيَّاكَ|iy-ya-ka;رَبُّكَ|rab-bu-ka;أَيُّهَا|ay-yu-ha;فَصَلِّ|fa-shol-li;تَبَّتْ|tab-bat;وَتَبَّ|wa-tab;يَدُعُّ|ya-du'-'u") });
+  m4.push({ nota: "Lafaz Allah dibaca tebal apabila huruf sebelumnya berbaris atas atau hadapan, dan nipis selepas baris bawah.", baris: iqTangan("ٱللَّهُ|Allahu;بِٱللَّهِ|billahi;لِلَّهِ|lillahi;عَبْدُ ٱللَّهِ|'abdullahi;رَسُولُ ٱللَّهِ|rasulullahi;نَصْرُ ٱللَّهِ|nasrullahi;بِسْمِ ٱللَّهِ|bismillahi;ٱلْحَمْدُ لِلَّهِ|alhamdulillahi;قُلْ هُوَ ٱللَّهُ|qul huwallahu;ٱللَّهُ ٱلصَّمَدُ|allahush-shomadu;سُبْحَانَ ٱللَّهِ|subhanallahi;فِى سَبِيلِ ٱللَّهِ|fi sabilillahi;دِينِ ٱللَّهِ|dinillahi;أَمْرُ ٱللَّهِ|amrullahi;نُورُ ٱللَّهِ|nurullahi") });
+  m4.push({ nota: "Alif lam qamariah: huruf lam dibaca jelas, contohnya al-qamaru.", baris: iqTangan("ٱلْقَمَرُ|al-qamaru;ٱلْكِتَٰبُ|al-kitabu;ٱلْبَيْتُ|al-baitu;ٱلْحَمْدُ|al-hamdu;ٱلْعِلْمُ|al-'ilmu;ٱلْفَلَقُ|al-falaqu;ٱلْيَوْمُ|al-yaumu;ٱلْوَلَدُ|al-waladu;ٱلْأَرْضُ|al-ardhu;ٱلْجَنَّةُ|al-jannatu;ٱلْمَسْجِدُ|al-masjidu;ٱلْغَفُورُ|al-ghafuru;ٱلْخَيْرُ|al-khairu;ٱلْهُدَىٰ|al-huda;ٱلْعَصْرُ|al-'ashru") });
+  m4.push({ nota: "Alif lam syamsiah: huruf lam tidak dibaca, terus masuk ke huruf bersabdu, contohnya asy-syamsu.", baris: iqTangan("ٱلشَّمْسُ|asy-syamsu;ٱلنَّاسُ|an-nasu;ٱلرَّحْمَٰنُ|ar-rahmanu;ٱلدِّينُ|ad-dinu;ٱلتِّينُ|at-tinu;ٱلسَّمَآءُ|as-sama'u;ٱلَّيْلُ|al-lailu;ٱلذِّكْرُ|adz-dzikru;ٱلصَّمَدُ|ash-shomadu;ٱلنُّورُ|an-nuru;ٱلزَّيْتُونُ|az-zaitunu;ٱلسَّلَامُ|as-salamu;ٱلطَّيِّبُ|ath-thoyyibu;ٱلضُّحَىٰ|adh-dhuha;ٱلثَّوَابُ|ats-tsawabu") });
+  m4.push({ nota: "Campuran tanda mati dan sabdu.", baris: iqJana(499, 15, r => iqPilih(r, [0, 1]) ? iqMati(r, H, false) : iqSabdu(r, H)) });
   buku.push({ nama: "Iqra' 4", ds: "Tanda mati, sabdu, lafaz Allah & alif lam", muka: m4 });
   /* Iqra' 5: ayat Al-Quran pendek (2, 3 & 4 ayat) */
   buku.push({ nama: "Iqra' 5", ds: "Ayat Al-Quran: 2, 3 & 4 ayat", muka: [
