@@ -1264,6 +1264,23 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 #s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:pr-item .4s cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:calc(var(--i,0) * 50ms + 80ms)}
 #s-home.on .dpn-kad:nth-child(1){--i:0}#s-home.on .dpn-kad:nth-child(2){--i:1}#s-home.on .dpn-kad:nth-child(3){--i:2}#s-home.on .dpn-kad:nth-child(4){--i:3}
 @media (prefers-reduced-motion:reduce){#s-home.on,#s-subj.on,#s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:none!important}}
+/* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
+.pet-nuri{position:fixed;left:0;top:0;width:clamp(118px,21vmin,172px);aspect-ratio:1;z-index:90;pointer-events:none;will-change:transform;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .25s}
+.pet-nuri[hidden],.pet-togol[hidden]{display:none!important}
+.pet-rupa{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.pet-rupa img{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;-webkit-user-drag:none}
+.pet-rupa img.on{opacity:1}
+.pet-badan{position:absolute;inset:14%;border-radius:46%;pointer-events:auto;touch-action:none;cursor:grab;outline:none;-webkit-tap-highlight-color:transparent}
+.pet-badan:focus-visible{box-shadow:0 0 0 3px #B79CF2}
+.pet-nuri.pet-lut{opacity:.45}.pet-nuri.pet-lut .pet-badan{pointer-events:none}
+.pet-zzz{position:absolute;right:4%;top:6%;font-weight:700;font-size:14px;line-height:1;color:#8A6FD1;opacity:0;pointer-events:none}
+.pet-nuri.pet-tidur .pet-zzz{opacity:.9}
+.pet-gel{position:fixed;left:0;top:0;z-index:91;pointer-events:none;max-width:min(250px,calc(100vw - 16px));background:#fff;color:#3E3150;border:2.5px solid #CDB9F5;border-radius:18px;padding:7px 13px;font-weight:700;font-size:16px;line-height:1.3;text-align:center;box-shadow:0 4px 12px rgba(62,49,80,.18);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;will-change:transform}
+.pet-gel.on{opacity:1;visibility:visible}
+.pet-togol{position:fixed;top:max(8px,env(safe-area-inset-top));right:calc(max(8px,env(safe-area-inset-right)) + 168px);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;padding:0;z-index:100;background:var(--card);color:var(--text);border:3px solid var(--garis);box-shadow:0 5px 0 var(--garis),0 8px 16px var(--sh)}
+.pet-togol img{width:34px;height:34px;pointer-events:none}
+.pet-togol.pet-mati img{opacity:.4;filter:grayscale(1)}
+@media (prefers-reduced-motion:reduce){.pet-nuri,.pet-gel{transition:none}}
 </style>
 </head>
 <body>
@@ -1437,6 +1454,7 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 <script src="gambar/menulis-data.js"></script>
 <script src="gambar/lottie/lottie_light.min.js"></script>
 <script src="gambar/lottie/lottie-data.js"></script>
+<script src="gambar/pet/nuri/dialog.js"></script>
 <script>
 "use strict";
 /* ===== Tema ===== */
@@ -2804,9 +2822,9 @@ function tone(freq, start, dur, type) {
     o.start(t); o.stop(t + dur + 0.02);
   } catch (e) { /* tiada audio */ }
 }
-const sndOk = () => { tone(660, 0, 0.15); tone(880, 0.13, 0.25); };
-const sndBad = () => { tone(220, 0, 0.18, "sawtooth"); tone(160, 0.16, 0.28, "sawtooth"); };
-const sndWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.14, 0.25)); };
+const sndOk = () => { tone(660, 0, 0.15); tone(880, 0.13, 0.25); PET_acara("betul"); };
+const sndBad = () => { tone(220, 0, 0.18, "sawtooth"); tone(160, 0.16, 0.28, "sawtooth"); PET_acara("salah"); };
+const sndWin = () => { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.14, 0.25)); PET_acara("tamat"); };
 
 /* ===== Suara ===== */
 const EMOJI_RE = /[\p{Extended_Pictographic}️‍]/gu;
@@ -5364,6 +5382,7 @@ function show(id) {
   if (PR_el && (id === "s-home" || id === "s-subj")) { void PR_el.offsetWidth; PR_el.classList.add(PR_arah); /* kelas dikekalkan hingga show() seterusnya: membuangnya menukar nama animasi dan memainkan pop kali kedua */ }
   document.body.classList.toggle("dpn-home", id === "s-home");
   window.scrollTo(0, 0);
+  PET_semak();
 }
 function stopSpeech() { henti(); try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } }
 
@@ -5925,6 +5944,7 @@ let qariAudio = null, qariSiri = 0;
 const QARI = { husary: ["Husary_Muallim_128kbps", "Syeikh Mahmoud Khalil Al-Husary"], minshawi: ["Minshawy_Teacher_128kbps", "Syeikh Al-Minshawi bersama kanak-kanak"], alafasy: ["Alafasy_128kbps", "Syeikh Mishary Alafasy"] };
 const qariUrl = (q, s, a) => "https://everyayah.com/data/" + QARI[q][0] + "/" + String(s).padStart(3, "0") + String(a).padStart(3, "0") + ".mp3";
 function qariMain(s, a, q) {
+  PET_senyap(); /* Nuri diam semasa qari membaca */
   if (!qariAudio) qariAudio = new Audio();
   return new Promise(ok => {
     const au = qariAudio; au.onended = () => ok(true); au.onerror = () => { ok(false); qrBual("Bacaan qari perlukan internet."); };
@@ -9022,6 +9042,288 @@ function BKA_sentuh() {
 /* Tunggu tetingkap siap dipapar dan peranti audio bangun (~600ms) supaya awal bunyi tidak terpotong */
 const BKA_mula = () => setTimeout(() => BKA_main().then(ok => { if (!ok) BKA_sentuh(); }), 600);
 if (document.readyState === "complete") BKA_mula(); else window.addEventListener("load", BKA_mula);
+/* ===== PET NURI (kucing lavender): hanya dalam Kelas Al-Quran (qrSenyap) =====
+   Aset: gambar/pet/nuri/<pose>.png + suara/<id>.mp3; ayat: dialog.js (dijana daripada dialog.json oleh tools/jana-pet-dialog.py).
+   Gerakan guna transform + requestAnimationFrame sahaja. Nuri senyap semasa qari/audio lain berbunyi. */
+const PET_DIR = "gambar/pet/nuri/";
+const PET_POSE = ["rehat", "rehat-kelip", "lambai", "gembira", "tepuk", "fikir", "tunjuk", "tidur", "jalan-1", "jalan-2", "jalan-3", "jalan-4"];
+const PET_JALAN = PET_POSE.filter(p => p.indexOf("jalan-") === 0);
+const PET_DLG = window.PET_DIALOG || {};
+/* kumpulan ayat dikira daripada id sebenar: "betul-3" -> kumpulan "betul" */
+const PET_KUMP = {};
+Object.keys(PET_DLG).forEach(id => { const k = id.replace(/-\d+$/, ""); (PET_KUMP[k] = PET_KUMP[k] || []).push(id); });
+const PET_KUNCI = "appPendidikan.petNuri", PET_BAWAH = 6, PET_LAJU = 40, PET_BINGKAI = 7;
+const PET_TEPI_SEL = ".qrpilih,.qtpilih,.thjpapan,canvas,input,textarea,select,.qjmuka,.qbhalaman,.qrayat,.qjayat";
+const PET_JAWAB_SEL = ".qrpilih,.qtpilih,.thjpapan";
+const PET = { el: null, aktif: false, dalam: false, sorok: false, x: 0, y: 0, tx: 0, ty: 0, arah: 1, mod: "rehat", saiz: 120,
+  poseKhas: "", poseKhas2: "", poseTukar: 0, poseHingga: 0, lompatHingga: 0, rehatHingga: 0, tahanHingga: 0, kelipT: 0, kelipHingga: 0,
+  aktifT: 0, lama: 0, raf: 0, tLepas: 0, gelHingga: 0, semakT: 0, tepi: false, jawab: false, sudut: null, galakT: -1e9, adabT: 0,
+  masuk: false, sapaT: 0, akhir: {}, au: null, auNo: 0, seret: null, poseKini: "", gw: 0, gh: 0 };
+try { PET.sorok = localStorage.getItem(PET_KUNCI) === "sorok"; } catch (e) { /* abaikan */ }
+const PET_kurang = () => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
+const PET_main = a => !!a && !a.paused && !a.ended;
+/* Ada audio lain sedang berbunyi? (qari, klip rakaman, bunyi pembuka, suara sistem, pemain rakaman) */
+function PET_audioLain() {
+  try {
+    if (PET_main(qariAudio) || PET_main(klipAudio) || PET_main(window.BKA_audio)) return true;
+    if (window.speechSynthesis && window.speechSynthesis.speaking) return true;
+    const m = document.querySelectorAll("audio,video");
+    for (let i = 0; i < m.length; i++) if (PET_main(m[i])) return true;
+  } catch (e) { /* abaikan */ }
+  return false;
+}
+/* Hentikan suara Nuri serta-merta (dipanggil sebelum qari bermula) */
+function PET_senyap() { PET.auNo++; try { if (PET.au && !PET.au.paused) PET.au.pause(); } catch (e) { /* abaikan */ } }
+/* iPad: salam dimainkan selepas Nuri berhenti (di luar sentuhan anak), jadi pemain audio dibuka dahulu secara senyap semasa sentuhan masuk kelas */
+function PET_bukaAudio() {
+  try {
+    if (PET.au || LANG !== "ms" || !SUARA_ON) return;
+    const a = PET.au = new Audio(), s = (PET_DLG[(PET_KUMP[PET_waktu()] || [])[0]] || {}).suara;
+    if (!s) return;
+    a.muted = true; a.src = PET_DIR + s;
+    const p = a.play(); if (p && p.then) p.then(() => { if (a.muted) a.pause(); }).catch(() => { /* abaikan */ });
+  } catch (e) { /* abaikan */ }
+}
+function PET_nama() { try { const p = mpProfil(); return p && p.nama ? String(p.nama).trim().slice(0, 20) : ""; } catch (e) { return ""; } }
+function PET_waktu() { const j = new Date().getHours(); return j >= 5 && j < 12 ? "sapa-pagi" : j >= 12 && j < 19 ? "sapa-petang" : "sapa-malam"; }
+function PET_label() {
+  const b = PET.togol; if (!b) return;
+  const t = tr(PET.sorok ? L("Tunjuk Nuri", "Show Nuri", "显示 Nuri") : L("Sorok Nuri", "Hide Nuri", "隐藏 Nuri"));
+  b.title = t; b.setAttribute("aria-label", t); b.setAttribute("aria-pressed", PET.sorok ? "false" : "true"); b.classList.toggle("pet-mati", PET.sorok);
+}
+function PET_bina() {
+  const el = document.createElement("div");
+  el.id = "petNuri"; el.className = "pet-nuri"; el.hidden = true;
+  el.innerHTML = '<div class="pet-rupa">' + PET_POSE.map(p => '<img alt="" draggable="false" data-pose="' + p + '" src="' + PET_DIR + p + '.png">').join("") + '</div><div class="pet-zzz" aria-hidden="true">z z z</div><div class="pet-badan" role="button" tabindex="0" aria-label="Nuri"></div>';
+  const gel = document.createElement("div"); gel.className = "pet-gel"; gel.setAttribute("role", "status"); gel.setAttribute("aria-live", "polite");
+  const tg = document.createElement("button"); tg.id = "petTogol"; tg.type = "button"; tg.className = "pet-togol"; tg.hidden = true;
+  tg.innerHTML = '<img alt="" src="' + PET_DIR + 'rehat.png">';
+  document.body.appendChild(el); document.body.appendChild(gel); document.body.appendChild(tg);
+  PET.el = el; PET.gel = gel; PET.togol = tg; PET.rupa = el.querySelector(".pet-rupa"); PET.badan = el.querySelector(".pet-badan");
+  PET.img = {}; el.querySelectorAll("img").forEach(i => { PET.img[i.dataset.pose] = i; });
+  tg.onclick = () => {
+    PET.sorok = !PET.sorok;
+    try { localStorage.setItem(PET_KUNCI, PET.sorok ? "sorok" : "tunjuk"); } catch (e) { /* abaikan */ }
+    PET_label(); PET_semak();
+  };
+  const b = PET.badan;
+  b.addEventListener("pointerdown", e => {
+    if (e.button) return;
+    e.preventDefault();
+    try { b.setPointerCapture(e.pointerId); } catch (x) { /* abaikan */ }
+    PET.seret = { id: e.pointerId, x0: e.clientX, y0: e.clientY, dx: e.clientX - PET.x, dy: e.clientY - PET.y, gerak: false };
+  });
+  b.addEventListener("pointermove", e => {
+    const s = PET.seret; if (!s || s.id !== e.pointerId) return;
+    if (!s.gerak && Math.hypot(e.clientX - s.x0, e.clientY - s.y0) < 8) return;
+    s.gerak = true; PET.mod = "pegang";
+    PET.x = Math.max(0, Math.min(innerWidth - PET.saiz, e.clientX - s.dx));
+    PET.y = Math.max(0, Math.min(innerHeight - PET.saiz, e.clientY - s.dy));
+  });
+  const lepas = e => {
+    const s = PET.seret; if (!s || s.id !== e.pointerId) return;
+    PET.seret = null;
+    try { b.releasePointerCapture(e.pointerId); } catch (x) { /* abaikan */ }
+    if (s.gerak) { PET.mod = "rehat"; PET.tx = PET.x; PET.ty = PET.y; PET.tahanHingga = performance.now() + 6000; }
+    else if (e.type === "pointerup") PET_sentuh();
+  };
+  b.addEventListener("pointerup", lepas); b.addEventListener("pointercancel", lepas);
+  b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); PET_sentuh(); } });
+  b.addEventListener("contextmenu", e => e.preventDefault());
+  /* sebarang sentuhan/kekunci = anak masih aktif; bangunkan Nuri jika tidur */
+  const hidup = e => { if (!PET.aktif) return; PET.aktifT = performance.now(); PET.lama = 0; if (PET.mod === "tidur" && e.target !== PET.badan) PET.mod = "rehat"; };
+  document.addEventListener("pointerdown", hidup, true); document.addEventListener("keydown", hidup, true);
+  window.addEventListener("resize", () => { PET.semakT = 0; });
+  PET_label();
+}
+/* Dipanggil oleh show(): Nuri hanya wujud selagi berada dalam Kelas Al-Quran */
+function PET_semak() {
+  try {
+    const patut = qrSenyap === true;
+    if (patut && !PET.el) PET_bina();
+    if (!PET.el) return;
+    PET.togol.hidden = !patut; PET_label();
+    const tunjuk = patut && !PET.sorok;
+    if (tunjuk && !PET.aktif) PET_masuk(!PET.dalam);
+    else if (!tunjuk && PET.aktif) PET_keluar();
+    if (tunjuk) PET.semakT = 0;
+    PET.dalam = patut;
+  } catch (e) { /* pet tidak boleh mengganggu app */ }
+}
+function PET_masuk(sapa) {
+  const t = performance.now();
+  PET.aktif = true; PET.el.hidden = false; PET.el.classList.remove("pet-lut", "pet-tidur");
+  PET.saiz = PET.el.offsetWidth || 120;
+  const yB = innerHeight - PET.saiz - PET_BAWAH;
+  PET.mod = "rehat"; PET.aktifT = t; PET.lama = 0; PET.tLepas = 0; PET.semakT = 0; PET.tahanHingga = 0; PET.sudut = null; PET.poseHingga = 0; PET.adabT = t;
+  PET.kelipT = t + 2500; PET.y = PET.ty = yB;
+  if (PET_kurang()) { PET.x = PET.tx = innerWidth - PET.saiz - 4; }
+  else { PET.x = -PET.saiz; PET.tx = Math.min(innerWidth - PET.saiz - 4, Math.max(8, innerWidth * .1)); PET.mod = "jalan"; PET.arah = 1; }
+  PET.rehatHingga = t + 5000;
+  /* sapaan: Nuri berjalan masuk dan berhenti dahulu; ~300ms kemudian baru lambai + gelembung + suara salam */
+  PET.masuk = !!sapa && PET.mod === "jalan"; PET.sapaT = sapa && !PET.masuk ? t + 300 : 0;
+  if (sapa) PET_bukaAudio();
+  cancelAnimationFrame(PET.raf); PET.raf = requestAnimationFrame(PET_detik);
+}
+function PET_keluar() {
+  PET.aktif = false; PET.seret = null; cancelAnimationFrame(PET.raf); PET_senyap();
+  PET.el.hidden = true; PET.gel.classList.remove("on"); PET.gelHingga = 0;
+}
+/* Papar gelembung (ikut bahasa app) + suara (BM sahaja, jika suara hidup dan tiada audio lain) */
+function PET_cakap(k, o) {
+  o = o || {};
+  if (!PET.aktif) return;
+  const senarai = PET_KUMP[k] || (PET_DLG[k] ? [k] : []);
+  if (!senarai.length) return;
+  let id = senarai[Math.floor(Math.random() * senarai.length)];
+  if (senarai.length > 1 && id === PET.akhir[k]) id = senarai[(senarai.indexOf(id) + 1) % senarai.length];
+  PET.akhir[k] = id;
+  const d = PET_DLG[id], t = performance.now();
+  if (o.pose) { PET.poseKhas = o.pose; PET.poseKhas2 = o.pose2 || ""; PET.poseTukar = t + 1100; PET.poseHingga = t + (o.lama || 2200); PET.lompatHingga = o.lompat ? t + 900 : 0; }
+  let teks = d[LANG === "ms" ? "bm" : LANG] || d.bm || "";
+  if (o.nama) { const n = PET_nama(); if (n) teks = tr(L("Hai, ", "Hi, ", "嗨，")) + n + (LANG === "zh" ? "！" : "! ") + teks; }
+  PET.gel.textContent = teks; PET.gel.classList.add("on");
+  PET.gw = PET.gel.offsetWidth; PET.gh = PET.gel.offsetHeight; PET.gelHingga = t + 3800;
+  PET_senyap();
+  if (!d.suara || LANG !== "ms" || !SUARA_ON || o.bisu) return;
+  const no = PET.auNo, mula = () => {
+    if (no !== PET.auNo || !PET.aktif || !SUARA_ON || LANG !== "ms" || PET_audioLain()) return;
+    try {
+      if (!PET.au) PET.au = new Audio();
+      PET.au.muted = false; PET.au.src = PET_DIR + d.suara;
+      const p = PET.au.play(); if (p && p.catch) p.catch(() => { /* tiada izin audio: gelembung sahaja */ });
+    } catch (e) { /* abaikan */ }
+  };
+  if (o.lengah) setTimeout(mula, o.lengah); else mula();
+}
+function PET_sentuh() {
+  if (!PET.aktif) return;
+  const t = performance.now(), tidur = PET.mod === "tidur";
+  PET.aktifT = t; PET.lama = 0;
+  if (tidur) { PET.mod = "rehat"; PET.rehatHingga = t + 4000; PET_cakap(PET_waktu(), { pose: "lambai", lama: 2600 }); return; }
+  if (PET.mod === "jalan") { PET.mod = "rehat"; PET.tx = PET.x; PET.ty = PET.y; PET.rehatHingga = t + 4000; }
+  PET_cakap("sentuh", Math.random() < .5 ? { pose: "lambai" } : { pose: "gembira", lompat: true });
+}
+/* Reaksi kepada bunyi app sedia ada: sndOk = betul, sndBad = salah, sndWin = tamat (logik soalan tidak disentuh) */
+function PET_acara(j) {
+  try {
+    if (!PET.aktif) return;
+    const t = performance.now();
+    PET.aktifT = t; PET.lama = 0; if (PET.mod === "tidur") PET.mod = "rehat";
+    if (j === "tamat" && document.querySelector(".screen.on .thjpapan")) j = "betul"; /* siap satu huruf, pelajaran belum tamat */
+    if (j === "betul") PET_cakap("betul", { pose: "gembira", pose2: "tepuk", lompat: true, lengah: 450 });
+    else if (j === "salah") PET_cakap("salah", { pose: "fikir", lama: 2600, lengah: 500 });
+    else if (j === "tamat") PET_cakap("tamat", { pose: "lambai", lama: 2800, lengah: 850 });
+  } catch (e) { /* abaikan */ }
+}
+/* Luas pertindihan kawasan sentuh Nuri (di x, y) dengan butang/kanvas */
+function PET_tindih(x, y, hal) {
+  const s = PET.saiz, a = s * .14, l = x + a, t = y + a, r = x + s - a, b = y + s - a;
+  let luas = 0;
+  for (let i = 0; i < hal.length; i++) { const h = hal[i], w = Math.min(r, h.right) - Math.max(l, h.left), tg = Math.min(b, h.bottom) - Math.max(t, h.top); if (w > 0 && tg > 0) luas += w * tg; }
+  return luas;
+}
+/* Cari bucu/tepi yang tidak menutup butang, pilihan jawapan atau kanvas */
+function PET_cariTepi() {
+  const W = innerWidth, H = innerHeight, s = PET.saiz, m = 4, yB = H - s - PET_BAWAH, kn = W - s - m;
+  const hal = [];
+  document.querySelectorAll(".screen.on button,.screen.on a,.screen.on input,.screen.on textarea,.screen.on select,.screen.on canvas,.screen.on [role=button],body>button").forEach(e => {
+    if (e === PET.togol) return;
+    const r = e.getBoundingClientRect(); if (r.width && r.height && r.bottom > 0 && r.top < H && r.right > 0 && r.left < W) hal.push(r);
+  });
+  const calon = [[kn, yB], [m, yB], [kn, H * .6 - s / 2], [m, H * .6 - s / 2], [kn, H * .3 - s / 2], [m, H * .3 - s / 2]];
+  if (PET.sudut) calon.unshift([PET.sudut.kiri ? m : kn, Math.min(yB, PET.sudut.y)]);
+  let baik = null;
+  calon.forEach(c => { const a = PET_tindih(c[0], c[1], hal); if (!baik || a < baik.a) baik = { x: c[0], y: c[1], a: a, kiri: c[0] === m }; });
+  return baik;
+}
+function PET_pose(p) {
+  if (p === PET.poseKini) return;
+  const a = PET.img[PET.poseKini], b = PET.img[p];
+  if (!b) return;
+  if (a) a.classList.remove("on");
+  b.classList.add("on"); PET.poseKini = p;
+}
+function PET_detik(t) {
+  if (!PET.aktif) return;
+  PET.raf = requestAnimationFrame(PET_detik);
+  const dt = Math.min(.1, PET.tLepas ? (t - PET.tLepas) / 1000 : 0); PET.tLepas = t;
+  const kurang = PET_kurang(), bising = PET_audioLain();
+  if (bising) { PET_senyap(); PET.aktifT = t; }
+  /* semak susun atur skrin 2-3 kali sesaat (bukan setiap bingkai) */
+  if (t - PET.semakT > 400) {
+    PET.semakT = t;
+    PET.saiz = PET.el.offsetWidth || PET.saiz;
+    const skrin = document.querySelector(".screen.on"), dulu = PET.jawab;
+    PET.tepi = !skrin || (skrin.id !== "s-subj" && skrin.id !== "s-quran") || !!skrin.querySelector(PET_TEPI_SEL);
+    PET.jawab = !!skrin && !!skrin.querySelector(PET_JAWAB_SEL);
+    PET.sudut = (PET.tepi || kurang) && PET.mod !== "pegang" ? PET_cariTepi() : null;
+    const lut = !!PET.sudut && PET.sudut.a > 0 && t >= PET.tahanHingga && PET.mod !== "pegang";
+    PET.el.classList.toggle("pet-lut", lut);
+    /* galakan ringkas bila anak mula menjawab/menulis */
+    if (PET.jawab && !dulu && !bising && t - PET.galakT > 60000 && t > PET.gelHingga && PET.mod !== "tidur") { PET.galakT = t; PET_cakap("galak", { pose: "tunjuk", lengah: 700 }); }
+  }
+  const W = innerWidth, H = innerHeight, s = PET.saiz, yB = H - s - PET_BAWAH;
+  let bergerak = false;
+  if (PET.mod !== "pegang" && PET.mod !== "tidur") {
+    /* berundur ke tepi tidak menunggu pose; reaksi lain berhenti sekejap */
+    const diam = t < PET.tahanHingga || (t < PET.poseHingga && !PET.sudut);
+    let laju = PET.masuk ? 70 : PET_LAJU;
+    if (PET.sudut && t >= PET.tahanHingga) {
+      if (PET.tx !== PET.sudut.x || PET.ty !== PET.sudut.y) { PET.tx = PET.sudut.x; PET.ty = PET.sudut.y; }
+      if (PET.x !== PET.tx || PET.y !== PET.ty) PET.mod = "jalan";
+      laju = 220;
+      if (kurang) { PET.x = PET.tx; PET.y = PET.ty; PET.mod = "rehat"; }
+    } else if (!diam && !kurang && !bising && PET.mod === "rehat" && (t > PET.rehatHingga || PET.y !== yB)) {
+      /* merayau: pilih titik baharu di jalur bawah */
+      const maks = Math.max(8, W - s - 8); let tx = 8 + Math.random() * (maks - 8);
+      if (Math.abs(tx - PET.x) < s) tx = PET.x < W / 2 ? Math.min(maks, PET.x + s * 1.5) : Math.max(8, PET.x - s * 1.5);
+      PET.tx = tx; PET.ty = yB; PET.mod = "jalan";
+      if (PET.y !== yB) laju = 90;
+    } else if (PET.mod === "jalan" && PET.y !== PET.ty) laju = 90;
+    if (PET.mod === "jalan" && !diam && !(bising && !PET.sudut && !PET.masuk)) {
+      const dx = PET.tx - PET.x, dy = PET.ty - PET.y, j = Math.hypot(dx, dy), langkah = laju * dt;
+      if (j <= langkah || j < .5) { PET.x = PET.tx; PET.y = PET.ty; PET.mod = "rehat"; PET.rehatHingga = t + 4000 + Math.random() * 4000; if (PET.masuk) { PET.masuk = false; PET.sapaT = t + 300; } }
+      else { PET.x += dx / j * langkah; PET.y += dy / j * langkah; if (Math.abs(dx) > 1) PET.arah = dx > 0 ? 1 : -1; bergerak = true; }
+    }
+    if (PET.x > W - s) PET.x = Math.max(0, W - s);
+    if (PET.y > H - s) PET.y = Math.max(0, H - s);
+  }
+  /* salam menunggu audio lain (cth. bunyi pembuka app) habis, paling lama 6 s */
+  if (PET.sapaT && t >= PET.sapaT && PET.mod !== "pegang" && (!bising || t > PET.sapaT + 6000)) { PET.sapaT = 0; PET_cakap(PET_waktu(), { pose: "lambai", lama: 2600, nama: true }); }
+  /* lama tak aktif: tegur, kemudian tidur */
+  if (PET.mod !== "tidur" && PET.mod !== "pegang") {
+    const sunyi = t - PET.aktifT, la = PET_KUMP.lama || [];
+    if (sunyi > 60000) { PET.lama = 2; PET.mod = "tidur"; PET.poseHingga = 0; if (la[1]) PET_cakap(la[1], {}); }
+    else if (sunyi > 45000 && PET.lama < 1) { PET.lama = 1; if (la[0]) PET_cakap(la[0], {}); }
+    else if (!bergerak && !PET.tepi && !bising && PET.mod === "rehat" && t - PET.adabT > 75000 && t > PET.gelHingga && sunyi < 30000) { PET.adabT = t; PET_cakap("adab", { pose: "tunjuk" }); }
+  }
+  /* pose */
+  let pose = "rehat", lompat = 0;
+  if (PET.mod === "pegang") pose = "gembira";
+  else if (PET.mod === "tidur") pose = "tidur";
+  else if (bergerak && PET.sudut) pose = PET_JALAN[Math.floor(t / 1000 * (PET_BINGKAI + 3)) % PET_JALAN.length];
+  else if (t < PET.poseHingga) { pose = PET.poseKhas2 && t > PET.poseTukar ? PET.poseKhas2 : PET.poseKhas; if (t < PET.lompatHingga && !kurang) lompat = -Math.abs(Math.sin((PET.lompatHingga - t) / 900 * Math.PI * 2)) * s * .13; }
+  else if (bergerak) pose = PET_JALAN[Math.floor(t / 1000 * PET_BINGKAI) % PET_JALAN.length];
+  else if (!kurang) {
+    if (t > PET.kelipT) { PET.kelipHingga = t + 170; PET.kelipT = t + 3000 + Math.random() * 2500; }
+    if (t < PET.kelipHingga) pose = "rehat-kelip";
+    lompat = Math.sin(t / 700) * s * .008;
+  }
+  PET_pose(pose);
+  PET.el.classList.toggle("pet-tidur", PET.mod === "tidur");
+  PET.el.style.transform = "translate3d(" + PET.x.toFixed(1) + "px," + PET.y.toFixed(1) + "px,0)";
+  PET.rupa.style.transform = "translate3d(0," + lompat.toFixed(1) + "px,0) scaleX(" + ((bergerak && PET.arah < 0) || (pose === "tunjuk" && PET.x > W / 2) ? -1 : 1) + ")"; /* tunjuk sentiasa menghala ke kandungan */
+  /* gelembung: di atas kepala, sentiasa dalam skrin */
+  if (PET.gelHingga) {
+    if (t > PET.gelHingga) { PET.gelHingga = 0; PET.gel.classList.remove("on"); }
+    else {
+      const gx = Math.max(8, Math.min(W - PET.gw - 8, PET.x + s / 2 - PET.gw / 2)); let gy = PET.y - PET.gh - 2 + Math.min(0, lompat);
+      if (gy < 8) gy = PET.y + s + 2;
+      PET.gel.style.transform = "translate3d(" + gx.toFixed(1) + "px," + gy.toFixed(1) + "px,0)";
+    }
+  }
+}
 } else if (typeof module !== "undefined") {
   module.exports = { SUBJEK, TAHAP, NOTA, setLang: l => { LANG = l; } };
 }
