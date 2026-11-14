@@ -1283,17 +1283,17 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 .peta::before{content:"";position:fixed;inset:0;z-index:-1;background:#e9dcf7 var(--peta-lp,url(gambar/peta/peta-latar-potret.jpg)) center/cover no-repeat;pointer-events:none}
 @media (orientation:landscape){.peta::before{background-image:var(--peta-ll,url(gambar/peta/peta-latar-landskap.jpg))}}
 body.peta-on #subjList{display:block}
-.peta{position:relative;width:100%;max-width:1100px;margin:0 auto;height:calc(100vh - 150px);min-height:460px}
+.peta{position:relative;width:100%;max-width:1100px;margin:0 auto;height:calc(100vh - 150px)}
 body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#4a3570;background:rgba(255,255,255,.88);border:3px solid #e6d6ff;border-radius:999px;padding:4px 22px;box-shadow:0 5px 0 #d9c6fb}
 .peta-pulau{position:absolute;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;z-index:2}
 .peta-pulau .peta-img{width:100%;display:block;filter:drop-shadow(0 18px 22px rgba(90,60,140,.28));animation:petaApung 4.2s ease-in-out infinite}
 .peta-quran .peta-img{animation-delay:-2.1s;animation-duration:4.8s}
-.peta-label{margin-top:-6%;background:#fff;color:#4a3570;border:3px solid #e6d6ff;border-radius:999px;padding:6px 20px;font-weight:800;font-size:clamp(17px,2.6vmin,24px);box-shadow:0 5px 0 #d9c6fb,0 10px 18px rgba(90,60,140,.18);white-space:nowrap}
+.peta-label{margin-top:-6%;font-size:clamp(13px,calc(var(--ph,700px) * .03),24px)!important;background:#fff;color:#4a3570;border:3px solid #e6d6ff;border-radius:999px;padding:6px 20px;font-weight:800;font-size:clamp(17px,2.6vmin,24px);box-shadow:0 5px 0 #d9c6fb,0 10px 18px rgba(90,60,140,.18);white-space:nowrap}
 .peta-label small{display:block;font-weight:600;font-size:.62em;color:#8a76ad;text-align:center}
-.peta-iqra{left:2%;top:0;width:min(54%,40vh)}
-.peta-quran{right:2%;bottom:3%;width:min(54%,40vh)}
+.peta-iqra{left:2%;top:0;width:min(54%,calc(var(--ph,700px) * .4))}
+.peta-quran{right:2%;bottom:3%;width:min(54%,calc(var(--ph,700px) * .4))}
 .peta-jambatan{position:absolute;left:24%;top:30%;width:52%;transform:rotate(28deg);opacity:.95;pointer-events:none;z-index:1;animation:petaKilau 3s ease-in-out infinite}
-@media (orientation:landscape){.peta{height:calc(100vh - 140px)}.peta-iqra{left:4%;top:8%;width:min(40%,62vh)}.peta-quran{right:4%;top:8%;bottom:auto;width:min(40%,62vh)}.peta-jambatan{left:30%;top:18%;width:40%;transform:none}}
+@media (orientation:landscape){.peta{height:calc(100vh - 140px)}.peta-iqra{left:4%;top:2%;width:min(40%,calc(var(--ph,600px) * .66))}.peta-quran{right:4%;top:2%;bottom:auto;width:min(40%,calc(var(--ph,600px) * .66))}.peta-jambatan{left:30%;top:18%;width:40%;transform:none}}
 .peta-kilat{position:absolute;width:10px;height:10px;pointer-events:none;z-index:3;background:radial-gradient(circle,#fff 0 30%,rgba(255,236,160,.9) 31% 50%,transparent 51%);animation:petaKelip 2.6s ease-in-out infinite}
 .peta-pulau:active .peta-img,.peta-pulau.peta-tekan .peta-img{animation:petaLantun .45s ease}
 .peta-pulau.peta-pergi{transition:transform .55s cubic-bezier(.5,0,.7,.4),opacity .55s ease-in;transform:scale(1.35);opacity:0}
@@ -1314,7 +1314,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 @keyframes petaKelip{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
 @media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
 /* ===== Pulau-pulau Iqra' (lln2) ===== */
-.lln2{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:calc(100vh - 150px);min-height:480px;overflow:hidden;touch-action:pan-y}
+.lln2{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:calc(100vh - 150px);overflow:hidden;touch-action:pan-y}
 .lln2::before{content:"";position:fixed;inset:0;z-index:-1;background:#e9dcf7 url(gambar/peta/peta-latar-potret.jpg) center/cover no-repeat;pointer-events:none;transition:background-position 1.6s ease}
 @media (orientation:landscape){.lln2::before{background-image:url(gambar/peta/peta-latar-landskap.jpg)}}
 .lln2.lln2-terbang::before{background-position:60% 50%}
@@ -1325,11 +1325,18 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .lln2-titik button.siap{background:#ffcf4a}
 .lln2-titik button.on{background:#a77bf3;transform:scale(1.35)}
 .lln2-pentas{position:absolute;left:0;right:0;top:72px;bottom:0}
-.lln2-pulau{position:absolute;left:50%;top:50%;width:min(94vw,calc((100vh - 240px) * 1.33),900px);margin-left:calc(min(94vw,calc((100vh - 240px) * 1.33),900px) / -2);aspect-ratio:4/3;translate:0 -50%;transition:transform 1.25s cubic-bezier(.55,.05,.35,1)}
+@media (max-height:520px){.lln2-pentas{top:22px}.lln2-atas{gap:4px}.lln2-tajuk{display:none}body.peta-on #subjTitle{font-size:16px;padding:2px 14px}.lln2-titik button{width:12px;height:12px}.lln2-anak{width:48px;height:48px;font-size:26px}.lln2-anak span{font-size:22px}.lln2-kiri{left:12px!important}.lln2-kanan{right:12px!important}.lln2-anak{bottom:auto;top:50%;margin-top:-24px}}
+.lln2-pulau{position:absolute;left:50%;top:var(--pt,50%);width:var(--pw,600px);margin-left:calc(var(--pw,600px) / -2);aspect-ratio:4/3;translate:0 -50%;transition:transform 1.25s cubic-bezier(.55,.05,.35,1)}
 .lln2-gbr{position:relative;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
 .lln2-apung::before{content:"";position:absolute;left:18%;right:18%;bottom:2%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(90,60,140,.28),rgba(90,60,140,0));pointer-events:none}
-.lln2-batu{width:clamp(84px,17%,150px)}
-.lln2-padat .lln2-batu{width:clamp(74px,14%,124px)}
+.lln2-batu{width:clamp(40px,16%,150px)}
+.lln2 .lln-nama{font-size:clamp(10.5px,calc(var(--pw,600px) * .026),16px);padding:2px 9px;border-width:2px}
+.lln2 .lln-no{font-size:clamp(20px,calc(var(--pw,600px) * .06),40px)}
+.lln2 .lln-ik{font-size:clamp(16px,calc(var(--pw,600px) * .05),34px)}
+.lln2 .lln-ik-kecil{font-size:clamp(11px,calc(var(--pw,600px) * .03),22px)!important}
+.lln2 .lln-bintang i{width:clamp(12px,calc(var(--pw,600px) * .03),20px);height:clamp(12px,calc(var(--pw,600px) * .03),20px)}
+.lln2 .lln-panah{font-size:clamp(10px,calc(var(--pw,600px) * .022),13px)}
+.lln2-padat .lln2-batu{width:clamp(38px,14%,124px)}
 .lln2-padat .lln-nama{font-size:clamp(12px,1.6vmin,14px)}
 .lln-tanda{position:absolute;right:4%;top:2%;width:28px;height:28px;border-radius:50%;background:#4cc38a;color:#fff;font-weight:900;display:grid;place-items:center;border:2.5px solid #fff;font-size:15px}
 .lln2-anak{position:absolute;bottom:5%;z-index:4;width:64px;height:64px;border-radius:50%;border:4px solid #fff;background:#a77bf3;color:#fff;font-size:34px;font-weight:900;line-height:1;box-shadow:0 5px 0 #7d55c9,0 10px 18px rgba(90,60,140,.3);display:grid;place-items:center;padding:0}
@@ -6120,6 +6127,8 @@ function PETA_bina() {
   lbl(".peta-quran", tk(tq.nama, "Al-Quran", "Al-Quran", "古兰经"), tk(tq.sub, "Tajwid, hafazan & 30 juz", "Tajwid, memorise & 30 juz", "泰吉威德、背诵和30卷"));
   for (let i = 0; i < 14; i++) { const k = document.createElement("i"); k.className = "peta-kilat"; k.style.left = (4 + Math.random() * 92) + "%"; k.style.top = (3 + Math.random() * 90) + "%"; k.style.animationDelay = (-Math.random() * 2.6) + "s"; p.appendChild(k); }
   $("subjList").appendChild(p);
+  const sesuaiP = () => { if (!p.isConnected) { window.removeEventListener("resize", sesuaiP); return; } const h = Math.max(220, window.innerHeight - p.getBoundingClientRect().top - 8); p.style.height = h + "px"; p.style.setProperty("--ph", h + "px"); };
+  sesuaiP(); window.addEventListener("resize", sesuaiP);
   let pergi = false;
   const buka = (btn, fn) => btn.onclick = () => {
     if (pergi) return; pergi = true;
@@ -6204,6 +6213,18 @@ function LLN_bina() {
     LLN_tulis(LLN_PULAU, kini);
   };
   document.body.classList.add("lln2-on");
+  /* saiz ikut ruang skrin sebenar (iPhone, iPad, MacBook, desktop) */
+  const sesuai = () => {
+    if (!w.isConnected) { window.removeEventListener("resize", sesuai); return; }
+    const top = w.getBoundingClientRect().top + (window.scrollY || 0), H = Math.max(240, window.innerHeight - top - 6);
+    w.style.height = H + "px";
+    const pendek = window.innerHeight < 520, W = w.clientWidth, ruangH = H - (pendek ? 26 : 72) - (pendek ? 4 : 96);
+    let pw = Math.min(W * .94, ruangH * 1.3, 900);
+    if (W < 600 && window.innerHeight > W) pw = Math.min(W * 1.04, ruangH * 1.3);
+    w.style.setProperty("--pw", Math.round(pw) + "px");
+    w.style.setProperty("--pt", pendek ? "50%" : "calc(50% - 30px)");
+  };
+  sesuai(); window.addEventListener("resize", sesuai);
   /* ---- Nuri dalam pulau: berdiri di sebelah batu, berjalan ke batu yang ditekan ---- */
   const kurang = PET_kurang();
   const titikBatu = (el, b) => { const q = el._sus[b]; return [Math.min(90, q[0] + 8.5), q[1] + 4]; };
