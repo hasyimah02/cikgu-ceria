@@ -1540,6 +1540,104 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .kbn-siluet.terang b{color:#a77bf3;opacity:1;filter:none;transition:color .3s}
 .kbn-siluet.goyang{animation:kbnGoyang .4s ease}
 .kbn-bayang .kbn-markah{top:auto;bottom:16px}
+.kbn-kebun{position:relative;height:min(64vh,580px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#cfeaff,#eaf6ff 38%,#bfe7a8 38%,#a6db8f 46%)}
+.kbn-tanah{position:absolute;left:0;right:0;top:46%;bottom:0;background:repeating-linear-gradient(0deg,#a8754a 0 26px,#9a6a40 26px 30px)}
+.kbn-batas{position:absolute;left:0;right:0;top:34%;display:flex;justify-content:center;gap:7%}
+.kbn-lobak{position:relative;width:clamp(96px,22%,150px);aspect-ratio:80/150;border:0;padding:0;background:none;cursor:pointer;animation:kbnTimbul2 .4s var(--d) both cubic-bezier(.3,1.6,.5,1)}
+.kbn-lobak-svg{position:absolute;left:0;top:0;width:100%;height:100%;transform:translateY(34%);transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.kbn-papan{position:absolute;left:50%;top:-14%;transform:translateX(-50%);min-width:80%;padding:4px 8px;border-radius:12px;background:#fff7e6;border:3px solid #c08a52;box-shadow:0 4px 0 #b07a44;display:grid;place-items:center;z-index:2}
+.kbn-papan b{font-size:clamp(40px,8vmin,66px);color:#3a2366;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1.1}
+.kbn-lobak.cabut .kbn-lobak-svg{transform:translateY(-30%) rotate(-8deg)}
+.kbn-lobak.cabut{pointer-events:none}
+.kbn-lobak.cabut .kbn-papan{border-color:#4cc38a;box-shadow:0 4px 0 #3aa874}
+.kbn-lobak.goyang .kbn-lobak-svg{animation:kbnGoyangL .45s ease}
+@keyframes kbnGoyangL{0%,100%{transform:translateY(34%)}25%{transform:translateY(30%) rotate(-10deg)}75%{transform:translateY(30%) rotate(10deg)}}
+.kbn-kebun .kbn-ulang,.kbn-litar .kbn-ulang{display:grid;place-items:center;z-index:6;top:auto;bottom:12px}
+.kbn-kebun .kbn-ulang svg,.kbn-litar .kbn-ulang svg{width:28px;height:28px}
+.kbn-kebun .kbn-markah,.kbn-litar .kbn-markah{top:auto;bottom:24px;z-index:6}
+.kbn-litar{position:relative;height:min(66vh,600px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:#7cc96d}
+.kbn-lorong-grid{position:absolute;left:6%;right:6%;top:0;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);background:#5b5f73;border-left:6px solid #fff;border-right:6px solid #fff}
+.kbn-lorong{position:relative;border:0;padding:0;background:transparent;cursor:pointer;border-right:4px dashed rgba(255,255,255,.7)}
+.kbn-lorong:last-child{border-right:0}
+.kbn-garis-mula{position:absolute;left:8%;right:8%;top:30%;padding:6px 0;border-radius:14px;background:#fff;border:4px solid #c7a9ff;box-shadow:0 4px 0 #d9c6fb;display:grid;place-items:center}
+.kbn-garis-mula b{font-size:clamp(44px,9vmin,72px);color:#3a2366;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1.1}
+.kbn-lorong.masuk .kbn-garis-mula{animation:kbnTimbul2 .4s both cubic-bezier(.3,1.6,.5,1)}
+.kbn-lorong.betul .kbn-garis-mula{border-color:#4cc38a;box-shadow:0 4px 0 #3aa874}
+.kbn-kereta-l{position:absolute;bottom:4%;left:50%;width:clamp(58px,11%,90px);aspect-ratio:80/120;transform:translateX(-50%);transition:left .35s ease,bottom .6s cubic-bezier(.6,0,.8,.4);z-index:3;pointer-events:none}
+.kbn-kereta-l svg{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
+.kbn-kereta-l.pecut{bottom:110%}
+.kbn-kereta-l.brek{animation:kbnBrek .5s ease}
+@keyframes kbnBrek{0%,100%{transform:translateX(-50%) rotate(0)}30%{transform:translateX(-50%) rotate(-12deg)}60%{transform:translateX(-50%) rotate(10deg)}}
+.kbn-padang{position:relative;height:min(64vh,580px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#e6f5ff,#fdf3ff 58%,#c6ecb6 58%,#aee09c)}
+.kbn-arnab{position:absolute;left:50%;top:6%;width:clamp(150px,32%,230px);transform:translateX(-50%)}
+.kbn-arnab svg{width:100%;height:auto;display:block;overflow:visible}
+.kbn-arnab .kbn-mulut{transform-box:fill-box;transform-origin:center}
+.kbn-arnab.lapar .kbn-mulut{animation:kbnMulut 1s ease-in-out infinite}
+@keyframes kbnMulut{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.35)}}
+.kbn-arnab.kunyah .kbn-mulut{animation:kbnKunyah .18s ease-in-out 5}
+@keyframes kbnKunyah{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(.9)}}
+.kbn-arnab.kunyah svg{animation:kbnLonjak .5s ease .1s}
+.kbn-arnab.geleng svg{animation:kbnGeleng .5s ease}
+@keyframes kbnGeleng{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.kbn-arnab.kenyang .kbn-mulut{transform:scaleY(.3)}
+.kbn-pinggan{position:absolute;left:0;right:0;bottom:6%;display:flex;justify-content:center;gap:6%}
+.kbn-biskut{width:clamp(90px,20%,132px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 30%,#c98a4e 0 5%,transparent 6%),radial-gradient(circle at 72% 62%,#c98a4e 0 5%,transparent 6%),radial-gradient(circle at 40% 75%,#c98a4e 0 4%,transparent 5%),radial-gradient(circle,#f6cf8e 0 66%,#e8b06a 67%);box-shadow:0 6px 0 #c98a4e;display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;animation:kbnTimbul2 .4s both cubic-bezier(.3,1.6,.5,1);position:relative;z-index:2}
+.kbn-biskut b{font-size:clamp(42px,8vmin,68px);color:#3a2366;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1;pointer-events:none}
+.kbn-pelancar{position:relative;height:min(66vh,600px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#2c2150,#5b3f8f 60%,#8d6cc9)}
+.kbn-bintang-l{position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 70% 12%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 85% 40%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 30% 50%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 55% 30%,#ffe9a8 0 2px,transparent 3px)}
+.kbn-roket{position:absolute;left:50%;bottom:32%;width:clamp(96px,20%,140px);transform:translateX(-50%);transition:transform 1.8s cubic-bezier(.6,0,.9,.5)}
+.kbn-roket svg{width:100%;height:auto;display:block}
+.kbn-tangki{position:absolute;right:-34px;bottom:12%;display:flex;flex-direction:column-reverse;gap:4px;padding:4px;border-radius:10px;background:rgba(255,255,255,.25);border:2px solid #fff}
+.kbn-tangki i{width:18px;height:14px;border-radius:4px;background:rgba(255,255,255,.35)}
+.kbn-tangki i.on{background:linear-gradient(#ffd36e,#ff9f1a);box-shadow:0 0 8px #ffc93c;animation:kbnMasuk .35s cubic-bezier(.3,1.8,.5,1)}
+.kbn-api{position:absolute;left:50%;top:94%;width:40%;height:0;transform:translateX(-50%);border-radius:0 0 50% 50%;background:linear-gradient(#ffe27a,#ff8a3a 60%,transparent);transition:height .3s}
+.kbn-pelancar.lancar .kbn-api{height:70%;animation:kbnApi .12s linear infinite alternate}
+@keyframes kbnApi{to{transform:translateX(-50%) scaleX(.8)}}
+.kbn-pelancar.lancar .kbn-roket{transform:translate(-50%,-140vh)}
+.kbn-asap-r{position:absolute;left:50%;bottom:18%;width:0;height:0}
+.kbn-pelancar.lancar .kbn-asap-r{width:70%;height:30%;transform:translateX(-50%);background:radial-gradient(ellipse at 30% 60%,#fff 0 22%,transparent 23%),radial-gradient(ellipse at 60% 50%,#f1ecf8 0 26%,transparent 27%),radial-gradient(ellipse at 80% 70%,#fff 0 18%,transparent 19%);animation:kbnAsapR 1.6s ease-out forwards}
+@keyframes kbnAsapR{from{opacity:0;transform:translateX(-50%) scale(.4)}to{opacity:1;transform:translateX(-50%) scale(1.2)}}
+.kbn-kira{position:absolute;left:50%;top:18%;transform:translateX(-50%);font-weight:900;font-size:clamp(70px,14vmin,120px);color:#ffc93c;text-shadow:0 4px 0 #3a2366}
+.kbn-kira.pop{animation:kbnMasuk .4s cubic-bezier(.3,1.8,.5,1)}
+.kbn-tong-baris{position:absolute;left:0;right:0;bottom:5%;display:flex;justify-content:center;gap:6%}
+.kbn-tong{width:clamp(84px,18%,120px);aspect-ratio:4/5;border:0;border-radius:16px;background:linear-gradient(90deg,#ff7a3a,#ffb054 45%,#ff7a3a);box-shadow:inset 0 10px 0 rgba(0,0,0,.12),inset 0 -10px 0 rgba(0,0,0,.12),0 5px 0 #c4552a;display:grid;place-items:center;cursor:pointer;animation:kbnTimbul2 .4s both cubic-bezier(.3,1.6,.5,1)}
+.kbn-tong b{font-size:clamp(40px,7.5vmin,64px);color:#fff;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1;text-shadow:0 2px 0 #3a2366,0 0 2px #3a2366}
+.kbn-tong.goyang{animation:kbnGoyang .4s ease}
+.kbn-padang .kbn-ulang,.kbn-pelancar .kbn-ulang{display:grid;place-items:center;z-index:6}
+.kbn-padang .kbn-ulang svg,.kbn-pelancar .kbn-ulang svg{width:28px;height:28px}
+.kbn-susun,.kbn-boss{position:relative;border-radius:28px;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#fff7fd,#efe6ff);padding:20px 16px 70px;min-height:min(56vh,520px)}
+.kbn-slot-baris{display:flex;flex-direction:row-reverse;justify-content:center;gap:10px;margin:6px 0 26px;flex-wrap:wrap}
+.kbn-slot-s{width:clamp(64px,15vw,104px);aspect-ratio:1;border-radius:18px;border:4px dashed #d4c2f5;background:rgba(255,255,255,.7);display:grid;place-items:center}
+.kbn-slot-s.isi{border:4px solid #4cc38a;background:#effbf4;animation:kbnMasuk .35s cubic-bezier(.3,1.6,.5,1)}
+.kbn-slot-s b,.kbn-jubin-s b,.kbn-boss-b b{font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1;color:#3a2366}
+.kbn-slot-s b{font-size:clamp(40px,8vmin,66px);color:#2e9a68}
+.kbn-susun-pilih{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.kbn-jubin-s{width:clamp(70px,16vw,112px);aspect-ratio:1;border:4px solid #c7a9ff;border-radius:20px;background:#fff;box-shadow:0 5px 0 #d9c6fb;display:grid;place-items:center;cursor:pointer}
+.kbn-jubin-s b{font-size:clamp(44px,9vmin,72px)}
+.kbn-jubin-s.guna{opacity:.25;cursor:default}
+.kbn-jubin-s.goyang{animation:kbnGoyang .4s ease}
+.kbn-susun .kbn-ulang,.kbn-boss .kbn-ulang{top:auto;bottom:12px;display:grid;place-items:center}
+.kbn-susun .kbn-ulang svg,.kbn-boss .kbn-ulang svg{width:28px;height:28px}
+.kbn-susun .kbn-markah{top:auto;bottom:24px}
+.kbn-boss-atas{display:flex;justify-content:space-between;align-items:center;font-weight:900;color:#4a3570;font-size:19px;margin:0 6px 10px}
+.kbn-boss-skor{background:#ffc93c;color:#5a3d00;border-radius:999px;padding:3px 14px;box-shadow:0 3px 0 #e2a92a}
+.kbn-masa{height:16px;border-radius:999px;background:#e6d6ff;overflow:hidden;margin:0 6px 20px}
+.kbn-masa i{display:block;height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#ff7a7a,#ffc93c,#4cc38a)}
+.kbn-boss-pilih{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto}
+.kbn-boss-b{aspect-ratio:1;border:4px solid #c7a9ff;border-radius:22px;background:#fff;box-shadow:0 5px 0 #d9c6fb;display:grid;place-items:center;cursor:pointer;animation:kbnMasuk .3s both}
+.kbn-boss-b b{font-size:clamp(50px,10vmin,86px)}
+.kbn-boss-b.betul{border-color:#4cc38a;background:#effbf4}
+.kbn-boss-b.salah{border-color:#ff7a7a;background:#fff0f0;animation:kbnGoyang .4s ease}
+.kbn-lencana{text-align:center;padding:10px}
+.kbn-lencana h3{font-size:30px;margin:12px 0 4px;color:#4a3570}
+.kbn-lencana p{font-weight:900;font-size:22px;color:#a77bf3;margin:0}
+.kbn-piala{position:relative;width:150px;height:170px;margin:0 auto;animation:kbnMasuk .6s cubic-bezier(.3,1.8,.5,1)}
+.kbn-piala-cawan{position:absolute;left:25px;top:20px;width:100px;height:86px;border-radius:0 0 50px 50px;background:linear-gradient(135deg,#ffe27a,#ffb300);box-shadow:inset -10px -8px 0 rgba(0,0,0,.08)}
+.kbn-piala-cawan::before,.kbn-piala-cawan::after{content:"";position:absolute;top:10px;width:30px;height:40px;border:8px solid #ffc21a;border-radius:50%}
+.kbn-piala-cawan::before{left:-28px;border-right-color:transparent}
+.kbn-piala-cawan::after{right:-28px;border-left-color:transparent}
+.kbn-piala-kaki{position:absolute;left:55px;top:104px;width:40px;height:30px;background:#ffb300;box-shadow:0 30px 0 -6px #a77bf3}
+.kbn-piala-b{position:absolute;left:52px;top:40px;width:46px;height:46px;background:#fff;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .kbn-ingat{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.6vmin,14px)}
 .kbn-kad{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none;perspective:800px;cursor:pointer;animation:kbnMasuk .4s var(--d) both cubic-bezier(.3,1.5,.5,1)}
 .kbn-muka{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .5s cubic-bezier(.3,1.3,.5,1)}
@@ -6411,9 +6509,13 @@ const KBN_LEVEL = [
   { h: [0, 1, 2, 3], k: ["alif", "ba", "ta", "tsa"], kenal: "telur", m: "m-kenal", g: ["Tangkap", "Padan"] },
   { h: [4, 5, 6, 7], k: ["jim", "ha", "kho", "dal"], kenal: "hadiah", m: "m-hadiah", g: ["Lompat", "Ingat"] },
   { h: [8, 9, 10, 11], k: ["dzal", "ro", "zai", "sin"], kenal: "telur", m: "m-kerang", g: ["Kereta", "Pancing"] },
-  { h: [12, 13, 14, 15], k: ["syin", "shod", "dhod", "tho"], kenal: "hadiah", m: "m-bunga", g: ["Menara", "Bayang"] }
+  { h: [12, 13, 14, 15], k: ["syin", "shod", "dhod", "tho"], kenal: "hadiah", m: "m-bunga", g: ["Menara", "Bayang"] },
+  { h: [16, 17, 18, 19], k: ["zho", "ain", "ghin", "fa"], kenal: "telur", m: "m-bunga", g: ["Lobak", "Lumba"] },
+  { h: [20, 21, 22, 23], k: ["qof", "kaf", "lam", "mim"], kenal: "hadiah", m: "m-bunga", g: ["Suap", "Roket"] },
+  { h: [24, 25, 26, 27], k: ["nun", "wau", "ha2", "ya"], kenal: "telur", m: "m-bunga", g: ["Susun", "Boss"] }
 ];
-const KBN_GAME = { Tangkap: () => kbnTangkap(), Padan: () => kbnPadan(), Lompat: () => kbnLompat(), Ingat: () => kbnIngat(), Kereta: () => kbnKereta(), Pancing: () => kbnPancing(), Menara: () => kbnMenara(), Bayang: () => kbnBayang() };
+const KBN_NAMA = ["alif", "ba", "ta", "tsa", "jim", "ha", "kho", "dal", "dzal", "ro", "zai", "sin", "syin", "shod", "dhod", "tho", "zho", "ain", "ghin", "fa", "qof", "kaf", "lam", "mim", "nun", "wau", "ha2", "ya"];
+const KBN_GAME = { Tangkap: () => kbnTangkap(), Padan: () => kbnPadan(), Lompat: () => kbnLompat(), Ingat: () => kbnIngat(), Kereta: () => kbnKereta(), Pancing: () => kbnPancing(), Menara: () => kbnMenara(), Bayang: () => kbnBayang(), Lobak: () => kbnLobak(), Lumba: () => kbnLumba(), Suap: () => kbnSuap(), Roket: () => kbnRoket(), Susun: () => kbnSusun(), Boss: () => kbnBoss() };
 const kbnSeterus = langkah => langkah === 1 ? KBN_GAME[KBN.g[0]]() : langkah === 2 ? KBN_GAME[KBN.g[1]]() : kbnSurih();
 const KBN_DIR = "gambar/kebun/";
 let KBN = null;
@@ -6428,7 +6530,13 @@ const KBN_TEKS = {
   "k-syin": "Ini huruf syin! Macam sin, dengan tiga titik di atas.", "k-shod": "Ini huruf shod! Ada perut bulat, macam siput.", "k-dhod": "Ini huruf dhod! Macam shod, dengan satu titik di atas.", "k-tho": "Ini huruf tho! Perut bulat dan tiang tegak.",
   "m-bunga": "Jom kenal huruf baharu!", "m-menara": "Jom bina menara! Pilih blok yang betul.", "m-bayang": "Cari bayang huruf ini!", "m-menara-siap": "Wah, menara kita sudah tinggi!", "siap-4": "Yeay! Misi empat berjaya!",
   "m-kenal": "Jom kenal huruf! Tekan telur.", "m-hadiah": "Jom buka hadiah! Tekan kotak.", "m-tangkap": "Dengar, kemudian pecahkan belon yang betul!", "m-padan": "Seret huruf kepada kawannya.", "m-lompat": "Bantu Nuri seberang sungai!", "m-ingat": "Cari pasangan huruf dan kawannya!", "m-surih": "Jom tulis huruf dengan jari!", "m-seberang": "Yeay! Nuri sudah sampai!",
-  "betul-1": "Pandainya!", "betul-2": "Betul! Hebat!", "betul-3": "Yeay, betul!", "salah": "Hmm, cuba lagi ya.", "siap": "Yeay! Misi berjaya!", "siap-2": "Yeay! Misi berjaya! Adik bijak!"
+  "betul-1": "Pandainya!", "betul-2": "Betul! Hebat!", "betul-3": "Yeay, betul!", "salah": "Hmm, cuba lagi ya.", "siap": "Yeay! Misi berjaya!", "siap-2": "Yeay! Misi berjaya! Adik bijak!",
+  "k-zho": "Ini huruf zho! Macam tho, dengan satu titik di atas.", "k-ain": "Ini huruf ain! Kepalanya terbuka, macam mulut ikan.", "k-ghin": "Ini huruf ghin! Macam ain, dengan satu titik di atas.", "k-fa": "Ini huruf fa! Kepala bulat dengan satu titik di atas.",
+  "m-lobak": "Jom cabut lobak! Pilih lobak yang betul.", "m-lumba": "Jom berlumba! Pandu kereta ke lorong yang betul.", "siap-5": "Yeay! Misi lima berjaya!",
+  "k-qof": "Ini huruf qof! Kepala bulat dengan dua titik di atas, dan ekor dalam.", "k-kaf": "Ini huruf kaf! Ada tanda kecil di dalamnya.", "k-lam": "Ini huruf lam! Tinggi, macam kail pancing.", "k-mim": "Ini huruf mim! Kepala bulat dan ekor ke bawah, macam lolipop.",
+  "m-suap": "Arnab lapar! Beri biskut huruf yang betul.", "m-roket": "Jom isi bahan api roket!", "m-roket-pergi": "Tiga, dua, satu! Roket terbang!", "siap-6": "Yeay! Misi enam berjaya!",
+  "k-nun": "Ini huruf nun! Macam mangkuk, dengan satu titik di atas.", "k-wau": "Ini huruf wau! Kepala bulat, macam wau layang-layang.", "k-ha2": "Ini huruf ha! Bulat macam donat.", "k-ya": "Ini huruf ya! Ada dua titik di bawah.",
+  "m-susun": "Susun huruf ikut urutan alif ba ta!", "m-boss": "Pertandingan juara! Cari huruf secepat mungkin!", "m-juara": "Tahniah! Adik Juara Hijaiyah!", "siap-7": "Yeay! Semua huruf siap! Adik memang juara!", "m-bunga": "Jom kenal huruf baharu!"
 };
 function KBN_teman(n) {
   const t = document.querySelector(".kbn-teman"); if (!t) return;
@@ -6723,6 +6831,200 @@ function kbnBayang() {
   };
   pusingan();
 }
+
+/* Kebun Lobak: 3 lobak berhuruf (papan tanda), tekan yang disebut -> lobak tercabut naik */
+function kbnLobak() {
+  const b = kbnSkrin(KBN.g.indexOf("Lobak") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-kebun"><div class="kbn-tanah"></div><div class="kbn-batas"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const kb = b.querySelector(".kbn-kebun"), bt = kb.querySelector(".kbn-batas"), markah = kb.querySelector(".kbn-markah");
+  const lobakSVG = '<svg class="kbn-lobak-svg" viewBox="0 0 80 150"><path d="M40 52 C22 30 18 10 30 4 C36 18 38 30 40 44 C42 30 44 18 50 4 C62 10 58 30 40 52Z" fill="#5cc46a"/><path d="M40 50 C12 30 8 22 14 16 C24 24 32 36 40 50Z" fill="#4cae5a"/><path d="M40 50 C68 30 72 22 66 16 C56 24 48 36 40 50Z" fill="#4cae5a"/><path d="M18 58 Q40 46 62 58 Q58 110 40 146 Q22 110 18 58Z" fill="#ff8a3d"/><path d="M26 76 h10 M44 92 h10 M30 108 h8" stroke="#e06a20" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="72" r="3" fill="#3a2366"/><circle cx="48" cy="72" r="3" fill="#3a2366"/><path d="M35 82 q5 4 10 0" stroke="#3a2366" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>';
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
+    if (g >= giliran.length) return setTimeout(() => kbnSeterus(2), 400);
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
+    bt.innerHTML = pilih.map((i, n) => '<button class="kbn-lobak" data-i="' + i + '" style="--d:' + (n * .08) + 's">' + lobakSVG + '<span class="kbn-papan"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></span></button>").join("");
+    kunci = false; KBN_suara("c-" + KBN.k[sasar]);
+    kb.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
+    bt.onclick = e => {
+      const t = e.target.closest(".kbn-lobak"); if (!t || kunci) return;
+      if (+t.dataset.i === sasar) {
+        kunci = true; t.classList.add("cabut"); const r = t.getBoundingClientRect(); try { tKonfeti(r.left + r.width / 2, r.top); } catch (er) { /* abaikan */ }
+        g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250));
+      } else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
+    };
+  };
+  KBN_suara("m-lobak").then(() => setTimeout(pusingan, 200));
+}
+
+/* Lumba Kereta: 3 lorong menegak berhuruf; tekan lorong yang disebut -> kereta pecut ke atas lorong itu */
+function kbnLumba() {
+  const b = kbnSkrin(KBN.g.indexOf("Lumba") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  const keretaSVG = '<svg viewBox="0 0 80 120"><rect x="10" y="16" width="60" height="92" rx="22" fill="#ff6fa8"/><rect x="18" y="30" width="44" height="26" rx="10" fill="#cfeaff"/><rect x="20" y="70" width="40" height="24" rx="8" fill="#ff8fbf"/><rect x="2" y="26" width="12" height="24" rx="5" fill="#3a2366"/><rect x="66" y="26" width="12" height="24" rx="5" fill="#3a2366"/><rect x="2" y="76" width="12" height="24" rx="5" fill="#3a2366"/><rect x="66" y="76" width="12" height="24" rx="5" fill="#3a2366"/><circle cx="30" cy="40" r="3" fill="#3a2366"/><circle cx="50" cy="40" r="3" fill="#3a2366"/><path d="M34 47 q6 4 12 0" stroke="#3a2366" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="24" cy="18" r="4" fill="#ffe27a"/><circle cx="56" cy="18" r="4" fill="#ffe27a"/></svg>';
+  b.innerHTML = '<div class="kbn-litar"><div class="kbn-lorong-grid">' + [0, 1, 2].map(c => '<button class="kbn-lorong" data-c="' + c + '"><span class="kbn-garis-mula"><b class="qrar"></b></span></button>').join("") + '</div><div class="kbn-kereta-l">' + keretaSVG + '</div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const lt = b.querySelector(".kbn-litar"), lor = [...lt.querySelectorAll(".kbn-lorong")], kr = lt.querySelector(".kbn-kereta-l"), markah = lt.querySelector(".kbn-markah");
+  const XL = ["16.67%", "50%", "83.33%"];
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
+    kr.className = "kbn-kereta-l"; kr.style.left = "50%";
+    if (g >= giliran.length) return setTimeout(() => kbnSeterus(3), 400);
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
+    lor.forEach((l, c) => { l.dataset.i = pilih[c]; l.querySelector("b").textContent = HIJAIYAH[KBN.h[pilih[c]]][0]; l.classList.remove("betul", "masuk"); void l.offsetWidth; l.classList.add("masuk"); });
+    kunci = false; KBN_suara("c-" + KBN.k[sasar]);
+    lt.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
+    lt.querySelector(".kbn-lorong-grid").onclick = e => {
+      const t = e.target.closest(".kbn-lorong"); if (!t || kunci) return; const c = +t.dataset.c;
+      if (+t.dataset.i === sasar) {
+        kunci = true; t.classList.add("betul"); kr.style.left = XL[c];
+        setTimeout(() => { kr.classList.add("pecut"); const r = t.getBoundingClientRect(); try { tKonfeti(r.left + r.width / 2, r.top + 40); } catch (er) { /* abaikan */ } }, 380);
+        g++; setTimeout(() => KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 300)), 900);
+      } else {
+        KBN.salah++; kr.style.left = XL[c]; kr.classList.remove("brek"); void kr.offsetWidth; kr.classList.add("brek");
+        setTimeout(() => { if (!kunci) kr.style.left = "50%"; }, 650);
+        KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); });
+      }
+    };
+  };
+  KBN_suara("m-lumba").then(() => setTimeout(pusingan, 200));
+}
+
+/* Suap Arnab: arnab lapar; seret atau tekan biskut berhuruf yang disebut ke mulutnya */
+function kbnSuap() {
+  const b = kbnSkrin(KBN.g.indexOf("Suap") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-padang"><div class="kbn-arnab"><svg viewBox="0 0 200 220"><ellipse cx="72" cy="48" rx="17" ry="46" fill="#fff" stroke="#e6d6ff" stroke-width="4"/><ellipse cx="72" cy="50" rx="8" ry="34" fill="#ffc2da"/><ellipse cx="128" cy="48" rx="17" ry="46" fill="#fff" stroke="#e6d6ff" stroke-width="4"/><ellipse cx="128" cy="50" rx="8" ry="34" fill="#ffc2da"/><ellipse cx="100" cy="170" rx="66" ry="46" fill="#fff" stroke="#e6d6ff" stroke-width="4"/><circle cx="100" cy="124" r="56" fill="#fff" stroke="#e6d6ff" stroke-width="4"/><ellipse cx="80" cy="114" rx="7" ry="9" fill="#3a2366"/><ellipse cx="120" cy="114" rx="7" ry="9" fill="#3a2366"/><circle cx="82" cy="111" r="2.6" fill="#fff"/><circle cx="122" cy="111" r="2.6" fill="#fff"/><ellipse cx="66" cy="134" rx="10" ry="6" fill="#ffb3cf"/><ellipse cx="134" cy="134" rx="10" ry="6" fill="#ffb3cf"/><path d="M95 126 L105 126 L100 132Z" fill="#ff8fbf"/><ellipse class="kbn-mulut" cx="100" cy="148" rx="14" ry="11" fill="#7a2f4f"/></svg></div><div class="kbn-pinggan"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const pd = b.querySelector(".kbn-padang"), ar = pd.querySelector(".kbn-arnab"), pg = pd.querySelector(".kbn-pinggan"), markah = pd.querySelector(".kbn-markah");
+  const mulut = () => { const r = ar.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height * 148 / 220]; };
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
+    if (g >= giliran.length) { ar.classList.add("kenyang"); return setTimeout(() => kbnSeterus(2), 700); }
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
+    pg.innerHTML = pilih.map(i => '<div class="kbn-biskut" data-i="' + i + '" role="button" tabindex="0"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></div>").join("");
+    ar.classList.remove("kenyang", "kunyah", "geleng"); ar.classList.add("lapar");
+    kunci = false; KBN_suara("c-" + KBN.k[sasar]);
+    pd.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
+    const cuba = t => {
+      if (kunci) return;
+      if (+t.dataset.i === sasar) {
+        kunci = true; const a = t.getBoundingClientRect(), m = mulut();
+        t.style.transition = "transform .5s cubic-bezier(.4,1.2,.6,1),opacity .2s .45s"; t.style.transform = "translate(" + (m[0] - a.left - a.width / 2) + "px," + (m[1] - a.top - a.height / 2) + "px) scale(.35)"; t.style.opacity = "0";
+        setTimeout(() => { ar.classList.remove("lapar"); ar.classList.add("kunyah"); g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250)); }, 520);
+      } else {
+        KBN.salah++; t.style.transition = "transform .3s"; t.style.transform = ""; ar.classList.remove("geleng"); void ar.offsetWidth; ar.classList.add("geleng");
+        KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); });
+      }
+    };
+    pg.querySelectorAll(".kbn-biskut").forEach(t => {
+      let x0, y0, seret = false, gerak = false;
+      t.addEventListener("pointerdown", e => { if (kunci) return; e.preventDefault(); try { t.setPointerCapture(e.pointerId); } catch (er) { /* abaikan */ } x0 = e.clientX; y0 = e.clientY; seret = true; gerak = false; t.style.transition = "none"; });
+      t.addEventListener("pointermove", e => { if (!seret) return; const dx = e.clientX - x0, dy = e.clientY - y0; if (Math.hypot(dx, dy) > 8) gerak = true; if (gerak) t.style.transform = "translate(" + dx + "px," + dy + "px) scale(1.08)"; });
+      const lepas = e => {
+        if (!seret) return; seret = false;
+        if (!gerak) { t.style.transform = ""; return cuba(t); }
+        const r = ar.getBoundingClientRect();
+        if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) cuba(t); else { t.style.transition = "transform .3s"; t.style.transform = ""; }
+      };
+      t.addEventListener("pointerup", lepas); t.addEventListener("pointercancel", lepas);
+      t.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); cuba(t); } });
+    });
+  };
+  KBN_suara("m-suap").then(() => setTimeout(pusingan, 200));
+}
+
+/* Roket: isi tangki 6 bar dengan tong bahan api berhuruf yang disebut; penuh -> kira detik & roket terbang */
+function kbnRoket() {
+  const b = kbnSkrin(KBN.g.indexOf("Roket") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-pelancar"><div class="kbn-bintang-l"></div><div class="kbn-roket"><svg viewBox="0 0 120 240"><path d="M60 6 C92 40 98 90 94 170 L26 170 C22 90 28 40 60 6Z" fill="#fff" stroke="#e6d6ff" stroke-width="4"/><path d="M60 6 C76 22 84 40 88 56 L32 56 C36 40 44 22 60 6Z" fill="#ff8fbf"/><circle cx="60" cy="86" r="16" fill="#8cc8ff" stroke="#a77bf3" stroke-width="5"/><path d="M26 130 L4 186 L28 176Z M94 130 L116 186 L92 176Z" fill="#a77bf3"/><rect x="40" y="170" width="40" height="16" rx="5" fill="#6d6d7a"/></svg><div class="kbn-tangki">' + giliran.map(() => "<i></i>").join("") + '</div><div class="kbn-api"></div></div><div class="kbn-asap-r"></div><div class="kbn-kira"></div><div class="kbn-tong-baris"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button></div>';
+  const pl = b.querySelector(".kbn-pelancar"), rk = pl.querySelector(".kbn-roket"), tb = pl.querySelector(".kbn-tong-baris"), bar = [...pl.querySelectorAll(".kbn-tangki i")], kira = pl.querySelector(".kbn-kira");
+  const terbang = () => {
+    tb.innerHTML = ""; let n = 3;
+    const detik = () => {
+      if (id !== KBN.id) return;
+      if (n > 0) { kira.textContent = n; kira.classList.remove("pop"); void kira.offsetWidth; kira.classList.add("pop"); n--; return setTimeout(detik, 650); }
+      kira.textContent = ""; pl.classList.add("lancar");
+      const r = rk.getBoundingClientRect(); try { tKonfeti(r.left + r.width / 2, r.top + r.height); } catch (e) { /* abaikan */ }
+      setTimeout(() => { if (id === KBN.id) kbnSeterus(3); }, 2000);
+    };
+    KBN_suara("m-roket-pergi"); detik();
+  };
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    if (g >= giliran.length) return setTimeout(terbang, 300);
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
+    tb.innerHTML = pilih.map(i => '<button class="kbn-tong" data-i="' + i + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
+    kunci = false; KBN_suara("c-" + KBN.k[sasar]);
+    pl.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
+    tb.onclick = e => {
+      const t = e.target.closest(".kbn-tong"); if (!t || kunci) return;
+      if (+t.dataset.i === sasar) {
+        kunci = true; const a = t.getBoundingClientRect(), c = bar[g].getBoundingClientRect();
+        t.style.transition = "transform .55s cubic-bezier(.4,1.2,.6,1),opacity .25s .45s"; t.style.transform = "translate(" + (c.left + c.width / 2 - a.left - a.width / 2) + "px," + (c.top - a.top - a.height / 2) + "px) scale(.3)"; t.style.opacity = "0";
+        setTimeout(() => { bar[g].classList.add("on"); g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 200)); }, 560);
+      } else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
+    };
+  };
+  KBN_suara("m-roket").then(() => setTimeout(pusingan, 200));
+}
+
+/* Susun Abjad: huruf berturutan dikocok; tekan ikut urutan alif-ba, slot diisi dari kanan ke kiri; 3 pusingan */
+function kbnSusun() {
+  const b = kbnSkrin(KBN.g.indexOf("Susun") + 1), id = ++KBN.id; let pus = 0;
+  b.innerHTML = '<div class="kbn-susun"><div class="kbn-slot-baris"></div><div class="kbn-susun-pilih"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const ss = b.querySelector(".kbn-susun"), slot = ss.querySelector(".kbn-slot-baris"), pl = ss.querySelector(".kbn-susun-pilih"), markah = ss.querySelector(".kbn-markah");
+  ss.querySelector(".kbn-ulang").onclick = () => KBN_suara("m-susun");
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = [0, 1, 2].map(i => '<i class="' + (i < pus ? "on" : "") + '"></i>').join("");
+    if (pus >= 3) return setTimeout(() => kbnSeterus(2), 400);
+    const n = pus === 0 ? 4 : 5, misi = KBN.h[Math.floor(Math.random() * KBN.h.length)];
+    const mula = Math.max(0, Math.min(28 - n, misi - Math.floor(Math.random() * n)));
+    const urut = Array.from({ length: n }, (_, k) => mula + k); let kini = 0;
+    slot.innerHTML = urut.map(() => '<span class="kbn-slot-s"></span>').join("");
+    pl.innerHTML = KBN_kocok(urut).map(h => '<button class="kbn-jubin-s" data-h="' + h + '"><b class="qrar">' + HIJAIYAH[h][0] + "</b></button>").join("");
+    pl.onclick = e => {
+      const t = e.target.closest(".kbn-jubin-s"); if (!t || t.disabled) return;
+      if (+t.dataset.h === urut[kini]) {
+        t.disabled = true; t.classList.add("guna"); const sl = slot.children[kini]; sl.innerHTML = '<b class="qrar">' + HIJAIYAH[urut[kini]][0] + "</b>"; sl.classList.add("isi"); kini++;
+        if (kini === n) { pus++; try { const r = slot.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 20); } catch (er) { /* abaikan */ } KBN_suara("betul-" + (1 + pus % 3)).then(() => setTimeout(pusingan, 300)); }
+      } else { KBN.salah += .5; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah"); }
+    };
+  };
+  KBN_suara("m-susun").then(() => setTimeout(pusingan, 150));
+}
+
+/* Pertandingan Juara: 10 soalan pantas dari semua 28 huruf, 8 s setiap soalan; tamat -> lencana Juara Hijaiyah */
+function kbnBoss() {
+  const b = kbnSkrin(KBN.g.indexOf("Boss") + 1), id = ++KBN.id, soal = KBN_kocok(Array.from({ length: 28 }, (_, i) => i)).slice(0, 10), T = 8000; let q = 0, markahN = 0, jam = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-boss"><div class="kbn-boss-atas"><span class="kbn-boss-tajuk">' + tr(L("Pertandingan Juara", "Champion Challenge", "冠军挑战")) + '</span><span class="kbn-boss-skor">0 / 10</span></div><div class="kbn-masa"><i></i></div><div class="kbn-boss-pilih"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button></div>';
+  const bs = b.querySelector(".kbn-boss"), pl = bs.querySelector(".kbn-boss-pilih"), bar = bs.querySelector(".kbn-masa i"), skor = bs.querySelector(".kbn-boss-skor");
+  const suaraH = h => "c-" + KBN_NAMA[h];
+  const tamat = () => {
+    clearTimeout(jam); if (id !== KBN.id) return;
+    try { localStorage.setItem("kebun.juara", "1"); } catch (e) { /* abaikan */ }
+    bs.innerHTML = '<div class="kbn-lencana"><div class="kbn-piala"><i class="kbn-piala-cawan"></i><i class="kbn-piala-kaki"></i><span class="kbn-piala-b"></span></div><h3>' + tr(L("Juara Hijaiyah", "Hijaiyah Champion", "字母冠军")) + "</h3><p>" + markahN + " / 10</p></div>";
+    try { const r = bs.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 80); sndWin(); } catch (e) { /* abaikan */ }
+    KBN_suara("m-juara").then(() => setTimeout(() => { if (id === KBN.id) kbnSeterus(3); }, 900));
+  };
+  const soalan = () => {
+    if (id !== KBN.id) return;
+    if (q >= soal.length) return tamat();
+    const h = soal[q], lain = KBN_kocok(Array.from({ length: 28 }, (_, i) => i).filter(x => x !== h)).slice(0, 3), pilih = KBN_kocok([h].concat(lain));
+    pl.dataset.s = h; pl.innerHTML = pilih.map(x => '<button class="kbn-boss-b" data-h="' + x + '"><b class="qrar">' + HIJAIYAH[x][0] + "</b></button>").join("");
+    bar.style.transition = "none"; bar.style.width = "100%"; void bar.offsetWidth; bar.style.transition = "width " + T + "ms linear"; bar.style.width = "0%";
+    kunci = false; KBN_suara(suaraH(h)); bs.querySelector(".kbn-ulang").onclick = () => KBN_suara(suaraH(h));
+    const lanjut = () => { clearTimeout(jam); q++; skor.textContent = markahN + " / 10"; setTimeout(soalan, 500); };
+    clearTimeout(jam);
+    jam = setTimeout(() => { if (id !== KBN.id || kunci) return; kunci = true; KBN.salah += .5; const btl = pl.querySelector('[data-h="' + h + '"]'); if (btl) btl.classList.add("betul"); setTimeout(lanjut, 500); }, T);
+    pl.onclick = e => {
+      const t = e.target.closest(".kbn-boss-b"); if (!t || kunci) return; kunci = true; bar.style.transition = "none";
+      if (+t.dataset.h === h) { t.classList.add("betul"); markahN++; PETA_bunyi("ting"); }
+      else { KBN.salah += .5; t.classList.add("salah"); const btl = pl.querySelector('[data-h="' + h + '"]'); if (btl) btl.classList.add("betul"); }
+      setTimeout(lanjut, 450);
+    };
+  };
+  KBN_suara("m-boss").then(() => setTimeout(soalan, 200));
+}
 /* 4. Tulis: guna papan surih sedia ada untuk setiap huruf level, kemudian Siap */
 function kbnSurih() {
   const akhir = KBN.h[KBN.h.length - 1];
@@ -6757,7 +7059,7 @@ function LLN_bina() {
   const nota = p => { const x = QN_URUTAN[p]; return x === "b" ? { id: "nb", ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { id: "nt", ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { id: "n" + x, ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) }; };
   const iq = i => ({ id: "iq" + i, n: String(i + 1), nm: IQRA[i].nama, b: bIqra(i), siap: pecahan(i) >= 1, fn: () => iqBaca(i, sambung(i)) });
   const P = [
-    { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }, { id: "video", ik: "▶", video: 1, nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, fn: () => LLN_video("gambar/" + vid) }, { id: "tulis", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }] },
+    { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "kebun5", ik: "ع غ", kecil: 1, nm: "Misi Huruf 5", b: KBN_bintang(4), siap: KBN_bintang(4) > 0, fn: () => kbnMula(4) }, { id: "kebun6", ik: "ق ك", kecil: 1, nm: "Misi Huruf 6", b: KBN_bintang(5), siap: KBN_bintang(5) > 0, fn: () => kbnMula(5) }, { id: "kebun7", ik: "ن و", kecil: 1, nm: "Misi Huruf 7", b: KBN_bintang(6), siap: KBN_bintang(6) > 0, fn: () => kbnMula(6) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }, { id: "video", ik: "▶", video: 1, nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, fn: () => LLN_video("gambar/" + vid) }, { id: "tulis", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }] },
     { nm: "Pulau Baris", g: "b", batu: [0, 1, 2, 3].map(nota) },
     { nm: "Pulau Dua Baris", g: "c", batu: [4, 5, 6, 7].map(nota) },
     { nm: "Pulau Tanda", g: "d", batu: [8, 9].map(nota) },
@@ -6771,7 +7073,7 @@ function LLN_bina() {
   P.some((pl, a) => pl.batu.some((x, b) => { if (!selesai(x)) { sp = a; sb = b; return true; } return false; }));
   let kini = LLN_baca(LLN_PULAU, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < P.length)) kini = 0;
   /* susun batu atas permukaan pulau (peratus lebar/tinggi gambar pulau) */
-  const SUSUN = { 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
+  const SUSUN = { 10: [[12, 24], [31, 20], [50, 19], [69, 20], [88, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 9: [[14, 24], [38, 20], [62, 20], [86, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 8: [[14, 26], [38, 21], [62, 21], [86, 26], [14, 50], [38, 46], [62, 46], [86, 50]], 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
   const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
   const w = document.createElement("div"); w.className = "lln2";
   w.innerHTML = '<div class="lln2-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + P.map((_, a) => '<button data-p="' + a + '" aria-label="' + P[a].nm + '"></button>').join("") + "</span></div>"
