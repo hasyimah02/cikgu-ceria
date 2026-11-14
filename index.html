@@ -1325,6 +1325,89 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 @keyframes petaKilau{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12) saturate(1.15)}}
 @keyframes petaKelip{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
 @media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
+/* ===== Animasi berangkai (RNT_) ===== */
+.rnt{position:relative;height:clamp(230px,34vh,300px);border-radius:26px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#cfeaff,#f3e9ff)}
+.rnt-langit{position:absolute;inset:0;background:radial-gradient(ellipse 70px 24px at 15% 22%,#fff 90%,transparent),radial-gradient(ellipse 90px 28px at 65% 15%,#fff 90%,transparent);opacity:.9}
+.rnt.jalan .rnt-langit{animation:kbnAwanS 18s linear infinite}
+.rnt-landas{position:absolute;left:0;right:0;bottom:22%;height:0}
+.rnt-rantai{position:absolute;left:0;bottom:24%;display:flex;flex-direction:row-reverse;align-items:flex-end;gap:10px;transition:transform .7s cubic-bezier(.4,0,.2,1);will-change:transform}
+.rnt-item{border:0;background:none;padding:0;cursor:pointer;position:relative;flex:none}
+.rnt-badan{display:flex;flex-direction:column;align-items:center;justify-content:center;width:96px;height:96px;position:relative;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.rnt-badan b{font-size:42px;line-height:1.25;color:#3a2366}
+.rnt-badan small{font-weight:900;font-size:15px;color:#4a3570;line-height:1}
+.rnt-item.on .rnt-badan{transform:translateY(-14px) scale(1.18)}
+.rnt-item.on .rnt-badan b{color:#e0457f}
+.rnt-kawal{position:absolute;left:12px;top:10px;z-index:3}
+.rnt-kawal button{border:0;border-radius:999px;background:#a77bf3;color:#fff;font-weight:900;padding:7px 16px;box-shadow:0 4px 0 #7d55c9;cursor:pointer}
+.brs-rantai{margin:4px 0 8px}
+/* keretapi */
+.rnt-keretapi .rnt-landas{height:14px;bottom:calc(22% - 14px);background:repeating-linear-gradient(90deg,#8b6b4a 0 10px,transparent 10px 30px),linear-gradient(transparent 4px,#6d6d7a 4px 7px,transparent 7px)}
+.rnt-keretapi .rnt-badan{background:linear-gradient(#ffd36e,#ffbf3c);border-radius:14px 14px 8px 8px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.1)}
+.rnt-keretapi .rnt-item:nth-child(3n) .rnt-badan{background:linear-gradient(#8fd9a8,#5fc98a)}.rnt-keretapi .rnt-item:nth-child(3n+1) .rnt-badan{background:linear-gradient(#8cc8ff,#5fb0ff)}
+.rnt-keretapi .rnt-badan::after{content:"";position:absolute;bottom:-12px;left:12px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#3a2366 24%);box-shadow:52px 0 0 0 #3a2366}
+.rnt-keretapi .rnt-kepala{order:-1;flex:none;width:110px;height:100px;border-radius:16px 30px 8px 8px;background:linear-gradient(#ff8fbf,#f06aa3);position:relative}
+.rnt-keretapi .rnt-kepala::before{content:"";position:absolute;right:18px;top:-30px;width:24px;height:32px;background:#3a2366;border-radius:4px}
+.rnt-keretapi.jalan .rnt-kepala::after{content:"";position:absolute;right:16px;top:-58px;width:26px;height:26px;border-radius:50%;background:#fff;animation:kbnAsap 1.2s ease-out infinite}
+.rnt-keretapi.jalan .rnt-item .rnt-badan::after{animation:kbnPusing .5s linear infinite}
+/* ulat */
+.rnt-ulat .rnt-rantai{gap:0}
+.rnt-ulat .rnt-badan{border-radius:50%;background:radial-gradient(circle at 35% 30%,#d6f7c8,#7fd37a 70%);margin-left:-10px;box-shadow:inset -6px -8px 0 rgba(0,0,0,.08)}
+.rnt-ulat .rnt-item:nth-child(even) .rnt-badan{background:radial-gradient(circle at 35% 30%,#fff1b8,#ffd36e 70%)}
+.rnt-ulat.jalan .rnt-badan{animation:rntUlat .6s ease-in-out infinite;animation-delay:calc(var(--n) * -.08s)}
+@keyframes rntUlat{50%{translate:0 -8px}}
+.rnt-ulat .rnt-kepala{order:-1;flex:none;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 40%,#3a2366 0 7%,transparent 8%),radial-gradient(circle at 60% 40%,#3a2366 0 7%,transparent 8%),radial-gradient(circle at 35% 30%,#d6f7c8,#7fd37a 70%);position:relative}
+.rnt-ulat .rnt-kepala::before{content:"";position:absolute;left:30px;top:-22px;width:4px;height:26px;background:#3a2366;box-shadow:30px 0 0 #3a2366;border-radius:2px}
+/* ikan berenang berangkai */
+.rnt-ikan{background:linear-gradient(#9fdcff,#4fa9e3)}
+.rnt-ikan .rnt-rantai{bottom:30%;gap:18px}
+.rnt-ikan .rnt-badan{width:118px;height:80px;border-radius:55% 45% 45% 55%/60% 50% 50% 60%;background:#ffb54a}
+.rnt-ikan .rnt-item:nth-child(3n) .rnt-badan{background:#ff8fbf}.rnt-ikan .rnt-item:nth-child(3n+1) .rnt-badan{background:#5fc9a8}
+.rnt-ikan .rnt-badan::before{content:"";position:absolute;right:-26px;top:50%;margin-top:-18px;border-top:18px solid transparent;border-bottom:18px solid transparent;border-left:30px solid currentColor;color:inherit;filter:brightness(.92)}
+.rnt-ikan .rnt-badan::after{content:"";position:absolute;left:14px;top:20px;width:10px;height:10px;border-radius:50%;background:#3a2366;box-shadow:0 0 0 3px #fff}
+.rnt-ikan .rnt-item:nth-child(3n+2) .rnt-badan::before{border-left-color:#ffb54a}.rnt-ikan .rnt-item:nth-child(3n) .rnt-badan::before{border-left-color:#ff8fbf}.rnt-ikan .rnt-item:nth-child(3n+1) .rnt-badan::before{border-left-color:#5fc9a8}
+.rnt-ikan .rnt-badan b,.rnt-ikan .rnt-badan small{color:#fff;text-shadow:0 2px 0 #3a2366;padding-left:14px}
+.rnt-ikan .rnt-badan{animation:rntRenang 1.8s ease-in-out infinite;animation-delay:calc(var(--n) * -.22s)}
+@keyframes rntRenang{25%{translate:0 -6px;rotate:-4deg}75%{translate:0 6px;rotate:4deg}}
+.rnt-ikan .rnt-langit{background:radial-gradient(circle at 20% 70%,rgba(255,255,255,.5) 0 4px,transparent 5px),radial-gradient(circle at 70% 40%,rgba(255,255,255,.5) 0 6px,transparent 7px),radial-gradient(circle at 45% 85%,rgba(255,255,255,.5) 0 3px,transparent 4px);animation:rntBuih 4s linear infinite}
+@keyframes rntBuih{to{background-position:0 -120px}}
+/* perahu */
+.rnt-perahu{background:linear-gradient(#cfeaff 55%,#7cc8f5 55%,#4fa9e3)}
+.rnt-perahu .rnt-rantai{bottom:34%}
+.rnt-perahu .rnt-badan{height:80px;width:104px;background:linear-gradient(#fff 0 60%,#ff8fbf 60%);border-radius:10px 10px 50px 50px}
+.rnt-perahu .rnt-item:nth-child(odd) .rnt-badan{background:linear-gradient(#fff 0 60%,#a77bf3 60%)}
+.rnt-perahu .rnt-badan{animation:rntOmbak 2s ease-in-out infinite;animation-delay:calc(var(--n) * -.25s)}
+@keyframes rntOmbak{50%{translate:0 6px;rotate:-3deg}}
+/* bunga mekar: kuntum hijau, kembang bila sampai giliran */
+.rnt-bunga{background:linear-gradient(#d9f0ff,#fff3fa 60%,#c9ecb8 60%)}
+.rnt-bunga .rnt-rantai{bottom:30%;gap:14px}
+.rnt-bunga .rnt-badan{width:112px;height:112px}
+.rnt-bunga .rnt-badan::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fff7d6 0 40%,transparent 41%),conic-gradient(from 0deg,#ff9ec4 0 30deg,#ffc2dc 30deg 60deg,#ff9ec4 60deg 90deg,#ffc2dc 90deg 120deg,#ff9ec4 120deg 150deg,#ffc2dc 150deg 180deg,#ff9ec4 180deg 210deg,#ffc2dc 210deg 240deg,#ff9ec4 240deg 270deg,#ffc2dc 270deg 300deg,#ff9ec4 300deg 330deg,#ffc2dc 330deg);-webkit-mask:radial-gradient(circle,#000 40%,transparent 41%),repeating-conic-gradient(#000 0 18deg,transparent 18deg 30deg);mask:radial-gradient(circle,#000 40%,transparent 41%),repeating-conic-gradient(#000 0 18deg,transparent 18deg 30deg);transform:scale(.25) rotate(-60deg);opacity:.6;transition:transform .8s cubic-bezier(.3,1.6,.5,1),opacity .4s;z-index:-1}
+.rnt-bunga .rnt-item:nth-child(3n) .rnt-badan::before{filter:hue-rotate(60deg)}.rnt-bunga .rnt-item:nth-child(3n+1) .rnt-badan::before{filter:hue-rotate(-50deg)}
+.rnt-bunga .rnt-badan::after{content:"";position:absolute;left:50%;top:100%;width:6px;height:44px;margin-left:-3px;background:#5cc46a;border-radius:3px}
+.rnt-bunga .rnt-item:not(.mekar) .rnt-badan{background:radial-gradient(ellipse 22px 32px at 50% 60%,#7fd37a 98%,transparent)}
+.rnt-bunga .rnt-item:not(.mekar) .rnt-badan b,.rnt-bunga .rnt-item:not(.mekar) .rnt-badan small{opacity:.55}
+.rnt-bunga .rnt-item.mekar .rnt-badan::before{transform:scale(1) rotate(0);opacity:1}
+.rnt-bunga .rnt-item.on .rnt-badan::before{animation:rntMekar 1.2s ease-in-out infinite}
+@keyframes rntMekar{50%{transform:scale(1.08) rotate(10deg)}}
+/* lebah */
+.rnt-lebah .rnt-badan{border-radius:50%;background:repeating-linear-gradient(90deg,#ffd36e 0 16px,#3a2366 16px 22px);width:110px;height:90px}
+.rnt-lebah .rnt-badan b,.rnt-lebah .rnt-badan small{background:#fff;border-radius:10px;padding:0 6px}
+.rnt-lebah .rnt-badan::before{content:"";position:absolute;top:-22px;left:28px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:26px 0 0 rgba(255,255,255,.85);animation:rntSayap .15s linear infinite alternate}
+@keyframes rntSayap{to{transform:scaleY(.6)}}
+.rnt-lebah .rnt-badan{animation:rntApung 1.6s ease-in-out infinite;animation-delay:calc(var(--n) * -.2s)}
+/* awan */
+.rnt-awan{background:linear-gradient(#9fd2ff,#e2f1ff)}
+.rnt-awan .rnt-badan{width:120px;height:80px;border-radius:40px;background:#fff;box-shadow:-18px -16px 0 -4px #fff,18px -20px 0 -2px #fff}
+.rnt-awan .rnt-rantai{bottom:36%}
+.rnt-awan .rnt-badan{animation:rntApung 3.2s ease-in-out infinite;animation-delay:calc(var(--n) * -.4s)}
+/* layang-layang */
+.rnt-layang .rnt-rantai{bottom:38%;gap:22px}
+.rnt-layang .rnt-badan{width:96px;height:96px;transform:rotate(45deg);border-radius:8px;background:linear-gradient(135deg,#ff8fbf 50%,#ffd36e 50%)}
+.rnt-layang .rnt-item:nth-child(odd) .rnt-badan{background:linear-gradient(135deg,#a77bf3 50%,#5fc9a8 50%)}
+.rnt-layang .rnt-badan b,.rnt-layang .rnt-badan small{transform:rotate(-45deg);color:#fff;text-shadow:0 2px 0 #3a2366}
+.rnt-layang .rnt-item.on .rnt-badan{transform:rotate(45deg) translateY(-14px) scale(1.15)}
+.rnt-layang .rnt-item::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:60px;background:rgba(90,60,140,.4);rotate:12deg}
+@media (prefers-reduced-motion:reduce){.rnt *{animation:none!important}}
 /* ===== Pulau Baris (BRS_) ===== */
 .brs-belajar{display:grid;gap:14px}
 .brs-watak{display:flex;align-items:center;gap:14px;background:#fff;border:4px solid #eadff9;border-radius:24px;padding:10px 16px;box-shadow:0 5px 0 #d9c6fb}
@@ -1346,6 +1429,209 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .brs .qrar,.brs-pentas .qrar{font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700}
 .brs-lencana{display:inline-block;margin:0 auto 14px;padding:10px 22px;border-radius:999px;background:linear-gradient(#ffd96b,#ffb800);color:#5a3d00;font-weight:900;font-size:22px;box-shadow:0 5px 0 #d99a00;animation:kbnMasuk .5s cubic-bezier(.3,1.8,.5,1)}
 .goyang{animation:kbnGoyang .4s ease}
+/* Pulau Baris: Topi, Hilang, Lif, Gelongsor */
+.brs-ikon.brs-ik-a,.brs-ikon.brs-ik-i,.brs-ikon.brs-ik-u{width:52px;height:52px;border-radius:14px;background:#f4ecff;position:relative;display:block;flex:none}
+.brs-ik-a::before{content:"";position:absolute;left:10px;right:10px;top:12px;height:13px;background:#ff8fbf;border-radius:9px 9px 3px 3px;box-shadow:0 7px 0 -3px #e0679c}
+.brs-ik-i::before{content:"";position:absolute;left:8px;bottom:12px;width:16px;height:10px;background:#6fb6ff;border-radius:7px 10px 3px 3px;box-shadow:20px 0 0 #6fb6ff}
+.brs-ik-u::before{content:"";position:absolute;left:16px;top:9px;width:18px;height:18px;border:5px solid #ffb54a;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
+.brs-topi .brs-kawasan{background:linear-gradient(#dff1ff,#f6ecff 60%,#cdeec0 60%,#b4e3a3)}
+.brs-topi-awan{position:absolute;inset:0 0 50% 0;background:radial-gradient(ellipse 70px 24px at 18% 30%,#fff 90%,transparent),radial-gradient(ellipse 90px 28px at 76% 20%,#fff 90%,transparent)}
+.brs-topi-terbang{position:absolute;left:calc(50% - 44px);top:7%;width:88px;height:60px;animation:brsTopiApung 2.2s ease-in-out infinite;z-index:4;transition:opacity .3s}
+.brs-topi-terbang i{position:absolute;left:14px;right:14px;top:6px;height:36px;background:#ff8fbf;border-radius:22px 22px 6px 6px;box-shadow:inset -6px -6px 0 rgba(0,0,0,.08)}
+.brs-topi-terbang::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:14px;background:#e0679c;border-radius:10px}
+.brs-topi-terbang::before{content:"";position:absolute;left:38px;top:-6px;width:12px;height:12px;border-radius:50%;background:#ffd36e;z-index:1}
+@keyframes brsTopiApung{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+.brs-topi-baris{position:absolute;left:0;right:0;bottom:16%;display:flex;justify-content:center;gap:5%}
+.brs-watak-h{position:relative;width:clamp(96px,24%,150px);aspect-ratio:3/4;border:0;border-radius:40% 40% 24px 24px;background:#fff;box-shadow:0 6px 0 #d9c6fb;display:grid;place-items:center;cursor:pointer;padding-top:14%;animation:kbnTimbul2 .4s both cubic-bezier(.3,1.6,.5,1)}
+.brs-watak-h:nth-child(2){animation-delay:.08s}.brs-watak-h:nth-child(3){animation-delay:.16s}
+.brs-watak-h b{font-size:clamp(58px,11vmin,92px);color:#3a2366;line-height:1.4}
+.brs-mata{position:absolute;top:12%;left:50%;width:44px;height:10px;transform:translateX(-50%);background:radial-gradient(circle at 6px 5px,#3a2366 0 4px,transparent 5px),radial-gradient(circle at 38px 5px,#3a2366 0 4px,transparent 5px)}
+.brs-watak-h.pakai{box-shadow:0 6px 0 #a6e3c4,0 0 0 4px #4cc38a;animation:kbnLonjak .45s ease}
+.brs-hilang .brs-kawasan{background:linear-gradient(#fff7fd,#efe6ff)}
+.brs-hilang-huruf{position:absolute;left:50%;top:8%;transform:translateX(-50%);width:clamp(150px,34vmin,230px);aspect-ratio:1;border-radius:32px;background:#fff;border:4px dashed #c7a9ff;display:grid;place-items:center;box-shadow:0 6px 0 #d9c6fb}
+.brs-hilang-huruf b{font-size:clamp(90px,18vmin,150px);color:#3a2366;line-height:1.5}
+.brs-tanya{position:absolute;right:10px;top:6px;width:36px;height:36px;border-radius:50%;background:#ffcf4a;color:#5a3d00;font-weight:900;display:grid;place-items:center;font-size:22px}
+.brs-hilang-huruf.lengkap{border-style:solid;border-color:#4cc38a}
+.brs-hilang-huruf.lengkap .brs-tanya{display:none}
+.brs-hilang-jubin{position:absolute;left:0;right:0;bottom:16%;display:flex;justify-content:center;gap:4%}
+.brs-jubin{width:clamp(96px,24%,150px);border:0;border-radius:22px;background:#fff;box-shadow:0 5px 0 #d9c6fb;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.brs-jubin b{font-size:clamp(36px,7vmin,54px);color:#7a55c7;line-height:1.5}
+.brs-jubin small{font-weight:900;color:#4a3570;font-size:16px}
+.brs-lif .brs-kawasan{background:linear-gradient(#d8ecff,#efe6ff)}
+.brs-bangunan{position:absolute;left:50%;top:5%;bottom:14%;transform:translateX(-50%);width:min(560px,90%);display:flex;gap:16px;background:#fff3e2;border:5px solid #e8b98a;border-radius:24px 24px 8px 8px;padding:12px;box-shadow:0 6px 0 #d49c66}
+.brs-aci{position:relative;flex:1;border-radius:14px;background:repeating-linear-gradient(#f6ead9 0 calc(33.33% - 2px),#e3cfb4 calc(33.33% - 2px) 33.33%);overflow:hidden}
+.brs-kotaklif{position:absolute;left:10%;right:10%;height:33.33%;transition:top .85s cubic-bezier(.45,.05,.4,1)}
+.brs-lif-dalam{position:absolute;inset:6px 0;border-radius:12px;background:#ffe8f3;border:4px solid #a77bf3;display:grid;place-items:center}
+.brs-lif-dalam b{font-size:clamp(42px,8vmin,66px);color:#3a2366;line-height:1.4}
+.brs-pintu{position:absolute;top:6px;bottom:6px;width:50%;background:linear-gradient(90deg,#c9b6ee,#b39ce6);border:3px solid #a77bf3;transition:transform .5s ease}
+.brs-pintu.kiri{left:0;border-radius:12px 0 0 12px}.brs-pintu.kanan{right:0;border-radius:0 12px 12px 0}
+.brs-kotaklif.buka .brs-pintu.kiri{transform:translateX(-100%)}.brs-kotaklif.buka .brs-pintu.kanan{transform:translateX(100%)}
+.brs-kotaklif.buka .brs-pintu{opacity:0;transition:transform .5s ease,opacity .2s .45s}
+.brs-kotaklif:not(.buka) .brs-pintu{transition:transform .45s ease,opacity .1s}
+.brs-tingkat-kol{flex:1.1;display:grid;grid-template-rows:repeat(3,1fr);gap:10px}
+.brs-tingkat{border:0;border-radius:18px;background:#fff;box-shadow:0 5px 0 #e3c9a8;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer}
+.brs-tingkat b{font-size:clamp(38px,7vmin,58px);color:#3a2366;line-height:1.4}
+.brs-tingkat.nyala{background:#effbf4;box-shadow:0 5px 0 #a6e3c4,0 0 0 4px #4cc38a}
+.brs-gelongsor .brs-kawasan{background:linear-gradient(#e3f4ff,#fff1f8)}
+.brs-luncur{position:absolute;inset:0 0 24% 0}
+.brs-jatuh{position:absolute;top:0;width:clamp(86px,20%,124px);aspect-ratio:1;border-radius:22px;background:#fff;border:4px solid #c7a9ff;box-shadow:0 5px 0 #d9c6fb;display:grid;place-items:center;cursor:pointer;animation:brsLuncur 4.2s linear infinite;z-index:3}
+.brs-jatuh:nth-child(2){border-color:#ff9ec4}.brs-jatuh:nth-child(3){border-color:#7fdbb6}
+.brs-jatuh b{font-size:clamp(40px,8vmin,62px);color:#3a2366;line-height:1.5}
+@keyframes brsLuncur{0%{transform:translateY(-20%) rotate(-6deg)}50%{transform:translateY(calc(min(64vh,580px) * .25)) rotate(6deg)}100%{transform:translateY(calc(min(64vh,580px) * .48)) rotate(-4deg)}}
+.brs-bakul{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);width:clamp(150px,34%,220px);height:clamp(70px,13vh,96px);background:repeating-linear-gradient(90deg,#d9a05b 0 14px,#c58a45 14px 18px);border-radius:10px 10px 40px 40px;box-shadow:0 6px 0 #a8743a;z-index:4}
+.brs-bakul::before{content:"";position:absolute;left:-6px;right:-6px;top:-8px;height:14px;background:#b8783a;border-radius:8px}
+.brs-bakul.dapat{animation:kbnLonjak .45s ease}
+@media (prefers-reduced-motion:reduce){.brs-topi-terbang,.brs-jatuh{animation-duration:12s}}
+/* --- Pulau Baris Fasa 2 (brsx-) --- */
+.brsx-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;border:3px solid #eadff9;border-radius:20px;padding:8px 14px;box-shadow:0 4px 0 #d9c6fb;font-weight:800;color:#4a3570}
+.brsx-streak{display:flex;align-items:center;gap:8px}
+.brsx-bunga{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle,#ffd96b 0 26%,transparent 27%),radial-gradient(circle at 50% 12%,#ff8fbf 0 22%,transparent 23%),radial-gradient(circle at 88% 50%,#ff8fbf 0 22%,transparent 23%),radial-gradient(circle at 50% 88%,#ff8fbf 0 22%,transparent 23%),radial-gradient(circle at 12% 50%,#ff8fbf 0 22%,transparent 23%)}
+.brsx-kostum{display:flex;gap:6px;flex:1}
+.brsx-album-btn{border:0;border-radius:999px;background:#a77bf3;color:#fff;font-weight:900;padding:7px 16px;box-shadow:0 4px 0 #7d55c9;cursor:pointer}
+.brsx-k{display:inline-block;width:30px;height:30px;border-radius:10px;background:#f4ecff;position:relative}
+.brsx-k-topi::before{content:"";position:absolute;left:5px;right:5px;top:8px;height:10px;background:#ff8fbf;border-radius:8px 8px 3px 3px}
+.brsx-k-kasut::before{content:"";position:absolute;left:4px;bottom:7px;width:10px;height:7px;background:#6fb6ff;border-radius:5px;box-shadow:12px 0 0 #6fb6ff}
+.brsx-k-reben::before{content:"";position:absolute;left:9px;top:6px;width:10px;height:10px;border:4px solid #ffb54a;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
+.brsx-album-lapis{position:fixed;inset:0;z-index:2147482000;background:rgba(40,25,70,.55);display:grid;place-items:center;padding:16px}
+.brsx-album{width:min(760px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:26px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.brsx-album-atas{display:flex;align-items:center;gap:12px;font-size:20px;color:#4a3570;margin-bottom:8px}
+.brsx-album-atas span{flex:1;color:#7a55c7;font-weight:800}
+.brsx-album-atas button{width:40px;height:40px;border-radius:50%;border:0;background:#f4ecff;color:#4a3570;font-size:20px;cursor:pointer}
+.brsx-lapor{background:#fff7e6;border:2px solid #ffd96b;border-radius:14px;padding:8px 12px;margin-bottom:10px;color:#5a3d00;font-size:14px}
+.brsx-sukar{display:inline-block;background:#fff;border-radius:999px;padding:1px 8px;margin:2px;font-weight:800}
+.brsx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.brsx-pel{display:flex;flex-direction:column;align-items:center;border-radius:12px;background:#eee;filter:grayscale(1);opacity:.45;padding:2px}
+.brsx-pel.ada{background:#effbf4;filter:none;opacity:1;box-shadow:0 2px 0 #a6e3c4}
+.brsx-pel b{font-size:28px;line-height:1.5;color:#3a2366}.brsx-pel small{font-weight:800;color:#7a55c7}
+.brsx-kostum-siap{margin:0 0 12px;color:#4a3570;font-weight:800}
+.brsx-kostum-siap p{margin:0 0 6px}
+.brsx-kostum-siap div{display:flex;justify-content:center;gap:12px}
+.brsx-kostum-siap span{display:flex;flex-direction:column;align-items:center;opacity:.35;filter:grayscale(1)}
+.brsx-kostum-siap span.ada{opacity:1;filter:none}
+.brsx-kebun{position:absolute;inset:0;background:linear-gradient(#e6f6ff,#f7fff0 62%,#c9eeb6 62%)}
+.brsx-pasu{position:absolute;left:50%;top:10%;width:210px;height:50%;transform:translateX(-50%)}
+.brsx-pasu::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:90px;background:linear-gradient(#ff9e7a,#e8795a);border-radius:8px 8px 26px 26px}
+.brsx-benih{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:2;font-size:46px;color:#3a2366;transition:opacity .4s}
+.brsx-pokok{position:absolute;left:50%;bottom:60px;width:8px;height:0;background:#5cc46a;transform:translateX(-50%);border-radius:4px;transition:height .7s cubic-bezier(.3,1.3,.5,1)}
+.brsx-kelopak{position:absolute;left:50%;top:-74px;width:110px;height:110px;transform:translateX(-50%) scale(0);border-radius:50%;background:radial-gradient(circle,#fff 0 46%,transparent 47%),conic-gradient(#ff8fbf 0 45deg,#ffb4d4 45deg 90deg,#ff8fbf 90deg 135deg,#ffb4d4 135deg 180deg,#ff8fbf 180deg 225deg,#ffb4d4 225deg 270deg,#ff8fbf 270deg 315deg,#ffb4d4 315deg);display:grid;place-items:center;transition:transform .5s .5s cubic-bezier(.3,1.8,.5,1)}
+.brsx-kelopak b{font-size:44px;color:#3a2366;line-height:1.4}
+.brsx-pasu.tumbuh .brsx-pokok{height:120px}
+.brsx-pasu.tumbuh .brsx-kelopak{transform:translateX(-50%) scale(1)}
+.brsx-pasu.tumbuh .brsx-benih{opacity:0}
+.brsx-tin-baris,.brsx-kawan .brsx-pilihan{position:absolute;left:0;right:0;bottom:16%;display:flex;justify-content:center;gap:5%}
+.brsx-tin{width:clamp(96px,22%,140px);aspect-ratio:1;border:0;background:none;padding:0;cursor:pointer;position:relative}
+.brsx-tin-badan{position:absolute;inset:18% 10% 0 10%;background:linear-gradient(#8cc8ff,#5fb0ff);border-radius:16px 16px 22px 22px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.1)}
+.brsx-tin-badan::before{content:"";position:absolute;right:-26%;top:16%;width:40%;height:10px;background:#5fb0ff;border-radius:6px;transform:rotate(-30deg)}
+.brsx-tin b{position:relative;font-size:clamp(40px,7vmin,60px);color:#fff;line-height:1.6;text-shadow:0 2px 0 #3a2366}
+.brsx-tin.siram{transition:transform .4s;transform:translate(0,-40px) rotate(-30deg)}
+.brsx-kawan,.brsx-cabaran,.brsx-rakam{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding-top:6%}
+.brsx-kad-kata{background:#fff;border:4px solid #c7a9ff;border-radius:24px;box-shadow:0 6px 0 #d9c6fb;padding:12px 30px;font-size:clamp(40px,8vmin,64px);font-weight:900;color:#4a3570;letter-spacing:2px}
+.brsx-kad-kata.betul{border-color:#4cc38a}
+.brsx-awal{color:#ff5c9a}
+.brsx-arah{font-weight:800;color:#7a55c7;margin:12px 0 0}
+.brsx-jubin{width:clamp(86px,20%,130px);aspect-ratio:1;border:4px solid #c7a9ff;border-radius:22px;background:#fff;box-shadow:0 5px 0 #d9c6fb;display:grid;place-items:center;cursor:pointer}
+.brsx-jubin b{font-size:clamp(44px,8vmin,70px);color:#3a2366;line-height:1.6}
+.brsx-jubin.betul{border-color:#4cc38a;background:#effbf4;animation:kbnLonjak .45s ease}
+.brsx-huruf-besar{width:clamp(140px,30vmin,200px);aspect-ratio:1;border-radius:30px;background:#fff;border:4px solid #c7a9ff;box-shadow:0 6px 0 #d9c6fb;display:grid;place-items:center}
+.brsx-huruf-besar b{font-size:clamp(80px,16vmin,130px);color:#3a2366;line-height:1.5}
+.brsx-nuri-c{position:relative;margin-top:10px;display:flex;align-items:center;gap:8px}
+.brsx-nuri-c img{width:clamp(90px,16vmin,130px)}
+.brsx-gel{background:#fff;border:3px solid #CDB9F5;border-radius:18px 18px 18px 4px;padding:8px 18px;font-weight:900;font-size:26px;color:#3a2366}
+.brsx-dua{display:flex;gap:16px;margin-top:14px}
+.brsx-dua button{border:0;border-radius:999px;padding:12px 30px;font-size:22px;font-weight:900;color:#fff;cursor:pointer}
+.brsx-ya{background:#4cc38a;box-shadow:0 5px 0 #3aa874}.brsx-tidak{background:#ff8fbf;box-shadow:0 5px 0 #e0679c}
+.brsx-dua button.betul{animation:kbnLonjak .45s ease}
+.brsx-lumba{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.brsx-sisi{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:10px}
+.brsx-p0{background:#fff0f7}.brsx-p1{background:#eef6ff;border-left:4px dashed #c7a9ff}
+.brsx-sisi.menang{box-shadow:inset 0 0 0 6px #ffd96b}
+.brsx-skor{font-weight:900;color:#4a3570;font-size:18px}
+.brsx-sisi .brsx-pilihan{display:flex;flex-direction:column;gap:10px}
+.brsx-sisi .brsx-jubin{width:clamp(70px,13vw,104px)}
+.brsx-mik{margin-top:16px;width:96px;height:96px;border-radius:50%;border:5px solid #fff;background:#ff8fbf;box-shadow:0 6px 0 #e0679c;cursor:pointer;position:relative}
+.brsx-mik i{position:absolute;left:50%;top:22%;width:26px;height:38px;transform:translateX(-50%);background:#fff;border-radius:14px}
+.brsx-mik i::after{content:"";position:absolute;left:50%;bottom:-14px;width:4px;height:12px;background:#fff;transform:translateX(-50%)}
+.brsx-mik.rakam{animation:kbnLonjak .8s ease infinite;background:#ff5c5c}
+.brsx-langkau{margin-top:14px;border:0;background:none;color:#7a55c7;font-weight:800;text-decoration:underline;cursor:pointer}
+.brsx-langkau.tonjol{background:#a77bf3;color:#fff;text-decoration:none;border-radius:999px;padding:8px 20px}
+.brs-kedai{position:absolute;inset:0;background:linear-gradient(#fff4fa,#ffe9f4 60%,#f3d9c8 60%)}
+.brs-awning{position:absolute;left:0;right:0;top:0;height:46px;background:repeating-linear-gradient(90deg,#ff8fbf 0 40px,#fff 40px 80px);border-radius:0 0 18px 18px;box-shadow:0 4px 0 rgba(0,0,0,.06)}
+.brs-plg{position:absolute;left:50%;top:13%;width:clamp(110px,22%,150px);transform:translateX(-50%)}
+.brs-arnab{width:100%;display:block;animation:brsAngguk 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.brs-mulut2{display:none}
+@keyframes brsAngguk{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.brs-plg.gembira .brs-arnab{animation:kbnLonjak .5s ease 2}
+.brs-plg.gembira .brs-mulut{display:none}.brs-plg.gembira .brs-mulut2{display:inline}
+.brs-plg.geleng .brs-arnab{animation:brsGeleng .5s ease}
+@keyframes brsGeleng{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.brs-gel{position:absolute;left:88%;top:-6%;min-width:52px;height:52px;border-radius:50%;background:#fff;border:3px solid #cdb9f5;display:grid;place-items:center;font-weight:900;font-size:30px;color:#a77bf3;box-shadow:0 4px 10px rgba(62,49,80,.15)}
+.brs-gel.hati{background:#ff8fbf;border-color:#fff}
+.brs-gel.hati::before{content:"";width:24px;height:22px;background:#fff;clip-path:polygon(50% 100%,0 40%,10% 10%,30% 0,50% 18%,70% 0,90% 10%,100% 40%)}
+.brs-syiling{position:absolute;right:-30%;top:40%;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc21a 60%,#e09600);box-shadow:0 0 0 3px #fff;opacity:0}
+.brs-plg.gembira .brs-syiling{animation:brsSyiling .9s ease forwards}
+@keyframes brsSyiling{0%{opacity:0;transform:translateY(20px) scale(.4)}40%{opacity:1;transform:translateY(-30px) scale(1.1) rotateY(180deg)}100%{opacity:1;transform:translateY(-16px) scale(1) rotateY(360deg)}}
+.brs-kaunter{position:absolute;left:0;right:0;top:56%;height:18px;background:#c48a5a;box-shadow:0 6px 0 #a06c42}
+.brs-kon-baris{position:absolute;left:0;right:0;bottom:16%;display:flex;justify-content:center;gap:6%}
+.brs-kon{position:relative;width:clamp(86px,18%,124px);aspect-ratio:3/5;border:0;padding:0;background:none;cursor:pointer;animation:kbnTimbul2 .4s var(--d) both cubic-bezier(.3,1.6,.5,1)}
+.brs-skop{position:absolute;left:4%;right:4%;top:0;aspect-ratio:1;border-radius:50% 50% 44% 44%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.7) 0 10%,transparent 24%),var(--w);box-shadow:inset 0 -8px 0 rgba(0,0,0,.07);display:grid;place-items:center;z-index:2}
+.brs-skop b{font-size:clamp(38px,7vmin,58px);color:#3a2366;line-height:1.4}
+.brs-cone{position:absolute;left:18%;right:18%;top:46%;bottom:0;background:repeating-linear-gradient(45deg,#e6a96a 0 8px,#d99555 8px 10px);clip-path:polygon(0 0,100% 0,50% 100%)}
+.brs-padang{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#8fd67a 0 46px,#7fca6b 46px 92px)}
+.brs-garis-p{position:absolute;left:8%;right:8%;top:54%;height:4px;background:rgba(255,255,255,.8);border-radius:2px}
+.brs-garis-p::after{content:"";position:absolute;left:50%;top:-40px;width:80px;height:80px;margin-left:-40px;border:4px solid rgba(255,255,255,.8);border-radius:50%}
+.brs-gol-baris{position:absolute;left:0;right:0;top:8%;display:flex;justify-content:center;gap:4%}
+.brs-gol{position:relative;width:clamp(110px,26%,170px);aspect-ratio:3/2;border:6px solid #fff;border-bottom:0;border-radius:10px 10px 0 0;background:rgba(255,255,255,.18);cursor:pointer;display:grid;place-items:center;padding:0;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+.brs-jaring{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.55) 0 2px,transparent 2px 14px),repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 2px,transparent 2px 14px)}
+.brs-gol b{position:relative;font-size:clamp(40px,7.5vmin,62px);color:#fff;text-shadow:0 3px 0 #3a2366,0 0 3px #3a2366;line-height:1.4}
+.brs-gol.masuk .brs-jaring{animation:brsJaring .5s ease}
+@keyframes brsJaring{0%,100%{transform:none}40%{transform:scale(1.08,1.12) translateY(-6px)}}
+.brs-gol.masuk{border-color:#ffe27a;box-shadow:0 0 0 4px rgba(255,226,122,.5)}
+.brs-gol.tiang{animation:brsTiang .4s ease}
+@keyframes brsTiang{0%,100%{transform:none}30%{transform:translateX(-6px)}60%{transform:translateX(5px)}}
+.brs-bolasepak{position:absolute;left:50%;bottom:16%;width:clamp(46px,9vmin,64px);aspect-ratio:1;margin-left:calc(clamp(46px,9vmin,64px) / -2);border-radius:50%;background:radial-gradient(circle at 50% 50%,#3a2366 0 13%,transparent 14%),radial-gradient(circle at 20% 30%,#3a2366 0 9%,transparent 10%),radial-gradient(circle at 80% 30%,#3a2366 0 9%,transparent 10%),radial-gradient(circle at 35% 82%,#3a2366 0 9%,transparent 10%),radial-gradient(circle at 70% 82%,#3a2366 0 9%,transparent 10%),#fff;box-shadow:0 6px 0 rgba(0,0,0,.15),inset -4px -6px 0 rgba(0,0,0,.08);z-index:4}
+.brs-mesin-w{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;padding-bottom:50px;background:radial-gradient(circle at 50% 30%,#fff,#efe6ff)}
+.brs-mesinb{position:relative;width:clamp(200px,46%,300px);display:flex;flex-direction:column;align-items:center}
+.brs-corong{width:62%;aspect-ratio:2/1;background:linear-gradient(#ffd36e,#ffbf3c);clip-path:polygon(0 0,100% 0,72% 100%,28% 100%);display:grid;place-items:start center}
+.brs-corong b{font-size:clamp(44px,8vmin,66px);color:#3a2366;line-height:1.3}
+.brs-badan{position:relative;width:100%;aspect-ratio:2/1.1;border-radius:26px;background:linear-gradient(#b38dff,#9a6ff0);box-shadow:inset 0 -10px 0 rgba(0,0,0,.12),0 6px 0 #7d55c9}
+.brs-gear{position:absolute;width:30%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,transparent 23%),repeating-conic-gradient(#ffd36e 0 18deg,#ffbf3c 18deg 36deg);top:18%}
+.brs-gear.g1{left:10%}.brs-gear.g2{right:10%;width:24%;top:28%}
+.brs-mesinb.jalan .brs-gear{animation:kbnPusing .5s linear infinite}
+.brs-mesinb.jalan .brs-gear.g2{animation-direction:reverse}
+.brs-mesinb.jalan .brs-badan{animation:brsGetar .12s linear infinite}
+@keyframes brsGetar{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+.brs-lampu{position:absolute;left:50%;top:-12px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#ff8fbf;box-shadow:0 0 0 4px #fff}
+.brs-mesinb.jalan .brs-lampu{background:#7dffb0;box-shadow:0 0 0 4px #fff,0 0 18px 6px #7dffb0}
+.brs-mesinb.rosak .brs-lampu{background:#ff5c5c;box-shadow:0 0 0 4px #fff,0 0 18px 6px #ff5c5c}
+.brs-mesinb.rosak .brs-badan{animation:kbnGoyang .4s ease}
+.brs-mata-m{position:absolute;left:36%;right:36%;bottom:16%;height:14%;border-radius:999px;background:#3a2366}
+.brs-saluran{width:22%;height:22px;background:#9a6ff0;border-radius:0 0 10px 10px}
+.brs-hasil{height:clamp(70px,12vmin,96px);display:grid;place-items:center}
+.brs-bola-h{width:clamp(70px,12vmin,96px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff 0 12%,#ff8fbf 13%);display:grid;place-items:center;animation:brsKeluar .6s cubic-bezier(.3,1.6,.5,1)}
+.brs-bola-h b{color:#fff;font-size:clamp(36px,6vmin,52px);text-shadow:0 2px 0 #3a2366;line-height:1.4}
+@keyframes brsKeluar{from{transform:translateY(-40px) scale(.3)}to{transform:none}}
+.brs-tuil-baris{display:flex;gap:5%;justify-content:center;width:100%;margin-top:24px}
+.brs-tuil{position:relative;width:clamp(84px,19%,120px);aspect-ratio:1;border:0;border-radius:22px;background:#fff;box-shadow:0 6px 0 #d9c6fb;cursor:pointer;display:grid;place-items:center;padding:0}
+.brs-tuil i{position:absolute;top:-22px;left:50%;width:10px;height:30px;margin-left:-5px;background:#c7a9ff;border-radius:5px;transform-origin:50% 100%}
+.brs-tuil i::before{content:"";position:absolute;top:-10px;left:-6px;width:22px;height:22px;border-radius:50%;background:#ff8fbf}
+.brs-tuil.brs-t-i i::before{background:#6fb6ff}.brs-tuil.brs-t-u i::before{background:#ffb54a}
+.brs-tuil.tarik i{animation:brsTarik .4s ease}
+@keyframes brsTarik{50%{transform:rotate(35deg)}}
+.brs-tuil b{font-size:clamp(40px,7.5vmin,62px);color:#3a2366;line-height:1.4}
+.brs-kilatq{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:16px 14px 70px;gap:14px;background:linear-gradient(#f3ecff,#ffeef7)}
+.brs-masa{width:100%;height:14px;flex:none;border-radius:999px;background:#fff;box-shadow:inset 0 2px 4px rgba(58,35,102,.12);overflow:hidden}
+.brs-masa i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#ff8fbf,#ffc21a)}
+.brs-kilatq.tamat .brs-masa i{background:#ff5c5c}
+.brs-kilat-atas{width:100%;display:flex;justify-content:space-between;font-weight:900;color:#4a3570;font-size:17px}
+.brs-mkh{color:#3aa874}
+.brs-dengar{flex:none;width:84px;height:84px;border:0;border-radius:50%;background:#a77bf3;box-shadow:0 6px 0 #7d55c9;display:grid;place-items:center;cursor:pointer;animation:brsDenyut 1.4s ease-in-out infinite}
+.brs-dengar svg{width:44px;height:44px}
+@keyframes brsDenyut{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.brs-kilat-pil{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(100%,560px);margin-top:auto}
+.brs-kp{aspect-ratio:1;border:4px solid #c7a9ff;border-radius:24px;background:#fff;box-shadow:0 6px 0 #d9c6fb;cursor:pointer;display:grid;place-items:center;padding:0}
+.brs-kp b{font-size:clamp(48px,9vmin,80px);color:#3a2366;line-height:1.4}
+.brs-kp.betul,.brs-kp.tunjuk{border-color:#4cc38a;background:#effbf4;box-shadow:0 6px 0 #a6e3c4}
+.brs-kp.silap{border-color:#ffb3b3;background:#fff1f1;opacity:.6}
 /* ===== Kebun Huruf (KBN_) ===== */
 .kbn-langkah{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px auto 12px;flex-wrap:wrap}
 .kbn-langkah button{font:inherit;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:#9a8ab5;background:#fff;border:2.5px solid #eadff9;border-radius:999px;padding:3px 12px 3px 4px}
@@ -6411,6 +6697,8 @@ function qrNota(i, lembar) {
   const sebut = c => ({ sebut: c[1].split(" (")[0].split(/[- ]/).filter(Boolean) });
   el.forEach((x, j) => { x.querySelector(".qrar").textContent = ct[j][0]; x.querySelector("small").textContent = ct[j][1]; x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(sebut(ct[j]), id); }; });
   qrButang("speak", "Dengar Nota", "ungu", () => { const id = ++qrId; speak(n.terang, "ms").then(() => tunggu(300)).then(() => { let p = Promise.resolve(); el.forEach((x, j) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); return iqSebut(sebut(ct[j]), id).then(() => tunggu(300)); }); }); return p; }).then(() => el.forEach(z => z.classList.remove("on"))); });
+  const RNT_V = { "Dua Baris Atas": "an", "Dua Baris Bawah": "in", "Dua Baris Depan": "un" }[n.tajuk];
+  if (RNT_V) { const hs = document.createElement("div"); hs.className = "brs-rantai"; k.insertBefore(hs, k.querySelector(".qnterang").nextSibling); RNT_bina(hs, HIJAIYAH.map((_, h) => { const x = h === 0 && RNT_V === "an" ? ["أً", "an"] : iqSuku(h, RNT_V); return { ar: x[0], lat: qrBersih(x[1]) }; }), RNT_TEMA[RNT_V], RNT_V); }
   qnNavigasi(pos);
   qrBual(n.tajuk);
   const id = qrId;
@@ -7071,6 +7359,35 @@ function kbnSiap() {
   b.querySelectorAll(".kbn-lanjut")[1].onclick = renderIqraMenu;
 }
 
+
+/* ===== Animasi berangkai (RNT_): 28 huruf alif..ya bergerak berangkai, menyala satu demi satu (macam karaoke). Lagu: tetapan.laluan.lagu[kunci] (Dashboard), tempo: tetapan.laluan.tempo (ms) ===== */
+const RNT_TEMA = { a: "keretapi", i: "ulat", u: "ikan", aiu: "perahu", taman: "bunga", an: "lebah", in: "awan", un: "layang" };
+function RNT_bina(host, item, tema, kunci) {
+  const L = (window.TETAPAN && TETAPAN.laluan) || {}, lagu = (L.lagu || {})[kunci] || "", tempo = +L.tempo || 950;
+  const w = document.createElement("div"); w.className = "rnt rnt-" + tema;
+  w.innerHTML = '<div class="rnt-langit"></div><div class="rnt-landas"></div><div class="rnt-rantai">' + (tema === "keretapi" ? '<span class="rnt-kepala"></span>' : tema === "ulat" ? '<span class="rnt-kepala"></span>' : "")
+    + item.map((x, n) => '<button class="rnt-item" data-n="' + n + '" style="--n:' + n + '"><span class="rnt-badan"><b class="qrar">' + x.ar + "</b><small>" + x.lat + "</small></span></button>").join("") + '</div><div class="rnt-kawal"><button class="rnt-main">▶ Main</button><button class="rnt-henti" hidden>❚❚ Henti</button></div>';
+  host.appendChild(w);
+  const rt = w.querySelector(".rnt-rantai"), el = [...w.querySelectorAll(".rnt-item")];
+  let no = 0, au = null;
+  const fokus = n => { const e = el[n]; if (!e) return; el.forEach((z, k) => { z.classList.toggle("on", z === e); if (k <= n) z.classList.add("mekar"); }); const lw = w.clientWidth, x = e.offsetLeft + e.offsetWidth / 2; rt.style.transform = "translateX(" + Math.round(lw / 2 - x) + "px)"; };
+  const henti = () => { no++; try { au && au.pause(); } catch (e) { /* abaikan */ } w.classList.remove("jalan"); w.querySelector(".rnt-main").hidden = false; w.querySelector(".rnt-henti").hidden = true; };
+  const main = () => {
+    const id = ++no; w.classList.add("jalan"); w.querySelector(".rnt-main").hidden = true; w.querySelector(".rnt-henti").hidden = false;
+    if (lagu && SUARA_ON) {
+      try { au = new Audio("gambar/" + lagu); au.play().catch(() => {}); } catch (e) { /* abaikan */ }
+      let n = 0; const t = () => { if (id !== no) return; fokus(n); n++; if (n < el.length) setTimeout(t, tempo); else setTimeout(henti, tempo); }; t();
+    } else {
+      let p = Promise.resolve();
+      el.forEach((e, n) => { p = p.then(() => { if (id !== no) return; fokus(n); return speak("~" + item[n].lat, "ms").then(() => tunggu(120)); }); });
+      p.then(() => { if (id === no) henti(); });
+    }
+  };
+  w.querySelector(".rnt-main").onclick = main; w.querySelector(".rnt-henti").onclick = henti;
+  rt.onclick = e => { const b = e.target.closest(".rnt-item"); if (!b) return; henti(); fokus(+b.dataset.n); speak("~" + item[+b.dataset.n].lat, "ms"); };
+  requestAnimationFrame(() => fokus(0));
+  return { main, henti };
+}
 /* ===== Pulau Baris (BRS_): belajar baris atas/bawah/depan sambil bermain. Enjin bersama; setiap permainan = fungsi brsG_<Nama>(q, kawasan, pilih) =====
    q = { sasar: suku, pilihan: [suku...] } ; suku = { h: indeks huruf, v: "a"|"i"|"u", ar, lat }
    Permainan memanggil pilih(suku, elemen) bila anak memilih; enjin menyemak, sebut, markah & teruskan. */
@@ -7080,7 +7397,8 @@ const BRS_LEVEL = [
   { nm: "Baris Atas", ik: "بَ", v: ["a"], g: ["Topi", "Hilang"] },
   { nm: "Baris Bawah", ik: "بِ", v: ["i"], g: ["Lif", "Gelongsor"] },
   { nm: "Baris Depan", ik: "بُ", v: ["u"], g: ["Aiskrim", "Bola"] },
-  { nm: "Jadual Baris", ik: "بَ بِ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Mesin", "Kilat"] }
+  { nm: "Jadual Baris", ik: "بَ بِ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Mesin", "Kilat"] },
+  { nm: "Taman Bunyi", ik: "بَ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Kebun", "Kawan", "Cabaran", "Lumba", "Rakam"] }
 ];
 const BRS_GAME = {};
 /* BRS_GAME_TAMBAH */
@@ -7113,9 +7431,12 @@ function brsLangkah(i) { if (i === 0) brsBelajar(); else if (i <= BRS.g.length) 
 function brsBelajar() {
   const b = brsSkrin(0);
   b.innerHTML = '<div class="brs-belajar">' + BRS.v.map(v => '<div class="brs-watak brs-w-' + v + '"><span class="brs-ikon"></span><p>' + BRS_WATAK[v][1] + "</p></div>").join("")
-    + '<div class="brs-grid">' + BRS_HURUF.slice(0, 8).map(h => BRS.v.map(v => { const sk = BRS_suku(h, v); return '<button class="brs-suku" data-h="' + h + '" data-v="' + v + '"><b class="qrar">' + sk.ar + "</b><small>" + sk.lat + "</small></button>"; }).join("")).join("") + '</div><button class="kbn-lanjut">Jom main! ▶</button></div>';
-  b.querySelector(".brs-grid").onclick = e => { const t = e.target.closest(".brs-suku"); if (!t) return; t.classList.remove("pop"); void t.offsetWidth; t.classList.add("pop"); BRS_sebut(BRS_suku(+t.dataset.h, t.dataset.v)); };
+    + '<div class="brs-rantai"></div><button class="kbn-lanjut">Jom main! ▶</button></div>';
+  const kunci = BRS.nm === "Taman Bunyi" ? "taman" : BRS.v.join(""), item = [];
+  HIJAIYAH.forEach((_, h) => BRS.v.forEach(v => item.push(BRS_suku(h, v))));
+  RNT_bina(b.querySelector(".brs-rantai"), item, RNT_TEMA[kunci] || "keretapi", kunci);
   b.querySelector(".kbn-lanjut").onclick = () => brsLangkah(1);
+  brsX_belajar(b); /* FASA2: streak + butang Album */
   speak(BRS_WATAK[BRS.v[0]][1], "ms");
 }
 /* Main: 6 soalan, permainan dari BRS_GAME */
@@ -7147,10 +7468,265 @@ function brsSiap() {
   b.innerHTML = '<div class="kbn-siap"><div class="kbn-siap-bintang">' + [0, 1, 2].map(i => '<i class="' + (i < n ? "on" : "") + '" style="animation-delay:' + (i * .25 + .2) + 's"></i>').join("") + "</div><h3>" + BRS.nm + " siap!</h3>" + (semua ? '<div class="brs-lencana">Pakar Baris</div>' : "") + '<div class="kbn-siap-btn"><button class="kbn-lanjut kbn-semula">↻ Main lagi</button><button class="kbn-lanjut">Kembali ke pulau ▶</button></div></div>';
   try { sndWin(); const r = b.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 80); } catch (e) { /* abaikan */ }
   if (semua) { try { localStorage.setItem("baris.pakar", "1"); } catch (e) { /* abaikan */ } }
+  brsX_siap(b); /* FASA2: kostum Nuri */
   b.querySelector(".kbn-semula").onclick = () => brsMula(BRS.l);
   b.querySelectorAll(".kbn-lanjut")[1].onclick = renderIqraMenu;
 }
 /* BRS_PERMAINAN_MULA (sub-ejen: tambah fungsi brsG_* & daftar BRS_GAME di bawah penanda ini) */
+
+const brsTanda = (kw, q) => { kw.dataset.sh = q.sasar.h; kw.dataset.sv = q.sasar.v; };
+const brsIkonBaris = v => '<span class="brs-ikon brs-ik-' + v + '"></span>';
+/* 1. Topi: 3 huruf tanpa baris berdiri; topi terapung; pilih huruf disebut -> topi jatuh, huruf jadi berbaris */
+function brsG_Topi(q, kw, pilih) {
+  brsTanda(kw, q);
+  kw.innerHTML = '<div class="brs-topi-awan"></div><div class="brs-topi-terbang"><i></i></div><div class="brs-topi-baris">' + q.pilihan.map(sk => '<button class="brs-watak-h" data-h="' + sk.h + '" data-v="' + sk.v + '"><span class="brs-mata"></span><b class="qrar">' + HIJAIYAH[sk.h][0] + "</b></button>").join("") + "</div>";
+  const topi = kw.querySelector(".brs-topi-terbang");
+  kw.querySelectorAll(".brs-watak-h").forEach((el, n) => el.onclick = () => pilih(q.pilihan[n], el));
+  return {
+    betul: el => new Promise(ok => {
+      const a = topi.getBoundingClientRect(), c = el.getBoundingClientRect();
+      topi.style.animation = "none"; topi.style.transition = "transform .6s cubic-bezier(.5,0,.5,1.4)";
+      topi.style.transform = "translate(" + (c.left + c.width / 2 - a.left - a.width / 2) + "px," + (c.top - a.top - a.height * .35) + "px)";
+      setTimeout(() => { el.querySelector("b").textContent = q.sasar.ar; el.classList.add("pakai"); topi.style.opacity = "0"; setTimeout(ok, 450); }, 620);
+    })
+  };
+}
+/* 2. Hilang: huruf besar tanpa baris; 3 jubin baris (topi/kasut/reben); pilih -> baris terbang ke huruf */
+function brsG_Hilang(q, kw, pilih) {
+  brsTanda(kw, q);
+  kw.innerHTML = '<div class="brs-hilang-huruf"><b class="qrar">' + HIJAIYAH[q.sasar.h][0] + '</b><span class="brs-tanya">?</span></div><div class="brs-hilang-jubin">' + q.pilihan.map(sk => '<button class="brs-jubin" data-h="' + sk.h + '" data-v="' + sk.v + '">' + brsIkonBaris(sk.v) + '<b class="qrar">' + sk.ar + "</b><small>" + sk.lat + "</small></button>").join("") + "</div>";
+  const hr = kw.querySelector(".brs-hilang-huruf");
+  kw.querySelectorAll(".brs-jubin").forEach((el, n) => el.onclick = () => pilih(q.pilihan[n], el));
+  return {
+    betul: el => new Promise(ok => {
+      const ik = el.querySelector(".brs-ikon"), a = ik.getBoundingClientRect(), c = hr.getBoundingClientRect();
+      ik.style.transition = "transform .6s cubic-bezier(.4,1.3,.6,1),opacity .2s .55s"; ik.style.zIndex = "5";
+      ik.style.transform = "translate(" + (c.left + c.width / 2 - a.left - a.width / 2) + "px," + (c.top + c.height / 2 - a.top - a.height / 2) + "px) scale(1.4)"; ik.style.opacity = "0";
+      setTimeout(() => { hr.querySelector("b").textContent = q.sasar.ar; hr.classList.add("lengkap"); setTimeout(ok, 400); }, 620);
+    })
+  };
+}
+/* 3. Lif: 3 tingkat (atas=a, tengah=u, bawah=i); huruf dalam lif; tekan tingkat -> lif bergerak, pintu buka */
+function brsG_Lif(q, kw, pilih) {
+  brsTanda(kw, q);
+  const TK = ["a", "u", "i"], bySk = v => q.pilihan.find(x => x.v === v);
+  kw.innerHTML = '<div class="brs-bangunan"><div class="brs-aci"><div class="brs-kotaklif buka" style="top:66.66%"><div class="brs-lif-dalam"><b class="qrar">' + HIJAIYAH[q.sasar.h][0] + '</b></div><i class="brs-pintu kiri"></i><i class="brs-pintu kanan"></i></div></div><div class="brs-tingkat-kol">' + TK.map(v => { const sk = bySk(v); return '<button class="brs-tingkat" data-h="' + sk.h + '" data-v="' + sk.v + '">' + brsIkonBaris(v) + '<b class="qrar">' + sk.ar + "</b></button>"; }).join("") + "</div></div>";
+  const lif = kw.querySelector(".brs-kotaklif");
+  kw.querySelectorAll(".brs-tingkat").forEach(el => el.onclick = () => pilih(bySk(el.dataset.v), el));
+  return {
+    betul: el => new Promise(ok => {
+      el.classList.add("nyala"); lif.classList.remove("buka");
+      setTimeout(() => { lif.style.top = (TK.indexOf(q.sasar.v) / 3 * 100) + "%"; lif.querySelector("b").textContent = q.sasar.ar; }, 520);
+      setTimeout(() => { lif.classList.add("buka"); setTimeout(ok, 650); }, 1450);
+    })
+  };
+}
+/* 4. Gelongsor: 3 jubin suku kata meluncur turun berterusan; tekan yang betul -> jatuh ke bakul */
+function brsG_Gelongsor(q, kw, pilih) {
+  brsTanda(kw, q);
+  kw.innerHTML = '<div class="brs-luncur">' + q.pilihan.map((sk, n) => '<button class="brs-jatuh" data-h="' + sk.h + '" data-v="' + sk.v + '" style="left:' + (12 + n * 28) + '%;animation-delay:' + (-n * 1.4).toFixed(1) + 's"><b class="qrar">' + sk.ar + "</b></button>").join("") + '</div><div class="brs-bakul"><i></i></div>';
+  const bk = kw.querySelector(".brs-bakul");
+  kw.querySelectorAll(".brs-jatuh").forEach((el, n) => el.onclick = () => pilih(q.pilihan[n], el));
+  return {
+    betul: el => new Promise(ok => {
+      const kr = kw.getBoundingClientRect(), a = el.getBoundingClientRect(), c = bk.getBoundingClientRect();
+      el.style.animation = "none"; el.style.transform = "translateY(" + (a.top - kr.top) + "px)"; void el.offsetWidth;
+      el.style.transition = "transform .55s cubic-bezier(.5,0,.8,.6),left .55s ease,opacity .2s .5s"; el.style.left = "calc(50% - " + (a.width / 2) + "px)";
+      el.style.transform = "translateY(" + (c.top - kr.top - a.height * .2) + "px) scale(.8)"; el.style.opacity = "0";
+      setTimeout(() => { bk.classList.add("dapat"); setTimeout(ok, 350); }, 560);
+    })
+  };
+}
+BRS_GAME.Topi = { jenis: "huruf", bina: brsG_Topi };
+BRS_GAME.Hilang = { jenis: "vokal", bina: brsG_Hilang };
+BRS_GAME.Lif = { jenis: "vokal", bina: brsG_Lif };
+BRS_GAME.Gelongsor = { jenis: "huruf", bina: brsG_Gelongsor };
+
+/* ---- FASA 2: storan ganjaran ---- */
+function brsX_baca(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
+function brsX_tulis(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* abaikan */ } }
+const BRS_KOSTUM = ["topi", "kasut", "reben"];
+/* Bungkus semua permainan (termasuk Fasa 1 yang didaftar kemudian): rekod Album (betul) & laporan salah per suku kata */
+setTimeout(() => Object.keys(BRS_GAME).forEach(nama => {
+  const G = BRS_GAME[nama]; if (!G || G._fasa2) return; G._fasa2 = true; const asal = G.bina;
+  G.bina = (q, kw, pilih) => { kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v; let dicatat = false; return asal(q, kw, (sk, el) => {
+    if (!dicatat && sk) { if (sk.h === q.sasar.h && sk.v === q.sasar.v) { const a = brsX_baca("baris.album", []); if (a.indexOf(q.sasar.lat) < 0) { a.push(q.sasar.lat); brsX_tulis("baris.album", a); } dicatat = true; }
+      else { const sl = brsX_baca("baris.salah", {}); sl[q.sasar.lat] = (sl[q.sasar.lat] || 0) + 1; brsX_tulis("baris.salah", sl); } }
+    pilih(sk, el);
+  }); };
+}), 0);
+function brsX_tarikh(d) { return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+function brsX_belajar(b) {
+  const kini = brsX_tarikh(new Date()), smlm = brsX_tarikh(new Date(Date.now() - 864e5)), st = brsX_baca("baris.streak", { tarikh: "", hari: 0 });
+  if (st.tarikh !== kini) { st.hari = st.tarikh === smlm ? st.hari + 1 : 1; st.tarikh = kini; brsX_tulis("baris.streak", st); }
+  const bar = document.createElement("div"); bar.className = "brsx-bar";
+  bar.innerHTML = '<span class="brsx-streak"><i class="brsx-bunga"></i>' + st.hari + ' hari</span><span class="brsx-kostum">' + brsX_baca("baris.kostum", []).map(k => '<i class="brsx-k brsx-k-' + k + '" title="' + k + '"></i>').join("") + '</span><button class="brsx-album-btn" type="button">Album Bunyi</button>';
+  const bl = b.querySelector(".brs-belajar"); if (bl) bl.prepend(bar);
+  bar.querySelector(".brsx-album-btn").onclick = brsX_album;
+}
+function brsX_album() {
+  const a = brsX_baca("baris.album", []), sl = brsX_baca("baris.salah", {}), o = document.createElement("div"); o.className = "brsx-album-lapis";
+  const sukar = Object.keys(sl).sort((x, y) => sl[y] - sl[x]).slice(0, 3);
+  let grid = "", n = 0;
+  for (let h = 0; h < 28; h++) ["a", "i", "u"].forEach(v => { const sk = BRS_suku(h, v), ada = a.indexOf(sk.lat) >= 0; if (ada) n++; grid += '<span class="brsx-pel' + (ada ? " ada" : "") + '"><b class="qrar">' + sk.ar + "</b><small>" + sk.lat + "</small></span>"; });
+  o.innerHTML = '<div class="brsx-album"><div class="brsx-album-atas"><b>Album Bunyi</b><span>' + n + ' / 84</span><button type="button" aria-label="Tutup">✕</button></div>'
+    + '<div class="brsx-lapor"><b>Untuk ibu bapa:</b> ' + (sukar.length ? "bunyi paling kerap salah: " + sukar.map(x => '<span class="brsx-sukar">' + x + " (" + sl[x] + ")</span>").join(" ") : "belum ada kesilapan direkod.") + "</div>"
+    + '<div class="brsx-grid">' + grid + "</div></div>";
+  o.querySelector("button").onclick = () => o.remove(); o.onclick = e => { if (e.target === o) o.remove(); };
+  document.body.appendChild(o);
+}
+function brsX_siap(b) {
+  if (BRS.l <= 2) { const k = brsX_baca("baris.kostum", []); if (k.indexOf(BRS_KOSTUM[BRS.l]) < 0) { k.push(BRS_KOSTUM[BRS.l]); brsX_tulis("baris.kostum", k); } }
+  const k = brsX_baca("baris.kostum", []); if (!k.length) return;
+  const d = document.createElement("div"); d.className = "brsx-kostum-siap";
+  d.innerHTML = "<p>Kostum Nuri:</p><div>" + BRS_KOSTUM.map(x => '<span class="' + (k.indexOf(x) >= 0 ? "ada" : "") + '"><i class="brsx-k brsx-k-' + x + '"></i><small>' + x + "</small></span>").join("") + "</div>";
+  const h3 = b.querySelector("h3"); if (h3) h3.after(d);
+}
+const brsX_pilih = (sk, kelas, isi) => '<button type="button" class="' + kelas + '" data-h="' + sk.h + '" data-v="' + sk.v + '">' + (isi || '<b class="qrar">' + sk.ar + "</b>") + "</button>";
+const brsX_cari = (q, el) => q.pilihan.find(x => x.h === +el.dataset.h && x.v === el.dataset.v);
+/* Kebun: siram benih huruf dengan tin baris yang betul -> bunga tumbuh */
+BRS_GAME.Kebun = { jenis: "vokal", bina(q, kw, pilih) {
+  kw.innerHTML = '<div class="brsx-kebun"><div class="brsx-pasu"><div class="brsx-pokok"><i class="brsx-kelopak"><b class="qrar">' + q.sasar.ar + '</b></i></div><span class="brsx-benih qrar">' + HIJAIYAH[q.sasar.h][0] + '</span></div><div class="brsx-tin-baris">' + q.pilihan.map(sk => brsX_pilih(sk, "brsx-tin", '<i class="brsx-tin-badan"></i><b class="qrar">' + sk.ar + "</b>")).join("") + "</div></div>";
+  const ps = kw.querySelector(".brsx-pasu");
+  kw.querySelectorAll(".brsx-tin").forEach(t => t.onclick = () => pilih(brsX_cari(q, t), t));
+  return { betul: el => new Promise(ok => { el.classList.add("siram"); setTimeout(() => { ps.classList.add("tumbuh"); setTimeout(ok, 750); }, 450); }) };
+} };
+/* Kawan: perkataan Melayu yang bermula dengan suku kata -> pilih suku kata jawi yang padan */
+const BRS_KATA = { ba: "batu", bi: "biji", bu: "buku", ta: "tali", ti: "tiga", tu: "tuju", ka: "kaki", ki: "kita", ku: "kuda", ma: "mata", mi: "minum", mu: "muka", la: "lari", li: "lima", lu: "lutut", na: "nasi", nu: "nur", da: "dahi", du: "duit", ja: "jari", ju: "jual", sa: "sayur", si: "siku", su: "susu", ha: "hati", hu: "hujan", ru: "rumah", ri: "rimau" };
+BRS_GAME.Kawan = { jenis: "huruf", bina(q, kw, pilih) {
+  const kata = BRS_KATA[q.sasar.lat], tunjuk = kata ? '<b class="brsx-awal">' + kata.slice(0, q.sasar.lat.length) + "</b>" + kata.slice(q.sasar.lat.length) : '<b class="brsx-awal">' + q.sasar.lat + "</b>";
+  kw.innerHTML = '<div class="brsx-kawan"><div class="brsx-kad-kata">' + tunjuk + '</div><p class="brsx-arah">Pilih bunyi awal perkataan ini</p><div class="brsx-pilihan">' + q.pilihan.map(sk => brsX_pilih(sk, "brsx-jubin")).join("") + "</div></div>";
+  kw.querySelectorAll(".brsx-jubin").forEach(t => t.onclick = () => pilih(brsX_cari(q, t), t));
+  return { betul: el => { el.classList.add("betul"); kw.querySelector(".brsx-kad-kata").classList.add("betul"); return new Promise(ok => setTimeout(ok, 500)); } };
+} };
+/* Cabaran Nuri: Nuri sebut bunyi (kadang sengaja salah); anak tekan Betul atau Salah! */
+BRS_GAME.Cabaran = { jenis: "vokal", senyap: true, bina(q, kw, pilih) {
+  const lain = q.pilihan.filter(x => x.v !== q.sasar.v), betulNuri = Math.random() < .5, sebut = betulNuri ? q.sasar : lain[Math.floor(Math.random() * lain.length)];
+  kw.dataset.betul = betulNuri ? "1" : "0";
+  kw.innerHTML = '<div class="brsx-cabaran"><div class="brsx-huruf-besar"><b class="qrar">' + q.sasar.ar + '</b></div><div class="brsx-nuri-c"><img alt="" src="gambar/pet/nuri/fikir.png"><span class="brsx-gel">' + sebut.lat + '!</span></div><div class="brsx-dua"><button type="button" class="brsx-ya" data-jawab="1">Betul</button><button type="button" class="brsx-tidak" data-jawab="0">Salah!</button></div></div>';
+  setTimeout(() => BRS_sebut(sebut), 250);
+  kw.querySelectorAll("[data-jawab]").forEach(t => t.onclick = () => pilih((t.dataset.jawab === kw.dataset.betul) ? q.sasar : lain[0], t));
+  return { betul: el => { el.classList.add("betul"); kw.querySelector(".brsx-nuri-c img").src = "gambar/pet/nuri/gembira.png"; return new Promise(ok => setTimeout(ok, 500)); } };
+} };
+/* Lumba: 2 pemain, skrin dibahagi dua; siapa tekan betul dulu dapat mata */
+BRS_GAME.Lumba = { jenis: "huruf", bina(q, kw, pilih) {
+  const skor = kw._skor || (kw._skor = [0, 0]);
+  const sisi = p => '<div class="brsx-sisi brsx-p' + p + '" data-p="' + p + '"><div class="brsx-skor">Pemain ' + (p + 1) + ": <b>" + skor[p] + '</b></div><div class="brsx-pilihan">' + KBN_kocok(q.pilihan).map(sk => brsX_pilih(sk, "brsx-jubin")).join("") + "</div></div>";
+  kw.innerHTML = '<div class="brsx-lumba">' + sisi(0) + sisi(1) + "</div>";
+  kw._menang = 0;
+  kw.querySelectorAll(".brsx-jubin").forEach(t => t.onclick = () => { const sk = brsX_cari(q, t); if (sk.h === q.sasar.h && sk.v === q.sasar.v && !kw._menang) { kw._menang = 1; const p = +t.closest(".brsx-sisi").dataset.p; skor[p]++; t.closest(".brsx-sisi").querySelector(".brsx-skor b").textContent = skor[p]; } pilih(sk, t); });
+  return { betul: el => { el.classList.add("betul"); el.closest(".brsx-sisi").classList.add("menang"); return new Promise(ok => setTimeout(ok, 600)); } };
+} };
+/* Rakam: anak sebut, rakam 2 s, dengar semula suara sendiri, kemudian suara Nuri */
+BRS_GAME.Rakam = { jenis: "vokal", jumlah: 3, bina(q, kw, pilih) {
+  kw.innerHTML = '<div class="brsx-rakam"><div class="brsx-huruf-besar"><b class="qrar">' + q.sasar.ar + '</b></div><p class="brsx-arah">Tekan mikrofon, sebut bunyi ini</p><button type="button" class="brsx-mik" aria-label="Rakam"><i></i></button><button type="button" class="brsx-langkau">Langkau</button></div>';
+  const mik = kw.querySelector(".brsx-mik"), lk = kw.querySelector(".brsx-langkau"), ar = kw.querySelector(".brsx-arah");
+  lk.onclick = () => pilih(q.sasar, lk);
+  mik.onclick = async () => {
+    if (mik.classList.contains("rakam")) return;
+    try {
+      if (!navigator.mediaDevices || !window.MediaRecorder) throw new Error("tiada");
+      const st = await navigator.mediaDevices.getUserMedia({ audio: true }), rc = new MediaRecorder(st), cebis = [];
+      rc.ondataavailable = e => cebis.push(e.data);
+      rc.onstop = () => { st.getTracks().forEach(t => t.stop()); mik.classList.remove("rakam"); ar.textContent = "Dengar suara adik...";
+        const a = new Audio(URL.createObjectURL(new Blob(cebis))); let s = false; const habis = () => { if (!s) { s = true; pilih(q.sasar, mik); } }; a.onended = habis; a.onerror = habis; setTimeout(habis, 4000); const p = a.play(); if (p && p.catch) p.catch(habis); };
+      mik.classList.add("rakam"); ar.textContent = "Sedang merakam..."; rc.start(); setTimeout(() => { if (rc.state !== "inactive") rc.stop(); }, 2000);
+    } catch (e) { ar.textContent = "Mikrofon tidak dapat digunakan. Tekan Langkau."; lk.classList.add("tonjol"); }
+  };
+  return { betul: el => { el.classList.add("betul"); return new Promise(ok => setTimeout(ok, 300)); } };
+} };
+
+/* --- Aiskrim: pelanggan arnab minta bunyi; tekan kon berlabel suku yang betul --- */
+function brsPelanggan() {
+  return '<svg class="brs-arnab" viewBox="0 0 120 130"><ellipse cx="42" cy="28" rx="11" ry="26" fill="#fff" stroke="#e8d6f5" stroke-width="3"/><ellipse cx="78" cy="28" rx="11" ry="26" fill="#fff" stroke="#e8d6f5" stroke-width="3"/><ellipse cx="42" cy="30" rx="5" ry="17" fill="#ffc6dc"/><ellipse cx="78" cy="30" rx="5" ry="17" fill="#ffc6dc"/><circle cx="60" cy="78" r="40" fill="#fff" stroke="#e8d6f5" stroke-width="3"/><ellipse cx="46" cy="72" rx="5" ry="6.5" fill="#3a2366"/><ellipse cx="74" cy="72" rx="5" ry="6.5" fill="#3a2366"/><circle cx="48" cy="70" r="1.8" fill="#fff"/><circle cx="76" cy="70" r="1.8" fill="#fff"/><ellipse cx="38" cy="86" rx="7" ry="4" fill="#ffb3cf"/><ellipse cx="82" cy="86" rx="7" ry="4" fill="#ffb3cf"/><path class="brs-mulut" d="M53 88 q7 6 14 0" stroke="#3a2366" stroke-width="3" fill="none" stroke-linecap="round"/><path class="brs-mulut2" d="M50 86 q10 12 20 0 z" fill="#ff7a9a" stroke="#3a2366" stroke-width="3" stroke-linejoin="round"/></svg>';
+}
+function brsCari(q, t) { return q.pilihan.find(x => x.h === +t.dataset.h && x.v === t.dataset.v); }
+BRS_GAME.Aiskrim = {
+  jenis: "vokal",
+  bina(q, kw, pilih) {
+    const W = ["#ffb3cf", "#b8e6c9", "#ffe08a"];
+    kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v;
+    kw.innerHTML = '<div class="brs-kedai"><div class="brs-awning"></div><div class="brs-plg">' + brsPelanggan() + '<span class="brs-gel">?</span><span class="brs-syiling"></span></div><div class="brs-kaunter"></div><div class="brs-kon-baris">'
+      + q.pilihan.map((sk, n) => '<button class="brs-kon" data-h="' + sk.h + '" data-v="' + sk.v + '" style="--w:' + W[n % 3] + ';--d:' + (n * .08) + 's"><span class="brs-skop"><b class="qrar">' + sk.ar + '</b></span><span class="brs-cone"></span></button>').join("") + "</div></div>";
+    const plg = kw.querySelector(".brs-plg"), gel = kw.querySelector(".brs-gel");
+    kw.querySelector(".brs-kon-baris").onclick = e => { const t = e.target.closest(".brs-kon"); if (t) pilih(brsCari(q, t), t); };
+    return {
+      betul(el) { return new Promise(ok => {
+        if (!el) return ok();
+        const a = el.getBoundingClientRect(), c = plg.getBoundingClientRect();
+        el.style.transition = "transform .6s cubic-bezier(.4,1.3,.6,1)"; el.style.zIndex = 5;
+        el.style.transform = "translate(" + (c.left + c.width / 2 - a.left - a.width / 2) + "px," + (c.top + c.height * .55 - a.top - a.height / 2) + "px) scale(.75)";
+        setTimeout(() => { plg.classList.add("gembira"); gel.textContent = ""; gel.classList.add("hati"); try { const r = plg.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 20); } catch (er) { /* abaikan */ } ok(); }, 620);
+      }); },
+      salah(el) { plg.classList.remove("geleng"); void plg.offsetWidth; plg.classList.add("geleng"); if (el) { el.classList.remove("goyang"); void el.offsetWidth; el.classList.add("goyang"); } }
+    };
+  }
+};
+/* --- Bola: 3 gol berlabel suku; tekan gol -> bola melengkung masuk --- */
+BRS_GAME.Bola = {
+  jenis: "vokal",
+  bina(q, kw, pilih) {
+    kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v;
+    kw.innerHTML = '<div class="brs-padang"><div class="brs-garis-p"></div><div class="brs-gol-baris">' + q.pilihan.map(sk => '<button class="brs-gol" data-h="' + sk.h + '" data-v="' + sk.v + '"><span class="brs-jaring"></span><b class="qrar">' + sk.ar + '</b></button>').join("") + '</div><div class="brs-bolasepak"></div></div>';
+    const bola = kw.querySelector(".brs-bolasepak");
+    let sibuk = false;
+    kw.querySelector(".brs-gol-baris").onclick = e => { const t = e.target.closest(".brs-gol"); if (t && !sibuk) pilih(brsCari(q, t), t); };
+    const tendang = (el, kena) => new Promise(ok => {
+      const a = bola.getBoundingClientRect(), c = el.getBoundingClientRect(), dx = c.left + c.width / 2 - a.left - a.width / 2, dy = c.top + c.height * (kena ? .55 : .05) - a.top - a.height / 2;
+      const t0 = performance.now(), T = 650, lengkung = (Math.random() > .5 ? 1 : -1) * 60;
+      const f = t => { const u = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - u, 2);
+        bola.style.transform = "translate(" + (dx * e + Math.sin(u * Math.PI) * lengkung) + "px," + (dy * e) + "px) scale(" + (1 - .35 * e) + ") rotate(" + (u * 720) + "deg)";
+        if (u < 1) requestAnimationFrame(f); else ok(); };
+      requestAnimationFrame(f);
+    });
+    return {
+      betul(el) { if (!el) return Promise.resolve(); sibuk = true; return tendang(el, true).then(() => { el.classList.add("masuk"); try { const r = el.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } catch (er) { /* abaikan */ } return new Promise(ok => setTimeout(ok, 450)); }); },
+      salah(el) { if (sibuk || !el) return; sibuk = true; tendang(el, false).then(() => { el.classList.remove("tiang"); void el.offsetWidth; el.classList.add("tiang"); bola.style.transition = "transform .45s ease-out"; bola.style.transform = ""; setTimeout(() => { bola.style.transition = ""; sibuk = false; }, 460); }); }
+    };
+  }
+};
+/* --- Mesin Bunyi: huruf ditunjuk, pilih tuil baris; mesin keluarkan bola suku --- */
+BRS_GAME.Mesin = {
+  jenis: "vokal", jumlah: 4,
+  bina(q, kw, pilih) {
+    kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v;
+    const urut = ["a", "i", "u"].map(v => q.pilihan.find(x => x.v === v));
+    kw.innerHTML = '<div class="brs-mesin-w"><div class="brs-mesinb"><div class="brs-corong"><b class="qrar">' + HIJAIYAH[q.sasar.h][0] + '</b></div><div class="brs-badan"><span class="brs-gear g1"></span><span class="brs-gear g2"></span><span class="brs-lampu"></span><span class="brs-mata-m"></span></div><div class="brs-saluran"></div><div class="brs-hasil"></div></div><div class="brs-tuil-baris">'
+      + urut.map(sk => '<button class="brs-tuil brs-t-' + sk.v + '" data-h="' + sk.h + '" data-v="' + sk.v + '"><i></i><b class="qrar">' + sk.ar + '</b></button>').join("") + "</div></div>";
+    const ms = kw.querySelector(".brs-mesinb"), hs = kw.querySelector(".brs-hasil");
+    kw.querySelector(".brs-tuil-baris").onclick = e => { const t = e.target.closest(".brs-tuil"); if (!t) return; t.classList.remove("tarik"); void t.offsetWidth; t.classList.add("tarik"); pilih(brsCari(q, t), t); };
+    return {
+      betul() { return new Promise(ok => { ms.classList.add("jalan"); setTimeout(() => { hs.innerHTML = '<span class="brs-bola-h"><b class="qrar">' + q.sasar.ar + "</b></span>"; ms.classList.remove("jalan"); try { const r = hs.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top); } catch (er) { /* abaikan */ } setTimeout(ok, 500); }, 900); }); },
+      salah(el) { ms.classList.remove("rosak"); void ms.offsetWidth; ms.classList.add("rosak"); if (el) { el.classList.remove("goyang"); void el.offsetWidth; el.classList.add("goyang"); } }
+    };
+  }
+};
+/* --- Kuiz Kilat: 10 soalan pantas, bar masa 6 s, markah --- */
+BRS_GAME.Kilat = {
+  jenis: "huruf", jumlah: 10,
+  bina(q, kw, pilih) {
+    if (kw.dataset.lv !== String(BRS.id)) { kw.dataset.no = "0"; kw.dataset.markah = "0"; kw.dataset.lv = String(BRS.id); }
+    const no = +kw.dataset.no + 1; kw.dataset.no = no;
+    kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v;
+    kw.innerHTML = '<div class="brs-kilatq"><div class="brs-masa"><i></i></div><div class="brs-kilat-atas"><span>Soalan ' + no + ' / 10</span><span class="brs-mkh">' + kw.dataset.markah + ' betul</span></div><button class="brs-dengar" aria-label="Dengar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="brs-kilat-pil">'
+      + q.pilihan.map(sk => '<button class="brs-kp" data-h="' + sk.h + '" data-v="' + sk.v + '"><b class="qrar">' + sk.ar + "</b></button>").join("") + "</div></div>";
+    const bar = kw.querySelector(".brs-masa i"); let salahSini = false, habis = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = "width 6s linear"; bar.style.width = "0%"; }));
+    const jam = setTimeout(() => { if (habis || !kw.isConnected) return; habis = true; if (!salahSini) BRS.salah++; kw.querySelector(".brs-kilatq").classList.add("tamat"); pilih(q.sasar, null); }, 6000);
+    kw.querySelector(".brs-dengar").onclick = () => BRS_sebut(q.sasar);
+    kw.querySelector(".brs-kilat-pil").onclick = e => { const t = e.target.closest(".brs-kp"); if (!t || habis) return; pilih(brsCari(q, t), t); };
+    return {
+      betul(el) {
+        habis = true; clearTimeout(jam); bar.style.transition = "none";
+        if (el) { el.classList.add("betul"); if (!salahSini) kw.dataset.markah = +kw.dataset.markah + 1; }
+        else { const b2 = kw.querySelector('.brs-kp[data-h="' + q.sasar.h + '"][data-v="' + q.sasar.v + '"]'); if (b2) b2.classList.add("tunjuk"); }
+        kw.querySelector(".brs-mkh").textContent = kw.dataset.markah + " betul";
+        return new Promise(ok => setTimeout(ok, el ? 250 : 700));
+      },
+      salah(el) { salahSini = true; if (el) { el.classList.add("silap"); el.disabled = true; } }
+    };
+  }
+};
 /* BRS_PERMAINAN_AKHIR */
 /* Pulau-pulau Iqra': satu pulau setiap skrin; Nuri naik kapal terbang ke pulau seterusnya */
 const LLN_KUNCI = "lln.dibuka", LLN_PULAU = "lln.pulau";
