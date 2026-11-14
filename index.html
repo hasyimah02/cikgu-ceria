@@ -1347,6 +1347,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
 .kbn-isi b{font-size:clamp(48px,10vmin,84px);line-height:1.5;color:#7a55c7;margin-top:-.1em}
 .kbn-isi small{font-weight:900;font-size:20px;color:#4a3570}
+.kbn-lanjut-tetap{position:sticky;bottom:12px;z-index:5;font-size:24px!important;padding:14px 34px!important}
 .kbn-lanjut{display:block;margin:18px auto 4px;border:0;border-radius:999px;background:#ff8fbf;color:#fff;font-weight:900;font-size:20px;padding:12px 28px;box-shadow:0 5px 0 #e0679c;cursor:pointer;animation:kbnMasuk .4s cubic-bezier(.3,1.6,.5,1)}
 .kbn-langit{position:relative;height:min(62vh,560px);border-radius:28px;overflow:hidden;background:linear-gradient(#cfe8ff,#f5e9ff);border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb}
 .kbn-ulang{position:absolute;left:12px;top:12px;z-index:3;width:54px;height:54px;border-radius:50%;border:3px solid #fff;background:#a77bf3;color:#fff;font-size:24px;box-shadow:0 4px 0 #7d55c9}
@@ -6352,8 +6353,8 @@ function kbnKenal() {
   b.innerHTML = '<div class="kbn-telur-grid">' + KBN.h.map((h, i) => '<button class="kbn-telur" data-i="' + i + '"><img class="kbn-tl" alt="" src="' + KBN_DIR + KBN.kenal + '.webp"><span class="kbn-isi"><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp">' + KBN_hurufSVG(h, "kbn-kenal-huruf") + "<small>" + HIJAIYAH[h][1] + "</small></span></button>").join("") + "</div>";
   KBN_suara(KBN.m);
   b.onclick = e => {
-    const t = e.target.closest(".kbn-telur"); if (!t) return; const i = +t.dataset.i;
-    const semak = () => { if (id === KBN.id && buka === KBN.h.length && !b.querySelector(".kbn-lanjut")) { const n = document.createElement("button"); n.className = "kbn-lanjut"; n.textContent = "Jom main! ▶"; n.onclick = () => kbnSeterus(1); b.appendChild(n); } };
+    const t = e.target.closest(".kbn-telur"); if (!t || b.querySelector(".kbn-lanjut:disabled")) return; const i = +t.dataset.i;
+    const semak = () => { if (id === KBN.id && buka === KBN.h.length && !b.querySelector(".kbn-lanjut")) { const n = document.createElement("button"); n.className = "kbn-lanjut kbn-lanjut-tetap"; n.textContent = "Jom main! ▶"; n.onclick = e => { e.stopPropagation(); KBN.id++; try { window.KBN_au && window.KBN_au.pause(); } catch (er) { /* abaikan */ } n.disabled = true; kbnSeterus(1); }; b.appendChild(n); } };
     if (!t.classList.contains("pecah")) { t.classList.add("goncang"); setTimeout(() => { t.classList.add("pecah"); buka++; try { const r = t.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 3); } catch (er) { /* abaikan */ } }, 420); }
     KBN_suara("k-" + KBN.k[i]).then(() => setTimeout(semak, 450));
   };
