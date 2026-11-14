@@ -781,6 +781,7 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .strk-titik.pop{animation:kbnMasuk .35s cubic-bezier(.3,1.8,.5,1)}
 .strk-pen{fill:#fff;stroke:#3a2366;stroke-width:1.4}
 .strk-main{border:0;border-radius:999px;background:#a77bf3;color:#fff;font-weight:800;font-size:14px;padding:5px 14px;box-shadow:0 3px 0 #7d55c9;cursor:pointer}
+.thjkhat .qrar{font-weight:700}
 .thjcontoh{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:24px;padding:0 22px 8px;box-shadow:0 6px 0 var(--garis)}
 .thjcontoh .qrar{font-size:64px;line-height:1.7;color:#3FA672}.thjcontoh small{font-weight:700;color:var(--muted)}
 .thjpapan{position:relative;align-self:center;width:min(100%,560px,62vh);aspect-ratio:1;background:var(--card);border-radius:32px;border:5px solid #8FD9A8;box-shadow:0 10px 0 var(--garis),0 16px 30px var(--sh);overflow:hidden}
@@ -1325,10 +1326,10 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 @media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
 /* ===== Kebun Huruf (KBN_) ===== */
 .kbn-langkah{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px auto 12px;flex-wrap:wrap}
-.kbn-langkah span{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:#9a8ab5;background:#fff;border:2.5px solid #eadff9;border-radius:999px;padding:3px 12px 3px 4px}
-.kbn-langkah span b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#eadff9;color:#7a55c7;font-size:13px}
-.kbn-langkah span.kini{color:#4a3570;border-color:#c7a9ff;box-shadow:0 3px 0 #d9c6fb}.kbn-langkah span.kini b{background:#a77bf3;color:#fff}
-.kbn-langkah span.siap b{background:#4cc38a;color:#fff}
+.kbn-langkah button{font:inherit;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:#9a8ab5;background:#fff;border:2.5px solid #eadff9;border-radius:999px;padding:3px 12px 3px 4px}
+.kbn-langkah button b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#eadff9;color:#7a55c7;font-size:13px}
+.kbn-langkah button:hover{border-color:#c7a9ff}.kbn-langkah button.kini{color:#4a3570;border-color:#c7a9ff;box-shadow:0 3px 0 #d9c6fb}.kbn-langkah button.kini b{background:#a77bf3;color:#fff}
+.kbn-langkah button.siap b{background:#4cc38a;color:#fff}
 .kbn-langkah i{width:14px;height:3px;border-radius:2px;background:#e6d6ff}
 .kbn{position:relative;width:100%;max-width:900px;margin:0 auto;align-self:stretch}
 .kbn-langkah{width:100%}
@@ -1341,7 +1342,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .kbn-telur.pecah .kbn-tl{transform:scale(1.5);opacity:0;animation:none}
 .kbn-isi{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border-radius:28px;border:4px solid #eadff9;box-shadow:0 6px 0 #d9c6fb;opacity:0;transform:scale(.4);transition:opacity .35s .2s,transform .5s .2s cubic-bezier(.3,1.6,.5,1)}
 .kbn-telur.pecah .kbn-isi{opacity:1;transform:scale(1)}
-.kbn-isi img{width:86%;aspect-ratio:1;object-fit:contain;margin:-14% 0 -18%}
+.kbn-isi img{width:88%;height:44%;flex:none;object-fit:contain;margin:0}
 .kbn-isi{gap:0;padding:6px 4px}
 .kbn-isi small{line-height:1.1;margin-top:8px;letter-spacing:.5px}
 body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
@@ -1828,7 +1829,7 @@ const UI = {
   pustaka: L("Perpustakaan","Library","图书馆"), pustakaDs: L("Ratusan gambar: buah, sayur, haiwan, kenderaan & lagi","Hundreds of pictures: fruits, vegetables, animals, vehicles & more","数百张图片：水果、蔬菜、动物、交通工具等"),
   gambar: L(" gambar"," pictures"," 张图片"),
   cubaLagi: L("Cuba lagi. ", "Try again. ", "再试一次。"),
-  tulis: L("Tulis Huruf A - Z", "Write Letters A - Z", "写字母 A - Z"), tulisDs: L("Surih huruf dengan Apple Pencil atau jari", "Trace letters with Apple Pencil or finger", "用 Apple Pencil 或手指描写字母"),
+  tulis: L("Tulis Huruf A - Z", "Write Letters A - Z", "写字母 A - Z"), tulisDs: L("Tulis huruf dengan Apple Pencil atau jari", "Trace letters with Apple Pencil or finger", "用 Apple Pencil 或手指描写字母"),
   jomTulis: L("Jom Tulis!", "Let's Write!", "来写字！"), ikut: L("Ikut nombor dan anak panah ya!", "Follow the numbers and arrows!", "跟着数字和箭头写！"),
   cubaGaris: L("Cuba ikut garisan ya!", "Try to stay on the line!", "试着沿着线写哦！"),
   hebatTulis: [L("Hebat! Cantiknya tulisan kamu!", "Great! Beautiful writing!", "太棒了！写得真漂亮！"), L("Pandai! Betul sekali!", "Clever! Just right!", "真聪明！写对了！"), L("Wah, bagus sungguh!", "Wow, well done!", "哇，真厉害！")],
@@ -3869,11 +3870,11 @@ const BM_MOD = {
   baca: { nama: L("Membaca", "Reading", "阅读"), ds: L("Baca perkataan ikut suku kata", "Read words by syllables", "按音节读单词"), ikon: "baca" },
   eja: { nama: L("Mengeja", "Spelling", "拼写"), ds: L("Susun huruf ikut suku kata", "Spell words by syllables", "按音节拼单词"), ikon: "eja" },
   bina: { nama: L("Bina Ayat", "Build Sentences", "造句"), ds: L("Susun perkataan jadi ayat", "Arrange words into a sentence", "把词语排成句子"), ikon: "bina" },
-  tulis: { nama: L("Menulis Ayat", "Writing Sentences", "写句子"), ds: L("Surih ayat dengan pensel", "Trace sentences with a pencil", "用笔描写句子"), ikon: "pensel" }
+  tulis: { nama: L("Menulis Ayat", "Writing Sentences", "写句子"), ds: L("Tulis ayat dengan pensel", "Trace sentences with a pencil", "用笔描写句子"), ikon: "pensel" }
 };
 const BM_SEBUT = {
   eja: "Dengar dan eja perkataan ini!", bina: "Susun perkataan menjadi ayat!", baca: "Dengar dan baca bersama!",
-  kamuBaca: "Sekarang kamu baca!", tulis: "Surih ayat ini dengan pensel!", hebat: ["Hebat!", "Pandai!", "Bagus sekali!", "Betul!"],
+  kamuBaca: "Sekarang kamu baca!", tulis: "Tulis ayat ini dengan pensel!", hebat: ["Hebat!", "Pandai!", "Bagus sekali!", "Betul!"],
   bacaBagus: "Bagus! Kamu pandai membaca!"
 };
 const kataBersih = w => w.toLowerCase().replace(/[^a-z-]/g, "");
@@ -4455,10 +4456,10 @@ function bmUp(e) {
    Mod: surih (titik panduan, semak automatik), salin (contoh di atas), ingat (dengar & tulis tanpa contoh), bebas (karangan berpandu) */
 let twAkt = 0, twMod = "", twTunjuk = false, twBarisKini = null, twTahap = (() => { try { return +localStorage.getItem("appPendidikan.twTahap") || 1; } catch (e) { return 1; } })();
 const TW = [null,
-  [L("Tulis Huruf", "Write Letters", "写字母"), ["Surih huruf kecil", "Salin huruf kecil", "Dengar & tulis huruf besar"]],
-  [L("Tulis Suku Kata & Perkataan", "Write Syllables & Words", "写音节和词语"), ["Surih suku kata", "Salin perkataan", "Dengar & tulis perkataan"]],
+  [L("Tulis Huruf", "Write Letters", "写字母"), ["Tulis huruf kecil", "Salin huruf kecil", "Dengar & tulis huruf besar"]],
+  [L("Tulis Suku Kata & Perkataan", "Write Syllables & Words", "写音节和词语"), ["Tulis suku kata", "Salin perkataan", "Dengar & tulis perkataan"]],
   [L("Imlak", "Dictation", "听写"), ["Dengar & tulis perkataan", "Dengar & tulis frasa", "Dengar & tulis ayat"]],
-  [L("Tulis Ayat Bergambar", "Write Picture Sentences", "看图写句"), ["Surih ayat", "Salin ayat", "Susun kata & tulis ayat"]],
+  [L("Tulis Ayat Bergambar", "Write Picture Sentences", "看图写句"), ["Tulis ayat", "Salin ayat", "Susun kata & tulis ayat"]],
   [L("Tulis Karangan", "Write a Composition", "写作文"), ["Salin 3 ayat", "Tulis 3 ayat dengan kata bantu", "Tulis 5 ayat sendiri"]]];
 const TW_MOD = { 1: ["surih", "salin", "ingat"], 2: ["surih", "salin", "ingat"], 3: ["ingat", "ingat", "ingat"], 4: ["surih", "salin", "susun"], 5: ["bebas", "bebas", "bebas"] };
 const twData = () => typeof TW_DATA !== "undefined" ? TW_DATA : { nota: [], imlak: { 1: [], 2: [], 3: [] }, karangan: { 1: [], 2: [], 3: [] } };
@@ -4469,7 +4470,7 @@ function renderTW(lv) {
   const st = loadStars(), kssr = TL.filter(x => x.lv === lv);
   const nota = [["bm1", IKON.baca, tr(L("Nota Menulis", "Writing Notes", "写作笔记")), twData().nota.length + " nota: cara pegang pensel hingga karangan", "", twNotaMenu]];
   const latihan = [2, 3, 4, 5].map(a => ["bm1", IKON.pensel, tr(TW[a][0]), TW[a][1][lv - 1] + " · 10 latihan", starText(st["bm1-tw" + a + "-" + lv] || 0), () => startTW(a, lv)])
-    .concat([["bm1", IKON.pensel, tr(L("Surih Ayat", "Trace Sentences", "描写句子")), tr(L("Surih ayat bertitik dengan pensel", "Trace dotted sentences", "描写虚线句子")), starText(st["bm1-tulis-" + lv] || 0), () => startBM("tulis", lv)]]);
+    .concat([["bm1", IKON.pensel, tr(L("Tulis Ayat", "Trace Sentences", "描写句子")), tr(L("Tulis ayat bertitik dengan pensel", "Trace dotted sentences", "描写虚线句子")), starText(st["bm1-tulis-" + lv] || 0), () => startBM("tulis", lv)]]);
   const topik = kssr.map((t, i) => ["bm1", IKON.pensel, t.nama, t.nota.length + " nota · 10 soalan", starText(st[t.id] || 0), () => startTB(t)]);
   renderMenu(tr(L("Menulis", "Writing", "写作")), nota.concat(latihan, topik), renderBM1);
   const box = $("subjList"), kad = [...box.children];
@@ -4528,7 +4529,7 @@ function twMula(it, id) {
     if (mod === "surih" || mod === "salin") md.innerHTML = bmPecah(teks, mod === "salin" ? (teks.split(" ").length > 4 ? 2 : 1) : 0).map(skEsc).join("<br>");
     if (mod === "susun") { md.classList.add("hide"); const kk = k.querySelector(".twkata"); kk.classList.remove("hide"); kk.innerHTML = shuffle(teks.replace(/[.!?]$/, "").split(" ")).map(w => `<span>${skEsc(w)}</span>`).join(""); }
     if (mod === "ingat") { md.classList.add("twsorok"); md.textContent = teks; }
-    arahan = { surih: "Surih mengikut titik", salin: "Salin dengan kemas di dalam kotak", ingat: "Dengar, kemudian tulis tanpa melihat", susun: "Lihat gambar. Susun kata dan tulis ayat yang betul" }[mod];
+    arahan = { surih: "Tulis mengikut titik", salin: "Salin dengan kemas di dalam kotak", ingat: "Dengar, kemudian tulis tanpa melihat", susun: "Lihat gambar. Susun kata dan tulis ayat yang betul" }[mod];
   }
   bmButang("speak", tr(UI.dengar), "ungu", () => mod === "bebas" ? speak(info.tajuk, "ms") : sebut());
   bmButang("padam", tr(UI.padam), "koral", () => { bmDone = false; bmInk = []; bmLukis(); });
@@ -6295,7 +6296,7 @@ function LLN_video(src) {
   document.body.appendChild(o); try { const p = v.play(); if (p && p.catch) p.catch(() => { /* pengguna tekan main */ }); } catch (e) { /* abaikan */ }
 }
 
-/* ===== Kebun Huruf (KBN_): belajar huruf berperingkat sambil bermain — Kenal (telur), Tangkap (belon), Padan (seret), Surih ===== */
+/* ===== Kebun Huruf (KBN_): belajar huruf berperingkat sambil bermain — Kenal (telur), Tangkap (belon), Padan (seret), Tulis ===== */
 const KBN_LEVEL = [
   { h: [0, 1, 2, 3], k: ["alif", "ba", "ta", "tsa"], kenal: "telur", m: "m-kenal", g: ["Tangkap", "Padan"] },
   { h: [4, 5, 6, 7], k: ["jim", "ha", "kho", "dal"], kenal: "hadiah", m: "m-hadiah", g: ["Lompat", "Ingat"] }
@@ -6341,8 +6342,11 @@ function KBN_hurufSVG(h, kelas) {
 const KBN_kocok = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function kbnKepala(langkah) {
   const N = ["Kenal", KBN.g[0], KBN.g[1], "Tulis"];
-  return '<div class="kbn-langkah">' + N.map((n, i) => '<span class="' + (i < langkah ? "siap" : i === langkah ? "kini" : "") + '"><b>' + (i < langkah ? "✓" : i + 1) + "</b>" + n + "</span>").join('<i></i>') + "</div>";
+  return '<div class="kbn-langkah">' + N.map((n, i) => '<button type="button" data-langkah="' + i + '" class="' + (i < langkah ? "siap" : i === langkah ? "kini" : "") + '"><b>' + (i < langkah ? "✓" : i + 1) + "</b>" + n + "</button>").join('<i></i>') + "</div>";
 }
+/* Label langkah boleh ditekan: lompat terus ke Kenal / permainan 1 / permainan 2 / Tulis */
+function kbnPergi(i) { if (!KBN) return; KBN.id++; try { window.KBN_au && window.KBN_au.pause(); } catch (e) { /* abaikan */ } if (i === 0) { window.KBN_tulis = null; kbnKenal(); } else kbnSeterus(i); }
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest(".kbn-langkah [data-langkah]"); if (b) { e.preventDefault(); kbnPergi(+b.dataset.langkah); } });
 function kbnMula(l) {
   KBN = { l, ...KBN_LEVEL[l], salah: 0, id: 0 };
   window.KBN_tulis = null;
@@ -6479,9 +6483,12 @@ function kbnIngat() {
 function kbnSurih() {
   const akhir = KBN.h[KBN.h.length - 1];
   thjMod = "surih"; thjBalik = () => { window.KBN_tulis = null; renderIqraMenu(); };
-  window.KBN_tulis = i => { if (i === akhir) { window.KBN_tulis = null; kbnSiap(); return true; } if (KBN.h.indexOf(i) >= 0) { qrTulis(KBN.h[KBN.h.indexOf(i) + 1]); return true; } return false; };
+  window.KBN_tulis = i => { if (i === akhir) { window.KBN_tulis = null; kbnSiap(); return true; } if (KBN.h.indexOf(i) >= 0) { qrTulis(KBN.h[KBN.h.indexOf(i) + 1]); kbnKepalaTulis(); return true; } return false; };
   KBN_suara("m-surih");
-  qrTulis(KBN.h[0]);
+  qrTulis(KBN.h[0]); kbnKepalaTulis();
+}
+function kbnKepalaTulis() {
+  const kw = $("qrKawasan"); if (kw && !kw.querySelector(".kbn-langkah")) kw.insertAdjacentHTML("afterbegin", kbnKepala(3));
 }
 function kbnSiap() {
   const b = kbnSkrin(4), n = KBN.salah <= 1 ? 3 : KBN.salah <= 4 ? 2 : 1;
@@ -7311,7 +7318,7 @@ setTerap();
 /* ===== Tulis Huruf Hijaiyah: surih atau tulis sendiri dengan jari / Apple Pencil ===== */
 const THJ_KEY = "appPendidikan.tulishijaiyah.v1";
 let thjMod = "surih";
-const THJ_KHAT = { naskh: ["Nasakh", '"Amiri Quran",serif'], ruqaa: ["Riq\'ah", '"Aref Ruqaa","Amiri Quran",serif'] };
+const THJ_KHAT = { naskh: ["Nasakh", '"Geeza Pro","Amiri Quran",serif'], ruqaa: ["Riq\'ah", '"Aref Ruqaa","Amiri Quran",serif'] };
 let thjKhat = (() => { try { return THJ_KHAT[localStorage.getItem("appPendidikan.thjKhat")] ? localStorage.getItem("appPendidikan.thjKhat") : "naskh"; } catch (e) { return "naskh"; } })();
 function thjData() { try { return JSON.parse(localStorage.getItem(THJ_KEY)) || {}; } catch (e) { return {}; } }
 let thjBalik = null;
@@ -7320,7 +7327,7 @@ function qrTulisMenu() {
   qrSkrin("Tulis Huruf Hijaiyah", renderIqraMenu);
   const k = $("qrKawasan"), d = thjData();
   const siap = HIJAIYAH.filter((h, i) => (d[i] || {})[thjMod]).length;
-  k.innerHTML = `<div class="thjseg"><button data-m="surih" class="${thjMod === "surih" ? "on" : ""}">Surih Huruf</button><button data-m="sendiri" class="${thjMod === "sendiri" ? "on" : ""}">Tulis Sendiri</button></div>
+  k.innerHTML = `<div class="thjseg"><button data-m="surih" class="${thjMod === "surih" ? "on" : ""}">Tulis Ikut Titik</button><button data-m="sendiri" class="${thjMod === "sendiri" ? "on" : ""}">Tulis Sendiri</button></div>
     <div class="thjseg">${Object.keys(THJ_KHAT).map(c => `<button data-khat="${c}" class="${thjKhat === c ? "on" : ""}">Khat ${THJ_KHAT[c][0]}</button>`).join("")}</div>
     <p class="qnterang">${thjMod === "surih" ? "Tulis di atas huruf bertitik mengikut bentuknya." : "Lihat contoh, kemudian tulis huruf itu sendiri tanpa panduan."} <b>${siap} / 28 siap</b></p>
     <div class="qrgrid thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}">${HIJAIYAH.map((h, i) => `<button class="qrh thjh${(d[i] || {})[thjMod] ? " siap" : ""}" data-i="${i}"><span class="qrar">${h[0]}</span><small>${h[1]}</small>${(d[i] || {})[thjMod] ? '<i class="thjbintang">★</i>' : ""}</button>`).join("")}</div>`;
@@ -7339,6 +7346,33 @@ function STRK_d(p) {
   for (let i = 0; i < q.length - 1; i++) { const a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
     d += " C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " + (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0] + " " + c[1]; }
   return d;
+}
+/* Arah menulis atas papan: bulatan bernombor di titik mula + anak panah arah pen (khat Nasakh) */
+function STRK_papan(g, huruf, kotak) {
+  const D = window.STROK && STROK[huruf];
+  if (!D || thjKhat !== "naskh" || !kotak || !(kotak[2] > kotak[0])) return;
+  let bb;
+  try { const sv = document.createElementNS("http://www.w3.org/2000/svg", "svg"), pp = document.createElementNS("http://www.w3.org/2000/svg", "path"); sv.setAttribute("style", "position:absolute;left:-9999px;width:10px;height:10px"); pp.setAttribute("d", D.glyph); sv.appendChild(pp); document.body.appendChild(sv); bb = pp.getBBox(); sv.remove(); } catch (e) { return; }
+  if (!bb || !bb.width) return;
+  const sx = (kotak[2] - kotak[0]) / bb.width, sy = (kotak[3] - kotak[1]) / bb.height;
+  const ke = (x, y) => [kotak[0] + (x - bb.x) * sx, kotak[1] + (y - bb.y) * sy];
+  const R = Math.max(13, Math.min(22, (kotak[2] - kotak[0]) * .07));
+  g.save(); g.setLineDash([]); g.lineCap = "round"; g.lineJoin = "round";
+  const lencana = (x, y, n, w) => { g.beginPath(); g.arc(x, y, R, 0, Math.PI * 2); g.fillStyle = w; g.fill(); g.lineWidth = 3; g.strokeStyle = "#fff"; g.stroke(); g.fillStyle = "#fff"; g.font = "900 " + Math.round(R * 1.15) + "px system-ui,sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(String(n), x, y + 1); };
+  D.strok.forEach((p, n) => {
+    const w = STRK_WARNA[n % 4], pts = []; for (let i = 0; i < p.length; i += 2) pts.push(ke(p[i], p[i + 1]));
+    /* anak panah: ikut ~35% pertama strok */
+    let pj = 0; const seg = [pts[0]]; for (let i = 1; i < pts.length; i++) { pj += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(pts[i]); if (pj > Math.max(R * 8, 120)) break; }
+    if (seg.length > 1) {
+      g.strokeStyle = w; g.lineWidth = 5; g.globalAlpha = .9; g.beginPath(); g.moveTo(seg[0][0], seg[0][1]); seg.slice(1).forEach(q => g.lineTo(q[0], q[1])); g.stroke();
+      const a = seg[seg.length - 1], b = seg[seg.length - 2], ang = Math.atan2(a[1] - b[1], a[0] - b[0]), L = R * .95;
+      g.beginPath(); g.moveTo(a[0] + Math.cos(ang) * 4, a[1] + Math.sin(ang) * 4); g.lineTo(a[0] - Math.cos(ang - .55) * L, a[1] - Math.sin(ang - .55) * L); g.lineTo(a[0] - Math.cos(ang + .55) * L, a[1] - Math.sin(ang + .55) * L); g.closePath(); g.fillStyle = w; g.fill();
+      g.globalAlpha = 1;
+    }
+    lencana(pts[0][0], pts[0][1], n + 1, w);
+  });
+  D.titik.forEach((t, k) => { const q = ke(t[0], t[1]); lencana(q[0] + R * 1.1, q[1] - R * 1.1, D.strok.length + k + 1, "#ff9f1a"); });
+  g.restore();
 }
 function STRK_pasang(atas, huruf) {
   const D = window.STROK && STROK[huruf];
@@ -7378,9 +7412,9 @@ function STRK_pasang(atas, huruf) {
 }
 function qrTulis(i) {
   const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
-  qrSkrin((sendiri ? "Tulis Sendiri: " : window.KBN_tulis ? "Tulis: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
+  qrSkrin((sendiri ? "Tulis Sendiri: " : window.KBN_tulis ? "Tulis: " : "Tulis: ") + h[1], thjBalik || qrTulisMenu);
   const k = $("qrKawasan");
-  k.innerHTML = `<div class="thjatas"><div class="thjcontoh thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
+  k.innerHTML = `<div class="thjatas"><div class="thjcontoh thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Tulis huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
     <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
   const papan = k.querySelector(".thjpapan"), cp = k.querySelector(".thjpanduan"), ci = k.querySelector(".thjink"), st = k.querySelector(".thjstatus");
   STRK_pasang(k.querySelector(".thjatas"), h[0]);
@@ -7396,7 +7430,7 @@ function qrTulis(i) {
     [H * .5].forEach(y => { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); });
     g.beginPath(); g.moveTo(W / 2, 0); g.lineTo(W / 2, H); g.stroke(); g.setLineDash([]);
     const fs = Math.min(W, H) * .62;
-    g.font = `${fs}px ${FON}`; g.textAlign = "center"; g.textBaseline = "alphabetic";
+    g.font = (thjKhat === "naskh" ? "bold " : "") + `${fs}px ${FON}`; g.textAlign = "center"; g.textBaseline = "alphabetic";
     const ukur = g.measureText(h[0]), cy = H * .5 + (ukur.actualBoundingBoxAscent - ukur.actualBoundingBoxDescent) / 2;
     if (!sendiri) {
       g.fillStyle = "rgba(143,217,168,.28)"; g.fillText(h[0], W / 2, cy);
@@ -7423,6 +7457,7 @@ function qrTulis(i) {
     }
     mask = { A: A, B: B, w: m.width, h: m.height, k: kk, kotak: [x0 / kk, y0 / kk, x1 / kk, y1 / kk], lab: lab, komp: komp };
     saiz = { W: W, H: H, fs: fs, dpr: dpr };
+    if (!sendiri) STRK_papan(g, h[0], mask.kotak);
     lukis();
   }
   function lukis() {
@@ -7483,7 +7518,7 @@ function qrTulis(i) {
   qrButang("play", "Semak", "ungu", () => { if (siap) return; if (semak()) berjaya(); else { st.textContent = garis.length && mask.komp.filter(n => n >= 3).length > 1 ? "Jangan lupa titik huruf ini" : "Cuba lagi, ikut bentuk huruf"; st.className = "thjstatus no"; sndBad(); } });
   if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
   if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
-  qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Surih huruf " + h[1]);
+  qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Tulis huruf " + h[1]);
   (document.fonts && document.fonts.load ? Promise.all([document.fonts.load("100px \"Amiri Quran\""), document.fonts.load("100px \"Aref Ruqaa\"")]) : Promise.resolve()).then(() => setTimeout(sedia, 30));
 }
 
@@ -8097,7 +8132,7 @@ const SB_SUBJEK = [
       a:Nanas|na-nas|Nanas manis dan masam
       a:Lebah|le-bah|Lebah membuat madu
       a:Jam|jam|Jam menunjukkan waktu`) },
-    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "a:Pencil", ds: "Surih huruf A hingga Z" }
+    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "a:Pencil", ds: "Tulis huruf A hingga Z" }
   ] },
   { id: "bi", nama: "Bahasa Inggeris", ikon: "g:ABC", w: "#8CC8FF", cerita: "Let's learn English together!", topik: [
     { n: "Phonics A-H", k: SB_K(`a:Apple|A is for Apple|Epal
@@ -8464,8 +8499,8 @@ const SB_SUBJEK = [
     { n: "Cara Pegang Pensel", k: SB_K(`a:pensel3jari|Guna tiga jari|Ibu jari, jari telunjuk dan jari hantu
       a:kertaspensel|Duduk tegak|Kertas di depan, belakang lurus
       a:tangan|Tangan rileks|Jangan genggam terlalu kuat`), kuiz: false },
-    { n: "Tulis Nombor", aksi: id => startTulis(0, () => sbSubjek(id), "nombor"), ikon: "g:123", ds: "Surih nombor 1 hingga 10" },
-    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "g:Aa", ds: "Surih huruf A hingga Z" },
+    { n: "Tulis Nombor", aksi: id => startTulis(0, () => sbSubjek(id), "nombor"), ikon: "g:123", ds: "Tulis nombor 1 hingga 10" },
+    { n: "Tulis Huruf", aksi: id => startTulis(0, () => sbSubjek(id)), ikon: "g:Aa", ds: "Tulis huruf A hingga Z" },
     { n: "Ikut Arahan", k: SB_K(`b:Bulatkan|Bulatkan|Lukis bulatan pada jawapan
       b:Garis|Garis|Buat garis di bawah
       b:Warnakan|Warnakan|Warnakan gambar
