@@ -1463,18 +1463,26 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .kbn-nuri.kiri img{transform:scaleX(-1)}
 .kbn-nuri.mendarat img{animation:kbnDarat .3s ease}
 @keyframes kbnDarat{0%{transform:scale(1.1,.88)}100%{transform:none}}
-.kbn-ingat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;margin:0 auto}
-@media (max-width:560px){.kbn-ingat{grid-template-columns:repeat(2,1fr)}}
-.kbn-kad{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none;perspective:700px;cursor:pointer}
-.kbn-muka{position:absolute;inset:0;border-radius:22px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
-.kbn-blk{background:radial-gradient(circle at 30% 30%,#fff6 0 10%,transparent 11%),radial-gradient(circle at 70% 65%,#fff5 0 8%,transparent 9%),linear-gradient(135deg,#b38dff,#ff8fbf);border:4px solid #fff;box-shadow:0 5px 0 #d9c6fb}
-.kbn-blk::after{content:"★";color:#fff;font-size:42px;opacity:.9}
+.kbn-meja{width:min(100%,calc((min(66vh,600px) - 70px) * 1.55));margin:0 auto;background:linear-gradient(160deg,#fff7fd,#efe6ff);border:4px solid #fff;border-radius:28px;box-shadow:0 6px 0 #d9c6fb,0 14px 30px rgba(90,60,140,.15);padding:14px 16px 18px}
+.kbn-meja-atas{display:flex;align-items:center;justify-content:space-between;margin:0 4px 12px;font-weight:900;color:#4a3570;font-size:17px}
+.kbn-pasang{display:flex;gap:8px}
+.kbn-pasang i{width:26px;height:26px;border-radius:50%;background:#fff;border:3px dashed #d4c2f5}
+.kbn-pasang i.on{background:#4cc38a;border:3px solid #fff;box-shadow:0 2px 0 #3aa874;position:relative;animation:kbnMasuk .4s cubic-bezier(.3,1.8,.5,1)}
+.kbn-pasang i.on::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900;font-size:14px}
+.kbn-ingat{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.6vmin,14px)}
+.kbn-kad{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none;perspective:800px;cursor:pointer;animation:kbnMasuk .4s var(--d) both cubic-bezier(.3,1.5,.5,1)}
+.kbn-muka{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .5s cubic-bezier(.3,1.3,.5,1)}
+.kbn-blk{background:radial-gradient(circle at 20% 18%,rgba(255,255,255,.45) 0 7%,transparent 8%),radial-gradient(circle at 82% 80%,rgba(255,255,255,.35) 0 9%,transparent 10%),linear-gradient(140deg,#b38dff,#ff8fbf);border:4px solid #fff;box-shadow:0 5px 0 #d9c6fb}
+.kbn-blk img{width:62%;height:auto;filter:drop-shadow(0 3px 2px rgba(60,30,100,.25))}
+.kbn-kad:hover .kbn-blk{transform:translateY(-3px)}
 .kbn-dpn{background:#fff;border:4px solid #c7a9ff;box-shadow:0 5px 0 #d9c6fb;transform:rotateY(180deg)}
 .kbn-kad.buka .kbn-blk{transform:rotateY(-180deg)}
 .kbn-kad.buka .kbn-dpn{transform:rotateY(0)}
-.kbn-kad.jumpa .kbn-dpn{border-color:#4cc38a;box-shadow:0 5px 0 #a6e3c4;animation:kbnMasuk .35s}
-.kbn-dpn b{font-size:clamp(44px,9vmin,72px);color:#3a2366}
-.kbn-dpn img{width:80%;height:80%;object-fit:contain}
+.kbn-kad.jumpa .kbn-dpn{border-color:#4cc38a;background:#effbf4;box-shadow:0 5px 0 #a6e3c4,0 0 0 4px rgba(76,195,138,.25)}
+.kbn-kad.jumpa{animation:kbnLonjak .5s ease}
+@keyframes kbnLonjak{0%,100%{transform:none}40%{transform:translateY(-10px) scale(1.04)}}
+.kbn-dpn b{font-size:clamp(48px,9vmin,84px);color:#3a2366}
+.kbn-dpn img{width:84%;height:84%;object-fit:contain}
 @keyframes kbnAngguk{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @keyframes kbnGoncang{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}
 @keyframes kbnNaik{0%{transform:translateY(0)}100%{transform:translateY(calc(-1 * min(62vh,560px) - 200px))}}
@@ -6515,7 +6523,7 @@ function kbnLompat() {
 function kbnIngat() {
   const b = kbnSkrin(KBN.g.indexOf("Ingat") + 1), id = ++KBN.id;
   const kad = KBN_kocok([0, 1, 2, 3].map(i => ({ i, j: "h" })).concat([0, 1, 2, 3].map(i => ({ i, j: "k" }))));
-  b.innerHTML = '<div class="kbn-ingat">' + kad.map((c, n) => '<button class="kbn-kad" data-n="' + n + '"><span class="kbn-muka kbn-blk"></span><span class="kbn-muka kbn-dpn">' + (c.j === "h" ? '<b class="qrar">' + HIJAIYAH[KBN.h[c.i]][0] + "</b>" : '<img alt="" src="' + KBN_DIR + KBN.k[c.i] + '.webp">') + "</span></button>").join("") + "</div>";
+  b.innerHTML = '<div class="kbn-meja"><div class="kbn-meja-atas"><span>' + tr(L("Cari pasangan", "Find the pairs", "找配对")) + '</span><span class="kbn-pasang">' + [0, 1, 2, 3].map(() => "<i></i>").join("") + '</span></div><div class="kbn-ingat">' + kad.map((c, n) => '<button class="kbn-kad" data-n="' + n + '" style="--d:' + (n * .05) + 's"><span class="kbn-muka kbn-blk"><img alt="" src="gambar/pet/nuri/rehat.png"></span><span class="kbn-muka kbn-dpn">' + (c.j === "h" ? '<b class="qrar">' + HIJAIYAH[KBN.h[c.i]][0] + "</b>" : '<img alt="" src="' + KBN_DIR + KBN.k[c.i] + '.webp">') + "</span></button>").join("") + "</div></div>";
   KBN_suara("m-ingat");
   let buka = [], kunci = false, jumpa = 0;
   b.onclick = e => {
@@ -6525,7 +6533,7 @@ function kbnIngat() {
     kunci = true; const [x, y] = buka.map(z => kad[+z.dataset.n]); buka = buka.slice();
     if (x.i === y.i && x.j !== y.j) {
       const pas = buka; buka = []; jumpa++;
-      setTimeout(() => { pas.forEach(z => z.classList.add("jumpa")); kunci = false; KBN_suara("k-" + KBN.k[x.i]).then(() => { if (id === KBN.id && jumpa === 4) setTimeout(() => kbnSeterus(3), 300); }); }, 350);
+      setTimeout(() => { pas.forEach(z => z.classList.add("jumpa")); const sl = b.querySelectorAll(".kbn-pasang i")[jumpa - 1]; if (sl) sl.classList.add("on"); kunci = false; KBN_suara("k-" + KBN.k[x.i]).then(() => { if (id === KBN.id && jumpa === 4) setTimeout(() => kbnSeterus(3), 300); }); }, 350);
     } else {
       KBN.salah += .5; const pas = buka; buka = [];
       setTimeout(() => { pas.forEach(z => z.classList.remove("buka")); kunci = false; }, 950);
