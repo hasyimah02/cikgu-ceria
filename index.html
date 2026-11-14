@@ -1325,7 +1325,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .lln2-titik button.siap{background:#ffcf4a}
 .lln2-titik button.on{background:#a77bf3;transform:scale(1.35)}
 .lln2-pentas{position:absolute;left:0;right:0;top:72px;bottom:0}
-.lln2-pulau{position:absolute;left:50%;top:50%;width:min(94vw,calc((100vh - 240px) * 1.33),900px);margin-left:calc(min(94vw,calc((100vh - 240px) * 1.33),900px) / -2);aspect-ratio:4/3;translate:0 -50%;transition:transform 1.6s cubic-bezier(.6,.05,.3,1)}
+.lln2-pulau{position:absolute;left:50%;top:50%;width:min(94vw,calc((100vh - 240px) * 1.33),900px);margin-left:calc(min(94vw,calc((100vh - 240px) * 1.33),900px) / -2);aspect-ratio:4/3;translate:0 -50%;transition:transform 1.25s cubic-bezier(.55,.05,.35,1)}
 .lln2-gbr{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 22px 26px rgba(90,60,140,.3));animation:petaApung 5s ease-in-out infinite;pointer-events:none}
 .lln2-batu{width:clamp(84px,17%,150px)}
 .lln2-padat .lln2-batu{width:clamp(74px,14%,124px)}
@@ -1336,11 +1336,21 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .lln2-kanan span{font-size:28px}
 @keyframes llnLompat2{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 .lln2-anak[hidden]{display:none}
-.lln2-kapal{position:fixed;left:0;top:0;width:clamp(150px,26vmin,240px);z-index:50;pointer-events:none;opacity:0;filter:drop-shadow(0 12px 16px rgba(60,30,100,.3))}
-.lln2-kapal-on{animation:llnTerbang 1.7s cubic-bezier(.45,.05,.4,1) forwards}
-.lln2-kapal-on.lln2-balik{animation-name:llnTerbangBalik}
-@keyframes llnTerbang{0%{opacity:0;transform:translate(-30vw,60vh) rotate(-8deg) scale(.7)}12%{opacity:1}50%{transform:translate(38vw,22vh) rotate(-4deg) scale(1.05)}88%{opacity:1}100%{opacity:0;transform:translate(110vw,8vh) rotate(-10deg) scale(.8)}}
-@keyframes llnTerbangBalik{0%{opacity:0;transform:translate(110vw,60vh) scaleX(-1) scale(.7)}12%{opacity:1}50%{transform:translate(38vw,22vh) scaleX(-1)}88%{opacity:1}100%{opacity:0;transform:translate(-40vw,8vh) scaleX(-1) scale(.8)}}
+.lln2-kapal{position:absolute;left:0;top:0;width:clamp(130px,22vmin,210px);z-index:50;pointer-events:none;opacity:0;filter:drop-shadow(0 12px 16px rgba(60,30,100,.3));will-change:transform;transition:opacity .25s}
+.lln2-apung{position:absolute;inset:0;animation:petaApung 5s ease-in-out infinite}
+.lln2-apung .lln2-gbr{animation:none}
+.lln2-nuri{position:absolute;width:15%;aspect-ratio:1;transform:translate(-50%,-90%);pointer-events:none;z-index:3;will-change:left,top}
+.lln2-padat .lln2-nuri{width:12.5%}
+.lln2-nuri-rupa{position:absolute;inset:0;transform:translateY(var(--lompat,0px));filter:drop-shadow(0 6px 5px rgba(60,30,100,.28))}
+.lln2-nuri.lln2-kiri-hadap .lln2-nuri-rupa{transform:translateY(var(--lompat,0px)) scaleX(-1)}
+.lln2-nuri img{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+.lln2-nuri img.on{opacity:1}
+.lln2-nuri.lln2-lompat .lln2-nuri-rupa{animation:llnNuriLompat .38s ease}
+.lln2-nuri.lln2-naik{transition:transform .3s ease-in,opacity .3s;transform:translate(-50%,-110%) scale(.6);opacity:0}
+.lln2-nuri.lln2-turun .lln2-nuri-rupa{animation:llnNuriTurun .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes llnNuriLompat{0%,100%{translate:0 0}45%{translate:0 -18px}}
+@keyframes llnNuriTurun{0%{translate:0 -26px;scale:.7}100%{translate:0 0;scale:1}}
+body.lln2-on .pet-nuri,body.lln2-on .pet-gel,body.lln2-on .pet-togol{display:none!important}
 body.lln2-sorokpet .pet-nuri,body.lln2-sorokpet .pet-gel{opacity:0!important;transition:opacity .2s}
 @media (prefers-reduced-motion:reduce){.lln2-gbr,.lln2-kanan{animation:none}}
 /* ===== Laluan level Iqra' (LLN_) ===== */
@@ -5497,7 +5507,7 @@ function tbBetul(s, sebut) {
 /* ===== UI ===== */
 const $ = id => document.getElementById(id);
 let PR_undur = false;
-function show(id) { if (id !== "s-subj") document.body.classList.remove("peta-on");
+function show(id) { if (id !== "s-subj") document.body.classList.remove("peta-on", "lln2-on");
   const PR_el = document.getElementById(id), PR_arah = PR_undur ? "pr-undur" : "pr-maju"; PR_undur = false;
   document.querySelectorAll(".screen").forEach(s => { s.classList.remove("pr-maju", "pr-undur", "vpn-diam"); s.classList.toggle("on", s.id === id); });
   if (PR_el && window.VPN_diam && id === "s-subj") PR_el.classList.add("vpn-diam"); /* video masuk Kelas Al-Quran sedang berjalan: tiada pr-maju */
@@ -6175,13 +6185,14 @@ function LLN_bina() {
   const binaPulau = a => {
     const pl = P[a], sus = SUSUN[pl.batu.length] || SUSUN[4], el = document.createElement("div");
     el.className = "lln2-pulau" + (pl.batu.length >= 6 ? " lln2-padat" : "");
-    el.innerHTML = '<img class="lln2-gbr" alt="" src="gambar/peta/pulau-' + pl.g + '.webp">' + pl.batu.map((x, b) => {
+    el.innerHTML = '<div class="lln2-apung"><img class="lln2-gbr" alt="" src="gambar/peta/pulau-' + pl.g + '.webp">' + pl.batu.map((x, b) => {
       const sel = selesai(x) && !x.kunci, next = a === sp && b === sb;
       return '<button class="lln-batu lln2-batu' + (next ? " lln-seterus" : "") + (x.kunci ? " lln-kunci" : "") + (sel ? " lln-siap" : "") + '" style="left:' + sus[b][0] + "%;top:" + sus[b][1] + "%;--d:" + (b * .08 + .1) + 's" data-b="' + b + '">'
         + (x.b != null ? bintang(x.b) : (sel ? '<span class="lln-tanda">✓</span>' : ""))
         + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik' + (x.kecil ? " lln-ik-kecil" : "") + (x.video ? " lln-ik-video" : "") + '">' + x.ik + "</b>") + "</span>"
         + '<span class="lln-nama">' + x.nm + "</span>" + (next ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>";
-    }).join("");
+    }).join("") + '<div class="lln2-nuri" aria-hidden="true"><div class="lln2-nuri-rupa">' + LLN_POSE.map(q => '<img alt="" data-p="' + q + '" src="gambar/pet/nuri/' + q + '.png">').join("") + "</div></div></div>";
+    el._sus = sus;
     return el;
   };
   const papar = () => {
@@ -6190,18 +6201,72 @@ function LLN_bina() {
     w.querySelector(".lln2-kiri").hidden = kini === 0; w.querySelector(".lln2-kanan").hidden = kini === P.length - 1;
     LLN_tulis(LLN_PULAU, kini);
   };
-  pentas.appendChild(binaPulau(kini)); papar();
+  document.body.classList.add("lln2-on");
+  /* ---- Nuri dalam pulau: berdiri di sebelah batu, berjalan ke batu yang ditekan ---- */
+  const kurang = PET_kurang();
+  const titikBatu = (el, b) => { const q = el._sus[b]; return [Math.min(90, q[0] + 8.5), q[1] + 4]; };
+  const PAD = arah => arah > 0 ? [84, 58] : [16, 58];
+  const nuri = el => el.querySelector(".lln2-nuri");
+  const pose = (el, q, flip) => { const n = nuri(el); n.querySelectorAll("img").forEach(m => m.classList.toggle("on", m.dataset.p === q)); if (flip != null) n.classList.toggle("lln2-kiri-hadap", flip); };
+  const letak = (el, xy) => { const n = nuri(el); n._xy = xy.slice(); n.style.left = xy[0] + "%"; n.style.top = xy[1] + "%"; };
+  let jalanNo = 0;
+  const jalan = (el, ke, siap) => {
+    const n = nuri(el), dari = n._xy || ke, no = ++jalanNo, W = el.getBoundingClientRect().width || 600;
+    const dx = (ke[0] - dari[0]) / 100 * W, dy = (ke[1] - dari[1]) / 100 * W * .75, jarak = Math.hypot(dx, dy);
+    if (kurang || jarak < 4) { letak(el, ke); pose(el, "gembira"); n.classList.remove("lln2-lompat"); void n.offsetWidth; n.classList.add("lln2-lompat"); setTimeout(() => { if (no === jalanNo) { pose(el, "rehat"); if (siap) siap(); } }, kurang ? 0 : 380); return; }
+    const lama = Math.max(380, Math.min(1500, jarak / 0.34)), t0 = performance.now();
+    pose(el, "jalan-1", dx < 0);
+    const langkah = t => {
+      if (no !== jalanNo) return;
+      const u = Math.min(1, (t - t0) / lama), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+      letak(el, [dari[0] + (ke[0] - dari[0]) * e, dari[1] + (ke[1] - dari[1]) * e]);
+      n.style.setProperty("--lompat", (-Math.abs(Math.sin(u * lama / 140 * Math.PI)) * 6) + "px");
+      pose(el, "jalan-" + (1 + Math.floor((t - t0) / 110) % 4));
+      if (u < 1) requestAnimationFrame(langkah); else { n.style.setProperty("--lompat", "0px"); pose(el, "gembira"); setTimeout(() => { if (no === jalanNo) { pose(el, "rehat"); if (siap) siap(); } }, 260); }
+    };
+    requestAnimationFrame(langkah);
+  };
+  const mulaNuri = (el, a) => { const pl = P[a]; let b = a === sp ? sb : pl.batu.findIndex(x => !selesai(x)); if (b < 0) b = 0; letak(el, titikBatu(el, b)); pose(el, "lambai", false); setTimeout(() => pose(el, "rehat"), 1400); };
+  const pertama = binaPulau(kini); pentas.appendChild(pertama); papar(); mulaNuri(pertama, kini);
+  /* ---- Terbang: jalan ke kapal, naik, berlepas, kamera ikut, mendarat lembut, turun ---- */
   let terbang = false;
-  const pergiKe = (a) => {
+  const kapal = w.querySelector(".lln2-kapal");
+  const pergiKe = a => {
     if (terbang || a === kini || a < 0 || a >= P.length) return;
-    const arah = a > kini ? 1 : -1, lama = pentas.querySelector(".lln2-pulau"), baru = binaPulau(a);
-    kini = a; papar(); PETA_bunyi("terbang");
-    if (PET_kurang()) { lama.remove(); pentas.appendChild(baru); return; }
-    terbang = true; w.classList.add("lln2-terbang"); document.body.classList.add("lln2-sorokpet");
-    baru.style.transform = "translateX(" + (arah * 115) + "vw)"; pentas.appendChild(baru);
-    const k = w.querySelector(".lln2-kapal"); k.classList.toggle("lln2-balik", arah < 0); k.classList.remove("lln2-kapal-on"); void k.offsetWidth; k.classList.add("lln2-kapal-on");
-    requestAnimationFrame(() => requestAnimationFrame(() => { lama.style.transform = "translateX(" + (-arah * 115) + "vw)"; baru.style.transform = "translateX(0)"; }));
-    setTimeout(() => { lama.remove(); terbang = false; w.classList.remove("lln2-terbang"); document.body.classList.remove("lln2-sorokpet"); k.classList.remove("lln2-kapal-on"); }, 1700);
+    const arah = a > kini ? 1 : -1, lama = pentas.querySelector(".lln2-pulau");
+    terbang = true;
+    const berlepas = () => {
+      const baru = binaPulau(a), wr = w.getBoundingClientRect(), lr = lama.getBoundingClientRect(), n = nuri(lama), nr = n.getBoundingClientRect();
+      const S = [nr.left + nr.width / 2 - wr.left, nr.top + nr.height * .62 - wr.top];
+      n.style.visibility = "hidden";
+      kini = a; papar(); PETA_bunyi("terbang");
+      if (kurang) { lama.remove(); pentas.appendChild(baru); mulaNuri(baru, a); terbang = false; return; }
+      baru.style.transition = "none"; baru.style.transform = "translateX(" + (arah * 115) + "vw)"; pentas.appendChild(baru);
+      nuri(baru).style.visibility = "hidden";
+      const pd = PAD(-arah), E = [lr.left - wr.left + pd[0] / 100 * lr.width, lr.top - wr.top + pd[1] / 100 * lr.height - nr.height * .1];
+      const A = [wr.width * .5, Math.max(70, wr.height * .2)];
+      const T = 3000, t0 = performance.now(); let sud = 0, geser = false;
+      kapal.classList.toggle("lln2-balik", arah < 0); kapal.style.opacity = "1"; w.classList.add("lln2-terbang"); document.body.classList.add("lln2-sorokpet");
+      const bz = (p0, p1, p2, p3, u) => { const v = 1 - u; return v * v * v * p0 + 3 * v * v * u * p1 + 3 * v * u * u * p2 + u * u * u * p3; };
+      let lp = S.slice();
+      const f = t => {
+        const u = Math.min(1, (t - t0) / T); let x, y, sk = 1;
+        if (u < .3) { const v = u / .3, e = v * v * (3 - 2 * v); x = bz(S[0], S[0] + arah * 60, A[0] - arah * 120, A[0], e); y = bz(S[1], S[1] - 10, A[1] + 60, A[1], e); sk = .8 + .2 * e; }
+        else if (u < .62) { const v = (u - .3) / .32; x = A[0] + Math.sin(v * Math.PI * 2) * 10; y = A[1] + Math.sin(v * Math.PI * 3) * 8; if (!geser) { geser = true; baru.style.transition = ""; lama.style.transform = "translateX(" + (-arah * 115) + "vw)"; requestAnimationFrame(() => { baru.style.transform = "translateX(0)"; }); } }
+        else { const v = (u - .62) / .38, e = 1 - Math.pow(1 - v, 3); x = bz(A[0], A[0] - arah * 80, E[0] + arah * 140, E[0], e); y = bz(A[1], A[1] - 20, E[1] - 70, E[1], e); y += v > .9 ? -Math.sin((v - .9) / .1 * Math.PI) * 6 : 0; sk = 1 - .2 * e; }
+        const ang = Math.max(-18, Math.min(18, Math.atan2(y - lp[1], (x - lp[0]) * arah + 1e-6) * 57.3)); sud += (ang - sud) * .15; lp = [x, y];
+        kapal.style.transform = "translate(" + x + "px," + y + "px) translate(-50%,-62%) scale(" + sk.toFixed(3) + ")" + (arah < 0 ? " scaleX(-1)" : "") + " rotate(" + sud.toFixed(1) + "deg)";
+        if (u < 1) return requestAnimationFrame(f);
+        /* mendarat: kapal hilang, Nuri turun di landasan, kemudian berjalan ke batu */
+        kapal.style.opacity = "0"; lama.remove(); w.classList.remove("lln2-terbang"); document.body.classList.remove("lln2-sorokpet");
+        const nb = nuri(baru); nb.style.visibility = ""; letak(baru, PAD(-arah)); pose(baru, "gembira", arah < 0); nb.classList.add("lln2-turun");
+        setTimeout(() => { nb.classList.remove("lln2-turun"); let b = a === sp ? sb : P[a].batu.findIndex(x => !selesai(x)); if (b < 0) b = 0; jalan(baru, titikBatu(baru, b), () => { pose(baru, "lambai"); setTimeout(() => pose(baru, "rehat"), 1200); terbang = false; }); }, 450);
+      };
+      kapal.style.transform = "translate(" + S[0] + "px," + S[1] + "px) translate(-50%,-62%) scale(.8)" + (arah < 0 ? " scaleX(-1)" : "");
+      requestAnimationFrame(f);
+    };
+    if (kurang) return berlepas();
+    jalan(lama, PAD(arah), () => { const n = nuri(lama); n.classList.add("lln2-naik"); setTimeout(berlepas, 300); });
   };
   w.querySelector(".lln2-kanan").onclick = () => pergiKe(kini + 1);
   w.querySelector(".lln2-kiri").onclick = () => pergiKe(kini - 1);
@@ -6211,13 +6276,14 @@ function LLN_bina() {
   let pergi = false;
   pentas.addEventListener("click", e => {
     const b = e.target.closest(".lln-batu"); if (!b || pergi || terbang) return;
-    const x = P[kini].batu[+b.dataset.b]; PETA_bunyi("ting");
-    if (x.kunci) { b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); return; }
+    const el = b.closest(".lln2-pulau"), bi = +b.dataset.b, x = P[kini].batu[bi]; PETA_bunyi("ting");
+    if (x.kunci) { b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); jalan(el, titikBatu(el, bi)); return; }
     pergi = true; dibuka[x.id] = 1; LLN_tulis(LLN_KUNCI, dibuka);
-    if (PET_kurang()) { x.fn(); return; }
-    b.classList.add("lln-tekan"); setTimeout(x.fn, 420);
+    b.classList.add("lln-tekan");
+    jalan(el, titikBatu(el, bi), () => setTimeout(x.fn, kurang ? 0 : 120));
   });
 }
+const LLN_POSE = ["rehat", "lambai", "gembira", "jalan-1", "jalan-2", "jalan-3", "jalan-4"];
 /* Mod mewah untuk seluruh bahagian Al-Quran */
 function setLux(on) { document.body.classList.toggle("lux-on", !!on && (typeof TETAP === "undefined" || TETAP.mewah)); }
 function renderAlQuranMenu() {
@@ -8924,7 +8990,7 @@ function renderHome() {
 /* Senarai kad generik pada skrin s-subj */
 function renderMenu(title, items, back) {
   LT_buangKepala();
-  document.body.classList.remove("peta-on");
+  document.body.classList.remove("peta-on", "lln2-on");
   $("subjTitle").textContent = title;
   $("subjBack").onclick = () => { PR_undur = true; back(); };
   const box = $("subjList");
