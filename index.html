@@ -1313,6 +1313,36 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 @keyframes petaKilau{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12) saturate(1.15)}}
 @keyframes petaKelip{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
 @media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
+/* ===== Pulau-pulau Iqra' (lln2) ===== */
+.lln2{position:relative;width:100%;height:calc(100vh - 150px);min-height:480px;overflow:hidden;touch-action:pan-y}
+.lln2::before{content:"";position:fixed;inset:0;z-index:-1;background:#e9dcf7 url(gambar/peta/peta-latar-potret.jpg) center/cover no-repeat;pointer-events:none;transition:background-position 1.6s ease}
+@media (orientation:landscape){.lln2::before{background-image:url(gambar/peta/peta-latar-landskap.jpg)}}
+.lln2.lln2-terbang::before{background-position:60% 50%}
+.lln2-atas{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:2px;position:relative;z-index:3}
+.lln2-tajuk{background:#fff;color:#4a3570;border:3px solid #e6d6ff;border-radius:999px;padding:5px 18px;font-weight:900;font-size:clamp(16px,2.4vmin,21px);box-shadow:0 4px 0 #d9c6fb}
+.lln2-titik{display:flex;gap:8px}
+.lln2-titik button{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;background:rgba(255,255,255,.45);padding:0;box-shadow:0 2px 4px rgba(90,60,140,.25)}
+.lln2-titik button.siap{background:#ffcf4a}
+.lln2-titik button.on{background:#a77bf3;transform:scale(1.35)}
+.lln2-pentas{position:absolute;left:0;right:0;top:72px;bottom:0}
+.lln2-pulau{position:absolute;left:50%;top:50%;width:min(94vw,calc((100vh - 240px) * 1.33),900px);margin-left:calc(min(94vw,calc((100vh - 240px) * 1.33),900px) / -2);aspect-ratio:4/3;translate:0 -50%;transition:transform 1.6s cubic-bezier(.6,.05,.3,1)}
+.lln2-gbr{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 22px 26px rgba(90,60,140,.3));animation:petaApung 5s ease-in-out infinite;pointer-events:none}
+.lln2-batu{width:clamp(84px,17%,150px)}
+.lln2-padat .lln2-batu{width:clamp(74px,14%,124px)}
+.lln2-padat .lln-nama{font-size:clamp(12px,1.6vmin,14px)}
+.lln-tanda{position:absolute;right:4%;top:2%;width:28px;height:28px;border-radius:50%;background:#4cc38a;color:#fff;font-weight:900;display:grid;place-items:center;border:2.5px solid #fff;font-size:15px}
+.lln2-anak{position:absolute;bottom:5%;z-index:4;width:64px;height:64px;border-radius:50%;border:4px solid #fff;background:#a77bf3;color:#fff;font-size:34px;font-weight:900;line-height:1;box-shadow:0 5px 0 #7d55c9,0 10px 18px rgba(90,60,140,.3);display:grid;place-items:center;padding:0}
+.lln2-kiri{left:calc(50% - 150px)}.lln2-kanan{right:calc(50% - 150px);background:#ff8fbf;box-shadow:0 5px 0 #e0679c,0 10px 18px rgba(90,60,140,.3);animation:llnLompat2 1.4s ease-in-out infinite}
+.lln2-kanan span{font-size:28px}
+@keyframes llnLompat2{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.lln2-anak[hidden]{display:none}
+.lln2-kapal{position:fixed;left:0;top:0;width:clamp(150px,26vmin,240px);z-index:50;pointer-events:none;opacity:0;filter:drop-shadow(0 12px 16px rgba(60,30,100,.3))}
+.lln2-kapal-on{animation:llnTerbang 1.7s cubic-bezier(.45,.05,.4,1) forwards}
+.lln2-kapal-on.lln2-balik{animation-name:llnTerbangBalik}
+@keyframes llnTerbang{0%{opacity:0;transform:translate(-30vw,60vh) rotate(-8deg) scale(.7)}12%{opacity:1}50%{transform:translate(38vw,22vh) rotate(-4deg) scale(1.05)}88%{opacity:1}100%{opacity:0;transform:translate(110vw,8vh) rotate(-10deg) scale(.8)}}
+@keyframes llnTerbangBalik{0%{opacity:0;transform:translate(110vw,60vh) scaleX(-1) scale(.7)}12%{opacity:1}50%{transform:translate(38vw,22vh) scaleX(-1)}88%{opacity:1}100%{opacity:0;transform:translate(-40vw,8vh) scaleX(-1) scale(.8)}}
+body.lln2-sorokpet .pet-nuri,body.lln2-sorokpet .pet-gel{opacity:0!important;transition:opacity .2s}
+@media (prefers-reduced-motion:reduce){.lln2-gbr,.lln2-kanan{animation:none}}
 /* ===== Laluan level Iqra' (LLN_) ===== */
 .lln{position:relative;width:100%;max-width:760px;margin:10px auto 40px}
 .lln::before{content:"";position:fixed;inset:0;z-index:-1;background:#cfeec9 url(gambar/peta/taman-potret.jpg) center/cover no-repeat;pointer-events:none}
@@ -6105,52 +6135,88 @@ function LLN_video(src) {
   o.querySelector("button").onclick = tutup; v.addEventListener("ended", tutup);
   document.body.appendChild(o); try { const p = v.play(); if (p && p.catch) p.catch(() => { /* pengguna tekan main */ }); } catch (e) { /* abaikan */ }
 }
+/* Pulau-pulau Iqra': satu pulau setiap skrin; Nuri naik kapal terbang ke pulau seterusnya */
+const LLN_KUNCI = "lln.dibuka", LLN_PULAU = "lln.pulau";
+function LLN_baca(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
+function LLN_tulis(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* abaikan */ } }
 function LLN_bina() {
   document.body.classList.add("peta-on");
-  const st = loadStars(), kj = iqKemajuan();
-  const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
+  const st = loadStars(), kj = iqKemajuan(), dibuka = LLN_baca(LLN_KUNCI, {});
   const pecahan = i => { const b = IQRA[i], d = (kj[i] || []).length; return b && b.muka.length ? d / b.muka.length : 0; };
   const bIqra = i => { const f = pecahan(i); return f >= 1 ? 3 : f >= .5 ? 2 : f > 0 ? 1 : 0; };
   const sambung = i => { const d = kj[i] || [], b = IQRA[i]; for (let m = 0; m < b.muka.length; m++) if (d.indexOf(m) < 0) return m; return 0; };
   const vid = ((window.TETAPAN && TETAPAN.laluan) || {}).videoHuruf || "";
-  const nota = QN_URUTAN.map((x, p) => x === "b" ? { ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) });
-  const LV = [
-    { n: "", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf },
-    { n: "", ik: "▶", nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, video: 1, fn: () => vid && LLN_video("gambar/" + vid) },
-    { n: "", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }
-  ].concat(nota).concat(IQRA.map((b, i) => ({ n: String(i + 1), nm: b.nama, b: bIqra(i), iq: i, fn: () => iqBaca(i, sambung(i)) })))
-   .concat([{ n: "", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { n: "", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }]);
-  let seterus = LV.findIndex(x => x.iq != null && pecahan(x.iq) < 1); if (seterus < 0) seterus = LV.length - 2;
-  const w = document.createElement("div"); w.className = "lln";
-  const LANGKAH = 168, lebar = () => w.clientWidth || 600;
-  w.style.height = (LV.length * LANGKAH + 120) + "px";
-  const titik = LV.map((x, i) => ({ x: 50 + Math.sin(i * 1.05) * 27, y: 70 + i * LANGKAH }));
-  const svgPath = () => { const W = lebar(); let d = ""; titik.forEach((t, i) => { const X = t.x / 100 * W; if (!i) d += "M" + X + " " + t.y; else { const p = titik[i - 1], PX = p.x / 100 * W, my = (p.y + t.y) / 2; d += " C" + PX + " " + my + " " + X + " " + my + " " + X + " " + t.y; } }); return d; };
-  w.innerHTML = '<svg class="lln-jalan" aria-hidden="true"><path class="lln-jalan-bayang"/><path class="lln-jalan-garis"/></svg>'
-    + LV.map((x, i) => '<button class="lln-batu' + (i === seterus ? " lln-seterus" : "") + (x.b === 3 ? " lln-siap" : "") + (x.kunci ? " lln-kunci" : "") + '" style="left:' + titik[i].x + "%;top:" + titik[i].y + 'px;--d:' + (i * 0.06) + 's" data-i="' + i + '">'
-      + (x.b != null ? bintang(x.b) : "")
-      + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik' + (x.kecil ? " lln-ik-kecil" : "") + (x.video ? " lln-ik-video" : "") + '">' + x.ik + "</b>") + "</span>"
-      + '<span class="lln-nama">' + x.nm + "</span>" + (i === seterus ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>").join("");
+  const nota = p => { const x = QN_URUTAN[p]; return x === "b" ? { id: "nb", ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { id: "nt", ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { id: "n" + x, ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) }; };
+  const iq = i => ({ id: "iq" + i, n: String(i + 1), nm: IQRA[i].nama, b: bIqra(i), siap: pecahan(i) >= 1, fn: () => iqBaca(i, sambung(i)) });
+  const P = [
+    { nm: "Pulau Huruf", g: "a", batu: [{ id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }, { id: "video", ik: "▶", video: 1, nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, fn: () => LLN_video("gambar/" + vid) }, { id: "tulis", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }] },
+    { nm: "Pulau Baris", g: "b", batu: [0, 1, 2, 3].map(nota) },
+    { nm: "Pulau Dua Baris", g: "c", batu: [4, 5, 6, 7].map(nota) },
+    { nm: "Pulau Tanda", g: "d", batu: [8, 9].map(nota) },
+    { nm: "Pulau Bacaan Panjang", g: "e", batu: [10, 11].map(nota) },
+    { nm: "Pulau Allah & Al", g: "f", batu: [12, 13].map(nota) },
+    { nm: "Pulau Iqra' 1 - 6", g: "g", batu: [0, 1, 2, 3, 4, 5].map(iq) },
+    { nm: "Pulau Kuiz & Doa", g: "h", batu: [{ id: "kuiz", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { id: "doa", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }] }
+  ];
+  const selesai = x => x.kunci || (x.siap != null ? x.siap : !!dibuka[x.id]);
+  let sp = -1, sb = -1;
+  P.some((pl, a) => pl.batu.some((x, b) => { if (!selesai(x)) { sp = a; sb = b; return true; } return false; }));
+  let kini = LLN_baca(LLN_PULAU, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < P.length)) kini = 0;
+  /* susun batu atas permukaan pulau (peratus lebar/tinggi gambar pulau) */
+  const SUSUN = { 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
+  const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
+  const w = document.createElement("div"); w.className = "lln2";
+  w.innerHTML = '<div class="lln2-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + P.map((_, a) => '<button data-p="' + a + '" aria-label="' + P[a].nm + '"></button>').join("") + "</span></div>"
+    + '<div class="lln2-pentas"></div>'
+    + '<button class="lln2-anak lln2-kiri" aria-label="Pulau sebelum">‹</button><button class="lln2-anak lln2-kanan" aria-label="Pulau seterusnya"><span>✈</span></button>'
+    + '<img class="lln2-kapal" alt="" src="gambar/pet/nuri/masuk/nuri-kapal.png">';
   $("subjList").appendChild(w);
-  /* lompatan kecil: 2 batu kecil di sepanjang lengkung antara setiap dua batu */
-  const titikLengkung = (a, b, t) => { const W = lebar(), x0 = a.x / 100 * W, x3 = b.x / 100 * W, my = (a.y + b.y) / 2, u = 1 - t; return { x: u * u * u * x0 + 3 * u * u * t * x0 + 3 * u * t * t * x3 + t * t * t * x3, y: u * u * u * a.y + 3 * u * u * t * my + 3 * u * t * t * my + t * t * t * b.y }; };
-  const lukis = () => {
-    const d = svgPath(); w.querySelectorAll("svg path").forEach(p => p.setAttribute("d", d)); const s2 = w.querySelector("svg"); s2.setAttribute("width", lebar()); s2.setAttribute("height", w.style.height);
-    w.querySelectorAll(".lln-kecil").forEach(e => e.remove());
-    const f = document.createDocumentFragment();
-    for (let i = 1; i < titik.length; i++) [.36, .64].forEach((t, k) => { const q = titikLengkung(titik[i - 1], titik[i], t), e = document.createElement("i"); e.className = "lln-kecil"; e.style.left = q.x + "px"; e.style.top = q.y + "px"; e.style.setProperty("--d", (i * 0.06 + k * 0.03) + "s"); f.appendChild(e); });
-    w.insertBefore(f, w.querySelector(".lln-batu"));
+  const pentas = w.querySelector(".lln2-pentas");
+  const binaPulau = a => {
+    const pl = P[a], sus = SUSUN[pl.batu.length] || SUSUN[4], el = document.createElement("div");
+    el.className = "lln2-pulau" + (pl.batu.length >= 6 ? " lln2-padat" : "");
+    el.innerHTML = '<img class="lln2-gbr" alt="" src="gambar/peta/pulau-' + pl.g + '.webp">' + pl.batu.map((x, b) => {
+      const sel = selesai(x) && !x.kunci, next = a === sp && b === sb;
+      return '<button class="lln-batu lln2-batu' + (next ? " lln-seterus" : "") + (x.kunci ? " lln-kunci" : "") + (sel ? " lln-siap" : "") + '" style="left:' + sus[b][0] + "%;top:" + sus[b][1] + "%;--d:" + (b * .08 + .1) + 's" data-b="' + b + '">'
+        + (x.b != null ? bintang(x.b) : (sel ? '<span class="lln-tanda">✓</span>' : ""))
+        + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik' + (x.kecil ? " lln-ik-kecil" : "") + (x.video ? " lln-ik-video" : "") + '">' + x.ik + "</b>") + "</span>"
+        + '<span class="lln-nama">' + x.nm + "</span>" + (next ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>";
+    }).join("");
+    return el;
   };
-  lukis(); try { new ResizeObserver(lukis).observe(w); } catch (e) { /* abaikan */ }
+  const papar = () => {
+    w.querySelector(".lln2-tajuk").textContent = (kini + 1) + " / " + P.length + " · " + P[kini].nm;
+    w.querySelectorAll(".lln2-titik button").forEach((b, a) => { b.classList.toggle("on", a === kini); b.classList.toggle("siap", P[a].batu.every(selesai)); });
+    w.querySelector(".lln2-kiri").hidden = kini === 0; w.querySelector(".lln2-kanan").hidden = kini === P.length - 1;
+    LLN_tulis(LLN_PULAU, kini);
+  };
+  pentas.appendChild(binaPulau(kini)); papar();
+  let terbang = false;
+  const pergiKe = (a) => {
+    if (terbang || a === kini || a < 0 || a >= P.length) return;
+    const arah = a > kini ? 1 : -1, lama = pentas.querySelector(".lln2-pulau"), baru = binaPulau(a);
+    kini = a; papar(); PETA_bunyi("terbang");
+    if (PET_kurang()) { lama.remove(); pentas.appendChild(baru); return; }
+    terbang = true; w.classList.add("lln2-terbang"); document.body.classList.add("lln2-sorokpet");
+    baru.style.transform = "translateX(" + (arah * 115) + "vw)"; pentas.appendChild(baru);
+    const k = w.querySelector(".lln2-kapal"); k.classList.toggle("lln2-balik", arah < 0); k.classList.remove("lln2-kapal-on"); void k.offsetWidth; k.classList.add("lln2-kapal-on");
+    requestAnimationFrame(() => requestAnimationFrame(() => { lama.style.transform = "translateX(" + (-arah * 115) + "vw)"; baru.style.transform = "translateX(0)"; }));
+    setTimeout(() => { lama.remove(); terbang = false; w.classList.remove("lln2-terbang"); document.body.classList.remove("lln2-sorokpet"); k.classList.remove("lln2-kapal-on"); }, 1700);
+  };
+  w.querySelector(".lln2-kanan").onclick = () => pergiKe(kini + 1);
+  w.querySelector(".lln2-kiri").onclick = () => pergiKe(kini - 1);
+  w.querySelector(".lln2-titik").onclick = e => { const b = e.target.closest("[data-p]"); if (b) pergiKe(+b.dataset.p); };
+  let x0 = null; pentas.addEventListener("pointerdown", e => { x0 = e.clientX; });
+  pentas.addEventListener("pointerup", e => { if (x0 == null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 70) pergiKe(kini + (dx < 0 ? 1 : -1)); });
   let pergi = false;
-  w.onclick = e => {
-    const b = e.target.closest(".lln-batu"); if (!b || pergi) return; pergi = true;
-    const x = LV[+b.dataset.i]; PETA_bunyi("ting");
-    if (x.kunci) { pergi = false; b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); return; }
+  pentas.addEventListener("click", e => {
+    const b = e.target.closest(".lln-batu"); if (!b || pergi || terbang) return;
+    const x = P[kini].batu[+b.dataset.b]; PETA_bunyi("ting");
+    if (x.kunci) { b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); return; }
+    pergi = true; dibuka[x.id] = 1; LLN_tulis(LLN_KUNCI, dibuka);
     if (PET_kurang()) { x.fn(); return; }
     b.classList.add("lln-tekan"); setTimeout(x.fn, 420);
-  };
-  setTimeout(() => { const s3 = w.querySelector(".lln-seterus"); if (s3 && s3.scrollIntoView) s3.scrollIntoView({ block: "center", behavior: PET_kurang() ? "auto" : "smooth" }); }, 350);
+  });
 }
 /* Mod mewah untuk seluruh bahagian Al-Quran */
 function setLux(on) { document.body.classList.toggle("lux-on", !!on && (typeof TETAP === "undefined" || TETAP.mewah)); }
