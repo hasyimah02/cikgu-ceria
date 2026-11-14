@@ -95,6 +95,9 @@ window.TETAPAN = {
       }
     }
   },
+  "laluan": {
+    "videoHuruf": ""
+  },
   "videoMasuk": {
     "aktif": true,
     "potret": "pet/nuri/masuk/pintu-quran.mp4",

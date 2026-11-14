@@ -1338,6 +1338,18 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .lln-bintang+.lln-muka~.lln-panah{bottom:122%}
 .lln-batu.lln-tekan{animation:petaLantun .42s ease}
 .lln-batu:focus-visible{outline:4px solid #b79cf2;outline-offset:4px;border-radius:50%}
+.lln-kecil{position:absolute;width:clamp(34px,4.6vmin,44px);aspect-ratio:1;transform:translate(-50%,-50%);background:url(gambar/peta/batu.png) center/contain no-repeat;pointer-events:none;opacity:.95;animation:llnMuncul .4s var(--d) both cubic-bezier(.3,1.5,.5,1)}
+.lln-kecil:nth-of-type(odd){filter:hue-rotate(60deg) saturate(.9)}
+.lln-ik-kecil{font-size:clamp(16px,2.6vmin,22px)!important;white-space:nowrap}
+.lln-ik-video{font-family:inherit!important;color:#ff6fa8!important}
+.lln-kunci{filter:grayscale(.75) brightness(1.05)!important;opacity:.85}
+.lln-kunci .lln-nama{color:#9a8ab5}
+.lln-goyang{animation:llnGoyang .45s ease!important}
+@keyframes llnGoyang{0%,100%{transform:translate(-50%,-50%) rotate(0)}25%{transform:translate(-50%,-50%) rotate(-7deg)}75%{transform:translate(-50%,-50%) rotate(7deg)}}
+.lln-nama{max-width:190px;overflow:hidden;text-overflow:ellipsis}
+.lln-vid{position:fixed;inset:0;z-index:2147483000;background:rgba(20,10,35,.92);display:grid;place-items:center}
+.lln-vid video{max-width:100vw;max-height:100vh;width:100%;height:100%;object-fit:contain}
+.lln-vid-tutup{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:52px;height:52px;border-radius:50%;border:3px solid #e6d6ff;background:#fff;color:#4a3570;font-size:24px;font-weight:900}
 @keyframes llnMuncul{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 @keyframes llnDenyut{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.07)}}
 @keyframes llnLompat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
@@ -5959,16 +5971,8 @@ function qnNavigasi(p) {
   if (p < QN_URUTAN.length - 1) qrButang("next", "Seterusnya", "hijau", () => qnBuka(p + 1));
   else qrButang("play", "Siap", "hijau", () => { sndWin(); qrNotaMenu(); });
 }
-function qrNotaMenu() {
-  backMenu = qrNotaMenu;
-  const warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz"];
-  const senarai = QR_NOTA.map((n, i) => [warna[i % 5], SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF"][i % 5]}"/><text x="32" y="${n.simbol.length > 3 ? 42 : 46}" font-family="Amiri Quran,Geeza Pro,serif" font-size="${n.simbol.length > 3 ? 20 : 30}" fill="#fff" text-anchor="middle">${n.simbol}</text>`), n.tajuk, n.terang.split(".")[0] + ".", "", () => qrNota(i)]);
-  /* Jadual diletak selepas nota 3 (baris) dan nota 6 (dua baris) */
-  senarai.splice(6, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بً بٍ بٌ</text>`), "Jadual Dua Baris", "Semua huruf dengan dua baris atas, bawah dan depan", "", () => qrBaris(true)]);
-  senarai.splice(3, 0, ["q-kuiz", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#BBA6FF"/><text x="32" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="22" fill="#fff" text-anchor="middle">بَ بِ بُ</text>`), "Jadual Baris Huruf", "Semua huruf dengan baris atas, bawah dan depan", "", () => qrBaris(false)]);
-  senarai.forEach((x, p) => x[2] = (p + 1) + ". " + x[2]);
-  renderMenu("Nota Bacaan", senarai, renderIqraMenu);
-}
+/* Nota Bacaan kini batu-batu dalam laluan Pulau Iqra' (LLN_bina); butang kembali/Siap pulang ke laluan */
+function qrNotaMenu() { renderIqraMenu(); }
 function qrNota(i, lembar) {
   const n = QR_NOTA[i];
   const pos = QN_URUTAN.indexOf(i);
@@ -6092,6 +6096,15 @@ function renderIqraMenu() {
   LLN_bina();
 }
 /* ===== Laluan level Pulau Iqra' (LLN_): batu loncatan berliku, bintang ikut kemajuan, batu seterusnya bercahaya ===== */
+/* Pemain video penuh skrin untuk batu Video (fail dari Dashboard > tetapan.laluan.videoHuruf) */
+function LLN_video(src) {
+  const o = document.createElement("div"); o.className = "lln-vid";
+  o.innerHTML = '<video playsinline controls autoplay></video><button class="lln-vid-tutup" aria-label="Tutup">✕</button>';
+  const v = o.querySelector("video"); v.src = src; v.muted = !SUARA_ON;
+  const tutup = () => { try { v.pause(); } catch (e) { /* abaikan */ } o.remove(); };
+  o.querySelector("button").onclick = tutup; v.addEventListener("ended", tutup);
+  document.body.appendChild(o); try { const p = v.play(); if (p && p.catch) p.catch(() => { /* pengguna tekan main */ }); } catch (e) { /* abaikan */ }
+}
 function LLN_bina() {
   document.body.classList.add("peta-on");
   const st = loadStars(), kj = iqKemajuan();
@@ -6099,30 +6112,41 @@ function LLN_bina() {
   const pecahan = i => { const b = IQRA[i], d = (kj[i] || []).length; return b && b.muka.length ? d / b.muka.length : 0; };
   const bIqra = i => { const f = pecahan(i); return f >= 1 ? 3 : f >= .5 ? 2 : f > 0 ? 1 : 0; };
   const sambung = i => { const d = kj[i] || [], b = IQRA[i]; for (let m = 0; m < b.muka.length; m++) if (d.indexOf(m) < 0) return m; return 0; };
+  const vid = ((window.TETAPAN && TETAPAN.laluan) || {}).videoHuruf || "";
+  const nota = QN_URUTAN.map((x, p) => x === "b" ? { ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) });
   const LV = [
     { n: "", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf },
-    { n: "", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu },
-    { n: "", ik: "بَ", nm: "Nota Bacaan", fn: qrNotaMenu }
-  ].concat(IQRA.map((b, i) => ({ n: String(i + 1), nm: b.nama, b: bIqra(i), iq: i, fn: () => iqBaca(i, sambung(i)) })))
+    { n: "", ik: "▶", nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, video: 1, fn: () => vid && LLN_video("gambar/" + vid) },
+    { n: "", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }
+  ].concat(nota).concat(IQRA.map((b, i) => ({ n: String(i + 1), nm: b.nama, b: bIqra(i), iq: i, fn: () => iqBaca(i, sambung(i)) })))
    .concat([{ n: "", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { n: "", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }]);
   let seterus = LV.findIndex(x => x.iq != null && pecahan(x.iq) < 1); if (seterus < 0) seterus = LV.length - 2;
   const w = document.createElement("div"); w.className = "lln";
-  const LANGKAH = 150, lebar = () => w.clientWidth || 600;
+  const LANGKAH = 168, lebar = () => w.clientWidth || 600;
   w.style.height = (LV.length * LANGKAH + 120) + "px";
   const titik = LV.map((x, i) => ({ x: 50 + Math.sin(i * 1.05) * 27, y: 70 + i * LANGKAH }));
   const svgPath = () => { const W = lebar(); let d = ""; titik.forEach((t, i) => { const X = t.x / 100 * W; if (!i) d += "M" + X + " " + t.y; else { const p = titik[i - 1], PX = p.x / 100 * W, my = (p.y + t.y) / 2; d += " C" + PX + " " + my + " " + X + " " + my + " " + X + " " + t.y; } }); return d; };
   w.innerHTML = '<svg class="lln-jalan" aria-hidden="true"><path class="lln-jalan-bayang"/><path class="lln-jalan-garis"/></svg>'
-    + LV.map((x, i) => '<button class="lln-batu' + (i === seterus ? " lln-seterus" : "") + (x.b === 3 ? " lln-siap" : "") + '" style="left:' + titik[i].x + "%;top:" + titik[i].y + 'px;--d:' + (i * 0.06) + 's" data-i="' + i + '">'
+    + LV.map((x, i) => '<button class="lln-batu' + (i === seterus ? " lln-seterus" : "") + (x.b === 3 ? " lln-siap" : "") + (x.kunci ? " lln-kunci" : "") + '" style="left:' + titik[i].x + "%;top:" + titik[i].y + 'px;--d:' + (i * 0.06) + 's" data-i="' + i + '">'
       + (x.b != null ? bintang(x.b) : "")
-      + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik">' + x.ik + "</b>") + "</span>"
+      + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik' + (x.kecil ? " lln-ik-kecil" : "") + (x.video ? " lln-ik-video" : "") + '">' + x.ik + "</b>") + "</span>"
       + '<span class="lln-nama">' + x.nm + "</span>" + (i === seterus ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>").join("");
   $("subjList").appendChild(w);
-  const lukis = () => { const d = svgPath(); w.querySelectorAll("svg path").forEach(p => p.setAttribute("d", d)); const s2 = w.querySelector("svg"); s2.setAttribute("width", lebar()); s2.setAttribute("height", w.style.height); };
+  /* lompatan kecil: 2 batu kecil di sepanjang lengkung antara setiap dua batu */
+  const titikLengkung = (a, b, t) => { const W = lebar(), x0 = a.x / 100 * W, x3 = b.x / 100 * W, my = (a.y + b.y) / 2, u = 1 - t; return { x: u * u * u * x0 + 3 * u * u * t * x0 + 3 * u * t * t * x3 + t * t * t * x3, y: u * u * u * a.y + 3 * u * u * t * my + 3 * u * t * t * my + t * t * t * b.y }; };
+  const lukis = () => {
+    const d = svgPath(); w.querySelectorAll("svg path").forEach(p => p.setAttribute("d", d)); const s2 = w.querySelector("svg"); s2.setAttribute("width", lebar()); s2.setAttribute("height", w.style.height);
+    w.querySelectorAll(".lln-kecil").forEach(e => e.remove());
+    const f = document.createDocumentFragment();
+    for (let i = 1; i < titik.length; i++) [.36, .64].forEach((t, k) => { const q = titikLengkung(titik[i - 1], titik[i], t), e = document.createElement("i"); e.className = "lln-kecil"; e.style.left = q.x + "px"; e.style.top = q.y + "px"; e.style.setProperty("--d", (i * 0.06 + k * 0.03) + "s"); f.appendChild(e); });
+    w.insertBefore(f, w.querySelector(".lln-batu"));
+  };
   lukis(); try { new ResizeObserver(lukis).observe(w); } catch (e) { /* abaikan */ }
   let pergi = false;
   w.onclick = e => {
     const b = e.target.closest(".lln-batu"); if (!b || pergi) return; pergi = true;
     const x = LV[+b.dataset.i]; PETA_bunyi("ting");
+    if (x.kunci) { pergi = false; b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); return; }
     if (PET_kurang()) { x.fn(); return; }
     b.classList.add("lln-tekan"); setTimeout(x.fn, 420);
   };
