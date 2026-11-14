@@ -7100,7 +7100,7 @@ function LLN_bina() {
     return el;
   };
   const papar = () => {
-    w.querySelector(".lln2-tajuk").textContent = (kini + 1) + " / " + P.length + " · " + P[kini].nm;
+    $("subjTitle").textContent = P[kini].nm; w.querySelector(".lln2-tajuk").textContent = (kini + 1) + " / " + P.length;
     w.querySelectorAll(".lln2-titik button").forEach((b, a) => { b.classList.toggle("on", a === kini); b.classList.toggle("siap", P[a].batu.every(selesai)); });
     w.querySelector(".lln2-kiri").hidden = kini === 0; w.querySelector(".lln2-kanan").hidden = kini === P.length - 1;
     LLN_tulis(LLN_PULAU, kini);
