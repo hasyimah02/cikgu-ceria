@@ -1413,26 +1413,35 @@ body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
 .kbn-gel{position:absolute;left:78%;bottom:70%;width:max-content;max-width:min(300px,62vw);background:#fff;color:#3E3150;border:2.5px solid #CDB9F5;border-radius:18px 18px 18px 4px;padding:7px 13px;font-weight:800;font-size:15px;line-height:1.3;box-shadow:0 4px 12px rgba(62,49,80,.18);opacity:0;transform:scale(.7);transform-origin:0 100%;transition:opacity .2s,transform .25s cubic-bezier(.3,1.6,.5,1)}
 .kbn-gel.on{opacity:1;transform:none}
 body:has(.kbn-sungai) .kbn-teman{display:none}
-.kbn-sungai{position:relative;height:min(64vh,580px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:#bfe3ff}
-.kbn-air{position:absolute;inset:0;background:repeating-linear-gradient(170deg,rgba(255,255,255,.0) 0 26px,rgba(255,255,255,.35) 26px 30px),linear-gradient(#7fcaf5,#a9dcff);background-size:200% 200%;animation:kbnAir 6s linear infinite}
+.kbn-sungai{position:relative;height:min(66vh,600px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:#8fd0f7}
+.kbn-dunia{position:absolute;left:0;right:0;top:0;will-change:transform}
+.kbn-air{position:absolute;inset:0;background:repeating-linear-gradient(170deg,rgba(255,255,255,0) 0 26px,rgba(255,255,255,.35) 26px 30px),linear-gradient(#7fcaf5,#a9dcff);background-size:200% 200%;animation:kbnAir 6s linear infinite}
 @keyframes kbnAir{to{background-position:200% 100%}}
-.kbn-tebing{position:absolute;left:0;right:0;height:16%;background:linear-gradient(#9ee08f,#7cc96d);border-radius:0 0 50% 50%/0 0 30% 30%}
-.kbn-tebing-a{bottom:0;border-radius:50% 50% 0 0/30% 30% 0 0}
-.kbn-tebing-b{top:0;display:grid;place-items:center;font-size:30px}
-.kbn-sungai .kbn-ulang{top:auto;bottom:12px}
-.kbn-sungai .kbn-markah{top:auto;bottom:22px}
-.kbn-baris{position:absolute;left:0;right:0;top:40%;display:flex;justify-content:center;gap:6%}
-.kbn-baris.masuk .kbn-batu-s{animation:kbnTimbul .45s both cubic-bezier(.3,1.6,.5,1)}
-.kbn-baris.masuk .kbn-batu-s:nth-child(2){animation-delay:.08s}.kbn-baris.masuk .kbn-batu-s:nth-child(3){animation-delay:.16s}
-.kbn-baris.keluar .kbn-batu-s{transition:opacity .3s,transform .3s;opacity:0;transform:translateY(40px)}
-.kbn-batu-s{width:clamp(96px,22%,150px);aspect-ratio:1;border:0;padding:0 0 12%;background:url(gambar/peta/batu.png) center/contain no-repeat;display:grid;place-items:center;cursor:pointer}
-.kbn-batu-s b{font-size:clamp(40px,8vmin,64px);color:#3a2366;line-height:1}
+.kbn-tebing{position:absolute;left:0;right:0;height:24%;max-height:170px;background:linear-gradient(#9ee08f,#74c465)}
+.kbn-tebing-a{bottom:0;border-radius:50% 50% 0 0/26% 26% 0 0}
+.kbn-tebing-b{top:0;border-radius:0 0 50% 50%/0 0 26% 26%}
+.kbn-bendera{position:absolute;left:50%;bottom:34%;width:6px;height:64px;background:#8a6a4a;border-radius:3px;transform:translateX(-50%)}
+.kbn-bendera i{position:absolute;left:6px;top:2px;width:46px;height:30px;background:repeating-conic-gradient(#3a2366 0 25%,#fff 0 50%) 0 0/15px 15px;border-radius:2px 8px 8px 2px;animation:kbnKibar 1.2s ease-in-out infinite;transform-origin:0 50%}
+@keyframes kbnKibar{0%,100%{transform:skewY(0)}50%{transform:skewY(-8deg)}}
+.kbn-sungai .kbn-ulang{top:auto;bottom:12px;display:grid;place-items:center;z-index:6}
+.kbn-sungai .kbn-ulang svg{width:28px;height:28px}
+.kbn-sungai .kbn-markah{top:auto;bottom:24px;z-index:6}
+.kbn-baris-s{position:absolute;left:0;right:0;height:0}
+.kbn-batu-s{position:absolute;top:0;width:clamp(92px,20%,150px);aspect-ratio:1;transform:translate(-50%,-50%);border:0;padding:0 0 12%;background:url(gambar/peta/batu.png) center/contain no-repeat;display:grid;place-items:center;cursor:pointer;transition:opacity .35s,filter .35s}
+.kbn-baris-s.depan .kbn-batu-s{opacity:.55;filter:saturate(.6);pointer-events:none}
+.kbn-baris-s.lepas .kbn-batu-s{pointer-events:none}
+.kbn-baris-s.aktif .kbn-batu-s{animation:kbnTimbul .45s both cubic-bezier(.3,1.6,.5,1)}
+.kbn-baris-s.aktif .kbn-batu-s:nth-child(2){animation-delay:.08s}.kbn-baris-s.aktif .kbn-batu-s:nth-child(3){animation-delay:.16s}
+.kbn-batu-s.hilang{opacity:0;transform:translate(-50%,-30%) scale(.7)}
+.kbn-batu-s b{font-size:clamp(46px,9vmin,76px);color:#3a2366;line-height:1}
 .kbn-batu-s.tenggelam{animation:kbnTenggelam .7s ease}
-.kbn-batu-s.betul{filter:drop-shadow(0 0 12px #ffe27a)}
-@keyframes kbnTimbul{from{transform:translateY(30px) scale(.6);opacity:0}to{transform:none;opacity:1}}
-@keyframes kbnTenggelam{0%,100%{transform:none}30%{transform:translateY(16px) rotate(-6deg)}60%{transform:translateY(6px) rotate(5deg)}}
-.kbn-nuri{position:absolute;width:clamp(80px,17%,130px);aspect-ratio:1;transform:translate(-50%,-85%);pointer-events:none;z-index:4}
+@keyframes kbnTimbul{from{transform:translate(-50%,-30%) scale(.6);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
+@keyframes kbnTenggelam{0%,100%{transform:translate(-50%,-50%)}30%{transform:translate(-50%,-38%) rotate(-6deg)}60%{transform:translate(-50%,-46%) rotate(5deg)}}
+.kbn-nuri{position:absolute;width:clamp(78px,16%,124px);aspect-ratio:1;transform:translate(-50%,-88%);pointer-events:none;z-index:4}
 .kbn-nuri img{width:100%;height:100%;object-fit:contain}
+.kbn-nuri.kiri img{transform:scaleX(-1)}
+.kbn-nuri.mendarat img{animation:kbnDarat .3s ease}
+@keyframes kbnDarat{0%{transform:scale(1.1,.88)}100%{transform:none}}
 .kbn-ingat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;margin:0 auto}
 @media (max-width:560px){.kbn-ingat{grid-template-columns:repeat(2,1fr)}}
 .kbn-kad{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none;perspective:700px;cursor:pointer}
@@ -6419,40 +6428,54 @@ function kbnPadan() {
   });
 }
 
-/* Lompat Sungai: Nuri melompat ke batu berhuruf yang disebut, 6 lompatan untuk seberang */
+/* Lompat Sungai: Nuri bermula di tebing bawah, melompat baris demi baris atas batu berhuruf, sampai tebing seberang (kamera ikut) */
 function kbnLompat() {
-  const b = kbnSkrin(KBN.g.indexOf("Lompat") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
-  b.innerHTML = '<div class="kbn-sungai"><div class="kbn-air"></div><div class="kbn-tebing kbn-tebing-a"></div><div class="kbn-tebing kbn-tebing-b"><span>🏁</span></div><button class="kbn-ulang" aria-label="Dengar lagi">🔊</button><div class="kbn-markah"></div><div class="kbn-baris"></div><div class="kbn-nuri"><img alt="" src="gambar/pet/nuri/rehat.png"></div></div>';
-  const sg = b.querySelector(".kbn-sungai"), baris = sg.querySelector(".kbn-baris"), nuri = sg.querySelector(".kbn-nuri"), img = nuri.querySelector("img"), markah = sg.querySelector(".kbn-markah");
-  const kedudukan = (x, y) => { nuri.style.left = x + "px"; nuri.style.top = y + "px"; };
-  const mula = () => { const r = sg.getBoundingClientRect(); kedudukan(r.width / 2, r.height * .86); };
-  mula();
+  const b = kbnSkrin(KBN.g.indexOf("Lompat") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6), N = giliran.length; let g = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-sungai"><div class="kbn-dunia"><div class="kbn-air"></div><div class="kbn-tebing kbn-tebing-b"><span class="kbn-bendera"><i></i></span></div><div class="kbn-tebing kbn-tebing-a"></div></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const sg = b.querySelector(".kbn-sungai"), dunia = sg.querySelector(".kbn-dunia"), markah = sg.querySelector(".kbn-markah");
+  const V = sg.clientHeight || 520, W = sg.clientWidth || 700, ROW = Math.round(V * .3), BANK = Math.round(V * .24), HW = BANK * 2 + N * ROW, X = [.22, .5, .78];
+  dunia.style.height = HW + "px";
+  const yBaris = k => HW - BANK - (k + .5) * ROW;
+  /* batu: semua baris dilukis; hanya baris aktif ada huruf */
+  const baris = [];
+  for (let k = 0; k < N; k++) {
+    const r = document.createElement("div"); r.className = "kbn-baris-s" + (k ? " depan" : ""); r.style.top = yBaris(k) + "px";
+    r.innerHTML = X.map((x, c) => '<button class="kbn-batu-s" data-c="' + c + '" style="left:' + (x * 100) + '%"><b class="qrar"></b></button>').join("");
+    dunia.appendChild(r); baris.push(r);
+  }
+  const nuri = document.createElement("div"); nuri.className = "kbn-nuri"; nuri.innerHTML = '<img alt="" src="gambar/pet/nuri/rehat.png">'; dunia.appendChild(nuri);
+  const img = nuri.querySelector("img");
+  let ty = 0, pos = [W / 2, HW - BANK * .45];
+  const letak = (x, y) => { pos = [x, y]; nuri.style.left = x + "px"; nuri.style.top = y + "px"; };
+  const kamera = y => Math.min(0, Math.max(V - HW, V * .68 - y));
+  const setKamera = v => { ty = v; dunia.style.transform = "translateY(" + v + "px)"; };
+  letak(pos[0], pos[1]); setKamera(kamera(pos[1]));
   const lompat = (ke, siap) => {
-    const r0 = [parseFloat(nuri.style.left), parseFloat(nuri.style.top)], t0 = performance.now(), T = 620;
-    img.src = "gambar/pet/nuri/gembira.png";
-    const f = t => { const u = Math.min(1, (t - t0) / T), e = u * u * (3 - 2 * u); kedudukan(r0[0] + (ke[0] - r0[0]) * e, r0[1] + (ke[1] - r0[1]) * e - Math.sin(u * Math.PI) * 90); if (u < 1) requestAnimationFrame(f); else { img.src = "gambar/pet/nuri/rehat.png"; siap && siap(); } };
+    const a = pos.slice(), t0 = performance.now(), T = 650, c0 = ty, c1 = kamera(ke[1]);
+    img.src = "gambar/pet/nuri/gembira.png"; nuri.classList.toggle("kiri", ke[0] < a[0] - 5);
+    const f = t => { const u = Math.min(1, (t - t0) / T), e = u * u * (3 - 2 * u);
+      letak(a[0] + (ke[0] - a[0]) * e, a[1] + (ke[1] - a[1]) * e - Math.sin(u * Math.PI) * ROW * .45);
+      setKamera(c0 + (c1 - c0) * e);
+      if (u < 1) requestAnimationFrame(f); else { img.src = "gambar/pet/nuri/rehat.png"; nuri.classList.remove("mendarat"); void nuri.offsetWidth; nuri.classList.add("mendarat"); siap && siap(); } };
     requestAnimationFrame(f);
   };
   const pusingan = () => {
     if (id !== KBN.id) return;
     markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
-    if (g >= giliran.length) { sg.classList.add("tamat"); const r = sg.getBoundingClientRect(); lompat([r.width / 2, r.height * .12], () => { img.src = "gambar/pet/nuri/lambai.png"; try { tKonfeti(r.left + r.width / 2, r.top + 60); } catch (e) { /* abaikan */ } KBN_suara("m-seberang").then(() => setTimeout(() => kbnSeterus(2), 400)); }); return; }
-    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
-    baris.innerHTML = pilih.map(i => '<button class="kbn-batu-s" data-i="' + i + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
-    baris.classList.remove("masuk"); void baris.offsetWidth; baris.classList.add("masuk");
+    if (g >= N) { lompat([W / 2, BANK * .55], () => { img.src = "gambar/pet/nuri/lambai.png"; const r = sg.getBoundingClientRect(); try { tKonfeti(r.left + r.width / 2, r.top + 60); } catch (e) { /* abaikan */ } KBN_suara("m-seberang").then(() => setTimeout(() => kbnSeterus(2), 400)); }); return; }
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2))), rw = baris[g];
+    rw.classList.remove("depan"); rw.classList.add("aktif");
+    rw.querySelectorAll(".kbn-batu-s").forEach((bt, c) => { bt.dataset.i = pilih[c]; bt.querySelector("b").textContent = HIJAIYAH[KBN.h[pilih[c]]][0]; });
     kunci = false; KBN_suara("l-" + KBN.k[sasar]);
     sg.querySelector(".kbn-ulang").onclick = () => KBN_suara("l-" + KBN.k[sasar]);
-    baris.onclick = e => {
+    rw.onclick = e => {
       const t = e.target.closest(".kbn-batu-s"); if (!t || kunci) return;
       if (+t.dataset.i === sasar) {
-        kunci = true; const r = sg.getBoundingClientRect(), tr2 = t.getBoundingClientRect();
-        lompat([tr2.left - r.left + tr2.width / 2, tr2.top - r.top + tr2.height * .35], () => {
-          t.classList.add("betul"); g++; KBN_suara("betul-" + (1 + g % 3)).then(() => {
-            if (id !== KBN.id) return;
-            baris.classList.add("keluar"); const n0 = [parseFloat(nuri.style.left), parseFloat(nuri.style.top)], t0 = performance.now();
-            const f = t2 => { const u = Math.min(1, (t2 - t0) / 450); kedudukan(n0[0] + (r.width / 2 - n0[0]) * u, n0[1] + (r.height * .86 - n0[1]) * u); if (u < 1) requestAnimationFrame(f); else { baris.classList.remove("keluar"); pusingan(); } };
-            requestAnimationFrame(f);
-          });
+        kunci = true; const c = +t.dataset.c;
+        lompat([X[c] * W, yBaris(g) - ROW * .08], () => {
+          t.classList.add("betul"); rw.classList.remove("aktif"); rw.classList.add("lepas");
+          rw.querySelectorAll(".kbn-batu-s").forEach(z => { if (z !== t) z.classList.add("hilang"); });
+          g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 150));
         });
       } else { KBN.salah++; t.classList.remove("tenggelam"); void t.offsetWidth; t.classList.add("tenggelam"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("l-" + KBN.k[sasar]); }); }
     };
