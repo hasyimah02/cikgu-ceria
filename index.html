@@ -7168,8 +7168,7 @@ function LLN_bina() {
   const P = [
     { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "kebun5", ik: "ع غ", kecil: 1, nm: "Misi Huruf 5", b: KBN_bintang(4), siap: KBN_bintang(4) > 0, fn: () => kbnMula(4) }, { id: "kebun6", ik: "ق ك", kecil: 1, nm: "Misi Huruf 6", b: KBN_bintang(5), siap: KBN_bintang(5) > 0, fn: () => kbnMula(5) }, { id: "kebun7", ik: "ن و", kecil: 1, nm: "Misi Huruf 7", b: KBN_bintang(6), siap: KBN_bintang(6) > 0, fn: () => kbnMula(6) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }] },
     { nm: "Pulau Baris", g: "b", batu: BRS_LEVEL.map((x, n) => ({ id: "brs" + n, ik: x.ik, kecil: x.kecil, nm: x.nm, b: BRS_bintang(n), siap: BRS_bintang(n) > 0, fn: () => brsMula(n) })).concat([4, 5, 6, 7].map(nota)) },
-    { nm: "Pulau Tanda", g: "d", batu: [8, 9].map(nota) },
-    { nm: "Pulau Bacaan Panjang & Allah", g: "e", batu: [10, 11, 12, 13].map(nota) },
+    { nm: "Pulau Tanda & Bacaan", g: "e", batu: [8, 9, 10, 11, 12, 13].map(nota) },
     { nm: "Pulau Iqra' 1 - 6", g: "g", batu: [0, 1, 2, 3, 4, 5].map(iq) },
     { nm: "Pulau Kuiz & Doa", g: "h", batu: [{ id: "kuiz", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { id: "doa", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }] }
   ];
