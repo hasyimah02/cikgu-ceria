@@ -782,6 +782,7 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .strk-pen{fill:#fff;stroke:#3a2366;stroke-width:1.4}
 .strk-main{border:0;border-radius:999px;background:#a77bf3;color:#fff;font-weight:800;font-size:14px;padding:5px 14px;box-shadow:0 3px 0 #7d55c9;cursor:pointer}
 .thjkhat .qrar{font-weight:700}
+.thjseg:has(button:only-child){display:none}
 .thjcontoh{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:24px;padding:0 22px 8px;box-shadow:0 6px 0 var(--garis)}
 .thjcontoh .qrar{font-size:64px;line-height:1.7;color:#3FA672}.thjcontoh small{font-weight:700;color:var(--muted)}
 .thjpapan{position:relative;align-self:center;width:min(100%,560px,62vh);aspect-ratio:1;background:var(--card);border-radius:32px;border:5px solid #8FD9A8;box-shadow:0 10px 0 var(--garis),0 16px 30px var(--sh);overflow:hidden}
@@ -7318,7 +7319,7 @@ setTerap();
 /* ===== Tulis Huruf Hijaiyah: surih atau tulis sendiri dengan jari / Apple Pencil ===== */
 const THJ_KEY = "appPendidikan.tulishijaiyah.v1";
 let thjMod = "surih";
-const THJ_KHAT = { naskh: ["Nasakh", '"Geeza Pro","Amiri Quran",serif'], ruqaa: ["Riq\'ah", '"Aref Ruqaa","Amiri Quran",serif'] };
+const THJ_KHAT = { naskh: ["Nasakh", '"Geeza Pro","Amiri Quran",serif'] }; /* pemilik 2026-11-15: satu fon sahaja (Geeza Pro tebal); Riq'ah dibuang */
 let thjKhat = (() => { try { return THJ_KHAT[localStorage.getItem("appPendidikan.thjKhat")] ? localStorage.getItem("appPendidikan.thjKhat") : "naskh"; } catch (e) { return "naskh"; } })();
 function thjData() { try { return JSON.parse(localStorage.getItem(THJ_KEY)) || {}; } catch (e) { return {}; } }
 let thjBalik = null;
