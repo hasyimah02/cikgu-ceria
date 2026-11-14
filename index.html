@@ -1265,10 +1265,10 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 #s-home.on .dpn-kad:nth-child(1){--i:0}#s-home.on .dpn-kad:nth-child(2){--i:1}#s-home.on .dpn-kad:nth-child(3){--i:2}#s-home.on .dpn-kad:nth-child(4){--i:3}
 @media (prefers-reduced-motion:reduce){#s-home.on,#s-subj.on,#s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:none!important}}
 /* ===== Video masuk Kelas Al-Quran (VPN_): kad pintu membesar -> video pintu penuh skrin -> Kelas Al-Quran. Aset Ravi: gambar/pet/nuri/masuk/pintu-quran.* ===== */
-.vpn-lapis{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;overflow:hidden;background:#e6c8f2;opacity:0;transition:opacity .3s ease-out;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.vpn-lapis{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;overflow:hidden;background:#e6c8f2;opacity:0;transition:opacity .5s ease-out .12s;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
 .vpn-lapis[hidden]{display:none}
 .vpn-lapis.vpn-nampak{opacity:1}
-.vpn-lapis.vpn-pudar{opacity:0;transition:opacity .4s ease-in;cursor:default}
+.vpn-lapis.vpn-pudar{opacity:0;transform:scale(1.08);filter:blur(8px);transition:opacity .8s ease-in-out,transform .8s ease-in-out,filter .8s ease-in-out;cursor:default}
 .vpn-lapis img,.vpn-lapis video{position:absolute;left:0;top:0;width:100%;height:100%;display:block;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .vpn-lapis video{background:transparent}
 .vpn-latar{display:none!important}
@@ -1276,7 +1276,7 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 @media (orientation:landscape){.vpn-lapis .vpn-latar{display:block!important;filter:blur(22px);transform:scale(1.2)}.vpn-lapis .vpn-awal,.vpn-lapis .vpn-video{object-fit:contain}}
 /* kad pintu membesar ke tengah skrin (transform sahaja) sementara lapisan muncul */
 #s-home.on .dpn-kad.vpn-besar{position:relative;z-index:5;animation:none!important}
-.dpn-kad.vpn-besar img{transition:transform .3s cubic-bezier(.3,.1,.3,1);will-change:transform}
+.dpn-kad.vpn-besar img{transition:transform .55s cubic-bezier(.3,.1,.3,1),opacity .55s ease-in;will-change:transform}
 /* semasa lapisan video aktif, skrin Kelas Al-Quran tidak memainkan pr-maju/stagger (satu peralihan sahaja); kelas dibuang oleh show() seterusnya */
 #s-subj.on.vpn-diam,#s-subj.on.vpn-diam .card{animation:none!important}
 /* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
@@ -9042,7 +9042,7 @@ renderHome();
    Tekan kad -> kad membesar ke tengah (~300ms) sambil lapisan penuh skrin muncul (bingkai pertama) -> pintu-quran.mp4 (5s, bunyi asal)
    -> video tamat: Kelas Al-Quran sudah sedia di belakang, lapisan pudar (~400ms) -> salam Nuri (VPN_tahanPet).
    Sentuhan/kekunci semasa video = langkau. play() disekat/gagal atau prefers-reduced-motion = terus buka tanpa video. Aset: gambar/pet/nuri/masuk/ (Ravi). */
-const VPN_DIR = "gambar/pet/nuri/masuk/", VPN_T_BESAR = 300, VPN_T_PUDAR = 400, VPN_T_TUNGGU = 1500, VPN_T_HAD = 8000;
+const VPN_DIR = "gambar/pet/nuri/masuk/", VPN_T_BESAR = 300, VPN_T_SEDIA = 680, VPN_T_PUDAR = 800, VPN_T_AWAL = 0.55, VPN_T_TUNGGU = 1500, VPN_T_HAD = 8000;
 let VPN_el = null, VPN_v = null, VPN_aktif = false, VPN_sudahQuran = false, VPN_jam = [], VPN_mulaT = 0, VPN_no = 0, VPN_kad = null;
 /* Dipanggil oleh renderHome(): bina lapisan (tersembunyi) supaya video (preload auto) dan bingkai pertama sudah dimuat sebelum kad ditekan */
 function VPN_pramuat() {
@@ -9056,6 +9056,8 @@ function VPN_pramuat() {
     const v = VPN_v = el.querySelector("video");
     v.muted = false; v.loop = false; v.controls = false;
     v.addEventListener("ended", () => VPN_tamat(false));
+    /* mula melebur sebelum bingkai akhir supaya video larut terus ke Kelas Al-Quran (tiada henti kaku) */
+    v.addEventListener("timeupdate", () => { if (VPN_aktif && v.duration && v.duration - v.currentTime < VPN_T_AWAL) VPN_tamat(false); });
     v.addEventListener("error", () => VPN_gagal(VPN_no));
     el.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); if (performance.now() - VPN_mulaT > VPN_T_BESAR) VPN_tamat(true); /* sentuhan berganda pada kad tidak melangkau */ });
     el.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
@@ -9109,7 +9111,7 @@ function VPN_masuk(kad) {
   VPN_besarkan(kad);
   VPN_jam = [
     /* lapisan sudah legap: sediakan Kelas Al-Quran di belakang supaya pudar di hujung video lancar */
-    setTimeout(() => { if (VPN_aktif && no === VPN_no) { VPN_lepasKad(); VPN_bukaQuran(); } }, VPN_T_BESAR + 60),
+    setTimeout(() => { if (VPN_aktif && no === VPN_no) { VPN_lepasKad(); VPN_bukaQuran(); } }, VPN_T_SEDIA),
     /* video tidak bermula (rangkaian/cache): jangan biarkan anak menunggu */
     setTimeout(() => { if (VPN_aktif && no === VPN_no && !(v.currentTime > 0)) VPN_tamat(false); }, VPN_T_TUNGGU),
     setTimeout(() => { if (no === VPN_no) VPN_tamat(false); }, VPN_T_HAD)
