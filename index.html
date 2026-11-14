@@ -1313,6 +1313,35 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 @keyframes petaKilau{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12) saturate(1.15)}}
 @keyframes petaKelip{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
 @media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
+/* ===== Laluan level Iqra' (LLN_) ===== */
+.lln{position:relative;width:100%;max-width:760px;margin:10px auto 40px}
+.lln::before{content:"";position:fixed;inset:0;z-index:-1;background:#cfeec9 url(gambar/peta/taman-potret.jpg) center/cover no-repeat;pointer-events:none}
+@media (orientation:landscape){.lln::before{background-image:url(gambar/peta/taman-landskap.jpg)}.lln{max-width:900px}}
+.lln-jalan{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.lln-jalan path{fill:none;stroke-linecap:round}
+.lln-jalan-bayang{stroke:rgba(120,90,60,.18);stroke-width:30}
+.lln-jalan-garis{stroke:#fff6e3;stroke-width:9;stroke-dasharray:2 22;opacity:.95}
+.lln-batu{position:absolute;transform:translate(-50%,-50%);width:clamp(104px,15vmin,138px);aspect-ratio:1;border:0;padding:0;background:url(gambar/peta/batu.png) center/contain no-repeat;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:llnMuncul .5s var(--d) both cubic-bezier(.3,1.5,.5,1)}
+.lln-batu:nth-child(3n) {filter:hue-rotate(-40deg) saturate(1.1)}
+.lln-batu:nth-child(3n+1){filter:hue-rotate(60deg) saturate(.9)}
+.lln-muka{position:absolute;left:50%;top:41%;transform:translate(-50%,-50%);width:58%;height:40%;display:grid;place-items:center}
+.lln-no{font-size:clamp(28px,4.4vmin,40px);font-weight:900;color:#7a55c7;text-shadow:0 2px 0 #fff}
+.lln-ik{font-size:clamp(24px,3.8vmin,34px);font-weight:900;color:#7a55c7;font-family:"Amiri Quran","Geeza Pro",serif;line-height:1}
+.lln-nama{position:absolute;left:50%;top:94%;transform:translateX(-50%);white-space:nowrap;background:#fff;color:#4a3570;border:2.5px solid #e6d6ff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:clamp(13px,1.9vmin,16px);box-shadow:0 3px 0 #d9c6fb}
+.lln-bintang{position:absolute;left:50%;top:-6%;transform:translateX(-50%);display:flex;gap:2px}
+.lln-bintang i{width:20px;height:20px;background:#fff;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:.75;filter:drop-shadow(0 1px 0 rgba(0,0,0,.2))}
+.lln-bintang i:nth-child(2){transform:translateY(-6px) scale(1.15)}
+.lln-bintang i.on{background:#FFC93C;opacity:1}
+.lln-seterus{animation:llnMuncul .5s var(--d) both cubic-bezier(.3,1.5,.5,1),llnDenyut 1.6s 1s ease-in-out infinite}
+.lln-seterus::after{content:"";position:absolute;inset:4%;border-radius:50%;box-shadow:0 0 0 6px rgba(255,236,150,.7),0 0 34px 12px rgba(255,220,120,.75);z-index:-1}
+.lln-panah{position:absolute;left:50%;bottom:104%;transform:translateX(-50%);background:#ffcf4a;color:#5a3d00;font-weight:900;font-size:13px;padding:3px 10px;border-radius:999px;white-space:nowrap;animation:llnLompat 1s ease-in-out infinite;box-shadow:0 3px 0 #e2a92a}
+.lln-bintang+.lln-muka~.lln-panah{bottom:122%}
+.lln-batu.lln-tekan{animation:petaLantun .42s ease}
+.lln-batu:focus-visible{outline:4px solid #b79cf2;outline-offset:4px;border-radius:50%}
+@keyframes llnMuncul{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes llnDenyut{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.07)}}
+@keyframes llnLompat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
+@media (prefers-reduced-motion:reduce){.lln-batu,.lln-seterus,.lln-panah{animation:none}}
 /* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
 .pet-nuri{position:fixed;left:0;top:0;width:clamp(118px,21vmin,172px);aspect-ratio:1;z-index:90;pointer-events:none;will-change:transform;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .25s}
 .pet-nuri[hidden],.pet-togol[hidden]{display:none!important}
@@ -6024,6 +6053,11 @@ function renderQuran() {
   PETA_bina();
 }
 /* Peta: dua pulau terapung; tekan = lantun, pulau membesar & pudar, kemudian buka menu */
+/* Bunyi peta: loceng + suara Aisyah (ElevenLabs). Dimainkan dalam sentuhan (iPad) dan disimpan global supaya terus berbunyi selepas tukar skrin */
+function PETA_bunyi(n) {
+  if (!SUARA_ON) return;
+  try { if (window.PETA_audio) window.PETA_audio.pause(); const a = window.PETA_audio = new Audio("gambar/peta/bunyi/" + n + ".mp3"); a.volume = 1; const p = a.play(); if (p && p.catch) p.catch(() => { /* disekat */ }); } catch (e) { /* abaikan */ }
+}
 function PETA_bina() {
   document.body.classList.add("peta-on");
   /* Tetapan dari gambar/tetapan.js (Dashboard > Peta Al-Quran) */
@@ -6043,7 +6077,7 @@ function PETA_bina() {
   let pergi = false;
   const buka = (btn, fn) => btn.onclick = () => {
     if (pergi) return; pergi = true;
-    try { if (typeof tBunyi === "function") tBunyi("ting"); } catch (e) { /* abaikan */ }
+    PETA_bunyi(btn.classList.contains("peta-iqra") ? "masuk-iqra" : "masuk-quran");
     if (PET_kurang()) { fn(); return; }
     btn.classList.add("peta-tekan");
     setTimeout(() => btn.classList.add("peta-pergi"), 380);
@@ -6054,15 +6088,45 @@ function PETA_bina() {
 }
 function renderIqraMenu() {
   backMenu = renderIqraMenu; qariHenti(); setLux(false);
-  const st = loadStars();
-  renderMenu("Iqra'", [
-    ["q-huruf", QR_IKON.huruf, "Huruf Hijaiyah", "28 huruf Arab: tekan dan dengar", "", qrHuruf],
-    ["q-surah", SVGC(`<rect x="8" y="8" width="48" height="48" rx="16" fill="#8CC8FF"/><text x="27" y="44" font-family="Amiri Quran,Geeza Pro,serif" font-size="28" fill="#fff" text-anchor="middle">ب</text><path d="M40 44 L50 18 L54 20 L44 46 Z" fill="#FFD978"/><path d="M40 44 l-1 5 l4-3z" fill="#5B4670"/>`), "Tulis Huruf Hijaiyah", "Surih dan tulis sendiri dengan jari atau Apple Pencil", "", qrTulisMenu],
-    ["q-baris", QR_IKON.baris, "Nota Bacaan", "Baris, tanwin, tanda mati, sabdu, bacaan panjang, Allah & al", "", qrNotaMenu],
-    ["q-surah", QR_IKON.surah.replace("#7FDDBB", "#FFD978"), "Iqra' 1 - 6", "Belajar membaca Al-Quran langkah demi langkah", "", qrIqra],
-    ["q-kuiz", QR_IKON.kuiz, "Kuiz Huruf", "Dengar nama huruf, pilih yang betul", starText(st["quran-kuiz"] || 0), qrKuiz],
-    ["q-doa", QR_IKON.doa, "Doa Harian", DOA.length + " doa untuk amalan setiap hari", "", qrSenaraiDoa]
-  ], renderQuran);
+  renderMenu("Iqra'", [], renderQuran);
+  LLN_bina();
+}
+/* ===== Laluan level Pulau Iqra' (LLN_): batu loncatan berliku, bintang ikut kemajuan, batu seterusnya bercahaya ===== */
+function LLN_bina() {
+  document.body.classList.add("peta-on");
+  const st = loadStars(), kj = iqKemajuan();
+  const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
+  const pecahan = i => { const b = IQRA[i], d = (kj[i] || []).length; return b && b.muka.length ? d / b.muka.length : 0; };
+  const bIqra = i => { const f = pecahan(i); return f >= 1 ? 3 : f >= .5 ? 2 : f > 0 ? 1 : 0; };
+  const sambung = i => { const d = kj[i] || [], b = IQRA[i]; for (let m = 0; m < b.muka.length; m++) if (d.indexOf(m) < 0) return m; return 0; };
+  const LV = [
+    { n: "", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf },
+    { n: "", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu },
+    { n: "", ik: "بَ", nm: "Nota Bacaan", fn: qrNotaMenu }
+  ].concat(IQRA.map((b, i) => ({ n: String(i + 1), nm: b.nama, b: bIqra(i), iq: i, fn: () => iqBaca(i, sambung(i)) })))
+   .concat([{ n: "", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { n: "", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }]);
+  let seterus = LV.findIndex(x => x.iq != null && pecahan(x.iq) < 1); if (seterus < 0) seterus = LV.length - 2;
+  const w = document.createElement("div"); w.className = "lln";
+  const LANGKAH = 150, lebar = () => w.clientWidth || 600;
+  w.style.height = (LV.length * LANGKAH + 120) + "px";
+  const titik = LV.map((x, i) => ({ x: 50 + Math.sin(i * 1.05) * 27, y: 70 + i * LANGKAH }));
+  const svgPath = () => { const W = lebar(); let d = ""; titik.forEach((t, i) => { const X = t.x / 100 * W; if (!i) d += "M" + X + " " + t.y; else { const p = titik[i - 1], PX = p.x / 100 * W, my = (p.y + t.y) / 2; d += " C" + PX + " " + my + " " + X + " " + my + " " + X + " " + t.y; } }); return d; };
+  w.innerHTML = '<svg class="lln-jalan" aria-hidden="true"><path class="lln-jalan-bayang"/><path class="lln-jalan-garis"/></svg>'
+    + LV.map((x, i) => '<button class="lln-batu' + (i === seterus ? " lln-seterus" : "") + (x.b === 3 ? " lln-siap" : "") + '" style="left:' + titik[i].x + "%;top:" + titik[i].y + 'px;--d:' + (i * 0.06) + 's" data-i="' + i + '">'
+      + (x.b != null ? bintang(x.b) : "")
+      + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik">' + x.ik + "</b>") + "</span>"
+      + '<span class="lln-nama">' + x.nm + "</span>" + (i === seterus ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>").join("");
+  $("subjList").appendChild(w);
+  const lukis = () => { const d = svgPath(); w.querySelectorAll("svg path").forEach(p => p.setAttribute("d", d)); const s2 = w.querySelector("svg"); s2.setAttribute("width", lebar()); s2.setAttribute("height", w.style.height); };
+  lukis(); try { new ResizeObserver(lukis).observe(w); } catch (e) { /* abaikan */ }
+  let pergi = false;
+  w.onclick = e => {
+    const b = e.target.closest(".lln-batu"); if (!b || pergi) return; pergi = true;
+    const x = LV[+b.dataset.i]; PETA_bunyi("ting");
+    if (PET_kurang()) { x.fn(); return; }
+    b.classList.add("lln-tekan"); setTimeout(x.fn, 420);
+  };
+  setTimeout(() => { const s3 = w.querySelector(".lln-seterus"); if (s3 && s3.scrollIntoView) s3.scrollIntoView({ block: "center", behavior: PET_kurang() ? "auto" : "smooth" }); }, 350);
 }
 /* Mod mewah untuk seluruh bahagian Al-Quran */
 function setLux(on) { document.body.classList.toggle("lux-on", !!on && (typeof TETAP === "undefined" || TETAP.mewah)); }
