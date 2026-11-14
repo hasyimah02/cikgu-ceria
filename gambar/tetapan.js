@@ -67,7 +67,7 @@ window.TETAPAN = {
   "videoMasuk": {
     "aktif": true,
     "potret": "pet/nuri/masuk/pintu-quran.mp4",
-    "landskap": "pet/nuri/masuk/pintu-quran-landskap.mp4",
+    "landskap": "",
     "landskapMula": 0,
     "landskapTamat": 0,
     "mula": 0,
