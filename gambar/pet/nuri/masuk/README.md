@@ -33,3 +33,20 @@ Tiada `bingkai.png`: pintu dijana tanpa bingkai/dinding; dua daun rapat membentu
 4. 2.6-2.9 s: pudar ke Kelas Al-Quran.
 
 Hormati `prefers-reduced-motion`: langkau terus ke langkah 4. Jika bunyi app dimatikan, jangan mainkan mp3.
+
+## Video pintu (Google Flow) - ditambah 2026-11-14
+
+Menggantikan animasi CSS di atas sebagai pilihan utama; fail lama (nuri-kapal.png, pintu-kiri/kanan.png, awan-*.jpg, mp3) dikekalkan sebagai sandaran. Asal: `~/Downloads/pintu-quran-potret.mp4` (tidak diubah).
+
+| Fail | Saiz | Nota |
+|---|---|---|
+| pintu-quran.mp4 | 720x1280, 5.00 s, 24 fps, 758 KB | H.264 Main L3.1, yuv420p, CRF 26, +faststart (moov di depan). Audio AAC-LC 96k stereo 48 kHz. Tempoh penuh, tiada potongan. |
+| pintu-quran-awal.jpg | 720x1280, 85 KB | Bingkai pertama (t=0, pintu tertutup). Guna sebagai `poster` / lapisan peralihan dari kad. |
+| pintu-quran-akhir.jpg | 720x1280, 119 KB | Bingkai terakhir (Nuri dalam kapal, melambai). Guna semasa pudar ke Kelas Al-Quran. |
+
+Kandungan: 0-0.5 s pintu tertutup, 0.5-1.6 s pintu terbuka, 1.6-2.5 s awan, 2.5-5.0 s Nuri terbang ke kamera dan melambai.
+
+Audio: audio asal Flow DIKEKALKAN (keriut pintu ~0.3-0.9 s, loceng/chime lembut, satu bunyi nada tinggi seperti "meow"/siulan pada ~4.1-4.7 s; tiada pertuturan dikesan pada spektrogram). Dinaikkan +4.7 dB ke -16.1 LUFS (puncak -2.9 dB), fade-out 0.3 s di hujung. Disemak melalui spektrogram sahaja, belum didengar telinga manusia.
+Sandaran jika audio Flow tidak sesuai: `~/Pejabat/studio/cikgu-ceria/video-pintu/out/pintu-quran-sfx.mp4` (video sama; audio = masuk-pintu.mp3 pada 0.5 s + masuk-terbang.mp3 pada 1.8 s).
+
+Nota pemasangan: `<video playsinline muted?>` - autoplay dengan bunyi perlukan gerak isyarat pengguna (ketik kad sudah memadai); hormati tetapan bunyi app dengan `video.muted`. `prefers-reduced-motion`: tunjuk pintu-quran-akhir.jpg sahaja.
