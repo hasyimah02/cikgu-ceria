@@ -1265,18 +1265,18 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 #s-home.on .dpn-kad:nth-child(1){--i:0}#s-home.on .dpn-kad:nth-child(2){--i:1}#s-home.on .dpn-kad:nth-child(3){--i:2}#s-home.on .dpn-kad:nth-child(4){--i:3}
 @media (prefers-reduced-motion:reduce){#s-home.on,#s-subj.on,#s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:none!important}}
 /* ===== Video masuk Kelas Al-Quran (VPN_): kad pintu membesar -> video pintu penuh skrin -> Kelas Al-Quran. Aset Ravi: gambar/pet/nuri/masuk/pintu-quran.* ===== */
-.vpn-lapis{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;overflow:hidden;background:#e6c8f2;opacity:0;transition:opacity .5s ease-out .12s;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.vpn-lapis{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;overflow:hidden;background:#e6c8f2;opacity:0;transition:opacity var(--vpn-muncul,.5s) ease-out .12s;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
 .vpn-lapis[hidden]{display:none}
 .vpn-lapis.vpn-nampak{opacity:1}
-.vpn-lapis.vpn-pudar{opacity:0;transform:scale(1.08);filter:blur(8px);transition:opacity .8s ease-in-out,transform .8s ease-in-out,filter .8s ease-in-out;cursor:default}
+.vpn-lapis.vpn-pudar{opacity:0;transform:scale(var(--vpn-zum,1.08));filter:blur(var(--vpn-kabur,8px));transition:opacity var(--vpn-pudar,.8s) ease-in-out,transform var(--vpn-pudar,.8s) ease-in-out,filter var(--vpn-pudar,.8s) ease-in-out;cursor:default}
 .vpn-lapis img,.vpn-lapis video{position:absolute;left:0;top:0;width:100%;height:100%;display:block;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .vpn-lapis video{background:transparent}
 .vpn-latar{display:none!important}
 /* landskap/Mac: video potret penuh di tengah (contain); latar = bingkai pertama dikaburkan dan dibesarkan supaya tiada jalur hitam */
-@media (orientation:landscape){.vpn-lapis .vpn-latar{display:block!important;filter:blur(22px);transform:scale(1.2)}.vpn-lapis .vpn-awal,.vpn-lapis .vpn-video{object-fit:contain}}
+@media (orientation:landscape){.vpn-lapis.vpn-ada-landskap .vpn-latar,.vpn-lapis.vpn-ada-landskap .vpn-awal{display:none!important}.vpn-lapis.vpn-ada-landskap .vpn-video{object-fit:cover!important}.vpn-lapis .vpn-latar{display:block!important;filter:blur(22px);transform:scale(1.2)}.vpn-lapis .vpn-awal,.vpn-lapis .vpn-video{object-fit:contain}}
 /* kad pintu membesar ke tengah skrin (transform sahaja) sementara lapisan muncul */
 #s-home.on .dpn-kad.vpn-besar{position:relative;z-index:5;animation:none!important}
-.dpn-kad.vpn-besar img{transition:transform .55s cubic-bezier(.3,.1,.3,1),opacity .55s ease-in;will-change:transform}
+.dpn-kad.vpn-besar img{transition:transform var(--vpn-besar,.55s) cubic-bezier(.3,.1,.3,1);will-change:transform}
 /* semasa lapisan video aktif, skrin Kelas Al-Quran tidak memainkan pr-maju/stagger (satu peralihan sahaja); kelas dibuang oleh show() seterusnya */
 #s-subj.on.vpn-diam,#s-subj.on.vpn-diam .card{animation:none!important}
 /* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
@@ -1463,6 +1463,7 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 </div>
 <canvas id="fx" aria-hidden="true"></canvas>
 
+<script src="gambar/tetapan.js"></script>
 <script src="gambar/senarai.js"></script>
 <script src="gambar/suara.js"></script>
 <script src="gambar/modul-pra.js"></script>
@@ -8688,11 +8689,20 @@ function renderHome() {
   const DPN_kad = (gbr, nama, umur, fn) => {
     const b = document.createElement("button");
     b.className = "dpn-kad"; b.innerHTML = '<img alt=""><b></b><small></small>';
-    b.querySelector("img").src = "gambar/depan/" + gbr + ".png"; b.querySelector("b").textContent = nama; b.querySelector("small").textContent = umur;
+    b.querySelector("img").src = "gambar/" + (gbr.indexOf("/") >= 0 ? gbr : "depan/" + gbr + ".png"); b.querySelector("b").textContent = nama; b.querySelector("small").textContent = umur;
     b.onclick = fn; box.appendChild(b);
   };
-  DPN_kad("quran", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), e => VPN_masuk(e && e.currentTarget));
-  TAHAP.forEach(t => DPN_kad(t.id, tr(t.nama), tr(t.umur), () => renderSubj(t)));
+  /* Kad dari gambar/tetapan.js (Dashboard): susunan, gambar, teks, tampak; tiada tetapan = susunan asal */
+  const DPN_t = (window.TETAPAN && TETAPAN.depan && Array.isArray(TETAPAN.depan.kad) && TETAPAN.depan.kad.length) ? TETAPAN.depan.kad : null;
+  const DPN_tks = (o, a) => (o && typeof o === "object" && (o.bm || o.en || o.zh)) ? tr(L(o.bm || a.bm, o.en || a.en, o.zh || a.zh)) : tr(L(a.bm, a.en, a.zh));
+  const DPN_qn = { bm: "Kelas Al-Quran", en: "Al-Quran Class", zh: "古兰经课" }, DPN_qu = { bm: "Iqra', surah lazim & doa", en: "Iqra', short surahs & duas", zh: "伊克拉、短章和祈祷" };
+  const DPN_l = o => ({ bm: o.ms, en: o.en, zh: o.zh });
+  (DPN_t || [{ id: "quran" }].concat(TAHAP.map(t => ({ id: t.id })))).forEach(k => {
+    if (!k || k.tampak === false) return;
+    if (k.id === "quran") { DPN_kad(k.gambar || "quran", DPN_tks(k.nama, DPN_qn), DPN_tks(k.umur, DPN_qu), e => VPN_masuk(e && e.currentTarget)); return; }
+    const t = TAHAP.find(x => x.id === k.id); if (!t) return;
+    DPN_kad(k.gambar || t.id, DPN_tks(k.nama, DPN_l(t.nama)), DPN_tks(k.umur, DPN_l(t.umur)), () => renderSubj(t));
+  });
   show("s-home");
   VPN_pramuat();
 }
@@ -9042,22 +9052,34 @@ renderHome();
    Tekan kad -> kad membesar ke tengah (~300ms) sambil lapisan penuh skrin muncul (bingkai pertama) -> pintu-quran.mp4 (5s, bunyi asal)
    -> video tamat: Kelas Al-Quran sudah sedia di belakang, lapisan pudar (~400ms) -> salam Nuri (VPN_tahanPet).
    Sentuhan/kekunci semasa video = langkau. play() disekat/gagal atau prefers-reduced-motion = terus buka tanpa video. Aset: gambar/pet/nuri/masuk/ (Ravi). */
-const VPN_DIR = "gambar/pet/nuri/masuk/", VPN_T_BESAR = 300, VPN_T_SEDIA = 680, VPN_T_PUDAR = 800, VPN_T_AWAL = 0.55, VPN_T_TUNGGU = 1500, VPN_T_HAD = 8000;
+/* Nilai masa dari gambar/tetapan.js (Dashboard > Video Masuk); nombor tidak sah = nilai asal */
+const VPN_C = (() => { const t = (window.TETAPAN && TETAPAN.videoMasuk) || {}, n = (k, d, a, b) => { const v = +t[k]; return isFinite(v) && t[k] !== "" && t[k] !== null ? Math.min(b, Math.max(a, v)) : d; };
+  return { aktif: t.aktif !== false, potret: t.potret || "pet/nuri/masuk/pintu-quran.mp4", landskap: t.landskap || "", mula: n("mula", 0, 0, 60), tamat: n("tamat", 0, 0, 60), mulaL: n("landskapMula", 0, 0, 60), tamatL: n("landskapTamat", 0, 0, 60), vol: n("kelantangan", 1, 0, 1),
+    besar: n("kadMembesar", .55, .1, 3), muncul: n("videoMuncul", .5, .1, 3), awal: n("leburSebelumAkhir", .55, 0, 5), pudar: n("leburTempoh", .8, .1, 4), zum: n("leburZum", 1.08, 1, 2), kabur: n("leburKabur", 8, 0, 40) }; })();
+const VPN_DIR = "gambar/pet/nuri/masuk/", VPN_T_BESAR = 300, VPN_T_SEDIA = Math.round((0.12 + VPN_C.muncul) * 1000) + 60, VPN_T_PUDAR = Math.round(VPN_C.pudar * 1000), VPN_T_AWAL = VPN_C.awal, VPN_T_TUNGGU = 1500 + Math.round(VPN_C.muncul * 1000);
+let VPN_T_HAD = 8000;
+/* Video ikut arah skrin: landskap guna video 16:9 jika ada */
+function VPN_srcSemasa() { let l = false; try { l = !!VPN_C.landskap && window.matchMedia("(orientation:landscape)").matches; } catch (e) { /* abaikan */ } return "gambar/" + (l ? VPN_C.landskap : VPN_C.potret); }
+function VPN_potong() { const l = !!VPN_v && !!VPN_C.landskap && (VPN_v.getAttribute("src") || "") === "gambar/" + VPN_C.landskap; return l ? { m: VPN_C.mulaL, t: VPN_C.tamatL } : { m: VPN_C.mula, t: VPN_C.tamat }; }
+function VPN_akhir(v) { const d = v && v.duration; if (!d || !isFinite(d)) return 0; const p = VPN_potong(); return p.t > p.m && p.t < d ? p.t : d; }
 let VPN_el = null, VPN_v = null, VPN_aktif = false, VPN_sudahQuran = false, VPN_jam = [], VPN_mulaT = 0, VPN_no = 0, VPN_kad = null;
 /* Dipanggil oleh renderHome(): bina lapisan (tersembunyi) supaya video (preload auto) dan bingkai pertama sudah dimuat sebelum kad ditekan */
 function VPN_pramuat() {
   try {
-    if (VPN_el || PET_kurang()) return;
+    if (VPN_el || PET_kurang() || !VPN_C.aktif) return;
     const el = VPN_el = document.createElement("div"), awal = VPN_DIR + "pintu-quran-awal.jpg";
     el.className = "vpn-lapis"; el.hidden = true; el.setAttribute("aria-hidden", "true");
     el.innerHTML = '<img class="vpn-latar" alt="" draggable="false" src="' + awal + '"><img class="vpn-awal" alt="" draggable="false" src="' + awal + '">'
-      + '<video class="vpn-video" playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="' + awal + '" src="' + VPN_DIR + 'pintu-quran.mp4"></video>';
+      + '<video class="vpn-video" playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="' + awal + '" src="' + VPN_srcSemasa() + '"></video>';
+    el.style.setProperty("--vpn-muncul", VPN_C.muncul + "s"); el.style.setProperty("--vpn-pudar", VPN_C.pudar + "s"); el.style.setProperty("--vpn-zum", VPN_C.zum); el.style.setProperty("--vpn-kabur", VPN_C.kabur + "px");
+    document.documentElement.style.setProperty("--vpn-besar", VPN_C.besar + "s");
+    if (VPN_C.landskap) el.classList.add("vpn-ada-landskap");
     document.body.appendChild(el);
     const v = VPN_v = el.querySelector("video");
     v.muted = false; v.loop = false; v.controls = false;
     v.addEventListener("ended", () => VPN_tamat(false));
     /* mula melebur sebelum bingkai akhir supaya video larut terus ke Kelas Al-Quran (tiada henti kaku) */
-    v.addEventListener("timeupdate", () => { if (VPN_aktif && v.duration && v.duration - v.currentTime < VPN_T_AWAL) VPN_tamat(false); });
+    v.addEventListener("timeupdate", () => { if (VPN_aktif && VPN_akhir(v) && VPN_akhir(v) - v.currentTime < Math.max(VPN_T_AWAL, .08)) VPN_tamat(false); });
     v.addEventListener("error", () => VPN_gagal(VPN_no));
     el.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); if (performance.now() - VPN_mulaT > VPN_T_BESAR) VPN_tamat(true); /* sentuhan berganda pada kad tidak melangkau */ });
     el.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
@@ -9095,14 +9117,17 @@ function VPN_lepasKad() {
 function VPN_masuk(kad) {
   if (VPN_aktif) return;
   let boleh = false;
-  try { boleh = !PET_kurang() && !!VPN_el && !!VPN_v && !VPN_v.error && typeof VPN_v.play === "function"; } catch (e) { boleh = false; }
+  try { boleh = VPN_C.aktif && !PET_kurang() && !!VPN_el && !!VPN_v && !VPN_v.error && typeof VPN_v.play === "function"; } catch (e) { boleh = false; }
   if (!boleh) { renderQuran(); return; }
   const el = VPN_el, v = VPN_v, no = ++VPN_no;
   VPN_aktif = true; VPN_sudahQuran = false; VPN_mulaT = performance.now(); window.VPN_diam = true; window.VPN_tahanPet = true;
   let p = null;
   try {
     v.muted = !SUARA_ON; /* suara app dimatikan: video senyap */
-    if (v.currentTime > 0) v.currentTime = 0;
+    try { v.volume = VPN_C.vol; } catch (e) { /* iPad: volume tetap */ }
+    const src = VPN_srcSemasa(); if (v.getAttribute("src") !== src) { v.setAttribute("src", src); if (src !== "gambar/" + VPN_C.potret) v.removeAttribute("poster"); else v.setAttribute("poster", VPN_DIR + "pintu-quran-awal.jpg"); }
+    const VPN_m = VPN_potong().m; if (v.currentTime !== VPN_m) v.currentTime = VPN_m;
+    VPN_T_HAD = 3000 + Math.round(((VPN_akhir(v) || 5) - VPN_m) * 1000);
     p = v.play();
   } catch (e) { VPN_gagal(no); return; }
   if (p && p.catch) p.catch(() => VPN_gagal(no)); /* disekat/gagal dimuat: terus ke Kelas Al-Quran */
