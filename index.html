@@ -1515,6 +1515,31 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .kbn-kail{position:absolute;top:0;left:50%;width:3px;height:0;background:#3a2366;transition:height .5s ease-in;z-index:5}
 .kbn-kail i{position:absolute;bottom:-14px;left:-8px;width:16px;height:18px;border:3px solid #6d6d7a;border-top:0;border-radius:0 0 10px 10px}
 .kbn-kail.tarik{height:0!important;transition:height .9s ease-in}
+.kbn-tapak{position:relative;height:min(64vh,580px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#ffe9f4,#efe6ff 70%,#cdeec0 70%,#b4e3a3)}
+.kbn-menara{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;width:clamp(96px,22%,140px)}
+.kbn-menara::after{content:"";width:130%;height:16px;border-radius:8px;background:#9a7a5a}
+.kbn-puncak{order:-1;width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-bottom:36px solid #ffc93c;opacity:0;transform:scale(.3);transition:.5s cubic-bezier(.3,1.8,.5,1)}
+.kbn-menara.siap .kbn-puncak{opacity:1;transform:none}
+.kbn-blok{width:clamp(88px,20vw,132px);height:clamp(56px,9vh,78px);border:0;border-radius:12px;background:var(--w);box-shadow:inset 0 -7px 0 rgba(0,0,0,.12),0 3px 0 rgba(0,0,0,.08);display:grid;place-items:center;cursor:pointer}
+.kbn-blok b{font-size:clamp(40px,7vmin,60px);color:#fff;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1;text-shadow:0 2px 0 rgba(58,35,102,.6)}
+.kbn-blok.tetap{width:100%;height:clamp(44px,7vh,62px);cursor:default;margin-top:-2px}
+.kbn-blok.tetap b{font-size:clamp(30px,5vmin,46px)}
+.kbn-blok.hentak{animation:kbnHentak .35s ease}
+@keyframes kbnHentak{0%{transform:translateY(-14px)}60%{transform:translateY(3px) scaleY(.92)}100%{transform:none}}
+.kbn-blok.goyang{animation:kbnGoyang .4s ease}
+.kbn-pilih-blok{position:absolute;left:0;right:0;bottom:6%;display:flex;justify-content:center;gap:5%}
+.kbn-tapak .kbn-ulang{display:grid;place-items:center;z-index:6}.kbn-tapak .kbn-ulang svg{width:28px;height:28px}
+.kbn-bayang{position:relative;border-radius:28px;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#fff7fd,#efe6ff);padding:18px 16px 54px}
+.kbn-sasar-b{width:clamp(120px,26vmin,180px);aspect-ratio:1;margin:0 auto 16px;border-radius:28px;background:#fff;border:4px solid #c7a9ff;box-shadow:0 6px 0 #d9c6fb;display:grid;place-items:center}
+.kbn-sasar-b.masuk{animation:kbnMasuk .45s cubic-bezier(.3,1.6,.5,1)}
+.kbn-sasar-b b{font-size:clamp(70px,14vmin,120px);color:#a77bf3;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1}
+.kbn-bayang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto}
+.kbn-siluet{aspect-ratio:1;border:0;border-radius:22px;background:#e9e2f7;box-shadow:inset 0 4px 10px rgba(58,35,102,.12);display:grid;place-items:center;cursor:pointer}
+.kbn-siluet b{font-size:clamp(52px,10vmin,88px);color:#2a1c45;opacity:.82;font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700;line-height:1;filter:blur(.4px)}
+.kbn-siluet.terang{background:#effbf4;box-shadow:0 0 0 4px #4cc38a}
+.kbn-siluet.terang b{color:#a77bf3;opacity:1;filter:none;transition:color .3s}
+.kbn-siluet.goyang{animation:kbnGoyang .4s ease}
+.kbn-bayang .kbn-markah{top:auto;bottom:16px}
 .kbn-ingat{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.6vmin,14px)}
 .kbn-kad{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none;perspective:800px;cursor:pointer;animation:kbnMasuk .4s var(--d) both cubic-bezier(.3,1.5,.5,1)}
 .kbn-muka{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .5s cubic-bezier(.3,1.3,.5,1)}
@@ -6385,9 +6410,10 @@ function LLN_video(src) {
 const KBN_LEVEL = [
   { h: [0, 1, 2, 3], k: ["alif", "ba", "ta", "tsa"], kenal: "telur", m: "m-kenal", g: ["Tangkap", "Padan"] },
   { h: [4, 5, 6, 7], k: ["jim", "ha", "kho", "dal"], kenal: "hadiah", m: "m-hadiah", g: ["Lompat", "Ingat"] },
-  { h: [8, 9, 10, 11], k: ["dzal", "ro", "zai", "sin"], kenal: "telur", m: "m-kerang", g: ["Kereta", "Pancing"] }
+  { h: [8, 9, 10, 11], k: ["dzal", "ro", "zai", "sin"], kenal: "telur", m: "m-kerang", g: ["Kereta", "Pancing"] },
+  { h: [12, 13, 14, 15], k: ["syin", "shod", "dhod", "tho"], kenal: "hadiah", m: "m-bunga", g: ["Menara", "Bayang"] }
 ];
-const KBN_GAME = { Tangkap: () => kbnTangkap(), Padan: () => kbnPadan(), Lompat: () => kbnLompat(), Ingat: () => kbnIngat(), Kereta: () => kbnKereta(), Pancing: () => kbnPancing() };
+const KBN_GAME = { Tangkap: () => kbnTangkap(), Padan: () => kbnPadan(), Lompat: () => kbnLompat(), Ingat: () => kbnIngat(), Kereta: () => kbnKereta(), Pancing: () => kbnPancing(), Menara: () => kbnMenara(), Bayang: () => kbnBayang() };
 const kbnSeterus = langkah => langkah === 1 ? KBN_GAME[KBN.g[0]]() : langkah === 2 ? KBN_GAME[KBN.g[1]]() : kbnSurih();
 const KBN_DIR = "gambar/kebun/";
 let KBN = null;
@@ -6399,6 +6425,8 @@ const KBN_TEKS = {
   "k-jim": "Ini huruf jim! Satu titik dalam perutnya, macam cawan dengan guli.", "k-ha": "Ini huruf ha! Macam jim, tapi tiada titik.", "k-kho": "Ini huruf kho! Satu titik di atas, macam ceri atas cawan.", "k-dal": "Ini huruf dal! Macam papan gelongsor kecil.",
   "k-dzal": "Ini huruf dzal! Macam dal, dengan satu titik di atas.", "k-ro": "Ini huruf ro! Melengkung macam pisang.", "k-zai": "Ini huruf zai! Macam ro, dengan satu titik di atas.", "k-sin": "Ini huruf sin! Ada tiga gigi, macam ulat tiga bonggol.",
   "m-kerang": "Jom buka kerang! Cari mutiara huruf.", "m-kereta": "Keretapi sudah sampai! Masukkan huruf yang betul ke gerabak.", "m-pancing": "Jom memancing! Tekan ikan yang betul.", "m-kereta-pergi": "Choo choo! Keretapi pun berjalan!", "siap-3": "Yeay! Misi tiga berjaya!",
+  "k-syin": "Ini huruf syin! Macam sin, dengan tiga titik di atas.", "k-shod": "Ini huruf shod! Ada perut bulat, macam siput.", "k-dhod": "Ini huruf dhod! Macam shod, dengan satu titik di atas.", "k-tho": "Ini huruf tho! Perut bulat dan tiang tegak.",
+  "m-bunga": "Jom kenal huruf baharu!", "m-menara": "Jom bina menara! Pilih blok yang betul.", "m-bayang": "Cari bayang huruf ini!", "m-menara-siap": "Wah, menara kita sudah tinggi!", "siap-4": "Yeay! Misi empat berjaya!",
   "m-kenal": "Jom kenal huruf! Tekan telur.", "m-hadiah": "Jom buka hadiah! Tekan kotak.", "m-tangkap": "Dengar, kemudian pecahkan belon yang betul!", "m-padan": "Seret huruf kepada kawannya.", "m-lompat": "Bantu Nuri seberang sungai!", "m-ingat": "Cari pasangan huruf dan kawannya!", "m-surih": "Jom tulis huruf dengan jari!", "m-seberang": "Yeay! Nuri sudah sampai!",
   "betul-1": "Pandainya!", "betul-2": "Betul! Hebat!", "betul-3": "Yeay, betul!", "salah": "Hmm, cuba lagi ya.", "siap": "Yeay! Misi berjaya!", "siap-2": "Yeay! Misi berjaya! Adik bijak!"
 };
@@ -6645,6 +6673,56 @@ function kbnPancing() {
   };
   KBN_suara("m-pancing").then(() => setTimeout(pusingan, 200));
 }
+
+/* Bina Menara: pilih blok huruf yang disebut, blok terbang ke atas menara; 6 blok -> bintang di puncak */
+function kbnMenara() {
+  const b = kbnSkrin(KBN.g.indexOf("Menara") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  const WARNA = ["#ff8fbf", "#a77bf3", "#5fc9a8", "#ffb54a", "#6fb6ff", "#ff7a7a"];
+  b.innerHTML = '<div class="kbn-tapak"><div class="kbn-menara"><i class="kbn-puncak"></i></div><div class="kbn-pilih-blok"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const tp = b.querySelector(".kbn-tapak"), mn = tp.querySelector(".kbn-menara"), pl = tp.querySelector(".kbn-pilih-blok"), markah = tp.querySelector(".kbn-markah");
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
+    if (g >= giliran.length) { pl.innerHTML = ""; mn.classList.add("siap"); const r = mn.getBoundingClientRect(); try { tKonfeti(r.left + r.width / 2, r.top); } catch (e) { /* abaikan */ } return KBN_suara("m-menara-siap").then(() => setTimeout(() => kbnSeterus(2), 500)); }
+    const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
+    pl.innerHTML = pilih.map((i, n) => '<button class="kbn-blok" data-i="' + i + '" style="--w:' + WARNA[(g + n) % 6] + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
+    kunci = false; KBN_suara("c-" + KBN.k[sasar]);
+    tp.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
+    pl.onclick = e => {
+      const t = e.target.closest(".kbn-blok"); if (!t || kunci) return;
+      if (+t.dataset.i === sasar) {
+        kunci = true;
+        const baru = document.createElement("div"); baru.className = "kbn-blok tetap"; baru.style.setProperty("--w", t.style.getPropertyValue("--w")); baru.innerHTML = t.innerHTML; baru.style.visibility = "hidden";
+        mn.insertBefore(baru, mn.firstChild);
+        const a = t.getBoundingClientRect(), c = baru.getBoundingClientRect();
+        t.style.transition = "transform .55s cubic-bezier(.4,1.3,.6,1)"; t.style.transform = "translate(" + (c.left - a.left + (c.width - a.width) / 2) + "px," + (c.top - a.top) + "px)";
+        setTimeout(() => { baru.style.visibility = ""; t.style.visibility = "hidden"; baru.classList.add("hentak"); g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 150)); }, 560);
+      } else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
+    };
+  };
+  KBN_suara("m-menara").then(() => setTimeout(pusingan, 200));
+}
+/* Cari Bayang: huruf berwarna di atas, pilih bayang (siluet) yang sama — huruf hampir serupa jadi pilihan */
+function kbnBayang() {
+  const b = kbnSkrin(KBN.g.indexOf("Bayang") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  b.innerHTML = '<div class="kbn-bayang"><div class="kbn-sasar-b"><b class="qrar"></b></div><div class="kbn-bayang-grid"></div><div class="kbn-markah"></div></div>';
+  const by = b.querySelector(".kbn-bayang"), sb = by.querySelector(".kbn-sasar-b"), gr = by.querySelector(".kbn-bayang-grid"), markah = by.querySelector(".kbn-markah");
+  const pusingan = () => {
+    if (id !== KBN.id) return;
+    markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
+    if (g >= giliran.length) return setTimeout(() => kbnSeterus(3), 400);
+    const sasar = giliran[g], pilih = KBN_kocok([0, 1, 2, 3]);
+    sb.querySelector("b").textContent = HIJAIYAH[KBN.h[sasar]][0]; sb.classList.remove("masuk"); void sb.offsetWidth; sb.classList.add("masuk");
+    gr.innerHTML = pilih.map(i => '<button class="kbn-siluet" data-i="' + i + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
+    kunci = false; if (g === 0) KBN_suara("m-bayang");
+    gr.onclick = e => {
+      const t = e.target.closest(".kbn-siluet"); if (!t || kunci) return;
+      if (+t.dataset.i === sasar) { kunci = true; t.classList.add("terang"); g++; KBN_suara("k-" + KBN.k[sasar]).then(() => setTimeout(pusingan, 250)); }
+      else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah"); }
+    };
+  };
+  pusingan();
+}
 /* 4. Tulis: guna papan surih sedia ada untuk setiap huruf level, kemudian Siap */
 function kbnSurih() {
   const akhir = KBN.h[KBN.h.length - 1];
@@ -6679,7 +6757,7 @@ function LLN_bina() {
   const nota = p => { const x = QN_URUTAN[p]; return x === "b" ? { id: "nb", ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { id: "nt", ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { id: "n" + x, ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) }; };
   const iq = i => ({ id: "iq" + i, n: String(i + 1), nm: IQRA[i].nama, b: bIqra(i), siap: pecahan(i) >= 1, fn: () => iqBaca(i, sambung(i)) });
   const P = [
-    { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }, { id: "video", ik: "▶", video: 1, nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, fn: () => LLN_video("gambar/" + vid) }, { id: "tulis", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }] },
+    { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }, { id: "video", ik: "▶", video: 1, nm: vid ? "Video Huruf" : "Video (akan datang)", kunci: !vid, fn: () => LLN_video("gambar/" + vid) }, { id: "tulis", ik: "✎", nm: "Tulis Huruf", fn: qrTulisMenu }] },
     { nm: "Pulau Baris", g: "b", batu: [0, 1, 2, 3].map(nota) },
     { nm: "Pulau Dua Baris", g: "c", batu: [4, 5, 6, 7].map(nota) },
     { nm: "Pulau Tanda", g: "d", batu: [8, 9].map(nota) },
@@ -6693,7 +6771,7 @@ function LLN_bina() {
   P.some((pl, a) => pl.batu.some((x, b) => { if (!selesai(x)) { sp = a; sb = b; return true; } return false; }));
   let kini = LLN_baca(LLN_PULAU, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < P.length)) kini = 0;
   /* susun batu atas permukaan pulau (peratus lebar/tinggi gambar pulau) */
-  const SUSUN = { 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
+  const SUSUN = { 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
   const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
   const w = document.createElement("div"); w.className = "lln2";
   w.innerHTML = '<div class="lln2-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + P.map((_, a) => '<button data-p="' + a + '" aria-label="' + P[a].nm + '"></button>').join("") + "</span></div>"
