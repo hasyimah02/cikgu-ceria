@@ -1,0 +1,10 @@
+⚠️  Primary provider quota exhausted — switching to fallback: gemini / gemini-3.8-flash
+Google AI Studio rate-limited every one of 3 attempts — it looks temporarily unavailable. Wait a minute and send /retry, or switch models with /model. To avoid this in future, add a backup provider with `hermes fallback add`.
+
+Provider said: Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.
+Please retry in 17h4m22.581926282s.
+
+Your Google API key is on the free tier (a few hundred requests/day for Gemini Flash models). Hermes typically makes 3-10 API calls per user turn, so the free tier is exhausted in a handful of messages and cannot sustain an agent session. Enable billing on your Google Cloud project and regenerate the key in a billing-enabled project: https://aistudio.google.com/apikey
+
+session_id: local-c567aa5eb266587eeba750a19ab4f65fbed0d631674a7c8d8a3f4c8a747db58d

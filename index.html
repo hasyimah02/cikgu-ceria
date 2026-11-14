@@ -771,6 +771,16 @@ body.ios-on::after,body.ios-on #hiasan,body.ios-on #setBtn,body.ios-on #suaraBtn
 .thjseg button{border-radius:999px;padding:8px 20px;font-weight:700;background:none}.thjseg button.on{background:#8FD9A8;color:var(--on)}
 .thjh{position:relative}.thjh.siap{border-color:#FFD36E;box-shadow:0 5px 0 #FFD36E}.thjbintang{position:absolute;top:4px;right:6px;font-style:normal;color:#FFB800;font-size:16px}
 .thjatas{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.strk{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);border-radius:24px;padding:10px 12px;box-shadow:0 6px 0 var(--garis)}
+.strk svg{width:clamp(110px,18vmin,170px);height:auto;overflow:visible}
+.strk-glyph{fill:#e9defc}
+.strk-garis{fill:none;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.strk-no circle{stroke:#fff;stroke-width:1.4}
+.strk-no text{fill:#fff;font:900 7px system-ui,sans-serif;text-anchor:middle;pointer-events:none}
+.strk-titik{fill:#ff5c9a;transform-box:fill-box;transform-origin:center}
+.strk-titik.pop{animation:kbnMasuk .35s cubic-bezier(.3,1.8,.5,1)}
+.strk-pen{fill:#fff;stroke:#3a2366;stroke-width:1.4}
+.strk-main{border:0;border-radius:999px;background:#a77bf3;color:#fff;font-weight:800;font-size:14px;padding:5px 14px;box-shadow:0 3px 0 #7d55c9;cursor:pointer}
 .thjcontoh{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:24px;padding:0 22px 8px;box-shadow:0 6px 0 var(--garis)}
 .thjcontoh .qrar{font-size:64px;line-height:1.7;color:#3FA672}.thjcontoh small{font-weight:700;color:var(--muted)}
 .thjpapan{position:relative;align-self:center;width:min(100%,560px,62vh);aspect-ratio:1;background:var(--card);border-radius:32px;border:5px solid #8FD9A8;box-shadow:0 10px 0 var(--garis),0 16px 30px var(--sh);overflow:hidden}
@@ -1689,6 +1699,7 @@ body.lln2-sorokpet .pet-nuri,body.lln2-sorokpet .pet-gel{opacity:0!important;tra
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <script src="gambar/tetapan.js"></script>
+<script src="gambar/strok.js"></script>
 <script src="gambar/senarai.js"></script>
 <script src="gambar/suara.js"></script>
 <script src="gambar/modul-pra.js"></script>
@@ -7263,6 +7274,53 @@ function qrTulisMenu() {
   k.querySelectorAll(".thjh").forEach(b => b.onclick = () => qrTulis(+b.dataset.i));
   qrBual("Pilih huruf untuk ditulis");
 }
+
+/* ===== Cara menulis (STRK_): animasi urutan strok dari gambar/strok.js (dijana tools/strok/strok.swift daripada Amiri Quran) ===== */
+const STRK_WARNA = ["#ff5c9a", "#3a8dff", "#22b573", "#ff9f1a"];
+function STRK_d(p) {
+  const q = []; for (let i = 0; i < p.length; i += 2) q.push([p[i], p[i + 1]]);
+  if (q.length < 2) return "";
+  let d = "M" + q[0][0] + " " + q[0][1];
+  for (let i = 0; i < q.length - 1; i++) { const a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
+    d += " C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " + (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0] + " " + c[1]; }
+  return d;
+}
+function STRK_pasang(atas, huruf) {
+  const D = window.STROK && STROK[huruf];
+  if (!atas || !D || thjKhat !== "naskh") return;
+  const NS = "http://www.w3.org/2000/svg", w = document.createElement("div"); w.className = "strk";
+  w.innerHTML = '<svg viewBox="-4 -4 108 108" aria-label="Cara menulis"><path class="strk-glyph"/></svg><button class="strk-main" type="button">▶ ' + tr(L("Cara tulis", "How to write", "怎么写")) + "</button>";
+  atas.appendChild(w);
+  const svg = w.querySelector("svg"); svg.querySelector(".strk-glyph").setAttribute("d", D.glyph);
+  const el = [];
+  D.strok.forEach((p, n) => {
+    const g = document.createElementNS(NS, "path"); g.setAttribute("d", STRK_d(p)); g.setAttribute("class", "strk-garis"); g.style.stroke = STRK_WARNA[n % 4]; svg.appendChild(g);
+    const b = document.createElementNS(NS, "g"); b.setAttribute("class", "strk-no"); b.innerHTML = '<circle r="5.2"/><text dy="1.9">' + (n + 1) + "</text>"; b.setAttribute("transform", "translate(" + p[0] + " " + p[1] + ")"); b.style.fill = STRK_WARNA[n % 4]; svg.appendChild(b);
+    el.push({ g, b });
+  });
+  const titik = D.titik.map((t, n) => { const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", t[0]); c.setAttribute("cy", t[1]); c.setAttribute("r", Math.max(2.6, D.jt || 3)); c.setAttribute("class", "strk-titik"); svg.appendChild(c); return c; });
+  const pen = document.createElementNS(NS, "circle"); pen.setAttribute("r", "3.6"); pen.setAttribute("class", "strk-pen"); svg.appendChild(pen);
+  let no = 0;
+  const main = () => {
+    const id = ++no, kurang = PET_kurang();
+    el.forEach(({ g, b }) => { const L2 = g.getTotalLength(); g.style.strokeDasharray = L2; g.style.strokeDashoffset = L2; b.style.opacity = 0; });
+    titik.forEach(c => c.style.opacity = 0); pen.style.opacity = 0;
+    let p = Promise.resolve();
+    el.forEach(({ g, b }) => { p = p.then(() => new Promise(ok => {
+      if (id !== no) return ok();
+      const L2 = g.getTotalLength(), T = kurang ? 1 : Math.max(700, L2 * 16), t0 = performance.now();
+      b.style.opacity = 1; pen.style.opacity = 1;
+      const f = t => { if (id !== no) return ok(); const u = Math.min(1, (t - t0) / T), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        g.style.strokeDashoffset = L2 * (1 - e); const q = g.getPointAtLength(L2 * e); pen.setAttribute("cx", q.x); pen.setAttribute("cy", q.y);
+        if (u < 1) requestAnimationFrame(f); else setTimeout(ok, 250); };
+      requestAnimationFrame(f);
+    })); });
+    titik.forEach(c => { p = p.then(() => new Promise(ok => { if (id !== no) return ok(); pen.style.opacity = 0; c.style.opacity = 1; c.classList.remove("pop"); void c.getBoundingClientRect(); c.classList.add("pop"); setTimeout(ok, 380); })); });
+    p.then(() => { if (id === no) pen.style.opacity = 0; });
+  };
+  w.querySelector(".strk-main").onclick = main;
+  setTimeout(main, 500);
+}
 function qrTulis(i) {
   const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
   qrSkrin((sendiri ? "Tulis Sendiri: " : window.KBN_tulis ? "Tulis: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
@@ -7270,6 +7328,7 @@ function qrTulis(i) {
   k.innerHTML = `<div class="thjatas"><div class="thjcontoh thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
     <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
   const papan = k.querySelector(".thjpapan"), cp = k.querySelector(".thjpanduan"), ci = k.querySelector(".thjink"), st = k.querySelector(".thjstatus");
+  STRK_pasang(k.querySelector(".thjatas"), h[0]);
   let garis = [], kini = null, siap = false, mask = null, saiz = null;
   const FON = THJ_KHAT[thjKhat][1];
   function sedia() {
