@@ -8691,7 +8691,7 @@ function renderHome() {
     b.querySelector("img").src = "gambar/depan/" + gbr + ".png"; b.querySelector("b").textContent = nama; b.querySelector("small").textContent = umur;
     b.onclick = fn; box.appendChild(b);
   };
-  DPN_kad("quran-pintu", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), e => VPN_masuk(e && e.currentTarget));
+  DPN_kad("quran", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), e => VPN_masuk(e && e.currentTarget));
   TAHAP.forEach(t => DPN_kad(t.id, tr(t.nama), tr(t.umur), () => renderSubj(t)));
   show("s-home");
   VPN_pramuat();
