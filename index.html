@@ -7517,8 +7517,15 @@ function qrTulis(i) {
   ci.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
   qrButang("padam", "Padam", "koral", () => { garis = []; siap = false; st.textContent = ""; st.className = "thjstatus"; lukis(); });
   qrButang("play", "Semak", "ungu", () => { if (siap) return; if (semak()) berjaya(); else { st.textContent = garis.length && mask.komp.filter(n => n >= 3).length > 1 ? "Jangan lupa titik huruf ini" : "Cuba lagi, ikut bentuk huruf"; st.className = "thjstatus no"; sndBad(); } });
-  if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
-  if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
+  if (window.KBN_tulis && KBN && KBN.h.indexOf(i) >= 0) {
+    /* dalam Misi Huruf: hanya huruf misi itu; selepas huruf terakhir -> Misi berjaya */
+    const p = KBN.h.indexOf(i);
+    if (p > 0) qrButang("back", "Sebelum", "biru", () => { qrTulis(KBN.h[p - 1]); kbnKepalaTulis(); });
+    qrButang("next", "Seterusnya", "hijau", () => { if (p < KBN.h.length - 1) { qrTulis(KBN.h[p + 1]); kbnKepalaTulis(); } else { window.KBN_tulis = null; kbnSiap(); } });
+  } else {
+    if (i > 0) qrButang("back", "Sebelum", "biru", () => qrTulis(i - 1));
+    if (i < 27) qrButang("next", "Seterusnya", "hijau", () => qrTulis(i + 1));
+  }
   qrBual(sendiri ? "Tulis huruf " + h[1] + " tanpa panduan" : "Tulis huruf " + h[1]);
   (document.fonts && document.fonts.load ? Promise.all([document.fonts.load("100px \"Amiri Quran\""), document.fonts.load("100px \"Aref Ruqaa\"")]) : Promise.resolve()).then(() => setTimeout(sedia, 30));
 }
