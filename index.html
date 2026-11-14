@@ -6237,7 +6237,7 @@ function KBN_suara(n) {
 }
 const KBN_kocok = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function kbnKepala(langkah) {
-  const N = ["Kenal", "Tangkap", "Padan", "Surih"];
+  const N = ["Kenal", "Tangkap", "Padan", "Tulis"];
   return '<div class="kbn-langkah">' + N.map((n, i) => '<span class="' + (i < langkah ? "siap" : i === langkah ? "kini" : "") + '"><b>' + (i < langkah ? "✓" : i + 1) + "</b>" + n + "</span>").join('<i></i>') + "</div>";
 }
 function kbnMula(l) {
@@ -6307,7 +6307,7 @@ function kbnPadan() {
     j.addEventListener("pointerup", lepas); j.addEventListener("pointercancel", lepas);
   });
 }
-/* 4. Surih: guna papan surih sedia ada untuk setiap huruf level, kemudian Siap */
+/* 4. Tulis: guna papan surih sedia ada untuk setiap huruf level, kemudian Siap */
 function kbnSurih() {
   const akhir = KBN.h[KBN.h.length - 1];
   thjMod = "surih"; thjBalik = () => { window.KBN_tulis = null; renderIqraMenu(); };
@@ -7163,7 +7163,7 @@ function qrTulisMenu() {
 }
 function qrTulis(i) {
   const h = HIJAIYAH[i], sendiri = thjMod === "sendiri";
-  qrSkrin((sendiri ? "Tulis Sendiri: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
+  qrSkrin((sendiri ? "Tulis Sendiri: " : window.KBN_tulis ? "Tulis: " : "Surih: ") + h[1], thjBalik || qrTulisMenu);
   const k = $("qrKawasan");
   k.innerHTML = `<div class="thjatas"><div class="thjcontoh thjkhat" style="--thjfon:${THJ_KHAT[thjKhat][1]}"><span class="qrar">${h[0]}</span><small>${h[1]}</small></div><p class="qnterang">${sendiri ? "Tulis huruf <b>" + h[1] + "</b> di dalam kotak. Tulis besar-besar." : "Surih huruf <b>" + h[1] + "</b> mengikut titik."}</p></div>
     <div class="thjpapan${sendiri ? " sendiri" : ""}"><canvas class="thjpanduan"></canvas><canvas class="thjink"></canvas><div class="thjstatus"></div></div>`;
