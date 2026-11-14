@@ -430,6 +430,29 @@ button{font:inherit;color:var(--text);cursor:pointer;border:0;touch-action:manip
 .qrnota .qrar{font-size:34px;color:#3FA672}
 .qrbaris{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;direction:rtl}
 .qrbr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:color-mix(in srgb,var(--card) 60%,transparent);border-radius:24px;padding:8px}
+/* ===== Iqra' beranimasi (sesi belajar, tiada permainan) ===== */
+#qrKawasan.iq-anim{position:relative}
+.iq-latar{position:absolute;inset:-20px 0 0;pointer-events:none;overflow:hidden;z-index:0}
+.iq-latar i{position:absolute;width:14px;height:14px;background:#ffd36e;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:.0;animation:iqBintang 4.5s ease-in-out infinite}
+.iq-latar i:nth-child(3n){background:#ff9ec4;width:10px;height:10px}.iq-latar i:nth-child(3n+1){background:#a7d8ff}
+@keyframes iqBintang{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:.85;transform:scale(1) rotate(40deg)}}
+.iq-buku{position:relative;z-index:1;background:linear-gradient(#fffdf6,#fff6e6);border-radius:26px;border:4px solid #fff;box-shadow:0 6px 0 #e9d9b8,0 16px 30px rgba(90,60,140,.15);padding:14px;transform-origin:left center}
+.iq-buku::before{content:"";position:absolute;top:10px;bottom:10px;left:50%;width:2px;background:rgba(160,120,60,.12)}
+.iq-maju .iq-buku{animation:iqSelak .55s cubic-bezier(.3,.8,.4,1)}
+.iq-undur .iq-buku{animation:iqSelakB .55s cubic-bezier(.3,.8,.4,1)}
+.iq-baru .iq-buku{animation:kbnMasuk .45s cubic-bezier(.3,1.5,.5,1)}
+@keyframes iqSelak{0%{transform:perspective(1200px) rotateY(-35deg) translateX(-30px);opacity:.2}100%{transform:none;opacity:1}}
+@keyframes iqSelakB{0%{transform:perspective(1200px) rotateY(35deg) translateX(30px);opacity:.2}100%{transform:none;opacity:1}}
+.iq-anim .iqw{animation:iqMuncul .45s var(--d) both cubic-bezier(.3,1.5,.5,1);background:#fff;border-radius:18px;box-shadow:0 4px 0 #efe2c4;transition:transform .2s,box-shadow .2s}
+@keyframes iqMuncul{from{opacity:0;transform:translateY(14px) scale(.85)}to{opacity:1;transform:none}}
+.iq-anim .iqw.on{transform:translateY(-6px) scale(1.06);box-shadow:0 0 0 4px #ffd36e,0 10px 18px rgba(255,180,0,.3);background:#fffbe8}
+.iq-anim .iqw .qrar{color:#3a2366}.iq-anim .iqw small{color:#7a55c7}
+.iq-anim .iqw{border-color:#f0e2c2}
+.iq-anim .iqw.on .qrar{color:#e0457f}
+.iq-anim .iqw.on::after{content:"";position:absolute;inset:-6px;border-radius:22px;border:3px solid #ffd36e;animation:iqRiak 1s ease-out infinite;pointer-events:none}
+.iq-anim .iqw{position:relative}
+@keyframes iqRiak{from{opacity:1;transform:scale(.95)}to{opacity:0;transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.iq-anim *{animation:none!important}}
 .iqgrid{direction:rtl;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .iqw{padding:10px 6px;min-width:0}.iqw .qrar{font-size:clamp(26px,5vw,46px);line-height:2}.iqw small{direction:ltr;font-size:clamp(12px,2.4vw,16px);overflow-wrap:anywhere;line-height:1.25}
 .iqsurah{text-align:center;font-weight:700;font-size:22px;color:#3FA672}
@@ -1415,6 +1438,10 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .brs-ikon{flex:none;width:64px;height:64px;border-radius:18px;background:#f4ecff;position:relative}
 .brs-w-a .brs-ikon::before{content:"";position:absolute;left:12px;right:12px;top:14px;height:16px;background:#ff8fbf;border-radius:10px 10px 4px 4px;box-shadow:0 8px 0 -4px #e0679c}
 .brs-w-i .brs-ikon::before{content:"";position:absolute;left:10px;bottom:14px;width:20px;height:12px;background:#6fb6ff;border-radius:8px 12px 4px 4px;box-shadow:24px 0 0 #6fb6ff}
+.brs-w-an .brs-ikon::before,.brs-w-in .brs-ikon::before,.brs-w-un .brs-ikon::before{content:"";position:absolute;inset:10px;border-radius:12px}
+.brs-w-an .brs-ikon::before{background:linear-gradient(#ff8fbf 0 30%,transparent 30% 45%,#ff8fbf 45% 75%,transparent 75%);inset:10px 12px 22px}
+.brs-w-in .brs-ikon::before{background:linear-gradient(transparent 25%,#6fb6ff 25% 55%,transparent 55% 70%,#6fb6ff 70%);inset:22px 10px 10px}
+.brs-w-un .brs-ikon::before{border:6px solid #ffb54a;border-radius:50% 50% 50% 0;inset:12px 26px 22px 10px;box-shadow:16px 0 0 -6px #fff,18px 0 0 0 #ffb54a}
 .brs-w-u .brs-ikon::before{content:"";position:absolute;left:20px;top:12px;width:24px;height:24px;border:6px solid #ffb54a;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
 .brs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px}
 .brs-suku{border:0;border-radius:18px;background:#fff;box-shadow:0 4px 0 #d9c6fb;padding:8px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
@@ -1429,6 +1456,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .brs .qrar,.brs-pentas .qrar{font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700}
 .brs-lencana{display:inline-block;margin:0 auto 14px;padding:10px 22px;border-radius:999px;background:linear-gradient(#ffd96b,#ffb800);color:#5a3d00;font-weight:900;font-size:22px;box-shadow:0 5px 0 #d99a00;animation:kbnMasuk .5s cubic-bezier(.3,1.8,.5,1)}
 .goyang{animation:kbnGoyang .4s ease}
+.brs-ik-dua{box-shadow:6px -6px 0 -2px rgba(255,255,255,.9)}
 /* Pulau Baris: Topi, Hilang, Lif, Gelongsor */
 .brs-ikon.brs-ik-a,.brs-ikon.brs-ik-i,.brs-ikon.brs-ik-u{width:52px;height:52px;border-radius:14px;background:#f4ecff;position:relative;display:block;flex:none}
 .brs-ik-a::before{content:"";position:absolute;left:10px;right:10px;top:12px;height:13px;background:#ff8fbf;border-radius:9px 9px 3px 3px;box-shadow:0 7px 0 -3px #e0679c}
@@ -6315,7 +6343,7 @@ function qrButang(ik, label, kelas, fn) {
 }
 function qrSkrin(tajuk, back) {
   qrId++; stopSpeech(); document.querySelectorAll(".kbn-teman").forEach(e => e.remove());
-  $("qrTajuk").textContent = tajuk; $("qrKawasan").innerHTML = ""; $("qrBtns").innerHTML = "";
+  $("qrTajuk").textContent = tajuk; $("qrKawasan").innerHTML = ""; $("qrKawasan").classList.remove("iq-anim"); $("qrBtns").innerHTML = "";
   $("qrBack").onclick = () => { qrId++; stopSpeech(); qariHenti(); back(); };
   show("s-quran");
 }
@@ -6596,10 +6624,13 @@ function qrIqra() {
 }
 function iqBaca(bi, mi) {
   const b = IQRA[bi], m = b.muka[mi];
+  const kw0 = $("qrKawasan"), arah0 = (window.IQ_akhir && IQ_akhir.bi === bi) ? (mi >= IQ_akhir.mi ? "maju" : "undur") : "baru"; window.IQ_akhir = { bi, mi };
+  if (kw0) { kw0.classList.remove("iq-maju", "iq-undur", "iq-baru"); void kw0.offsetWidth; kw0.classList.add("iq-" + arah0); }
   qrSkrin(b.nama + " · Muka " + (mi + 1) + " / " + b.muka.length, qrIqra);
   const k = $("qrKawasan");
   if (m.ayat) return iqBacaAyat(b, bi, mi, m, k);
-  k.innerHTML = `<div class="iqgrid">${m.baris.map(w => `<button class="qrh iqw"><span class="qrar"></span><small></small></button>`).join("")}</div><p class="qrpesan">Tekan bacaan untuk dengar suku kata perlahan-lahan. Baca bersama guru untuk tajwid yang betul.</p>`;
+  k.classList.add("iq-anim");
+  k.innerHTML = `<div class="iq-latar" aria-hidden="true">${Array.from({ length: 10 }, (_, n) => `<i style="left:${(n * 37 + 7) % 96}%;top:${(n * 53 + 11) % 90}%;animation-delay:${-n * .7}s"></i>`).join("")}</div><div class="iq-buku"><div class="iqgrid">${m.baris.map((w, n) => `<button class="qrh iqw" style="--d:${(n * .06).toFixed(2)}s"><span class="qrar"></span><small></small></button>`).join("")}</div></div><p class="qrpesan">Tekan bacaan untuk dengar suku kata perlahan-lahan. Baca bersama guru untuk tajwid yang betul.</p>`;
   const el = [...k.querySelectorAll(".iqw")];
   el.forEach((x, i) => { x.querySelector(".qrar").textContent = m.baris[i].ar; x.querySelector("small").textContent = m.baris[i].rm.join("-"); x.onclick = () => { const id = ++qrId; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); iqSebut(m.baris[i], id); }; });
   qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((x, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); x.classList.add("on"); x.scrollIntoView({ block: "nearest", behavior: "smooth" }); return iqSebut(m.baris[i], id).then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
@@ -7361,7 +7392,7 @@ function kbnSiap() {
 
 
 /* ===== Animasi berangkai (RNT_): 28 huruf alif..ya bergerak berangkai, menyala satu demi satu (macam karaoke). Lagu: tetapan.laluan.lagu[kunci] (Dashboard), tempo: tetapan.laluan.tempo (ms) ===== */
-const RNT_TEMA = { a: "keretapi", i: "ulat", u: "ikan", aiu: "perahu", taman: "bunga", an: "lebah", in: "awan", un: "layang" };
+const RNT_TEMA = { a: "keretapi", i: "ulat", u: "ikan", aiu: "perahu", taman: "bunga", an: "lebah", in: "awan", un: "layang", aninun: "perahu" };
 function RNT_bina(host, item, tema, kunci) {
   const L = (window.TETAPAN && TETAPAN.laluan) || {}, lagu = (L.lagu || {})[kunci] || "", tempo = +L.tempo || 950;
   const w = document.createElement("div"); w.className = "rnt rnt-" + tema;
@@ -7392,26 +7423,31 @@ function RNT_bina(host, item, tema, kunci) {
    q = { sasar: suku, pilihan: [suku...] } ; suku = { h: indeks huruf, v: "a"|"i"|"u", ar, lat }
    Permainan memanggil pilih(suku, elemen) bila anak memilih; enjin menyemak, sebut, markah & teruskan. */
 const BRS_HURUF = [1, 2, 3, 4, 7, 9, 11, 21, 22, 23, 24, 26];
-const BRS_WATAK = { a: ["topi", "Baris atas macam topi di atas kepala. Bunyinya a."], i: ["kasut", "Baris bawah macam kasut di bawah kaki. Bunyinya i."], u: ["reben", "Baris depan macam reben kecil di atas. Bunyinya u."] };
+const BRS_WATAK = { a: ["topi", "Baris atas macam topi di atas kepala. Bunyinya a."], i: ["kasut", "Baris bawah macam kasut di bawah kaki. Bunyinya i."], u: ["reben", "Baris depan macam reben kecil di atas. Bunyinya u."],
+  an: ["dua topi", "Dua baris atas macam dua topi. Bunyinya an."], in: ["dua kasut", "Dua baris bawah macam dua kasut. Bunyinya in."], un: ["dua reben", "Dua baris depan macam dua reben. Bunyinya un."] };
 const BRS_LEVEL = [
   { nm: "Baris Atas", ik: "بَ", v: ["a"], g: ["Topi", "Hilang"] },
   { nm: "Baris Bawah", ik: "بِ", v: ["i"], g: ["Lif", "Gelongsor"] },
   { nm: "Baris Depan", ik: "بُ", v: ["u"], g: ["Aiskrim", "Bola"] },
   { nm: "Jadual Baris", ik: "بَ بِ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Mesin", "Kilat"] },
-  { nm: "Taman Bunyi", ik: "بَ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Kebun", "Kawan", "Cabaran", "Lumba", "Rakam"] }
+  { nm: "Taman Bunyi", ik: "بَ بُ", kecil: 1, v: ["a", "i", "u"], g: ["Kebun", "Kawan", "Cabaran", "Lumba", "Rakam"] },
+  { nm: "Dua Baris Atas", ik: "بً", v: ["an"], vset: ["an", "in", "un"], g: ["Hilang", "Kebun"] },
+  { nm: "Dua Baris Bawah", ik: "بٍ", v: ["in"], vset: ["an", "in", "un"], g: ["Lif", "Bola"] },
+  { nm: "Dua Baris Depan", ik: "بٌ", v: ["un"], vset: ["an", "in", "un"], g: ["Aiskrim", "Cabaran"] },
+  { nm: "Jadual Dua Baris", ik: "بً بٍ بٌ", kecil: 1, v: ["an", "in", "un"], vset: ["an", "in", "un"], g: ["Mesin", "Kilat", "Lumba"] }
 ];
 const BRS_GAME = {};
 /* BRS_GAME_TAMBAH */
 let BRS = null;
 function BRS_bintang(l) { try { return +(JSON.parse(localStorage.getItem("baris.bintang")) || {})[l] || 0; } catch (e) { return 0; } }
 function BRS_simpan(l, n) { try { const d = JSON.parse(localStorage.getItem("baris.bintang")) || {}; d[l] = Math.max(+d[l] || 0, n); localStorage.setItem("baris.bintang", JSON.stringify(d)); } catch (e) { /* abaikan */ } }
-function BRS_suku(h, v) { const x = iqSuku(h, v); return { h, v, ar: x[0], lat: qrBersih(x[1]) }; }
+function BRS_suku(h, v) { const x = h === 0 && v === "an" ? ["أً", "an"] : iqSuku(h, v); return { h, v, ar: x[0], lat: qrBersih(x[1]) }; }
 function BRS_sebut(sk) { return speak("~" + sk.lat, "ms"); }
 /* soalan: ikut vokal level; jenis "huruf" (vokal tetap, pilih huruf) atau "vokal" (huruf tetap, pilih baris) */
 function BRS_soalan(jenis) {
   const V = BRS.v, h = BRS_HURUF[Math.floor(Math.random() * BRS_HURUF.length)], v = V[Math.floor(Math.random() * V.length)], sasar = BRS_suku(h, v);
   let pilihan;
-  if (jenis === "vokal") pilihan = ["a", "i", "u"].map(x => BRS_suku(h, x));
+  if (jenis === "vokal") pilihan = (BRS.vset || ["a", "i", "u"]).map(x => BRS_suku(h, x));
   else pilihan = [sasar].concat(KBN_kocok(BRS_HURUF.filter(x => x !== h)).slice(0, 2).map(x => BRS_suku(x, V.length > 1 ? V[Math.floor(Math.random() * V.length)] : v)));
   return { sasar, pilihan: KBN_kocok(pilihan) };
 }
@@ -7475,7 +7511,7 @@ function brsSiap() {
 /* BRS_PERMAINAN_MULA (sub-ejen: tambah fungsi brsG_* & daftar BRS_GAME di bawah penanda ini) */
 
 const brsTanda = (kw, q) => { kw.dataset.sh = q.sasar.h; kw.dataset.sv = q.sasar.v; };
-const brsIkonBaris = v => '<span class="brs-ikon brs-ik-' + v + '"></span>';
+const brsIkonBaris = v => '<span class="brs-ikon brs-ik-' + v[0] + (v.length > 1 ? " brs-ik-dua" : "") + '"></span>';
 /* 1. Topi: 3 huruf tanpa baris berdiri; topi terapung; pilih huruf disebut -> topi jatuh, huruf jadi berbaris */
 function brsG_Topi(q, kw, pilih) {
   brsTanda(kw, q);
@@ -7509,10 +7545,10 @@ function brsG_Hilang(q, kw, pilih) {
 /* 3. Lif: 3 tingkat (atas=a, tengah=u, bawah=i); huruf dalam lif; tekan tingkat -> lif bergerak, pintu buka */
 function brsG_Lif(q, kw, pilih) {
   brsTanda(kw, q);
-  const TK = ["a", "u", "i"], bySk = v => q.pilihan.find(x => x.v === v);
+  const TK = ["a", "u", "i"], bySk = v => q.pilihan.find(x => x.v[0] === v);
   kw.innerHTML = '<div class="brs-bangunan"><div class="brs-aci"><div class="brs-kotaklif buka" style="top:66.66%"><div class="brs-lif-dalam"><b class="qrar">' + HIJAIYAH[q.sasar.h][0] + '</b></div><i class="brs-pintu kiri"></i><i class="brs-pintu kanan"></i></div></div><div class="brs-tingkat-kol">' + TK.map(v => { const sk = bySk(v); return '<button class="brs-tingkat" data-h="' + sk.h + '" data-v="' + sk.v + '">' + brsIkonBaris(v) + '<b class="qrar">' + sk.ar + "</b></button>"; }).join("") + "</div></div>";
   const lif = kw.querySelector(".brs-kotaklif");
-  kw.querySelectorAll(".brs-tingkat").forEach(el => el.onclick = () => pilih(bySk(el.dataset.v), el));
+  kw.querySelectorAll(".brs-tingkat").forEach(el => el.onclick = () => pilih(q.pilihan.find(x => x.v === el.dataset.v), el));
   return {
     betul: el => new Promise(ok => {
       el.classList.add("nyala"); lif.classList.remove("buka");
@@ -7690,7 +7726,7 @@ BRS_GAME.Mesin = {
   jenis: "vokal", jumlah: 4,
   bina(q, kw, pilih) {
     kw.dataset.h = q.sasar.h; kw.dataset.v = q.sasar.v;
-    const urut = ["a", "i", "u"].map(v => q.pilihan.find(x => x.v === v));
+    const urut = ["a", "i", "u"].map(v => q.pilihan.find(x => x.v[0] === v));
     kw.innerHTML = '<div class="brs-mesin-w"><div class="brs-mesinb"><div class="brs-corong"><b class="qrar">' + HIJAIYAH[q.sasar.h][0] + '</b></div><div class="brs-badan"><span class="brs-gear g1"></span><span class="brs-gear g2"></span><span class="brs-lampu"></span><span class="brs-mata-m"></span></div><div class="brs-saluran"></div><div class="brs-hasil"></div></div><div class="brs-tuil-baris">'
       + urut.map(sk => '<button class="brs-tuil brs-t-' + sk.v + '" data-h="' + sk.h + '" data-v="' + sk.v + '"><i></i><b class="qrar">' + sk.ar + '</b></button>').join("") + "</div></div>";
     const ms = kw.querySelector(".brs-mesinb"), hs = kw.querySelector(".brs-hasil");
@@ -7743,7 +7779,7 @@ function LLN_bina() {
   const iq = i => ({ id: "iq" + i, n: String(i + 1), nm: IQRA[i].nama, b: bIqra(i), siap: pecahan(i) >= 1, fn: () => iqBaca(i, sambung(i)) });
   const P = [
     { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "kebun5", ik: "ع غ", kecil: 1, nm: "Misi Huruf 5", b: KBN_bintang(4), siap: KBN_bintang(4) > 0, fn: () => kbnMula(4) }, { id: "kebun6", ik: "ق ك", kecil: 1, nm: "Misi Huruf 6", b: KBN_bintang(5), siap: KBN_bintang(5) > 0, fn: () => kbnMula(5) }, { id: "kebun7", ik: "ن و", kecil: 1, nm: "Misi Huruf 7", b: KBN_bintang(6), siap: KBN_bintang(6) > 0, fn: () => kbnMula(6) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }] },
-    { nm: "Pulau Baris", g: "b", batu: BRS_LEVEL.map((x, n) => ({ id: "brs" + n, ik: x.ik, kecil: x.kecil, nm: x.nm, b: BRS_bintang(n), siap: BRS_bintang(n) > 0, fn: () => brsMula(n) })).concat([4, 5, 6, 7].map(nota)) },
+    { nm: "Pulau Baris", g: "b", batu: BRS_LEVEL.map((x, n) => ({ id: "brs" + n, ik: x.ik, kecil: x.kecil, nm: x.nm, b: BRS_bintang(n), siap: BRS_bintang(n) > 0, fn: () => brsMula(n) })) },
     { nm: "Pulau Tanda & Bacaan", g: "e", batu: [8, 9, 10, 11, 12, 13].map(nota) },
     { nm: "Pulau Iqra' 1 - 6", g: "g", batu: [0, 1, 2, 3, 4, 5].map(iq) },
     { nm: "Pulau Kuiz & Doa", g: "h", batu: [{ id: "kuiz", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { id: "doa", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }] }
@@ -7753,7 +7789,7 @@ function LLN_bina() {
   P.some((pl, a) => pl.batu.some((x, b) => { if (!selesai(x)) { sp = a; sb = b; return true; } return false; }));
   let kini = LLN_baca(LLN_PULAU, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < P.length)) kini = 0;
   /* susun batu atas permukaan pulau (peratus lebar/tinggi gambar pulau) */
-  const SUSUN = { 10: [[12, 24], [31, 20], [50, 19], [69, 20], [88, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 9: [[14, 24], [38, 20], [62, 20], [86, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 8: [[14, 26], [38, 21], [62, 21], [86, 26], [14, 50], [38, 46], [62, 46], [86, 50]], 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
+  const SUSUN = { 10: [[12, 24], [31, 20], [50, 19], [69, 20], [88, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 9: [[16, 21], [38, 17], [62, 17], [84, 21], [50, 35], [14, 51], [36, 48], [64, 48], [86, 51]], 8: [[14, 26], [38, 21], [62, 21], [86, 26], [14, 50], [38, 46], [62, 46], [86, 50]], 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
   const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
   const w = document.createElement("div"); w.className = "lln2";
   w.innerHTML = '<div class="lln2-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + P.map((_, a) => '<button data-p="' + a + '" aria-label="' + P[a].nm + '"></button>').join("") + "</span></div>"
