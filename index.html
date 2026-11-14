@@ -1280,8 +1280,8 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 /* semasa lapisan video aktif, skrin Kelas Al-Quran tidak memainkan pr-maju/stagger (satu peralihan sahaja); kelas dibuang oleh show() seterusnya */
 #s-subj.on.vpn-diam,#s-subj.on.vpn-diam .card{animation:none!important}
 /* ===== Peta Kelas Al-Quran (PETA_): latar langit, Pulau Iqra' & Istana Al-Quran terapung, jambatan pelangi ===== */
-.peta::before{content:"";position:fixed;inset:0;z-index:-1;background:#e9dcf7 url(gambar/peta/peta-latar-potret.jpg) center/cover no-repeat;pointer-events:none}
-@media (orientation:landscape){.peta::before{background-image:url(gambar/peta/peta-latar-landskap.jpg)}}
+.peta::before{content:"";position:fixed;inset:0;z-index:-1;background:#e9dcf7 var(--peta-lp,url(gambar/peta/peta-latar-potret.jpg)) center/cover no-repeat;pointer-events:none}
+@media (orientation:landscape){.peta::before{background-image:var(--peta-ll,url(gambar/peta/peta-latar-landskap.jpg))}}
 body.peta-on #subjList{display:block}
 .peta{position:relative;width:100%;max-width:1100px;margin:0 auto;height:calc(100vh - 150px);min-height:460px}
 body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#4a3570;background:rgba(255,255,255,.88);border:3px solid #e6d6ff;border-radius:999px;padding:4px 22px;box-shadow:0 5px 0 #d9c6fb}
@@ -1298,11 +1298,21 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .peta-pulau:active .peta-img,.peta-pulau.peta-tekan .peta-img{animation:petaLantun .45s ease}
 .peta-pulau.peta-pergi{transition:transform .55s cubic-bezier(.5,0,.7,.4),opacity .55s ease-in;transform:scale(1.35);opacity:0}
 .peta-pulau:focus-visible{outline:4px solid #b79cf2;outline-offset:6px;border-radius:24px}
+/* pelangi cahaya: jalur lutsinar, hujung pudar ke awan, dilukis kiri->kanan, berkilau perlahan */
+.peta-pelangi{position:absolute;left:18%;top:20%;width:64%;aspect-ratio:2/1;pointer-events:none;z-index:1;transform:rotate(30deg);transform-origin:50% 100%;
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%),linear-gradient(0deg,transparent 0,#000 30%);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%) intersect,linear-gradient(0deg,transparent 0,#000 30%)}
+.peta-pelangi i{position:absolute;inset:0;border-radius:50% 50% 0 0/100% 100% 0 0;
+  background:radial-gradient(circle at 50% 100%,transparent 0 56%,rgba(190,140,255,.0) 56%,rgba(190,140,255,.55) 59%,rgba(120,170,255,.55) 63%,rgba(110,225,190,.55) 67%,rgba(255,236,120,.6) 71%,rgba(255,180,120,.55) 75%,rgba(255,120,160,.5) 79%,rgba(255,120,160,0) 82%);
+  filter:blur(3px);mix-blend-mode:screen;opacity:.85;clip-path:inset(0 100% 0 0);animation:pelangiLukis 1.6s .35s cubic-bezier(.3,.1,.3,1) forwards,pelangiKilau 4.5s 2s ease-in-out infinite}
+.peta-pelangi i::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 100%,transparent 0 60%,rgba(255,255,255,.55) 68%,transparent 76%);filter:blur(6px);opacity:.6}
+@media (orientation:landscape){.peta-pelangi{left:28%;top:6%;width:44%;transform:none}}
+@keyframes pelangiLukis{to{clip-path:inset(0 0 0 0)}}
+@keyframes pelangiKilau{0%,100%{opacity:.85;filter:blur(3px) saturate(1)}50%{opacity:1;filter:blur(2.5px) saturate(1.25)}}
 @keyframes petaApung{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes petaLantun{0%{transform:scale(1)}35%{transform:scale(.9,1.08)}70%{transform:scale(1.08,.94)}100%{transform:scale(1)}}
 @keyframes petaKilau{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12) saturate(1.15)}}
 @keyframes petaKelip{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
-@media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}}
+@media (prefers-reduced-motion:reduce){.peta-pulau .peta-img,.peta-jambatan,.peta-kilat{animation:none}.peta-pelangi i{animation:none;clip-path:none}}
 /* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
 .pet-nuri{position:fixed;left:0;top:0;width:clamp(118px,21vmin,172px);aspect-ratio:1;z-index:90;pointer-events:none;will-change:transform;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .25s}
 .pet-nuri[hidden],.pet-togol[hidden]{display:none!important}
@@ -6016,10 +6026,18 @@ function renderQuran() {
 /* Peta: dua pulau terapung; tekan = lantun, pulau membesar & pudar, kemudian buka menu */
 function PETA_bina() {
   document.body.classList.add("peta-on");
+  /* Tetapan dari gambar/tetapan.js (Dashboard > Peta Al-Quran) */
+  const T = (window.TETAPAN && TETAPAN.peta) || {}, g = (k, d) => "gambar/" + (T[k] || d);
+  const tk = (o, bm, en, zh) => o && (o.bm || o.en || o.zh) ? tr(L(o.bm || bm, o.en || en, o.zh || zh)) : tr(L(bm, en, zh));
+  const ti = T.iqra || {}, tq = T.quran || {};
   const p = document.createElement("div"); p.className = "peta";
-  p.innerHTML = '<img class="peta-jambatan" alt="" src="gambar/peta/jambatan-pelangi.png">'
-    + '<button class="peta-pulau peta-iqra"><img class="peta-img" alt="" src="gambar/peta/pulau-iqra.png"><span class="peta-label">Iqra\'<small>' + tr(L("Huruf, Iqra' 1-6 & doa", "Letters, Iqra' 1-6 & duas", "字母、伊克拉1-6和祈祷")) + '</small></span></button>'
-    + '<button class="peta-pulau peta-quran"><img class="peta-img" alt="" src="gambar/peta/istana-quran.png"><span class="peta-label">Al-Quran<small>' + tr(L("Tajwid, hafazan & 30 juz", "Tajwid, memorise & 30 juz", "泰吉威德、背诵和30卷")) + '</small></span></button>';
+  if (T.latarPotret || T.latarLandskap) { p.style.setProperty("--peta-lp", "url('" + g("latarPotret", "peta/peta-latar-potret.jpg") + "')"); p.style.setProperty("--peta-ll", "url('" + g("latarLandskap", "peta/peta-latar-landskap.jpg") + "')"); }
+  p.innerHTML = (T.jambatan ? '<img class="peta-jambatan" alt="" src="' + g("jambatan", "") + '">' : '<div class="peta-pelangi" aria-hidden="true"><i></i></div>')
+    + '<button class="peta-pulau peta-iqra"><img class="peta-img" alt="" src="' + g("gambarIqra", "peta/pulau-iqra.png") + '"><span class="peta-label"></span></button>'
+    + '<button class="peta-pulau peta-quran"><img class="peta-img" alt="" src="' + g("gambarQuran", "peta/istana-quran.png") + '"><span class="peta-label"></span></button>';
+  const lbl = (sel, n, sb) => { const e = p.querySelector(sel + " .peta-label"); e.textContent = n; const sm = document.createElement("small"); sm.textContent = sb; e.appendChild(sm); };
+  lbl(".peta-iqra", tk(ti.nama, "Iqra'", "Iqra'", "伊克拉"), tk(ti.sub, "Huruf, Iqra' 1-6 & doa", "Letters, Iqra' 1-6 & duas", "字母、伊克拉1-6和祈祷"));
+  lbl(".peta-quran", tk(tq.nama, "Al-Quran", "Al-Quran", "古兰经"), tk(tq.sub, "Tajwid, hafazan & 30 juz", "Tajwid, memorise & 30 juz", "泰吉威德、背诵和30卷"));
   for (let i = 0; i < 14; i++) { const k = document.createElement("i"); k.className = "peta-kilat"; k.style.left = (4 + Math.random() * 92) + "%"; k.style.top = (3 + Math.random() * 90) + "%"; k.style.animationDelay = (-Math.random() * 2.6) + "s"; p.appendChild(k); }
   $("subjList").appendChild(p);
   let pergi = false;

@@ -64,6 +64,15 @@ window.TETAPAN = {
       }
     ]
   },
+  "peta": {
+    "latarPotret": "peta/peta-latar-potret.jpg",
+    "latarLandskap": "peta/peta-latar-landskap.jpg",
+    "jambatan": "",
+    "gambarIqra": "peta/pulau-iqra.png",
+    "gambarQuran": "peta/istana-quran.png",
+    "iqra": { "nama": { "bm": "Iqra'", "en": "Iqra'", "zh": "伊克拉" }, "sub": { "bm": "Huruf, Iqra' 1-6 & doa", "en": "Letters, Iqra' 1-6 & duas", "zh": "字母、伊克拉1-6和祈祷" } },
+    "quran": { "nama": { "bm": "Al-Quran", "en": "Al-Quran", "zh": "古兰经" }, "sub": { "bm": "Tajwid, hafazan & 30 juz", "en": "Tajwid, memorise & 30 juz", "zh": "泰吉威德、背诵和30卷" } }
+  },
   "videoMasuk": {
     "aktif": true,
     "potret": "pet/nuri/masuk/pintu-quran.mp4",
