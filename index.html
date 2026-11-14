@@ -1264,6 +1264,35 @@ body.dpn-home #homeTitle{position:absolute;width:1px;height:1px;margin:0;overflo
 #s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:pr-item .4s cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:calc(var(--i,0) * 50ms + 80ms)}
 #s-home.on .dpn-kad:nth-child(1){--i:0}#s-home.on .dpn-kad:nth-child(2){--i:1}#s-home.on .dpn-kad:nth-child(3){--i:2}#s-home.on .dpn-kad:nth-child(4){--i:3}
 @media (prefers-reduced-motion:reduce){#s-home.on,#s-subj.on,#s-home.on .card,#s-subj.on .card,#s-home.on .dpn-kad{animation:none!important}}
+/* ===== Animasi masuk Kelas Al-Quran (MSK_): Nuri terbang -> pintu terbuka. Aset Ravi: gambar/pet/nuri/masuk/. transform/opacity sahaja ===== */
+.msk-lapis{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483000;overflow:hidden;background:#bfe6fb;opacity:1;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.msk-lapis[hidden]{display:none}
+.msk-lapis img{display:block;pointer-events:none;-webkit-user-drag:none}
+.msk-awan{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+.msk-awan-l{display:none!important}
+@media (orientation:landscape){.msk-awan-p{display:none!important}.msk-awan-l{display:block!important}}
+.msk-kapal{position:absolute;left:0;top:13%;width:min(46vw,54vh);opacity:0;will-change:transform}
+.msk-kapal img{width:100%;height:auto;will-change:transform}
+.msk-pintu{position:absolute;left:50%;top:50%;width:min(92vw,50.2vh);aspect-ratio:502/700;margin:0;opacity:0;transform:translate3d(-50%,-50%,0) scale(.8);will-change:transform,opacity}
+.msk-daun-bekas{display:flex;width:100%;height:100%;perspective:1200px}
+.msk-daun{width:50%;height:100%;will-change:transform,opacity}
+.msk-daun-kiri{transform-origin:0% 50%}
+.msk-daun-kanan{transform-origin:100% 50%}
+.msk-lapis.msk-main{animation:msk-pudar 1s linear 1.6s forwards}
+.msk-main .msk-kapal{animation:msk-terbang 1.4s linear forwards}
+.msk-main .msk-kapal img{animation:msk-oleng .35s ease-in-out 4 alternate}
+.msk-main .msk-pintu{animation:msk-pop .4s cubic-bezier(.34,1.4,.64,1) 1.2s forwards}
+.msk-main .msk-daun-kiri{animation:msk-buka-kiri 1s ease-in-out 1.6s forwards}
+.msk-main .msk-daun-kanan{animation:msk-buka-kanan 1s ease-in-out 1.6s forwards}
+.msk-lapis.msk-langkau{animation:none;opacity:0;cursor:default}
+@keyframes msk-terbang{0%{opacity:1;transform:translate3d(-105%,0,0)}100%{opacity:1;transform:translate3d(100vw,0,0)}}
+@keyframes msk-oleng{from{transform:translate3d(0,-12px,0) rotate(-6deg)}to{transform:translate3d(0,12px,0) rotate(-1deg)}}
+@keyframes msk-pop{0%{opacity:0;transform:translate3d(-50%,-50%,0) scale(.8)}70%{opacity:1;transform:translate3d(-50%,-50%,0) scale(1.04)}100%{opacity:1;transform:translate3d(-50%,-50%,0) scale(1)}}
+@keyframes msk-buka-kiri{0%{transform:rotateY(0);opacity:1}75%{opacity:1}100%{transform:rotateY(-100deg);opacity:0}}
+@keyframes msk-buka-kanan{0%{transform:rotateY(0);opacity:1}75%{opacity:1}100%{transform:rotateY(100deg);opacity:0}}
+@keyframes msk-pudar{0%,30%{opacity:1}100%{opacity:0}}
+/* semasa lapisan masuk aktif, skrin Kelas Al-Quran tidak memainkan pr-maju/stagger (satu animasi sahaja); kelas dibuang oleh show() seterusnya */
+#s-subj.on.msk-diam,#s-subj.on.msk-diam .card{animation:none!important}
 /* ===== Pet Nuri (Kelas Al-Quran): bekas tidak menangkap sentuhan, hanya badan Nuri ===== */
 .pet-nuri{position:fixed;left:0;top:0;width:clamp(118px,21vmin,172px);aspect-ratio:1;z-index:90;pointer-events:none;will-change:transform;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .25s}
 .pet-nuri[hidden],.pet-togol[hidden]{display:none!important}
@@ -5378,7 +5407,8 @@ const $ = id => document.getElementById(id);
 let PR_undur = false;
 function show(id) {
   const PR_el = document.getElementById(id), PR_arah = PR_undur ? "pr-undur" : "pr-maju"; PR_undur = false;
-  document.querySelectorAll(".screen").forEach(s => { s.classList.remove("pr-maju", "pr-undur"); s.classList.toggle("on", s.id === id); });
+  document.querySelectorAll(".screen").forEach(s => { s.classList.remove("pr-maju", "pr-undur", "msk-diam"); s.classList.toggle("on", s.id === id); });
+  if (PR_el && window.MSK_diam && id === "s-subj") PR_el.classList.add("msk-diam"); /* animasi masuk Kelas Al-Quran sedang berjalan: tiada pr-maju */
   if (PR_el && (id === "s-home" || id === "s-subj")) { void PR_el.offsetWidth; PR_el.classList.add(PR_arah); /* kelas dikekalkan hingga show() seterusnya: membuangnya menukar nama animasi dan memainkan pop kali kedua */ }
   document.body.classList.toggle("dpn-home", id === "s-home");
   window.scrollTo(0, 0);
@@ -8675,9 +8705,10 @@ function renderHome() {
     b.querySelector("img").src = "gambar/depan/" + gbr + ".png"; b.querySelector("b").textContent = nama; b.querySelector("small").textContent = umur;
     b.onclick = fn; box.appendChild(b);
   };
-  DPN_kad("quran", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), renderQuran);
+  DPN_kad("quran", tr(L("Kelas Al-Quran", "Al-Quran Class", "古兰经课")), tr(L("Iqra', surah lazim & doa", "Iqra', short surahs & duas", "伊克拉、短章和祈祷")), () => MSK_masuk());
   TAHAP.forEach(t => DPN_kad(t.id, tr(t.nama), tr(t.umur), () => renderSubj(t)));
   show("s-home");
+  MSK_pramuat();
 }
 /* Senarai kad generik pada skrin s-subj */
 function renderMenu(title, items, back) {
@@ -9021,11 +9052,93 @@ $("tbMas").insertAdjacentHTML("beforeend", MASKOT);
 window.addEventListener("resize", () => { if (bmOn()) bmSaiz(); });
 applyLang();
 renderHome();
+/* ===== Animasi masuk Kelas Al-Quran (MSK_): kad "Kelas Al-Quran" di halaman depan sahaja =====
+   0-1.4s Nuri terbang (masuk-terbang.mp3) -> 1.2-1.6s pintu muncul -> 1.6-2.6s pintu terbuka (masuk-pintu.mp3) + renderQuran di belakang + lapisan pudar.
+   Sentuhan/kekunci semasa animasi = langkau. Salam Nuri bermula selepas lapisan tamat (MSK_tahanPet). Aset: gambar/pet/nuri/masuk/ (Ravi). */
+const MSK_DIR = "gambar/pet/nuri/masuk/", MSK_T_PINTU = 1600, MSK_T_TAMAT = 2600;
+const MSK_GAMBAR = ["awan-potret.jpg", "awan-landskap.jpg", "nuri-kapal.png", "pintu-kiri.png", "pintu-kanan.png"];
+let MSK_el = null, MSK_aktif = false, MSK_sudahQuran = false, MSK_jam = [];
+/* Dipanggil oleh renderHome(): bina lapisan (tersembunyi) supaya gambar dan bunyi sudah dimuat sebelum kad ditekan */
+function MSK_pramuat() {
+  try {
+    if (MSK_el || PET_kurang()) return;
+    const el = MSK_el = document.createElement("div");
+    el.className = "msk-lapis"; el.hidden = true; el.setAttribute("aria-hidden", "true");
+    el.innerHTML = '<img class="msk-awan msk-awan-p" alt="" draggable="false" src="' + MSK_DIR + 'awan-potret.jpg"><img class="msk-awan msk-awan-l" alt="" draggable="false" src="' + MSK_DIR + 'awan-landskap.jpg">'
+      + '<div class="msk-kapal"><img alt="" draggable="false" src="' + MSK_DIR + 'nuri-kapal.png"></div>'
+      + '<div class="msk-pintu"><div class="msk-daun-bekas"><img class="msk-daun msk-daun-kiri" alt="" draggable="false" src="' + MSK_DIR + 'pintu-kiri.png"><img class="msk-daun msk-daun-kanan" alt="" draggable="false" src="' + MSK_DIR + 'pintu-kanan.png"></div></div>';
+    document.body.appendChild(el);
+    el.querySelectorAll("img").forEach(i => { try { const d = i.decode && i.decode(); if (d && d.catch) d.catch(() => { /* abaikan */ }); } catch (e) { /* abaikan */ } });
+    el.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); MSK_tamat(true); });
+    el.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
+    el.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => { if (MSK_aktif) { e.preventDefault(); e.stopPropagation(); MSK_tamat(true); } }, true);
+    const au = f => { const a = new Audio(); a.preload = "auto"; a.src = MSK_DIR + f; return a; };
+    window.MSK_auTerbang = au("masuk-terbang.mp3"); window.MSK_auPintu = au("masuk-pintu.mp3");
+  } catch (e) { /* animasi masuk tidak boleh mengganggu app */ }
+}
+const MSK_sedia = () => !!MSK_el && MSK_GAMBAR.length === MSK_el.querySelectorAll("img").length && Array.prototype.every.call(MSK_el.querySelectorAll("img"), i => i.complete && i.naturalWidth > 0);
+function MSK_henti(a) { try { if (a && !a.paused) a.pause(); } catch (e) { /* abaikan */ } }
+/* Bunyi pembuka app masih berbunyi: perlahankan ~200ms kemudian henti, supaya tidak bertindih dengan bunyi terbang */
+function MSK_redamBuka() {
+  const a = window.BKA_audio; if (!PET_main(a)) return;
+  let n = 0; const v0 = a.volume, j = setInterval(() => {
+    n++;
+    try { a.volume = Math.max(0, v0 * (1 - n / 5)); } catch (e) { /* iPad: volume tidak boleh diubah */ }
+    if (n >= 5) { clearInterval(j); MSK_henti(a); try { a.volume = v0; } catch (e) { /* abaikan */ } }
+  }, 40);
+}
+/* Dipanggil DALAM pengendali sentuhan kad (iPad/Safari membenarkan bunyi hanya di sini) */
+function MSK_masuk() {
+  if (MSK_aktif) return;
+  let boleh = false;
+  try { boleh = !PET_kurang() && MSK_sedia(); } catch (e) { boleh = false; }
+  if (!boleh) { renderQuran(); return; }
+  MSK_aktif = true; MSK_sudahQuran = false; window.MSK_diam = true; window.MSK_tahanPet = true;
+  const el = MSK_el;
+  el.classList.remove("msk-main", "msk-langkau"); el.hidden = false; void el.offsetWidth; el.classList.add("msk-main");
+  if (SUARA_ON) {
+    MSK_redamBuka();
+    try {
+      const a = window.MSK_auTerbang; a.muted = false; a.currentTime = 0;
+      const p = a.play(); if (p && p.catch) p.catch(() => { /* tiada izin audio */ });
+      /* bunyi pintu dimainkan pada 1.6s (di luar sentuhan): buka pemainnya secara senyap sekarang */
+      const b = window.MSK_auPintu; b.muted = true;
+      const q = b.play(); if (q && q.then) q.then(() => { if (b.muted) { b.pause(); b.currentTime = 0; } }).catch(() => { /* abaikan */ });
+    } catch (e) { /* abaikan */ }
+    PET_bukaAudio(); /* salam Nuri juga dimainkan kemudian, di luar sentuhan */
+  }
+  MSK_jam = [setTimeout(MSK_pintu, MSK_T_PINTU), setTimeout(() => MSK_tamat(false), MSK_T_TAMAT)];
+}
+function MSK_bukaQuran() { if (MSK_sudahQuran) return; MSK_sudahQuran = true; renderQuran(); }
+function MSK_pintu() {
+  if (!MSK_aktif) return;
+  MSK_bukaQuran();
+  if (!SUARA_ON) return;
+  try {
+    const b = window.MSK_auPintu; b.pause(); b.muted = false; b.currentTime = 0;
+    const p = b.play(); if (p && p.catch) p.catch(() => { /* abaikan */ });
+  } catch (e) { /* abaikan */ }
+}
+function MSK_tamat(langkau) {
+  if (!MSK_aktif) return;
+  MSK_aktif = false; MSK_jam.forEach(clearTimeout); MSK_jam = [];
+  const el = MSK_el, tutup = () => { el.hidden = true; el.classList.remove("msk-main", "msk-langkau"); };
+  try { MSK_bukaQuran(); } catch (e) { /* abaikan */ }
+  window.MSK_diam = false;
+  if (langkau) {
+    MSK_henti(window.MSK_auTerbang); MSK_henti(window.MSK_auPintu);
+    /* lapisan lut sinar kekal ~350ms supaya sentuhan langkau tidak tertekan pada kad di bawah */
+    el.classList.add("msk-langkau"); setTimeout(() => { if (!MSK_aktif) tutup(); }, 350);
+  } else tutup();
+  window.MSK_tahanPet = false; PET_semak();
+}
 /* ===== Bunyi pembuka app (BKA_): sekali setiap sesi; Mac terus, iPad pada sentuhan pertama ===== */
 let BKA_siap = false;
 function BKA_main() {
   if (BKA_siap) return Promise.resolve(true);
   if (!SUARA_ON) { BKA_siap = true; return Promise.resolve(true); }
+  if (window.MSK_diam) { BKA_siap = true; return Promise.resolve(true); } /* animasi masuk Kelas Al-Quran sedang berbunyi: jangan tindih */
   try {
     const a = window.BKA_audio = new Audio("gambar/suara/buka-app.m4a"); a.volume = 1; a.preload = "auto";
     const p = a.play();
@@ -9065,7 +9178,7 @@ const PET_main = a => !!a && !a.paused && !a.ended;
 /* Ada audio lain sedang berbunyi? (qari, klip rakaman, bunyi pembuka, suara sistem, pemain rakaman) */
 function PET_audioLain() {
   try {
-    if (PET_main(qariAudio) || PET_main(klipAudio) || PET_main(window.BKA_audio)) return true;
+    if (PET_main(qariAudio) || PET_main(klipAudio) || PET_main(window.BKA_audio) || PET_main(window.MSK_auTerbang) || PET_main(window.MSK_auPintu)) return true;
     if (window.speechSynthesis && window.speechSynthesis.speaking) return true;
     const m = document.querySelectorAll("audio,video");
     for (let i = 0; i < m.length; i++) if (PET_main(m[i])) return true;
@@ -9139,7 +9252,7 @@ function PET_bina() {
 /* Dipanggil oleh show(): Nuri hanya wujud selagi berada dalam Kelas Al-Quran */
 function PET_semak() {
   try {
-    const patut = qrSenyap === true;
+    const patut = qrSenyap === true && !window.MSK_tahanPet; /* Nuri masuk selepas animasi pintu tamat */
     if (patut && !PET.el) PET_bina();
     if (!PET.el) return;
     PET.togol.hidden = !patut; PET_label();
@@ -9324,6 +9437,7 @@ function PET_detik(t) {
     }
   }
 }
+MSK_pramuat(); /* renderHome() pertama berjalan sebelum MSK_/PET_ ditakrif: pramuat aset masuk di sini */
 } else if (typeof module !== "undefined") {
   module.exports = { SUBJEK, TAHAP, NOTA, setLang: l => { LANG = l; } };
 }
