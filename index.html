@@ -1385,6 +1385,13 @@ body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
 .kbn-siap-huruf b{font-size:48px;line-height:1.6;color:#7a55c7}
 .kbn-siap-btn{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .kbn-semula{background:#a77bf3;box-shadow:0 5px 0 #7d55c9}
+.kbn-huruf-svg{display:block;overflow:visible}
+.kbn-huruf-badan{fill:#7a55c7}
+.kbn-titik{fill:#ffc21a;stroke:#e09600;stroke-width:1.2;stroke-linejoin:round}
+.kbn-kenal-huruf{width:56%;height:auto;margin:2% 0 0}
+.kbn-siap-svg{width:64px;height:64px}
+.kbn-jubin-svg{width:72%;height:72%;pointer-events:none}
+.kbn-slot .kbn-jubin-svg .kbn-huruf-badan{fill:#4cc38a}
 .kbn-teman{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));width:clamp(92px,15vmin,140px);aspect-ratio:1;z-index:60;pointer-events:none}
 .kbn-teman-rupa{position:absolute;inset:0}
 .kbn-teman img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0}
@@ -6291,7 +6298,7 @@ function KBN_bintang(l) { try { return +(JSON.parse(localStorage.getItem("kebun.
 function KBN_simpan(l, n) { try { const d = JSON.parse(localStorage.getItem("kebun.bintang")) || {}; d[l] = Math.max(+d[l] || 0, n); localStorage.setItem("kebun.bintang", JSON.stringify(d)); } catch (e) { /* abaikan */ } }
 /* Nuri teman dalam Misi Huruf: gelembung kata + pose ikut suara */
 const KBN_TEKS = {
-  "k-alif": "Ini huruf alif! Alif berdiri tegak, macam pensel.", "k-ba": "Ini huruf ba! Satu titik di bawah, macam bot dengan satu mutiara.", "k-ta": "Ini huruf ta! Dua titik di atas.", "k-tsa": "Ini huruf tsa! Tiga titik di atas.",
+  "k-alif": "Ini huruf alif! Alif berdiri tegak, macam pensel.", "k-ba": "Ini huruf ba! Satu titik di bawah, macam bot dengan satu mutiara.", "k-ta": "Ini huruf ta! Dua titik di atas, macam bot dengan dua bintang.", "k-tsa": "Ini huruf tsa! Tiga titik di atas, macam bot dengan tiga bintang.",
   "k-jim": "Ini huruf jim! Satu titik dalam perutnya, macam cawan dengan guli.", "k-ha": "Ini huruf ha! Macam jim, tapi tiada titik.", "k-kho": "Ini huruf kho! Satu titik di atas, macam ceri atas cawan.", "k-dal": "Ini huruf dal! Macam papan gelongsor kecil.",
   "m-kenal": "Jom kenal huruf! Tekan telur.", "m-hadiah": "Jom buka hadiah! Tekan kotak.", "m-tangkap": "Dengar, kemudian pecahkan belon yang betul!", "m-padan": "Seret huruf kepada kawannya.", "m-lompat": "Bantu Nuri seberang sungai!", "m-ingat": "Cari pasangan huruf dan kawannya!", "m-surih": "Jom tulis huruf dengan jari!", "m-seberang": "Yeay! Nuri sudah sampai!",
   "betul-1": "Pandainya!", "betul-2": "Betul! Hebat!", "betul-3": "Yeay, betul!", "salah": "Hmm, cuba lagi ya.", "siap": "Yeay! Misi berjaya!", "siap-2": "Yeay! Misi berjaya! Adik bijak!"
@@ -6312,6 +6319,14 @@ function KBN_suara(n) {
     if (!SUARA_ON) return ok();
     try { if (window.KBN_au) window.KBN_au.pause(); const a = window.KBN_au = new Audio(KBN_DIR + "suara/" + n + ".mp3"); let s = false; const habis = () => { if (!s) { s = true; ok(); } }; a.onended = habis; a.onerror = habis; setTimeout(habis, 6000); const p = a.play(); if (p && p.catch) p.catch(habis); } catch (e) { ok(); }
   });
+}
+/* Huruf sebagai SVG (dari strok.js) dengan titik berwarna emas, supaya padan dengan bintang/mutiara pada gambar kawan */
+function KBN_hurufSVG(h, kelas) {
+  const c = HIJAIYAH[h][0], D = null; /* titik bercantum dalam data strok (cth. ت): guna teks biasa */
+  if (!D) return '<b class="qrar ' + (kelas || "") + '">' + c + "</b>";
+  const r = Math.max(4.2, (D.jt || 3) * 1.45);
+  const bintang = (x, y) => { let p = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .5 : r * 1.15; p += (i ? "L" : "M") + (x + Math.cos(a) * rr).toFixed(1) + " " + (y + Math.sin(a) * rr).toFixed(1); } return '<path class="kbn-titik" d="' + p + 'Z"/>'; };
+  return '<svg class="kbn-huruf-svg ' + (kelas || "") + '" viewBox="-6 -6 112 112" role="img" aria-label="' + HIJAIYAH[h][1] + '"><path class="kbn-huruf-badan" d="' + D.glyph + '"/>' + D.titik.map(t => bintang(t[0], t[1])).join("") + "</svg>";
 }
 const KBN_kocok = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function kbnKepala(langkah) {
@@ -6334,7 +6349,7 @@ function kbnSkrin(langkah) {
 /* 1. Kenal: tekan telur -> pecah -> huruf + kawan + suara */
 function kbnKenal() {
   const b = kbnSkrin(0), id = ++KBN.id; let buka = 0;
-  b.innerHTML = '<div class="kbn-telur-grid">' + KBN.h.map((h, i) => '<button class="kbn-telur" data-i="' + i + '"><img class="kbn-tl" alt="" src="' + KBN_DIR + KBN.kenal + '.webp"><span class="kbn-isi"><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp"><b class="qrar">' + HIJAIYAH[h][0] + "</b><small>" + HIJAIYAH[h][1] + "</small></span></button>").join("") + "</div>";
+  b.innerHTML = '<div class="kbn-telur-grid">' + KBN.h.map((h, i) => '<button class="kbn-telur" data-i="' + i + '"><img class="kbn-tl" alt="" src="' + KBN_DIR + KBN.kenal + '.webp"><span class="kbn-isi"><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp">' + KBN_hurufSVG(h, "kbn-kenal-huruf") + "<small>" + HIJAIYAH[h][1] + "</small></span></button>").join("") + "</div>";
   KBN_suara(KBN.m);
   b.onclick = e => {
     const t = e.target.closest(".kbn-telur"); if (!t) return; const i = +t.dataset.i;
@@ -6370,7 +6385,7 @@ function kbnTangkap() {
 function kbnPadan() {
   const b = kbnSkrin(KBN.g.indexOf("Padan") + 1), id = ++KBN.id; let siap = 0;
   const kiri = KBN_kocok([0, 1, 2, 3]), kanan = KBN_kocok([0, 1, 2, 3]);
-  b.innerHTML = '<div class="kbn-padan"><div class="kbn-kol kbn-huruf">' + kiri.map(i => '<div class="kbn-jubin" data-i="' + i + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></div>").join("") + '</div><div class="kbn-kol kbn-kawan">' + kanan.map(i => '<div class="kbn-sasar" data-i="' + i + '"><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp"><span class="kbn-slot"></span></div>').join("") + "</div></div>";
+  b.innerHTML = '<div class="kbn-padan"><div class="kbn-kol kbn-huruf">' + kiri.map(i => '<div class="kbn-jubin" data-i="' + i + '">' + KBN_hurufSVG(KBN.h[i], "kbn-jubin-svg") + "</div>").join("") + '</div><div class="kbn-kol kbn-kawan">' + kanan.map(i => '<div class="kbn-sasar" data-i="' + i + '"><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp"><span class="kbn-slot"></span></div>').join("") + "</div></div>";
   KBN_suara("m-padan");
   b.querySelectorAll(".kbn-jubin").forEach(j => {
     let x0, y0, seret = false;
@@ -6461,7 +6476,7 @@ function kbnSurih() {
 function kbnSiap() {
   const b = kbnSkrin(4), n = KBN.salah <= 1 ? 3 : KBN.salah <= 4 ? 2 : 1;
   KBN_simpan(KBN.l, n);
-  b.innerHTML = '<div class="kbn-siap"><div class="kbn-siap-bintang">' + [0, 1, 2].map(i => '<i class="' + (i < n ? "on" : "") + '" style="animation-delay:' + (i * .25 + .2) + 's"></i>').join("") + '</div><h3>Misi ' + (KBN.l + 1) + ' berjaya!</h3><div class="kbn-siap-huruf">' + KBN.h.map((h, i) => '<span><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp"><b class="qrar">' + HIJAIYAH[h][0] + "</b></span>").join("") + '</div><div class="kbn-siap-btn"><button class="kbn-lanjut kbn-semula">↻ Main lagi</button><button class="kbn-lanjut">Kembali ke pulau ▶</button></div></div>';
+  b.innerHTML = '<div class="kbn-siap"><div class="kbn-siap-bintang">' + [0, 1, 2].map(i => '<i class="' + (i < n ? "on" : "") + '" style="animation-delay:' + (i * .25 + .2) + 's"></i>').join("") + '</div><h3>Misi ' + (KBN.l + 1) + ' berjaya!</h3><div class="kbn-siap-huruf">' + KBN.h.map((h, i) => '<span><img alt="" src="' + KBN_DIR + KBN.k[i] + '.webp">' + KBN_hurufSVG(h, "kbn-siap-svg") + "</span>").join("") + '</div><div class="kbn-siap-btn"><button class="kbn-lanjut kbn-semula">↻ Main lagi</button><button class="kbn-lanjut">Kembali ke pulau ▶</button></div></div>';
   try { sndWin(); const r = b.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + 80); } catch (e) { /* abaikan */ }
   KBN_suara(KBN.l ? "siap-" + (KBN.l + 1) : "siap");
   b.querySelector(".kbn-semula").onclick = () => kbnMula(KBN.l);
