@@ -1393,6 +1393,15 @@ body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
 .kbn-siap-svg{width:64px;height:64px}
 .kbn-jubin-svg{width:72%;height:72%;pointer-events:none}
 .kbn-slot .kbn-jubin-svg .kbn-huruf-badan{fill:#4cc38a}
+/* Misi Huruf: semua huruf guna Geeza Pro tebal (titik terpisah jelas), di tengah */
+.kbn-isi b,.kbn-jubin b,.kbn-slot b,.kbn-dpn b,.kbn-batu-s b,.kbn-siap-huruf b{font-family:"Geeza Pro","Noto Naskh Arabic","Amiri Quran",sans-serif!important;font-weight:700;display:block;width:auto!important;height:auto!important;text-align:center;line-height:1.25;margin:0}
+.kbn-jubin{display:flex!important;align-items:center;justify-content:center}
+.kbn-jubin b{font-size:clamp(60px,12vmin,104px)!important;padding-bottom:.1em}
+.kbn-slot b{font-size:clamp(30px,6vmin,52px)!important}
+.kbn-dpn b{font-size:clamp(56px,11vmin,92px)!important}
+.kbn-batu-s b{font-size:clamp(46px,9vmin,76px)!important}
+.kbn-isi b{font-size:clamp(54px,11vmin,92px)!important;line-height:1.35}
+.kbn-siap-huruf b{font-size:52px!important}
 .kbn-teman{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));width:clamp(92px,15vmin,140px);aspect-ratio:1;z-index:60;pointer-events:none}
 .kbn-teman-rupa{position:absolute;inset:0}
 .kbn-teman img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0}
@@ -6376,7 +6385,7 @@ function kbnTangkap() {
     langit.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
     langit.onclick = e => {
       const t = e.target.closest(".kbn-belon"); if (!t || kunci) return;
-      if (+t.dataset.i === sasar) { kunci = true; t.classList.add("letup"); try { const r = t.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } catch (er) { /* abaikan */ } g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250)); }
+      if (+t.dataset.i === sasar) { kunci = true; t.classList.add("letup"); if (SUARA_ON) { try { const pp = new Audio(KBN_DIR + "pop.mp3"); pp.volume = 1; const q = pp.play(); if (q && q.catch) q.catch(() => {}); } catch (er) { /* abaikan */ } } try { const r = t.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } catch (er) { /* abaikan */ } g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250)); }
       else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
     };
   };
