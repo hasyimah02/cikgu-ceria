@@ -1661,6 +1661,10 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .brs-kp.betul,.brs-kp.tunjuk{border-color:#4cc38a;background:#effbf4;box-shadow:0 6px 0 #a6e3c4}
 .brs-kp.silap{border-color:#ffb3b3;background:#fff1f1;opacity:.6}
 /* ===== Kebun Huruf (KBN_) ===== */
+.kbn-latar{position:fixed;inset:0;z-index:-1;background:var(--lp) center/cover no-repeat;pointer-events:none;animation:kbnLatar .6s ease}
+@media (orientation:landscape){.kbn-latar{background-image:var(--ll)}}
+@keyframes kbnLatar{from{opacity:0}to{opacity:1}}
+body:has(.kbn-latar) #s-quran h2,body:has(.kbn-latar) #qrTajuk{color:#4a3570;background:rgba(255,255,255,.88);border-radius:999px;padding:2px 18px;display:inline-block}
 .kbn-langkah{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px auto 12px;flex-wrap:wrap}
 .kbn-langkah button{font:inherit;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:#9a8ab5;background:#fff;border:2.5px solid #eadff9;border-radius:999px;padding:3px 12px 3px 4px}
 .kbn-langkah button b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#eadff9;color:#7a55c7;font-size:13px}
@@ -6198,7 +6202,7 @@ function tbBetul(s, sebut) {
 /* ===== UI ===== */
 const $ = id => document.getElementById(id);
 let PR_undur = false;
-function show(id) { if (id !== "s-subj") document.body.classList.remove("peta-on", "lln2-on"); if (id !== "s-quran") document.querySelectorAll(".kbn-teman").forEach(e => e.remove());
+function show(id) { if (id !== "s-subj") document.body.classList.remove("peta-on", "lln2-on"); if (id !== "s-quran") document.querySelectorAll(".kbn-teman,.kbn-latar").forEach(e => e.remove());
   const PR_el = document.getElementById(id), PR_arah = PR_undur ? "pr-undur" : "pr-maju"; PR_undur = false;
   document.querySelectorAll(".screen").forEach(s => { s.classList.remove("pr-maju", "pr-undur", "vpn-diam"); s.classList.toggle("on", s.id === id); });
   if (PR_el && window.VPN_diam && id === "s-subj") PR_el.classList.add("vpn-diam"); /* video masuk Kelas Al-Quran sedang berjalan: tiada pr-maju */
@@ -6342,7 +6346,7 @@ function qrButang(ik, label, kelas, fn) {
   return b;
 }
 function qrSkrin(tajuk, back) {
-  qrId++; stopSpeech(); document.querySelectorAll(".kbn-teman").forEach(e => e.remove());
+  qrId++; stopSpeech(); document.querySelectorAll(".kbn-teman,.kbn-latar").forEach(e => e.remove());
   $("qrTajuk").textContent = tajuk; $("qrKawasan").innerHTML = ""; $("qrKawasan").classList.remove("iq-anim"); $("qrBtns").innerHTML = "";
   $("qrBack").onclick = () => { qrId++; stopSpeech(); qariHenti(); back(); };
   show("s-quran");
@@ -6918,6 +6922,14 @@ function kbnKepala(langkah) {
 /* Label langkah boleh ditekan: lompat terus ke Kenal / permainan 1 / permainan 2 / Tulis */
 function kbnPergi(i) { if (!KBN) return; KBN.id++; try { window.KBN_au && window.KBN_au.pause(); } catch (e) { /* abaikan */ } if (i === 0) { window.KBN_tulis = null; kbnKenal(); } else kbnSeterus(i); }
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest(".kbn-langkah [data-langkah]"); if (b) { e.preventDefault(); kbnPergi(+b.dataset.langkah); } });
+/* latar penuh skrin ikut misi (dilekat pada body supaya tidak terkurung oleh animasi skrin) */
+function KBN_latar() {
+  document.querySelectorAll(".kbn-latar").forEach(e => e.remove());
+  if (!KBN) return;
+  const d = document.createElement("div"); d.className = "kbn-latar"; const n = KBN.l + 1;
+  d.style.setProperty("--lp", "url(gambar/kebun/latar/m" + n + "-potret.jpg)"); d.style.setProperty("--ll", "url(gambar/kebun/latar/m" + n + "-landskap.jpg)");
+  document.body.prepend(d);
+}
 function kbnMula(l) {
   KBN = { l, ...KBN_LEVEL[l], salah: 0, id: 0 };
   window.KBN_tulis = null;
@@ -6926,6 +6938,7 @@ function kbnMula(l) {
 function kbnSkrin(langkah) {
   qrSkrin("Misi Huruf " + (KBN.l + 1) + " · " + KBN.h.map(h => HIJAIYAH[h][0]).join(" "), () => { window.KBN_tulis = null; renderIqraMenu(); });
   const k = $("qrKawasan"); k.innerHTML = kbnKepala(langkah) + '<div class="kbn"></div>';
+  KBN_latar();
   const tm = document.createElement("div"); tm.className = "kbn-teman"; tm.setAttribute("aria-hidden", "true");
   tm.innerHTML = '<div class="kbn-gel"></div><div class="kbn-teman-rupa">' + ["rehat", "lambai", "gembira", "fikir", "tunjuk", "tepuk"].map(p => '<img alt="" data-p="' + p + '" src="gambar/pet/nuri/' + p + '.png"' + (p === "lambai" ? ' class="on"' : "") + ">").join("") + "</div>";
   document.body.appendChild(tm);
@@ -7382,6 +7395,7 @@ function kbnSurih() {
 }
 function kbnKepalaTulis() {
   const kw = $("qrKawasan"); if (kw && !kw.querySelector(".kbn-langkah")) kw.insertAdjacentHTML("afterbegin", kbnKepala(3));
+  KBN_latar();
 }
 function kbnSiap() {
   const b = kbnSkrin(4), n = KBN.salah <= 1 ? 3 : KBN.salah <= 4 ? 2 : 1;
