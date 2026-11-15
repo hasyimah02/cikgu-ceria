@@ -2120,35 +2120,6 @@ body.no-gerak .lln2-lencana,body.no-gerak .lc-sinar,body.no-gerak .lc-kertas{ani
 body.lln2-on .pet-nuri,body.lln2-on .pet-gel,body.lln2-on .pet-togol{display:none!important}
 body.lln2-sorokpet .pet-nuri,body.lln2-sorokpet .pet-gel{opacity:0!important;transition:opacity .2s}
 @media (prefers-reduced-motion:reduce){.lln2-gbr,.lln2-kanan{animation:none}}
-/* ===== Istana Al-Quran (IST_): bilik-bilik istana ===== */
-.ist{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:calc(100vh - 150px);overflow:hidden;touch-action:pan-y}
-.ist::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#f3e6ff,#ffe6f1);pointer-events:none}
-.ist-pentas{position:absolute;inset:0}
-.ist-bilik{position:absolute;inset:0;transition:transform .9s cubic-bezier(.55,.05,.35,1)}
-.ist-latar{position:absolute;inset:0;background:var(--c) center/cover no-repeat}
-.ist-latar::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 70%,rgba(255,240,250,.35) 100%)}
-.ist-lantai{position:absolute;left:50%;top:var(--atas,70px);width:var(--lw,600px);height:var(--lh,400px);transform:translateX(-50%)}
-.ist-atas .lln2-tajuk{background:rgba(255,255,255,.92)}
-.ist-pintu{position:absolute;transform:translate(-50%,-50%);width:var(--dw,100px);aspect-ratio:3/4;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:llnMuncul .5s var(--d) both cubic-bezier(.3,1.5,.5,1)}
-.ist-muka{position:absolute;inset:0;border-radius:999px 999px 14px 14px;background:linear-gradient(180deg,#fff 0%,var(--c,#e6d6ff) 70%);border:4px solid #f3c54d;box-shadow:0 5px 0 #d49b2a,0 12px 18px rgba(80,50,120,.32),inset 0 0 0 4px rgba(255,255,255,.75);display:grid;place-items:center;overflow:hidden}
-.ist-muka::before{content:"";position:absolute;left:16%;right:16%;top:12%;bottom:0;border-radius:999px 999px 0 0;border:2.5px solid rgba(201,150,46,.45);border-bottom:0}
-.ist-muka::after{content:"";position:absolute;right:20%;top:60%;width:9%;aspect-ratio:1;border-radius:50%;background:#f3c54d;box-shadow:0 1px 0 #b7841f}
-.ist-ik{position:relative;font-size:calc(var(--dw,100px) * .34);font-weight:900;color:#7a55c7;font-family:"Amiri Quran","Geeza Pro",serif;line-height:1;text-shadow:0 2px 0 #fff;margin-top:10%}
-.ist-ik-kecil{font-size:calc(var(--dw,100px) * .2)}
-.ist-pintu .lln-nama{top:auto;bottom:-6px;transform:translate(-50%,100%);font-size:clamp(11px,calc(var(--dw,100px) * .14),16px);padding:2px 10px;border-width:2px;z-index:2}
-.ist-pintu .lln-bintang{top:-18px;z-index:2}
-.ist-pintu .lln-bintang i{width:clamp(15px,calc(var(--dw,100px) * .24),24px);height:clamp(15px,calc(var(--dw,100px) * .24),24px)}
-.ist-pintu .lln-panah{bottom:calc(100% + 18px);z-index:3}
-.ist-pintu.lln-seterus::after{border-radius:999px 999px 14px 14px;inset:0}
-.ist-pintu.ist-siap .ist-muka{border-color:#ffd34e}
-.ist-pintu.ist-buka .ist-muka{animation:petaLantun .42s ease}
-.ist-pintu:focus-visible{outline:4px solid #b79cf2;outline-offset:6px;border-radius:999px 999px 14px 14px}
-.ist-nuri{width:calc(var(--dw,100px) * .95);z-index:4}
-.ist-lencana{z-index:5}
-.ist .lln2-anak{z-index:5;bottom:3%}.ist .lln2-kiri{left:14px}.ist .lln2-kanan{right:14px}
-@media (max-height:520px){.ist .lln2-anak{width:48px;height:48px;font-size:26px;bottom:2%}.ist-kiri{left:10px}.ist-kanan{right:10px}}
-@media (orientation:landscape){.ist .lln2-kiri{left:18px}.ist .lln2-kanan{right:18px}.ist .lln2-anak{bottom:calc(50% - 32px)}}
-@media (prefers-reduced-motion:reduce){.ist-pintu,.ist .lln2-kanan{animation:none}.ist-bilik{transition:none}}
 /* ===== Laluan level Iqra' (LLN_) ===== */
 .lln{position:relative;width:100%;max-width:760px;margin:10px auto 40px}
 .lln::before{content:"";position:fixed;inset:0;z-index:-1;background:#cfeec9 url(gambar/peta/taman-potret.jpg) center/cover no-repeat;pointer-events:none}
@@ -6987,7 +6958,6 @@ function PETA_bina() {
   lbl(".peta-quran", tk(tq.nama, "Al-Quran", "Al-Quran", "古兰经"), tk(tq.sub, "Tajwid, hafazan & 30 juz", "Tajwid, memorise & 30 juz", "泰吉威德、背诵和30卷"));
   for (let i = 0; i < 14; i++) { const k = document.createElement("i"); k.className = "peta-kilat"; k.style.left = (4 + Math.random() * 92) + "%"; k.style.top = (3 + Math.random() * 90) + "%"; k.style.animationDelay = (-Math.random() * 2.6) + "s"; p.appendChild(k); }
   LC_rak(p.querySelector(".peta-iqra"));
-  LC_rak(p.querySelector(".peta-quran"), IST_LC_SENARAI);
   $("subjList").appendChild(p);
   const sesuaiP = () => { if (!p.isConnected) { window.removeEventListener("resize", sesuaiP); return; } const h = Math.max(220, window.innerHeight - p.getBoundingClientRect().top - 8); p.style.height = h + "px"; p.style.setProperty("--ph", h + "px"); };
   sesuaiP(); window.addEventListener("resize", sesuaiP);
@@ -8133,12 +8103,12 @@ const LC_SENARAI = [
 ];
 function LC_baca() { return LLN_baca(LC_KUNCI, {}) || {}; }
 function LC_tunjuk(k, baru) {
-  const c = LC_SENARAI.concat(IST_LC_SENARAI).find(x => x.k === k); if (!c) return;
+  const c = LC_SENARAI.find(x => x.k === k); if (!c) return;
   const ada = !!LC_baca()[k], o = document.createElement("div");
   o.className = "lc-tirai" + (baru ? " lc-baru" : "") + (ada ? "" : " lc-belum");
   o.innerHTML = '<div class="lc-kotak"><div class="lc-sinar" aria-hidden="true"></div><img class="lc-gbr" alt="" src="gambar/lencana/' + k + '.webp">'
     + "<h3>" + (baru ? tr(L("Tahniah!", "Congratulations!", "恭喜！")) + "<br>" : "") + tr(L(c.nm[0], c.nm[1], c.nm[2])) + "</h3>"
-    + "<p>" + (c.pintu ? (ada ? tr(L("Semua pintu di " + c.p + " sudah dibuka!", "Every door in " + c.p + " is done!", c.p + " 全部完成！")) : tr(L("Buka semua pintu di " + c.p + " untuk dapat lencana ini.", "Finish every door in " + c.p + " to earn this badge.", "完成 " + c.p + " 的所有门来获得徽章。"))) : ada ? tr(L("Semua batu di " + c.p + " sudah siap!", "Every stone on " + c.p + " is done!", c.p + " 全部完成！")) : tr(L("Siapkan semua batu di " + c.p + " untuk dapat lencana ini.", "Finish every stone on " + c.p + " to earn this badge.", "完成 " + c.p + " 的所有关卡来获得徽章。"))) + "</p>"
+    + "<p>" + (ada ? tr(L("Semua batu di " + c.p + " sudah siap!", "Every stone on " + c.p + " is done!", c.p + " 全部完成！")) : tr(L("Siapkan semua batu di " + c.p + " untuk dapat lencana ini.", "Finish every stone on " + c.p + " to earn this badge.", "完成 " + c.p + " 的所有关卡来获得徽章。"))) + "</p>"
     + '<button class="kbn-lanjut lc-tutup">' + tr(L("OK", "OK", "好")) + "</button></div>";
   if (baru) for (let i = 0; i < 18; i++) { const t = document.createElement("i"); t.className = "lc-kertas"; t.style.left = Math.random() * 100 + "%"; t.style.background = ["#ff8fb8", "#a77bf3", "#7cc6ff", "#7be0a8", "#ffd34e"][i % 5]; t.style.animationDelay = Math.random() * .8 + "s"; o.appendChild(t); }
   const tutup = () => o.remove();
@@ -8321,187 +8291,11 @@ function HDH_pulau(w) {
   setTimeout(tunggu, PET_kurang() ? 300 : 1600);
 }
 const LLN_POSE = ["rehat", "lambai", "gembira", "jalan-1", "jalan-2", "jalan-3", "jalan-4"];
-/* ===== Istana Al-Quran (IST_): bilik-bilik istana, satu bilik setiap skrin; pintu membuka ciri Al-Quran sedia ada; Nuri berjalan antara pintu ===== */
-const IST_KUNCI = "ist.dibuka", IST_BILIK = "ist.bilik", IST_AKHIR = "ist.akhir";
-/* Lencana Istana: senarai berasingan daripada lencana pulau Iqra' (LC_SENARAI) */
-const IST_LC_SENARAI = [
-  { k: "q-tajwid", nm: ["Lencana Tajwid", "Tajwid Badge", "泰吉威德徽章"], p: "Bilik Tajwid", pintu: 1 },
-  { k: "q-hafazan", nm: ["Lencana Hafazan", "Memorising Badge", "背诵徽章"], p: "Bilik Hafazan", pintu: 1 },
-  { k: "q-surah", nm: ["Lencana Surah Lazim", "Short Surahs Badge", "短章徽章"], p: "Bilik Surah Lazim", pintu: 1 },
-  { k: "q-pustaka", nm: ["Lencana Perpustakaan", "Library Badge", "图书馆徽章"], p: "Perpustakaan 30 Juz", pintu: 1 }
-];
-/* Susun pintu dalam grid berliku (peratus lebar/tinggi pentas) */
-function IST_susun(n, kol) {
-  const bar = Math.ceil(n / kol), o = [];
-  for (let i = 0; i < n; i++) {
-    const r = Math.floor(i / kol), dlm = r < bar - 1 ? kol : n - r * kol, c = i % kol;
-    const x = (c + .5) / dlm * 100, y = 100 * (r + .6) / (bar + .05) + (dlm > 1 ? (c % 2 ? 3 : -3) : 0);
-    o.push([Math.round(x * 10) / 10, Math.round(y * 10) / 10]);
-  }
-  return o;
-}
-function IST_bina() {
-  document.body.classList.add("peta-on");
-  const st = loadStars(), dibuka = LLN_baca(IST_KUNCI, {}), hq = qhData(), d = trkData(), bm = qjPenanda();
-  const tk = (bm_, en, zh) => tr(L(bm_, en, zh));
-  const kat = [...new Set(TAJWID.map(t => t.k))];
-  const pecah = f => f >= 1 ? 3 : f >= .5 ? 2 : f > 0 ? 1 : 0;
-  /* Kemajuan hafazan: pecahan ayat dihafal bagi senarai [surah, dari, hingga] */
-  const hafal = sr => { const jum = sr.reduce((t, r) => t + r[2] - r[1] + 1, 0); return jum ? sr.reduce((t, r) => t + qhKira(hq, r), 0) / jum : 0; };
-  const sNo = nm => QS_NAMA.indexOf(nm) + 1;
-  const surahPintu = nm => { const s = SURAH.find(x => x.nama === nm), no = sNo(nm); return s ? { id: "s-" + no, ik: String(no), nm: nm, b: pecah(no ? hafal([[no, 1, QMETA.s[no - 1][1]]]) : 0), fn: () => qrBaca(s, renderAlQuranMenu, true) } : null; };
-  const IK_KUIZ = ["نْ", "مْ", "نّ", "آ", "ر"], NM_KUIZ = [["Kuiz Nun Mati", "Nun Sakinah Quiz", "静符努恩测验"], ["Kuiz Mim Mati", "Mim Sakinah Quiz", "静符米姆测验"], ["Kuiz Ghunnah", "Ghunnah Quiz", "鼻音测验"], ["Kuiz Mad", "Mad Quiz", "长音测验"], ["Kuiz Lain-lain", "More Rules Quiz", "其他规则测验"]];
-  const B = [
-    { nm: tk("Bilik Tajwid", "Tajwid Room", "泰吉威德室"), g: "tajwid", lc: "q-tajwid", c: "#bfeccf", pintu: [
-      { id: "tajwid", ik: "تَجْوِيد", kecil: 1, nm: tk("Ilmu Tajwid", "Tajwid Rules", "泰吉威德规则"), fn: qtMenu },
-      { id: "nota", ik: "ح", nm: tk("Nota Poket", "Pocket Notes", "口袋笔记"), fn: qnpBuka }
-    ].concat(kat.map((k, j) => ({ id: "kuiz" + j, ik: IK_KUIZ[j] || "?", nm: tk(...(NM_KUIZ[j] || ["Kuiz", "Quiz", "测验"])), b: Math.min(3, st["tajwid-" + j] || 0), wajibB: 1, fn: () => qtKuiz(j) }))) },
-    { nm: tk("Bilik Hafazan", "Memorising Room", "背诵室"), g: "hafazan", lc: "q-hafazan", c: "#ddd0ff", pintu: [
-      { id: "fatihah", ik: "1", nm: "Al-Fatihah", b: pecah(hafal([[1, 1, 7]])), wajibB: 1, fn: () => qhBaca(1, 1, 1, 7) },
-      { id: "juzamma", ik: "30", nm: "Juz 'Amma", b: pecah(hafal(qhJuzSurah(30))), wajibB: 1, fn: () => qhJuzMenu(30) },
-      { id: "hafazan30", ik: "♡", nm: tk("Hafazan 30 Juz", "Memorise 30 Juz", "背诵30卷"), fn: qhMenu },
-      { id: "trkh", ik: "✓", nm: tk("Tracker Hafazan", "Memorising Tracker", "背诵记录"), fn: () => trkMenu("h", renderAlQuranMenu) }
-    ] },
-    { nm: tk("Bilik Surah Lazim", "Short Surahs Room", "短章室"), g: "surah", lc: "q-surah", c: "#ffe0c4", pintu: ["Al-Fatihah", "Al-Ikhlas", "Al-Falaq", "An-Nas", "Al-Kauthar", "Al-'Asr"].map(surahPintu).filter(Boolean).concat([
-      { id: "semuasurah", ik: "☾", nm: tk("Semua Surah", "All Surahs", "所有短章"), fn: qrSenaraiSurah }
-    ]) },
-    { nm: tk("Perpustakaan 30 Juz", "30 Juz Library", "30卷图书馆"), g: "perpustakaan", lc: "q-pustaka", c: "#cfe7ff", pintu: [
-      { id: "juz30", ik: "30", nm: tk("Bacaan 30 Juz", "Read 30 Juz", "诵读30卷"), b: pecah(d.muka.length / 604), fn: qjMenu },
-      { id: "sambung", ik: "▶", nm: tk("Sambung Bacaan", "Continue Reading", "继续诵读"), fn: () => bm ? qjBaca(bm.j, bm.p) : qjBaca(1, 1) },
-      { id: "tafsir", ik: "تفسير", kecil: 1, nm: tk("Al-Quran Bertafsir", "Quran with Tafsir", "古兰经注释"), fn: qbMenu },
-      { id: "ulum", ik: "علوم", kecil: 1, nm: tk("Ulum Al-Quran", "Quran Sciences", "古兰经学"), fn: quMenu },
-      { id: "kelas", ik: "★", nm: tk("Kelas Al-Quran", "Quran Class", "古兰经课"), fn: IST_menuLama }
-    ] }
-  ];
-  const selesai = x => x.b > 0 || (!x.wajibB && !!dibuka[x.id]);
-  /* "Seterusnya" = pintu belum siap pertama, bermula dari pintu terakhir yang dibuka */
-  let sp = -1, sb = -1;
-  const rata = []; B.forEach((bl, a) => bl.pintu.forEach((x, b) => rata.push([a, b, x])));
-  const akhir = LLN_baca(IST_AKHIR, ""), mula = Math.max(0, rata.findIndex(r => r[0] + ":" + r[2].id === akhir));
-  const cari = (dari, ke) => { for (let i = dari; i < ke; i++) if (!selesai(rata[i][2])) { sp = rata[i][0]; sb = rata[i][1]; return true; } return false; };
-  if (!cari(mula, rata.length)) cari(0, mula);
-  let kini = LLN_baca(IST_BILIK, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < B.length)) kini = 0;
-  const kurang = PET_kurang() || document.body.classList.contains("no-gerak");
-  const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
-  const w = document.createElement("div"); w.className = "ist";
-  w.innerHTML = '<div class="lln2-atas ist-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + B.map((bl, a) => '<button data-p="' + a + '" aria-label="' + bl.nm + '"></button>').join("") + "</span></div>"
-    + '<button class="lln2-lencana ist-lencana" aria-label="' + tk("Lencana bilik", "Room badge", "房间徽章") + '"><img alt="" src=""></button>'
-    + '<div class="ist-pentas"></div>'
-    + '<button class="lln2-anak lln2-kiri ist-kiri" aria-label="' + tk("Bilik sebelum", "Previous room", "上一个房间") + '">‹</button><button class="lln2-anak lln2-kanan ist-kanan" aria-label="' + tk("Bilik seterusnya", "Next room", "下一个房间") + '">›</button>';
-  $("subjList").appendChild(w);
-  const pentas = w.querySelector(".ist-pentas");
-  let potret = false, kol = 3, dwP = 100, lwP = 600;
-  const binaBilik = a => {
-    const bl = B[a], sus = IST_susun(bl.pintu.length, kol), el = document.createElement("div");
-    el.className = "ist-bilik"; el.style.setProperty("--c", bl.c);
-    el.innerHTML = '<div class="ist-latar" style="background-image:url(gambar/istana/' + bl.g + '.webp)"></div><div class="ist-lantai">' + bl.pintu.map((x, b) => {
-      const sel = selesai(x), next = a === sp && b === sb;
-      return '<button class="ist-pintu' + (next ? " lln-seterus" : "") + (sel ? " ist-siap" : "") + '" style="left:' + sus[b][0] + "%;top:" + sus[b][1] + "%;--d:" + (b * .07 + .1) + 's" data-b="' + b + '">'
-        + (x.b != null ? bintang(x.b) : (sel ? '<span class="lln-tanda">✓</span>' : ""))
-        + '<span class="ist-muka"><b class="ist-ik' + (x.kecil ? " ist-ik-kecil" : "") + '">' + x.ik + "</b></span>"
-        + '<span class="lln-nama">' + x.nm + "</span>" + (next ? '<span class="lln-panah">' + tk("Seterusnya", "Next", "下一步") + "</span>" : "") + "</button>";
-    }).join("") + '<div class="lln2-nuri ist-nuri" aria-hidden="true"><div class="lln2-nuri-rupa">' + LLN_POSE.map(q => '<img alt="" data-p="' + q + '" src="gambar/pet/nuri/' + q + '.png">').join("") + "</div></div></div>";
-    el._sus = sus;
-    return el;
-  };
-  const papar = () => {
-    $("subjTitle").textContent = B[kini].nm; w.querySelector(".lln2-tajuk").textContent = (kini + 1) + " / " + B.length;
-    w.querySelectorAll(".lln2-titik button").forEach((b, a) => { b.classList.toggle("on", a === kini); b.classList.toggle("siap", B[a].pintu.every(selesai)); });
-    w.querySelector(".ist-kiri").hidden = kini === 0; w.querySelector(".ist-kanan").hidden = kini === B.length - 1;
-    const lb = w.querySelector(".ist-lencana");
-    lb.querySelector("img").src = "gambar/lencana/" + B[kini].lc + ".webp"; lb.classList.toggle("lc-dapat", !!LC_baca()[B[kini].lc]);
-    LLN_tulis(IST_BILIK, kini);
-  };
-  document.body.classList.add("lln2-on");
-  /* saiz ikut skrin: potret (iPhone/iPad tegak) 2-3 lajur, landskap (Mac) 4 lajur */
-  const sesuai = () => {
-    if (!w.isConnected) { window.removeEventListener("resize", sesuai); return; }
-    const top = w.getBoundingClientRect().top + (window.scrollY || 0);
-    const H = Math.max(260, window.innerHeight - top - 6), W = w.clientWidth;
-    w.style.height = H + "px";
-    const pendek = window.innerHeight < 520, atas = pendek ? 34 : 84, bawah = pendek ? 8 : 92;
-    const lp = potret; potret = H > W * 1.05;
-    const lh = Math.min(H - atas - bawah, potret ? H : 640), lw = Math.min(W * .94, potret ? W * .96 : lh * 1.75, 1100);
-    w.style.setProperty("--lw", Math.round(lw) + "px"); w.style.setProperty("--lh", Math.round(lh) + "px"); w.style.setProperty("--atas", atas + "px");
-    const lk = kol; kol = potret ? (W < 600 ? 2 : 3) : 4;
-    const n = Math.max(...B.map(bl => bl.pintu.length)), bar = Math.ceil(n / kol);
-    dwP = Math.round(Math.max(54, Math.min(lw / kol * .5, lh / bar * .5, 132))); lwP = lw;
-    w.style.setProperty("--dw", dwP + "px");
-    if ((lk !== kol || lp !== potret) && pentas.firstChild && !tukar) { const el = binaBilik(kini); pentas.replaceChildren(el); mulaNuri(el, kini); }
-  };
-  /* ---- Nuri: berdiri di sebelah pintu, berjalan ke pintu yang ditekan ---- */
-  const titik = (el, b) => { const q = el._sus[b], dx = dwP / lwP * 100 * .82; return [q[0] < 60 ? q[0] + dx : q[0] - dx, q[1] + 6]; };
-  const PAD = arah => arah > 0 ? [104, 70] : [-4, 70];
-  const nuri = el => el.querySelector(".ist-nuri");
-  const pose = (el, q, flip) => { const n = nuri(el); n.querySelectorAll("img").forEach(m => m.classList.toggle("on", m.dataset.p === q)); if (flip != null) n.classList.toggle("lln2-kiri-hadap", flip); };
-  const letak = (el, xy) => { const n = nuri(el); n._xy = xy.slice(); n.style.left = xy[0] + "%"; n.style.top = xy[1] + "%"; };
-  let jalanNo = 0;
-  const jalan = (el, ke, siap) => {
-    const n = nuri(el), dari = n._xy || ke, no = ++jalanNo, R = el.querySelector(".ist-lantai").getBoundingClientRect();
-    const dx = (ke[0] - dari[0]) / 100 * (R.width || 600), dy = (ke[1] - dari[1]) / 100 * (R.height || 400), jarak = Math.hypot(dx, dy);
-    if (kurang || jarak < 4) { letak(el, ke); pose(el, "gembira"); setTimeout(() => { if (no === jalanNo) { pose(el, "rehat"); if (siap) siap(); } }, kurang ? 0 : 300); return; }
-    const lama = Math.max(380, Math.min(1500, jarak / 0.34)), t0 = performance.now();
-    pose(el, "jalan-1", dx < 0);
-    const langkah = t => {
-      if (no !== jalanNo || !el.isConnected) return;
-      const u = Math.min(1, (t - t0) / lama), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
-      letak(el, [dari[0] + (ke[0] - dari[0]) * e, dari[1] + (ke[1] - dari[1]) * e]);
-      n.style.setProperty("--lompat", (-Math.abs(Math.sin(u * lama / 140 * Math.PI)) * 6) + "px");
-      pose(el, "jalan-" + (1 + Math.floor((t - t0) / 110) % 4));
-      if (u < 1) requestAnimationFrame(langkah); else { n.style.setProperty("--lompat", "0px"); pose(el, "gembira"); setTimeout(() => { if (no === jalanNo) { pose(el, "rehat"); if (siap) siap(); } }, 260); }
-    };
-    requestAnimationFrame(langkah);
-  };
-  const sasaran = a => { let b = a === sp ? sb : B[a].pintu.findIndex(x => !selesai(x)); return b < 0 ? 0 : b; };
-  const mulaNuri = (el, a) => { letak(el, titik(el, sasaran(a))); pose(el, "lambai", false); setTimeout(() => { if (el.isConnected) pose(el, "rehat"); }, 1400); };
-  let tukar = false;
-  sesuai(); window.addEventListener("resize", sesuai); setTimeout(sesuai, 650); /* ukur semula selepas animasi skrin masuk */
-  const pertama = binaBilik(kini); pentas.appendChild(pertama); papar(); mulaNuri(pertama, kini);
-  /* Lencana bilik: beri lencana baharu bila semua pintu bilik siap */
-  const lcAda = LC_baca(), lcBaru = B.filter(bl => bl.pintu.every(selesai) && !lcAda[bl.lc]).map(bl => bl.lc);
-  if (lcBaru.length) { lcBaru.forEach(k => { lcAda[k] = Date.now(); }); LLN_tulis(LC_KUNCI, lcAda); papar(); setTimeout(() => LC_tunjuk(lcBaru[0], true), kurang ? 0 : 900); }
-  w.querySelector(".ist-lencana").onclick = () => LC_tunjuk(B[kini].lc, false);
-  /* ---- Tukar bilik: Nuri berjalan keluar, bilik meluncur, Nuri masuk ke pintu ---- */
-  const pergiKe = a => {
-    if (tukar || a === kini || a < 0 || a >= B.length) return;
-    const arah = a > kini ? 1 : -1, lama = pentas.querySelector(".ist-bilik");
-    tukar = true; w.dataset.sibuk = "1";
-    const luncur = () => {
-      const baru = binaBilik(a); kini = a; papar(); PETA_bunyi("ting");
-      if (kurang) { lama.remove(); pentas.appendChild(baru); mulaNuri(baru, a); tukar = false; delete w.dataset.sibuk; return; }
-      baru.style.transition = "none"; baru.style.transform = "translateX(" + (arah * 105) + "%)"; pentas.appendChild(baru);
-      letak(baru, PAD(-arah)); pose(baru, "jalan-1", arah < 0);
-      requestAnimationFrame(() => requestAnimationFrame(() => { baru.style.transition = ""; baru.style.transform = "translateX(0)"; lama.style.transform = "translateX(" + (-arah * 105) + "%)"; }));
-      setTimeout(() => { lama.remove(); tukar = false; delete w.dataset.sibuk; jalan(baru, titik(baru, sasaran(a)), () => { pose(baru, "lambai"); setTimeout(() => { if (baru.isConnected) pose(baru, "rehat"); }, 1200); }); }, 950);
-    };
-    if (kurang) return luncur();
-    jalan(lama, PAD(arah), luncur);
-  };
-  w.querySelector(".ist-kanan").onclick = () => pergiKe(kini + 1);
-  w.querySelector(".ist-kiri").onclick = () => pergiKe(kini - 1);
-  w.querySelector(".lln2-titik").onclick = e => { const b = e.target.closest("[data-p]"); if (b) pergiKe(+b.dataset.p); };
-  let x0 = null, leret = false; pentas.addEventListener("pointerdown", e => { x0 = e.clientX; leret = false; });
-  pentas.addEventListener("pointerup", e => { if (x0 == null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 70) { leret = true; pergiKe(kini + (dx < 0 ? 1 : -1)); } });
-  let pergi = false;
-  pentas.addEventListener("click", e => {
-    const b = e.target.closest(".ist-pintu"); if (!b || pergi || tukar || leret) return;
-    const el = b.closest(".ist-bilik"), bi = +b.dataset.b, x = B[kini].pintu[bi]; PETA_bunyi("ting");
-    pergi = true; dibuka[x.id] = 1; LLN_tulis(IST_KUNCI, dibuka); LLN_tulis(IST_AKHIR, kini + ":" + x.id);
-    b.classList.add("ist-buka");
-    jalan(el, titik(el, bi), () => setTimeout(() => { if (!w.isConnected) return; setLux(true); x.fn(); }, kurang ? 0 : 280));
-  });
-}
 /* Mod mewah untuk seluruh bahagian Al-Quran */
 function setLux(on) { document.body.classList.toggle("lux-on", !!on && (typeof TETAP === "undefined" || TETAP.mewah)); }
-/* Istana Al-Quran: bilik-bilik (IST_bina); menu lama kekal sebagai pintu "Kelas Al-Quran" di Perpustakaan */
 function renderAlQuranMenu() {
-  backMenu = renderAlQuranMenu; qariHenti(); setLux(false);
-  renderMenu(tr(L("Istana Al-Quran", "Quran Palace", "古兰经宫殿")), [], renderQuran);
-  IST_bina();
-}
-function IST_menuLama() {
-  backMenu = IST_menuLama; qariHenti(); setLux(true);
-  renderMenu("Al-Quran", [], renderAlQuranMenu);
+  backMenu = renderAlQuranMenu; qariHenti(); setLux(true);
+  renderMenu("Al-Quran", [], renderQuran);
   const d = trkData(), hq = qhData(), hari = trkTarikh(), jumH = Object.keys(hq).reduce((a, x) => a + (hq[x] || []).length, 0);
   const hero = document.createElement("div");
   hero.className = "lux luxt luxhero";
