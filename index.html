@@ -6667,12 +6667,8 @@ const IQRA = (() => {
 })();
 const IQ_KEY = "appPendidikan.iqra.v2";
 function iqKemajuan() { try { return JSON.parse(localStorage.getItem(IQ_KEY)) || {}; } catch (e) { return {}; } }
-function qrIqra() {
-  backMenu = qrIqra;
-  const kj = iqKemajuan(), warna = ["q-huruf", "q-baris", "q-surah", "q-doa", "q-kuiz", "q-huruf"];
-  renderMenu("Iqra' 1 - 6", IQRA.map((b, i) => [warna[i], SVGC(`<rect x="10" y="8" width="44" height="50" rx="12" fill="${["#8FD9A8", "#FFD978", "#8CC8FF", "#FFB98A", "#BBA6FF", "#FF9EC4"][i]}"/><rect x="10" y="8" width="10" height="50" rx="5" fill="#000" opacity=".08"/>${TULIS(36, 44, i + 1, 30, "#fff")}`),
-    b.nama, b.ds + " · " + (kj[i] || []).length + " / " + b.muka.length + " muka", "", () => iqBaca(i, 0)]), renderIqraMenu);
-}
+/* Kembali dari muka Iqra' -> pulau Iqra' (bukan senarai lama) */
+function qrIqra() { renderIqraMenu(); }
 function iqBaca(bi, mi) {
   const b = IQRA[bi], m = b.muka[mi];
   const kw0 = $("qrKawasan"), arah0 = (window.IQ_akhir && IQ_akhir.bi === bi) ? (mi >= IQ_akhir.mi ? "maju" : "undur") : "baru"; window.IQ_akhir = { bi, mi };
@@ -7967,7 +7963,7 @@ function LLN_bina() {
         /* mendarat: kapal hilang, Nuri turun di landasan, kemudian berjalan ke batu */
         kapal.style.opacity = "0"; lama.remove(); w.classList.remove("lln2-terbang"); document.body.classList.remove("lln2-sorokpet");
         const nb = nuri(baru); nb.style.visibility = ""; letak(baru, PAD(-arah)); pose(baru, "gembira", arah < 0); nb.classList.add("lln2-turun");
-        setTimeout(() => { nb.classList.remove("lln2-turun"); let b = a === sp ? sb : P[a].batu.findIndex(x => !selesai(x)); if (b < 0) b = 0; jalan(baru, titikBatu(baru, b), () => { pose(baru, "lambai"); setTimeout(() => pose(baru, "rehat"), 1200); terbang = false; }); }, 450);
+        setTimeout(() => { nb.classList.remove("lln2-turun"); let b = a === sp ? sb : P[a].batu.findIndex(x => !selesai(x)); if (b < 0) b = 0; terbang = false; jalan(baru, titikBatu(baru, b), () => { pose(baru, "lambai"); setTimeout(() => pose(baru, "rehat"), 1200); }); }, 450);
       };
       kapal.style.transform = "translate(" + S[0] + "px," + S[1] + "px) translate(-50%,-62%) scale(.8)" + (arah < 0 ? " scaleX(-1)" : "");
       requestAnimationFrame(f);
@@ -11266,7 +11262,7 @@ const PET_DLG = window.PET_DIALOG || {};
 const PET_KUMP = {};
 Object.keys(PET_DLG).forEach(id => { const k = id.replace(/-\d+$/, ""); (PET_KUMP[k] = PET_KUMP[k] || []).push(id); });
 const PET_KUNCI = "appPendidikan.petNuri", PET_BAWAH = 6, PET_LAJU = 40, PET_BINGKAI = 7;
-const PET_TEPI_SEL = ".qrpilih,.qtpilih,.thjpapan,canvas,input,textarea,select,.qjmuka,.qbhalaman,.qrayat,.qjayat";
+const PET_TEPI_SEL = ".qrpilih,.qtpilih,.thjpapan,canvas,input,textarea,select,.qjmuka,.qbhalaman,.qrayat,.qjayat,.qrgrid,.iqgrid,.qrbaris,.qrh";
 const PET_JAWAB_SEL = ".qrpilih,.qtpilih,.thjpapan";
 const PET = { el: null, aktif: false, dalam: false, sorok: false, x: 0, y: 0, tx: 0, ty: 0, arah: 1, mod: "rehat", saiz: 120,
   poseKhas: "", poseKhas2: "", poseTukar: 0, poseHingga: 0, lompatHingga: 0, rehatHingga: 0, tahanHingga: 0, kelipT: 0, kelipHingga: 0,
@@ -11471,7 +11467,9 @@ function PET_detik(t) {
     PET.tepi = !skrin || (skrin.id !== "s-subj" && skrin.id !== "s-quran") || !!skrin.querySelector(PET_TEPI_SEL);
     PET.jawab = !!skrin && !!skrin.querySelector(PET_JAWAB_SEL);
     PET.sudut = (PET.tepi || kurang) && PET.mod !== "pegang" ? PET_cariTepi() : null;
-    const lut = !!PET.sudut && PET.sudut.a > 0 && t >= PET.tahanHingga && PET.mod !== "pegang";
+    /* tidur di luar tepi selamat (cth. di atas grid huruf/bacaan): lut sinar & tidak menghalang tekanan */
+    const tidurAtas = PET.mod !== "pegang" && !!PET.sudut && (Math.abs(PET.x - PET.sudut.x) > 8 || Math.abs(PET.y - PET.sudut.y) > 8); /* juga semasa berjalan ke tepi */
+    const lut = (!!PET.sudut && PET.sudut.a > 0 && t >= PET.tahanHingga && PET.mod !== "pegang") || tidurAtas;
     PET.el.classList.toggle("pet-lut", lut);
     /* galakan ringkas bila anak mula menjawab/menulis */
     if (PET.jawab && !dulu && !bising && t - PET.galakT > 60000 && t > PET.gelHingga && PET.mod !== "tidur") { PET.galakT = t; PET_cakap("galak", { pose: "tunjuk", lengah: 700 }); }
