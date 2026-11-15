@@ -7143,7 +7143,7 @@ function kbnIngat() {
 
 /* Kereta Api: stesen 3D; masukkan kotak huruf yang disebut ke gerabak; 3 gerabak setiap perjalanan, 2 perjalanan */
 function kbnKereta() {
-  const b = kbnSkrin(KBN.g.indexOf("Kereta") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
+  const b = kbnSkrin(KBN.g.indexOf("Kereta") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true, pergiPada = -1;
   const HUE = ["0deg", "95deg", "200deg"];
   b.innerHTML = '<div class="kbn-stesen kt2"><div class="kt-latar"></div><div class="kbn-kereta kt-kereta"><div class="kt-lok"><div class="kt-badan"><img alt="" src="' + KBN_DIR + 'kt-lok.webp"></div><i class="kt-asap"></i><i class="kt-asap a2"></i><i class="kt-asap a3"></i></div>' + [0, 1, 2].map(n => '<div class="kbn-gerabak kt-gb"><div class="kt-badan"><span class="kt-muatan"><i></i><i></i></span><img alt="" src="' + KBN_DIR + 'kt-gerabak.webp" style="filter:hue-rotate(' + HUE[n] + ')"><span class="kt-label"><b class="qrar"></b></span></div></div>').join("") + '</div><div class="kbn-platform kt-platform"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
   const st = b.querySelector(".kbn-stesen"), kt = st.querySelector(".kbn-kereta"), pf = st.querySelector(".kbn-platform"), markah = st.querySelector(".kbn-markah");
@@ -7153,8 +7153,7 @@ function kbnKereta() {
   const pusingan = () => {
     if (id !== KBN.id) return;
     markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
-    if (g && g % 3 === 0 && !kt.dataset.baru) { kt.dataset.baru = "1"; pf.innerHTML = ""; KBN_suara("m-kereta-pergi"); return pergi(() => { if (g >= giliran.length) return kbnSeterus(2); masuk(() => { kt.dataset.baru = ""; pusingan(); }); }); }
-    kt.dataset.baru = "";
+    if (g && g % 3 === 0 && pergiPada !== g) { pergiPada = g; pf.innerHTML = ""; KBN_suara("m-kereta-pergi"); return pergi(() => { if (id !== KBN.id) return; if (g >= giliran.length) return kbnSeterus(2); masuk(() => pusingan()); }); }
     const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
     pf.innerHTML = pilih.map((i, n) => '<button class="kbn-kotak kt-kotak" data-i="' + i + '" style="--d:' + (n * .08) + 's"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
     gb.forEach((x, n) => x.classList.toggle("sasar", n === g % 3));
