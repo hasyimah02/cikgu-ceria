@@ -1357,6 +1357,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .rnt-item{border:0;background:none;padding:0;cursor:pointer;position:relative;flex:none}
 .rnt-badan{display:flex;flex-direction:column;align-items:center;justify-content:center;width:96px;height:96px;position:relative;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
 .rnt-badan b{font-size:42px;line-height:1.25;color:#3a2366}
+.rnt .rnt-badan .qrar{font-family:"Geeza Pro","Amiri Quran",sans-serif!important;font-weight:700}
 .rnt-badan small{font-weight:900;font-size:15px;color:#4a3570;line-height:1}
 .rnt-item.on .rnt-badan{transform:translateY(-14px) scale(1.18)}
 .rnt-item.on .rnt-badan b{color:#e0457f}
@@ -1367,7 +1368,9 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .rnt-keretapi .rnt-landas{height:14px;bottom:calc(22% - 14px);background:repeating-linear-gradient(90deg,#8b6b4a 0 10px,transparent 10px 30px),linear-gradient(transparent 4px,#6d6d7a 4px 7px,transparent 7px)}
 .rnt-keretapi .rnt-badan{background:linear-gradient(#ffd36e,#ffbf3c);border-radius:14px 14px 8px 8px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.1)}
 .rnt-keretapi .rnt-item:nth-child(3n) .rnt-badan{background:linear-gradient(#8fd9a8,#5fc98a)}.rnt-keretapi .rnt-item:nth-child(3n+1) .rnt-badan{background:linear-gradient(#8cc8ff,#5fb0ff)}
-.rnt-keretapi .rnt-badan::after{content:"";position:absolute;bottom:-12px;left:12px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#3a2366 24%);box-shadow:52px 0 0 0 #3a2366}
+.rnt-keretapi .rnt-badan::after,.rnt-keretapi .rnt-badan::before{content:"";position:absolute;bottom:-12px;left:12px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,transparent 24%),conic-gradient(#3a2366 0 40deg,#5a4386 40deg 90deg,#3a2366 90deg 130deg,#5a4386 130deg 180deg,#3a2366 180deg 220deg,#5a4386 220deg 270deg,#3a2366 270deg 310deg,#5a4386 310deg)}
+.rnt-keretapi .rnt-badan::before{left:auto;right:12px}
+.rnt-keretapi.jalan .rnt-item .rnt-badan::before{animation:kbnPusing .5s linear infinite}
 .rnt-keretapi .rnt-kepala{order:-1;flex:none;width:110px;height:100px;border-radius:16px 30px 8px 8px;background:linear-gradient(#ff8fbf,#f06aa3);position:relative}
 .rnt-keretapi .rnt-kepala::before{content:"";position:absolute;right:18px;top:-30px;width:24px;height:32px;background:#3a2366;border-radius:4px}
 .rnt-keretapi.jalan .rnt-kepala::after{content:"";position:absolute;right:16px;top:-58px;width:26px;height:26px;border-radius:50%;background:#fff;animation:kbnAsap 1.2s ease-out infinite}
@@ -1420,7 +1423,7 @@ body.peta-on #subjTitle{display:table;margin-left:auto;margin-right:auto;color:#
 .rnt-lebah .rnt-badan{animation:rntApung 1.6s ease-in-out infinite;animation-delay:calc(var(--n) * -.2s)}
 /* awan */
 .rnt-awan{background:linear-gradient(#9fd2ff,#e2f1ff)}
-.rnt-awan .rnt-badan{width:120px;height:80px;border-radius:40px;background:#fff;box-shadow:-18px -16px 0 -4px #fff,18px -20px 0 -2px #fff}
+.rnt-awan .rnt-badan{width:124px;height:100px;border-radius:40px;background:#fff;box-shadow:-18px -16px 0 -4px #fff,18px -20px 0 -2px #fff}
 .rnt-awan .rnt-rantai{bottom:36%}
 .rnt-awan .rnt-badan{animation:rntApung 3.2s ease-in-out infinite;animation-delay:calc(var(--n) * -.4s)}
 /* layang-layang */
@@ -7482,10 +7485,10 @@ function RNT_bina(host, item, tema, kunci) {
     const id = ++no; w.classList.add("jalan"); w.querySelector(".rnt-main").hidden = true; w.querySelector(".rnt-henti").hidden = false;
     if (lagu && SUARA_ON) {
       try { au = new Audio("gambar/" + lagu); au.play().catch(() => {}); } catch (e) { /* abaikan */ }
-      let n = 0; const t = () => { if (id !== no) return; fokus(n); n++; if (n < el.length) setTimeout(t, tempo); else setTimeout(henti, tempo); }; t();
+      let n = 0; const t = () => { if (id !== no) return; if (!w.isConnected) { try { au && au.pause(); } catch (e) { /* abaikan */ } return; } fokus(n); n++; if (n < el.length) setTimeout(t, tempo); else setTimeout(henti, tempo); }; t();
     } else {
       let p = Promise.resolve();
-      el.forEach((e, n) => { p = p.then(() => { if (id !== no) return; fokus(n); return speak("~" + item[n].lat, "ms").then(() => tunggu(120)); }); });
+      el.forEach((e, n) => { p = p.then(() => { if (id !== no || !w.isConnected) return; fokus(n); return speak("~" + item[n].lat, "ms").then(() => tunggu(120)); }); });
       p.then(() => { if (id === no) henti(); });
     }
   };
@@ -7627,7 +7630,7 @@ function brsG_Lif(q, kw, pilih) {
   return {
     betul: el => new Promise(ok => {
       el.classList.add("nyala"); lif.classList.remove("buka");
-      setTimeout(() => { lif.style.top = (TK.indexOf(q.sasar.v) / 3 * 100) + "%"; lif.querySelector("b").textContent = q.sasar.ar; }, 520);
+      setTimeout(() => { lif.style.top = (TK.indexOf(q.sasar.v[0]) / 3 * 100) + "%"; lif.querySelector("b").textContent = q.sasar.ar; }, 520);
       setTimeout(() => { lif.classList.add("buka"); setTimeout(ok, 650); }, 1450);
     })
   };
