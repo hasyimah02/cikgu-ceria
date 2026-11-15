@@ -1862,6 +1862,34 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .kbn-kail{position:absolute;top:0;left:50%;width:3px;height:0;background:#3a2366;transition:height .5s ease-in;z-index:5}
 .kbn-kail i{position:absolute;bottom:-14px;left:-8px;width:16px;height:18px;border:3px solid #6d6d7a;border-top:0;border-radius:0 0 10px 10px}
 .kbn-kail.tarik{height:0!important;transition:height .9s ease-in}
+/* Kereta Api v2 */
+.kbn-stesen.kt2{background:#cfe8ff}
+.kt-latar{position:absolute;inset:0;background:url(gambar/kebun/kt-latar.jpg) 0 40%/cover no-repeat;transition:background-position 1.6s cubic-bezier(.4,0,.2,1)}
+.kt2.bergerak .kt-latar{animation:ktPan 1.6s ease-in-out}
+@keyframes ktPan{0%{filter:blur(0)}50%{filter:blur(1.5px)}100%{filter:blur(0)}}
+.kt2 .kbn-landasan,.kt2 .kbn-awan-s{display:none}
+.kt-kereta{top:auto!important;bottom:31%;left:3%;gap:0!important;align-items:flex-end}
+.kt-lok{position:relative;width:clamp(150px,30vw,230px)}
+.kt-lok img,.kt-gb img{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 4px rgba(60,30,100,.25))}
+.kt-gb{position:relative;width:clamp(110px,22vw,170px);height:auto!important;background:none!important;margin-right:-6px;display:block!important}
+.kt-gb img{position:relative;z-index:2}
+.kt-muatan{position:absolute;left:50%;top:6%;width:46%;aspect-ratio:1;transform:translate(-50%,30%) scale(.6);z-index:1;border-radius:10px;background:repeating-linear-gradient(0deg,#f0c48a 0 14px,#e3b273 14px 17px);border:3px solid #c08a52;display:grid;place-items:center;opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.kt-muatan b{font-size:clamp(30px,6vmin,48px);color:#3a2366;line-height:1;align-self:start;margin-top:6%}
+.kt-gb.isi .kt-muatan{opacity:1;transform:translate(-50%,-42%)}
+.kt-gb.sasar::after{content:"";position:absolute;left:12%;right:12%;top:-6%;height:18%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,150,.95),rgba(255,236,150,0));z-index:3;animation:ktCahaya 1s ease-in-out infinite}
+@keyframes ktCahaya{50%{opacity:.4}}
+.kt-kereta.berhenti .kt-lok img{animation:ktGegar 1.2s ease-in-out infinite}
+.kt-kereta.masuk .kt-lok img,.kt-kereta.pergi .kt-lok img,.kt-kereta.masuk .kt-gb img,.kt-kereta.pergi .kt-gb img{animation:ktLantun .28s ease-in-out infinite}
+@keyframes ktLantun{50%{transform:translateY(-3px)}}
+@keyframes ktGegar{50%{transform:translateY(-1.5px)}}
+.kt-asap{position:absolute;left:58%;top:-6%;width:30px;height:30px;border-radius:50%;background:#fff;opacity:0;animation:ktAsap 2.2s ease-out infinite}
+.kt-asap.a2{animation-delay:.7s}.kt-asap.a3{animation-delay:1.4s}
+.kt-kereta.masuk .kt-asap,.kt-kereta.pergi .kt-asap{animation-duration:.8s}
+@keyframes ktAsap{0%{transform:translate(0,0) scale(.4);opacity:.95}100%{transform:translate(-40px,-70px) scale(2);opacity:0}}
+.kt-platform{bottom:3%!important}
+.kt-kotak{animation:kbnTimbul2 .45s var(--d) both cubic-bezier(.3,1.6,.5,1);box-shadow:0 8px 0 #b07a44,0 14px 18px rgba(60,30,10,.25)!important}
+.kt-kotak.terbang{animation:ktTerbang .65s cubic-bezier(.4,.1,.5,1) forwards}
+@keyframes ktTerbang{0%{transform:none}45%{transform:translate(calc(var(--dx) * .5),calc(var(--dy) * .5 - 90px)) rotate(-12deg) scale(.9)}100%{transform:translate(var(--dx),var(--dy)) rotate(0) scale(.5)}}
 .kbn-tapak{position:relative;height:min(64vh,580px);border-radius:28px;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 0 #d9c6fb;background:linear-gradient(#ffe9f4,#efe6ff 70%,#cdeec0 70%,#b4e3a3)}
 .kbn-menara{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;width:clamp(96px,22%,140px)}
 .kbn-menara::after{content:"";width:130%;height:16px;border-radius:8px;background:#9a7a5a}
@@ -7104,29 +7132,32 @@ function kbnIngat() {
   };
 }
 
-/* Kereta Api: masukkan kotak huruf yang disebut ke gerabak; 3 gerabak setiap perjalanan, 2 perjalanan */
+/* Kereta Api: stesen 3D; masukkan kotak huruf yang disebut ke gerabak; 3 gerabak setiap perjalanan, 2 perjalanan */
 function kbnKereta() {
   const b = kbnSkrin(KBN.g.indexOf("Kereta") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
-  b.innerHTML = '<div class="kbn-stesen"><div class="kbn-awan-s"></div><div class="kbn-kereta"><div class="kbn-lok"><i class="kbn-asap"></i><span class="kbn-roda"></span><span class="kbn-roda r2"></span></div>' + [0, 1, 2].map(() => '<div class="kbn-gerabak"><b class="qrar"></b><span class="kbn-roda"></span><span class="kbn-roda r2"></span></div>').join("") + '</div><div class="kbn-landasan"></div><div class="kbn-platform"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+  const HUE = ["0deg", "95deg", "200deg"];
+  b.innerHTML = '<div class="kbn-stesen kt2"><div class="kt-latar"></div><div class="kbn-kereta kt-kereta"><div class="kt-lok"><img alt="" src="' + KBN_DIR + 'kt-lok.webp"><i class="kt-asap"></i><i class="kt-asap a2"></i><i class="kt-asap a3"></i></div>' + [0, 1, 2].map(n => '<div class="kbn-gerabak kt-gb"><span class="kt-muatan"><b class="qrar"></b></span><img alt="" src="' + KBN_DIR + 'kt-gerabak.webp" style="filter:hue-rotate(' + HUE[n] + ')"></div>').join("") + '</div><div class="kbn-platform kt-platform"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
   const st = b.querySelector(".kbn-stesen"), kt = st.querySelector(".kbn-kereta"), pf = st.querySelector(".kbn-platform"), markah = st.querySelector(".kbn-markah");
   const gb = [...st.querySelectorAll(".kbn-gerabak")];
-  const masuk = cb => { kt.className = "kbn-kereta"; void kt.offsetWidth; kt.classList.add("masuk"); setTimeout(cb, 1300); };
-  const pergi = cb => { kt.classList.remove("masuk"); kt.classList.add("pergi"); setTimeout(() => { gb.forEach(x => { x.classList.remove("isi"); x.querySelector("b").textContent = ""; }); cb(); }, 1500); };
+  const masuk = cb => { st.classList.add("bergerak"); kt.className = "kbn-kereta kt-kereta"; void kt.offsetWidth; kt.classList.add("masuk"); setTimeout(() => { st.classList.remove("bergerak"); kt.classList.add("berhenti"); cb(); }, 1500); };
+  const pergi = cb => { kt.classList.remove("masuk", "berhenti"); st.classList.add("bergerak"); kt.classList.add("pergi"); setTimeout(() => { st.classList.remove("bergerak"); gb.forEach(x => { x.classList.remove("isi"); x.querySelector("b").textContent = ""; }); cb(); }, 1700); };
   const pusingan = () => {
     if (id !== KBN.id) return;
     markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
     if (g && g % 3 === 0 && !kt.dataset.baru) { kt.dataset.baru = "1"; pf.innerHTML = ""; KBN_suara("m-kereta-pergi"); return pergi(() => { if (g >= giliran.length) return kbnSeterus(2); masuk(() => { kt.dataset.baru = ""; pusingan(); }); }); }
     kt.dataset.baru = "";
     const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
-    pf.innerHTML = pilih.map(i => '<button class="kbn-kotak" data-i="' + i + '"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
+    pf.innerHTML = pilih.map((i, n) => '<button class="kbn-kotak kt-kotak" data-i="' + i + '" style="--d:' + (n * .08) + 's"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></button>").join("");
+    gb.forEach((x, n) => x.classList.toggle("sasar", n === g % 3));
     kunci = false; KBN_suara("c-" + KBN.k[sasar]);
     st.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
     pf.onclick = e => {
       const t = e.target.closest(".kbn-kotak"); if (!t || kunci) return;
       if (+t.dataset.i === sasar) {
-        kunci = true; const w = gb[g % 3], a = t.getBoundingClientRect(), c = w.getBoundingClientRect();
-        t.style.transition = "transform .55s cubic-bezier(.4,1.4,.6,1),opacity .2s .5s"; t.style.transform = "translate(" + (c.left + c.width / 2 - a.left - a.width / 2) + "px," + (c.top + c.height * .3 - a.top - a.height / 2) + "px) scale(.7)"; t.style.opacity = "0";
-        setTimeout(() => { w.classList.add("isi"); w.querySelector("b").textContent = HIJAIYAH[KBN.h[sasar]][0]; g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 200)); }, 560);
+        kunci = true; const w = gb[g % 3], mu = w.querySelector(".kt-muatan"), a = t.getBoundingClientRect(), c = mu.getBoundingClientRect();
+        const dx = c.left + c.width / 2 - a.left - a.width / 2, dy = c.top + c.height / 2 - a.top - a.height / 2;
+        t.style.setProperty("--dx", dx + "px"); t.style.setProperty("--dy", dy + "px"); t.classList.add("terbang");
+        setTimeout(() => { t.style.visibility = "hidden"; w.classList.add("isi"); w.classList.remove("sasar"); w.querySelector("b").textContent = HIJAIYAH[KBN.h[sasar]][0]; PETA_bunyi("ting"); g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 200)); }, 650);
       } else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
     };
   };
