@@ -6852,11 +6852,11 @@ function LLN_video(src) {
 const KBN_LEVEL = [
   { h: [0, 1, 2, 3], k: ["alif", "ba", "ta", "tsa"], kenal: "telur", m: "m-kenal", g: ["Tangkap", "Padan"] },
   { h: [4, 5, 6, 7], k: ["jim", "ha", "kho", "dal"], kenal: "hadiah", m: "m-hadiah", g: ["Lompat", "Ingat"] },
-  { h: [8, 9, 10, 11], k: ["dzal", "ro", "zai", "sin"], kenal: "telur", m: "m-kerang", g: ["Kereta", "Pancing"] },
-  { h: [12, 13, 14, 15], k: ["syin", "shod", "dhod", "tho"], kenal: "hadiah", m: "m-bunga", g: ["Menara", "Bayang"] },
-  { h: [16, 17, 18, 19], k: ["zho", "ain", "ghin", "fa"], kenal: "telur", m: "m-bunga", g: ["Lobak", "Lumba"] },
-  { h: [20, 21, 22, 23], k: ["qof", "kaf", "lam", "mim"], kenal: "hadiah", m: "m-bunga", g: ["Suap", "Roket"] },
-  { h: [24, 25, 26, 27], k: ["nun", "wau", "ha2", "ya"], kenal: "telur", m: "m-bunga", g: ["Susun", "Boss"] }
+  { h: [8, 9, 10, 11], k: ["dzal", "ro", "zai", "sin"], kenal: "kerang", m: "m-kerang", g: ["Kereta", "Pancing"] },
+  { h: [12, 13, 14, 15], k: ["syin", "shod", "dhod", "tho"], kenal: "bunga", m: "m-bunga", g: ["Menara", "Bayang"] },
+  { h: [16, 17, 18, 19], k: ["zho", "ain", "ghin", "fa"], kenal: "rumah", m: "m-rumah", g: ["Lobak", "Lumba"] },
+  { h: [20, 21, 22, 23], k: ["qof", "kaf", "lam", "mim"], kenal: "awan", m: "m-awan", g: ["Suap", "Roket"] },
+  { h: [24, 25, 26, 27], k: ["nun", "wau", "ha2", "ya"], kenal: "peti", m: "m-peti", g: ["Susun", "Boss"] }
 ];
 const KBN_NAMA = ["alif", "ba", "ta", "tsa", "jim", "ha", "kho", "dal", "dzal", "ro", "zai", "sin", "syin", "shod", "dhod", "tho", "zho", "ain", "ghin", "fa", "qof", "kaf", "lam", "mim", "nun", "wau", "ha2", "ya"];
 const KBN_GAME = { Tangkap: () => kbnTangkap(), Padan: () => kbnPadan(), Lompat: () => kbnLompat(), Ingat: () => kbnIngat(), Kereta: () => kbnKereta(), Pancing: () => kbnPancing(), Menara: () => kbnMenara(), Bayang: () => kbnBayang(), Lobak: () => kbnLobak(), Lumba: () => kbnLumba(), Suap: () => kbnSuap(), Roket: () => kbnRoket(), Susun: () => kbnSusun(), Boss: () => kbnBoss() };
@@ -6867,12 +6867,15 @@ function KBN_bintang(l) { try { return +(JSON.parse(localStorage.getItem("kebun.
 function KBN_simpan(l, n) { try { const d = JSON.parse(localStorage.getItem("kebun.bintang")) || {}; d[l] = Math.max(+d[l] || 0, n); localStorage.setItem("kebun.bintang", JSON.stringify(d)); } catch (e) { /* abaikan */ } }
 /* Nuri teman dalam Misi Huruf: gelembung kata + pose ikut suara */
 const KBN_TEKS = {
+  "m-peti": "Jom buka peti harta karun! Ada huruf baharu di dalamnya.",
+  "m-awan": "Jom tekan awan! Huruf baharu akan turun macam hujan.",
+  "m-rumah": "Tok tok tok! Jom ketuk pintu rumah untuk jumpa huruf baharu.",
   "k-alif": "Ini huruf alif! Alif berdiri tegak, macam pensel.", "k-ba": "Ini huruf ba! Satu titik di bawah, macam bot dengan satu mutiara di bawah.", "k-ta": "Ini huruf ta! Dua titik di atas, macam bot dengan dua bintang di atas.", "k-tsa": "Ini huruf tsa! Tiga titik di atas, macam bot dengan tiga bintang di atas.",
   "k-jim": "Ini huruf jim! Satu titik dalam perutnya, macam cawan dengan guli.", "k-ha": "Ini huruf ha! Macam jim, tapi tiada titik.", "k-kho": "Ini huruf kho! Satu titik di atas, macam ceri atas cawan.", "k-dal": "Ini huruf dal! Macam papan gelongsor kecil.",
   "k-dzal": "Ini huruf dzal! Macam dal, dengan satu titik di atas.", "k-ro": "Ini huruf ro! Melengkung macam pisang.", "k-zai": "Ini huruf zai! Macam ro, dengan satu titik di atas.", "k-sin": "Ini huruf sin! Ada tiga gigi, macam ulat tiga bonggol.",
-  "m-kerang": "Jom buka kerang! Cari mutiara huruf.", "m-kereta": "Keretapi sudah sampai! Masukkan huruf yang betul ke gerabak.", "m-pancing": "Jom memancing! Tekan ikan yang betul.", "m-kereta-pergi": "Choo choo! Keretapi pun berjalan!", "siap-3": "Yeay! Misi tiga berjaya!",
+  "m-kerang": "Jom buka kerang! Tekan kerang untuk cari mutiara huruf.", "m-kereta": "Keretapi sudah sampai! Masukkan huruf yang betul ke gerabak.", "m-pancing": "Jom memancing! Tekan ikan yang betul.", "m-kereta-pergi": "Choo choo! Keretapi pun berjalan!", "siap-3": "Yeay! Misi tiga berjaya!",
   "k-syin": "Ini huruf syin! Macam sin, dengan tiga titik di atas.", "k-shod": "Ini huruf shod! Ada perut bulat, macam siput.", "k-dhod": "Ini huruf dhod! Macam shod, dengan satu titik di atas.", "k-tho": "Ini huruf tho! Perut bulat dan tiang tegak.",
-  "m-bunga": "Jom kenal huruf baharu!", "m-menara": "Jom bina menara! Pilih blok yang betul.", "m-bayang": "Cari bayang huruf ini!", "m-menara-siap": "Wah, menara kita sudah tinggi!", "siap-4": "Yeay! Misi empat berjaya!",
+  "m-bunga": "Jom buka bunga! Tekan bunga untuk lihat huruf baharu.", "m-menara": "Jom bina menara! Pilih blok yang betul.", "m-bayang": "Cari bayang huruf ini!", "m-menara-siap": "Wah, menara kita sudah tinggi!", "siap-4": "Yeay! Misi empat berjaya!",
   "m-kenal": "Jom kenal huruf! Tekan telur.", "m-hadiah": "Jom buka hadiah! Tekan kotak.", "m-tangkap": "Dengar, kemudian pecahkan belon yang betul!", "m-padan": "Seret huruf kepada kawannya.", "m-lompat": "Bantu Nuri seberang sungai!", "m-ingat": "Cari pasangan huruf dan kawannya!", "m-surih": "Jom tulis huruf dengan jari!", "m-seberang": "Yeay! Nuri sudah sampai!",
   "betul-1": "Pandainya!", "betul-2": "Betul! Hebat!", "betul-3": "Yeay, betul!", "salah": "Hmm, cuba lagi ya.", "siap": "Yeay! Misi berjaya!", "siap-2": "Yeay! Misi berjaya! Adik bijak!",
   "k-zho": "Ini huruf zho! Macam tho, dengan satu titik di atas.", "k-ain": "Ini huruf ain! Kepalanya terbuka, macam mulut ikan.", "k-ghin": "Ini huruf ghin! Macam ain, dengan satu titik di atas.", "k-fa": "Ini huruf fa! Macam ikan paus, kepala bulat dengan satu titik air di atas.",
