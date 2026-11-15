@@ -1695,10 +1695,18 @@ body:has(.kbn) .pet-nuri,body:has(.kbn) .pet-gel{display:none!important}
 .kbn-markah{position:absolute;right:14px;top:18px;z-index:3;display:flex;gap:6px}
 .kbn-markah i{width:18px;height:18px;background:#fff;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .kbn-markah i.on{background:#ffc93c}
-.kbn-belon{position:absolute;bottom:-200px;width:clamp(104px,21%,164px);display:grid;place-items:center;aspect-ratio:4/5;border:0;padding:0;cursor:pointer;border-radius:50% 50% 48% 48%/55% 55% 45% 45%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.75) 0 8%,transparent 22%),var(--w);box-shadow:inset -8px -10px 0 rgba(0,0,0,.08);animation:kbnNaik 7s linear infinite}
-.kbn-belon::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:60px;background:rgba(90,60,140,.35)}
-.kbn-belon b{display:block;font-family:"Geeza Pro","Noto Naskh Arabic","Amiri Quran",sans-serif!important;font-weight:700;color:#fff;font-size:clamp(78px,15vmin,136px);line-height:1;padding-bottom:.12em;text-shadow:0 3px 0 #3a2366,0 0 3px #3a2366,0 0 1px #3a2366}
-.kbn-belon.letup{animation:kbnLetup .35s ease-out forwards}
+.kbn-belon{position:absolute;bottom:-260px;width:clamp(140px,26%,210px);aspect-ratio:2/3;display:grid;place-items:start center;padding-top:14%;border:0;cursor:pointer;background:var(--gb) center -6%/135% auto no-repeat;filter:drop-shadow(0 8px 10px rgba(90,60,140,.25));animation:kbnNaik 7s linear infinite}
+.kbn-belon::after{content:none}
+.kbn-belon b{position:absolute;left:0;right:0;top:20%;text-align:center;display:block;font-family:"Geeza Pro","Noto Naskh Arabic","Amiri Quran",sans-serif!important;font-weight:700;color:#fff;font-size:clamp(56px,10vmin,92px);line-height:1;padding-bottom:.12em;text-shadow:0 3px 0 #3a2366,0 0 3px #3a2366,0 0 1px #3a2366}
+.kbn-belon.letup{animation:kbnLetup .18s ease-out forwards}
+.kbn-pop{position:fixed;width:0;height:0;z-index:80;pointer-events:none}
+.kbn-pop i{position:absolute;left:0;top:0}
+.kbn-pop-kilat{width:120px;height:120px;margin:-60px;border-radius:50%;background:radial-gradient(circle,#fff 0 30%,rgba(255,255,255,0) 70%);animation:kbnKilat .35s ease-out forwards}
+.kbn-pop-gelang{width:40px;height:40px;margin:-20px;border-radius:50%;border:6px solid var(--w);animation:kbnGelang .5s ease-out forwards}
+.kbn-pop-cebis{width:14px;height:9px;margin:-4px -7px;border-radius:3px 8px 3px 8px;background:var(--w);animation:kbnCebis .8s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes kbnKilat{from{transform:scale(.3);opacity:1}to{transform:scale(1.4);opacity:0}}
+@keyframes kbnGelang{from{transform:scale(.4);opacity:1}to{transform:scale(4);opacity:0;border-width:1px}}
+@keyframes kbnCebis{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}100%{transform:translate(var(--dx),calc(var(--dy) + 60px)) rotate(var(--r)) scale(.6);opacity:0}}
 .kbn-belon.goyang{animation:kbnNaik 7s linear infinite,kbnGoyang .4s ease}
 .kbn-padan{display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:start}
 .kbn-kol{display:grid;gap:12px}
@@ -6914,6 +6922,16 @@ function KBN_hurufSVG(h, kelas) {
   const bintang = (x, y) => { let p = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .5 : r * 1.15; p += (i ? "L" : "M") + (x + Math.cos(a) * rr).toFixed(1) + " " + (y + Math.sin(a) * rr).toFixed(1); } return '<path class="kbn-titik" d="' + p + 'Z"/>'; };
   return '<svg class="kbn-huruf-svg ' + (kelas || "") + '" viewBox="-6 -6 112 112" role="img" aria-label="' + HIJAIYAH[h][1] + '"><path class="kbn-huruf-badan" d="' + D.glyph + '"/>' + D.titik.map(t => bintang(t[0], t[1])).join("") + "</svg>";
 }
+/* Letupan belon: kilatan, gelang & cebisan berwarna belon */
+function KBN_letup(t) {
+  try {
+    const r = t.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height * .42, w = t.dataset.w || "#ff8fbf";
+    const b = document.createElement("div"); b.className = "kbn-pop"; b.style.left = x + "px"; b.style.top = y + "px"; b.style.setProperty("--w", w);
+    let h = '<i class="kbn-pop-kilat"></i><i class="kbn-pop-gelang"></i>';
+    for (let n = 0; n < 14; n++) { const a = n / 14 * Math.PI * 2 + Math.random() * .3, d = 70 + Math.random() * 70; h += '<i class="kbn-pop-cebis" style="--dx:' + (Math.cos(a) * d).toFixed(0) + 'px;--dy:' + (Math.sin(a) * d).toFixed(0) + 'px;--r:' + (Math.random() * 540 - 270).toFixed(0) + 'deg;' + (n % 3 ? "" : "background:#fff;") + '"></i>'; }
+    b.innerHTML = h; document.body.appendChild(b); setTimeout(() => b.remove(), 900);
+  } catch (e) { /* abaikan */ }
+}
 const KBN_kocok = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function kbnKepala(langkah) {
   const N = ["Kenal", KBN.g[0], KBN.g[1], "Tulis"];
@@ -6968,12 +6986,12 @@ function kbnTangkap() {
     markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
     langit.querySelectorAll(".kbn-belon").forEach(x => x.remove());
     const sasar = giliran[g], susun = KBN_kocok([0, 1, 2, 3]);
-    susun.forEach((i, p) => { const e = document.createElement("button"); e.className = "kbn-belon"; e.dataset.i = i; e.style.left = (8 + p * 23) + "%"; e.style.setProperty("--w", WARNA[(p + g) % 5]); e.style.animationDelay = (p * .35) + "s"; e.style.animationDuration = (6.5 + Math.random() * 1.5) + "s"; e.innerHTML = '<b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b>"; langit.appendChild(e); });
+    susun.forEach((i, p) => { const e = document.createElement("button"); e.className = "kbn-belon"; e.dataset.i = i; e.style.left = (8 + p * 23) + "%"; e.style.setProperty("--w", WARNA[(p + g) % 5]); e.style.setProperty("--gb", "url(gambar/kebun/belon-" + ["pink", "ungu", "hijau", "oren"][(p + g) % 4] + ".webp)"); e.dataset.w = ["#ff8fbf", "#b38dff", "#7fdba6", "#ffab6b"][(p + g) % 4]; e.style.animationDelay = (p * .35) + "s"; e.style.animationDuration = (6.5 + Math.random() * 1.5) + "s"; e.innerHTML = '<b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b>"; langit.appendChild(e); });
     kunci = false; KBN_suara("c-" + KBN.k[sasar]);
     langit.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
     langit.onclick = e => {
       const t = e.target.closest(".kbn-belon"); if (!t || kunci) return;
-      if (+t.dataset.i === sasar) { kunci = true; t.classList.add("letup"); if (SUARA_ON) { try { const pp = new Audio(KBN_DIR + "pop.mp3"); pp.volume = 1; const q = pp.play(); if (q && q.catch) q.catch(() => {}); } catch (er) { /* abaikan */ } } try { const r = t.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } catch (er) { /* abaikan */ } g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250)); }
+      if (+t.dataset.i === sasar) { kunci = true; KBN_letup(t); t.classList.add("letup"); if (SUARA_ON) { try { const pp = new Audio(KBN_DIR + "pop.mp3"); pp.volume = 1; const q = pp.play(); if (q && q.catch) q.catch(() => {}); } catch (er) { /* abaikan */ } } try { const r = t.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height / 2); } catch (er) { /* abaikan */ } g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(pusingan, 250)); }
       else { KBN.salah++; t.classList.remove("goyang"); void t.offsetWidth; t.classList.add("goyang"); KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); }); }
     };
   };
