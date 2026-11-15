@@ -2056,6 +2056,29 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .lln2-atas{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:2px;position:relative;z-index:3}
 .lln2-tajuk{background:#fff;color:#4a3570;border:3px solid #e6d6ff;border-radius:999px;padding:5px 18px;font-weight:900;font-size:clamp(16px,2.4vmin,21px);box-shadow:0 4px 0 #d9c6fb}
 .lln2-titik{display:flex;gap:8px}
+.lln2-lencana{position:absolute;top:4px;right:10px;z-index:4;width:clamp(54px,9vmin,84px);aspect-ratio:276/360;border:0;background:none;padding:0;filter:grayscale(1) opacity(.55) drop-shadow(0 3px 4px rgba(60,40,100,.3))}
+.lln2-lencana img{width:100%;height:100%;object-fit:contain}
+.lln2-lencana.lc-dapat{filter:drop-shadow(0 4px 6px rgba(60,40,100,.35));animation:lcGoyang 3s ease-in-out infinite}
+@keyframes lcGoyang{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.lc-rak{display:flex;gap:4px;margin-top:6px;padding:4px 10px;background:rgba(255,255,255,.75);border:3px solid #fff;border-radius:999px;box-shadow:0 4px 10px rgba(90,60,140,.2);cursor:default}
+.lc-rak span{width:clamp(26px,calc(var(--ph,700px) * .045),44px);aspect-ratio:276/360;cursor:pointer;filter:grayscale(1) opacity(.45)}
+.lc-rak span.lc-dapat{filter:none}
+.lc-rak img{width:100%;height:100%;object-fit:contain}
+.lc-tirai{position:fixed;inset:0;z-index:9000;background:rgba(40,25,70,.55);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:lcPudar .3s}
+.lc-kotak{position:relative;background:#fff;border-radius:32px;padding:22px 28px 20px;text-align:center;max-width:min(88vw,380px);box-shadow:0 10px 0 #e6d6ff,0 20px 40px rgba(0,0,0,.25);animation:kbnMasuk .5s cubic-bezier(.3,1.8,.5,1)}
+.lc-gbr{position:relative;width:min(46vw,190px);display:block;margin:0 auto}
+.lc-belum .lc-gbr{filter:grayscale(1) opacity(.5)}
+.lc-baru .lc-gbr{animation:lcMuncul 1.1s cubic-bezier(.3,1.6,.5,1)}
+@keyframes lcMuncul{0%{transform:scale(.2) rotate(-25deg);opacity:0}70%{transform:scale(1.12) rotate(6deg);opacity:1}100%{transform:none}}
+.lc-sinar{position:absolute;left:50%;top:110px;width:340px;height:340px;margin:-170px 0 0 -170px;background:repeating-conic-gradient(rgba(255,211,78,.35) 0 12deg,transparent 12deg 30deg);border-radius:50%;animation:lcPusing 8s linear infinite;display:none}
+.lc-baru .lc-sinar{display:block}
+@keyframes lcPusing{to{transform:rotate(360deg)}}
+.lc-kotak h3{position:relative;font-size:26px;color:#4a3570;margin:10px 0 4px}
+.lc-kotak p{position:relative;font-weight:800;color:#8a6fc0;margin:0 0 12px}
+.lc-kertas{position:absolute;top:-20px;width:10px;height:16px;border-radius:3px;animation:lcJatuh 2.6s ease-in forwards}
+@keyframes lcJatuh{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes lcPudar{from{opacity:0}}
+body.no-gerak .lln2-lencana,body.no-gerak .lc-sinar,body.no-gerak .lc-kertas{animation:none}
 .lln2-titik button{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;background:rgba(255,255,255,.45);padding:0;box-shadow:0 2px 4px rgba(90,60,140,.25)}
 .lln2-titik button.siap{background:#ffcf4a}
 .lln2-titik button.on{background:#a77bf3;transform:scale(1.35)}
@@ -2154,6 +2177,73 @@ body.lln2-sorokpet .pet-nuri,body.lln2-sorokpet .pet-gel{opacity:0!important;tra
 .pet-togol{position:fixed;top:max(8px,env(safe-area-inset-top));right:calc(max(8px,env(safe-area-inset-right)) + 168px);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;padding:0;z-index:100;background:var(--card);color:var(--text);border:3px solid var(--garis);box-shadow:0 5px 0 var(--garis),0 8px 16px var(--sh)}
 .pet-togol img{width:34px;height:34px;pointer-events:none}
 .pet-togol.pet-mati img{opacity:.4;filter:grayscale(1)}
+/* ===== Hadiah & Aksesori Nuri (HDH_) ===== */
+img.hdh-aks{position:absolute;inset:auto;height:auto;opacity:1;z-index:2;pointer-events:none;transform:translate(-50%,-50%) rotate(var(--hdh-r,0deg));-webkit-user-drag:none;filter:drop-shadow(0 2px 2px rgba(60,30,100,.18))}
+img.hdh-aks.hdh-belakang{z-index:auto}
+img.hdh-aks[data-a="cermin"]{filter:saturate(2.6) brightness(.62) contrast(1.15) drop-shadow(0 1px 1px rgba(60,30,100,.35))}
+img.hdh-aks[hidden]{display:none}
+.lln2-almari{position:absolute;top:4px;left:10px;z-index:4;width:clamp(54px,9vmin,80px);aspect-ratio:1;border-radius:50%;border:4px solid #fff;background:radial-gradient(circle,#fff 55%,#f1e6ff);padding:6px;box-shadow:0 5px 0 #d9c6fb,0 8px 16px rgba(90,60,140,.25);display:grid;place-items:center}
+.lln2-almari img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.lln2-almari i{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:#ff5a8a;border:3px solid #fff;display:none}
+.lln2-almari.hdh-ada i{display:block}
+.lln2-almari.hdh-ada img{animation:hdhLonjak 1.6s ease-in-out infinite}
+.lln2-almari:active{transform:scale(.93)}
+@keyframes hdhLonjak{0%,60%,100%{transform:none}70%{transform:translateY(-6px) rotate(-8deg)}80%{transform:translateY(0) rotate(6deg)}90%{transform:rotate(-3deg)}}
+.hdh-tirai{position:fixed;inset:0;z-index:9001;background:rgba(40,25,70,.55);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:12px;animation:lcPudar .3s}
+.hdh-kad{position:relative;background:#fff;border-radius:32px;padding:18px 22px 20px;text-align:center;width:min(92vw,400px);max-height:94vh;overflow:auto;box-shadow:0 10px 0 #e6d6ff,0 20px 40px rgba(0,0,0,.25);animation:kbnMasuk .5s cubic-bezier(.3,1.8,.5,1)}
+.hdh-tajuk{font-size:clamp(21px,3.4vmin,28px);color:#4a3570;margin:4px 0 6px}
+.hdh-pentas{position:relative;display:block;margin:0 auto;width:min(58vw,240px,38vh);aspect-ratio:1;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hdh-pentas img{position:absolute;pointer-events:none}
+.hdh-kotak{left:10%;bottom:2%;width:80%;animation:hdhAyun 1.8s ease-in-out infinite;transform-origin:50% 100%}
+.hdh-tudung{left:10%;bottom:46%;width:80%;opacity:0}
+.hdh-kotak-buka{left:5%;bottom:2%;width:90%;opacity:0}
+.hdh-barang{left:50%;bottom:30%;width:58%;opacity:0;transform:translate(-50%,0) scale(.2)}
+.hdh-sinar{position:absolute;left:50%;top:40%;width:150%;aspect-ratio:1;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(255,211,78,.4) 0 12deg,transparent 12deg 30deg);border-radius:50%;opacity:0;-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%)}
+.hdh-goncang .hdh-kotak{animation:hdhGoncang .7s ease-in-out}
+@keyframes hdhAyun{0%,70%,100%{transform:none}78%{transform:rotate(-5deg) scale(1.03)}86%{transform:rotate(5deg) scale(1.03)}93%{transform:rotate(-2deg)}}
+@keyframes hdhGoncang{0%{transform:none}15%{transform:rotate(-9deg) scale(1.05,.95)}30%{transform:rotate(9deg) scale(.95,1.05)}45%{transform:rotate(-7deg)}60%{transform:rotate(7deg)}80%{transform:scale(1.12,.88)}100%{transform:scale(1)}}
+.hdh-terbuka .hdh-kotak{opacity:0;animation:none}
+.hdh-terbuka .hdh-kotak-buka{opacity:1;animation:hdhLenting .5s cubic-bezier(.3,1.8,.5,1)}
+.hdh-terbuka .hdh-tudung{animation:hdhTudung 1s ease-out forwards}
+.hdh-terbuka .hdh-barang{opacity:1;bottom:42%;transform:translate(-50%,0);animation:hdhNaik 1s cubic-bezier(.3,1.6,.5,1)}
+.hdh-terbuka .hdh-sinar{opacity:1;animation:lcPusing 8s linear infinite}
+.hdh-terbuka .hdh-pentas{cursor:default}
+@keyframes hdhLenting{0%{transform:scale(1.15,.8)}100%{transform:none}}
+@keyframes hdhTudung{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(70%,-120%) rotate(40deg)}}
+@keyframes hdhNaik{0%{opacity:0;bottom:12%;transform:translate(-50%,0) scale(.2) rotate(-20deg)}100%{opacity:1;bottom:42%;transform:translate(-50%,0)}}
+.hdh-pesan{font-weight:800;color:#8a6fc0;margin:8px 0 10px;font-size:17px}
+.hdh-btn{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hdh-btn[hidden]{display:none}
+.hdh-almari{position:relative;background:#fff;border-radius:32px;padding:16px 18px 14px;width:min(94vw,640px);max-height:94vh;overflow:auto;box-shadow:0 10px 0 #e6d6ff,0 20px 40px rgba(0,0,0,.25);animation:kbnMasuk .5s cubic-bezier(.3,1.8,.5,1);text-align:center}
+.hdh-x{position:absolute;top:10px;right:12px;width:44px;height:44px;border-radius:50%;border:3px solid #e6d6ff;background:#fff;color:#7d55c9;font-size:20px;font-weight:900;padding:0;z-index:2}
+.hdh-badan{display:flex;flex-direction:column;align-items:center;gap:10px}
+.hdh-kiri{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.hdh-pra{position:relative;width:min(44vw,190px,30vh);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 60%,#f4ecff 55%,#e6d6ff)}
+.hdh-pra .lln2-nuri-rupa{position:absolute;inset:4%}
+.hdh-pra img.hdh-pose{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.hdh-pra img.hdh-pose.on{opacity:1}
+.hdh-pra.hdh-lompat .lln2-nuri-rupa{animation:llnNuriLompat .5s ease}
+.hdh-mata{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:clamp(16px,2.6vmin,20px);color:#4a3570}
+.hdh-mata b{white-space:nowrap;background:#fff6d6;border:3px solid #ffe08a;border-radius:999px;padding:2px 14px}
+.hdh-mata b.hdh-lc{background:#ffeef5;border-color:#ffc2d9}
+.hdh-bar{width:min(100%,240px);height:14px;border-radius:999px;background:#efe6fb;overflow:hidden;box-shadow:inset 0 2px 3px rgba(90,60,140,.15)}
+.hdh-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ffd34e,#ff9fc4)}
+.hdh-nota{margin:0;font-weight:800;color:#8a6fc0;font-size:15px}
+.hdh-tiada{border:3px solid #e6d6ff;background:#fff;color:#7d55c9;border-radius:999px;padding:6px 16px;font-weight:800;font-size:15px}
+.hdh-tiada.on{background:#a77bf3;border-color:#a77bf3;color:#fff}
+.hdh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.hdh-slot{position:relative;border:4px solid #efe6fb;background:#fbf8ff;border-radius:22px;padding:8px 6px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:44px;box-shadow:0 4px 0 #e6d6ff}
+.hdh-slot img{width:100%;aspect-ratio:4/3;object-fit:contain;pointer-events:none}
+.hdh-slot span{font-weight:900;font-size:14px;color:#4a3570;line-height:1.15}
+.hdh-slot.on{border-color:#a77bf3;background:#f3eaff;box-shadow:0 4px 0 #7d55c9}
+.hdh-slot.on::after{content:"✓";position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;background:#a77bf3;color:#fff;font-weight:900;display:grid;place-items:center;border:3px solid #fff}
+.hdh-slot.hdh-baru{border-color:#ffd34e;background:#fffaf0;animation:hdhAyun 1.8s ease-in-out infinite}
+.hdh-slot.hdh-kunci img{filter:grayscale(1) opacity(.45)}
+.hdh-slot.hdh-kunci span{color:#a99bc0}
+.hdh-slot:active{transform:scale(.95)}
+.hdh-cara{margin:10px 0 0;font-size:14px;font-weight:700;color:#9a88b8}
+@media (min-width:600px) and (min-aspect-ratio:1/1){.hdh-badan{flex-direction:row;align-items:center}.hdh-kiri{width:42%}.hdh-grid{flex:1}.hdh-pra{width:min(30vw,200px,34vh)}}
+@media (max-height:520px){.hdh-almari{padding:10px 14px}.hdh-tajuk{margin:0 0 4px;font-size:20px}.hdh-slot img{aspect-ratio:2/1}.hdh-cara{display:none}}
 @media (prefers-reduced-motion:reduce){.pet-nuri,.pet-gel{transition:none}}
 </style>
 </head>
@@ -6867,6 +6957,7 @@ function PETA_bina() {
   lbl(".peta-iqra", tk(ti.nama, "Iqra'", "Iqra'", "伊克拉"), tk(ti.sub, "Huruf, Iqra' 1-6 & doa", "Letters, Iqra' 1-6 & duas", "字母、伊克拉1-6和祈祷"));
   lbl(".peta-quran", tk(tq.nama, "Al-Quran", "Al-Quran", "古兰经"), tk(tq.sub, "Tajwid, hafazan & 30 juz", "Tajwid, memorise & 30 juz", "泰吉威德、背诵和30卷"));
   for (let i = 0; i < 14; i++) { const k = document.createElement("i"); k.className = "peta-kilat"; k.style.left = (4 + Math.random() * 92) + "%"; k.style.top = (3 + Math.random() * 90) + "%"; k.style.animationDelay = (-Math.random() * 2.6) + "s"; p.appendChild(k); }
+  LC_rak(p.querySelector(".peta-iqra"));
   $("subjList").appendChild(p);
   const sesuaiP = () => { if (!p.isConnected) { window.removeEventListener("resize", sesuaiP); return; } const h = Math.max(220, window.innerHeight - p.getBoundingClientRect().top - 8); p.style.height = h + "px"; p.style.setProperty("--ph", h + "px"); };
   sesuaiP(); window.addEventListener("resize", sesuaiP);
@@ -7843,7 +7934,7 @@ BRS_GAME.Kilat = {
 };
 /* BRS_PERMAINAN_AKHIR */
 /* Pulau-pulau Iqra': satu pulau setiap skrin; Nuri naik kapal terbang ke pulau seterusnya */
-const LLN_KUNCI = "lln.dibuka", LLN_PULAU = "lln.pulau";
+const LLN_KUNCI = "lln.dibuka", LLN_PULAU = "lln.pulau", LLN_AKHIR = "lln.akhir";
 function LLN_baca(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } }
 function LLN_tulis(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* abaikan */ } }
 function LLN_bina() {
@@ -7856,21 +7947,26 @@ function LLN_bina() {
   const nota = p => { const x = QN_URUTAN[p]; return x === "b" ? { id: "nb", ik: "بَ بِ بُ", nm: "Jadual Baris", kecil: 1, fn: () => qnBuka(p) } : x === "t" ? { id: "nt", ik: "بً بٍ بٌ", nm: "Jadual Dua Baris", kecil: 1, fn: () => qnBuka(p) } : { id: "n" + x, ik: QR_NOTA[x].simbol, nm: QR_NOTA[x].tajuk, kecil: QR_NOTA[x].simbol.length > 3 ? 1 : 0, fn: () => qnBuka(p) }; };
   const iq = i => ({ id: "iq" + i, n: String(i + 1), nm: IQRA[i].nama, b: bIqra(i), siap: pecahan(i) >= 1, fn: () => iqBaca(i, sambung(i)) });
   const P = [
-    { nm: "Pulau Huruf", g: "a", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "kebun5", ik: "ع غ", kecil: 1, nm: "Misi Huruf 5", b: KBN_bintang(4), siap: KBN_bintang(4) > 0, fn: () => kbnMula(4) }, { id: "kebun6", ik: "ق ك", kecil: 1, nm: "Misi Huruf 6", b: KBN_bintang(5), siap: KBN_bintang(5) > 0, fn: () => kbnMula(5) }, { id: "kebun7", ik: "ن و", kecil: 1, nm: "Misi Huruf 7", b: KBN_bintang(6), siap: KBN_bintang(6) > 0, fn: () => kbnMula(6) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }] },
-    { nm: "Pulau Baris", g: "b", batu: BRS_LEVEL.map((x, n) => ({ id: "brs" + n, ik: x.ik, kecil: x.kecil, nm: x.nm, b: BRS_bintang(n), siap: BRS_bintang(n) > 0, fn: () => brsMula(n) })) },
-    { nm: "Pulau Tanda & Bacaan", g: "e", batu: [8, 9, 10, 11, 12, 13].map(nota) },
-    { nm: "Pulau Iqra' 1 - 6", g: "g", batu: [0, 1, 2, 3, 4, 5].map(iq) },
-    { nm: "Pulau Kuiz & Doa", g: "h", batu: [{ id: "kuiz", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { id: "doa", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }] }
+    { nm: "Pulau Huruf", g: "a", lc: "huruf", batu: [{ id: "kebun1", ik: "ا ب", kecil: 1, nm: "Misi Huruf 1", b: KBN_bintang(0), siap: KBN_bintang(0) > 0, fn: () => kbnMula(0) }, { id: "kebun2", ik: "ج ح", kecil: 1, nm: "Misi Huruf 2", b: KBN_bintang(1), siap: KBN_bintang(1) > 0, fn: () => kbnMula(1) }, { id: "kebun3", ik: "ر ز", kecil: 1, nm: "Misi Huruf 3", b: KBN_bintang(2), siap: KBN_bintang(2) > 0, fn: () => kbnMula(2) }, { id: "kebun4", ik: "ص ط", kecil: 1, nm: "Misi Huruf 4", b: KBN_bintang(3), siap: KBN_bintang(3) > 0, fn: () => kbnMula(3) }, { id: "kebun5", ik: "ع غ", kecil: 1, nm: "Misi Huruf 5", b: KBN_bintang(4), siap: KBN_bintang(4) > 0, fn: () => kbnMula(4) }, { id: "kebun6", ik: "ق ك", kecil: 1, nm: "Misi Huruf 6", b: KBN_bintang(5), siap: KBN_bintang(5) > 0, fn: () => kbnMula(5) }, { id: "kebun7", ik: "ن و", kecil: 1, nm: "Misi Huruf 7", b: KBN_bintang(6), siap: KBN_bintang(6) > 0, fn: () => kbnMula(6) }, { id: "huruf", ik: "ابت", nm: "Huruf Hijaiyah", fn: qrHuruf }] },
+    { nm: "Pulau Baris", g: "b", lc: "baris", batu: BRS_LEVEL.map((x, n) => ({ id: "brs" + n, ik: x.ik, kecil: x.kecil, nm: x.nm, b: BRS_bintang(n), siap: BRS_bintang(n) > 0, fn: () => brsMula(n) })) },
+    { nm: "Pulau Tanda & Bacaan", g: "e", lc: "bacaan", batu: [8, 9, 10, 11, 12, 13].map(nota) },
+    { nm: "Pulau Iqra' 1 - 6", g: "g", lc: "iqra", batu: [0, 1, 2, 3, 4, 5].map(iq) },
+    { nm: "Pulau Kuiz & Doa", g: "h", lc: "kuiz", batu: [{ id: "kuiz", ik: "?", nm: "Kuiz Huruf", b: Math.min(3, st["quran-kuiz"] || 0), fn: qrKuiz }, { id: "doa", ik: "☾", nm: "Doa Harian", fn: qrSenaraiDoa }] }
   ];
   const selesai = x => x.kunci || (x.siap != null ? x.siap : !!dibuka[x.id]);
+  /* "Seterusnya" = batu belum siap pertama, bermula dari batu terakhir yang dimain (bukan sentiasa batu pertama) */
   let sp = -1, sb = -1;
-  P.some((pl, a) => pl.batu.some((x, b) => { if (!selesai(x)) { sp = a; sb = b; return true; } return false; }));
+  const rata = []; P.forEach((pl, a) => pl.batu.forEach((x, b) => rata.push([a, b, x])));
+  const akhir = LLN_baca(LLN_AKHIR, ""), mula = Math.max(0, rata.findIndex(r => r[2].id === akhir));
+  const cari = (dari, ke) => { for (let i = dari; i < ke; i++) if (!selesai(rata[i][2]) && !rata[i][2].kunci) { sp = rata[i][0]; sb = rata[i][1]; return true; } return false; };
+  if (!cari(mula, rata.length)) cari(0, mula);
   let kini = LLN_baca(LLN_PULAU, sp >= 0 ? sp : 0); if (!(kini >= 0 && kini < P.length)) kini = 0;
   /* susun batu atas permukaan pulau (peratus lebar/tinggi gambar pulau) */
   const SUSUN = { 10: [[12, 24], [31, 20], [50, 19], [69, 20], [88, 24], [12, 48], [31, 45], [50, 44], [69, 45], [88, 48]], 9: [[16, 21], [38, 17], [62, 17], [84, 21], [50, 35], [14, 51], [36, 48], [64, 48], [86, 51]], 8: [[14, 26], [38, 21], [62, 21], [86, 26], [14, 50], [38, 46], [62, 46], [86, 50]], 7: [[16, 26], [38, 21], [62, 21], [84, 26], [24, 50], [50, 46], [76, 50]], 5: [[16, 44], [34, 27], [52, 44], [68, 26], [84, 44]], 2: [[30, 38], [70, 38]], 3: [[22, 42], [50, 28], [78, 42]], 4: [[20, 42], [40, 26], [60, 42], [80, 26]], 6: [[20, 25], [50, 21], [80, 25], [20, 50], [50, 46], [80, 50]] };
   const bintang = n => '<span class="lln-bintang">' + [0, 1, 2].map(k => '<i class="' + (k < n ? "on" : "") + '"></i>').join("") + "</span>";
   const w = document.createElement("div"); w.className = "lln2";
   w.innerHTML = '<div class="lln2-atas"><span class="lln2-tajuk"></span><span class="lln2-titik">' + P.map((_, a) => '<button data-p="' + a + '" aria-label="' + P[a].nm + '"></button>').join("") + "</span></div>"
+    + '<button class="lln2-lencana" aria-label="Lencana pulau"><img alt="" src=""></button>'
     + '<div class="lln2-pentas"></div>'
     + '<button class="lln2-anak lln2-kiri" aria-label="Pulau sebelum">‹</button><button class="lln2-anak lln2-kanan" aria-label="Pulau seterusnya"><span>✈</span></button>'
     + '<img class="lln2-kapal" alt="" src="gambar/pet/nuri/masuk/nuri-kapal.png">';
@@ -7885,7 +7981,7 @@ function LLN_bina() {
         + (x.b != null ? bintang(x.b) : (sel ? '<span class="lln-tanda">✓</span>' : ""))
         + '<span class="lln-muka">' + (x.n ? '<b class="lln-no">' + x.n + "</b>" : '<b class="lln-ik' + (x.kecil ? " lln-ik-kecil" : "") + (x.video ? " lln-ik-video" : "") + '">' + x.ik + "</b>") + "</span>"
         + '<span class="lln-nama">' + x.nm + "</span>" + (next ? '<span class="lln-panah">' + tr(L("Seterusnya", "Next", "下一步")) + "</span>" : "") + "</button>";
-    }).join("") + '<div class="lln2-nuri" aria-hidden="true"><div class="lln2-nuri-rupa">' + LLN_POSE.map(q => '<img alt="" data-p="' + q + '" src="gambar/pet/nuri/' + q + '.png">').join("") + "</div></div></div>";
+    }).join("") + '<div class="lln2-nuri" aria-hidden="true"><div class="lln2-nuri-rupa">' + HDH_img() + LLN_POSE.map(q => '<img alt="" data-p="' + q + '" src="gambar/pet/nuri/' + q + '.png">').join("") + "</div></div></div>";
     el._sus = sus;
     return el;
   };
@@ -7893,6 +7989,8 @@ function LLN_bina() {
     $("subjTitle").textContent = P[kini].nm; w.querySelector(".lln2-tajuk").textContent = (kini + 1) + " / " + P.length;
     w.querySelectorAll(".lln2-titik button").forEach((b, a) => { b.classList.toggle("on", a === kini); b.classList.toggle("siap", P[a].batu.every(selesai)); });
     w.querySelector(".lln2-kiri").hidden = kini === 0; w.querySelector(".lln2-kanan").hidden = kini === P.length - 1;
+    const lb = w.querySelector(".lln2-lencana"), dapat = !!LC_baca()[P[kini].lc];
+    lb.querySelector("img").src = "gambar/lencana/" + P[kini].lc + ".webp"; lb.classList.toggle("lc-dapat", dapat);
     LLN_tulis(LLN_PULAU, kini);
   };
   document.body.classList.add("lln2-on");
@@ -7934,6 +8032,11 @@ function LLN_bina() {
   };
   const mulaNuri = (el, a) => { const pl = P[a]; let b = a === sp ? sb : pl.batu.findIndex(x => !selesai(x)); if (b < 0) b = 0; letak(el, titikBatu(el, b)); pose(el, "lambai", false); setTimeout(() => pose(el, "rehat"), 1400); };
   const pertama = binaPulau(kini); pentas.appendChild(pertama); papar(); mulaNuri(pertama, kini);
+  /* Lencana pulau: beri lencana baharu bila semua batu pulau siap */
+  const lcAda = LC_baca(), lcBaru = P.filter(pl => pl.batu.every(selesai) && !lcAda[pl.lc]).map(pl => pl.lc);
+  if (lcBaru.length) { lcBaru.forEach(k => { lcAda[k] = Date.now(); }); LLN_tulis(LC_KUNCI, lcAda); papar(); setTimeout(() => LC_tunjuk(lcBaru[0], true), PET_kurang() ? 0 : 900); }
+  w.querySelector(".lln2-lencana").onclick = () => LC_tunjuk(P[kini].lc, false);
+  HDH_pulau(w); /* Almari Nuri + kotak hadiah */
   /* ---- Terbang: jalan ke kapal, naik, berlepas, kamera ikut, mendarat lembut, turun ---- */
   let terbang = false;
   const kapal = w.querySelector(".lln2-kapal");
@@ -7984,10 +8087,208 @@ function LLN_bina() {
     const b = e.target.closest(".lln-batu"); if (!b || pergi || terbang) return;
     const el = b.closest(".lln2-pulau"), bi = +b.dataset.b, x = P[kini].batu[bi]; PETA_bunyi("ting");
     if (x.kunci) { b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); jalan(el, titikBatu(el, bi)); return; }
-    pergi = true; dibuka[x.id] = 1; LLN_tulis(LLN_KUNCI, dibuka);
+    pergi = true; dibuka[x.id] = 1; LLN_tulis(LLN_KUNCI, dibuka); LLN_tulis(LLN_AKHIR, x.id);
     b.classList.add("lln-tekan");
     jalan(el, titikBatu(el, bi), () => setTimeout(x.fn, kurang ? 0 : 120));
   });
+}
+/* ===== Lencana Pulau (LC_): satu lencana setiap pulau Iqra', gambar/lencana/*.webp (ChatGPT) ===== */
+const LC_KUNCI = "lln.lencana";
+const LC_SENARAI = [
+  { k: "huruf", nm: ["Lencana Huruf", "Letters Badge", "字母徽章"], p: "Pulau Huruf" },
+  { k: "baris", nm: ["Lencana Baris", "Harakat Badge", "符号徽章"], p: "Pulau Baris" },
+  { k: "bacaan", nm: ["Lencana Bacaan", "Reading Badge", "阅读徽章"], p: "Pulau Tanda & Bacaan" },
+  { k: "iqra", nm: ["Lencana Iqra'", "Iqra' Badge", "伊克拉徽章"], p: "Pulau Iqra' 1 - 6" },
+  { k: "kuiz", nm: ["Lencana Juara", "Champion Badge", "冠军徽章"], p: "Pulau Kuiz & Doa" }
+];
+function LC_baca() { return LLN_baca(LC_KUNCI, {}) || {}; }
+function LC_tunjuk(k, baru) {
+  const c = LC_SENARAI.find(x => x.k === k); if (!c) return;
+  const ada = !!LC_baca()[k], o = document.createElement("div");
+  o.className = "lc-tirai" + (baru ? " lc-baru" : "") + (ada ? "" : " lc-belum");
+  o.innerHTML = '<div class="lc-kotak"><div class="lc-sinar" aria-hidden="true"></div><img class="lc-gbr" alt="" src="gambar/lencana/' + k + '.webp">'
+    + "<h3>" + (baru ? tr(L("Tahniah!", "Congratulations!", "恭喜！")) + "<br>" : "") + tr(L(c.nm[0], c.nm[1], c.nm[2])) + "</h3>"
+    + "<p>" + (ada ? tr(L("Semua batu di " + c.p + " sudah siap!", "Every stone on " + c.p + " is done!", c.p + " 全部完成！")) : tr(L("Siapkan semua batu di " + c.p + " untuk dapat lencana ini.", "Finish every stone on " + c.p + " to earn this badge.", "完成 " + c.p + " 的所有关卡来获得徽章。"))) + "</p>"
+    + '<button class="kbn-lanjut lc-tutup">' + tr(L("OK", "OK", "好")) + "</button></div>";
+  if (baru) for (let i = 0; i < 18; i++) { const t = document.createElement("i"); t.className = "lc-kertas"; t.style.left = Math.random() * 100 + "%"; t.style.background = ["#ff8fb8", "#a77bf3", "#7cc6ff", "#7be0a8", "#ffd34e"][i % 5]; t.style.animationDelay = Math.random() * .8 + "s"; o.appendChild(t); }
+  const tutup = () => o.remove();
+  o.addEventListener("click", e => { if (e.target === o || e.target.closest(".lc-tutup")) tutup(); });
+  document.body.appendChild(o);
+  if (baru) { try { mpBunyi.lencana(); } catch (e) { PETA_bunyi("ting"); } }
+}
+/* Rak lencana di bawah label pulau pada peta (Iqra' sekarang; Al-Quran nanti guna senarai sendiri) */
+function LC_rak(induk, senarai) {
+  const ada = LC_baca(), r = document.createElement("span"); r.className = "lc-rak";
+  r.innerHTML = (senarai || LC_SENARAI).map(c => '<span role="button" tabindex="0" data-k="' + c.k + '" class="' + (ada[c.k] ? "lc-dapat" : "") + '" aria-label="' + c.nm[0] + '"><img alt="" src="gambar/lencana/' + c.k + '.webp"></span>').join("");
+  r.addEventListener("click", e => { e.stopPropagation(); const b = e.target.closest("[data-k]"); if (b) LC_tunjuk(b.dataset.k, false); });
+  induk.appendChild(r);
+}
+/* ===== Hadiah & Aksesori Nuri (HDH_): bintang + lencana buka kotak hadiah; Almari Nuri pilih satu aksesori ===== */
+const HDH_KUNCI = "hdh.nuri", HDH_DIR = "gambar/hadiah/";
+/* tangga adil: mata = bintang (Misi Huruf, Baris, Iqra', Kuiz) + 3 setiap lencana pulau; maksimum ~84 */
+const HDH_SENARAI = [
+  { id: "topi", perlu: 3, nm: ["Topi Comel", "Cute Hat", "可爱帽子"], w: 420, h: 247 },
+  { id: "cermin", perlu: 9, nm: ["Cermin Mata", "Glasses", "眼镜"], w: 420, h: 182 },
+  { id: "kopiah", perlu: 18, nm: ["Kopiah Putih", "White Kopiah", "白色小帽"], w: 400, h: 221 },
+  { id: "skaf", perlu: 30, nm: ["Skaf Hangat", "Warm Scarf", "温暖围巾"], w: 346, h: 369 },
+  { id: "beg", perlu: 45, nm: ["Beg Galas", "Backpack", "背包"], w: 369, h: 402 },
+  { id: "mahkota", perlu: 60, nm: ["Mahkota", "Crown", "皇冠"], w: 412, h: 246 }
+];
+/* kedudukan kepala setiap pose (piksel dalam gambar 512x512, diukur dari gambar/pet/nuri/*.png):
+   [tengah kepala x, atas kepala y, lebar kepala, tengah mata x, tengah mata y, jarak dua mata, condong darjah] */
+const HDH_POSE = {
+  "rehat": [253, 70, 329, 266, 212, 109, -7], "rehat-kelip": [254, 70, 330, 266, 212, 109, -7],
+  "lambai": [254, 63, 331, 266, 214, 108, -7], "gembira": [246, 58, 286, 264, 184, 92, -7],
+  "tepuk": [253, 62, 329, 265, 212, 108, -7], "fikir": [233, 68, 323, 259, 199, 113, -10],
+  "tunjuk": [243, 64, 326, 256, 213, 107, -7], "tidur": [245, 83, 360, 222, 224, 120, -10],
+  "jalan-1": [282, 72, 327, 327, 209, 111, -7], "jalan-2": [295, 68, 329, 347, 215, 111, -6],
+  "jalan-3": [284, 56, 322, 345, 208, 104, -5], "jalan-4": [286, 47, 312, 351, 202, 97, -6]
+};
+function HDH_baca() { const d = LLN_baca(HDH_KUNCI, {}) || {}; d.buka = d.buka || {}; d.lihat = d.lihat || {}; return d; }
+function HDH_mata() {
+  let b = 0, lc = 0;
+  try { for (let i = 0; i < 7; i++) b += KBN_bintang(i); } catch (e) { /* abaikan */ }
+  try { BRS_LEVEL.forEach((_, i) => { b += BRS_bintang(i); }); } catch (e) { /* abaikan */ }
+  try { const kj = iqKemajuan(); for (let i = 0; i < 6; i++) { const m = IQRA[i] && IQRA[i].muka.length, f = m ? (kj[i] || []).length / m : 0; b += f >= 1 ? 3 : f >= .5 ? 2 : f > 0 ? 1 : 0; } } catch (e) { /* abaikan */ }
+  try { b += Math.min(3, loadStars()["quran-kuiz"] || 0); } catch (e) { /* abaikan */ }
+  try { const a = LC_baca(); lc = LC_SENARAI.filter(c => a[c.k]).length; } catch (e) { /* abaikan */ }
+  return { bintang: b, lencana: lc, mata: b + lc * 3 };
+}
+const HDH_nama = h => tr(L(h.nm[0], h.nm[1], h.nm[2]));
+/* hadiah yang sudah cukup mata tetapi kotaknya belum dibuka */
+function HDH_menunggu() { const m = HDH_mata().mata, d = HDH_baca(); return HDH_SENARAI.filter(h => m >= h.perlu && !d.buka[h.id]); }
+/* kira kedudukan aksesori (peratus kotak Nuri) bagi satu pose */
+function HDH_letak(p, a) {
+  const T = HDH_POSE[p] || HDH_POSE.rehat, h = HDH_SENARAI.find(x => x.id === a), n = h.h / h.w;
+  const [hx, atas, hw, ex, ey, s, t] = T;
+  let cx, cy, w, r = t;
+  if (a === "topi") { w = .95 * hw; cx = hx; cy = atas + .27 * hw - w * n / 2; }
+  else if (a === "mahkota") { w = .56 * hw; cx = hx; cy = atas + .17 * hw - w * n / 2; }
+  else if (a === "kopiah") { w = .74 * hw; cx = hx; cy = atas + .31 * hw - w * n / 2; }
+  else if (a === "cermin") { w = 2.9 * s; cx = ex; cy = ey + .03 * s; }
+  else if (a === "skaf") { w = (p === "tidur" ? 1.6 : 1.95) * s; cx = (hx + ex) / 2; cy = ey + (p === "tidur" ? .72 : 1.08) * s + .3 * w * n; r = t / 2; }
+  else { w = 1.35 * s; cx = hx + .5 * hw; cy = ey + 1.45 * s; r = t + 12; }
+  const pc = v => (v / 512 * 100).toFixed(2) + "%";
+  return "left:" + pc(cx) + ";top:" + pc(cy) + ";width:" + pc(w) + ";--hdh-r:" + r + "deg";
+}
+function HDH_gaya() {
+  if (document.getElementById("hdhGaya")) return;
+  let css = "";
+  HDH_SENARAI.forEach(h => {
+    css += "img.hdh-aks[data-a=\"" + h.id + "\"]{" + HDH_letak("rehat", h.id) + "}\n";
+    Object.keys(HDH_POSE).forEach(p => {
+      css += ".lln2-nuri-rupa:has(>img.on[data-p=\"" + p + "\"])>img.hdh-aks[data-a=\"" + h.id + "\"],.pet-rupa:has(>img.on[data-pose=\"" + p + "\"])>img.hdh-aks[data-a=\"" + h.id + "\"]{" + HDH_letak(p, h.id) + "}\n";
+    });
+  });
+  const s = document.createElement("style"); s.id = "hdhGaya"; s.textContent = css; document.head.appendChild(s);
+}
+/* <img> aksesori untuk diletak di dalam .lln2-nuri-rupa / .pet-rupa (sebelum gambar pose) */
+function HDH_img() {
+  HDH_gaya();
+  const a = HDH_baca().pakai || "";
+  return '<img class="hdh-aks' + (a === "beg" ? " hdh-belakang" : "") + '" alt="" draggable="false" data-a="' + a + '"' + (a ? ' src="' + HDH_DIR + a + '.webp"' : " hidden") + ">";
+}
+function HDH_pakai(a) {
+  const d = HDH_baca(); d.pakai = a || ""; LLN_tulis(HDH_KUNCI, d);
+  document.querySelectorAll("img.hdh-aks").forEach(m => {
+    m.dataset.a = d.pakai; m.hidden = !d.pakai; m.classList.toggle("hdh-belakang", d.pakai === "beg");
+    if (d.pakai) m.src = HDH_DIR + d.pakai + ".webp"; else m.removeAttribute("src");
+  });
+}
+function HDH_kertas(o, n) { for (let i = 0; i < n; i++) { const t = document.createElement("i"); t.className = "lc-kertas"; t.style.left = Math.random() * 100 + "%"; t.style.background = ["#ff8fb8", "#a77bf3", "#7cc6ff", "#7be0a8", "#ffd34e"][i % 5]; t.style.animationDelay = Math.random() * .8 + "s"; o.appendChild(t); } }
+/* Detik membuka kotak hadiah */
+function HDH_buka(id, selepas) {
+  const h = HDH_SENARAI.find(x => x.id === id); if (!h) return;
+  const d0 = HDH_baca(); d0.lihat[id] = 1; LLN_tulis(HDH_KUNCI, d0);
+  const o = document.createElement("div"); o.className = "hdh-tirai";
+  o.innerHTML = '<div class="hdh-kad" role="dialog" aria-label="' + tr(L("Hadiah untuk Nuri", "A gift for Nuri", "给努里的礼物")) + '">'
+    + '<h3 class="hdh-tajuk">' + tr(L("Hadiah untuk Nuri!", "A gift for Nuri!", "给努里的礼物！")) + "</h3>"
+    + '<button class="hdh-pentas" aria-label="' + tr(L("Buka kotak hadiah", "Open the gift box", "打开礼物盒")) + '"><span class="hdh-sinar" aria-hidden="true"></span>'
+    + '<img class="hdh-kotak-buka" alt="" src="' + HDH_DIR + 'kotak-buka.webp"><img class="hdh-barang" alt="" src="' + HDH_DIR + id + '.webp">'
+    + '<img class="hdh-kotak" alt="" src="' + HDH_DIR + 'kotak.webp"><img class="hdh-tudung" alt="" src="' + HDH_DIR + 'tudung.webp"></button>'
+    + '<p class="hdh-pesan">' + tr(L("Tekan kotak untuk buka!", "Tap the box to open it!", "点击盒子打开！")) + "</p>"
+    + '<div class="hdh-btn" hidden><button class="kbn-lanjut hdh-pakai">' + tr(L("Pakai sekarang", "Wear it now", "现在戴上")) + '</button><button class="kbn-lanjut hdh-nanti">' + tr(L("Nanti", "Later", "稍后")) + "</button></div></div>";
+  document.body.appendChild(o);
+  const pentas = o.querySelector(".hdh-pentas"), kurang = PET_kurang();
+  let dibuka = false;
+  const tutup = () => { o.remove(); if (selepas) selepas(); };
+  const buka = () => {
+    if (dibuka) return; dibuka = true;
+    const d = HDH_baca(); d.buka[id] = Date.now(); LLN_tulis(HDH_KUNCI, d);
+    try { mpBunyi.pop(); } catch (e) { /* abaikan */ }
+    pentas.classList.add("hdh-goncang");
+    setTimeout(() => {
+      pentas.classList.remove("hdh-goncang"); o.classList.add("hdh-terbuka");
+      try { mpBunyi.lencana(); } catch (e) { PETA_bunyi("ting"); }
+      if (!kurang) HDH_kertas(o, 24);
+      o.querySelector(".hdh-tajuk").textContent = tr(L("Wah! ", "Wow! ", "哇！")) + HDH_nama(h) + "!";
+      o.querySelector(".hdh-pesan").textContent = tr(L("Hadiah baharu untuk Nuri. Terima kasih kerana rajin belajar!", "A new gift for Nuri. Thank you for learning so well!", "努里的新礼物。谢谢你认真学习！"));
+      o.querySelector(".hdh-btn").hidden = false;
+      document.querySelectorAll(".lln2-almari").forEach(HDH_titik);
+    }, kurang ? 0 : 700);
+  };
+  pentas.onclick = buka;
+  o.querySelector(".hdh-pakai").onclick = () => { HDH_pakai(id); PETA_bunyi("ting"); tutup(); };
+  o.querySelector(".hdh-nanti").onclick = tutup;
+  o.addEventListener("click", e => { if (e.target === o && dibuka) tutup(); });
+}
+/* titik merah pada butang almari bila ada kotak belum dibuka */
+function HDH_titik(b) { b.classList.toggle("hdh-ada", HDH_menunggu().length > 0); }
+/* Almari Nuri: pilih satu aksesori */
+function HDH_almari() {
+  const o = document.createElement("div"); o.className = "hdh-tirai";
+  const binaIsi = () => {
+    const d = HDH_baca(), m = HDH_mata(), seterus = HDH_SENARAI.find(h => m.mata < h.perlu);
+    const pakai = d.pakai || "";
+    const kurangLagi = seterus ? seterus.perlu - m.mata : 0, dulu = seterus ? (HDH_SENARAI[HDH_SENARAI.indexOf(seterus) - 1] || { perlu: 0 }).perlu : 0;
+    const peratus = seterus ? Math.round((m.mata - dulu) / (seterus.perlu - dulu) * 100) : 100;
+    o.innerHTML = '<div class="hdh-almari" role="dialog" aria-label="' + tr(L("Almari Nuri", "Nuri's Wardrobe", "努里的衣柜")) + '">'
+      + '<button class="hdh-x" aria-label="' + tr(L("Tutup", "Close", "关闭")) + '">✕</button>'
+      + '<h3 class="hdh-tajuk">' + tr(L("Almari Nuri", "Nuri's Wardrobe", "努里的衣柜")) + "</h3>"
+      + '<div class="hdh-badan"><div class="hdh-kiri"><div class="hdh-pra"><div class="lln2-nuri-rupa">' + HDH_img() + ["rehat", "gembira"].map(q => '<img alt="" class="hdh-pose' + (q === "rehat" ? " on" : "") + '" data-p="' + q + '" src="gambar/pet/nuri/' + q + '.png">').join("") + "</div></div>"
+      + '<div class="hdh-mata"><b>⭐ ' + m.bintang + "</b>" + (m.lencana ? '<b class="hdh-lc">🏅 ' + m.lencana + " = +" + m.lencana * 3 + " ⭐</b>" : "") + "</div>"
+      + '<div class="hdh-bar"><i style="width:' + peratus + '%"></i></div>'
+      + '<p class="hdh-nota">' + (seterus ? tr(L("Lagi " + kurangLagi + " ⭐ untuk hadiah seterusnya", kurangLagi + " more ⭐ for the next gift", "再得 " + kurangLagi + " ⭐ 获得下一个礼物")) : tr(L("Semua hadiah sudah dibuka. Hebat!", "Every gift is unlocked. Amazing!", "所有礼物都解锁了，太棒了！"))) + "</p>"
+      + '<button class="hdh-tiada' + (pakai ? "" : " on") + '" data-a="">' + tr(L("Tanpa aksesori", "No accessory", "不戴饰品")) + "</button></div>"
+      + '<div class="hdh-grid">' + HDH_SENARAI.map(h => {
+        const ada = d.buka[h.id], boleh = m.mata >= h.perlu;
+        if (ada) return '<button class="hdh-slot' + (pakai === h.id ? " on" : "") + '" data-a="' + h.id + '"><img alt="" src="' + HDH_DIR + h.id + '.webp"><span>' + HDH_nama(h) + "</span></button>";
+        if (boleh) return '<button class="hdh-slot hdh-baru" data-buka="' + h.id + '"><img alt="" src="' + HDH_DIR + 'kotak.webp"><span>' + tr(L("Buka!", "Open!", "打开！")) + "</span></button>";
+        return '<button class="hdh-slot hdh-kunci" data-kunci="' + h.perlu + '"><img alt="" src="' + HDH_DIR + 'kotak.webp"><span>⭐ ' + h.perlu + "</span></button>";
+      }).join("") + "</div></div>"
+      + '<p class="hdh-cara">' + tr(L("Kumpul bintang dan lencana di pulau Iqra' untuk buka hadiah.", "Collect stars and badges on the Iqra' islands to unlock gifts.", "在伊克拉岛收集星星和徽章来解锁礼物。")) + "</p></div>";
+  };
+  binaIsi();
+  const goyang = () => {
+    const pra = o.querySelector(".hdh-pra"); if (!pra) return;
+    pra.querySelectorAll("img.hdh-pose").forEach(i => i.classList.toggle("on", i.dataset.p === "gembira"));
+    pra.classList.remove("hdh-lompat"); void pra.offsetWidth; pra.classList.add("hdh-lompat");
+    setTimeout(() => { if (pra.isConnected) pra.querySelectorAll("img.hdh-pose").forEach(i => i.classList.toggle("on", i.dataset.p === "rehat")); }, 900);
+  };
+  o.addEventListener("click", e => {
+    if (e.target === o || e.target.closest(".hdh-x")) { o.remove(); return; }
+    const b = e.target.closest("[data-a],[data-buka],[data-kunci]"); if (!b) return;
+    if (b.dataset.buka) { HDH_buka(b.dataset.buka, () => { if (o.isConnected) { binaIsi(); goyang(); } }); return; }
+    if (b.dataset.kunci) { b.classList.remove("lln-goyang"); void b.offsetWidth; b.classList.add("lln-goyang"); try { mpBunyi.lembut(); } catch (x) { /* abaikan */ } return; }
+    HDH_pakai(b.dataset.a); PETA_bunyi("ting"); binaIsi(); goyang();
+  });
+  document.body.appendChild(o);
+}
+/* Dipanggil oleh LLN_bina: butang almari + kotak hadiah baharu muncul sendiri (sekali), selepas lencana ditutup */
+function HDH_pulau(w) {
+  const b = document.createElement("button"); b.className = "lln2-almari"; b.setAttribute("aria-label", tr(L("Almari Nuri", "Nuri's Wardrobe", "努里的衣柜")));
+  b.innerHTML = '<img alt="" src="' + HDH_DIR + 'kotak.webp"><i aria-hidden="true"></i>';
+  b.onclick = () => { PETA_bunyi("ting"); HDH_almari(); };
+  w.appendChild(b); HDH_titik(b);
+  const baru = HDH_menunggu().filter(h => !HDH_baca().lihat[h.id]);
+  if (!baru.length) return;
+  let cuba = 0;
+  const tunggu = () => {
+    if (!w.isConnected || ++cuba > 120) return;
+    if (document.querySelector(".lc-tirai,.hdh-tirai") || w.classList.contains("lln2-terbang")) { setTimeout(tunggu, 500); return; }
+    HDH_buka(baru[0].id);
+  };
+  setTimeout(tunggu, PET_kurang() ? 300 : 1600);
 }
 const LLN_POSE = ["rehat", "lambai", "gembira", "jalan-1", "jalan-2", "jalan-3", "jalan-4"];
 /* Mod mewah untuk seluruh bahagian Al-Quran */
@@ -11306,7 +11607,7 @@ function PET_label() {
 function PET_bina() {
   const el = document.createElement("div");
   el.id = "petNuri"; el.className = "pet-nuri"; el.hidden = true;
-  el.innerHTML = '<div class="pet-rupa">' + PET_POSE.map(p => '<img alt="" draggable="false" data-pose="' + p + '" src="' + PET_DIR + p + '.png">').join("") + '</div><div class="pet-zzz" aria-hidden="true">z z z</div><div class="pet-badan" role="button" tabindex="0" aria-label="Nuri"></div>';
+  el.innerHTML = '<div class="pet-rupa">' + HDH_img() + PET_POSE.map(p => '<img alt="" draggable="false" data-pose="' + p + '" src="' + PET_DIR + p + '.png">').join("") + '</div><div class="pet-zzz" aria-hidden="true">z z z</div><div class="pet-badan" role="button" tabindex="0" aria-label="Nuri"></div>';
   const gel = document.createElement("div"); gel.className = "pet-gel"; gel.setAttribute("role", "status"); gel.setAttribute("aria-live", "polite");
   const tg = document.createElement("button"); tg.id = "petTogol"; tg.type = "button"; tg.className = "pet-togol"; tg.hidden = true;
   tg.innerHTML = '<img alt="" src="' + PET_DIR + 'rehat.png">';
