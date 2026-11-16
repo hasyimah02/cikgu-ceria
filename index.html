@@ -6643,8 +6643,6 @@ function qrHuruf() {
   /* Video huruf digabung di sini (Dashboard > Peta Al-Quran > Video Huruf) */
   const bv = qrButang("play", vidH ? "Video Huruf" : "Video (akan datang)", "koral", () => { if (vidH) LLN_video("gambar/" + vidH); });
   if (!vidH) bv.disabled = true, bv.style.opacity = ".55";
-  qrButang("pensel", "Tulis Huruf", "biru", qrTulisMenu);
-  qrButang("play", "Kuiz Huruf", "hijau", qrKuiz);
   qrBual(QR_SEBUT.huruf);
   speak(QR_SEBUT.huruf, "ms");
   void id0;
