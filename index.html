@@ -2346,6 +2346,28 @@ img.hdh-aks[hidden]{display:none}
 @media (min-width:600px) and (min-aspect-ratio:1/1){.hdh-badan{flex-direction:row;align-items:center}.hdh-kiri{width:42%}.hdh-grid{flex:1}.hdh-pra{width:min(30vw,200px,34vh)}}
 @media (max-height:520px){.hdh-almari{padding:10px 14px}.hdh-tajuk{margin:0 0 4px;font-size:20px}.hdh-slot img{aspect-ratio:2/1}.hdh-cara{display:none}}
 @media (prefers-reduced-motion:reduce){.pet-nuri,.pet-gel{transition:none}}
+
+/* ===== Huruf Hijaiyah baharu (HH2_): latar taman, skrin TV, blok 7 warna ikut misi, huruf Amiri Quran 4D berwarna ===== */
+.hh2{position:relative;border-radius:30px;border:4px solid #fff;background:#cdeeff url(gambar/huruf/latar.webp) center/cover;padding:26px clamp(10px,2.4vw,22px) 26px;box-shadow:0 8px 0 #d9c6fb,0 18px 28px rgba(77,61,116,.16);display:flex;flex-direction:column;gap:clamp(12px,2vh,20px);overflow:hidden}
+.hh2-tv{position:relative;align-self:center;width:min(300px,62%);aspect-ratio:5/4;margin-top:22px;border-radius:36px;background:radial-gradient(circle at 50% 35%,#fff 0 40%,color-mix(in srgb,var(--w,#ff8fbd) 12%,#fff) 85%);border:9px solid var(--w,#ff8fbd);box-shadow:0 9px 0 color-mix(in srgb,var(--w,#ff8fbd) 70%,#000),0 18px 26px rgba(70,50,120,.22),inset 0 0 0 4px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:border-color .3s,box-shadow .3s}
+.hh2-tv::before,.hh2-tv::after{content:"";position:absolute;top:-34px;width:7px;height:34px;border-radius:4px;background:#b9a3e6;transform-origin:50% 100%}
+.hh2-tv::before{left:36%;rotate:-24deg}.hh2-tv::after{right:36%;rotate:24deg}
+.hh2-antena{position:absolute;top:-44px;left:0;right:0;height:0}.hh2-antena i{position:absolute;width:16px;height:16px;border-radius:50%;background:#ffd34d;box-shadow:inset 0 -3px 0 #e8a91c;top:0}
+.hh2-antena i:first-child{left:calc(36% - 18px)}.hh2-antena i:last-child{right:calc(36% - 18px)}
+/* Huruf 4D: lapisan depan = isian kilat berwarna; lapisan belakang (::before) = garis putih + badan timbul berlapis + bayang */
+.hh2 .h4d{position:relative;display:inline-block;font-family:"Amiri Quran","Geeza Pro",serif!important;font-weight:400;line-height:2.45em!important;padding:0 .14em!important;margin:-.98em 0 -.12em;color:color-mix(in srgb,var(--w) 50%,#1d1240);text-shadow:0.004em 0.008em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.008em 0.016em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.012em 0.024em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.016em 0.032em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.020em 0.040em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.024em 0.048em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.028em 0.056em 0 color-mix(in srgb,var(--w) 50%,#1d1240),0.032em 0.064em 0 color-mix(in srgb,var(--w) 50%,#1d1240);z-index:1;filter:drop-shadow(.022em 0 0 #fff) drop-shadow(-.022em 0 0 #fff) drop-shadow(0 .022em 0 #fff) drop-shadow(0 -.022em 0 #fff) drop-shadow(.02em .06em .04em rgba(29,18,64,.35))}
+.hh2 .h4d::after{content:attr(data-h);position:absolute;inset:0;padding:inherit;color:transparent;text-shadow:none;background:linear-gradient(180deg,color-mix(in srgb,var(--w) 20%,#fff) 44%,color-mix(in srgb,var(--w) 60%,#fff) 56%,var(--w) 68%,color-mix(in srgb,var(--w) 82%,#1d1240) 94%);-webkit-background-clip:text;background-clip:text;transform:translate(-.006em,-.012em)}
+.hh2-tv .h4d{font-size:clamp(90px,16vw,150px);margin-top:-1.1em}
+.hh2-tv b{margin-top:10px;padding:2px 18px;border-radius:99px;background:var(--w,#ff8fbd);color:#fff;font-size:clamp(20px,3vw,26px);font-weight:800;box-shadow:0 3px 0 color-mix(in srgb,var(--w,#ff8fbd) 70%,#000)}
+.hh2-tv.pop .h4d{animation:hh2Lompat .5s cubic-bezier(.3,1.6,.5,1)}@keyframes hh2Lompat{0%{transform:scale(.4) translateY(20px)}60%{transform:scale(1.15)}100%{transform:none}}
+.hh2-vid{position:absolute;right:-12px;bottom:-14px;border:3px solid #fff;border-radius:99px;background:#ff6f8f;color:#fff;font:800 14px/1 system-ui,sans-serif;padding:8px 13px;box-shadow:0 4px 0 #c94a6a;cursor:pointer}
+.hh2 .qrgrid{gap:clamp(7px,1.3vw,12px)}
+.hh2 .qrh{position:relative;background:linear-gradient(180deg,#fff 30%,color-mix(in srgb,var(--w) 22%,#fff));border:3px solid var(--w);border-radius:22px;box-shadow:0 6px 0 color-mix(in srgb,var(--w) 75%,#000),0 10px 14px rgba(60,40,110,.16),inset 0 0 0 3px #fff;padding:0 2px 6px;transition:transform .15s;overflow:visible}
+.hh2 .qrh .h4d{font-size:clamp(40px,7vw,62px)}
+.hh2 .qrh small{position:relative;z-index:1;margin-top:2px;color:color-mix(in srgb,var(--w) 70%,#1d1240);font-weight:900;font-size:15px}
+.hh2 .qrh.on{transform:translateY(-5px) scale(1.07);box-shadow:0 10px 0 color-mix(in srgb,var(--w) 75%,#000),0 0 0 4px #ffe36d,0 14px 22px rgba(60,40,110,.25)}
+.hh2 .qrh:active{transform:translateY(3px)}
+.hh2-bin{position:absolute;top:-8px;right:-6px;font-size:18px;filter:drop-shadow(0 2px 0 rgba(0,0,0,.2))}
 </style>
 </head>
 <body>
@@ -6609,14 +6631,16 @@ function qrMainSemua(el, teks, id) {
 function qrHuruf() {
   qrSkrin("Huruf Hijaiyah", renderIqraMenu);
   const k = $("qrKawasan"), id0 = qrId;
-  k.innerHTML = `<div class="qrbesar"><span class="qrar"></span><b></b></div><div class="qrgrid">${HIJAIYAH.map(h => `<button class="qrh"><span class="qrar">${h[0]}</span><small>${h[1]}</small></button>`).join("")}</div>`;
-  const el = [...k.querySelectorAll(".qrh")], besar = k.querySelector(".qrbesar");
-  const papar = i => { besar.querySelector(".qrar").textContent = HIJAIYAH[i][0]; besar.querySelector("b").textContent = HIJAIYAH[i][1]; besar.classList.remove("pop"); void besar.offsetWidth; besar.classList.add("pop"); };
+  const HH2_W = ["#ff7fae", "#4f9dff", "#3fc283", "#ff9b3d", "#9b74ee", "#22b8c0", "#ff6b6b"], vidH = ((window.TETAPAN && TETAPAN.laluan) || {}).videoHuruf || "";
+  const bin = g => { try { return KBN_bintang(g) > 0; } catch (e) { return false; } };
+  k.innerHTML = `<div class="hh2"><div class="hh2-tv"><div class="hh2-antena"><i></i><i></i></div><span class="qrar h4d"></span><b></b>${vidH ? '<button class="hh2-vid">▶ Video</button>' : ""}</div><div class="qrgrid">${HIJAIYAH.map((h, i) => `<button class="qrh" style="--w:${HH2_W[Math.floor(i / 4)]}">${bin(Math.floor(i / 4)) ? '<span class="hh2-bin">⭐</span>' : ""}<span class="qrar h4d" data-h="${h[0]}">${h[0]}</span><small>${h[1]}</small></button>`).join("")}</div></div>`;
+  const el = [...k.querySelectorAll(".qrh")], besar = k.querySelector(".hh2-tv");
+  if (vidH) besar.querySelector(".hh2-vid").onclick = () => LLN_video("gambar/" + vidH);
+  const papar = i => { besar.style.setProperty("--w", HH2_W[Math.floor(i / 4)]); besar.querySelector(".qrar").textContent = HIJAIYAH[i][0]; besar.querySelector(".qrar").dataset.h = HIJAIYAH[i][0]; besar.querySelector("b").textContent = HIJAIYAH[i][1]; besar.classList.remove("pop"); void besar.offsetWidth; besar.classList.add("pop"); };
   el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); speak(HIJAIYAH[i][1], "ms"); });
   papar(0);
   qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return speak(HIJAIYAH[i][1], "ms").then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
   /* Video huruf digabung di sini (Dashboard > Peta Al-Quran > Video Huruf) */
-  const vidH = ((window.TETAPAN && TETAPAN.laluan) || {}).videoHuruf || "";
   const bv = qrButang("play", vidH ? "Video Huruf" : "Video (akan datang)", "koral", () => { if (vidH) LLN_video("gambar/" + vidH); });
   if (!vidH) bv.disabled = true, bv.style.opacity = ".55";
   qrButang("pensel", "Tulis Huruf", "biru", qrTulisMenu);
