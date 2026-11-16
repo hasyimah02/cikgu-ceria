@@ -2086,7 +2086,7 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .upb-piknik .bunga{position:absolute;bottom:35%;font-size:clamp(26px,5.5vmin,44px);line-height:1;animation:upbKibar 3s ease-in-out infinite}.upb-piknik .bunga.a{right:5%}.upb-piknik .bunga.b{right:15%;bottom:31%;animation-delay:-1s}.upb-piknik .bunga.c{left:19%;bottom:33%;animation-delay:-2s}
 .upb-piknik .rama{position:absolute;left:12%;top:34%;font-size:clamp(22px,4vmin,34px);animation:upbRama 4s ease-in-out infinite}
 .kbn-padang:has(.upb-piknik){background:linear-gradient(#aee7ff 0,#eafffb 38%,#bde79c 39%,#8ed27c)}
-.kbn-padang .kbn-arnab{top:17%;z-index:4;width:clamp(170px,39%,290px);transform-origin:50% 100%}.kbn-padang .kbn-arnab img{animation:upbArnabGembira 1.8s ease-in-out infinite;transform-origin:50% 100%}.kbn-padang .kbn-arnab.kunyah img{animation:upbKunyah .22s ease-in-out 4}.kbn-padang .kbn-arnab.kenyang img{animation:upbLompat .55s ease-in-out infinite}.kbn-padang .kbn-arnab.geleng img{animation:upbGeleng .6s ease}
+.kbn-padang .kbn-arnab{top:12%;z-index:4;width:clamp(150px,34%,250px);transform-origin:50% 100%}.kbn-padang .kbn-arnab img{animation:upbArnabGembira 1.8s ease-in-out infinite;transform-origin:50% 100%}.kbn-padang .kbn-arnab.kunyah img{animation:upbKunyah .22s ease-in-out 4}.kbn-padang .kbn-arnab.kenyang img{animation:upbLompat .55s ease-in-out infinite}.kbn-padang .kbn-arnab.geleng img{animation:upbGeleng .6s ease}
 .kbn-padang .kbn-pinggan{z-index:6;bottom:5%;padding:0 6%}.kbn-padang .kbn-pinggan::before{display:none}
 .upb-pinggan-bg{position:absolute;left:50%;bottom:3%;width:96%;max-width:640px;transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 8px 4px rgba(60,80,120,.22))}
 .upb-hatimeter{position:absolute;z-index:7;top:14px;left:50%;transform:translateX(-50%);display:flex;gap:4px;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.75);border:3px solid #fff;box-shadow:0 3px 0 rgba(120,90,160,.22)}.upb-hatimeter img{width:clamp(20px,4.2vmin,30px);height:auto;filter:grayscale(1);opacity:.35;transition:filter .3s,opacity .3s,transform .4s}.upb-hatimeter img.on{filter:none;opacity:1;animation:upbDenyut .5s ease}
@@ -2106,7 +2106,7 @@ body:has(.kbn-sungai) .kbn-teman{display:none}
 .upb-gundukan{top:65%;height:13%;background:linear-gradient(#c98751,#ad6a3e);box-shadow:inset 0 3px 0 #dfaa71}
 .upb-lumba-pilihan .kbn-lorong{min-width:0}
 .kbn-padang .kbn-biskut{min-width:0;width:28%;max-width:132px}
-@media(max-height:650px){.kbn-padang .kbn-arnab{top:13%;width:150px}.upb-hatimeter{top:6px}.upb-podium{height:40%}.upb-juara{top:17%;font-size:22px}}
+@media(max-height:650px){.kbn-padang .kbn-arnab{top:6%;width:115px}.upb-hatimeter{top:6px}.upb-podium{height:40%}.upb-juara{top:17%;font-size:22px}}
 @media(prefers-reduced-motion:reduce){.upb-lumba-jalan,.upb-sisi,.upb-pucuk,.kbn-padang .kbn-arnab img,.upb-mulut{animation:none!important}}
 
 .kbn-susun .kbn-ulang,.kbn-boss .kbn-ulang{top:auto;bottom:12px;display:grid;place-items:center}
@@ -7610,8 +7610,10 @@ function kbnSuap() {
   const b = kbnSkrin(KBN.g.indexOf("Suap") + 1), id = ++KBN.id, giliran = KBN_kocok([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 6); let g = 0, kunci = true;
   const S = "gambar/kebun/game/suap/";
   b.innerHTML = '<div class="kbn-padang"><div class="upb-piknik"><i class="awan a"></i><i class="awan b"></i><i class="matahari"></i><div class="mat"></div><img class="bakul" alt="" src="gambar/kebun/game/lobak/bakul.webp"><span class="bunga a">🌻</span><span class="bunga b">🌷</span><span class="bunga c">🌼</span><span class="rama">🦋</span></div>' +
-    '<div class="upb-hatimeter">' + giliran.map(() => '<img alt="" src="' + S + 'hati.webp">').join("") + '</div><div class="kbn-arnab lapar"><img alt="Arnab gembira" src="' + S + 'upb-arnab.webp"><i class="upb-mulut"></i></div><img class="upb-pinggan-bg" alt="" src="' + S + 'pinggan.webp"><div class="kbn-pinggan"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
+    '<div class="upb-hatimeter">' + giliran.map(() => '<img alt="" src="' + S + 'hati.webp">').join("") + '</div><div class="kbn-arnab lapar"><img alt="Arnab lapar" src="' + S + 'upb2-nganga.webp"></div><img class="upb-pinggan-bg" alt="" src="' + S + 'pinggan.webp"><div class="kbn-pinggan"></div><button class="kbn-ulang" aria-label="Dengar lagi"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button><div class="kbn-markah"></div></div>';
   const pd = b.querySelector(".kbn-padang"), ar = pd.querySelector(".kbn-arnab"), arImg = ar.querySelector("img"), pg = pd.querySelector(".kbn-pinggan"), hati = [...pd.querySelectorAll(".upb-hatimeter img")], markah = pd.querySelector(".kbn-markah");
+  ["nganga", "kunyah1", "kunyah2", "kenyang"].forEach(n => { const i = new Image(); i.src = S + "upb2-" + n + ".webp"; });
+  const pose = n => { arImg.src = S + "upb2-" + n + ".webp"; };
   const mulut = () => { const r = ar.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height * .56]; };
   const kesan = m => {
     const k = pd.getBoundingClientRect(), x = m[0] - k.left, y = m[1] - k.top;
@@ -7621,11 +7623,11 @@ function kbnSuap() {
   const pusingan = () => {
     if (id !== KBN.id) return;
     markah.innerHTML = giliran.map((_, i) => '<i class="' + (i < g ? "on" : "") + '"></i>').join("");
-    if (g >= giliran.length) { ar.classList.remove("lapar", "kunyah", "geleng"); ar.classList.add("kenyang"); arImg.src = S + "upb-arnab.webp"; try { const r = ar.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height * .3); mpBunyi.kilau(); } catch (er) { /* abaikan */ } return setTimeout(() => { if (id === KBN.id) kbnSeterus(2); }, 1600); }
+    if (g >= giliran.length) { ar.classList.remove("lapar", "kunyah", "geleng"); ar.classList.add("kenyang"); pose("kenyang"); try { const r = ar.getBoundingClientRect(); tKonfeti(r.left + r.width / 2, r.top + r.height * .3); mpBunyi.kilau(); } catch (er) { /* abaikan */ } return setTimeout(() => { if (id === KBN.id) kbnSeterus(2); }, 1600); }
     const sasar = giliran[g], pilih = KBN_kocok([sasar].concat(KBN_kocok([0, 1, 2, 3].filter(x => x !== sasar)).slice(0, 2)));
     pg.innerHTML = pilih.map(i => '<div class="kbn-biskut" data-i="' + i + '" role="button" tabindex="0"><b class="qrar">' + HIJAIYAH[KBN.h[i]][0] + "</b></div>").join("");
     ar.classList.remove("kenyang", "kunyah", "geleng"); ar.classList.add("lapar");
-    arImg.src = S + "upb-arnab.webp";
+    pose("nganga");
     kunci = false; KBN_suara("c-" + KBN.k[sasar]);
     pd.querySelector(".kbn-ulang").onclick = () => KBN_suara("c-" + KBN.k[sasar]);
     const cuba = t => {
@@ -7640,14 +7642,14 @@ function kbnSuap() {
           const satu = () => {
             if (id !== KBN.id) return;
             if (k < gigit.length) {
-              const [sk, lb] = gigit[k++]; ar.classList.remove("kunyah"); void ar.offsetWidth; ar.classList.add("kunyah");
+              const [sk, lb] = gigit[k++]; pose(k % 2 ? "kunyah1" : "kunyah2"); ar.classList.remove("kunyah"); void ar.offsetWidth; ar.classList.add("kunyah");
               t.style.transition = "transform .18s"; t.style.transform = "translate(" + dx + "px," + (dy + 10) + "px) scale(" + sk + ") rotate(" + (210 + k * 25) + "deg)";
               t.style.webkitMaskImage = t.style.maskImage = "radial-gradient(circle at 50% -8%, transparent " + lb + "%, #000 " + (lb + 1) + "%)";
               kesan(m); try { mpBunyi.pop(); } catch (er) { /* abaikan */ }
               return setTimeout(satu, 430);
             }
             t.style.transition = "transform .25s,opacity .25s"; t.style.transform += " scale(.2)"; t.style.opacity = "0";
-            ar.classList.remove("makan", "kunyah"); ar.classList.add("kenyang-sekejap");
+            ar.classList.remove("makan", "kunyah"); ar.classList.add("kenyang-sekejap"); pose("kenyang");
             UPB_pop(pd, "+1", m[0] - pd.getBoundingClientRect().left + 12, m[1] - pd.getBoundingClientRect().top - 22);
             g++; KBN_suara("betul-" + (1 + g % 3)).then(() => setTimeout(() => { if (id === KBN.id) { ar.classList.remove("kenyang-sekejap"); pusingan(); } }, 450));
           };
@@ -7655,7 +7657,7 @@ function kbnSuap() {
         });
       } else {
         KBN.salah++; t.style.animation = "none"; t.style.transition = "transform .3s"; t.style.transform = ""; ar.classList.remove("geleng"); void ar.offsetWidth; ar.classList.add("geleng");
-        arImg.src = S + "upb-arnab.webp"; setTimeout(() => { if (id === KBN.id && !kunci) arImg.src = S + "upb-arnab.webp"; }, 700); try { mpBunyi.lembut(); } catch (er) { /* abaikan */ }
+        pose("kunyah1"); setTimeout(() => { if (id === KBN.id && !kunci) pose("nganga"); }, 700); try { mpBunyi.lembut(); } catch (er) { /* abaikan */ }
         KBN_suara("salah").then(() => { if (id === KBN.id && !kunci) KBN_suara("c-" + KBN.k[sasar]); });
       }
     };
