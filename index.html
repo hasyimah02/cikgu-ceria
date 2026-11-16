@@ -3966,15 +3966,15 @@ function SR_diamLain() {
   try { henti(); window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ }
   try { PET_senyap(); } catch (e) { /* abaikan */ }
 }
-function speak(text, lang) {
+function speak(text, lang, paksa) {
   henti();
   try { if (window.KBN_au && !window.KBN_au.paused) window.KBN_au.pause(); } catch (e) { /* abaikan */ }
   try { PET_senyap(); } catch (e) { /* abaikan */ }
-  if (!SUARA_ON || qrSenyap) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } return tunggu(Math.min(2500, 300 + String(text || "").length * 35)); }
+  if (!SUARA_ON || (qrSenyap && !paksa)) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ } return tunggu(Math.min(2500, 300 + String(text || "").length * 35)); }
   const f = SUARA[(VOICE[lang] ? lang : "ms") + "|" + text];
   if (f) {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* abaikan */ }
-    return mainKlip(f).catch(() => { delete KLIP[f]; delete SUARA[(VOICE[lang] ? lang : "ms") + "|" + text]; return speak(text, lang); });
+    return mainKlip(f).catch(() => { delete KLIP[f]; delete SUARA[(VOICE[lang] ? lang : "ms") + "|" + text]; return speak(text, lang, paksa); });
   }
   return new Promise(selesai => {
   setTimeout(selesai, 1500 + text.length * 150);
@@ -6638,7 +6638,7 @@ function qrHuruf() {
   if (vidH) besar.querySelector(".hh2-vid").onclick = () => LLN_video("gambar/" + vidH);
   const papar = i => { besar.style.setProperty("--w", HH2_W[Math.floor(i / 4)]); besar.querySelector(".qrar").textContent = HIJAIYAH[i][0]; besar.querySelector(".qrar").dataset.h = HIJAIYAH[i][0]; besar.querySelector("b").textContent = HIJAIYAH[i][1]; besar.classList.remove("pop"); void besar.offsetWidth; besar.classList.add("pop"); };
   /* Kelas Al-Quran senyapkan TTS (qrSenyap); nama huruf tetap disebut dengan rakaman Amira */
-  const sebutH = t => { const s0 = qrSenyap; qrSenyap = false; try { return speak(t, "ms"); } finally { qrSenyap = s0; } };
+  const sebutH = t => speak(t, "ms", true);
   el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); sebutH(HIJAIYAH[i][1]); });
   papar(0);
   qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return sebutH(HIJAIYAH[i][1]).then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
