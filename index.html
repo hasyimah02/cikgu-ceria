@@ -6637,9 +6637,11 @@ function qrHuruf() {
   const el = [...k.querySelectorAll(".qrh")], besar = k.querySelector(".hh2-tv");
   if (vidH) besar.querySelector(".hh2-vid").onclick = () => LLN_video("gambar/" + vidH);
   const papar = i => { besar.style.setProperty("--w", HH2_W[Math.floor(i / 4)]); besar.querySelector(".qrar").textContent = HIJAIYAH[i][0]; besar.querySelector(".qrar").dataset.h = HIJAIYAH[i][0]; besar.querySelector("b").textContent = HIJAIYAH[i][1]; besar.classList.remove("pop"); void besar.offsetWidth; besar.classList.add("pop"); };
-  el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); speak(HIJAIYAH[i][1], "ms"); });
+  /* Kelas Al-Quran senyapkan TTS (qrSenyap); nama huruf tetap disebut dengan rakaman Amira */
+  const sebutH = t => { const s0 = qrSenyap; qrSenyap = false; try { return speak(t, "ms"); } finally { qrSenyap = s0; } };
+  el.forEach((b, i) => b.onclick = () => { qrId++; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); sebutH(HIJAIYAH[i][1]); });
   papar(0);
-  qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return speak(HIJAIYAH[i][1], "ms").then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
+  qrButang("speak", "Dengar Semua", "ungu", () => { const id = ++qrId; let p = Promise.resolve(); el.forEach((b, i) => { p = p.then(() => { if (id !== qrId) return; el.forEach(z => z.classList.remove("on")); b.classList.add("on"); papar(i); return sebutH(HIJAIYAH[i][1]).then(() => tunggu(300)); }); }); p.then(() => el.forEach(z => z.classList.remove("on"))); });
   /* Video huruf digabung di sini (Dashboard > Peta Al-Quran > Video Huruf) */
   const bv = qrButang("play", vidH ? "Video Huruf" : "Video (akan datang)", "koral", () => { if (vidH) LLN_video("gambar/" + vidH); });
   if (!vidH) bv.disabled = true, bv.style.opacity = ".55";
